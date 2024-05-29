@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             <text id="MysteryCh5_1Title">Circus Performance</text>
+             <text id="MysteryCh5_1Frame0Dia0">Circus performances are in full swing here.
+A bizarre-looking clown, a crooked lion, an elephant with a human's hand... is this the taste of City dwellers?
+It's okay to visit for a while if you want.</text>
+             <text id="MysteryCh5_1Frame0Choice0Desc">Watch a performance(All Librarians current HP - 20%. Get 'inspiration')</text>
+             <text id="MysteryCh5_1Frame0Choice1Desc">Pass over</text>
+             <text id="MysteryCh5_1Frame1Dia0">All the Librarians who watched the ghastly, glamorous, and grotesque performance were exhausted, but on the other hand, they seem to have realized something in the content of the performance.
+But they may not be able to explain themselves what it is.</text>
+             <text id="MysteryCh5_1Frame1Choice0Desc">End</text>
+
+             <text id="MysteryCh5_2Title">Prescript</text>
+             <text id="MysteryCh5_2Frame0Dia0">A citizen comes to us with a box.
+"The Prescript telling me to hand this to you."
+There are quite a few bills in the box.
+
+It is said that Prescripts are always made to the advantage of the Index.
+...Let's think for a moment about what it means to receive this.</text>
+             <text id="MysteryCh5_2Frame0Choice0Desc">Receive(Get 40 Ahn)</text>
+             <text id="MysteryCh5_2Frame0Choice1Desc">Ignore</text>
+             <text id="MysteryCh5_2Frame1Dia0">You have received a box.
+What's good for the Index isn't necessarily bad for us.</text>
+             <text id="MysteryCh5_2Frame1Choice0Desc">End</text>
+             <text id="MysteryCh5_2Frame2Dia0">You did not receive the box.
+The citizen who failed to undertake the Prescript's countenance darkened, but we don't care about it.</text>
+             <text id="MysteryCh5_2Frame2Choice0Desc">End</text>
+
+ <text id="MysteryCh5_2_1Title">Result of the Prescript</text>
+             <text id="MysteryCh5_2_1Frame0Dia0">"It's you guys. Messing with Thumb's stuff."
+Thumb's Capo and Soldato appeared and aimed their guns at us.
+...the result of the Prescript came like this.</text>
+             <text id="MysteryCh5_2_1Frame0Choice0Desc">Begin Battle!</text>
+             <text id="MysteryCh5_2_1Frame0Choice1Desc">Beg for life (Use 60 Ahn)</text>
+
+</localize>

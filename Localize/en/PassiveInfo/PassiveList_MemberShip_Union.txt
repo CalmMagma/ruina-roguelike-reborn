@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<PassiveDesc ID="28581001">
+		<Name>Union Workshop's Merchant</Name>
+		<Desc>Why don't you buy something?</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581001">
+    <Name>Bionic Equipment - Ravenous Sickle</Name>
+    <Desc>(Cannot be duplicated with other Bionic Equipment) At the end of the Scene, lose 5% of Max. HP(MAX. 12). Recover HP equal to the 25% of damage this character dealt.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581002">
+    <Name>Bionic Equipment - Bloodsucking Fingernail</Name>
+    <Desc>(Cannot be duplicated with other Bionic Equipment) At the end of the Scene, lose 5% of Max. HP(MAX. 12). Inflict 2 Bleed on hit with offensive dice. Each time you apply Bleed, deal damage equal to the amount of Bleed target has.</Desc>
+	</PassiveDesc>1
+
+	<PassiveDesc ID="8581003">
+    <Name>Bionic Equipment - Sixth Finger</Name>
+    <Desc>(Cannot be duplicated with other Bionic Equipment) At the end of the Scene, lose 5% of Max. HP(MAX. 12). Raise every dice's maximum value by 3~5</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581004">
+    <Name>Bionic Equipment - Eye Looking Beyond</Name>
+    <Desc>(Cannot be duplicated with other Bionic Equipment) At the end of the Scene, lose 5% of Max. HP(MAX. 12). Gain 2 Luck.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581005">
+    <Name>Bionic Equipment - Rough Toenail</Name>
+    <Desc>(Cannot be duplicated with other Bionic Equipment) At the end of the Scene, lose 5% of Max. HP(MAX. 12). When a die this character plays lose a Clash, reroll it. (Once per die)</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581006">
+    <Name>Bionic Equipment - Tattered Wings</Name>
+    <Desc>(Cannot be duplicated with other Bionic Equipment) At the end of the Scene, lose 5% of Max. HP(MAX. 12). Instantly end the Clash when being hit by a one-sided attack with a Melee Page. (Twice per Scene)</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581007">
+    <Name>Biofuel</Name>
+    <Desc>[Global] When another character dies, all character recovers 5% Max. HP (Max. 6)</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581008">
+    <Name>Exoskeleton</Name>
+    <Desc>Increases one Librarian's MAX. HP by 10 and Max. Stagger Resist by 5</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581009">
+    <Name>Forced Awakening</Name>
+    <Desc>When Staggered, lose 25% of current HP and recovers from Stagger.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8581010">
+    <Name>Sensory Battle</Name>
+    <Desc>When using the Combat Page used in the previous battle, apply Maximum value + 1 and 1 Luck</Desc>
+	</PassiveDesc>
+
+</PassiveDescRoot>
+  
+

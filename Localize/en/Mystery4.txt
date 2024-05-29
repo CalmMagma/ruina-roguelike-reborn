@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             <text id="MysteryCh4_1Title">Ruined Workshop</text>
+             <text id="MysteryCh4_1Frame0Dia0">It is a ruined and abandoned workshop.
+Precious things are already gone, but when I look around, there are still useful items.
+Even if it's old, you can use it yourself, as it is a Workshop-made item, or maybe you can find good buyers.</text>
+             <text id="MysteryCh4_1Frame0Choice0Desc">Use it for myself(Gain five Urban Plague Combat Page reward.)</text>
+             <text id="MysteryCh4_1Frame0Choice1Desc">Sell over(Get 25 Ahn)</text>
+             <text id="MysteryCh4_1Frame1Dia0">You gave items to Backstreets Syndicates and got money.</text>
+             <text id="MysteryCh4_1Frame1Dia1">You gave items to Assosiation Fixers and got money.</text>
+             <text id="MysteryCh4_1Frame1Dia2">You gave items to Workshop Engineers and got money.</text>
+             <text id="MysteryCh4_1Frame1Dia3">You gave items to Arms collectors and got money.</text>
+             <text id="MysteryCh4_1Frame1Choice0Desc">Get 25 Ahn</text>
+
+             <text id="MysteryCh4_2Title">Haulage</text>
+             <text id="MysteryCh4_2Frame0Dia0">According to information from an anonymous informant, we found a package of an organization moving valuable items.
+You're ready to raid, but you're a little hesitant. Maybe you're afraid of repatriation?</text>
+             <text id="MysteryCh4_2Frame0Choice0Desc">Raid(Get 30~50 Ahn. Add 3 Normal Combat)</text>
+             <text id="MysteryCh4_2Frame0Choice1Desc">Give up</text>
+             <text id="MysteryCh4_2Frame1Dia0">You killed organization members and robbed them.</text>
+             <text id="MysteryCh4_2Frame1Choice0Desc">End(Get 30~50 Ahn. Add 3 Normal Combat)</text>
+             <text id="MysteryCh4_2Frame2Dia0">You gave up the raid.</text>
+             <text id="MysteryCh4_2Frame2Choice0Desc">End</text>
+
+             <text id="MysteryCh4_3Title">Surprise Attack</text>
+             <text id="MysteryCh4_3Frame0Dia0">Gunshots ring out! You quickly hid behind cover.
+You can see mysterious attackers shooting from above the building. It's too far away, so it's hard to counterattack.
+Don't know if anyone ordered it or if they were just robbers, but they won't be able to fire expensive bullets forever.</text>
+             <text id="MysteryCh4_3Frame0Choice0Desc">The combat begins!</text>
+             <text id="MysteryCh4_3Frame0Choice1Desc">Avoid using a Smoke Bomb(remove Smoke Bomb. Avoid combat)</text>
+
+             <text id="MysteryCh4_4Title">Stealth Operation</text>
+             <text id="MysteryCh4_4Frame0Dia0">Most of the time, work in the city ends with power.
+But not everyone works that way. Spying, trespassing, stealing... There are plenty of things to do in secret.
+Such a quest came to you, who only fought recklessly. Can you really do it?
+
+Control the character with the arrow keys to avoid obstacles and reach the goal to succeed!</text>
+             <text id="MysteryCh4_4Frame0Choice0Desc">Stealth operation begins!</text>
+
+ <text id="MysteryCh4_4Frame1Dia0">You have successfully infiltrated and achieved the desired target!</text>
+             <text id="MysteryCh4_4Frame1Choice0Desc">End(Get 30 Ahn)</text>
+
+ <text id="MysteryCh4_4Frame2Dia0">The enemies found out...
+Fortunately, you escaped safely, but the quest failed.</text>
+             <text id="MysteryCh4_4Frame2Choice0Desc">End</text>
+
+
+
+
+</localize>

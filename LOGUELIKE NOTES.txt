@@ -32,3 +32,9 @@ CARD UPGRADE : UpgradeModel_ : UpgradeBase
 CUSTOM SHOP : ShopModel_ : ShopBase
 LOG STAT ADDER : No prefix (class name saved to save file) : LogStatAdder
 GLOBAL EFFECT : No prefix (class name saved to save file) : GlobalRebornEffectBase
+
+Distopia's PostBuildEvent
+    <PostBuildEvent>copy /Y "$(TargetDir)\*.dll" "C:\Program Files (x86)\Steam\steamapps\workshop\content\1256670\3100054061\Assemblies\dlls"</PostBuildEvent>
+
+Magma's PostBuildEvent
+    <PostBuildEvent>copy /Y "$(TargetDir)\*.dll" "C:\Users\paulo\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls"</PostBuildEvent>

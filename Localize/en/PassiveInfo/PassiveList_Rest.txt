@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<PassiveDesc ID="800001">
+    <Name>Restoration</Name>
+    <Desc>Recovers 40% of one Librarian's HP</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="800002">
+    <Name>Training</Name>
+    <Desc>Select and upgrade a Combat Page</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="800003">
+    <Name>Moisture Proof Treatment</Name>
+    <Desc>Increases one Librarian's every damage resistance by 1 level for this Chapter.(Up to "Ineffective")</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="800004">
+    <Name>Conversion</Name>
+    <Desc>Get 15 Ahn</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="800005">
+    <Name>Full Restoration</Name>
+    <Desc>Recovers 100% of one Librarian's HP</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="800006">
+    <Name>Page Conversion</Name>
+    <Desc>Select 1 Combat Page and remove it. Get 1 Combat Page reward from the previous chapter of the removed Combat Page.
+Depending on the grade of the Combat Page you have removed, you will receive a higher grade Combat Page reward. When you remove the Combat Page of the Canard Chapter, you will receive the lowest grade of the Canard Chapter Combat Page reward.
+Can be used regardless of other actions
+Remaining : {0}</Desc>
+	</PassiveDesc>
+
+</PassiveDescRoot>
+  
+

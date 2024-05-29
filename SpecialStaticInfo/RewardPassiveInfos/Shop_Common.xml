@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RewardPassivesRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+ <ChapterList Chapter="GradeAll" Type="Shop" ID="90000">
+    <RewardList ID="90001" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood1" ArtWork="ShopPassive1"/>
+    <RewardList ID="90002" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood2" ArtWork="ShopPassive2"/>
+    <RewardList ID="90003" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood3" ArtWork="ShopPassive3"/>
+    <RewardList ID="90004" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood4" ArtWork="ShopPassive4"/>
+    <RewardList ID="90005" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood5" ArtWork="ShopPassive5"/>
+    <!-- <RewardList ID="90006" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood6" ArtWork="ShopPassive6"/> -->
+    <RewardList ID="90007" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood7" ArtWork="ShopPassive7"/>
+    <RewardList ID="90008" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood8" ArtWork="ShopPassive8"/>
+    <RewardList ID="90009" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood9" ArtWork="ShopPassive9"/>
+    <!-- <RewardList ID="90010" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood10" ArtWork="ShopPassive10"/>-->
+    <RewardList ID="90011" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood11" ArtWork="ShopPassive11"/> 
+    <RewardList ID="90012" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood12" ArtWork="ShopPassive12"/>
+    <RewardList ID="90013" PassiveType="Custom" ShopType="Once" TargetType="All" Script="ShopGood13" ArtWork="ShopPassive13"/>
+    <!-- <RewardList ID="90014" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood14" ArtWork="ShopPassive14"/> -->
+    <RewardList ID="90015" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood15" ArtWork="ShopPassive15"/>
+    <RewardList ID="90016" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood16" ArtWork="ShopPassive16"/>
+    <RewardList ID="90017" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood17" ArtWork="ShopPassive17"/>
+    <!-- <RewardList ID="90018" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood18" ArtWork="ShopPassive18"/> -->
+    <RewardList ID="90020" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood20" ArtWork="ShopPassive20"/>
+    <RewardList ID="90022" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood22" ArtWork="ShopPassive22"/>
+    <RewardList ID="90023" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood23" ArtWork="ShopPassive23"/>
+    <RewardList ID="90024" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood24" ArtWork="ShopPassive24"/>
+    <RewardList ID="90025" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood25" ArtWork="ShopPassive25"/>
+    <RewardList ID="90026" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood26" ArtWork="ShopPassive26"/>
+    <RewardList ID="90027" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood27" ArtWork="ShopPassive27"/>
+    <RewardList ID="90028" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood28" ArtWork="ShopPassive28"/>
+    <RewardList ID="90029" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood29" ArtWork="ShopPassive29"/>
+    <RewardList ID="90030" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood30" ArtWork="ShopPassive30"/>
+    <RewardList ID="90031" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood31" ArtWork="ShopPassive31"/>
+    <RewardList ID="90032" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood32" ArtWork="ShopPassive32"/>
+    <RewardList ID="90033" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood33" ArtWork="ShopPassive33"/>
+    <RewardList ID="90034" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood34" ArtWork="ShopPassive34"/>
+    <RewardList ID="90035" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood35" ArtWork="ShopPassive35"/>
+    <RewardList ID="90036" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood36" ArtWork="ShopPassive36"/>
+    <RewardList ID="90037" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood37" ArtWork="ShopPassive37"/>
+    <RewardList ID="90038" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood38" ArtWork="ShopPassive38"/>
+    <RewardList ID="90039" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood39" ArtWork="ShopPassive39"/>
+    <RewardList ID="90040" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood40" ArtWork="ShopPassive40"/>
+    <RewardList ID="90041" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood41" ArtWork="ShopPassive41"/>
+    <RewardList ID="90042" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood42" ArtWork="ShopPassive42"/>
+    <RewardList ID="90043" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood43" ArtWork="ShopPassive43"/>
+    <RewardList ID="90044" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood44" ArtWork="ShopPassive44"/>
+    <RewardList ID="90045" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood45" ArtWork="ShopPassive45"/>
+    <RewardList ID="90046" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood46" ArtWork="ShopPassive46"/>
+  </ChapterList> 
+
+ <ChapterList Chapter="GradeAll" Type="Shop" ID="190025">
+    <RewardList ID="900251" PassiveType="Custom" TargetType="SelectOne" Script="ShopGood25Effect1" ArtWork="ShopPassive25_1"/>
+    <RewardList ID="900252" PassiveType="Custom" TargetType="SelectOne" Script="ShopGood25Effect2" ArtWork="ShopPassive25_2"/>
+  </ChapterList> 
+
+ <ChapterList Chapter="GradeAll" Type="Shop" ID="190040">
+    <RewardList ID="900401" PassiveType="Custom" TargetType="SelectOne" Script="ShopGood40Effect" ArtWork="ShopPassive40"/>
+  </ChapterList> 
+
+</RewardPassivesRoot>

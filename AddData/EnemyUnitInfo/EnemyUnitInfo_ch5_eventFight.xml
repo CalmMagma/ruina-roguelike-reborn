@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EnemyUnitClassRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Version>1.1</Version>
+
+
+
+<Enemy ID="28494002">
+    <!--엄지 조직원-->
+    <NameID>122</NameID>
+    <MinHeight>160</MinHeight>
+    <MaxHeight>180</MaxHeight>
+
+    <BookId>28494002</BookId>
+
+    <Exp>5</Exp>
+  </Enemy>
+</EnemyUnitClassRoot>

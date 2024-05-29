@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BookXmlRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Version>1.1</Version>
+
+<Book ID="28494002">
+    <Name>엄지 조직원</Name>
+    <TextId>250005</TextId>
+    <Category>Thumb</Category>
+    <EquipEffect>
+      <HP>80</HP>
+      <Break>39</Break>
+      <SpeedMin>2</SpeedMin>
+      <Speed>6</Speed>
+      <SResist>Normal</SResist>
+      <PResist>Normal</PResist>
+      <HResist>Endure</HResist>
+      <SBResist>Normal</SBResist>
+      <PBResist>Normal</PBResist>
+      <HBResist>Normal</HBResist>
+
+      <Passive Pid="@origin" Level="1">10001</Passive>
+      <Passive Pid="@origin" Level="1">250005</Passive>
+      
+      <!-- enemy only-->
+      <Passive Pid="@origin">230004</Passive>
+
+    </EquipEffect>
+    <BookIcon>TheThumb</BookIcon>
+    <Chapter>6</Chapter>
+    <Rarity>Uncommon</Rarity>
+    <CharacterSkin>ThumbUnit</CharacterSkin>
+    <SpeedDiceNum>1</SpeedDiceNum>
+
+    <RandomFace>true</RandomFace>
+  </Book>
+
+</BookXmlRoot>

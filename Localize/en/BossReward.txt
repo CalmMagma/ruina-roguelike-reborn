@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             <text id="BossRewardFlaverText">Chapter Clear Reward</text>
+
+             <text id="BossReward1Name">Bookbinding</text>
+             <text id="BossReward1Desc">[Global] Maximum Passive Cost + 2</text>
+             <text id="BossReward1Desc_Effect">[Global] Maximum Passive Cost + {0}</text>
+             <text id="BossReward2Name">Reminiscence</text>
+             <text id="BossReward2Desc">Get {0} Currnet Chapter's Limited-Objet d'art Combat Page Reward, Get {1} Current Chapter's Limited-Objet d'art key Page Reward</text>
+             <text id="BossReward3Name">Wealth and Fame</text>
+             <text id="BossReward3Desc">Get {0} Ahn. Add 1 Shop to next Chapter's Reception list.</text>
+             <text id="BossReward4Name">Compilation</text>
+             <text id="BossReward4Desc">Doubles one Librarian's HP and Stagger Resist. Doesn't add next Librarian.</text>
+             <text id="BossReward5Name">Wild Card</text>
+             <text id="BossReward5Desc">[Global] On use, Select one Combat Page in your Combat Bookshelf. Give it to selected Librarian. Can be used once per reception.</text>
+             <text id="BossReward5_1Name">Wild Card</text>
+             <text id="BossReward5_1Desc">Gain '{0}' Combat Page to the selected Librarian</text>
+			 <text id="BossReward6Name">Four-Leaf Clover</text>
+             <text id="BossReward6Desc">Replaces Three-Leaf Clover. [Global] Maximum Passive Cost +1. At the start of the Scene, every Librarian gain 1 Luck.</text>
+             <text id="BossReward6_1Name">Four-Leaf Clover</text>
+             <text id="BossReward6_1Desc">[Global] Maximum Passive Cost +1. At the start of the Scene, every Librarian gain 1 Luck.</text>
+             <text id="BossReward7Name">Limited Edition</text>
+             <text id="BossReward7Desc">Combat Page reward and Shop's Combat Page items have a 15% chance to appear in an enhanced state.</text>
+             <text id="BossReward8Name">Blast Furnace</text>
+             <text id="BossReward8Desc">20% reduction in Craft cost</text>
+</localize>

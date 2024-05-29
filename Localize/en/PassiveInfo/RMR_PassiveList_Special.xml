@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<PassiveDesc ID="-100">
+		<Name>Strange Orb</Name>
+		<Desc>At the start of each Scene, randomly chooses to inflict 1 Paralysis to all enemies, make 2 random allies restore 1 Light, make 2 random allies draw 1 page or give all allies 1 Damage Up.</Desc>
+	</PassiveDesc>
+  
+</PassiveDescRoot>
+  
+

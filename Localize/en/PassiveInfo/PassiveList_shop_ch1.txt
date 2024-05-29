@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+	<PassiveDesc ID="8571001">
+		<Name>Gut-harvesting</Name>
+		<Desc>Upon defeating an enemy with Bleed, gain one Ahn and one Canard Combat Page reward.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8571003">
+		<Name>Union Workshop</Name>
+		<Desc>At the start of the Scene, gain 1 Luck. Lose 1 HP upon using Pages.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8571004">
+    <Name>Yellow Flash</Name>
+    <Desc>When this character rolls Evade dice, roll 3 times and applies the highest rolled value.</Desc>
+	</PassiveDesc>
+
+</PassiveDescRoot>
+  
+

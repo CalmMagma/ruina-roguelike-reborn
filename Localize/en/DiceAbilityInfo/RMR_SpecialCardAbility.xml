@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BattleCardAbilityDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <BattleCardAbility ID="RMR_ShivThrow">
+    <Desc>[On Play] Exhaust this page and add the first die of this page to the page with the lowest Cost in hand for the rest of the Act</Desc>
+  </BattleCardAbility>
+
+</BattleCardAbilityDescRoot>

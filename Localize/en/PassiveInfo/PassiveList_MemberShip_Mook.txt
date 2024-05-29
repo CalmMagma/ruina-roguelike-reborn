@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<PassiveDesc ID="28583001">
+		<Name>Mook Workshop's Merchant</Name>
+		<Desc>Why don't you buy something?</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583001">
+    <Name>Battojutsu</Name>
+    <Desc>Page's first Offensive dice gain + 2 Power. Other dice Gain - 1 Power.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583002">
+    <Name>A Moment</Name>
+    <Desc>The first Offensive dice on the Page considers the enemy's Resistance as 'Fatal' regardless of damage type(Excluding 'Immune').</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583003">
+    <Name>Life and Death</Name>
+    <Desc>Damage +2 when HP is less than 50%, Damage +2 when enemy's HP is less than 50%</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583004">
+    <Name>Matt</Name>
+    <Desc>Ignore Counter dice when doing one-sided attack</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583005">
+    <Name>Quick Sheath</Name>
+    <Desc>When you kill an enemy with the first die of the Page, you get a Counter die equal to that die.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583006">
+    <Name>Cut Off</Name>
+    <Desc>After one offensive die deals damage more than 15 or 10% of enemy's maximum health, inflicts 5 Bleed and 2 Paralysis next Scene.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583007">
+    <Name>Killing Aura</Name>
+    <Desc>[Global] Damage is doubled except offensive dice.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583008">
+    <Name>Afterimage</Name>
+    <Desc>On Page's first offensive dice Clash wins, the dice are reused as a one-sided attack on the target (Once per Scene).</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583009">
+    <Name>Apnea</Name>
+    <Desc>Even if the Light is not enough, a Page can be used instead by consuming Stagger Resistance equal to the cost*3</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8583010">
+    <Name>Quenching</Name>
+    <Desc>[Global] Give 'On Hit - Deal 1 damage to target' to all Librarian's offensive dice</Desc>
+	</PassiveDesc>
+
+</PassiveDescRoot>
+  
+

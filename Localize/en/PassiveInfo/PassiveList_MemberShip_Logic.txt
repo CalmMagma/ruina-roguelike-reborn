@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<PassiveDesc ID="28580001">
+		<Name>Atelier Logic's Merchant</Name>
+		<Desc>Why don't you buy something?</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580001">
+    <Name>Reload</Name>
+    <Desc>At the End of each Scene, draw 2 Ranged Pages if there's no Ranged Pages in the hand.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580002">
+    <Name>Obscuration</Name>
+    <Desc>When you Clash Ranged Page against Melee Page, when you use all dice of your Page, immediately end Clash(Once per Scene).</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580003">
+    <Name>Getting Head Start</Name>
+    <Desc>Gain +1 Speed Dice Slot for the first Scene</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580004">
+    <Name>Fire Net</Name>
+    <Desc>[Global] Ranged Offensive dice Power + 1 against enemies targeted by other characters' Ranged Page</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580005">
+    <Name>Special Order - Atelier Logic</Name>
+    <Desc>Get 3 'Atelier Logic' Combat Pages</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580006">
+    <Name>Spare Magazine</Name>
+    <Desc>At the start of the Act, a copy of the first Ranged Page in the deck is placed into your hand.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580007">
+    <Name>Penetrating Shot</Name>
+    <Desc>When you kill an enemy with a Ranged Page, if there are Offensive dice left on the Page, the remaining dice are reused as a one-sided attack on a random enemy.</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580008">
+    <Name>Petty Death</Name>
+    <Desc>Damage + 3 when doing one-sided attack with Ranged Page</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580009">
+    <Name>Ballistics</Name>
+    <Desc>Luck+1 for Ranged Offensive dice</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580010">
+    <Name>Gun Cleaning</Name>
+    <Desc>Ranged dice Power +2 for this Scene if no Ranged Page was used in the previous Scene</Desc>
+	</PassiveDesc>
+
+	<PassiveDesc ID="8580011">
+    <Name>All-Around Defense</Name>
+    <Desc>Gain a Counter die (Pierce, 3-9) when using a Ranged Page(Once per Scene).</Desc>
+	</PassiveDesc>
+
+</PassiveDescRoot>
+  
+

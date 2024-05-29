@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BattleCardAbilityDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BattleCardAbility ID="protection2friendLog">
+    <Desc>[On Use] Give 2 Protection to all allies next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="recoverHp2Log">
+    <Desc>[On Use] Recover 2 HP</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="downgradeNext2pwLog">
+    <Desc>[On Clash Win] Lower max value of opponent’s next die by 4</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="recoverHp5atkLog">
+    <Desc>[On Hit] Recover 5 HP</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="ruru2Log">
+    <Desc>[On Hit] Inflict 3 Burn; Deal 2 damage to self</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="carnivalLog">
+    <Desc>Add ‘Fascinating Fabric+’ to each other’s hands</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="burn5atkLog">
+    <Desc>[On Hit] Inflict 5 Burn</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUp2targetParalysisLog">
+    <Desc>Add +2 Power if target has Paralysis</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="tomerry1Log">
+    <Desc>[On Use] If HP is at 25% or lower, all dice on this page gain +3 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="tomerry2Log">
+    <Desc>[On Use] Deal 5 damage to self; all dice on this page gain +3 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUpNext4plLog">
+    <Desc>[On Clash Lose] Add +4 Power to next die</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="bleedingSlash2thisRoundLog">
+    <Desc>[Combat Start] Upon each successful Slash attack this Scene, inflict 2 Bleed next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="enemy3weak1thisRoundLog">
+    <Desc>[Combat Start] Inflict 1 Feeble to three random enemies</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="ally3strength1thisRoundLog">
+    <Desc>[Combat Start] Give 1 Strength to three random allies</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="damage7atkLog">
+    <Desc>[On Hit] Deal 7 damage to target</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="damage4pwLog">
+    <Desc>[On Clash Win] Deal 4 damage to target</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="quick2discardLog">
+    <Desc>When discarded, gain 2 Haste</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="quickall2discardLog">
+    <Desc>When discarded, give 2 Haste to all allies next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="sakuraLog">
+    <Desc>[On Use] If 4+ pages are in hand, discard 4 random pages and boost the min value of all dice on this page by +4</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUp2speed5Log">
+    <Desc>[On Use] If speed is 5 or higher, all dice on this page gain +2 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="energy2atkAndHpLog">
+    <Desc>[On Hit] If HP is at 25% or lower, restore 2 Light</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="sweeperOnlyLog">
+    <Desc>[On Use] All Offensive dice of this page gain ‘[On Hit] Recover 3 HP’</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="ally3protection1thisRoundLog">
+    <Desc>[Combat Start] Give 1 Protection to three random allies</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUpDice6highlanderLog">
+    <Desc>If Singleton, add +6 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUp2fullCardLog">
+    <Desc>[On Use] If there are 5 or more pages in hand, all dice on this page gain +2 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="warpSkillLog">
+    <Desc>[On Use] Spend all Charge; has a (Charge x 9.9)% chance to succeed.</Desc>
+    <Desc>[Success] All dice on this page gain +10 Power;
+[Failure] Deal 15 damage to self</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="drawCardWarpLog">
+    <Desc>[On Use] Gain 2 Haste next Scene; spend 3 Charge to draw 2 pages</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="smoke9atkLog">
+    <Desc>[On Hit] Inflict 9 Smoke</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="bleedingXsmokeLog">
+    <Desc>[On Hit] Inflict Bleed equal to stacks of Smoke on target</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="energySmokeLog">
+    <Desc>[On Use] Gain 3 Smoke. Restore 1 Light</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="debufsSmokeLog">
+    <Desc>[On Hit] If target has 6 or more Smoke, inflict 2 Paralysis and 1 Feeble</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="Seven_FlecheLog">
+    <Desc>[On Clash Win] Deal 5 Stagger damage; inflict 1 Fragile next Scene</Desc>
+  </BattleCardAbility>
+<BattleCardAbility ID="Seven_EngagementLog">
+    <Desc>[On Use] Add 'En Garde+' to user's hand</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="Seven_EnGardeLog">
+    <Desc>[On Use] Gain 2 Strength next Scene, give 1 Strength to target</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="Sword_getbonecuttingcardplLog">
+    <Desc>[On Clash Lose] Add ‘To Claim Their Bones+’ to user’s hand</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="paralysis10bleeding5atkLog">
+    <Desc>[On Hit] Inflict 10 Paralysis and 5 Bleed next Scene</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="Stigma8_0Up">
+    <Desc>[On Play] Inflict 8 Burn to target</Desc>
+  </BattleCardAbility>
+
+<BattleCardAbility ID="gainPositive2Log">
+    <Desc>[On Use] Gain 2 Positive Emotion Point</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="quickness2atkLog">
+    <Desc>[On Hit] Gain 2 Haste next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="lowelonlyLog">
+    <Desc>[On Use] Add a Mass Attack page to hand that can be only used next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="liuBurnDiceLog">
+    <Desc>[On Hit] Inflict 2 + (Personal Emotion Level) amount of Burn</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="AddBullet1AndDrawLog">
+    <Desc>[On Use] Add a random Ammunition+ to hand; draw 1 page</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="AddBullet2Log">
+    <Desc>[On Use] Add 2 random Ammunition+ to hand</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="dmgUp3AllLog">
+    <Desc>[On Use] All allies deal +3 damage with their Offensive dice next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="thumbBullet1Log">
+    <Desc>Exhausts when used or discarded; [On Exhaust] Dice clashing against user’s Ranged Combat Pages Gain -1 Power and –1 Damage for this Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="thumbBullet2Log">
+    <Desc>Exhausts when used or discarded; [On Exhaust] On hit with Ranged Combat Pages this Scene, inflict 2 Paralysis and 1 Disarm next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="thumbBullet3Log">
+    <Desc>Exhausts when used or discarded; [On Exhaust] On hit with Ranged Combat Pages this Scene, inflict 3 Burn</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="warpCharge7Log">
+    <Desc>[On Use] Gain 7 Charge</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="warpCharge9Log">
+    <Desc>[On Use] Gain 9 Charge</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="badaCardRemakeLog">
+    <Desc>[On Use] Spend 4 Charge to boost Power of all dice on this page by +3</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="chargeEnergyLog">
+    <Desc>[On Use] Spend 3 Charge to restore 3 Light</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="breakChargeRemakeLog">
+    <Desc>[On Hit] Spend 2 Charge to deal 6 Stagger damage, up to four times</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="smokeSelf5drawLog">
+    <Desc>[On Use] Gain 5 Smoke and draw 1 page</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="smokeSelf5Log">
+    <Desc>[On Use] Gain 5 Smoke</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="smokePowerUpLog">
+    <Desc>[On Use] If target has 2 or more Smoke, all dice on this page gain +1 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="energy2Smoke3Log">
+    <Desc>[On Use] Gain 3 Smoke. Restore 2 Light</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="gloriaDiceLog">
+    <Desc>[On Hit] Inflict 2 Feeble this Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="estherCardLog">
+    <Desc>Only usable in the ‘Blade Unlocked’ state</Desc>
+    <Desc>Reduce Power of all opponent’s dice clashing against this by 15</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="estherDiceLog">
+    <Desc>[On Hit] Deal bonus damage and stagger damage by 8x the natural roll</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="hubertDiceLog">
+    <Desc>[On Hit] Inflict 2 Feeble and 10 Bleed next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUp2targetHp50Log">
+    <Desc>Add +2 Power if target’s HP is at 50% or lower</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="cardPowerDown2targetHighlanderLog">
+    <Desc>[Start of Clash] If Singleton, reduce Power of all target’s dice by 2</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="indexRelease1Log">
+    <Desc>[On Use] Add 'Unlock-Ⅱ+' to hand</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="indexRelease2Log">
+    <Desc>[On Use] Add 'Unlock-Ⅲ+' to hand</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="burn8atkLog">
+    <Desc>[On Hit] Inflict 8 Burn</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="burn1pwLog">
+    <Desc>[Clash Win] Inflict 1 Burn</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="rudolphDiceLog">
+    <Desc>[On Hit] Deal 8 Stagger damage</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="nicolaiCard2Log">
+    <Desc>Only usable at 20+ Charge. Upon defeating an enemy with this page, add a copy of ‘Disposal+’ to hand and lower its Cost by 1.</Desc>
+    <Desc>If target’s HP is at 50% or lower, deal twice as much damage.</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="deerCardLog">
+    <Desc>[On Use] Deal 3 Stagger damage to self</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="deerDiceLog">
+    <Desc>[On Hit] Spend 3 Charge to deal 10 Stagger damage</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUp1speed5exhaustLog">
+    <Desc>[On Use] If Speed is 5 or higher, all dice on this page gain +1 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerUp3speed5exhaustLog">
+    <Desc>[On Use] If Speed is 5 or higher, all dice on this page gain +3 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="otherAlly3strength1thisRoundLog">
+    <Desc>[Combat Start] Give 1 Strength to 3 other allies</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="energyAndChargeLog">
+    <Desc>[On Use] Restore 1 Light and gain 4 Charge</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="warpCharge9">
+    <Desc>[On Use] Gain 9 Charge</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerDownNext3pwTargetLog">
+    <Desc>[Clash Win] Reduce Power of opponent’s next die by 3</Desc>
+  </BattleCardAbility>
+<BattleCardAbility ID="purpleAreaDice1Log">
+    <Desc>[On Hit] Deal 7 damage</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="purpleAreaDice2Log">
+    <Desc>[On Hit] Deal 7 Stagger damage</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="purpleAreaDice3Log">
+    <Desc>[On Hit] Inflict 4 Bleed and 1 Fragile this Scene and next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="burnAllLog">
+    <Desc>[On Hit] Inflict 3 Burn to all enemies</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="shyaoSelfBurnLog">
+    <Desc>[Combat Start] Take 10 less damage from Burn for this Scene and next Scene</Desc>
+    <Desc>[On Use] If user has Burn, recover 5 HP and gain 2 Protection next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="allyBufLog">
+    <Desc>[Combat Start] Give 2 Strength, 2 Protection, and 2 Stagger Protection to a random other ally</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="yanAreaDiceLog">
+    <Desc>[On Hit] Inflict 3 Erosion</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="yanOnly1DiceLog">
+    <Desc>[On Hit] Inflict 3 Erosion</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="yanInstantEnergyLog">
+    <Desc>[On Play] Restore all Light; Lose as much Light next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="binding2pwLog">
+    <Desc>[Clash Win] Inflict 2 Bind next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="awlofnight1Log">
+    <Desc>[On Use] Boost Power of this page’s offensive dice by sum of user’s Haste and target’s Bind</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="usett_eyeLog">
+    <Desc>[On Hit] Give 2 Protection and 2 Stagger Protection to all allies next Scene</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="plutoCardLog">
+    <Desc>Restore 2 Light upon discarding this page</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="discardAllEnergy1Log">
+    <Desc>When discarded, all allies restore 1 Light</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="handCountpowerUpLog">
+    <Desc>[On Use] Boost Power by +1 for each page in hand; Discard all pages from hand</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="lifeInsuranceAreaAtkLog">
+    <Desc>[On Hit] Inflict 2 Disarm, Bind, and Feeble; Recover 4 HP</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="powerup2byselfsmoke8Log">
+    <Desc>[On Use] If user has 8+ Smoke, all dice on this page gain +2 Power</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="DontMoveDrawLog">
+    <Desc>[On Use] If the character did not use any pages on the previous Scene, draw 1 Page</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="selfstunwithabilLog">
+    <Desc>[On Play]
+Become Immobilized this Scene.
+Gain 4 Strength next Scene.
+Add a copy of ‘Pinpoint Breakthrough+’ to hand.</Desc>
+  </BattleCardAbility>
+
+</BattleCardAbilityDescRoot>
+

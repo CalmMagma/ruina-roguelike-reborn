@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             <text id="MysteryChX_1Title">Break Time</text>
+             <text id="MysteryChX_1Frame0Dia0">It's break time.
+Let's go to the Stack room and rest for a while.</text>
+             <text id="MysteryChX_1Frame0Choice0Desc">Go to Stack room</text>
+
+             <text id="MysteryChX_2Title">Canteen</text>
+             <text id="MysteryChX_2Frame0Dia0">This is a canteen inside the Library.
+The money received from Guests can be put to good use.</text>
+             <text id="MysteryChX_2Frame0Choice0Desc">Go to Shop</text>
+             
+<text id="MysteryChX_3Title">Things that You Need</text>
+             <text id="MysteryChX_3Frame0Dia0">Your road ahead is full of hardships.
+What do you need to overcome these hardships?</text>
+             <text id="MysteryChX_3Frame0Choice0Desc">Powerful weapon(Gain {0} current Chapter's Combat Page reward)</text>
+             <text id="MysteryChX_3Frame0Choice1Desc">Sturdy armor(Gain {0} current Chapter's Key Page reward)</text>
+             <text id="MysteryChX_3Frame0Choice2Desc">Wealth(Get {0} Ahn)</text>
+             <text id="MysteryChX_3Frame0Choice3Desc">Health(Recovers 25% of every Librarian's HP)</text>
+             <text id="MysteryChX_3Frame1Dia0">No one knows what will be needed.
+The future is always like that.</text>
+             <text id="MysteryChX_3Frame1Choice0Desc">End</text>
+
+             <text id="MysteryChX_4Title">Vending Machine</text>
+             <text id="MysteryChX_4Frame0Dia0">This is a vending machine where you put money in and get useful items.
+The product... it's probably depending on luck.
+If you can afford it, it might be a good idea to try it out.</text>
+             <text id="MysteryChX_4Frame0Choice0Desc">Put money in a vending machine(Consume 10 Ahn. Get a random consumable item)</text>
+             <text id="MysteryChX_4Frame0Choice1Desc">Ignore</text>
+</localize>

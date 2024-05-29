@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DeckXmlRoot>
+  <!-- 엄지 조직원 -->
+  <Deck ID="28494002">
+    <Card>602001</Card>
+    <Card>602002</Card>
+    <Card>602003</Card>
+    <Card>602004</Card>
+    <!--<Card>602005</Card>-->
+    <Card>602006</Card>
+    <Card>602012</Card>
+    <Card>602012</Card>
+    <Card>602012</Card>
+  </Deck>
+</DeckXmlRoot>

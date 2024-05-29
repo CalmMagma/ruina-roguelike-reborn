@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<RogueMysteryXmlRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Mystery ID="-100">
+    <Frame ID="0">
+      <Dialog>Angela gifts upon you 4 artifacts to receive the guests with. 
+Which one will you choose?</Dialog>
+      <Choice ID="0">
+        <Desc>Choose &lt;color=#33DD11&gt;Heart of Iron</Desc>
+      </Choice>
+      <Choice ID="1">
+        <Desc>Choose &lt;color=#33DD11&gt;Hunter's Cloak</Desc>
+      </Choice>
+      <Choice ID="2">
+        <Desc>Choose &lt;color=#33DD11&gt;Strange Orb</Desc>
+      </Choice>
+      <Choice ID="3">
+        <Desc>Choose &lt;color=#33DD11&gt;Still Water</Desc>
+      </Choice>
+    </Frame>
+    <Frame ID="1">
+      <Dialog>The dialog changes with the frame, and the doors of the Library open once again.</Dialog>
+      <Choice ID="0">
+        <Desc>End</Desc>
+      </Choice>
+    </Frame>
+    <Title>Angela's Gift</Title> <!-- Event title -->
+  </Mystery>
+</RogueMysteryXmlRoot>

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<LogueEffectXmlRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <LogueEffectInfo Id="RMR_IronHeart">
+    <Name>Heart of Iron</Name> 
+    <Desc>The Patron Librarian restores 6 HP at the start of each Act.</Desc> 
+    <FlavorText>&lt;color=#CA0812&gt;"Tough, but still caring. One of the last of its kind."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>    Organs are always wanting: absorbing new ideas, nutrients or desires onto themselves, then discarding when the necessity has ceased. There is a constant loop to such actions, and although most do out of necessity, one doesn't - rather, it remembers everything. No matter how small.
+
+    Such is the nature of the heart, the birthplace of feelings and pride - the heart never forgets what it has felt, nor does it let go of feelings that actively cause it harm - it remembers. Not because it can, but because it must. Something must always remember, no matter how tragic, so that one may never lose their way.
+
+    One such mind gave up every feeling it had for promises of grander, sweeter dreams - so deep was the trauma of such action that the mind chose to forget - forget the sun on her skin, the tiredness and joy after a well fed belly. And like before, even if her mind chose to forget, her heart didn't.
+
+    Because the mind... the mind can forget, but the heart never will.</CatalogDesc>
+  </LogueEffectInfo> 
+
+  <LogueEffectInfo Id="RMR_HunterCloak">
+    <Name>Hunter's Cloak</Name> 
+    <Desc>The Patron Librarian draws 2 pages at the start of each Act. At the start of each Scene, add a copy of 'Shiv' to the hand of the Patron Librarian.</Desc>
+    <FlavorText>&lt;color=#08CA12&gt;"Torn and worn, and yet littered with seemingly endless shivs."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>    The disappearance of Bayard and most of his office, although uneventful, left many aspiring fixers without a home - what once was a group for the undisciplined and hopeful, now weakened and without its founder. Perhaps he was not the most charismatic or charming leader one could ask for, but he never gave up trying - even when someone better showed up.
+
+    Despite the jealousness and soft resent, Bayard did not let pride take over his heart, instead cultivating the newfound stability in his office to leave an old, everlasting present. A few days after the announced disappearance and rebrand of the Office, there were reports of a known fixer from a popular office with a new attire - a dark green cloak, branded by a half-moon and spear, pridefully flying in the wind.
+
+    When the Lion left his pride for bloodier savahnnas, he also left a present: Hope. So that they may know where to go, even if the tip of his spear was not there to guide them.</CatalogDesc>
+  </LogueEffectInfo> 
+
+  <LogueEffectInfo Id="RMR_StrangeOrb">
+    <Name>Strange Orb</Name>
+    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered and is able to inflict 1 Paralysis to all enemies, make 2 random allies restore 1 Light, make 2 random allies draw 1 page or give all allies 1 Damage Up. The Orb will choose one of these actions at random each Scene while alive.</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>    Not many minds remember the days before the Grand War - something so horrible and so extensive, something so feared and so forgotten - only embers remain of the "Old World", roaming its ruins for a long-lost purpose. One such case is seen with an amalgam - a union that can only be described as an anomaly.
+
+    After the Old World was shattered into its many unfathomable pieces, they were still there: Divided, but standing together mere moments after the lights that brought end to all reason. They wondered and wandered, finding themselves in familiar yet alien ruins of their old homes, schools and roads. The fires still fought to the bitter end, and life would only be ruin from now on.
+
+    Many years later the fires had almost been extinguished - a new beacon of cold lights forming itself in a distance - they thought that perhaps their embers could reach the promised cold of its inner walls, but they were left outside - fending for themselves in the ruins they were so familiar with. Eventually, through so much pressure and years of single minded thoughts - they focused, undying like the fires they descended from.
+
+    From a voice it became two, and two became many. Thoughts and words drooled and fused into single, overloaded actions - they could see, but not look. Touch, but not feel . Argue, but not speak. Such was the sentence of embers as bright as theirs - destined to become one with the reluctant fires of the Old World, forced to be deprived of themselves.
+
+    Yet, through some mysterious means, they find themselves here - familiar and alien as before. Although forever changed, their hearts remained the same: Perhaps they could find answers in this place, or a final gust of wind to fade into the New World.</CatalogDesc>
+  </LogueEffectInfo> 
+
+  <LogueEffectInfo Id="RMR_StillWater">
+    <Name>Still Water</Name>
+    <Desc>If no offensive dice were rolled by the Patron
+- Calm: Upon leaving this state, restore 2 Light.
+- Wrath: All dice deal additional damage equal to the final roll. Upon taking a hit, take additional damage equal to the enemy's final roll.</Desc> 
+    <FlavorText>&lt;color=#CA08A9&gt;"A fine liquid can be seen within the crystal. No matter how much it is shook, the liquid seems to remain still."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Have you felt toxic spray, upon your face?
+Have you seen ambling pearls at the bow, keeping pace?
+Have you viewed distant sunsets, ever less bright?
+Have you fixed on cowardly sailors, cowering in fright?
+
+Has there been a time, to save a shipmate?
+Has the hum of whales, ever kept you awake?
+Has the vastness of the lake, left you feeling alone?
+Has the shattered waters, made you wish you were home?
+
+If you have prayed to the lake, for safer waters
+If you crossed treacherous sections, at midnight swelter
+If you stood your watch, for its violet crystals
+If you heeded whistles, no matter how brittle
+
+When you have secured the decks, for day to turn in
+When you have mustered at sunset, seen a new night begin
+When you have left them behind, ignoring their pleas
+When you have known all these things, in Still Waters you'll be</CatalogDesc>
+  </LogueEffectInfo> 
+  
+</LogueEffectXmlRoot>

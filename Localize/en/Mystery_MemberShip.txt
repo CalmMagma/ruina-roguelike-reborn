@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <text id="Stage_MemberShip">Workshop Membership</text>
+<text id="Stage_MemberShip_Desc">Make a contract with the Workshop of your choice!</text>
+         
+<text id="MemberShipTitle">Workshop Membership</text>
+             <text id="MemberShipFrame0Dia0">Everyone, now you have made a name for yourself in the city.
+Membership offers came from several workshops that took note of this.
+In the city, contracts like this are actually the more the better, but unfortunately there is only one contract that the Library accepts.
+Let's choose carefully.
+
+-The shop of the selected workshop will appear once per chapter.
+-The workshop shop sells disposable items and workshop-exclusive items.</text>
+             <text id="MemberShipFrame0Choice0Desc">Membership - Atelier Logic</text>
+             <text id="MemberShipFrame0Choice1Desc">Membership - Union Workshop</text>
+             <text id="MemberShipFrame0Choice2Desc">Membership - Stigma Workshop</text>
+             <text id="MemberShipFrame0Choice3Desc">Membership - Mook Workshop</text>
+
+             <text id="MemberShipFrame1DiaLogic">Atelier Logic
+-Specialized in supporting Ranged Page
+-Upon contract, all Librarians cna use ranged Combat page
+-Key Keywords : Damage, Power, One-sided attack</text>
+
+             <text id="MemberShipFrame1DiaUnion">Union Workshop
+-Specialized in supporting Boosting dice and Retention
+-Key Keywords : Luck, Diversity, HP recovery</text>
+
+             <text id="MemberShipFrame1DiaStigma">Stigma Workshop
+-Specialized in supporting Burn
+-Key Keywords : Burn, Status ailment</text>
+
+             <text id="MemberShipFrame1DiaMook">Mook Workshop
+-Specialized in supporting Single Dice Combat Page
+-주요 키워드 : Damage, Resistance, Singular Strike</text>
+
+           <text id="MemberShipFrame1Choice0Desc">Sign up</text>
+           <text id="MemberShipFrame1Choice1Desc">Choose again</text>
+
+             <text id="MemberShipFrame2Dia0">Membership registration has completed.</text>
+           <text id="MemberShipFrame2Choice0Desc">End</text>
+
+</localize>

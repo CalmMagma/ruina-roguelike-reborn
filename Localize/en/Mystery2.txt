@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             <text id="MysteryCh2_1Title">Pierre's Bistro</text>
+             <text id="MysteryCh2_1Frame0Dia0">&lt;i&gt;"Hey, you. Are you interested in our food?"
+"I came up with a very ingenious recipe... Unfortunately, there are not enough ingredients."
+"If you bring me the ingredients, I'll make you taste my new dish, for the first time."
+"Or... wouldn't it be bad to use you as an ingredient?"&lt;/i&gt;</text>
+             <text id="MysteryCh2_1Frame0Choice0Desc">Accept(Start Meatpie Quest)</text>
+             <text id="MysteryCh2_1Frame0Choice1Desc">Refuse(Do reception of Pierre and Backstreets Butchers)</text>
+
+             <text id="MysteryCh2_1Frame1Dia0">&lt;i&gt;"Alright. I'll be waiting for you."&lt;/i&gt;</text>
+             <text id="MysteryCh2_1Frame1Dia1">
+From now on, if you skip the Combat Page reward until the end of the quest, you can get the 'Meat' Combat Page.
+If you bring 5 'Meat' to Pierre, she will serve you &lt;b&gt;amazing&lt;/b&gt; dish.</text>
+             <text id="MysteryCh2_1Frame1Choice0Desc">End(Start Meatpie Quest)</text>
+
+             <text id="MysteryCh2_1Frame2Dia0">Pierre grinned grimly and drew her knife.</text>
+             <text id="MysteryCh2_1Frame2Choice0Desc">End(Do reception of Pierre and Backstreets Butchers)</text>
+
+
+
+             <text id="MysteryCh2_1_1Title">Ingredient Delivery</text>
+             <text id="MysteryCh2_1_1Frame0Dia0">You passed the 'Meat' you got around to Pierre.
+In return, Pierre used her skills to create amazing dish.
+You can eat it now, or you can preserve it and eat it later.</text>
+             <text id="MysteryCh2_1_1Frame0Choice0Desc">Eat Now (Recover 100% of all librarians' HP)</text>
+             <text id="MysteryCh2_1_1Frame0Choice1Desc">Take out (Obtain 3 'Meat Jam' Combat Page)</text>
+
+             <text id="MysteryCh2_2Title">Prepared Mind</text>
+ <text id="MysteryCh2_2Frame0Dia0">Fixers of Streetlight Office who came to the Library are arguing with each other.
+They argue each other that he/she will stay, so the other could run away.
+It's nice to see a deep friendship, but it doesn't seem to be the attitude to show the enemy right in front of you.
+They exposed themselves to the attack. Maybe we can help them make a decision.</text>
+             <text id="MysteryCh2_2Frame0Choice0Desc">Attack Mars.(Get Mars' Key Page. Lulu appears in the Boss Chapter.)</text>
+             <text id="MysteryCh2_2Frame0Choice1Desc">Attack Lulu.(Gat Lulu's Key Page. Mars appears in the Boss Chapter.)</text>
+
+ <text id="MysteryCh2_2Frame1Dia0">One Guest turned into a Book by a Librarian who did not miss an opportunity.
+
+Let the rest run away. They'll be back soon anyway.</text>
+             <text id="MysteryCh2_2Frame1Choice0Desc">End (Get Mars' Key Page. Lulu appears in the boss chapter)</text>
+
+ <text id="MysteryCh2_2Frame2Dia0">One Guest turned into a Book by a Librarian who did not miss an opportunity.
+
+Let the rest run away. They'll be back soon anyway.</text>
+             <text id="MysteryCh2_2Frame2Choice0Desc">End (Get Lulu's Key Page. Mars appears in the boss chapter)</text>
+
+</localize>
