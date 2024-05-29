@@ -1,0 +1,34 @@
+---- ROGUELIKE MOD NOTES ----
+
+-- ALTERED CLASSES/METHODS --
+
+ChapterGrade -> altered to have Grade7
+LogCreatureTabPanel.Init() -> altered to change the scale and make the icons wider
+LogLikeMod.ModId -> altered packageId to match the mod's new one
+NEW CraftEquipChapter7 -> created to add crafting to Impuritas
+LogLikeMod.SetNextStage() -> added CraftEquipChapter7 to allow Impurity crafting
+GlobalLogueEffectManager.AddEffects() -> it should now increase the counter in SaveData
+NEW GlobalLogueEffectManager.isLoadingSave -> to keep track if save is being loaded (so as to not double-count already obtained items)
+GlobalLogueEffectManager.LoadFromSaveData() -> to assign true or false to isLoadingSave
+PassiveAbility_ShopPassive45.SpeedDiceNumAdder() -> changed UnityEngine.Random.value with System.Random
+LogLikeMod.StageController_ClearBattle() -> added to make the lists reset when battle is cleared and stuff is saved
+LogueBookModels.LoadFromSaveData() -> added ChapterGrade.Grade7
+abcdcode_LOGLIKE_MOD.CreaturePickUpModel.ApplyEmotionCard() -> no longer complains about NullReferenceExceptions
+LogLikeMod.BookModel_GetThumbSprite() -> added a null check and empty check
+MysteryChoiceInfo.desc -> assigned a default empty string value
+
+NEW StagesXmlList.RestoreToDefault(); + NEW _allInfos;
+NEW RewardPassivesList.RestoreToDefault(); + NEW _allInfos;
+NEW MysteryXmlList.RestoreToDefault(); + NEW _allInfos;
+NEW CardDropValueList.RestoreToDefault(); + NEW _allInfos;
+| ----------------------------------------> all added to have a reserve list that can reload the main list upon changing gamemodes
+
+
+-- CLASS PREFIXES --
+
+MYSTERY EVENTS : MysteryModel_ : MysteryModel
+ITEMS : PickUpModel_ : PickUpRebornModel --> NEEDS TO HAVE ITS CONSTRUCTOR INHERITED FROM BASE TOO
+CARD UPGRADE : UpgradeModel_ : UpgradeBase
+CUSTOM SHOP : ShopModel_ : ShopBase
+LOG STAT ADDER : No prefix (class name saved to save file) : LogStatAdder
+GLOBAL EFFECT : No prefix (class name saved to save file) : GlobalRebornEffectBase
