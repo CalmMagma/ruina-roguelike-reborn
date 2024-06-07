@@ -4,6 +4,11 @@
 		<Name>Current Ahn</Name>
 		<Desc>???</Desc>
 	</PassiveDesc>
+	
+	<PassiveDesc ID="854">
+		<Name>스파클링</Name>
+		<Desc>With me you shall walk through endless, ever so sparkling possibilities.</Desc>
+	</PassiveDesc>
   
 </PassiveDescRoot>
   

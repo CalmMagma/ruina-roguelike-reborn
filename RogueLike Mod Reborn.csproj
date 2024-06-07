@@ -143,6 +143,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)\*.dll" "C:\Users\paulo\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(TargetDir)\*.dll" "C:\Users\paulo\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

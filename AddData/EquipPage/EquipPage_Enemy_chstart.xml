@@ -7,50 +7,54 @@
 		<Name>???</Name>
 		<EquipEffect>
 			<EmotionLevel>1</EmotionLevel>
-			<HP>100</HP>
-			<Break>100</Break>
+			<HP>1</HP>
+			<Break>1</Break>
 			<SpeedMin>1</SpeedMin>
 			<Speed>1</Speed>
-			<SResist>Normal</SResist>
-			<PResist>Normal</PResist>
-			<HResist>Normal</HResist>
-			<SBResist>Normal</SBResist>
-			<PBResist>Normal</PBResist>
-			<HBResist>Normal</HBResist>
+			<SResist>Immune</SResist>
+			<PResist>Immune</PResist>
+			<HResist>Immune</HResist>
+			<SBResist>Immune</SBResist>
+			<PBResist>Immune</PBResist>
+			<HBResist>Immune</HBResist>
 			<StartPlayPoint>0</StartPlayPoint>
 			<MaxPlayPoint>2</MaxPlayPoint>
 			<Passive Level="1">854</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
-	</Book>
+		<CharacterSkin>The Sparkling Mirror</CharacterSkin>
+    		<CharacterSkinType>Custom</CharacterSkinType>
+		<Rarity>Special</Rarity>
+		<SkinGender>N</SkinGender>
+    	<RandomFace>false</RandomFace>
+  </Book>
 
 	<!-- 서고 -->
 	<Book ID="855">
 		<Name>???</Name>
 		<EquipEffect>
 			<EmotionLevel>1</EmotionLevel>
-			<HP>100</HP>
-			<Break>100</Break>
+			<HP>1</HP>
+			<Break>1</Break>
 			<SpeedMin>1</SpeedMin>
 			<Speed>1</Speed>
-			<SResist>Normal</SResist>
-			<PResist>Normal</PResist>
-			<HResist>Normal</HResist>
-			<SBResist>Normal</SBResist>
-			<PBResist>Normal</PBResist>
-			<HBResist>Normal</HBResist>
+			<SResist>Immune</SResist>
+			<PResist>Immune</PResist>
+			<HResist>Immune</HResist>
+			<SBResist>Immune</SBResist>
+			<PBResist>Immune</PBResist>
+			<HBResist>Immune</HBResist>
 			<StartPlayPoint>0</StartPlayPoint>
 			<MaxPlayPoint>2</MaxPlayPoint>
 			<Passive Level="1">855</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
-	</Book>
+		<CharacterSkin>The Sparkling Mirror</CharacterSkin>
+    		<CharacterSkinType>Custom</CharacterSkinType>
+		<Rarity>Special</Rarity>
+		<SkinGender>N</SkinGender>
+    	<RandomFace>false</RandomFace>
+  </Book>
 
 
 </BookXmlRoot>

@@ -205,11 +205,10 @@ namespace RogueLike_Mod_Reborn
             {
                 if (ids.Item1 == RMRCore.packageId)
                 {
-                    Debug.Log("Unnecessary custom artwork call for vanilla artwork! Coming from " + Environment.StackTrace);
+                    if (provideAdditionalLogging) Debug.Log("Unnecessary custom artwork call for vanilla artwork! Coming from " + Environment.StackTrace);
                     if (LogLikeMod.ArtWorks.ContainsKey(ids.Item2))
                         return LogLikeMod.ArtWorks[ids.Item2];
-                    else
-                        Debug.Log("Failed to obtain sprite altogether!! REAL SHIT!!!");
+                    else if (provideAdditionalLogging) Debug.Log("Failed to obtain sprite altogether!! REAL SHIT!!!");
                 }
                 else
                 {
@@ -237,7 +236,7 @@ namespace RogueLike_Mod_Reborn
                 }
             } catch (Exception e)
             {
-                Debug.Log("Failed to obtain custom artwork: " + e);
+                if (provideAdditionalLogging) Debug.Log("Failed to obtain custom artwork: " + e);
             }
             return null;
         }
@@ -440,8 +439,29 @@ namespace RogueLike_Mod_Reborn
 
         public static BattleUnitModel GetPatron(this BattleObjectManager manager)
         {
-            return manager.GetAliveList().Find(x => x.index == 0);
+            return manager.GetAliveList(Faction.Player).SortReturn((BattleUnitModel x, BattleUnitModel y) => x.index - y.index)[0];
         }
+
+        /// <summary>
+        /// Replaces color shorthands from the XMLs.
+        /// <br></br>[green] - #33DD11
+        /// <br></br>[red] - #DD3311
+        /// </summary>
+        public static string ReplaceColorShorthands(this string input)
+        {
+            string colored = input;
+            foreach (var values in colorShorthands)
+            {
+                colored = colored.Replace(values.Key, values.Value);
+            }
+            return colored;
+        }
+
+        public static Dictionary<string, string> colorShorthands = new Dictionary<string, string>
+        {
+            {"[green]", "<color=#33DD11>"},
+            {"[red]", "<color=#DD3311>"}
+        };
     }
 
     #region UNIT UTIL
@@ -1259,7 +1279,7 @@ namespace RogueLike_Mod_Reborn
                 {
                     foreach (var dia in Dialog)
                     {
-                        text += dia + Environment.NewLine;
+                        text += dia.ReplaceColorShorthands() + Environment.NewLine;
                     }
                 }
                 return text;
@@ -1316,10 +1336,15 @@ namespace RogueLike_Mod_Reborn
         // Handles save file creation, deletion and initialization
         public void LoadGamemodeByStageRecipe(LorId stageRecipe, bool isContinue)
         {
-            var gamemode = isContinue ? gamemodeList.Find(x => stageRecipe == new LorId(LogLikeMod.ModId, -855)) : gamemodeList.Find(x => stageRecipe == x.StageStart);
-            if (gamemode == null) return;
+            this.isContinue = false;
             if (isContinue)
-                this.InitializeGamemode(gamemode);  
+            {
+                this.isContinue = true;
+                LoadGamemodeByName(Singleton<LogueSaveManager>.Instance.LoadData("Lastest").GetString("CurrentGamemode"), true);
+                return;
+            }
+            var gamemode = gamemodeList.Find(x => stageRecipe == x.StageStart);
+            if (gamemode == null) return;
             else if (!File.Exists(Path.Combine(LogueSaveManager.Saveroot, gamemode.SaveDataString)))
             {
                 SaveData data = new SaveData(SaveDataType.Dictionary);
@@ -1341,8 +1366,12 @@ namespace RogueLike_Mod_Reborn
         public void LoadGamemodeByName(string name, bool isContinue)
         {
             var gamemode = gamemodeList.Find(x => x.GetType().Name == name);
-            if (gamemode == null) return;
-            if (isContinue)
+            if (gamemode == null)
+            {
+                Debug.Log("LoadGamemodeByName failed to load gamemode, real shit??");
+                return;
+            }
+            else if (isContinue)
                 this.InitializeGamemode(gamemode);
             else if (!File.Exists(Path.Combine(LogueSaveManager.Saveroot, gamemode.SaveDataString)))
             {
@@ -1366,11 +1395,18 @@ namespace RogueLike_Mod_Reborn
             Singleton<LogueSaveManager>.Instance.SaveData(RMRCore.CurrentGamemode.GetSaveData(), RMRCore.CurrentGamemode.SaveDataString);
         }
 
+        public void SaveCurrentGamemodeName(SaveData data)
+        {
+            data.SetData("CurrentGamemode", new SaveData(RMRCore.CurrentGamemode.GetType().Name));
+        }
+
         public void InitializeGamemode(RoguelikeGamemodeBase gamemode)
         {
             SaveData data = Singleton<LogueSaveManager>.Instance.LoadData(gamemode.SaveDataString);
             gamemode.LoadFromSaveData(data);
         }
+
+        public bool isContinue = false;
 
         public List<RoguelikeGamemodeBase> gamemodeList = new List<RoguelikeGamemodeBase>();
 
@@ -1590,8 +1626,11 @@ namespace RogueLike_Mod_Reborn
 
         public override void AfterInitializeGamemode()
         {
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
-            Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
+            if (!RoguelikeGamemodeController.Instance.isContinue)
+            {
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
+            }
         }
 
         public override void OnWaveStartInitialEvent()
@@ -1623,8 +1662,11 @@ namespace RogueLike_Mod_Reborn
 
         public override void AfterInitializeGamemode()
         {
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
-            Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
+            if (!RoguelikeGamemodeController.Instance.isContinue)
+            {
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
+            }
         }
 
         public override void OnWaveStartInitialEvent()
@@ -1927,7 +1969,7 @@ namespace RogueLike_Mod_Reborn
                 {
                     if (this.baseimage == null)
                     {
-                        this.baseimage = ModdingUtils.CreateImage(base.transform, "ShopGoodRewardFrame", new Vector2(1f, 1f), new Vector2(0f, 0f), new Vector2(70f, 70f));
+                        this.baseimage = ModdingUtils.CreateImage(base.transform, "EmptyIcon", new Vector2(1f, 1f), new Vector2(0f, 0f), new Vector2(70f, 70f));
                     }
                     this.sprite = effect.GetSprite();
                     this.baseimage.sprite = this.sprite;
@@ -2055,6 +2097,7 @@ namespace RogueLike_Mod_Reborn
             panel.portrait.sprite = item.isObtained ? item.sprite : LogLikeMod.ArtWorks["ItemNotFoundIcon"];
             panel.portrait.enabled = true;
             LayoutRebuilder.ForceRebuildLayoutImmediate(panel.equipPageStory.GetComponent<RectTransform>());
+            panel.scrollbar.scrollbar.Select();
             panel.scrollbar.scrollbar.value = 1f;
         }
 
@@ -2070,7 +2113,7 @@ namespace RogueLike_Mod_Reborn
             }
             
             panel.portrait.transform.localPosition = new Vector3(0f, 0f, 0f);
-            panel.portrait.transform.Rotate(new Vector3(56f, 354f, 349f));
+            panel.portrait.transform.Rotate(337.5f, 0f, 0f);
             panel.portrait.transform.localScale = new Vector3(0.48f, 0.48f, 1f);
             panel.portrait.enabled = false;
             panel.SelectablePanel_Text.ChildSelectable.interactable = false;
@@ -2263,11 +2306,13 @@ namespace RogueLike_Mod_Reborn
                 if (string.IsNullOrEmpty(keyword) || !RMRCore.ClassIds.ContainsKey(buf.GetType().Assembly)) return;
                 if (RMRCore.ClassIds[buf.GetType().Assembly] == RMRCore.packageId && LogLikeMod.ArtWorks.ContainsKey(keyword))
                 {
-                    buf._bufIcon = LogLikeMod.ArtWorks[keyword];
+                    Sprite sprite = LogLikeMod.ArtWorks[keyword];
+                    if (sprite != null) buf._bufIcon = sprite;
                 }
                 else if (LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[buf.GetType().Assembly], keyword)))
                 {
-                    buf._bufIcon = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[buf.GetType().Assembly], keyword)];
+                    Sprite sprite = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[buf.GetType().Assembly], keyword)];
+                    if (sprite != null) buf._bufIcon = sprite;
                 }
             }
             catch (Exception e)
@@ -2282,18 +2327,20 @@ namespace RogueLike_Mod_Reborn
         [HarmonyTranspiler, HarmonyPatch(typeof(MysteryBase), nameof(MysteryBase.GetCurFrameDia))]
         static IEnumerable<CodeInstruction> GetLocalizedFrameDialog(IEnumerable<CodeInstruction> instructions)
         {
+
             foreach (var x in instructions)
             {
-                yield return x;
-                if (x.opcode == OpCodes.Endfinally)
+                if (x.opcode == OpCodes.Stloc_S)
                 {
                     yield return new CodeInstruction(OpCodes.Ldarg_0); // loads current instance of MysteryBase onto stack
-                    yield return new CodeInstruction(OpCodes.Ldloc_0); // loads string text onto stack (first variable declared)
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.LocalizeFrameDialog_Infix)));
+                    yield return new CodeInstruction(OpCodes.Stloc_0);
+                    yield return new CodeInstruction(OpCodes.Ldloc_0);
                 }
+                yield return x;
             }
         }
-        static void LocalizeFrameDialog_Infix(MysteryBase mystery, string text)
+        static string LocalizeFrameDialog_Infix(string text, MysteryBase mystery)
         {
             RogueMysteryXmlInfo loc = RogueMysteryXmlList.Instance.GetLocalizedMystery(mystery.xmlinfo.StageId);
             try
@@ -2303,6 +2350,7 @@ namespace RogueLike_Mod_Reborn
                     text = loc.GetFrameById(mystery.curFrame.FrameID).Dialogs; 
                 }
             } catch (Exception e) { Debug.Log("Failed to localize frame dialog: " + e); }
+            return text;
         }
 
         /// <summary>
@@ -2311,27 +2359,22 @@ namespace RogueLike_Mod_Reborn
         [HarmonyTranspiler, HarmonyPatch(typeof(MysteryBase), nameof(MysteryBase.GetCurFrameTitle))]
         static IEnumerable<CodeInstruction> GetLocalizedFrameTitle(IEnumerable<CodeInstruction> instructions)
         {
-            foreach (var x in instructions)
-            {
-                yield return x;
-                if (x.opcode == OpCodes.Call && x.Calls(AccessTools.Method(typeof(abcdcode_LOGLIKE_MOD_Extension.TextDataModel), nameof(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText))))
-                {
-                    yield return new CodeInstruction(OpCodes.Ldarg_0); // loads current instance of MysteryBase onto stack
-                    yield return new CodeInstruction(OpCodes.Ldloc_0); // loads string text onto stack (first variable declared)
-                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.LocalizeFrameTitle_Infix)));
-                }
-            }
+            yield return new CodeInstruction(OpCodes.Ldarg_0); // loads current instance of MysteryBase onto stack
+            yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.LocalizeFrameTitle_Infix)));
+            yield return new CodeInstruction(OpCodes.Ret);
         }
-        static void LocalizeFrameTitle_Infix(MysteryBase mystery, string text)
+        static string LocalizeFrameTitle_Infix(MysteryBase mystery)
         {
+            string text = "";
             RogueMysteryXmlInfo loc = RogueMysteryXmlList.Instance.GetLocalizedMystery(mystery.xmlinfo.StageId);
             try
             {
                 if (loc != null)
-                {
                     text = loc.Title;
-                }
-            }  catch (Exception e) { Debug.Log("Failed to localize frame title: " + e); }
+                 else
+                    text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(mystery.xmlinfo.Title, Array.Empty<object>());
+            } catch (Exception e) { Debug.Log("Failed to localize frame title: " + e); }
+            return text.ReplaceColorShorthands();
         }
 
         /// <summary>
@@ -2358,7 +2401,7 @@ namespace RogueLike_Mod_Reborn
             {
                 text = loc.GetFrameById(mystery.curFrame.FrameID).GetChoiceById(enumerator.Current.ChoiceID).Desc;
             }
-            return text;
+            return text.ReplaceColorShorthands();
         }
 
         /// <summary>
@@ -2468,14 +2511,13 @@ namespace RogueLike_Mod_Reborn
         [HarmonyTranspiler, HarmonyPatch(typeof(LoguePlayDataSaver), nameof(LoguePlayDataSaver.SavePlayData))]
         static IEnumerable<CodeInstruction> SaveGamemodeData(IEnumerable<CodeInstruction> instructions)
         {
-            bool trigger = false;
             foreach (var x in instructions)
             {
-                if (x.opcode == OpCodes.Ldstr && !trigger) 
+                if (x.opcode == OpCodes.Call && x.Calls(AccessTools.Method(typeof(LogueSaveManager), "get_Instance")))
                 {
-                    trigger = true;
-                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RoguelikeGamemodeController), "get_Instance")); 
-                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RoguelikeGamemodeController), nameof(RoguelikeGamemodeController.SaveCurrentGamemodeData)));
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RoguelikeGamemodeController), "get_Instance"));
+                    yield return new CodeInstruction(OpCodes.Ldloc_0);
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RoguelikeGamemodeController), nameof(RoguelikeGamemodeController.SaveCurrentGamemodeName)));
                 }
                 yield return x;
             }
@@ -2487,55 +2529,76 @@ namespace RogueLike_Mod_Reborn
         [HarmonyTranspiler, HarmonyPatch(typeof(LogLikeMod), nameof(LogLikeMod.UIInvitationRightMainPanel_ConfirmSendInvitation))]
         static IEnumerable<CodeInstruction> DetectAndPatchGamemodes(IEnumerable<CodeInstruction> instructions)
         {
-            bool dont = true;
             List<CodeInstruction> ins = new List<CodeInstruction>();
             foreach (CodeInstruction x in instructions)
             {
-                if (dont && x.opcode == OpCodes.Newobj)
+
+                if (x.opcode == OpCodes.Newobj)
                 {
-                    dont = false;
                     ins.RemoveAt(ins.Count - 1);
                     ins.RemoveAt(ins.Count - 1);
+                    ins.RemoveAt(ins.Count - 1);
+                    ins.Add(new CodeInstruction(OpCodes.Ldarg_1));
+                    ins.Add(new CodeInstruction(OpCodes.Ldarg_2));
                     ins.Add(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.DetectAndPatchGamemodesInfix))));
-                    ins.Add(new CodeInstruction(OpCodes.Ldloc_0));
-                    ins.Add(new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(StageClassInfo), "get_id")));
-                }
-                else if (x.opcode == OpCodes.Callvirt && x.Calls(AccessTools.Method(typeof(List<string>), nameof(List<string>.Clear))))
+                    ins.Add(new CodeInstruction(OpCodes.Ret));
+                } else
                 {
                     ins.Add(x);
-                    ins.Add(new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))));
-                    ins.Add(new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), nameof(RoguelikeGamemodeBase.BeforeInitializeGamemode))));
                 }
-                else if (x.opcode == OpCodes.Call && (x.Calls(AccessTools.Method(typeof(LoguePlayDataSaver), nameof(LoguePlayDataSaver.RemovePlayerData))) || x.Calls(AccessTools.Method(typeof(LoguePlayDataSaver), nameof(LoguePlayDataSaver.LoadPlayData)))))
-                {
-                    ins.Add(x);
-                    ins.Add(new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))));
-                    ins.Add(new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), nameof(RoguelikeGamemodeBase.AfterInitializeGamemode))));
-                } else ins.Add(x);
             }
             return ins;
         }
-        static LorId DetectAndPatchGamemodesInfix(LorId invitation)
+        static void DetectAndPatchGamemodesInfix(StageClassInfo inv, Action<UIInvitationRightMainPanel> orig, UIInvitationRightMainPanel self)
         {
+            StagesXmlList.Instance.RestoreToDefault();
+            RewardPassivesList.Instance.RestoreToDefault();
+            MysteryXmlList.Instance.RestoreToDefault();
+            LorId invitation = inv.id;
             bool succes = false;
+            bool isContinue = invitation == new LorId(RMRCore.packageId, -855);
+            if (isContinue)
+            {
+                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(invitation, true);
+                RMRCore.CurrentGamemode.FilterContent();
+
+                RMRCore.CurrentGamemode.BeforeInitializeGamemode();
+                inv.mapInfo.Clear();
+                orig(self);
+                LoguePlayDataSaver.LoadPlayData();
+                RMRCore.CurrentGamemode.AfterInitializeGamemode();
+                Debug.Log("IT IS GOING INTO THE CONTINUE PATH! " + RMRCore.CurrentGamemode.SaveDataString);
+                return;
+            }
             try
             {
                 RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(invitation, false);
                 succes = true;
-            } catch { }
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
             if (RMRCore.CurrentGamemode == null)
                 RMRCore.CurrentGamemode = new RoguelikeGamemode_RMR_Default();
-            StagesXmlList.Instance.RestoreToDefault();
-            RewardPassivesList.Instance.RestoreToDefault();
-            MysteryXmlList.Instance.RestoreToDefault();
-            //CardDropValueList.Instance.RestoreToDefault();
+
             if (succes)
             {
                 RMRCore.CurrentGamemode.FilterContent();
-                return invitation;
+                RMRCore.CurrentGamemode.BeforeInitializeGamemode();
+                inv.mapInfo.Clear();
+                LogueBookModels.CreatePlayer();
+                orig(self);
+                LogueBookModels.CreatePlayerBattle();
+                LoguePlayDataSaver.RemovePlayerData();
+                RMRCore.CurrentGamemode.AfterInitializeGamemode();
+                Debug.Log("NEW RUN! " + RMRCore.CurrentGamemode.SaveDataString);
             }
-            return new LorId(" ", -1);
+            else
+                orig(self);
+            Debug.Log("REGULAR RECEPTION!");
         }
+    
 
         /// <summary>
         /// Patches RoguelikeGamemodeBase.OnWaveStartInitialEvent into the initial event passive
@@ -2583,6 +2646,38 @@ namespace RogueLike_Mod_Reborn
                     ins.Add(new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))));
                     ins.Add(new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), "get_StageStart")));
                 } else ins.Add(x);
+            }
+            return ins;
+        }
+
+
+        /// <summary>
+        /// Patch to deal with checking if current reception is roguelike
+        /// </summary>
+        [HarmonyTranspiler, HarmonyPatch(typeof(LogLikeMod), nameof(LogLikeMod.SetNextStage))]
+        static IEnumerable<CodeInstruction> CheckSetNextStagePatch(IEnumerable<CodeInstruction> instructions)
+        {
+            bool doonce1 = true;
+            bool doonce2 = true;
+            List<CodeInstruction> ins = new List<CodeInstruction>();
+            foreach (CodeInstruction x in instructions)
+            {
+                if (doonce2 && x.opcode == OpCodes.Stloc_0)
+                {
+                    doonce2 = true;
+                    ins.Add(x);
+                    ins.Add(new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))));
+                    ins.Add(new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), "get_StageStart")));
+                    ins.Add(new CodeInstruction(OpCodes.Stloc_1));
+                }
+                else if (doonce1 && x.opcode == OpCodes.Newobj)
+                {
+                    doonce1 = false;
+                    ins.RemoveAt(ins.Count - 1);
+                    ins.RemoveAt(ins.Count - 1);
+                    ins.Add(new CodeInstruction(OpCodes.Ldloc_1));
+                }
+                else ins.Add(x);
             }
             return ins;
         }
