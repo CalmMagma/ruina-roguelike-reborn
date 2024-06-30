@@ -169,11 +169,12 @@
   <Stage id="40014">
 
     <Wave>
+      <ManagerScript>TheCrying</ManagerScript>
       <AvailableUnit>5</AvailableUnit>
       <Formation>13</Formation>
       <Unit>30028</Unit>
     </Wave>
-
+    
     <MapInfo>Philip1</MapInfo>
     <MapInfo>Philip2</MapInfo>
     <MapInfo>Philip3</MapInfo>

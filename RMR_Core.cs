@@ -44,6 +44,19 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnInitializeMod();
 
+            if (!File.Exists(LogueSaveManager.Saveroot + "/RMR_Config.xml"))
+            {
+               using (var file = File.Create(LogueSaveManager.Saveroot + "/RMR_Config.xml")) {
+                    new XmlSerializer(typeof(RMRConfigRoot)).Serialize(file, new RMRConfigRoot());
+               }
+            }
+            using (var file = File.OpenRead(LogueSaveManager.Saveroot + "/RMR_Config.xml"))
+            {
+                RMRConfigRoot config = (RMRConfigRoot)(new XmlSerializer(typeof(RMRConfigRoot)).Deserialize(file));
+                RMRCore.provideAdditionalLogging = config.EnableAdditionalLogging;
+                GlobalLogueItemCatalogPanel.Instance.debugMode = config.ShowAllItemCatalog;
+            }
+
             Harmony.CreateAndPatchAll(typeof(RMR_Patches), packageId);
             if (!Directory.Exists(LogueSaveManager.Saveroot))
                 Directory.CreateDirectory(LogueSaveManager.Saveroot);
@@ -205,7 +218,7 @@ namespace RogueLike_Mod_Reborn
             {
                 if (ids.Item1 == RMRCore.packageId)
                 {
-                    if (provideAdditionalLogging) Debug.Log("Unnecessary custom artwork call for vanilla artwork! Coming from " + Environment.StackTrace);
+                    if (provideAdditionalLogging && !Environment.StackTrace.Contains("abcdcode_LOGLIKE_MOD.LogLikeMod+CacheDic`2[Tkey,TValue].ContainsKey (Tkey key)")) Debug.Log("Unnecessary custom artwork call for vanilla artwork! Coming from " + Environment.StackTrace);
                     if (LogLikeMod.ArtWorks.ContainsKey(ids.Item2))
                         return LogLikeMod.ArtWorks[ids.Item2];
                     else if (provideAdditionalLogging) Debug.Log("Failed to obtain sprite altogether!! REAL SHIT!!!");
@@ -375,7 +388,7 @@ namespace RogueLike_Mod_Reborn
         public static IList<T> SortReturn<T> (this IList<T> list, Comparison<T> comparer)
         {
             var list2 = list.ToList();
-            list2.Sort();
+            list2.Sort(comparer);
             return list2;
         }
 
@@ -462,6 +475,16 @@ namespace RogueLike_Mod_Reborn
             {"[green]", "<color=#33DD11>"},
             {"[red]", "<color=#DD3311>"}
         };
+    }
+
+    [Serializable]
+    public class RMRConfigRoot
+    {
+        [XmlElement("ShowAdditionalLogging")]
+        public bool EnableAdditionalLogging = false;
+
+        [XmlElement("ShowAllItemCatalog")]
+        public bool ShowAllItemCatalog = false;
     }
 
     #region UNIT UTIL
