@@ -475,6 +475,10 @@ namespace RogueLike_Mod_Reborn
             {"[green]", "<color=#33DD11>"},
             {"[red]", "<color=#DD3311>"}
         };
+
+        /*
+        
+        */
     }
 
     [Serializable]
@@ -1084,109 +1088,6 @@ namespace RogueLike_Mod_Reborn
             return sprite;
         }
     }
-
-    public class LogueEffectXmlList : Singleton<LogueEffectXmlList>
-    {
-        public void Init(string language)
-        {
-            string str = Path.Combine("Localize", language);
-            string ogpath = Path.Combine(ModContentManager.Instance.GetModPath(RMRCore.packageId), "Assemblies", "dlls");
-
-            if (Directory.Exists(Path.Combine(ogpath, str, "LogueEffectText")))
-            {
-                DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(ogpath, str, "LogueEffectText"));
-                foreach (System.IO.FileInfo fileinfo in directoryInfo.GetFiles())
-                {
-                    try
-                    {
-                        var root = new XmlSerializer(typeof(LogueEffectXmlRoot)).Deserialize(fileinfo.OpenRead()) as LogueEffectXmlRoot;
-                        foreach (var info in root.LogueEffectList)
-                        {
-                            if (!effectDict.ContainsKey(RMRCore.packageId))
-                                effectDict.Add(RMRCore.packageId, new Dictionary<string, LogueEffectXmlInfo>());
-                            if (!effectDict[RMRCore.packageId].ContainsKey(info.Id) && info != null)
-                                effectDict[RMRCore.packageId].Add(info.Id, info);
-                            else if (info != null)
-                                effectDict[RMRCore.packageId][info.Id] = info;
-                        }
-                    } catch (Exception e)
-                    {
-                        Debug.Log("Error while trying to load XML file " + fileinfo.Name + ": " + e);
-                    }
-                }
-
-            }
-
-            foreach (ModContentInfo modContentInfo in LogLikeMod.GetLogMods())
-            {
-                string uniqueId = modContentInfo.invInfo.workshopInfo.uniqueId;
-                if (Directory.Exists(Path.Combine(modContentInfo.GetLogDllPath(), str, "LogueEffectText")))
-                {
-                    DirectoryInfo directoryInfo2 = new DirectoryInfo(Path.Combine(modContentInfo.GetLogDllPath(), str, "LogueEffectText"));
-                    foreach (System.IO.FileInfo fileinfo2 in directoryInfo2.GetFiles())
-                    {
-                        try {
-                            var root = new XmlSerializer(typeof(LogueEffectXmlRoot)).Deserialize(fileinfo2.OpenRead()) as LogueEffectXmlRoot;
-                            foreach (var info in root.LogueEffectList)
-                            {
-                                if (!effectDict.ContainsKey(uniqueId))
-                                    effectDict.Add(uniqueId, new Dictionary<string, LogueEffectXmlInfo>());
-                                if (!effectDict[uniqueId].ContainsKey(info.Id))
-                                    effectDict[uniqueId].Add(info.Id, info);
-                                else
-                                    effectDict[uniqueId][info.Id] = info;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.Log("Error while trying to load XML file " + fileinfo2.Name + ": " + e);
-                        }
-                    }
-                }
-
-            }
-        }
-
-        public LogueEffectXmlInfo GetEffectInfo(string id, string packageId, params object[] args)
-        {
-            if (effectDict.ContainsKey(packageId) && effectDict[packageId].ContainsKey(id))
-            {
-                LogueEffectXmlInfo info = effectDict[packageId][id];
-                if (GlobalLogueItemCatalogPanel.Instance.activated || args == null || args.Length == 0)
-                    info.Desc = info.Desc.Replace("{0}", "X");
-                else if (args != null && args.Length > 0)
-                    info.Desc = string.Format(info.Desc, args);
-                return info;
-            }
-            return null;
-        }
-
-        public Dictionary<string, Dictionary<string, LogueEffectXmlInfo>> effectDict = new Dictionary<string, Dictionary<string, LogueEffectXmlInfo>>();
-    }
-
-    public class LogueEffectXmlRoot
-    {
-        [XmlElement("LogueEffectInfo")]
-        public List<LogueEffectXmlInfo> LogueEffectList;
-    }
-
-    public class LogueEffectXmlInfo
-    {
-        [XmlAttribute]
-        public string Id;
-
-        [XmlElement]
-        public string Name;
-
-        [XmlElement]
-        public string Desc;
-
-        [XmlElement]
-        public string FlavorText;
-
-        [XmlElement]
-        public string CatalogDesc;
-    }
     #endregion
 
     #region MYSTERY EVENT LOC.
@@ -1785,6 +1686,7 @@ namespace RogueLike_Mod_Reborn
         public void Activate()
         {
             this.activated = true;
+            LogLikeMod.itemCatalogActive = true;
             root.canvasGroup.alpha = 1f;
             root.canvasGroup.interactable = true;
             root.canvasGroup.blocksRaycasts = true;
@@ -1794,6 +1696,7 @@ namespace RogueLike_Mod_Reborn
         public void Deactivate()
         {
             this.activated = false;
+            LogLikeMod.itemCatalogActive = false;
             root.canvasGroup.alpha = 0f;
             root.canvasGroup.interactable = false;
             root.canvasGroup.blocksRaycasts = false;
@@ -2081,6 +1984,8 @@ namespace RogueLike_Mod_Reborn
         {
             if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
                 return ((GlobalRebornEffectBase)item).GetCredenzaEntry();
+            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
+                return loc.CatalogDesc;
             return item.GetEffectDesc();
         }
 
@@ -2116,7 +2021,7 @@ namespace RogueLike_Mod_Reborn
                 return;
             }
             panel.equipPageName.text = item.isObtained ? item.effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
-            panel.equipPageStory.text = item.isObtained ? item.effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza"); // replace by item story later
+            panel.equipPageStory.text = item.isObtained ? item.effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
             panel.portrait.sprite = item.isObtained ? item.sprite : LogLikeMod.ArtWorks["ItemNotFoundIcon"];
             panel.portrait.enabled = true;
             LayoutRebuilder.ForceRebuildLayoutImmediate(panel.equipPageStory.GetComponent<RectTransform>());

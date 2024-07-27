@@ -52,7 +52,7 @@ namespace RogueLike_Mod_Reborn
     {
         public override void OnStartBattleAfter()
         {
-            StageController.Instance.AddModdedUnit(Faction.Player, new LorId(RMRCore.packageId, -100), -1, 170, new XmlVector2 { x = -20, y = 0 });
+            StageController.Instance.AddModdedUnit(Faction.Player, new LorId(RMRCore.packageId, -100), -1, 170, new XmlVector2 { x = 20, y = 0 });
             UnitUtil.RefreshCombatUI();
         }
 

@@ -23,7 +23,7 @@ NEW RewardPassivesList.RestoreToDefault(); + NEW _allInfos;
 NEW MysteryXmlList.RestoreToDefault(); + NEW _allInfos;
 NEW CardDropValueList.RestoreToDefault(); + NEW _allInfos;
 | ----------------------------------------> all added to have a reserve list that can reload the main list upon changing gamemodes
-
+NEW LogueEffectXmlList, Info AND Root (moved to old DLL)
 
 -- CLASS PREFIXES --
 

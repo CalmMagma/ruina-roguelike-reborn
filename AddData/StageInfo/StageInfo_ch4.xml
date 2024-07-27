@@ -169,7 +169,6 @@
   <Stage id="40014">
 
     <Wave>
-      <ManagerScript>TheCrying</ManagerScript>
       <AvailableUnit>5</AvailableUnit>
       <Formation>13</Formation>
       <Unit>30028</Unit>

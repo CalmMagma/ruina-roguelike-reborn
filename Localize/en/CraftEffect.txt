@@ -18,5 +18,4 @@
 	 <text id="CraftEquipChapter7Desc">Craft a random Impuritas Civitatis Key Page</text>
 
 	 <text id="CraftEquipResult">Crafted {0}</text>
-	 <text id="CraftEquipResult">Cannot Craft anymore</text>
 </localize>
