@@ -4,7 +4,7 @@
   <LogueEffectInfo Id="GlobalEffect_MemberShipLogic">
     <Name>Thumb Training Certificate</Name> 
     <Desc>All Librarians can use Ranged Combat Pages.</Desc> 
-    <FlavorText>&lt;color=#CA0812&gt;"powerful"&lt;/color&gt;</FlavorText> 
+    <FlavorText>&lt;color=#CA0812&gt;"Proof that you can handle firearms, at least ineffectively."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
   
