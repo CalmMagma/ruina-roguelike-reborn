@@ -2,9 +2,7 @@
 <localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<text id="Shop7_Name">Original Intention</text>
 	 <text id="Shop7_Desc">Upon using previous chapter's Combat Pages, all dice on the Page gain + 1 Power. Combat Pages from the previous chapter appears in the shop.</text>
-	 
-	 <text id="Shop18_Name">Savings Product</text>
-	 <text id="Shop18_Desc">Upon use, get {0} Ahn. Increases by 3 for every entry into a normal battle.</text>
+	
 	 
 	 <text id="ShopGood25_1Name">The Puppeteer</text>
 	 <text id="ShopGood25_1Desc">When this character uses Combat Page, Manikin uses the same Combat Page as a one-sided attack on the target.</text>
@@ -14,9 +12,6 @@
 	 
 	 <text id="ShopGood40_1Name">Science Kit</text>
 	 <text id="ShopGood40_1Desc">Add '{0}' Combat Page to hand. It costs 0 until used.</text>
-
-	  <text id="Event3Effect_Name">Enkephalin</text>
-	 <text id="Event3Effect_Desc">During Canard and Urban Myth Chapter, librian's Emotion Level starts at 1.</text>
 
 	 <text id="MeatPieQuest_Name">Meatpie Quest</text>
 	 <text id="MeatPieQuest_Desc">Skip Combat Page reward to get Meat. Gather 5 Meat to complete the Quest.
@@ -39,8 +34,7 @@ Gathered Meat : {0}</text>
 	 <text id="Ch6Event2Effect_Name">Stake</text>
 	 <text id="Ch6Event2Effect_Desc">Kill selected Librarian</text>
 
-	 <text id="ShopThiefPenalty_Name">Not for Thief!</text>
-	 <text id="ShopThiefPenalty_Desc">Cannot buy items from this shop.</text>
+
 
 
 
@@ -50,6 +44,5 @@ Gathered Meat : {0}</text>
 	 <text id="Shop3_2_Name">Importance of Promise</text>
 	 <text id="Shop3_2_Desc">After a normal battle, gain one Urban Legend Combat Page reward.</text>
 
-	 <text id="GlobalEffect_MemberShipLogic_Name">Logic</text>
-	 <text id="GlobalEffect_MemberShipLogic_Desc">All Librarians can use ranged Combat Page.</text>
+
 </localize>

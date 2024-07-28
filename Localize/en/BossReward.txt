@@ -22,5 +22,5 @@
              <text id="BossReward7Name">Limited Edition</text>
              <text id="BossReward7Desc">Combat Page reward and Shop's Combat Page items have a 15% chance to appear in an enhanced state.</text>
              <text id="BossReward8Name">Blast Furnace</text>
-             <text id="BossReward8Desc">20% reduction in Craft cost</text>
+             <text id="BossReward8Desc">25% reduction in Craft cost</text>
 </localize>

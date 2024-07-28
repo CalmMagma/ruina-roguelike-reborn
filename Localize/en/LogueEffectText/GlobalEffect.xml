@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<LogueEffectXmlRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <LogueEffectInfo Id="GlobalEffect_ThumbTrainCerti">
+    <Name>Thumb Training Certificate</Name> 
+    <Desc>All Librarians can use Ranged Combat Pages</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Proof that you can handle firearms, at least ineffectively.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo>
+  
+  <LogueEffectInfo Id="GlobalEffect_ShopThiefPenalty">
+    <Name>Bad Manners!</Name> 
+    <Desc>You're unable to visit shops this act</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Etiquette, you troglodyte!”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="GlobalEffect_RolandNft">
+    <Name>Rare Street Thug Action Figure</Name> 
+    <Desc>[Consumable] Upon use gain {0} Ahn. Value grows by 3 for every battle won</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“I have nothing but my— holy shit is that Roland the Street Thug™!?”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
+  <LogueEffectInfo Id="GlobalEffect_SlowBurn">
+    <Name>Slow Burn</Name> 
+    <Desc>Burn stacks reduce by 1/3 instead of 1/4</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Arsonist's #1 choice!”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  // isn't working: localization doesn't change
+ 
+  <LogueEffectInfo Id="GlobalEffect_EgoWeed">
+    <Name>Enkephalin Sticker</Name> 
+    <Desc>All Librarians Emotion Level start at 1</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Love, heart, control Enkephalin! It gets you going.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+ 
+  // below is new stuff
+ 
+  <LogueEffectInfo Id="GlobalEffect_NineFourteen">
+    <Name>9-14</Name> 
+    <Desc>All future cards will appear as upgraded versions of themselves</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Ps: Tuned to 'Very Fine'.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
+  <LogueEffectInfo Id="GlobalEffect_SuppressiveFire">
+    <Name>Suppressive Fire</Name> 
+    <Desc>Ranged Offensive Die gain +1 Power against enemies targeted by other Librarian’s Ranged Combat Pages</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Enemies in that direction!
+Copy. Erasing that direction.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+ 
+   <LogueEffectInfo Id="GlobalEffect_ScrapShield">
+    <Name>Scrap Shield</Name> 
+    <Desc>Adds 1 Counter Die (Block, 2-5) to the selected Librarian’s queue. Min. and Max. value increases by 1 per chapter</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;““Sticks and stones may just break your bones.””&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
+    <LogueEffectInfo Id="GlobalEffect_">
+    <Name>Dshka</Name> 
+    <Desc>Dshka</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
+     <LogueEffectInfo Id="GlobalEffect_">
+    <Name>Dshka</Name> 
+    <Desc>Dshka</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
+      <LogueEffectInfo Id="GlobalEffect_">
+    <Name>Dshka</Name> 
+    <Desc>Dshka</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
+      <LogueEffectInfo Id="GlobalEffect_">
+    <Name>Dshka</Name> 
+    <Desc>Dshka</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
+</LogueEffectXmlRoot>
