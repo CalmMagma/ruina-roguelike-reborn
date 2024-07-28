@@ -2020,8 +2020,16 @@ namespace RogueLike_Mod_Reborn
                 panel.SelectablePanel_Text.ChildSelectable.interactable = false;
                 return;
             }
+            if (Singleton<GlobalLogueItemCatalogPanel>.Instance.debugMode)
+                panel.equipPageStory.text = "--- DEBUGGING INFO ---\n" + 
+                    "Class name: " + item.GetType().Name + "\n" +
+                    "Full class path: " + item.GetType().FullName + "\n" + 
+                    "Localization type: " + item.GetType().GetProperty("KeywordId", BindingFlags.Public) != null || item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)) ? "New" : "Old" +
+                    "--- DEBUGGING INFO ---\n\n" +
+                    item.effect.GetItemCredenzaEntry();
+            else panel.equipPageStory.text = item.isObtained ? item.effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
             panel.equipPageName.text = item.isObtained ? item.effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
-            panel.equipPageStory.text = item.isObtained ? item.effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
+            
             panel.portrait.sprite = item.isObtained ? item.sprite : LogLikeMod.ArtWorks["ItemNotFoundIcon"];
             panel.portrait.enabled = true;
             LayoutRebuilder.ForceRebuildLayoutImmediate(panel.equipPageStory.GetComponent<RectTransform>());
@@ -2037,7 +2045,7 @@ namespace RogueLike_Mod_Reborn
             if (panel.portrait.GetComponentInParent<Mask>() is var mask && mask != null)
             {
                 mask.gameObject.transform.localPosition = new Vector3(170f, 370f, 0f);
-                mask.gameObject.transform.localScale = new Vector3(1.125f, 1.1f, 1f);
+                mask.gameObject.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
             }
             
             panel.portrait.transform.localPosition = new Vector3(0f, 0f, 0f);
@@ -2128,9 +2136,11 @@ namespace RogueLike_Mod_Reborn
             if (Singleton<GlobalLogueItemCatalogPanel>.Instance.root == null)
             {
                 Singleton<GlobalLogueItemCatalogPanel>.Instance.GetLogUIObj();
+                Singleton<GlobalLogueItemCatalogPanel>.Instance.Init();
             }
-            Singleton<GlobalLogueItemCatalogPanel>.Instance.Init();
-            Singleton<GlobalLogueItemCatalogPanel>.Instance.Deactivate();
+            
+            if (__instance.tabcontroller.GetCurrentIndex() != 4)
+                Singleton<GlobalLogueItemCatalogPanel>.Instance.Deactivate();
 
             __instance.tabcontroller.TabsRoot.transform.localPosition = new Vector3(-290f, 3.17f, 0f);
             __instance.tabcontroller.CustomTabs[0].transform.localPosition = new Vector3(325f, 35f, 0f);
