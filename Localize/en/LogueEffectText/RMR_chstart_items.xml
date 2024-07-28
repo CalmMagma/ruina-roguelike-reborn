@@ -4,7 +4,7 @@
   <LogueEffectInfo Id="RMR_IronHeart">
     <Name>Heart of Iron</Name> 
     <Desc>The Patron Librarian restores 6 HP at the start of each Act.</Desc> 
-    <FlavorText>&lt;color=#ff8034&gt;"Tough, but still caring. One of the last of its kind."&lt;/color&gt;</FlavorText> 
+    <FlavorText>&lt;color=#CA0812&gt;"Tough, but still caring. One of the last of its kind."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>    Organs are always wanting: absorbing new ideas, nutrients or desires onto themselves, then discarding when the necessity has ceased. There is a constant loop to such actions, and although most do out of necessity, one doesn't - rather, it remembers everything. No matter how small.
 
     Such is the nature of the heart, the birthplace of feelings and pride - the heart never forgets what it has felt, nor does it let go of feelings that actively cause it harm - it remembers. Not because it can, but because it must. Something must always remember, no matter how tragic, so that one may never lose their way.
