@@ -2025,7 +2025,7 @@ namespace RogueLike_Mod_Reborn
                     "Class name: " + item.GetType().Name + "\n" +
                     "Full class path: " + item.GetType().FullName + "\n" + 
                     "Localization type: " + item.GetType().GetProperty("KeywordId", BindingFlags.Public) != null || item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)) ? "New" : "Old" +
-                    "--- DEBUGGING INFO ---\n\n" +
+                    "\n--- DEBUGGING INFO ---\n\n" +
                     item.effect.GetItemCredenzaEntry();
             else panel.equipPageStory.text = item.isObtained ? item.effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
             panel.equipPageName.text = item.isObtained ? item.effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
