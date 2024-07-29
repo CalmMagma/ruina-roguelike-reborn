@@ -974,12 +974,12 @@ namespace RogueLike_Mod_Reborn
         /// <value>
         /// Override this with the ID provided within the effect's respective localization XML.
         /// </value>
-        protected virtual string KeywordId { get; }
+        public virtual string KeywordId { get; }
 
         /// <value>
         /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
         /// </value>
-        protected virtual string KeywordIconId { get; }
+        public virtual string KeywordIconId { get; }
 
         /// <summary>
         /// Do <b>NOT</b> forget to inherit this constructor on your derived <see cref="PickUpRebornModel"/>.
@@ -1013,12 +1013,12 @@ namespace RogueLike_Mod_Reborn
         /// <value>
         /// Override this with the ID provided within the effect's respective localization XML.
         /// </value>
-        protected virtual string KeywordId { get; }
+        public virtual string KeywordId { get; }
 
         /// <value>
         /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
         /// </value>
-        protected virtual string KeywordIconId { get; }
+        public virtual string KeywordIconId { get; }
 
         public override string GetEffectDesc()
         {
@@ -1666,6 +1666,16 @@ namespace RogueLike_Mod_Reborn
             return true;
         }
 
+        public bool IsItemShown(PickUpModelBase item)
+        {
+            Type type = item.GetType();
+            if (type.GetCustomAttribute<HideFromItemCatalog>(false) != null)
+                return false;
+            else if (item.GetType().GetCustomAttribute<SecretInItemCatalog>(false) != null)
+                return item.HasBeenObtained();
+            return true;
+        }
+
         public void GetLogUIObj()
         {
             UIStoryArchivesPanel goG = UI.UIController.Instance.GetUIPanel(UIPanelType.Story) as UIStoryArchivesPanel;
@@ -1980,6 +1990,7 @@ namespace RogueLike_Mod_Reborn
 
     public static class UIItemCatalogPanel
     {
+
         public static string GetItemCredenzaEntry(this GlobalLogueEffectBase item)
         {
             if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
@@ -1987,6 +1998,26 @@ namespace RogueLike_Mod_Reborn
             if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
                 return loc.CatalogDesc;
             return item.GetEffectDesc();
+        }
+
+
+        public static string GetItemCredenzaEntry(this PickUpModelBase item)
+        {
+            if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
+                return ((PickUpRebornModel)item).;
+            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
+                return loc.CatalogDesc;
+            return item.GetEffectDesc();
+        }
+
+
+        public static string GetItemKeywordId(this GlobalLogueEffectBase item)
+        {
+            if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
+                return ((GlobalRebornEffectBase)item).KeywordId;
+            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
+                return loc.Id;
+            return "NO_KEYWORD_GIVEN";
         }
 
         public static int GetItemObtainCount(this GlobalLogueEffectBase item)
@@ -2021,12 +2052,15 @@ namespace RogueLike_Mod_Reborn
                 return;
             }
             if (Singleton<GlobalLogueItemCatalogPanel>.Instance.debugMode)
+            {  
                 panel.equipPageStory.text = "--- DEBUGGING INFO ---\n" + 
-                    "Class name: " + item.GetType().Name + "\n" +
-                    "Full class path: " + item.GetType().FullName + "\n" + 
-                    "Localization type: " + item.GetType().GetProperty("KeywordId", BindingFlags.Public) != null || item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)) ? "New" : "Old" +
+                    "Class name: " + item.effect.GetType().Name + "\n" +
+                    "Full class path: " + item.effect.GetType().FullName + "\n" + 
+                    "KeywordId: " + item.effect.GetItemKeywordId() + "\n" +
+                    "PackageId/AssemblyId: " + RMRCore.ClassIds[item.effect.GetType().Assembly] + 
                     "\n--- DEBUGGING INFO ---\n\n" +
                     item.effect.GetItemCredenzaEntry();
+            }
             else panel.equipPageStory.text = item.isObtained ? item.effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
             panel.equipPageName.text = item.isObtained ? item.effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
             

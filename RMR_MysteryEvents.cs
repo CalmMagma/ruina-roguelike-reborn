@@ -25,7 +25,7 @@ namespace RogueLike_Mod_Reborn
                         Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_StrangeOrb());
                         break;
                     case 3:
-                        //Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_StillWater());
+                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_StillWater());
                         break;
                     default:
                         break;
@@ -50,7 +50,7 @@ namespace RogueLike_Mod_Reborn
                         this.ShowOverlayOverButton(new RMREffect_StrangeOrb(), choiceid);
                         break;
                     case 3:
-                        //this.ShowOverlayOverButton(new RMREffect_StillWater(), choiceid);
+                        this.ShowOverlayOverButton(new RMREffect_StillWater(), choiceid);
                         break;
                     default:
                         break;

@@ -37,6 +37,10 @@
       <HintPath>dependencies\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="10EnumExtender">
+      <HintPath>dependencies\10EnumExtender.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="abcdcode_LOGLIKE_MOD, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dependencies\abcdcode_LOGLIKE_MOD.dll</HintPath>
@@ -49,6 +53,10 @@
       <HintPath>dependencies\CustomMapUtility.dll</HintPath>
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="KeywordUtil">
+      <HintPath>dependencies\KeywordUtil.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>dependencies\Mono.Cecil.dll</HintPath>
