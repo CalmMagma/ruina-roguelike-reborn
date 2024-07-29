@@ -19,7 +19,7 @@
     <Name>Rare Street Thug Action Figure</Name> 
     <Desc>[Consumable] Upon use gain {0} Ahn. Value grows by 3 for every battle won</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“I have nothing but my— holy shit is that Roland the Street Thug™!?”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
   </LogueEffectInfo> 
 
   <LogueEffectInfo Id="GlobalEffect_SlowBurn">
@@ -32,7 +32,7 @@
  
   <LogueEffectInfo Id="GlobalEffect_EgoWeed">
     <Name>Enkephalin Sticker</Name> 
-    <Desc>All Librarians Emotion Level start at 1</Desc> 
+    <Desc>All Librarians start at Emotional Level 1</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Love, heart, control Enkephalin! It gets you going.”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
@@ -58,31 +58,88 @@ Copy. Erasing that direction.”&lt;/color&gt;</FlavorText>
     <Name>Scrap Shield</Name> 
     <Desc>Adds 1 Counter Die (Block, 2-5) to the selected Librarian’s queue. Min. and Max. value increases by 1 per chapter</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;““Sticks and stones may just break your bones.””&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Art by @Blan_ka_</CatalogDesc>
+  </LogueEffectInfo> 
+  
+    <LogueEffectInfo Id="GlobalEffect_HpBullet">
+    <Name>HP Bullet</Name> 
+    <Desc>[Consumable] Selected Librarian recovers 30% HP</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“This will hurt…”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
   
+     <LogueEffectInfo Id="GlobalEffect_StrStim">
+    <Name>Aggro Stim</Name> 
+    <Desc>[Consumable] Selected Librarian gains 2 Strength this Scene</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“To become Her greatest soldier one must also be Her greatest eeper.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+  </LogueEffectInfo> 
+  
+      <LogueEffectInfo Id="GlobalEffect_RfxStim">
+    <Name>RFLX Stim</Name> 
+    <Desc>[Consumable] Selected Librarian gains 2 Endurance this Scene</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“*Miss* *Miss* *Miss*”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+  </LogueEffectInfo> 
+  
+   <LogueEffectInfo Id="GlobalEffect_W1dStim">
+    <Name>W1-ND</Name> 
+    <Desc>[Consumable] Selected Librarian gains 3 Haste this Scene</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Index targeting? We’ll see about that.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+  </LogueEffectInfo> 
+
+   <LogueEffectInfo Id="GlobalEffect_IrnStim">
+    <Name>1R0N Stim</Name> 
+    <Desc>[Consumable] Selected Librarian gains 3 Protection and Stagger Protection this Scene</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Because L34D wasn't that popular.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+  </LogueEffectInfo> 
+
+   <LogueEffectInfo Id="GlobalEffect_">
+    <Name>Dshka</Name> 
+    <Desc>Dshka</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
+    <LogueEffectInfo Id="GlobalEffect_BloodShed">
+    <Name>Bloodshed</Name> 
+    <Desc>All characters deal double damage and stagger damage this Scene
+Can be used once per battle.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“The man in the mirror nods his head…”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
+    <LogueEffectInfo Id="GlobalEffect_G1sSteroids">
+    <Name>Grade-1 Steroids</Name> 
+    <Desc>[Consumable] Selected Librarian's dice have their max value increased by 2 and min value lowered by 1 for two Scenes.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Also known as ‘Fool’s Strength’.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
+    <LogueEffectInfo Id="GlobalEffect_CaffPills">
+    <Name>Caffeine Pills</Name> 
+    <Desc>[Consumable] Selected Librarian's dice have their min value increased by 2 and max value lowered by 1 for two Scenes.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“For late night requests.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
     <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
-  
-     <LogueEffectInfo Id="GlobalEffect_">
+
+    <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
-  
-      <LogueEffectInfo Id="GlobalEffect_">
-    <Name>Dshka</Name> 
-    <Desc>Dshka</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
-  </LogueEffectInfo> 
-  
-      <LogueEffectInfo Id="GlobalEffect_">
+
+    <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
