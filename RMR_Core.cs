@@ -969,17 +969,18 @@ namespace RogueLike_Mod_Reborn
 
     #region ITEM LOCALIZATION
 
+    [HideFromItemCatalog]
     public class PickUpRebornModel : PickUpModelBase
     {
         /// <value>
         /// Override this with the ID provided within the effect's respective localization XML.
         /// </value>
-        protected virtual string KeywordId { get; }
+        public virtual string KeywordId { get; }
 
         /// <value>
         /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
         /// </value>
-        protected virtual string KeywordIconId { get; }
+        public virtual string KeywordIconId { get; }
 
         /// <summary>
         /// Do <b>NOT</b> forget to inherit this constructor on your derived <see cref="PickUpRebornModel"/>.
@@ -1005,6 +1006,20 @@ namespace RogueLike_Mod_Reborn
                 this.ArtWork = KeywordIconId == null ? KeywordId : KeywordIconId;
             }
         }
+
+        public virtual string GetCredenzaEntry()
+        {
+            LogueEffectXmlInfo info;
+            try
+            {
+                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly]);
+            }
+            catch
+            {
+                info = null;
+            }
+            return info == null ? "" : info.CatalogDesc;
+        }
     }
 
     [HideFromItemCatalog]
@@ -1013,12 +1028,12 @@ namespace RogueLike_Mod_Reborn
         /// <value>
         /// Override this with the ID provided within the effect's respective localization XML.
         /// </value>
-        protected virtual string KeywordId { get; }
+        public virtual string KeywordId { get; }
 
         /// <value>
         /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
         /// </value>
-        protected virtual string KeywordIconId { get; }
+        public virtual string KeywordIconId { get; }
 
         public override string GetEffectDesc()
         {
@@ -1638,22 +1653,6 @@ namespace RogueLike_Mod_Reborn
 
     #region UI INFRASTRUCTURE
 
-    /// <summary>
-    /// If attached to a GlobalLogueEffect, the effect will not be shown in the Item Catalog.
-    /// </summary>
-    public class HideFromItemCatalog : Attribute
-    {
-
-    }
-
-    /// <summary>
-    /// If attached to a GlobalLogueEffect, the effect will show in the Item Catalog if the player has obtained it before.
-    /// </summary>
-    public class SecretInItemCatalog : Attribute
-    {
-
-    }
-
     public class GlobalLogueItemCatalogPanel : Singleton<GlobalLogueItemCatalogPanel>
     {
         public bool IsItemShown(GlobalLogueEffectBase item)
@@ -1662,6 +1661,16 @@ namespace RogueLike_Mod_Reborn
             if (type.GetCustomAttribute<HideFromItemCatalog>(false) != null)
                 return false;
             else if (item.GetType().GetCustomAttribute<SecretInItemCatalog>(false) != null)
+                return item.HasBeenObtained();
+            return true;
+        }
+
+        public bool IsItemShown(PickUpModelBase item)
+        {
+            Type type = item.GetType();
+            if (type.GetCustomAttribute<HideFromItemCatalog>(false) != null)
+                return false;
+            else if (type.GetCustomAttribute<SecretInItemCatalog>(false) != null)
                 return item.HasBeenObtained();
             return true;
         }
@@ -1681,6 +1690,35 @@ namespace RogueLike_Mod_Reborn
             gameObject3.gameObject.SetActive(true);
             gameObject3.transform.SetAsFirstSibling();
             root = gameObject3;
+            Image image = ModdingUtils.CreateImage(this.root.transform, "RogueLikeRebornIconAlt", new Vector2(1.2f, 1.2f), new Vector2(0f, 0f));
+            image.transform.localPosition = new Vector3(525f, -25f, 0f);
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a / 5);
+
+            this.pageText = ModdingUtils.CreateText_TMP(this.root.transform, new Vector2(-1285f, 250f), 64, new Vector2(0f, 0f), new Vector2(1f, 1f), new Vector2(0f, 0f), TextAlignmentOptions.BottomRight, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
+            this.pageText.gameObject.SetActive(true);
+
+            Image image3 = ModdingUtils.CreateImage(this.root.transform, "ItemCatalogForwardButton", new Vector2(1f, 1f), new Vector2(0f, 0f), new Vector2(65f, 65f));
+            this.pageClickForward = image3.gameObject.AddComponent<UIPageSwitchButton>();
+            this.pageClickForward.Init(true);
+            this.pageClickForward.transform.localPosition = new Vector3(-265f, -245f);
+            this.pageClickForward.gameObject.SetActive(true);
+
+            Image image4 = ModdingUtils.CreateImage(this.root.transform, "ItemCatalogBackButton", new Vector2(1f, 1f), new Vector2(0f, 0f), new Vector2(65f, 65f));
+            this.pageClickBackwards = image4.gameObject.AddComponent<UIPageSwitchButton>();
+            this.pageClickBackwards.Init(false);
+            this.pageClickBackwards.transform.localPosition = new Vector3(-515f, -245f);
+            this.pageClickBackwards.gameObject.SetActive(true);
+
+            for (int i = 0; i < rowCount; i++) // 6 rows
+            {
+                for (int j = 0; j < columnCount; j++) // 9 entries each
+                {
+                    Image image2 = ModdingUtils.CreateImage(this.root.transform, (Sprite)null, new Vector2(1f, 1f), new Vector2((float)(-785 + j * 100), (float)(350 - i * 100)), new Vector2(85f, 85f));
+                    LogueEffectImage_ItemCatalog item = image2.gameObject.AddComponent<LogueEffectImage_ItemCatalog>();
+                    this.sprites.Add(item);
+                    item.gameObject.SetActive(true);
+                }
+            }
         }
 
         public void Activate()
@@ -1700,12 +1738,14 @@ namespace RogueLike_Mod_Reborn
             root.canvasGroup.alpha = 0f;
             root.canvasGroup.interactable = false;
             root.canvasGroup.blocksRaycasts = false;
+            SingletonBehavior<UIMainOverlayManager>.Instance.Close();
         }
 
         public void Init()
         {
             this.sprites = new List<LogueEffectImage_ItemCatalog>();
             List<GlobalLogueEffectBase> gamer = new List<GlobalLogueEffectBase>();
+            List<PickUpModelBase> gaming = new List<PickUpModelBase>();
             Assembly[] assemblies = LogLikeMod.GetAssemList().Distinct().ToArray();
             for (int b = 0; b < assemblies.Length; b++)
             {
@@ -1722,38 +1762,27 @@ namespace RogueLike_Mod_Reborn
                 {
                     Debug.Log("Failed to add list of types to sprites: " + e);
                 }
-            }
-            this.effects = gamer.FindAll(x => x != null && x.GetSprite() != null && IsItemShown(x)).ToArray();
 
-            Image image = ModdingUtils.CreateImage(this.root.transform, "RogueLikeRebornIconAlt", new Vector2(1.2f, 1.2f), new Vector2(0f, 0f));
-            image.transform.localPosition = new Vector3(525f, -25f, 0f);
-            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a / 5);
-
-            this.pageText = ModdingUtils.CreateText_TMP(this.root.transform, new Vector2(-1285f, 250f), 64, new Vector2(0f, 0f), new Vector2(1f, 1f), new Vector2(0f, 0f), TextAlignmentOptions.BottomRight, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
-            this.pageText.gameObject.SetActive(true);
-
-            Image image3 = ModdingUtils.CreateImage(this.root.transform, "ItemCatalogForwardButton", new Vector2(1f, 1f), new Vector2(0f, 0f), new Vector2(65f, 65f));
-            this.pageClickForward = image3.gameObject.AddComponent<UIPageSwitchButton>();
-            this.pageClickForward.Init(true);
-            this.pageClickForward.transform.localPosition = new Vector3(-265f, -245f); 
-            this.pageClickForward.gameObject.SetActive(true);
-
-            Image image4 = ModdingUtils.CreateImage(this.root.transform, "ItemCatalogBackButton", new Vector2(1f, 1f), new Vector2(0f, 0f), new Vector2(65f, 65f));
-            this.pageClickBackwards = image4.gameObject.AddComponent<UIPageSwitchButton>();
-            this.pageClickBackwards.Init(false);
-            this.pageClickBackwards.transform.localPosition = new Vector3(-515f, -245f);
-            this.pageClickBackwards.gameObject.SetActive(true);
-            
-            for (int i = 0; i < rowCount; i++) // 6 rows
-            {
-                for (int j = 0; j < columnCount; j++) // 9 entries each
+                try
                 {
-                    Image image2 = ModdingUtils.CreateImage(this.root.transform, (Sprite)null, new Vector2(1f, 1f), new Vector2((float)(-785 + j * 100), (float)(350 - i * 100)), new Vector2(85f, 85f));
-                    LogueEffectImage_ItemCatalog item = image2.gameObject.AddComponent<LogueEffectImage_ItemCatalog>();
-                    this.sprites.Add(item);
-                    item.gameObject.SetActive(true);
+                    TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => (x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel)) || x.IsSubclassOf(typeof(PickUpRebornModel)) && !x.IsSubclassOf(typeof(CreaturePickUpModel)))).ToArray();
+                    for (int i = 0; i < pickups.Length; i++)
+                    {
+                        if (pickups[i] != null && pickups[i].GetCustomAttribute(typeof(HideFromItemCatalog), false) == null)
+                            gaming.Add(Activator.CreateInstance(pickups[i].AsType()) as PickUpModelBase);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to add list of types to sprites: " + e);
                 }
             }
+            List<object> itemsList = new List<object>();
+
+            foreach (var eff in gamer.FindAll(x => x != null && x.GetSprite() != null && IsItemShown(x))) itemsList.Add(eff);
+            foreach (var pick in gaming.FindAll(x => x != null && x.GetSprite() != null && IsItemShown(x)).ToArray()) itemsList.Add(pick);
+
+            this.items = itemsList.OrderBy(x => x.GetHashCode()).ToArray();
         }
 
         public void UpdateSprites()
@@ -1765,9 +1794,9 @@ namespace RogueLike_Mod_Reborn
             }
 
             int index = 0;
-            for (int i = currentPage * SpriteCount; i < effects.Length; i++)
+            for (int i = currentPage * SpriteCount; i < items.Length; i++)
             {
-                this.sprites[index].Init(effects[i]);
+                this.sprites[index].Init(items[i]);
                 index++;
                 if (index >= SpriteCount)
                     break;
@@ -1785,7 +1814,7 @@ namespace RogueLike_Mod_Reborn
         public int pageCount {
             get
             {
-                return effects.Length % SpriteCount == 0 ? effects.Length / SpriteCount - 1 : effects.Length / SpriteCount;
+                return items.Length % SpriteCount == 0 ? items.Length / SpriteCount - 1 : items.Length / SpriteCount;
             }
         }
 
@@ -1805,7 +1834,7 @@ namespace RogueLike_Mod_Reborn
 
         public UIBookStoryPanel root;
 
-        public GlobalLogueEffectBase[] effects;
+        public object[] items;
 
         public List<LogueEffectImage_ItemCatalog> sprites;
     }
@@ -1875,6 +1904,15 @@ namespace RogueLike_Mod_Reborn
 
     public class LogueEffectImage_ItemCatalog : MonoBehaviour
     {
+        public void Init(object item)
+        {
+            this.item = item;
+            if (isEffect)
+                this.Init(Effect);
+            else
+                this.Init(Pickup);
+        }
+
         public void Init(GlobalLogueEffectBase effect)
         {
             if (effect == null)
@@ -1883,7 +1921,7 @@ namespace RogueLike_Mod_Reborn
             }
             else
             {
-                this.effect = effect;
+                this.item = effect;
                 this.image = base.gameObject.GetComponent<Image>();
                 this.image.sprite = LogLikeMod.ArtWorks["ItemCatalogRounded"];
                 if (effect.GetSprite() == null)
@@ -1930,6 +1968,64 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
+        public void Init(PickUpModelBase pickup)
+        {
+            if (pickup == null)
+            {
+                base.gameObject.SetActive(false);
+            }
+            else
+            {
+                this.item = pickup;
+                this.image = base.gameObject.GetComponent<Image>();
+                this.image.sprite = LogLikeMod.ArtWorks["ItemCatalogRounded"];
+                Sprite sproite = pickup.GetSprite();
+                
+                if (sproite == null)
+                {
+                    this.Log("effect is null");
+                    base.gameObject.SetActive(false);
+                }
+                else
+                {
+                    if (this.baseimage == null)
+                    {
+                        this.baseimage = ModdingUtils.CreateImage(base.transform, "EmptyIcon", new Vector2(1f, 1f), new Vector2(0f, 0f), new Vector2(70f, 70f));
+                    }
+                    this.sprite = sproite;
+                    this.baseimage.sprite = this.sprite;
+                    this.baseimage.color = this.isObtained ? new Color(1f, 1f, 1f) : Color.black;
+                    if (this.selectable == null)
+                    {
+                        this.selectable = base.gameObject.AddComponent<UILogCustomSelectable>();
+                        this.selectable.targetGraphic = this.image;
+                        this.selectable.SelectEvent = new UnityEventBasedata();
+                        this.selectable.SelectEvent.AddListener(delegate (BaseEventData e)
+                        {
+                            this.OnEnterImage();
+                        });
+                        this.selectable.onClick = new Button.ButtonClickedEvent();
+                        this.selectable.onClick.AddListener(delegate
+                        {
+                            this.OnPointerClick();
+                        });
+                        this.selectable.DeselectEvent = new UnityEventBasedata();
+                        this.selectable.DeselectEvent.AddListener(delegate (BaseEventData e)
+                        {
+                            this.OnExitImage();
+                        });
+                    }
+                    this.gameObject.SetActive(true);
+                    this.update = false;
+                    if (SingletonBehavior<UIMainOverlayManager>.Instance != null)
+                    {
+                        SingletonBehavior<UIMainOverlayManager>.Instance.Close();
+                    }
+                }
+            }
+        }
+
+
         public void OnPointerClick()
         {
             Singleton<GlobalLogueItemCatalogPanel>.Instance.root.SetItemRightPanel(this);
@@ -1937,16 +2033,32 @@ namespace RogueLike_Mod_Reborn
 
         public void OnEnterImage()
         {
-            if (!string.IsNullOrEmpty(this.effect.GetEffectDesc()))
+            if (this.isEffect)
             {
-                SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
-                    this.isObtained ? this.effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name"), 
-                    this.isObtained ? this.effect.GetEffectDesc() + "\n\n" + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.effect.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"), 
-                    base.transform as RectTransform, 
-                    UIToolTipPanelType.OnlyContent
-                );
-                this.image.color = new Color(0f, 0.6f, 1f);
-                this.update = true;
+                if (!string.IsNullOrEmpty(this.Effect.GetEffectDesc()))
+                {
+                    SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
+                        this.isObtained ? this.Effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name"),
+                        this.isObtained ? this.Effect.GetEffectDesc() + "\n\n" + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Effect.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
+                        base.transform as RectTransform,
+                        UIToolTipPanelType.OnlyContent
+                    );
+                    this.image.color = new Color(0f, 0.6f, 1f);
+                    this.update = true;
+                }
+            } else
+            {
+                if (!string.IsNullOrEmpty(this.Pickup.Desc))
+                {
+                    SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
+                        this.isObtained ? this.Pickup.Name : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name"),
+                        this.isObtained ? this.Pickup.Desc + "\n\n" + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Pickup.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
+                        base.transform as RectTransform,
+                        UIToolTipPanelType.OnlyContent
+                    );
+                    this.image.color = new Color(0f, 0.6f, 1f);
+                    this.update = true;
+                }
             }
         }
 
@@ -1959,15 +2071,49 @@ namespace RogueLike_Mod_Reborn
 
         public bool update;
 
+        public PickUpModelBase Pickup
+        {
+            get
+            {
+                if (!isEffect)
+                    return (PickUpModelBase)item;
+                else
+                    return null;
+            }
+        }
+
+        public GlobalLogueEffectBase Effect
+        {
+            get { 
+                if (isEffect) 
+                    return (GlobalLogueEffectBase) item;
+                else 
+                    return null;
+            }
+        }
+
+        public bool isEffect
+        {
+            get
+            {
+                return item.GetType() == typeof(GlobalLogueEffectBase) || item.GetType().IsSubclassOf(typeof(GlobalLogueEffectBase));
+            }
+        }
+
         public bool isObtained
         {
             get
             {
-                return effect.HasBeenObtained() || Singleton<GlobalLogueItemCatalogPanel>.Instance.debugMode;
+                if (Singleton<GlobalLogueItemCatalogPanel>.Instance.debugMode)
+                    return true;
+                if (isEffect)
+                {
+                    return Effect.HasBeenObtained();
+                } else return Pickup.HasBeenObtained();
             }
         }
 
-        public GlobalLogueEffectBase effect;
+        public object item;
 
         public UILogCustomSelectable selectable;
 
@@ -1980,6 +2126,22 @@ namespace RogueLike_Mod_Reborn
 
     public static class UIItemCatalogPanel
     {
+        public static Sprite GetSprite(this PickUpModelBase item)
+        {
+            try
+            {
+                if (RMRCore.ClassIds[item.GetType().Assembly] != RMRCore.packageId)
+                {
+                    return LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[item.GetType().Assembly], item.ArtWork)];
+                }
+                else return LogLikeMod.ArtWorks[item.ArtWork];
+            }
+            catch 
+            { 
+            }
+            return null;
+        }
+
         public static string GetItemCredenzaEntry(this GlobalLogueEffectBase item)
         {
             if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
@@ -1988,6 +2150,31 @@ namespace RogueLike_Mod_Reborn
                 return loc.CatalogDesc;
             return item.GetEffectDesc();
         }
+        public static string GetItemCredenzaEntry(this PickUpModelBase item)
+        {
+            if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
+                return ((PickUpRebornModel)item).GetCredenzaEntry();
+            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
+                return loc.CatalogDesc;
+            return item.Desc;
+        }
+
+        public static string GetItemKeywordId(this GlobalLogueEffectBase item)
+        {
+            if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
+                return ((GlobalRebornEffectBase)item).KeywordId;
+            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
+                return loc.Id;
+            return "NO_KEYWORD_GIVEN";
+        }
+        public static string GetItemKeywordId(this PickUpModelBase item)
+        {
+            if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
+                return ((PickUpRebornModel)item).KeywordId;
+            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
+                return loc.Id;
+            return "NO_KEYWORD_GIVEN";
+        }
 
         public static int GetItemObtainCount(this GlobalLogueEffectBase item)
         {
@@ -1995,6 +2182,17 @@ namespace RogueLike_Mod_Reborn
                 int count = Singleton<LogueSaveManager>.Instance.LoadData("RMR_ItemCatalog").GetInt("ObtainCount_" + item.GetType().Name);
                 return count;
             } catch
+            { }
+            return 0;
+        }
+        public static int GetItemObtainCount(this PickUpModelBase item)
+        {
+            try
+            {
+                int count = Singleton<LogueSaveManager>.Instance.LoadData("RMR_ItemCatalog").GetInt("ObtainCount_" + item.GetType().Name);
+                return count;
+            }
+            catch
             { }
             return 0;
         }
@@ -2009,6 +2207,17 @@ namespace RogueLike_Mod_Reborn
             { }
             return false;
         }
+        public static bool HasBeenObtained(this PickUpModelBase item)
+        {
+            try
+            {
+                bool obtain = Singleton<LogueSaveManager>.Instance.LoadData("RMR_ItemCatalog").GetInt("ObtainCount_" + item.GetType().Name) > 0;
+                return obtain;
+            }
+            catch
+            { }
+            return false;
+        }
 
         public static void SetItemRightPanel(this UIBookStoryPanel panel, LogueEffectImage_ItemCatalog item)
         {
@@ -2020,16 +2229,37 @@ namespace RogueLike_Mod_Reborn
                 panel.SelectablePanel_Text.ChildSelectable.interactable = false;
                 return;
             }
-            if (Singleton<GlobalLogueItemCatalogPanel>.Instance.debugMode)
-                panel.equipPageStory.text = "--- DEBUGGING INFO ---\n" + 
-                    "Class name: " + item.GetType().Name + "\n" +
-                    "Full class path: " + item.GetType().FullName + "\n" + 
-                    "Localization type: " + item.GetType().GetProperty("KeywordId", BindingFlags.Public) != null || item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)) ? "New" : "Old" +
-                    "\n--- DEBUGGING INFO ---\n\n" +
-                    item.effect.GetItemCredenzaEntry();
-            else panel.equipPageStory.text = item.isObtained ? item.effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
-            panel.equipPageName.text = item.isObtained ? item.effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
-            
+
+            if (item.isEffect)
+            {
+                if (Singleton<GlobalLogueItemCatalogPanel>.Instance.debugMode)
+                {
+                    panel.equipPageStory.text = "--- DEBUGGING INFO ---\n" +
+                        "Class name: " + item.Effect.GetType().Name + "\n" +
+                        "Full class path: " + item.Effect.GetType().FullName + "\n" +
+                        "KeywordId: " + item.Effect.GetItemKeywordId() + "\n" +
+                        "PackageId/AssemblyId: " + RMRCore.ClassIds[item.Effect.GetType().Assembly] +
+                        "\n--- DEBUGGING INFO ---\n\n" +
+                        item.Effect.GetItemCredenzaEntry();
+                }
+                else panel.equipPageStory.text = item.isObtained ? item.Effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
+                panel.equipPageName.text = item.isObtained ? item.Effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
+            }
+            else
+            {
+                if (Singleton<GlobalLogueItemCatalogPanel>.Instance.debugMode)
+                {
+                    panel.equipPageStory.text = "--- DEBUGGING INFO ---\n" +
+                        "Class name: " + item.Pickup.GetType().Name + "\n" +
+                        "Full class path: " + item.Pickup.GetType().FullName + "\n" +
+                        "KeywordId: " + item.Pickup.GetItemKeywordId() + "\n" +
+                        "PackageId/AssemblyId: " + RMRCore.ClassIds[item.Pickup.GetType().Assembly] +
+                        "\n--- DEBUGGING INFO ---\n\n" +
+                        item.Pickup.GetItemCredenzaEntry();
+                }
+                else panel.equipPageStory.text = item.isObtained ? item.Pickup.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
+                panel.equipPageName.text = item.isObtained ? item.Pickup.Name : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
+            }
             panel.portrait.sprite = item.isObtained ? item.sprite : LogLikeMod.ArtWorks["ItemNotFoundIcon"];
             panel.portrait.enabled = true;
             LayoutRebuilder.ForceRebuildLayoutImmediate(panel.equipPageStory.GetComponent<RectTransform>());
@@ -2136,9 +2366,9 @@ namespace RogueLike_Mod_Reborn
             if (Singleton<GlobalLogueItemCatalogPanel>.Instance.root == null)
             {
                 Singleton<GlobalLogueItemCatalogPanel>.Instance.GetLogUIObj();
-                Singleton<GlobalLogueItemCatalogPanel>.Instance.Init();
+                
             }
-            
+            Singleton<GlobalLogueItemCatalogPanel>.Instance.Init();
             if (__instance.tabcontroller.GetCurrentIndex() != 4)
                 Singleton<GlobalLogueItemCatalogPanel>.Instance.Deactivate();
 
