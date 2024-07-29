@@ -18,9 +18,9 @@ namespace RogueLike_Mod_Reborn
             model.RecoverHP(6);
         }
 
-        protected override string KeywordId => "RMR_IronHeart";
+        public override string KeywordId => "RMR_IronHeart";
 
-        protected override string KeywordIconId => "RMR_IronHeart";
+        public override string KeywordIconId => "RMR_IronHeart";
     }
 
 
@@ -42,9 +42,9 @@ namespace RogueLike_Mod_Reborn
             model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -100), true);
         }
 
-        protected override string KeywordId => "RMR_HunterCloak";
+        public override string KeywordId => "RMR_HunterCloak";
 
-        protected override string KeywordIconId => "RMR_HunterCloak";
+        public override string KeywordIconId => "RMR_HunterCloak";
     }
 
 
@@ -56,9 +56,9 @@ namespace RogueLike_Mod_Reborn
             UnitUtil.RefreshCombatUI();
         }
 
-        protected override string KeywordId => "RMR_StrangeOrb";
+        public override string KeywordId => "RMR_StrangeOrb";
 
-        protected override string KeywordIconId => "RMR_StrangeOrb";
+        public override string KeywordIconId => "RMR_StrangeOrb";
     }
     public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
     {
@@ -104,8 +104,8 @@ namespace RogueLike_Mod_Reborn
             
         }
 
-        protected override string KeywordId => "RMR_StillWater";
+        public override string KeywordId => "RMR_StillWater";
 
-        protected override string KeywordIconId => "RMR_StillWater";
+        public override string KeywordIconId => "RMR_StillWater";
     }
 }
