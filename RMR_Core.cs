@@ -24,6 +24,8 @@ using CustomMapUtility;
 using Workshop;
 using Sound;
 using UnityEngine.SceneManagement;
+using EnumExtenderV2;
+using KeywordUtil;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -69,6 +71,7 @@ namespace RogueLike_Mod_Reborn
                 }
             }
 
+            RegisterAllKeyword();
             RMRCore.RMRMapHandler = CustomMapHandler.GetCMU(packageId);
 
             foreach (Assembly ass in LogLikeMod.GetAssemList().Distinct())
@@ -252,6 +255,22 @@ namespace RogueLike_Mod_Reborn
                 if (provideAdditionalLogging) Debug.Log("Failed to obtain custom artwork: " + e);
             }
             return null;
+        }
+
+        public static bool AddNewKeywordBufToList(string keyword, ref KeywordBuf buf)
+        {
+            if (EnumExtender.TryGetValueOf<KeywordBuf>(keyword, out var newKeyword) || EnumExtender.TryFindUnnamedValue(default(KeywordBuf), null, false, out newKeyword) || EnumExtender.TryAddName(keyword, newKeyword))
+            {
+                buf = newKeyword;
+                return true;
+            }
+            return false;
+        }
+
+        public static void RegisterAllKeyword()
+        {
+            if (AddNewKeywordBufToList(packageId + "_RMR_CritChance", ref RoguelikeBufs.CritChance))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_CritChance>();
         }
 
         #region literally do not use this ever
@@ -929,11 +948,11 @@ namespace RogueLike_Mod_Reborn
                     battleUI.SetUnitModel(battleUnitModel);
                     if (battleUnitModel.faction == Faction.Player)
                     {
-                        SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.allyarray[battleUnitModel.index] = battleUI;
+                        SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.allyProfileArray[battleUnitModel.index] = battleUI;
                     }
                     else
                     {
-                        SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.enemyarray[battleUnitModel.index] = battleUI;
+                        SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.enemyProfileArray[battleUnitModel.index] = battleUI;
                     }
 
                 }
@@ -1690,6 +1709,8 @@ namespace RogueLike_Mod_Reborn
             gameObject3.gameObject.SetActive(true);
             gameObject3.transform.SetAsFirstSibling();
             root = gameObject3;
+
+
             Image image = ModdingUtils.CreateImage(this.root.transform, "RogueLikeRebornIconAlt", new Vector2(1.2f, 1.2f), new Vector2(0f, 0f));
             image.transform.localPosition = new Vector3(525f, -25f, 0f);
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a / 5);
@@ -1708,7 +1729,6 @@ namespace RogueLike_Mod_Reborn
             this.pageClickBackwards.Init(false);
             this.pageClickBackwards.transform.localPosition = new Vector3(-515f, -245f);
             this.pageClickBackwards.gameObject.SetActive(true);
-
             for (int i = 0; i < rowCount; i++) // 6 rows
             {
                 for (int j = 0; j < columnCount; j++) // 9 entries each
@@ -1743,46 +1763,51 @@ namespace RogueLike_Mod_Reborn
 
         public void Init()
         {
-            this.sprites = new List<LogueEffectImage_ItemCatalog>();
+            
+            this.items = new List<object>();
             List<GlobalLogueEffectBase> gamer = new List<GlobalLogueEffectBase>();
             List<PickUpModelBase> gaming = new List<PickUpModelBase>();
             Assembly[] assemblies = LogLikeMod.GetAssemList().Distinct().ToArray();
             for (int b = 0; b < assemblies.Length; b++)
-            {
-                try
+            {  
+                TypeInfo[] effects = assemblies[b].DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(GlobalLogueEffectBase)) || x.IsSubclassOf(typeof(OnceEffect)) || x.IsSubclassOf(typeof(GlobalRebornEffectBase))).ToArray();
+                for (int i = 0; i < effects.Length; i++)
                 {
-                    TypeInfo[] effects = assemblies[b].DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(GlobalLogueEffectBase)) || x.IsSubclassOf(typeof(OnceEffect)) || x.IsSubclassOf(typeof(GlobalRebornEffectBase))).ToArray();
-                    for (int i = 0; i < effects.Length; i++)
+                    try
                     {
-                        if (effects[i] != null && effects[i].GetCustomAttribute(typeof(HideFromItemCatalog), false) == null) 
+                        if (effects[i] != null && effects[i].GetCustomAttribute(typeof(HideFromItemCatalog), false) == null)
                             gamer.Add(Activator.CreateInstance(effects[i].AsType()) as GlobalLogueEffectBase);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.Log("Failed to add list of types to sprites: " + e);
-                }
-
-                try
-                {
-                    TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => (x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel)) || x.IsSubclassOf(typeof(PickUpRebornModel)) && !x.IsSubclassOf(typeof(CreaturePickUpModel)))).ToArray();
-                    for (int i = 0; i < pickups.Length; i++)
+                    } catch (Exception e)
                     {
-                        if (pickups[i] != null && pickups[i].GetCustomAttribute(typeof(HideFromItemCatalog), false) == null)
-                            gaming.Add(Activator.CreateInstance(pickups[i].AsType()) as PickUpModelBase);
+                        Debug.Log("Failed to instantiate an effect: " + e);
                     }
                 }
-                catch (Exception e)
+                
+                TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel)) || x.IsSubclassOf(typeof(PickUpRebornModel)) && !x.IsSubclassOf(typeof(CreaturePickUpModel))).ToArray();
+                for (int i = 0; i < pickups.Length; i++)
                 {
-                    Debug.Log("Failed to add list of types to sprites: " + e);
+                    try { 
+                    if (pickups[i] != null && pickups[i].GetCustomAttribute(typeof(HideFromItemCatalog), false) == null)
+                        gaming.Add(Activator.CreateInstance(pickups[i].AsType()) as PickUpModelBase);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("Failed to instantiate a pickup: " + e);
+                    }
                 }
             }
-            List<object> itemsList = new List<object>();
 
-            foreach (var eff in gamer.FindAll(x => x != null && x.GetSprite() != null && IsItemShown(x))) itemsList.Add(eff);
-            foreach (var pick in gaming.FindAll(x => x != null && x.GetSprite() != null && IsItemShown(x)).ToArray()) itemsList.Add(pick);
+            foreach (var eff in gamer.FindAll(x => x != null && x.GetSprite() != null && IsItemShown(x)))
+            {
+                eff.Log("EFFECT");
+                items.Add(eff);
+            }
+            foreach (var pick in gaming.FindAll(x => x != null && x.GetSprite() != null && IsItemShown(x)))
+            {
+                pick.Log("PICKUP");
+                items.Add(pick);
+            }
 
-            this.items = itemsList.OrderBy(x => x.GetHashCode()).ToArray();
         }
 
         public void UpdateSprites()
@@ -1792,9 +1817,10 @@ namespace RogueLike_Mod_Reborn
                 if (logueEffectImage_Inventory != null)
                     logueEffectImage_Inventory.gameObject.SetActive(false);
             }
-
+            this.pageText.text = string.Concat(currentPage + 1, " / ", pageCount + 1);
             int index = 0;
-            for (int i = currentPage * SpriteCount; i < items.Length; i++)
+            
+            for (int i = currentPage * SpriteCount; i < items.Count; i++)
             {
                 this.sprites[index].Init(items[i]);
                 index++;
@@ -1802,7 +1828,7 @@ namespace RogueLike_Mod_Reborn
                     break;
             }
 
-            this.pageText.text = string.Concat(currentPage + 1, " / ", pageCount + 1);
+            
         }
 
         public bool debugMode = false;
@@ -1814,7 +1840,7 @@ namespace RogueLike_Mod_Reborn
         public int pageCount {
             get
             {
-                return items.Length % SpriteCount == 0 ? items.Length / SpriteCount - 1 : items.Length / SpriteCount;
+                return items.Count % SpriteCount == 0 ? items.Count / SpriteCount - 1 : items.Count / SpriteCount;
             }
         }
 
@@ -1834,9 +1860,9 @@ namespace RogueLike_Mod_Reborn
 
         public UIBookStoryPanel root;
 
-        public object[] items;
+        public List<object> items;
 
-        public List<LogueEffectImage_ItemCatalog> sprites;
+        public List<LogueEffectImage_ItemCatalog> sprites = new List<LogueEffectImage_ItemCatalog>();
     }
 
     public class UIPageSwitchButton : MonoBehaviour
@@ -2096,7 +2122,7 @@ namespace RogueLike_Mod_Reborn
         {
             get
             {
-                return item.GetType() == typeof(GlobalLogueEffectBase) || item.GetType().IsSubclassOf(typeof(GlobalLogueEffectBase));
+                return item is GlobalLogueEffectBase || item.GetType().IsSubclassOf(typeof(GlobalLogueEffectBase));
             }
         }
 
@@ -2279,8 +2305,8 @@ namespace RogueLike_Mod_Reborn
             }
             
             panel.portrait.transform.localPosition = new Vector3(0f, 0f, 0f);
-            panel.portrait.transform.Rotate(337.5f, 0f, 0f);
-            panel.portrait.transform.localScale = new Vector3(0.48f, 0.48f, 1f);
+            panel.portrait.transform.Rotate(0f, 0f, 0f);
+            panel.portrait.transform.localScale = new Vector3(0.5f, 0.25f, 1f);
             panel.portrait.enabled = false;
             panel.SelectablePanel_Text.ChildSelectable.interactable = false;
 
@@ -2366,7 +2392,6 @@ namespace RogueLike_Mod_Reborn
             if (Singleton<GlobalLogueItemCatalogPanel>.Instance.root == null)
             {
                 Singleton<GlobalLogueItemCatalogPanel>.Instance.GetLogUIObj();
-                
             }
             Singleton<GlobalLogueItemCatalogPanel>.Instance.Init();
             if (__instance.tabcontroller.GetCurrentIndex() != 4)
