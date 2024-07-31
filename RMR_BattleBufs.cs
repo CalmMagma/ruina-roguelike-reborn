@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using HyperCard;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -21,5 +22,19 @@ namespace RogueLike_Mod_Reborn
                 return RoguelikeBufs.CritChance;
             }
         }
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            var critRoll = RandomUtil.Range(0, 100);
+            if (critRoll <= this.stack)
+            {
+                behavior.ApplyDiceStatBonus(new DiceStatBonus
+                {
+                    dmgRate = 50,
+                    breakRate = 50
+                });
+            }
+        }
     }
+    
 }

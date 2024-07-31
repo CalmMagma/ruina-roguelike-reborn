@@ -42,9 +42,7 @@
 
   <LogueEffectInfo Id="RMR_StillWater">
     <Name>Still Water</Name>
-    <Desc>If no offensive dice were rolled by the Patron
-- Calm: Upon leaving this state, restore 2 Light.
-- Wrath: All dice deal additional damage equal to the final roll. Upon taking a hit, take additional damage equal to the enemy's final roll.</Desc> 
+    <Desc>All Librarians gain 4 Critical Strike at the start of each Act.</Desc> 
     <FlavorText>&lt;color=#CA08A9&gt;"A fine liquid can be seen within the crystal. No matter how much it is shook, the liquid seems to remain still."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>Have you felt toxic spray, upon your face?
 Have you seen ambling pearls at the bow, keeping pace?
