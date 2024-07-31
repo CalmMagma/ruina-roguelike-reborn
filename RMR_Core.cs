@@ -269,7 +269,7 @@ namespace RogueLike_Mod_Reborn
 
         public static void RegisterAllKeyword()
         {
-            if (AddNewKeywordBufToList(packageId + "_RMR_CritChance", ref RoguelikeBufs.CritChance))
+            if (AddNewKeywordBufToList("CalmMagma_RMR_CritChance", ref RoguelikeBufs.CritChance))
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_CritChance>();
         }
 
@@ -1913,12 +1913,12 @@ namespace RogueLike_Mod_Reborn
 
         public void OnEnterImage()
         {
-            this.image.color = new Color(0f, 0.6f, 1f);
+            this.image.color = new Color(0f, 1f, 1f);
         }
 
         public void OnExitImage()
         {
-            this.image.color = new Color(1f, 1f, 1f);
+            this.image.color = new Color(0.8f, 0.75f, 0f);
         }
 
         public bool forward;
@@ -2051,7 +2051,6 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-
         public void OnPointerClick()
         {
             Singleton<GlobalLogueItemCatalogPanel>.Instance.root.SetItemRightPanel(this);
@@ -2069,8 +2068,7 @@ namespace RogueLike_Mod_Reborn
                         base.transform as RectTransform,
                         UIToolTipPanelType.OnlyContent
                     );
-                    this.image.color = new Color(0f, 0.6f, 1f);
-                    this.update = true;
+                    
                 }
             } else
             {
@@ -2082,16 +2080,16 @@ namespace RogueLike_Mod_Reborn
                         base.transform as RectTransform,
                         UIToolTipPanelType.OnlyContent
                     );
-                    this.image.color = new Color(0f, 0.6f, 1f);
-                    this.update = true;
                 }
             }
+            this.image.color = new Color(0f, 1f, 1f);
+            this.update = true;
         }
 
         public void OnExitImage()
         {
             SingletonBehavior<UIMainOverlayManager>.Instance.Close();
-            this.image.color = new Color(1f, 1f, 1f);
+            this.image.color = new Color(0.8f, 0.75f, 0f);
             this.update = false;
         }
 

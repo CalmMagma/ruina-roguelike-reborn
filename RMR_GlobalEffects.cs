@@ -73,14 +73,26 @@ namespace RogueLike_Mod_Reborn
                         enemy?.bufListDetail?.AddKeywordBufThisRoundByEtc(KeywordBuf.Paralysis, 1, owner);
                     break;
                 case 1:
-                    list[0].cardSlotDetail.RecoverPlayPoint(1);
-                    list = list.Shuffle();
-                    list[0].cardSlotDetail.RecoverPlayPoint(1);
+                    var unit = list[UnityEngine.Random.Range(0, list.Count)];
+                    if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
+                    else break;
+                    list.Remove(unit);
+                    if (list.Any())
+                    {
+                        unit = list[UnityEngine.Random.Range(0, list.Count)];
+                        if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
+                    }
                     break;
                 case 2:
-                    list[0].allyCardDetail.DrawCards(1);
-                    list = list.Shuffle();
-                    list[0].allyCardDetail.DrawCards(1);
+                    var unit2 = list[UnityEngine.Random.Range(0, list.Count)];
+                    if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
+                    else break;
+                    list.Remove(unit2);
+                    if (list.Any())
+                    {
+                        unit2 = list[UnityEngine.Random.Range(0, list.Count)];
+                        if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
+                    }
                     break;
                 case 3:
                     foreach (var ally in BattleObjectManager.instance.GetAliveList(owner.faction))

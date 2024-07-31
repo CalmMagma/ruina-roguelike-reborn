@@ -17,6 +17,7 @@ abcdcode_LOGLIKE_MOD.CreaturePickUpModel.ApplyEmotionCard() -> no longer complai
 LogLikeMod.BookModel_GetThumbSprite() -> added a null check and empty check
 MysteryChoiceInfo.desc -> assigned a default empty string value
 LogueBookModels.CreatePlayer() -> added Dhska
+LogueBookModels.EquipNewPage() -> removed GetStartHp check for keepSuc which made HP reduction effects nonfunctional
 
 NEW StagesXmlList.RestoreToDefault(); + NEW _allInfos;
 NEW RewardPassivesList.RestoreToDefault(); + NEW _allInfos;
