@@ -269,7 +269,7 @@ namespace RogueLike_Mod_Reborn
 
         public static void RegisterAllKeyword()
         {
-            if (AddNewKeywordBufToList(packageId + "_RMR_CritChance", ref RoguelikeBufs.CritChance))
+            if (AddNewKeywordBufToList("CalmMagma_RMR_CritChance", ref RoguelikeBufs.CritChance))
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_CritChance>();
         }
 
