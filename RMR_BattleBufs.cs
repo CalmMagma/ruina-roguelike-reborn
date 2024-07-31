@@ -10,6 +10,7 @@ namespace RogueLike_Mod_Reborn
     public static class RoguelikeBufs
     {
         public static KeywordBuf CritChance;
+        public static KeywordBuf ZeroCounterplay;
     }
 
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
@@ -21,5 +22,20 @@ namespace RogueLike_Mod_Reborn
                 return RoguelikeBufs.CritChance;
             }
         }
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            var critRoll = RandomUtil.Range(0, 100);
+            if (critRoll <= this.stack)
+            {
+                behavior.ApplyDiceStatBonus(new DiceStatBonus
+                {
+                    dmgRate = 50,
+                    breakRate = 50
+                });
+            }
+        }
     }
+    
+    
 }

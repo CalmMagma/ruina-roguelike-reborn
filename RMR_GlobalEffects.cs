@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -60,6 +61,7 @@ namespace RogueLike_Mod_Reborn
 
         public override string KeywordIconId => "RMR_StrangeOrb";
     }
+
     public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
     {
         public override void OnRoundStart()
@@ -114,6 +116,16 @@ namespace RogueLike_Mod_Reborn
         public override void OnRoundStart(StageController stage)
         {
             
+        }
+
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            for(int i = 0; i < list.Count; i++)
+            {
+                list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 4);
+            }
         }
 
         public override string KeywordId => "RMR_StillWater";
