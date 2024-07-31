@@ -19,16 +19,12 @@ namespace RogueLike_Mod_Reborn
             BattleDiceBehavior battleDiceBehavior = cardItem.CreateDiceCardBehaviorList()[0];
             var list = unit.allyCardDetail.GetHand();
             list.SortByCost();
-            try
+            if (list[0] != null)
             {
-                if (list[0] == null)
-                {
-                    if (list[0]._originalXmlData != null)
-                        list[0].CopySelf();
-                    list[0].XmlData.DiceBehaviourList.Add(battleDiceBehavior.behaviourInCard);
-                }
-            } catch (ArgumentOutOfRangeException)
-            { }
+                if (list[0]._originalXmlData != null)
+                    list[0].CopySelf();
+                list[0].XmlData.DiceBehaviourList.Add(battleDiceBehavior.behaviourInCard);
+            }
         }
     }
 }
