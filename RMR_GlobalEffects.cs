@@ -37,10 +37,10 @@ namespace RogueLike_Mod_Reborn
             {
                 if (c != null && c.GetID() == card.card.GetID())
                 {
-                    powerUp++;
+                    powerUp++; // if card is the same, add power
                 }
             }
-            powerUp--;
+            powerUp--; // remove 1 power 'cause one of the cards is the one we played
         }
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
@@ -49,6 +49,39 @@ namespace RogueLike_Mod_Reborn
             {
                 power = powerUp
             });
+        }
+    }
+
+    public class RMREffect_ZeroCounterplay : GlobalRebornEffectBase
+    {
+        bool ZCActive = false;
+        int diceTicks = 3;
+        public override void OnRoundStart(StageController stage)
+        {
+            base.OnRoundStart(stage);
+            ZCActive = true;
+            diceTicks = 3;
+        }
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            if(ZCActive && behavior.TargetDice != null && behavior.TargetDice.card.GetDiceBehaviorList().Count() > 0)
+            {
+                var list = behavior.TargetDice.card.owner.cardSlotDetail.keepCard;
+                if(list != null && behavior.TargetDice.card == list)
+                {
+                    foreach(var d in list.cardBehaviorQueue)
+                    {
+                        if(diceTicks > 0)
+                        {
+                            d.DestroyDice(DiceUITiming.AttackAfter);
+                            diceTicks--;
+                        }
+                    }
+                    ZCActive = false;
+                }
+            }
+            // this has yet to be tested
         }
     }
 
