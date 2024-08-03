@@ -89,6 +89,40 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_StrangeOrb";
     }
 
+    public class RMREffect_Crowbar : GlobalRebornEffectBase
+    {
+
+        public class CrowbarDamageBuf : BattleUnitBuf
+        {
+            public override void BeforeRollDice(BattleDiceBehavior behavior)
+            {
+                base.BeforeRollDice(behavior);
+                var enemy = behavior.card.target;
+                    // this is how you select the enemy 
+                    if (enemy == null) return;
+                    if (enemy.hp/(float)enemy.MaxHp >= 0.9)
+                    //float thingy means 0.9 = 90%
+                        {
+                        behavior.ApplyDiceStatBonus(new DiceStatBonus { dmgRate = 50, breakRate = 50 });
+                    //applying extra damage to the funny die
+                        }
+            }           
+        }
+        public override void OnStartBattleAfter()
+            //hidden buf because pm are terrible people
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
+            {
+                unit.bufListDetail.AddBuf(new CrowbarDamageBuf());
+            }
+        }
+
+        public override string KeywordId => "RMR_Crowbar";
+
+        public override string KeywordIconId => "RMR_Crowbar";
+    }
+
     public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
     {
         public override void OnRoundStart()
@@ -138,7 +172,7 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class RMREffect_StillWater : GlobalRebornEffectBase
+    public class RMREffect_ViciousGlasses : GlobalRebornEffectBase
     {
         public override void OnRoundStart(StageController stage)
         {
@@ -151,12 +185,12 @@ namespace RogueLike_Mod_Reborn
             var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
             for(int i = 0; i < list.Count; i++)
             {
-                list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 4);
+                list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 10);
             }
         }
 
-        public override string KeywordId => "RMR_StillWater";
+        public override string KeywordId => "RMR_ViciousGlasses";
 
-        public override string KeywordIconId => "RMR_StillWater";
+        public override string KeywordIconId => "RMR_ViciousGlasses";
     }
 }
