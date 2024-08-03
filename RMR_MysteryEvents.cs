@@ -19,13 +19,13 @@ namespace RogueLike_Mod_Reborn
                         Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_IronHeart());
                         break;
                     case 1:
-                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HunterCloak());
+                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Crowbar());
                         break;
                     case 2:
                         Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_StrangeOrb());
                         break;
                     case 3:
-                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_StillWater());
+                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_ViciousGlasses());
                         break;
                     default:
                         break;
@@ -44,13 +44,13 @@ namespace RogueLike_Mod_Reborn
                         this.ShowOverlayOverButton(new RMREffect_IronHeart(), choiceid);
                         break;
                     case 1:
-                        this.ShowOverlayOverButton(new RMREffect_HunterCloak(), choiceid);
+                        this.ShowOverlayOverButton(new RMREffect_Crowbar(), choiceid);
                         break;
                     case 2:
                         this.ShowOverlayOverButton(new RMREffect_StrangeOrb(), choiceid);
                         break;
                     case 3:
-                        this.ShowOverlayOverButton(new RMREffect_StillWater(), choiceid);
+                        this.ShowOverlayOverButton(new RMREffect_ViciousGlasses(), choiceid);
                         break;
                     default:
                         break;

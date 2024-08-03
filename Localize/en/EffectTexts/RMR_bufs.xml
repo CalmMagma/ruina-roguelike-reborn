@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<BattleEffectTextRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<effectTextList>
+
+    <BattleEffectText ID="RMR_CriticalStrike">
+	  <Name>Critical Strike</Name>
+	  <Desc>Attacks have {0}% chance to deal +50% damage and stagger damage.</Desc>
+	</BattleEffectText>
+	
+    <BattleEffectText ID="RMR_CriticalStrike_Keyword">
+	  <Name>Critical Strike X</Name>
+	  <Desc>Attacks have X% chance to deal +50% damage and stagger damage.</Desc>
+	</BattleEffectText>
+
+
+
+
+
+	</effectTextList>
+</BattleEffectTextRoot>

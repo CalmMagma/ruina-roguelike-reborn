@@ -15,6 +15,12 @@ namespace RogueLike_Mod_Reborn
 
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
+
+        public override string keywordId => "RMR_CriticalStrike";
+
+        public override string keywordIconId => "criticalstrike";
+
+
         public override KeywordBuf bufType
         {
             get
