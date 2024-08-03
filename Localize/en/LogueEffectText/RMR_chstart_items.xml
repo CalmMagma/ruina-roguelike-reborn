@@ -40,29 +40,11 @@
     Yet, through some mysterious means, they find themselves here - familiar and alien as before. Although forever changed, their hearts remained the same: Perhaps they could find answers in this place, or a final gust of wind to fade into the New World.</CatalogDesc>
   </LogueEffectInfo> 
 
-  <LogueEffectInfo Id="RMR_StillWater">
+  <LogueEffectInfo Id="RMR_ViciousGlasses">
     <Name>Still Water</Name>
-    <Desc>All Librarians gain 4 Critical Strike at the start of each Act.</Desc> 
-    <FlavorText>&lt;color=#CA08A9&gt;"A fine liquid can be seen within the crystal. No matter how much it is shook, the liquid seems to remain still."&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Have you felt toxic spray, upon your face?
-Have you seen ambling pearls at the bow, keeping pace?
-Have you viewed distant sunsets, ever less bright?
-Have you fixed on cowardly sailors, cowering in fright?
-
-Has there been a time, to save a shipmate?
-Has the hum of whales, ever kept you awake?
-Has the vastness of the lake, left you feeling alone?
-Has the shattered waters, made you wish you were home?
-
-If you have prayed to the lake, for safer waters
-If you crossed treacherous sections, at midnight swelter
-If you stood your watch, for its violet crystals
-If you heeded whistles, no matter how brittle
-
-When you have secured the decks, for day to turn in
-When you have mustered at sunset, seen a new night begin
-When you have left them behind, ignoring their pleas
-When you have known all these things, in Still Waters you'll be</CatalogDesc>
+    <Desc>[Patron Librarian] At the start of the Act, gain 10 stacks of Critical Strike.</Desc> 
+    <FlavorText>&lt;color=#CA08A9&gt;"Glas"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
   
 </LogueEffectXmlRoot>
