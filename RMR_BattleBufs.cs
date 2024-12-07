@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
-using HyperCard;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -15,11 +14,8 @@ namespace RogueLike_Mod_Reborn
 
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
-
         public override string keywordId => "RMR_CriticalStrike";
-
-        public override string keywordIconId => "criticalstrike";
-
+        public override string keywordIconId => "RMRBuf_CriticalStrike";
 
         public override KeywordBuf bufType
         {

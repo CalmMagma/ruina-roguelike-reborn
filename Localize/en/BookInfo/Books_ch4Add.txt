@@ -7,5 +7,11 @@
       <TextList />
       <PassiveList />
     </BookDesc>
+
+    <BookDesc BookID="28483002">
+      <BookName>A Backstreets Gang Member's Page</BookName>
+      <TextList />
+      <PassiveList />
+    </BookDesc>
   </bookDescList>
 </BookDescRoot>

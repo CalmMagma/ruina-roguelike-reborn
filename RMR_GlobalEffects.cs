@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
-using HyperCard;
-using static UnityEngine.UI.GridLayoutGroup;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -25,6 +23,7 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_IronHeart";
     }
 
+    // NEEDS LOCALIZATION AND OBTAINMENT METHOD
     public class RMREffect_BigBrotherChains : GlobalRebornEffectBase
     {
         int powerUp = 0;
@@ -52,6 +51,7 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    // NEEDS LOCALIZATION, OBTAINMENT METHOD AND TESTING
     public class RMREffect_ZeroCounterplay : GlobalRebornEffectBase
     {
         bool ZCActive = false;
@@ -108,7 +108,6 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_HunterCloak";
     }
 
-
     public class RMREffect_StrangeOrb : GlobalRebornEffectBase
     {
         public override void OnStartBattleAfter()
@@ -121,41 +120,6 @@ namespace RogueLike_Mod_Reborn
 
         public override string KeywordIconId => "RMR_StrangeOrb";
     }
-
-    public class RMREffect_Crowbar : GlobalRebornEffectBase
-    {
-
-        public class CrowbarDamageBuf : BattleUnitBuf
-        {
-            public override void BeforeRollDice(BattleDiceBehavior behavior)
-            {
-                base.BeforeRollDice(behavior);
-                var enemy = behavior.card.target;
-                    // this is how you select the enemy 
-                    if (enemy == null) return;
-                    if (enemy.hp/(float)enemy.MaxHp >= 0.9)
-                    //float thingy means 0.9 = 90%
-                        {
-                        behavior.ApplyDiceStatBonus(new DiceStatBonus { dmgRate = 50, breakRate = 50 });
-                    //applying extra damage to the funny die
-                        }
-            }           
-        }
-        public override void OnStartBattleAfter()
-            //hidden buf because pm are terrible people
-        {
-            base.OnStartBattleAfter();
-            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
-            {
-                unit.bufListDetail.AddBuf(new CrowbarDamageBuf());
-            }
-        }
-
-        public override string KeywordId => "RMR_Crowbar";
-
-        public override string KeywordIconId => "RMR_Crowbar";
-    }
-
     public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
     {
         public override void OnRoundStart()
@@ -205,13 +169,43 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class RMREffect_ViciousGlasses : GlobalRebornEffectBase
+    // REQUIRES OBTAINMENT METHOD
+    public class RMREffect_Crowbar : GlobalRebornEffectBase
     {
-        public override void OnRoundStart(StageController stage)
+        public class CrowbarDamageBuf : BattleUnitBuf
         {
-            
+            public override void BeforeRollDice(BattleDiceBehavior behavior)
+            {
+                base.BeforeRollDice(behavior);
+                var enemy = behavior.card.target;
+                    // this is how you select the enemy 
+                    if (enemy == null) return;
+                    if (enemy.hp/(float)enemy.MaxHp >= 0.9) // float thingy means 0.9 = 90%
+                    {
+                        behavior.ApplyDiceStatBonus(new DiceStatBonus { dmgRate = 50, breakRate = 50 });
+                        //applying extra damage to the funny die
+                    }
+            }           
         }
 
+        //hidden buf because pm are terrible people
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
+            {
+                unit.bufListDetail.AddBuf(new CrowbarDamageBuf());
+            }
+        }
+
+        public override string KeywordId => "RMR_Crowbar";
+
+        public override string KeywordIconId => "RMR_Crowbar";
+    }
+
+    // REPLACES STILL WATER
+    public class RMREffect_ViciousGlasses : GlobalRebornEffectBase
+    {
         public override void OnStartBattleAfter()
         {
             base.OnStartBattleAfter();

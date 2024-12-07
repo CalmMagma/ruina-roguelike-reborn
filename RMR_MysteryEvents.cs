@@ -19,7 +19,7 @@ namespace RogueLike_Mod_Reborn
                         Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_IronHeart());
                         break;
                     case 1:
-                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Crowbar());
+                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HunterCloak());
                         break;
                     case 2:
                         Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_StrangeOrb());
@@ -44,7 +44,7 @@ namespace RogueLike_Mod_Reborn
                         this.ShowOverlayOverButton(new RMREffect_IronHeart(), choiceid);
                         break;
                     case 1:
-                        this.ShowOverlayOverButton(new RMREffect_Crowbar(), choiceid);
+                        this.ShowOverlayOverButton(new RMREffect_HunterCloak(), choiceid);
                         break;
                     case 2:
                         this.ShowOverlayOverButton(new RMREffect_StrangeOrb(), choiceid);

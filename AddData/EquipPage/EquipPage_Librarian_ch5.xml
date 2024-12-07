@@ -5,7 +5,8 @@
     <Name>유진</Name>
     <TextId>240001</TextId>
     <EquipEffect>
-      <HP>248</HP>
+	  <HpReduction>196</HpReduction>
+      <HP>268</HP>
       <Break>44</Break>
       <SpeedMin>2</SpeedMin>
       <Speed>6</Speed>
@@ -18,7 +19,7 @@
 
       <PassiveCost>17</PassiveCost>
 
-			<Passive Pid="@origin" Level="1">10004</Passive>
+	  <Passive Pid="@origin" Level="1">10004</Passive>
       <Passive Pid="@origin" Level="20">240001</Passive>
       <Passive Pid="@origin" Level="10">240101</Passive>
       <Passive Pid="@origin" Level="1">240301</Passive>
@@ -40,6 +41,7 @@
     <Name>발렌틴</Name>
     <TextId>240002</TextId>
     <EquipEffect>
+	  <HpReduction>45</HpReduction>
       <HP>100</HP>
       <Break>40</Break>
       <SpeedMin>2</SpeedMin>
@@ -71,6 +73,7 @@
     <Name>텐마</Name>
     <TextId>240003</TextId>
     <EquipEffect>
+	  <HpReduction>38</HpReduction>
       <HP>96</HP>
       <Break>41</Break>
       <SpeedMin>1</SpeedMin>
@@ -186,7 +189,7 @@
     <SpeedDiceNum>1</SpeedDiceNum>
 
   </Book>
-
+<!--
   <Book ID="240010">
     <Name>노아(착용불가)</Name>
     <TextId>240008</TextId>
@@ -211,7 +214,7 @@
     <Rarity>Common</Rarity>
     <CharacterSkin>Puppet1Librarian</CharacterSkin>
   </Book>
-
+-->
   <Book ID="240015">
     <Name>안톤</Name>
     <TextId>240014</TextId>

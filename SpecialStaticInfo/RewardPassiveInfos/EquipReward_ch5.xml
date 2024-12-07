@@ -10,7 +10,7 @@
     <RewardList ID="240004" PassiveType="Nolimit" Rarity="Uncommon" TargetType="All" RewardType="EquipPage" ArtWork="240004"/>
     <RewardList ID="240005" PassiveType="Nolimit" Rarity="Rare" TargetType="All" RewardType="EquipPage" ArtWork="240005"/>
     <RewardList ID="240009" PassiveType="Nolimit" Rarity="Rare" TargetType="All" RewardType="EquipPage" ArtWork="240009"/>
-    <RewardList ID="240010" PassiveType="Nolimit" Rarity="Common" TargetType="All" RewardType="EquipPage" ArtWork="240010"/>
+    <!-- <RewardList ID="240010" PassiveType="Nolimit" Rarity="Common" TargetType="All" RewardType="EquipPage" ArtWork="240010"/> -->
     <RewardList ID="240015" PassiveType="Nolimit" Rarity="Uncommon" TargetType="All" RewardType="EquipPage" ArtWork="240015"/>
     <RewardList ID="240016" PassiveType="Nolimit" Rarity="Uncommon" TargetType="All" RewardType="EquipPage" ArtWork="240016"/>
     <RewardList ID="240017" PassiveType="Nolimit" Rarity="Uncommon" TargetType="All" RewardType="EquipPage" ArtWork="240017"/>

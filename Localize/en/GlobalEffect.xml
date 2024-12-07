@@ -28,9 +28,6 @@ Gathered Meat : {0}</text>
 	<text id="Ch6Event1Effect1_Name">Stuck in the Past</text>
 	 <text id="Ch6Event1Effect1_Desc">Doesn't get Combat Page reward anymore</text>
 	 
-	 <text id="Ch6Event1Effect2_Name">Future</text>
-	 <text id="Ch6Event1Effect2_Desc">Whenever gaining Combat Pagee, enhance it</text>
-	 
 	 <text id="Ch6Event2Effect_Name">Stake</text>
 	 <text id="Ch6Event2Effect_Desc">Kill selected Librarian</text>
 

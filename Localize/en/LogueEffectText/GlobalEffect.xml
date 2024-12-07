@@ -28,7 +28,6 @@
     <FlavorText>&lt;color=#CACACA&gt;“Arsonist's #1 choice!”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
-  // isn't working: localization doesn't change
  
   <LogueEffectInfo Id="GlobalEffect_EgoWeed">
     <Name>Enkephalin Sticker</Name> 
@@ -36,8 +35,6 @@
     <FlavorText>&lt;color=#CACACA&gt;“Love, heart, control Enkephalin! It gets you going.”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
- 
-  // below is new stuff
  
   <LogueEffectInfo Id="GlobalEffect_NineFourteen">
     <Name>9-14</Name> 
@@ -132,13 +129,21 @@ Can be used once per battle.</Desc>
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
 
+    <LogueEffectInfo Id="GlobalEffect_THEFUTURE">
+    <Name>Future</Name> 
+    <Desc>Whenever you gain a Combat Page, upgrade it.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Future... Fuuuutuuuuure...”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
     <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
-
+  
+  
     <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 

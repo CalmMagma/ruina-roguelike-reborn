@@ -13,8 +13,9 @@
     <Exp>2</Exp>
 
     <DropTable Level="0">
-      <DropItem Prob="0.6">3003</DropItem>
-      <DropItem Prob="0.2">4001</DropItem>
+      <DropItem Prob="0.5">4001</DropItem>
+      <DropItem Prob="0.3">4002</DropItem>
+	  <DropItem Prob="0.1">4003</DropItem>
     </DropTable>
   </Enemy>
 

@@ -986,6 +986,86 @@ namespace RogueLike_Mod_Reborn
     }
     #endregion
 
+    #region SCROLL ABILITY UTIL
+    /// <summary>
+    /// This utility was made by StartUp for the Da'at Floor Mod in order to create On Scroll effects.<br></br>
+    /// It has been used with due permission from both StartUp himself and the current coordinator<br></br>
+    /// of the Da'at Floor Mod (at the time of writing, Dememenic).<br></br><br></br>
+    /// If you plan on taking this for yourself, please credit StartUp for ScrollAbilityUtil, and keep this summary tag here.
+    /// <br></br>Oh yeah, and as a bonus, you're gonna need to reference UnityEngine.InputLegacyModule beside the regular CoreModule
+    /// <br></br>in order for this to work.
+    /// </summary>
+    internal static class ScrollAbilityUtil
+    {
+        internal static ScrollAbilityManager GetScrollAbilityManager(this BattleUnitModel model)
+            => model.view.GetComponent<ScrollAbilityManager>() ?? model.view.gameObject.AddComponent<ScrollAbilityManager>();
+
+        internal static void AddScrollAbility(this BattleUnitModel model, BattleDiceCardModel card, ScrollAbilityBase ability)
+            => model.GetScrollAbilityManager().AddAbility(card, ability);
+
+        internal static void AddScrollAbility<T>(this BattleUnitModel model, BattleDiceCardModel card) where T : ScrollAbilityBase, new()
+            => model.AddScrollAbility(card, new T());
+    }
+
+    public class ScrollAbilityManager : MonoBehaviour
+    {
+        private bool scrolled;
+        private BattleUnitModel owner;
+        private Dictionary<BattleDiceCardModel, ScrollAbilityBase> _dict = new Dictionary<BattleDiceCardModel, ScrollAbilityBase>();
+
+        private void Awake()
+            => owner = gameObject.GetComponent<BattleUnitView>().model;
+
+        private void Update()
+        {
+            if (scrolled) scrolled = !(BattleCamManager.Instance.scrollable = true);
+
+            if (StageController.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase) return;
+
+            var handUI = BattleManagerUI.Instance.ui_unitCardsInHand;
+            if (handUI.SelectedModel != owner) return;
+
+            var uiCard = handUI.GetSelectedCard();
+            if (uiCard == null) return;
+
+            var card = uiCard.CardModel;
+            if (card == null || !_dict.ContainsKey(card)) return;
+
+            scrolled = BattleCamManager.Instance.scrollable;
+            BattleCamManager.Instance.scrollable = false;
+
+            var scroll = Input.mouseScrollDelta.y;
+            if (Mathf.Abs(scroll) < float.Epsilon) return;
+
+            if (scroll > 0)
+                _dict[card].OnScrollUp(owner, card);
+            else
+                _dict[card].OnScrollDown(owner, card);
+
+            uiCard.SetCard(card);
+            ((Singleton<StageController>.Instance.AllyFormationDirection == Direction.RIGHT)
+                ? SingletonBehavior<BattleManagerUI>.Instance.ui_unitInformationPlayer
+                : SingletonBehavior<BattleManagerUI>.Instance.ui_unitInformation).ShowPreviewCard(card, true);
+            uiCard.KeywordListUI.Activate();
+        }
+
+
+        public void AddAbility(BattleDiceCardModel card, ScrollAbilityBase ability, bool overrideIfExist = false)
+        {
+            if (card is null) throw new ArgumentNullException(nameof(card));
+            if (ability is null) throw new ArgumentNullException(nameof(ability));
+            if (_dict.ContainsKey(card) && !overrideIfExist) return;
+            _dict[card] = ability;
+        }
+    }
+
+    public class ScrollAbilityBase
+    {
+        public virtual void OnScrollUp(BattleUnitModel unit, BattleDiceCardModel self) { }
+        public virtual void OnScrollDown(BattleUnitModel unit, BattleDiceCardModel self) { }
+    }
+    #endregion
+
     #region ITEM LOCALIZATION
 
     [HideFromItemCatalog]
