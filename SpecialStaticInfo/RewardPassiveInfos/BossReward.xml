@@ -9,7 +9,7 @@
     <!-- <RewardList ID="100004" PassiveType="Nolimit" Rarity="Unique" TargetType="SelectOne" Script="BossReward4" ArtWork="BossReward4"/> -->
     <RewardList ID="100005" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward5" ArtWork="BossReward5"/>
     <RewardList ID="100006" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward6" ArtWork="BossReward6"/>
-    <RewardList ID="100007" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward7" ArtWork="BossReward7"/>
+    <!-- <RewardList ID="100007" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward7" ArtWork="BossReward7"/> NOW BASEKIT --> 
     <RewardList ID="100008" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward8" ArtWork="BossReward8"/>
   </ChapterList>
 

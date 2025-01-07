@@ -3,12 +3,12 @@
   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <bookDescList>
     <BookDesc BookID="-854">
-      <BookName>Player</BookName>
+      <BookName>A Rogue Patron Librarian's Page</BookName>
       <TextList />
       <PassiveList />
     </BookDesc>
     <BookDesc BookID="-855">
-      <BookName>Continue Roguelike Run</BookName>
+      <BookName>A Rogue Librarian's Page</BookName>
       <TextList />
       <PassiveList />
     </BookDesc>

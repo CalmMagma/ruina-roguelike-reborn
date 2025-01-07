@@ -46,11 +46,18 @@
     <RewardList ID="90044" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood44" ArtWork="ShopPassive44"/>
     <RewardList ID="90045" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood45" ArtWork="ShopPassive45"/>
     <RewardList ID="90046" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood46" ArtWork="ShopPassive46"/>
+	
+	<!-- RMR ITEMS START HERE -->
+	<RewardList ID="90047" PassiveType="Custom" ShopType="Eternal" TargetType="All" Script="RMR_BigBrothersChains" ArtWork="RMR_BigBrothersChains"/>
+	<RewardList ID="90048" PassiveType="Custom" ShopType="Eternal" TargetType="All" Script="RMR_Crowbar" ArtWork="RMR_Crowbar"/>
+	
+	
   </ChapterList> 
 
  <ChapterList Chapter="GradeAll" Type="Shop" ID="190025">
     <RewardList ID="900251" PassiveType="Custom" TargetType="SelectOne" Script="ShopGood25Effect1" ArtWork="ShopPassive25_1"/>
     <RewardList ID="900252" PassiveType="Custom" TargetType="SelectOne" Script="ShopGood25Effect2" ArtWork="ShopPassive25_2"/>
+	
   </ChapterList> 
 
  <ChapterList Chapter="GradeAll" Type="Shop" ID="190040">

@@ -97,7 +97,7 @@ Copy. Erasing that direction.”&lt;/color&gt;</FlavorText>
     <Name>Crowbar</Name> 
     <Desc>Attacks deal +50% damage and stagger damage to targets above 90% HP</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“To deal with unforeseen consequences.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
   </LogueEffectInfo> 
   
     <LogueEffectInfo Id="GlobalEffect_BloodShed">
