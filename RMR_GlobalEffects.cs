@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using LOR_DiceSystem;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -23,13 +24,14 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_IronHeart";
     }
 
-    // NEEDS LOCALIZATION AND OBTAINMENT METHOD
     public class RMREffect_BigBrotherChains : GlobalRebornEffectBase
     {
         int powerUp = 0;
         public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
         {
+            if (card.owner.faction == Faction.Enemy) return;
             base.OnUseCard(card);
+            powerUp = 0;
             var list = card.owner.allyCardDetail.GetHand();
 
             foreach (BattleDiceCardModel c in list)
@@ -43,12 +45,16 @@ namespace RogueLike_Mod_Reborn
         }
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
+            if (behavior.card.owner.faction == Faction.Enemy) return;
             base.BeforeRollDice(behavior);
             behavior.ApplyDiceStatBonus(new DiceStatBonus
             {
                 power = powerUp
             });
         }
+
+        public override string KeywordIconId => "RMR_BigBrothersChains";
+        public override string KeywordId => "RMR_BigBrothersChains";
     }
 
     // NEEDS LOCALIZATION, OBTAINMENT METHOD AND TESTING
@@ -169,7 +175,6 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    // REQUIRES OBTAINMENT METHOD
     public class RMREffect_Crowbar : GlobalRebornEffectBase
     {
         public class CrowbarDamageBuf : BattleUnitBuf
@@ -220,4 +225,49 @@ namespace RogueLike_Mod_Reborn
 
         public override string KeywordIconId => "RMR_ViciousGlasses";
     }
+
+    /// <summary>
+    /// Hidden effect that is added on gamemode initialization<br></br>
+    /// Basekit 20% chance to find upgraded cards
+    /// </summary>
+    [HideFromItemCatalog]
+    public class RMREffect_HiddenUpgradeChanceEffect : GlobalLogueEffectBase
+    {
+        public override void ChangeShopCard(ref DiceCardXmlInfo card)
+        {
+            base.ChangeShopCard(ref card);
+            if (card.CheckCanUpgrade())
+            {
+                if (UnityEngine.Random.value < 0.20f)
+                {
+                    card = Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(card.id);
+                }
+            }
+        }
+
+        public override void ChangeCardReward(ref List<DiceCardXmlInfo> cardlist)
+        {
+            List<DiceCardXmlInfo> list = new List<DiceCardXmlInfo>();
+            foreach (DiceCardXmlInfo diceCardXmlInfo in cardlist)
+            {
+                if (!diceCardXmlInfo.CheckCanUpgrade())
+                {
+                    list.Add(diceCardXmlInfo);
+                }
+                else
+                {
+                    if (UnityEngine.Random.value < 0.20f)
+                    {
+                        list.Add(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(diceCardXmlInfo.id));
+                    }
+                    else
+                    {
+                        list.Add(diceCardXmlInfo);
+                    }
+                }
+            }
+            cardlist = list;
+        }
+    }
 }
+

@@ -27,14 +27,13 @@ using UnityEngine.SceneManagement;
 using EnumExtenderV2;
 using KeywordUtil;
 
+
 namespace RogueLike_Mod_Reborn
 {
     public class RMRCore : ModInitializer
     {
-        public static LorId[] booksToAddToInventory = new LorId[]
-        {
-            new LorId(RMRCore.packageId, -853),
-        };
+        public static LorId[] booksToAddToInventory =>
+            Singleton<RoguelikeGamemodeController>.Instance.gamemodeList.Select(x => x.StageStart).ToArray();
           
         public static bool provideAdditionalLogging = true;
         public static Dictionary<Assembly, string> ClassIds = new Dictionary<Assembly, string>();
@@ -494,6 +493,18 @@ namespace RogueLike_Mod_Reborn
             {"[green]", "<color=#33DD11>"},
             {"[red]", "<color=#DD3311>"}
         };
+
+        public static GlobalLogueEffectBase GetRandomEffect(this GlobalLogueEffectManager manager, Rarity rarity)
+        {
+            List<TypeInfo> items = new List<TypeInfo>();
+            foreach (var assembly in LogLikeMod.GetAssemList())
+            {
+                var randomItems = assembly.DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(GlobalLogueEffectBase)) || x.IsSubclassOf(typeof(GlobalRebornEffectBase))).FindAll(x => x.GetField("IsRandom", BindingFlags.Static | BindingFlags.Public) is var randomy && randomy != null && (bool)randomy.GetValue(null));
+                var randomItemsRare = randomItems.FindAll(x => x.GetField("ItemRarity", BindingFlags.Static | BindingFlags.Public) is var rare && rare != null && (Rarity)rare.GetValue(null) == rarity);
+                items.AddRange(randomItemsRare);
+            }
+            return (GlobalLogueEffectBase)Activator.CreateInstance(items.SelectOneRandom().AsType());
+        }
 
         /*
         
@@ -1069,6 +1080,59 @@ namespace RogueLike_Mod_Reborn
     #region ITEM LOCALIZATION
 
     [HideFromItemCatalog]
+    public class ShopPickUpRebornModel : ShopPickUpModel
+    {
+        /// <value>
+        /// Override this with the ID provided within the effect's respective localization XML.
+        /// </value>
+        public virtual string KeywordId { get; }
+
+        /// <value>
+        /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
+        /// </value>
+        public virtual string KeywordIconId { get; }
+
+        /// <summary>
+        /// Do <b>NOT</b> forget to inherit this constructor on your derived <see cref="ShopPickUpRebornModel"/>.
+        /// <code>
+        /// // You can do it like this:
+        /// public class PickUpModel_MyCoolItem : ShopPickUpRebornModel
+        /// {
+        ///     public PickUpModel_MyCoolItem() : base() // do not forget this : base() part
+        ///     {
+        ///         this.id = new LorId(myModInitializer.packageId, 1984);
+        ///         this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(myModInitializer.packageId, 1984));
+        ///     }
+        /// }</code>
+        /// </summary>
+        public ShopPickUpRebornModel()
+        {
+            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly]);
+            if (info != null)
+            {
+                this.Name = info.Name;
+                this.Desc = info.Desc;
+                this.FlaverText = info.FlavorText;
+                this.ArtWork = KeywordIconId == null ? KeywordId : KeywordIconId;
+            }
+        }
+
+        public virtual string GetCredenzaEntry()
+        {
+            LogueEffectXmlInfo info;
+            try
+            {
+                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly]);
+            }
+            catch
+            {
+                info = null;
+            }
+            return info == null ? "" : info.CatalogDesc;
+        }
+    }
+
+    [HideFromItemCatalog]
     public class PickUpRebornModel : PickUpModelBase
     {
         /// <value>
@@ -1133,6 +1197,8 @@ namespace RogueLike_Mod_Reborn
         /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
         /// </value>
         public virtual string KeywordIconId { get; }
+
+        public virtual Rarity ItemRarity { get; }
 
         public override string GetEffectDesc()
         {
@@ -1667,6 +1733,7 @@ namespace RogueLike_Mod_Reborn
             if (!RoguelikeGamemodeController.Instance.isContinue)
             {
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HiddenUpgradeChanceEffect());
                 Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
             }
         }
@@ -1703,7 +1770,9 @@ namespace RogueLike_Mod_Reborn
             if (!RoguelikeGamemodeController.Instance.isContinue)
             {
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HiddenUpgradeChanceEffect());
                 Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
+
             }
         }
 
@@ -2977,7 +3046,6 @@ namespace RogueLike_Mod_Reborn
         {
             return __exception is NullReferenceException ? null : __exception;
         }
-
 
         #endregion
     }

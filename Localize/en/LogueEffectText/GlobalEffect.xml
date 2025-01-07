@@ -55,7 +55,7 @@ Copy. Erasing that direction.”&lt;/color&gt;</FlavorText>
     <Name>Scrap Shield</Name> 
     <Desc>Adds 1 Counter Die (Block, 2-5) to the selected Librarian’s queue. Min. and Max. value increases by 1 per chapter</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Sticks and stones may just break your bones.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @Blan_ka_</CatalogDesc>
+    <CatalogDesc>Art by @T_Blanket_</CatalogDesc>
   </LogueEffectInfo> 
   
     <LogueEffectInfo Id="GlobalEffect_HpBullet">
@@ -112,14 +112,14 @@ Can be used once per battle.</Desc>
     <Name>Grade-1 Steroids</Name> 
     <Desc>[Consumable] Selected Librarian's dice have their max value increased by 2 and min value lowered by 1 for two Scenes.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Also known as ‘Fool’s Strength’.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @Blan_ka_</CatalogDesc>
+    <CatalogDesc>Art by @T_Blanket_</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="GlobalEffect_CaffPills">
     <Name>Caffeine Pills</Name> 
     <Desc>[Consumable] Selected Librarian's dice have their min value increased by 2 and max value lowered by 1 for two Scenes.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“For late night requests.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @Blan_ka_</CatalogDesc>
+    <CatalogDesc>Art by @T_Blanket_</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="GlobalEffect_LightFrag">
@@ -136,6 +136,14 @@ Can be used once per battle.</Desc>
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
 
+    <LogueEffectInfo Id="RMR_BigBrothersChains">
+    <Name>Big Brother's Chains</Name> 
+    <Desc>When using a Combat Page, all dice on that page gain Power equal to the amount of copies of the Combat Page in hand.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Etched within one of the chains, one can barely read 'Big Rich'”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <!-- 
     <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 
@@ -150,5 +158,5 @@ Can be used once per battle.</Desc>
     <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
-
+  -->
 </LogueEffectXmlRoot>

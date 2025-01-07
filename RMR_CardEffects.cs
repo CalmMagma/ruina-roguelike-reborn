@@ -24,7 +24,9 @@ namespace RogueLike_Mod_Reborn
             {
                 if (list[0]._originalXmlData != null)
                     list[0].CopySelf();
-                list[0].XmlData.DiceBehaviourList.Add(battleDiceBehavior.behaviourInCard);
+                List<DiceBehaviour> dicelist = list[0].XmlData.DiceBehaviourList;
+                dicelist.Add(battleDiceBehavior.behaviourInCard);
+                list[0].XmlData.DiceBehaviourList = dicelist;
             }
         }
     }

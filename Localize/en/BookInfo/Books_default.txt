@@ -3,7 +3,7 @@
   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <bookDescList>
     <BookDesc BookID="-854">
-      <BookName>Roguelike Run</BookName>
+      <BookName>Player</BookName>
       <TextList />
       <PassiveList />
     </BookDesc>
