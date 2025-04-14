@@ -201,7 +201,7 @@ Cannot be Stacked with other Textbook Global effects</Desc>
 
 	<PassiveDesc ID="8570045">
     <Name>Unstable Speed</Name>
-    <Desc>Gain +1 Speed Dice Slot for 50% Chance (Cannot Overlap)</Desc>
+    <Desc>Gain +1 Speed Dice Slot at a 50% Chance (Cannot Overlap)</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570046">
