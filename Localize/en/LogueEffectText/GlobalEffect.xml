@@ -142,6 +142,13 @@ Can be used once per battle.</Desc>
     <FlavorText>&lt;color=#CACACA&gt;“Etched within one of the chains, one can barely read 'Big Rich'”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
+
+    <LogueEffectInfo Id="RMR_HarvestScythe">
+    <Name>Harvester's Scythe</Name> 
+    <Desc>Gain 5 Critical Chance. [On Crit] Recover 5 HP</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“It takes a brave man to look death in the eye and claim they don't need help.”&lt;/color&gt;</FlavorText>
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
   
   <!-- 
     <LogueEffectInfo Id="GlobalEffect_">
