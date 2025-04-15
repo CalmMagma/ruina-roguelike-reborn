@@ -1126,6 +1126,7 @@ namespace RogueLike_Mod_Reborn
                 this.FlaverText = info.FlavorText;
                 this.ArtWork = KeywordIconId == null ? KeywordId : KeywordIconId;
             }
+            this.basepassive = null;
         }
 
         public virtual string GetCredenzaEntry()
@@ -1177,8 +1178,7 @@ namespace RogueLike_Mod_Reborn
                 this.Name = info.Name;
                 this.Desc = info.Desc;
                 this.FlaverText = info.FlavorText;
-                this.ArtWork = KeywordIconId == null ? KeywordId : KeywordIconId;
-            }
+                this.ArtWork = KeywordIconId == null ? KeywordId : KeywordIconId;            }
         }
 
         public virtual string GetCredenzaEntry()
@@ -1208,8 +1208,6 @@ namespace RogueLike_Mod_Reborn
         /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
         /// </value>
         public virtual string KeywordIconId { get; }
-
-        public virtual Rarity ItemRarity { get; }
 
         public override string GetEffectDesc()
         {

@@ -41,7 +41,7 @@
   </LogueEffectInfo> 
 
   <LogueEffectInfo Id="RMR_ViciousGlasses">
-    <Name>Still Water</Name>
+    <Name>Vicious Glasses</Name>
     <Desc>[Patron Librarian] At the start of the Act, gain 10 stacks of Critical Strike.</Desc> 
     <FlavorText>&lt;color=#CA08A9&gt;"Glas"&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
