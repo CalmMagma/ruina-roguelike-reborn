@@ -338,6 +338,17 @@ namespace RogueLike_Mod_Reborn
             battleEffectSound.Init(audio, volume, loop);
         }
 
+        public static bool isCrit(this BattleUnitModel model)
+        {
+            BattleUnitBuf_RMR_CritChance buf = (model.bufListDetail.GetActivatedBuf(RoguelikeBufs.CritChance) as BattleUnitBuf_RMR_CritChance);
+            if(buf != null)
+            {
+                if (buf.onCrit) return true;
+
+            }
+            return false;
+        }
+
         /// <summary>
         /// Set <u><see cref="BattleUnitView.deadEvent"/></u> to this in order to make an unit explode on death.
         /// </summary>

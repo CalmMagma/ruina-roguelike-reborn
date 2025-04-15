@@ -24,6 +24,31 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_IronHeart";
     }
 
+    public class RMREffect_HarvesterScythe : GlobalRebornEffectBase
+    {
+        public override string KeywordId => "RMR_HarvestScythe";
+
+        public override string KeywordIconId => "RMR_HarvestScythe";
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 5);
+            }
+        }
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            if(RMRUtilityExtensions.isCrit(behavior.card.owner))
+            {
+                behavior.card.owner.RecoverHP(5);
+            }
+        }
+    }
+
     public class RMREffect_BigBrotherChains : GlobalRebornEffectBase
     {
         int powerUp = 0;
@@ -33,7 +58,7 @@ namespace RogueLike_Mod_Reborn
             base.OnUseCard(card);
             powerUp = 0;
             var list = card.owner.allyCardDetail.GetHand();
-
+            
             foreach (BattleDiceCardModel c in list)
             {
                 if (c != null && c.GetID() == card.card.GetID())
@@ -42,8 +67,13 @@ namespace RogueLike_Mod_Reborn
                 }
             }
             powerUp--; // remove 1 power 'cause one of the cards is the one we played
+            card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+            {
+                power = powerUp
+            });
+            // do this here because for some reason we can't apply it on rolling the dice, which is probably something to do with order of operation
         }
-        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        /*public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             if (behavior.card.owner.faction == Faction.Enemy) return;
             base.BeforeRollDice(behavior);
@@ -51,7 +81,8 @@ namespace RogueLike_Mod_Reborn
             {
                 power = powerUp
             });
-        }
+        }*/
+        // omitted until we know for sure the other solution works
 
         public override string KeywordIconId => "RMR_BigBrothersChains";
         public override string KeywordId => "RMR_BigBrothersChains";
