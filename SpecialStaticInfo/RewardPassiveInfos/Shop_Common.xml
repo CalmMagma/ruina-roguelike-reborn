@@ -48,9 +48,9 @@
     <RewardList ID="90046" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood46" ArtWork="ShopPassive46"/>
 	
 	<!-- RMR ITEMS START HERE -->
-	<RewardList ID="90047" PassiveType="Custom" Rarity="Uncommon" TargetType="All" Script="RMR_BigBrothersChains" ArtWork="RMR_BigBrothersChains"/>
-	<RewardList ID="90048" PassiveType="Custom" Rarity="Uncommon" TargetType="All" Script="RMR_Crowbar" ArtWork="RMR_Crowbar"/>
-	
+	<RewardList ID="90047" PassiveType="Custom" ShopType="Eternal" TargetType="All" Script="RMR_BigBrothersChains" ArtWork="RMR_BigBrothersChains"/>
+	<RewardList ID="90048" PassiveType="Custom" ShopType="Eternal" TargetType="All" Script="RMR_Crowbar" ArtWork="RMR_Crowbar"/>
+	<RewardList ID="90049" PassiveType="Custom" ShopType="Eternal" TargetType="All" Script="RMR_HarvestScythe" ArtWork="RMR_HarvestScythe"/>
 	
   </ChapterList> 
 

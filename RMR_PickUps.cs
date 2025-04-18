@@ -32,7 +32,7 @@ namespace RogueLike_Mod_Reborn
         public PickUpModel_RMR_Crowbar() : base()
         {
             this.id = new LorId(LogLikeMod.ModId, 90048);
-            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90048));
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90048));            
         }
         public override void OnPickUpShop(ShopGoods good)
         {
@@ -42,6 +42,25 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_Crowbar";
 
         public override string KeywordId => "RMR_Crowbar";
+
+    }
+
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_HarvestScythe : ShopPickUpRebornModel
+    {
+        public PickUpModel_RMR_HarvestScythe() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90049);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90049));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HarvesterScythe());
+        }
+
+        public override string KeywordIconId => "RMR_HarvestScythe";
+
+        public override string KeywordId => "RMR_HarvestScythe";
 
     }
 }
