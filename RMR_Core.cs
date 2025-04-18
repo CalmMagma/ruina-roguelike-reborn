@@ -1003,7 +1003,7 @@ namespace RogueLike_Mod_Reborn
     /// It has been used with due permission from both StartUp himself and the current coordinator<br></br>
     /// of the Da'at Floor Mod (at the time of writing, Dememenic).<br></br><br></br>
     /// If you plan on taking this for yourself, please credit StartUp for ScrollAbilityUtil, and keep this summary tag here.
-    /// <br></br>Oh yeah, and as a bonus, you're gonna need to reference UnityEngine.InputLegacyModule beside the regular CoreModule
+    /// <br></br>Oh yeah, and as a bonus, you're gonna need to reference UnityEngine.InputLegacyModule besides the regular CoreModule
     /// <br></br>in order for this to work.
     /// </summary>
     internal static class ScrollAbilityUtil
@@ -2211,8 +2211,11 @@ namespace RogueLike_Mod_Reborn
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
                         this.isObtained ? this.Effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name"),
-                        this.isObtained ? this.Effect.GetEffectDesc() + "\n\n" + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Effect.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
+                        this.isObtained ? this.Effect.GetEffectDesc() + "\n" 
+                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.Effect.GetRarity())) +">" + this.Effect.GetRarity().ToString() + "</color>" + "\n\n" 
+                        + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Effect.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
                         base.transform as RectTransform,
+                        this.Effect.GetRarity(),
                         UIToolTipPanelType.OnlyContent
                     );
                     
@@ -2223,8 +2226,11 @@ namespace RogueLike_Mod_Reborn
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
                         this.isObtained ? this.Pickup.Name : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name"),
-                        this.isObtained ? this.Pickup.Desc + "\n\n" + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Pickup.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
+                        this.isObtained ? this.Pickup.Desc + "\n"
+                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.Pickup.GetRarity())) + ">" + this.Pickup.GetRarity().ToString() + "</color>" + "\n\n"
+                        + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Pickup.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
                         base.transform as RectTransform,
+                        this.Effect.GetRarity(),
                         UIToolTipPanelType.OnlyContent
                     );
                 }
@@ -2312,6 +2318,20 @@ namespace RogueLike_Mod_Reborn
             }
             return null;
         }
+
+        public static Rarity GetRarity(this PickUpModelBase item)
+        {
+            if (item is ShopPickUpModel && ((ShopPickUpModel)item).basepassive != null) return ((ShopPickUpModel)item).basepassive.rare;
+            return item.rewardinfo.passiverarity;
+        }
+
+        public static Rarity GetRarity(this GlobalLogueEffectBase item)
+        {
+            if (item.GetType().GetField("ItemRarity", BindingFlags.Static | BindingFlags.Public) is var rare && rare != null)
+                return (Rarity)rare.GetValue(null);
+            return Rarity.Special;
+        }
+
 
         public static string GetItemCredenzaEntry(this GlobalLogueEffectBase item)
         {
@@ -2484,7 +2504,7 @@ namespace RogueLike_Mod_Reborn
             UnityEngine.Object.Destroy(panel.slotsLayoutGroup.gameObject);
         }
 
-        public static void SetTooltip(this UIMainOverlayManager __instance, string name, string content, RectTransform rectTransform, UIToolTipPanelType panelType = UIToolTipPanelType.Normal)
+        public static void SetTooltip(this UIMainOverlayManager __instance, string name, string content, RectTransform rectTransform, Rarity rare = (Rarity)69, UIToolTipPanelType panelType = UIToolTipPanelType.Normal)
         {
             __instance.Open();
             __instance.tooltipName.text = name;
@@ -2499,6 +2519,13 @@ namespace RogueLike_Mod_Reborn
                     camera = Camera.main;
                 }
             }
+            Color toolColor = Color.white;
+            if (rare < Rarity.Common || rare > Rarity.Unique)
+            {
+                toolColor = Color.white;
+            } else if (rare == Rarity.Special) toolColor = UIColorManager.Manager.Error;
+            __instance.tooltipName.color = toolColor;
+            __instance.setter_tooltipname.underlayColor = toolColor;
             __instance.tooltipDesc.text = content;
             __instance.SetTooltipOverlayBoxSize(panelType);
             __instance.SetTooltipOverlayBoxPosition(camera, rectTransform);

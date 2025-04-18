@@ -19,6 +19,8 @@ namespace RogueLike_Mod_Reborn
             model.RecoverHP(6);
         }
 
+        public static Rarity ItemRarity = Rarity.Uncommon;
+
         public override string KeywordId => "RMR_IronHeart";
 
         public override string KeywordIconId => "RMR_IronHeart";
@@ -53,6 +55,7 @@ namespace RogueLike_Mod_Reborn
             });
         }
 
+        public static Rarity ItemRarity = Rarity.Common;
         public override string KeywordIconId => "RMR_BigBrothersChains";
         public override string KeywordId => "RMR_BigBrothersChains";
     }
@@ -62,6 +65,9 @@ namespace RogueLike_Mod_Reborn
     {
         bool ZCActive = false;
         int diceTicks = 3;
+
+        public static Rarity ItemRarity = Rarity.Rare;
+
         public override void OnRoundStart(StageController stage)
         {
             base.OnRoundStart(stage);
@@ -109,6 +115,8 @@ namespace RogueLike_Mod_Reborn
             model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -100), true);
         }
 
+        public static Rarity ItemRarity = Rarity.Uncommon;
+
         public override string KeywordId => "RMR_HunterCloak";
 
         public override string KeywordIconId => "RMR_HunterCloak";
@@ -121,6 +129,8 @@ namespace RogueLike_Mod_Reborn
             StageController.Instance.AddModdedUnit(Faction.Player, new LorId(RMRCore.packageId, -100), -1, 170, new XmlVector2 { x = 20, y = 0 });
             UnitUtil.RefreshCombatUI();
         }
+
+        public static Rarity ItemRarity = Rarity.Uncommon;
 
         public override string KeywordId => "RMR_StrangeOrb";
 
@@ -203,6 +213,8 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
+        public static Rarity ItemRarity = Rarity.Common;
+
         public override string KeywordId => "RMR_Crowbar";
 
         public override string KeywordIconId => "RMR_Crowbar";
@@ -220,6 +232,8 @@ namespace RogueLike_Mod_Reborn
                 list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 10);
             }
         }
+
+        public static Rarity ItemRarity = Rarity.Uncommon;
 
         public override string KeywordId => "RMR_ViciousGlasses";
 
