@@ -341,7 +341,7 @@ namespace RogueLike_Mod_Reborn
         public static bool isCrit(this BattleUnitModel model)
         {
             BattleUnitBuf_RMR_CritChance buf = (model.bufListDetail.GetActivatedBuf(RoguelikeBufs.CritChance) as BattleUnitBuf_RMR_CritChance);
-            if(buf != null)
+            if (buf != null)
             {
                 if (buf.onCrit) return true;
 

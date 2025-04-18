@@ -28,6 +28,9 @@ namespace RogueLike_Mod_Reborn
 
     public class RMREffect_HarvesterScythe : GlobalRebornEffectBase
     {
+
+        public static Rarity ItemRarity = Rarity.Uncommon;
+
         public override string KeywordId => "RMR_HarvestScythe";
 
         public override string KeywordIconId => "RMR_HarvestScythe";
