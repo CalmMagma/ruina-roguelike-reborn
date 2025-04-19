@@ -42,6 +42,16 @@
     <Priority>0</Priority>
   </Card>
 
-
+  <Card ID="-103">
+    <Name>The Remote</Name>
+    <Artwork>sword2</Artwork>
+    <Rarity>Common</Rarity>
+    <Spec Range="Instance" Cost="0" />
+    <Script>RMR_Remote</Script>
+    <ScriptDesc />
+    <BehaviourList />
+    <Chapter>1</Chapter>
+    <Priority>0</Priority>
+  </Card>
 
 </DiceCardXmlRoot>

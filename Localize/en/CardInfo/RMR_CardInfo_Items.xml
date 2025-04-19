@@ -10,5 +10,8 @@
     <BattleCardDesc ID="-102">
       <LocalizedName>Wrath</LocalizedName>
     </BattleCardDesc>
+    <BattleCardDesc ID="-103">
+      <LocalizedName>The Remote</LocalizedName>
+    </BattleCardDesc>
   </cardDescList>
 </BattleCardDescRoot>
