@@ -24,23 +24,30 @@ namespace RogueLike_Mod_Reborn
                 return RoguelikeBufs.CritChance;
             }
         }
-
-        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
-            // reset crit here
-            onCrit = false;
-            base.BeforeRollDice(behavior);
-            var critRoll = RandomUtil.Range(0, 100);
-            if (critRoll <= this.stack)
+            base.BeforeGiveDamage(behavior);
+            if (behavior.owner?.currentDiceAction?.target != null)
             {
-                // apply crit = true here
-                onCrit = true;
+                var target = behavior.owner?.currentDiceAction?.target;
+                var critRoll = RandomUtil.Range(0, 100);
+                if (critRoll <= this.stack)
+                {
+                    onCrit = true;
+                }
                 behavior.ApplyDiceStatBonus(new DiceStatBonus
                 {
                     dmgRate = 50,
                     breakRate = 50
                 });
+                GlobalLogueEffectManager.Instance.OnCrit(_owner, target);
             }
+        }
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            // reset crit here
+            onCrit = false;
         }
 
     }

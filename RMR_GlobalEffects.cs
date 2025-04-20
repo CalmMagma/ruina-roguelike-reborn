@@ -44,13 +44,10 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        public override void OnCrit(BattleUnitModel critter, BattleUnitModel target)
         {
-            base.BeforeRollDice(behavior);
-            if(RMRUtilityExtensions.isCrit(behavior.card.owner))
-            {
-                behavior.card.owner.RecoverHP(5);
-            }
+            base.OnCrit(critter, target);
+            critter?.RecoverHP(5);
         }
     }
 

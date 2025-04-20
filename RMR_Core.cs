@@ -28,6 +28,7 @@ using EnumExtenderV2;
 using KeywordUtil;
 
 
+
 namespace RogueLike_Mod_Reborn
 {
     public class RMRCore : ModInitializer
@@ -338,6 +339,12 @@ namespace RogueLike_Mod_Reborn
             battleEffectSound.Init(audio, volume, loop);
         }
 
+        /// <summary>
+        /// Checks if the current hit is a crit. Should be set to true in-between BeforeRollDice calls.<br></br>
+        /// Ideally should be called OnSucceedAttack
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public static bool isCrit(this BattleUnitModel model)
         {
             BattleUnitBuf_RMR_CritChance buf = (model.bufListDetail.GetActivatedBuf(RoguelikeBufs.CritChance) as BattleUnitBuf_RMR_CritChance);
@@ -2163,6 +2170,7 @@ namespace RogueLike_Mod_Reborn
                 this.item = pickup;
                 this.image = base.gameObject.GetComponent<Image>();
                 this.image.sprite = LogLikeMod.ArtWorks["ItemCatalogRounded"];
+                this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
                 Sprite sproite = pickup.GetSprite();
                 
                 if (sproite == null)
@@ -2246,14 +2254,14 @@ namespace RogueLike_Mod_Reborn
                     );
                 }
             }
-            this.image.color = new Color(0f, 1f, 1f);
+            this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Highlighted);
             this.update = true;
         }
 
         public void OnExitImage()
         {
             SingletonBehavior<UIMainOverlayManager>.Instance.Close();
-            this.image.color = new Color(0.8f, 0.75f, 0f);
+            this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
             this.update = false;
         }
 
