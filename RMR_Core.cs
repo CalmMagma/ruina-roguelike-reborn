@@ -341,9 +341,8 @@ namespace RogueLike_Mod_Reborn
 
         /// <summary>
         /// Checks if the current hit is a crit. Should be set to true in-between BeforeRollDice calls.<br></br>
-        /// Ideally should be called OnSucceedAttack
+        /// Ideally should be called OnSucceedAttack.
         /// </summary>
-        /// <param name="model"></param>
         /// <returns></returns>
         public static bool isCrit(this BattleUnitModel model)
         {
@@ -2539,9 +2538,9 @@ namespace RogueLike_Mod_Reborn
                 }
             }
             Color toolColor = Color.white;
-            if (rare < Rarity.Common || rare > Rarity.Unique)
+            if (rare >= Rarity.Common && rare <= Rarity.Unique)
             {
-                toolColor = Color.white;
+                toolColor = UIColorManager.Manager.GetEquipRarityColor(rare);
             } else if (rare == Rarity.Special) toolColor = UIColorManager.Manager.Error;
             __instance.tooltipName.color = toolColor;
             __instance.setter_tooltipname.underlayColor = toolColor;
@@ -2550,6 +2549,8 @@ namespace RogueLike_Mod_Reborn
             __instance.SetTooltipOverlayBoxPosition(camera, rectTransform);
         }
     }
+
+    
 
     #endregion
 

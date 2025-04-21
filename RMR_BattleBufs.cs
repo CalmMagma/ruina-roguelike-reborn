@@ -35,12 +35,15 @@ namespace RogueLike_Mod_Reborn
                 {
                     onCrit = true;
                 }
-                behavior.ApplyDiceStatBonus(new DiceStatBonus
+                if (onCrit)
                 {
-                    dmgRate = 50,
-                    breakRate = 50
-                });
-                GlobalLogueEffectManager.Instance.OnCrit(_owner, target);
+                    behavior.ApplyDiceStatBonus(new DiceStatBonus
+                    {
+                        dmgRate = 50,
+                        breakRate = 50
+                    });
+                    GlobalLogueEffectManager.Instance.OnCrit(_owner, target);
+                }
             }
         }
 
