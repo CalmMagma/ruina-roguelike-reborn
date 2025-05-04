@@ -47,12 +47,13 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        public override void OnSuccessAttack(BattleDiceBehavior behavior)
         {
+            base.OnSuccessAttack(behavior);
             // reset crit here
             onCrit = false;
-        }
 
+        }
     }
 
 }

@@ -28,11 +28,8 @@ namespace RogueLike_Mod_Reborn
 
     public class RMREffect_HarvesterScythe : GlobalRebornEffectBase
     {
-
         public static Rarity ItemRarity = Rarity.Uncommon;
-
         public override string KeywordId => "RMR_HarvestScythe";
-
         public override string KeywordIconId => "RMR_HarvestScythe";
         public override void OnStartBattleAfter()
         {
@@ -48,6 +45,22 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnCrit(critter, target);
             critter?.RecoverHP(5);
+        }
+    }
+
+    public class RMREffect_Remote : GlobalRebornEffectBase
+    {
+        public static Rarity ItemRarity = Rarity.Uncommon;
+        public override string KeywordId => "RMR_Remote";
+        public override string KeywordIconId => "RMR_Remote";
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            BattleUnitModel model = BattleObjectManager.instance.GetPatron();
+            if (model != null)
+            {
+                model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -103));
+            }
         }
     }
 

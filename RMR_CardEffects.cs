@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using LOR_BattleUnit_UI;
 using LOR_DiceSystem;
 using LOR_XML;
 
@@ -28,6 +29,30 @@ namespace RogueLike_Mod_Reborn
                 dicelist.Add(battleDiceBehavior.behaviourInCard);
                 list[0].XmlData.DiceBehaviourList = dicelist;
             }
+        }
+    }
+    public class DiceCardSelfAbility_RMR_Remote : DiceCardSelfAbilityBase
+    {
+        public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
+        {
+            base.OnUseInstance(unit, self, targetUnit);
+            self.exhaust = true;
+            var list = targetUnit.cardSlotDetail.cardAry;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] != null && list[i].card.CurCost > 0)
+                {
+                    targetUnit.cardSlotDetail.cardAry[i] = null;
+                }
+            }
+            targetUnit.cardSlotDetail.SetPlayPoint(0);
+            SingletonBehavior<BattleManagerUI>.Instance.ui_TargetArrow.UpdateTargetList();
+            GlobalLogueEffectBase effect = GlobalLogueEffectManager.Instance.GetEffectList().Find(x => x is RMREffect_Remote);
+            if (effect != null)
+            {
+                GlobalLogueEffectManager.Instance.RemoveEffect(effect);
+            }
+            
         }
     }
 }

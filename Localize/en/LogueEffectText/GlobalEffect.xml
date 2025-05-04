@@ -149,6 +149,12 @@ Can be used once per battle.</Desc>
     <FlavorText>&lt;color=#CACACA&gt;“It takes a brave man to look death in the eye and claim they don't need help.”&lt;/color&gt;</FlavorText>
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
+    <LogueEffectInfo Id="RMR_Remote">
+    <Name>The Remote</Name> 
+    <Desc>Adds a Single-Use, [On Play] page at the start of the Act that removes all of the target's Light and unslots any non-0 Cost pages This item is removed upon using the page.</Desc>
+    <FlavorText>&lt;color=#CACACA&gt;“You have a feeling someone messed up their wiring somewhere...”&lt;/color&gt;</FlavorText>
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
   
   <!-- 
     <LogueEffectInfo Id="GlobalEffect_">
