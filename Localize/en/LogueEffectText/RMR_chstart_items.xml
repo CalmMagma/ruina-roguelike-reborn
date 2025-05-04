@@ -42,7 +42,7 @@
 
   <LogueEffectInfo Id="RMR_ViciousGlasses">
     <Name>Vicious Glasses</Name>
-    <Desc>[Patron Librarian] At the start of the Act, gain 10 stacks of Critical Strike.</Desc> 
+    <Desc>At the start of the Act, give 10 Critical Strike to all allies.</Desc> 
     <FlavorText>&lt;color=#CA08A9&gt;"Glas"&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 

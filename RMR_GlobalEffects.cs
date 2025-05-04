@@ -19,7 +19,7 @@ namespace RogueLike_Mod_Reborn
             model.RecoverHP(6);
         }
 
-        public static Rarity ItemRarity = Rarity.Uncommon;
+        public static Rarity ItemRarity = Rarity.Common;
 
         public override string KeywordId => "RMR_IronHeart";
 
@@ -146,7 +146,7 @@ namespace RogueLike_Mod_Reborn
             model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -100), true);
         }
 
-        public static Rarity ItemRarity = Rarity.Uncommon;
+        public static Rarity ItemRarity = Rarity.Common;
 
         public override string KeywordId => "RMR_HunterCloak";
 
@@ -161,7 +161,7 @@ namespace RogueLike_Mod_Reborn
             UnitUtil.RefreshCombatUI();
         }
 
-        public static Rarity ItemRarity = Rarity.Uncommon;
+        public static Rarity ItemRarity = Rarity.Common;
 
         public override string KeywordId => "RMR_StrangeOrb";
 
@@ -264,7 +264,7 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public static Rarity ItemRarity = Rarity.Uncommon;
+        public static Rarity ItemRarity = Rarity.Common;
 
         public override string KeywordId => "RMR_ViciousGlasses";
 
