@@ -46,6 +46,9 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnInitializeMod();
 
+            if (!Directory.Exists(LogueSaveManager.Saveroot))
+                Directory.CreateDirectory(LogueSaveManager.Saveroot);
+
             if (!File.Exists(LogueSaveManager.Saveroot + "/RMR_Config.xml"))
             {
                using (var file = File.Create(LogueSaveManager.Saveroot + "/RMR_Config.xml")) {
