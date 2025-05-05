@@ -2619,7 +2619,16 @@ namespace RogueLike_Mod_Reborn
         [HarmonyPostfix, HarmonyPatch(typeof(DropBookInventoryModel), "GetBookList_invitationBookList")]
         static List<LorId> AddInvitationBooks(List<LorId> result)
         {
-            result.AddRange(RMRCore.booksToAddToInventory);
+            foreach (LorId book in RMRCore.booksToAddToInventory)
+            {
+                int num;
+                if ((num = result.Count(x => x == book)) > 1)
+                {
+                    result.RemoveAll(x => x == book);
+                    result.Add(book);
+                }
+                else if (num == 0) result.Add(book);
+            }
             return result;
         }
         #endregion
