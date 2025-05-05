@@ -8,7 +8,7 @@ using LOR_DiceSystem;
 
 namespace RogueLike_Mod_Reborn
 {
-
+    #region STARTER ITEMS
     public class RMREffect_IronHeart : GlobalRebornEffectBase
     {
         public override void OnStartBattleAfter()
@@ -25,6 +25,117 @@ namespace RogueLike_Mod_Reborn
 
         public override string KeywordIconId => "RMR_IronHeart";
     }
+
+    public class RMREffect_HunterCloak : GlobalRebornEffectBase
+    {
+        public override void OnStartBattleAfter()
+        {
+            BattleUnitModel model = BattleObjectManager.instance.GetPatron();
+            if (model == null)
+                return;
+            model.allyCardDetail.DrawCards(2);
+        }
+
+        public override void OnRoundStart(StageController stage)
+        {
+            BattleUnitModel model = BattleObjectManager.instance.GetPatron();
+            if (model == null)
+                return;
+            model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -100), true);
+        }
+
+        public static Rarity ItemRarity = Rarity.Common;
+
+        public override string KeywordId => "RMR_HunterCloak";
+
+        public override string KeywordIconId => "RMR_HunterCloak";
+    }
+
+    public class RMREffect_ViciousGlasses : GlobalRebornEffectBase
+    {
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 10);
+            }
+        }
+
+        public static Rarity ItemRarity = Rarity.Common;
+
+        public override string KeywordId => "RMR_ViciousGlasses";
+
+        public override string KeywordIconId => "RMR_ViciousGlasses";
+    }
+
+    public class RMREffect_StrangeOrb : GlobalRebornEffectBase
+    {
+        public override void OnStartBattleAfter()
+        {
+            StageController.Instance.AddModdedUnit(Faction.Player, new LorId(RMRCore.packageId, -100), -1, 170, new XmlVector2 { x = 20, y = 0 });
+            UnitUtil.RefreshCombatUI();
+        }
+
+        public static Rarity ItemRarity = Rarity.Common;
+
+        public override string KeywordId => "RMR_StrangeOrb";
+
+        public override string KeywordIconId => "RMR_StrangeOrb";
+        public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
+        {
+            public override void OnRoundStart()
+            {
+                base.OnRoundStart();
+                var list = BattleObjectManager.instance.GetAliveList(owner.faction).Shuffle();
+                switch (UnityEngine.Random.Range(0, 4))
+                {
+                    case 0:
+                        foreach (var enemy in BattleObjectManager.instance.GetAliveList_opponent(owner.faction))
+                            enemy?.bufListDetail?.AddKeywordBufThisRoundByEtc(KeywordBuf.Paralysis, 1, owner);
+                        break;
+                    case 1:
+                        var unit = list[UnityEngine.Random.Range(0, list.Count)];
+                        if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
+                        else break;
+                        list.Remove(unit);
+                        if (list.Any())
+                        {
+                            unit = list[UnityEngine.Random.Range(0, list.Count)];
+                            if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
+                        }
+                        break;
+                    case 2:
+                        var unit2 = list[UnityEngine.Random.Range(0, list.Count)];
+                        if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
+                        else break;
+                        list.Remove(unit2);
+                        if (list.Any())
+                        {
+                            unit2 = list[UnityEngine.Random.Range(0, list.Count)];
+                            if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
+                        }
+                        break;
+                    case 3:
+                        foreach (var ally in BattleObjectManager.instance.GetAliveList(owner.faction))
+                            ally?.bufListDetail?.AddKeywordBufThisRoundByEtc(KeywordBuf.DmgUp, 1, owner);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            public override bool IsImmuneBreakDmg(DamageType type)
+            {
+                return true;
+            }
+        }
+
+
+    }
+    #endregion
+
 
     public class RMREffect_HarvesterScythe : GlobalRebornEffectBase
     {
@@ -47,7 +158,7 @@ namespace RogueLike_Mod_Reborn
             critter?.RecoverHP(5);
         }
     }
-
+    
     public class RMREffect_Remote : GlobalRebornEffectBase
     {
         public static Rarity ItemRarity = Rarity.Uncommon;
@@ -99,7 +210,7 @@ namespace RogueLike_Mod_Reborn
         }*/
         // omitted until we know for sure the other solution works
 
-        public static Rarity ItemRarity = Rarity.Common;
+        public static Rarity ItemRarity = Rarity.Rare;
         public override string KeywordIconId => "RMR_BigBrothersChains";
         public override string KeywordId => "RMR_BigBrothersChains";
     }
@@ -141,94 +252,6 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class RMREffect_HunterCloak : GlobalRebornEffectBase
-    {
-        public override void OnStartBattleAfter()
-        {
-            BattleUnitModel model = BattleObjectManager.instance.GetPatron();
-            if (model == null)
-                return;
-            model.allyCardDetail.DrawCards(2);
-        }
-
-        public override void OnRoundStart(StageController stage)
-        {
-            BattleUnitModel model = BattleObjectManager.instance.GetPatron();
-            if (model == null)
-                return;
-            model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -100), true);
-        }
-
-        public static Rarity ItemRarity = Rarity.Common;
-
-        public override string KeywordId => "RMR_HunterCloak";
-
-        public override string KeywordIconId => "RMR_HunterCloak";
-    }
-
-    public class RMREffect_StrangeOrb : GlobalRebornEffectBase
-    {
-        public override void OnStartBattleAfter()
-        {
-            StageController.Instance.AddModdedUnit(Faction.Player, new LorId(RMRCore.packageId, -100), -1, 170, new XmlVector2 { x = 20, y = 0 });
-            UnitUtil.RefreshCombatUI();
-        }
-
-        public static Rarity ItemRarity = Rarity.Common;
-
-        public override string KeywordId => "RMR_StrangeOrb";
-
-        public override string KeywordIconId => "RMR_StrangeOrb";
-    }
-    public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
-    {
-        public override void OnRoundStart()
-        {
-            base.OnRoundStart();
-            var list = BattleObjectManager.instance.GetAliveList(owner.faction).Shuffle();
-            switch (UnityEngine.Random.Range(0, 4))
-            {
-                case 0:
-                    foreach (var enemy in BattleObjectManager.instance.GetAliveList_opponent(owner.faction))
-                        enemy?.bufListDetail?.AddKeywordBufThisRoundByEtc(KeywordBuf.Paralysis, 1, owner);
-                    break;
-                case 1:
-                    var unit = list[UnityEngine.Random.Range(0, list.Count)];
-                    if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
-                    else break;
-                    list.Remove(unit);
-                    if (list.Any())
-                    {
-                        unit = list[UnityEngine.Random.Range(0, list.Count)];
-                        if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
-                    }
-                    break;
-                case 2:
-                    var unit2 = list[UnityEngine.Random.Range(0, list.Count)];
-                    if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
-                    else break;
-                    list.Remove(unit2);
-                    if (list.Any())
-                    {
-                        unit2 = list[UnityEngine.Random.Range(0, list.Count)];
-                        if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
-                    }
-                    break;
-                case 3:
-                    foreach (var ally in BattleObjectManager.instance.GetAliveList(owner.faction))
-                        ally?.bufListDetail?.AddKeywordBufThisRoundByEtc(KeywordBuf.DmgUp, 1, owner);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        public override bool IsImmuneBreakDmg(DamageType type)
-        {
-            return true;
-        }
-    }
-
     public class RMREffect_Crowbar : GlobalRebornEffectBase
     {
         public class CrowbarDamageBuf : BattleUnitBuf
@@ -262,26 +285,6 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordId => "RMR_Crowbar";
 
         public override string KeywordIconId => "RMR_Crowbar";
-    }
-
-    // REPLACES STILL WATER
-    public class RMREffect_ViciousGlasses : GlobalRebornEffectBase
-    {
-        public override void OnStartBattleAfter()
-        {
-            base.OnStartBattleAfter();
-            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
-            for(int i = 0; i < list.Count; i++)
-            {
-                list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 10);
-            }
-        }
-
-        public static Rarity ItemRarity = Rarity.Common;
-
-        public override string KeywordId => "RMR_ViciousGlasses";
-
-        public override string KeywordIconId => "RMR_ViciousGlasses";
     }
 
     /// <summary>

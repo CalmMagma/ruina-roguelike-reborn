@@ -310,17 +310,22 @@ namespace RogueLike_Mod_Reborn
 
         public static void ShowOverlayOverButton(this MysteryBase mystery, GlobalLogueEffectBase item, int button)
         {
-            SingletonBehavior<UIBattleOverlayManager>.Instance.EnableBufOverlay(item.GetEffectName(), item.GetEffectDesc(), item.GetSprite(), mystery.FrameObj["choice_btn" + button.ToString()]);
+            SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(item.GetEffectName(), item.GetEffectDesc() + "\n"
+                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(item.GetRarity())) + ">" + item.GetRarity().ToString() + "</color>", mystery.FrameObj["choice_btn" + button.ToString()].transform as RectTransform, item.GetRarity(), UIToolTipPanelType.OnlyContent);
         }
 
         public static void ShowOverlayOverButton(this MysteryBase mystery, PickUpModelBase item, int button)
         {
-            SingletonBehavior<UIBattleOverlayManager>.Instance.EnableBufOverlay(item.Name, item.Desc, LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[item.GetType().Assembly], item.ArtWork)) ? LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[item.GetType().Assembly], item.ArtWork)] : LogLikeMod.ArtWorks[item.ArtWork], mystery.FrameObj["choice_btn" + button.ToString()]);
+            SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(item.Name, item.Desc + "\n"
+                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(item.GetRarity())) + ">" + item.GetRarity().ToString() + "</color>", mystery.FrameObj["choice_btn" + button.ToString()].transform as RectTransform, item.GetRarity(), UIToolTipPanelType.OnlyContent);
         }
 
         public static void CloseOverlayOverButton(this MysteryBase mystery)
         {
-            SingletonBehavior<UIBattleOverlayManager>.Instance.DisableOverlay();
+            if (SingletonBehavior<UIBattleOverlayManager>.Instance.isActiveAndEnabled)
+                SingletonBehavior<UIBattleOverlayManager>.Instance.DisableOverlay();
+            if (SingletonBehavior<UIMainOverlayManager>.Instance.IsOpened())
+                SingletonBehavior<UIMainOverlayManager>.Instance.Close();
         }
     }
 
@@ -1881,6 +1886,7 @@ namespace RogueLike_Mod_Reborn
             Image image = ModdingUtils.CreateImage(this.root.transform, "RogueLikeRebornIconAlt", new Vector2(1.2f, 1.2f), new Vector2(0f, 0f));
             image.transform.localPosition = new Vector3(525f, -25f, 0f);
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a / 5);
+            image.transform.SetSiblingIndex(1);
 
             this.pageText = ModdingUtils.CreateText_TMP(this.root.transform, new Vector2(-1285f, 250f), 64, new Vector2(0f, 0f), new Vector2(1f, 1f), new Vector2(0f, 0f), TextAlignmentOptions.BottomRight, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
             this.pageText.gameObject.SetActive(true);
@@ -2060,7 +2066,7 @@ namespace RogueLike_Mod_Reborn
                     this.OnExitImage();
                 });
             }
-
+            this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
             this.gameObject.SetActive(true);
         }
 
@@ -2080,12 +2086,12 @@ namespace RogueLike_Mod_Reborn
 
         public void OnEnterImage()
         {
-            this.image.color = new Color(0f, 1f, 1f);
+            this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Highlighted);
         }
 
         public void OnExitImage()
         {
-            this.image.color = new Color(0.8f, 0.75f, 0f);
+            this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
         }
 
         public bool forward;
@@ -2117,6 +2123,7 @@ namespace RogueLike_Mod_Reborn
                 this.item = effect;
                 this.image = base.gameObject.GetComponent<Image>();
                 this.image.sprite = LogLikeMod.ArtWorks["ItemCatalogRounded"];
+                this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
                 if (effect.GetSprite() == null)
                 {
                     this.Log("effect is null");
@@ -2343,6 +2350,7 @@ namespace RogueLike_Mod_Reborn
         public static Rarity GetRarity(this PickUpModelBase item)
         {
             if (item is ShopPickUpModel && ((ShopPickUpModel)item).basepassive != null) return ((ShopPickUpModel)item).basepassive.rare;
+            else if (item.rewardinfo == null) return Rarity.Special;
             return item.rewardinfo.passiverarity;
         }
 
@@ -2550,6 +2558,13 @@ namespace RogueLike_Mod_Reborn
             __instance.tooltipDesc.text = content;
             __instance.SetTooltipOverlayBoxSize(panelType);
             __instance.SetTooltipOverlayBoxPosition(camera, rectTransform);
+            // ----
+            __instance.setter_tooltipname.enabled = false;
+            __instance.setter_tooltipname.enabled = true;
+            __instance.tooltipName.enabled = false;
+            __instance.tooltipName.enabled = true;
+            // for some reason this fixes the color glow not updating??? what the fuck??
+            // P.S.: it's also in the vanilla game!! what the actual fuck??
         }
     }
 

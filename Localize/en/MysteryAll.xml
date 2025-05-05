@@ -2,8 +2,8 @@
 <localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
              <text id="MysteryChX_1Title">Break Time</text>
              <text id="MysteryChX_1Frame0Dia0">It's break time.
-Let's go to the Stack room and rest for a while.</text>
-             <text id="MysteryChX_1Frame0Choice0Desc">Go to Stack room</text>
+Let's go to the Rest room and rest for a while.</text>
+             <text id="MysteryChX_1Frame0Choice0Desc">Go to Rest room</text>
 
              <text id="MysteryChX_2Title">Canteen</text>
              <text id="MysteryChX_2Frame0Dia0">This is a canteen inside the Library.

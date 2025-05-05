@@ -63,4 +63,23 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordId => "RMR_HarvestScythe";
 
     }
+
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_Remote : ShopPickUpRebornModel
+    {
+        public PickUpModel_RMR_Remote() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90050);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90050));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Remote());
+        }
+
+        public override string KeywordIconId => "RMR_HarvestScythe";
+
+        public override string KeywordId => "RMR_HarvestScythe";
+
+    }
 }

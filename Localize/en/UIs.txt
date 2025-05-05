@@ -38,7 +38,7 @@
   <text id="Stage_Shop_Desc">Purchase useful items using your savings.</text>
   <text id="Stage_Rest_Desc">A resting space to recover your spirits. You can restore HP of Librarians or upgrade Combat Pages.</text>
 
-  <text id="Mystery_RequireCondition">[Condition not met]</text>
+  <text id="Mystery_RequireCondition">[Locked] </text>
 
   <text id="LogueLike_PlayerName">Player</text>
 
