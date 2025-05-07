@@ -158,6 +158,18 @@ This item is removed upon using the page.</Desc>
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
   
+  <LogueEffectInfo Id="GlobalEffect_Inspiration">
+    <Name>Insanity</Name> 
+    <Desc>At the start of each Scene for the duration of this Chapter, all Librarians share one of the following effects:
+3 Strength
+3 Endurance
+3 Protection
+3 Fragile
+Immobilization</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Futures made of...”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+  
   <!-- 
     <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 

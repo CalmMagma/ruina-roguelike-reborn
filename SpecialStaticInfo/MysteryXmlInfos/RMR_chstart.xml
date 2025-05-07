@@ -6,19 +6,15 @@
       <ArtWork>RMR_SparklingMirror</ArtWork>
       <Choice ID="0">
         <Next>1</Next>
-	<Desc></Desc>
       </Choice>
       <Choice ID="1">
         <Next>1</Next>
-	<Desc></Desc>
       </Choice>
       <Choice ID="2">
         <Next>1</Next>
-	<Desc></Desc>
       </Choice>
       <Choice ID="3">
         <Next>1</Next>
-	<Desc></Desc>
       </Choice>
     </Frame>
 
