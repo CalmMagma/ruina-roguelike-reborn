@@ -1103,7 +1103,6 @@ namespace RogueLike_Mod_Reborn
     #endregion
 
     #region ITEM LOCALIZATION
-
     [HideFromItemCatalog]
     public class ShopPickUpRebornModel : ShopPickUpModel
     {
@@ -1291,6 +1290,53 @@ namespace RogueLike_Mod_Reborn
             return sprite;
         }
     }
+
+    [HideFromItemCatalog]
+    public class GlobalRebornOnceEffectBase : GlobalRebornEffectBase
+    {
+        public override void AddedNew()
+        {
+            this.stack++;
+            Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
+        }
+
+        public override bool CanDupliacte()
+        {
+            return true;
+        }
+
+        public override SaveData GetSaveData()
+        {
+            SaveData saveData = base.GetSaveData();
+            saveData.AddData("stack", this.stack);
+            return saveData;
+        }
+
+        public override void LoadFromSaveData(SaveData save)
+        {
+            base.LoadFromSaveData(save);
+            this.stack = save.GetInt("stack");
+        }
+
+        public virtual void Use()
+        {
+            this.stack--;
+            bool flag = this.stack <= 0;
+            if (flag)
+            {
+                this.Destroy();
+            }
+            Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
+        }
+
+        public override int GetStack()
+        {
+            return this.stack;
+        }
+
+        public int stack = 1;
+    }
+
     #endregion
 
     #region MYSTERY EVENT LOC.
@@ -2260,7 +2306,7 @@ namespace RogueLike_Mod_Reborn
                         + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.Pickup.GetRarity())) + ">" + this.Pickup.GetRarity().ToString() + "</color>" + "\n\n"
                         + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Pickup.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
                         base.transform as RectTransform,
-                        this.Effect.GetRarity(),
+                        this.Pickup.GetRarity(),
                         UIToolTipPanelType.OnlyContent
                     );
                 }
@@ -2397,16 +2443,20 @@ namespace RogueLike_Mod_Reborn
         {
             if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
                 return ((GlobalRebornEffectBase)item).KeywordId;
-            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
+            Debug.Log("TRYING GET KEYWORD ID OLD ITEM");
+            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
                 return loc.Id;
+            Debug.Log("TRIED GET KEYWORD ID OLD ITEM: " + loc.Name);
             return "NO_KEYWORD_GIVEN";
         }
         public static string GetItemKeywordId(this PickUpModelBase item)
         {
             if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
                 return ((PickUpRebornModel)item).KeywordId;
+            Debug.Log("TRYING GET KEYWORD ID OLD ITEM");
             if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
                 return loc.Id;
+            Debug.Log("TRIED GET KEYWORD ID OLD ITEM: " + loc.Name);
             return "NO_KEYWORD_GIVEN";
         }
 
@@ -2571,7 +2621,7 @@ namespace RogueLike_Mod_Reborn
             __instance.setter_tooltipname.underlayColor = toolColor;
             __instance.tooltipDesc.text = content;
             __instance.SetTooltipOverlayBoxSize(panelType);
-            __instance.SetTooltipOverlayBoxPosition(camera, rectTransform);
+            __instance.SetFixedTooltipOverlayBoxPosition(camera, rectTransform);
             // ----
             __instance.setter_tooltipname.enabled = false;
             __instance.setter_tooltipname.enabled = true;
@@ -2579,6 +2629,45 @@ namespace RogueLike_Mod_Reborn
             __instance.tooltipName.enabled = true;
             // for some reason this fixes the color glow not updating??? what the fuck??
             // P.S.: it's also in the vanilla game!! what the actual fuck??
+        }
+
+        public static void SetFixedTooltipOverlayBoxPosition(this UIMainOverlayManager __instance, Camera cam, RectTransform targeTranseForm)
+        {
+            RectTransform rect = __instance.tooltipCanvas.transform as RectTransform;
+            Vector3 worldPoint = targeTranseForm.TransformPoint(targeTranseForm.rect.center);
+            Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(cam, worldPoint);
+            Vector2 desiredPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, __instance.tooltipCanvas.worldCamera, out desiredPos);
+            Vector2 vector2 = new Vector2(desiredPos.x + __instance._curSize.x, desiredPos.y - __instance._curSize.y);
+            if (vector2.x > __instance._rightDownPivot.x)
+            {
+                desiredPos.x -= __instance._curSize.x + __instance.tooltipSizePivot.anchoredPosition.x * 2f;
+            }
+            if (vector2.y < __instance._rightDownPivot.y)
+            {
+                desiredPos.y += __instance._curSize.y - __instance.tooltipSizePivot.anchoredPosition.x * 2f;
+            }
+            if ((desiredPos.y - __instance._curSize.y) < -500)
+            {
+                desiredPos.y -= 500 + (desiredPos.y - __instance._curSize.y);
+            }
+            else if (desiredPos.y + __instance._curSize.y / 2 > 520)
+                desiredPos.y -= 520 - (desiredPos.y + __instance._curSize.y);
+            /*
+            IF X AXIS > 960
+            x -= size.x
+
+            IF Y AXIS < -540
+            y += size.y
+
+            IF Y AXIS - size.y IS STILL < -500
+            y -= (500 + (y - size.y))
+
+            IF Y AXIS + size.y IS STILL > 520
+            y -= (520 - (y + size.y)) 
+            */
+
+            __instance.tooltipPositionPivot.anchoredPosition = desiredPos;
         }
     }
 
