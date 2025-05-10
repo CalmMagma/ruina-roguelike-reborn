@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using Sound;
+using UnityEngine;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -14,6 +16,7 @@ namespace RogueLike_Mod_Reborn
 
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
+        private AudioClip critSfx = RMRCore.RMRMapHandler.GetAudioClip("critical.mp3");
         public override string keywordId => "RMR_CriticalStrike";
         public override string keywordIconId => "RMRBuf_CriticalStrike";
         public bool onCrit;
@@ -24,6 +27,12 @@ namespace RogueLike_Mod_Reborn
                 return RoguelikeBufs.CritChance;
             }
         }
+
+        private void OnCritEffect()
+        {
+            critSfx.PlaySound(_owner.view.transform);
+        }
+
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
             base.BeforeGiveDamage(behavior);
@@ -42,6 +51,7 @@ namespace RogueLike_Mod_Reborn
                         dmgRate = 50,
                         breakRate = 50
                     });
+                    behavior.owner.battleCardResultLog.SetPrintEffectEvent(OnCritEffect);
                     GlobalLogueEffectManager.Instance.OnCrit(_owner, target);
                 }
             }

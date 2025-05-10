@@ -1956,7 +1956,7 @@ namespace RogueLike_Mod_Reborn
                     }
                 }
                 
-                TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel)) || x.IsSubclassOf(typeof(PickUpRebornModel)) && !x.IsSubclassOf(typeof(CreaturePickUpModel))).ToArray();
+                TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => (x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel)) || x.IsSubclassOf(typeof(PickUpRebornModel))) && !x.IsSubclassOf(typeof(CreaturePickUpModel))).ToArray();
                 for (int i = 0; i < pickups.Length; i++)
                 {
                     try { 
@@ -2233,6 +2233,8 @@ namespace RogueLike_Mod_Reborn
 
         public void OnEnterImage()
         {
+            this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Highlighted);
+            this.update = true;
             if (this.isEffect)
             {
                 if (!string.IsNullOrEmpty(this.Effect.GetEffectDesc()))
@@ -2263,8 +2265,7 @@ namespace RogueLike_Mod_Reborn
                     );
                 }
             }
-            this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Highlighted);
-            this.update = true;
+            
         }
 
         public void OnExitImage()
@@ -2339,6 +2340,10 @@ namespace RogueLike_Mod_Reborn
                 {
                     return LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[item.GetType().Assembly], item.ArtWork)];
                 }
+                else if (string.IsNullOrEmpty(item.ArtWork) && item.id != null)
+                {
+                    return RewardPassivesList.Instance.GetPassiveInfo(item.id).Artwork;
+                }
                 else return LogLikeMod.ArtWorks[item.ArtWork];
             }
             catch 
@@ -2349,9 +2354,18 @@ namespace RogueLike_Mod_Reborn
 
         public static Rarity GetRarity(this PickUpModelBase item)
         {
-            if (item is ShopPickUpModel && ((ShopPickUpModel)item).basepassive != null) return ((ShopPickUpModel)item).basepassive.rare;
-            else if (item.rewardinfo == null) return Rarity.Special;
-            return item.rewardinfo.passiverarity;
+            try
+            {
+                if (item is ShopPickUpModel && ((ShopPickUpModel)item).basepassive != null)
+                    return ((ShopPickUpModel)item).basepassive.rare;
+                else if (item.rewardinfo == null)
+                    return Rarity.Special;
+                return item.rewardinfo.passiverarity;
+            }
+            catch
+            {
+                return Rarity.Special;
+            }
         }
 
         public static Rarity GetRarity(this GlobalLogueEffectBase item)
