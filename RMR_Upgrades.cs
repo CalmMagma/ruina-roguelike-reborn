@@ -7,11 +7,5 @@ using abcdcode_LOGLIKE_MOD;
 
 namespace RogueLike_Mod_Reborn
 {
-    public class UpgradeModel_RMR_StarterCard_1 : UpgradeBase
-    {
-        public UpgradeModel_RMR_StarterCard_1()
-        {
-            
-        }
-    }
+   
 }

@@ -15,6 +15,6 @@ namespace RogueLike_Mod_Reborn
             ActivateBonusAttackDice();
         }
 
-        public static string Desc = "[On Clash Lose] Recycle this die";
+        // public static string Desc = "[On Clash Lose] Recycle this die";
     }
 }

@@ -26,11 +26,6 @@ using Sound;
 using UnityEngine.SceneManagement;
 using EnumExtenderV2;
 using KeywordUtil;
-using System.Linq.Expressions;
-using MonoMod.Utils.Cil;
-using System.Threading;
-
-
 
 namespace RogueLike_Mod_Reborn
 {
@@ -101,6 +96,7 @@ namespace RogueLike_Mod_Reborn
             RogueMysteryXmlList.Instance.Init(TextDataModel.CurrentLanguage);
             SceneManager.sceneLoaded += FindGamemodes;
             CurrentGamemode = new RoguelikeGamemode_RMR_Default();
+            ModContentManager.Instance.GetErrorLogs().RemoveAll(x => x.Contains("The same assembly name already exists."));
         }
 
         // This essentially guarantees that the gamemodes are only collected far after all mods are loaded
@@ -3247,13 +3243,14 @@ namespace RogueLike_Mod_Reborn
                 ins.Add(instruction);
                 if (instruction.opcode == OpCodes.Stloc_0)
                 {
-                    instructions.AddItem(new CodeInstruction(OpCodes.Ldloc_0));
-                    instructions.AddItem(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))));
+                    ins.AddItem(new CodeInstruction(OpCodes.Ldloc_0));
+                    ins.AddItem(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))));
+                    ins.AddItem(new CodeInstruction(OpCodes.Stloc_0));
                 }
             }
             return ins;
         }
-        static void AddStarters(List<DiceCardXmlInfo> ids)
+        static List<DiceCardXmlInfo> AddStarters(List<DiceCardXmlInfo> ids)
         {
             if (RMRCore.CurrentGamemode.ReplaceBaseDeck)
             {
@@ -3261,7 +3258,8 @@ namespace RogueLike_Mod_Reborn
                 {
                     ids.Add(ItemXmlDataList.instance.GetCardItem(card, false));
                 }
-            } else ids.AddRange(new List<DiceCardXmlInfo>
+            } 
+            else ids.AddRange(new List<DiceCardXmlInfo>
             {
                 ItemXmlDataList.instance.GetCardItem(1, false),
                 ItemXmlDataList.instance.GetCardItem(2, false),
@@ -3269,6 +3267,7 @@ namespace RogueLike_Mod_Reborn
                 ItemXmlDataList.instance.GetCardItem(4, false),
                 ItemXmlDataList.instance.GetCardItem(5, false)
             });
+            return ids;
         }
 
 

@@ -20,7 +20,7 @@ namespace RogueLike_Mod_Reborn
             owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Endurance, 1, owner);
         }
 
-        public static string Desc = "[On Use] Draw 1 page and gain 1 Endurance this Scene";
+        // public static string Desc = "[On Use] Draw 1 page and gain 1 Endurance this Scene";
         public override string[] Keywords => new string[]{
         "DrawCard_Keyword", "Endurance_Keyword"
         };
@@ -42,7 +42,7 @@ namespace RogueLike_Mod_Reborn
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus { power = pow });
         }
 
-        public static string Desc = "[On Use] Dice on this page gain +1 Power for each copy of this page being used against the same target";
+        // public static string Desc = "[On Use] Dice on this page gain +1 Power for each copy of this page being used against the same target";
     }
 
     public class DiceCardSelfAbility_RMR_Gain2AhnOnKill : DiceCardSelfAbilityBase
@@ -55,7 +55,7 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public static string Desc = "[On Kill] Gain 2 Ahn";
+        // public static string Desc = "[On Kill] Gain 2 Ahn";
     }
 
     public class DiceCardSelfAbility_RMR_ShivThrow : DiceCardSelfAbilityBase
