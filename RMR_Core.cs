@@ -26,6 +26,9 @@ using Sound;
 using UnityEngine.SceneManagement;
 using EnumExtenderV2;
 using KeywordUtil;
+using System.Linq.Expressions;
+using MonoMod.Utils.Cil;
+using System.Threading;
 
 
 
@@ -2692,6 +2695,27 @@ namespace RogueLike_Mod_Reborn
     [HarmonyPatch]
     public class RMR_Patches
     {
+        #region PREFIXES
+
+        /// <summary>
+        /// Patch to replace base decks with upgraded Combat Pages
+        /// </summary>
+        [HarmonyPrefix, HarmonyPatch(typeof(LogLikeMod), "BookXmlInfo_get_DeckId")]
+        static bool ReplaceDeckWithUpgrades(ref LorId __result, Func<BookXmlInfo, LorId> orig, BookXmlInfo self)
+        {
+            if (self.id == new LorId(LogLikeMod.ModId, -854) && RMRCore.CurrentGamemode.ReplaceBaseDeck)
+            {
+                __result = RMRCore.CurrentGamemode.BaseDeckReplacement;
+            } 
+            else
+            {
+                __result = orig(self);
+            }
+            return false;
+        }
+
+        #endregion
+
         #region POSTFIXES
         // Responsible for making the Item Catalog Credenza tab activate and deactivate other panels
         [HarmonyPostfix, HarmonyPatch(typeof(UIStoryArchivesPanel), nameof(UIStoryArchivesPanel.TabControllerUpdated))]
@@ -3208,45 +3232,6 @@ namespace RogueLike_Mod_Reborn
                 }
                 else ins.Add(x);
             }
-            return ins;
-        }
-
-        /// <summary>
-        /// Patch to replace base decks with upgraded Combat Pages
-        /// </summary>
-        [HarmonyTranspiler, HarmonyPatch(typeof(BookXmlInfo), "get_DeckId")]
-        static IEnumerable<CodeInstruction> ReplaceDeckWithUpgrades(IEnumerable<CodeInstruction> instructions)
-        {
-            var ins = new List<CodeInstruction>()
-            {
-
-                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(LogLikeMod), nameof(LogLikeMod.ModId))),
-                new CodeInstruction(OpCodes.Ldc_I4, -854),
-                new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(typeof(LorId), new Type[] {typeof(string), typeof(int)})),
-                 // new LorId(LogLikeMod.ModId, -854)
-                
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(BookXmlInfo), "get_id")),
-                // this.id
-
-                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(LorId), "op_Equality", new Type[] {typeof(LorId),typeof(LorId)})),
-                // this.id == new LorId(LogLikeMod.ModId, -854)
-                
-                new CodeInstruction(OpCodes.Brfalse, 57), // index 13
-                // if (this.id == new LorId(LogLikeMod.ModId, -854) OTHERWISE SKIP THE FOLLOWING CODE
-
-                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))),
-                new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), "get_ReplaceBaseDeck")),
-                new CodeInstruction(OpCodes.Brfalse, 57), // index 13
-                // if (RMRCore.CurrentGamemode.ReplaceBaseDeck) OTHERWISE SKIP THE FOLLOWING CODE
-
-                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))),
-                new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), "get_BaseDeckReplacement")),
-                new CodeInstruction(OpCodes.Ret)
-                // return RMRCore.CurrentGamemode.BaseDeckReplacement;
-            };
-            ins.AddRange(instructions);
-           
             return ins;
         }
 
