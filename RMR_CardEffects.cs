@@ -11,6 +11,53 @@ using LOR_XML;
 
 namespace RogueLike_Mod_Reborn
 {
+    public class DiceSelfCardAbility_RMR_Starter_Evade : DiceCardSelfAbilityBase
+    {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.allyCardDetail.DrawCards(1);
+            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Endurance, 1, owner);
+        }
+
+        public static string Desc = "[On Use] Draw 1 page and gain 1 Endurance this Scene";
+        public override string[] Keywords => new string[]{
+        "DrawCard_Keyword", "Endurance_Keyword"
+        };
+    }
+    public class DiceSelfCardAbility_RMR_Starter_CoordinatedStrikes : DiceCardSelfAbilityBase
+    {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            int pow = 0;
+            foreach (var unit in BattleObjectManager.instance.GetAliveList())
+            {
+                foreach (var c in unit.cardSlotDetail.cardAry)
+                {
+                    if (c != null && c.target == card.target && c.card.GetID() == card.card.GetID())
+                        pow++;
+                }
+            }
+            card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus { power = pow });
+        }
+
+        public static string Desc = "[On Use] Dice on this page gain +1 Power for each copy of this page being used against the same target";
+    }
+
+    public class DiceCardSelfAbility_RMR_Gain2AhnOnKill : DiceCardSelfAbilityBase
+    {
+        public override void OnEndBattle()
+        {
+            if (card.target.IsDead())
+            {
+                LogueBookModels.AddMoney(2);
+            }
+        }
+
+        public static string Desc = "[On Kill] Gain 2 Ahn";
+    }
+
     public class DiceCardSelfAbility_RMR_ShivThrow : DiceCardSelfAbilityBase
     {
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)

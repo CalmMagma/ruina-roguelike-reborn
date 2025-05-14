@@ -18,7 +18,9 @@
     <Name>Hunter's Cloak</Name> 
     <Desc>The Patron Librarian draws 2 pages at the start of each Act. At the start of each Scene, add a copy of 'Shiv' to the hand of the Patron Librarian.</Desc>
     <FlavorText>&lt;color=#08CA12&gt;"Torn and worn, and yet littered with seemingly endless shivs."&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>    The disappearance of Bayard and most of his office, although uneventful, left many aspiring fixers without a home - what once was a group for the undisciplined and hopeful, now weakened and without its founder. Perhaps he was not the most charismatic or charming leader one could ask for, but he never gave up trying - even when someone better showed up.
+    <CatalogDesc>Art by BloobCake
+	
+    The disappearance of Bayard and most of his office, although uneventful, left many aspiring fixers without a home - what once was a group for the undisciplined and hopeful, now weakened and without its founder. Perhaps he was not the most charismatic or charming leader one could ask for, but he never gave up trying - even when someone better showed up.
 
     Despite the jealousness and soft resent, Bayard did not let pride take over his heart, instead cultivating the newfound stability in his office to leave an old, everlasting present. A few days after the announced disappearance and rebrand of the Office, there were reports of a known fixer from a popular office with a new attire - a dark green cloak, branded by a half-moon and spear, pridefully flying in the wind.
 
@@ -35,7 +37,7 @@
 
     Many years later the fires had almost been extinguished - a new beacon of cold lights forming itself in a distance - they thought that perhaps their embers could reach the promised cold of its inner walls, but they were left outside - fending for themselves in the ruins they were so familiar with. Eventually, through so much pressure and years of single minded thoughts - they focused, undying like the fires they descended from.
 
-    From a voice it became two, and two became many. Thoughts and words drooled and fused into single, overloaded actions - they could see, but not look. Touch, but not feel . Argue, but not speak. Such was the sentence of embers as bright as theirs - destined to become one with the reluctant fires of the Old World, forced to be deprived of themselves.
+    From a voice it became two, and two became many. Thoughts and words drooled and fused into single, overloaded actions - they could look, but not see. Touch, but not feel . Argue, but not speak. Such was the sentence of embers as bright as theirs - destined to become one with the reluctant fires of the Old World, forced to be deprived of themselves.
 
     Yet, through some mysterious means, they find themselves here - familiar and alien as before. Although forever changed, their hearts remained the same: Perhaps they could find answers in this place, or a final gust of wind to fade into the New World.</CatalogDesc>
   </LogueEffectInfo> 
@@ -44,7 +46,7 @@
     <Name>Vicious Glasses</Name>
     <Desc>At the start of the Act, give 10 Critical Strike to all allies.</Desc> 
     <FlavorText>&lt;color=#CA08A9&gt;"Glas"&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>Art by BloobCake</CatalogDesc>
   </LogueEffectInfo> 
   
 </LogueEffectXmlRoot>

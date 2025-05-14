@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BattleCardAbilityDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <BattleCardAbility ID="RMR_Starter_Evade">
+    <Desc>[On Use] Draw 1 page and gain 1 Endurance this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Starter_CoordinatedStrikes">
+    <Desc>[On Use] Dice on this page gain +1 Power for each copy of this page being used against the same target</Desc>
+  </BattleCardAbility>
+  
+   <BattleCardAbility ID="RMR_RecycleOnClashLose">
+    <Desc>[On Clash Lose] Recycle this die</Desc>
+  </BattleCardAbility>
+  
+   <BattleCardAbility ID="RMR_Gain2AhnOnKill">
+    <Desc>[On Kill] Gain 2 Ahn</Desc>
+  </BattleCardAbility>
+
+
   <BattleCardAbility ID="protection2friendLog">
     <Desc>[On Use] Give 2 Protection to all allies next Scene</Desc>
   </BattleCardAbility>

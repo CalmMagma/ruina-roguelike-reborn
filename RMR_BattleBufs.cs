@@ -51,6 +51,7 @@ namespace RogueLike_Mod_Reborn
                         dmgRate = 50,
                         breakRate = 50
                     });
+                    behavior.owner.emotionDetail.GiveEmotionCoin(EmotionCoinType.Positive);
                     behavior.owner.battleCardResultLog.SetPrintEffectEvent(OnCritEffect);
                     GlobalLogueEffectManager.Instance.OnCrit(_owner, target);
                 }

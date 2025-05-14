@@ -364,6 +364,17 @@ namespace RogueLike_Mod_Reborn
         }
 
         /// <summary>
+        /// UI convenient way of quickly giving an unit an Emotion Coin/Point.
+        /// </summary>
+        /// <param name="posType">Whether it's positive or negative.</param>
+        /// <param name="count">How many coins to give (default: 1).</param>
+        public static void GiveEmotionCoin(this BattleUnitEmotionDetail detail, EmotionCoinType posType, int count = 1)
+        {
+            detail.CreateEmotionCoin(posType, count);
+            SingletonBehavior<BattleManagerUI>.Instance.ui_battleEmotionCoinUI.OnAcquireCoin(detail._self, posType, count);
+        }
+
+        /// <summary>
         /// Set <u><see cref="BattleUnitView.deadEvent"/></u> to this in order to make an unit explode on death.
         /// </summary>
         public static void ExplodeOnDeath(BattleUnitView view)
@@ -1776,6 +1787,20 @@ namespace RogueLike_Mod_Reborn
         /// Defaults to <b>this assembly's</b> current packageId. Do not ask how that is done. It simply is.
         /// </summary>
         public virtual string GetContentScopePackageId => RMRCore.ClassIds[this.GetType().Assembly];
+
+        /// <summary>
+        /// Determines whether to override the base deck or not.<br></br>
+        /// (Evade, Charge and Cover, Focused Strikes, etc.)<br></br>
+        /// Defaults to <see cref="false"/>. The replacement deck is set by <see cref="BaseDeckReplacement"/>.
+        /// </summary>
+        public virtual bool ReplaceBaseDeck => false;
+
+        /// <summary>
+        /// If <see cref="ReplaceBaseDeck"/> is set to <see langword="true"/>, <br></br>
+        /// this points to the <see cref="LorId"/> of the deck you are replacing the base deck with. <br></br>
+        /// Defaults to RMR's upgraded deck.
+        /// </summary>
+        public virtual LorId BaseDeckReplacement => new LorId(RMRCore.packageId, -10);
     }
 
     public class RoguelikeGamemode_RMR_Default : RoguelikeGamemodeBase
@@ -1850,6 +1875,8 @@ namespace RogueLike_Mod_Reborn
             Singleton<MysteryManager>.Instance.StartMystery(Singleton<MysteryXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -100)));
         }
 
+        public override bool ReplaceBaseDeck => true;
+        public override LorId BaseDeckReplacement => new LorId(RMRCore.packageId, -10);
         public override string GetContentScopePackageId => RMRCore.packageId;
     }
 
@@ -2426,7 +2453,7 @@ namespace RogueLike_Mod_Reborn
         {
             if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
                 return ((GlobalRebornEffectBase)item).GetCredenzaEntry();
-            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
+            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
                 return loc.CatalogDesc;
             return item.GetEffectDesc();
         }
@@ -2434,7 +2461,7 @@ namespace RogueLike_Mod_Reborn
         {
             if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
                 return ((PickUpRebornModel)item).GetCredenzaEntry();
-            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
+            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
                 return loc.CatalogDesc;
             return item.Desc;
         }
@@ -2443,20 +2470,16 @@ namespace RogueLike_Mod_Reborn
         {
             if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
                 return ((GlobalRebornEffectBase)item).KeywordId;
-            Debug.Log("TRYING GET KEYWORD ID OLD ITEM");
-            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
+            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
                 return loc.Id;
-            Debug.Log("TRIED GET KEYWORD ID OLD ITEM: " + loc.Name);
             return "NO_KEYWORD_GIVEN";
         }
         public static string GetItemKeywordId(this PickUpModelBase item)
         {
             if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
                 return ((PickUpRebornModel)item).KeywordId;
-            Debug.Log("TRYING GET KEYWORD ID OLD ITEM");
-            if (LogueEffectXmlList.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
+            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
                 return loc.Id;
-            Debug.Log("TRIED GET KEYWORD ID OLD ITEM: " + loc.Name);
             return "NO_KEYWORD_GIVEN";
         }
 
@@ -2653,19 +2676,8 @@ namespace RogueLike_Mod_Reborn
             }
             else if (desiredPos.y + __instance._curSize.y / 2 > 520)
                 desiredPos.y -= 520 - (desiredPos.y + __instance._curSize.y);
-            /*
-            IF X AXIS > 960
-            x -= size.x
-
-            IF Y AXIS < -540
-            y += size.y
-
-            IF Y AXIS - size.y IS STILL < -500
-            y -= (500 + (y - size.y))
-
-            IF Y AXIS + size.y IS STILL > 520
-            y -= (520 - (y + size.y)) 
-            */
+            else if (desiredPos.y > 520f)
+                desiredPos.y = 520f;
 
             __instance.tooltipPositionPivot.anchoredPosition = desiredPos;
         }
@@ -3110,8 +3122,10 @@ namespace RogueLike_Mod_Reborn
                 Debug.Log("NEW RUN! " + RMRCore.CurrentGamemode.SaveDataString);
             }
             else
+            {
                 orig(self);
-            Debug.Log("REGULAR RECEPTION!");
+                Debug.Log("REGULAR RECEPTION!");
+            }
         }
     
 
@@ -3196,6 +3210,82 @@ namespace RogueLike_Mod_Reborn
             }
             return ins;
         }
+
+        /// <summary>
+        /// Patch to replace base decks with upgraded Combat Pages
+        /// </summary>
+        [HarmonyTranspiler, HarmonyPatch(typeof(BookXmlInfo), "get_DeckId")]
+        static IEnumerable<CodeInstruction> ReplaceDeckWithUpgrades(IEnumerable<CodeInstruction> instructions)
+        {
+            var ins = new List<CodeInstruction>()
+            {
+
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(LogLikeMod), nameof(LogLikeMod.ModId))),
+                new CodeInstruction(OpCodes.Ldc_I4, -854),
+                new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(typeof(LorId), new Type[] {typeof(string), typeof(int)})),
+                 // new LorId(LogLikeMod.ModId, -854)
+                
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(BookXmlInfo), "get_id")),
+                // this.id
+
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(LorId), "op_Equality", new Type[] {typeof(LorId),typeof(LorId)})),
+                // this.id == new LorId(LogLikeMod.ModId, -854)
+                
+                new CodeInstruction(OpCodes.Brfalse, 57), // index 13
+                // if (this.id == new LorId(LogLikeMod.ModId, -854) OTHERWISE SKIP THE FOLLOWING CODE
+
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))),
+                new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), "get_ReplaceBaseDeck")),
+                new CodeInstruction(OpCodes.Brfalse, 57), // index 13
+                // if (RMRCore.CurrentGamemode.ReplaceBaseDeck) OTHERWISE SKIP THE FOLLOWING CODE
+
+                new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(RMRCore), nameof(RMRCore.CurrentGamemode))),
+                new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(RoguelikeGamemodeBase), "get_BaseDeckReplacement")),
+                new CodeInstruction(OpCodes.Ret)
+                // return RMRCore.CurrentGamemode.BaseDeckReplacement;
+            };
+            ins.AddRange(instructions);
+           
+            return ins;
+        }
+
+        /// <summary>
+        /// Patch to add base deck cards onto the LogueBookModels card list
+        /// </summary>
+        [HarmonyTranspiler, HarmonyPatch(typeof(LogueBookModels), nameof(LogueBookModels.GetCardListForInven))]
+        static IEnumerable<CodeInstruction> AddStartersIntoInv(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> ins = new List<CodeInstruction>();
+            foreach (var instruction in instructions)
+            {
+                ins.Add(instruction);
+                if (instruction.opcode == OpCodes.Stloc_0)
+                {
+                    instructions.AddItem(new CodeInstruction(OpCodes.Ldloc_0));
+                    instructions.AddItem(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))));
+                }
+            }
+            return ins;
+        }
+        static void AddStarters(List<DiceCardXmlInfo> ids)
+        {
+            if (RMRCore.CurrentGamemode.ReplaceBaseDeck)
+            {
+                foreach (var card in DeckXmlList.Instance.GetData(RMRCore.CurrentGamemode.BaseDeckReplacement).cardIdList)
+                {
+                    ids.Add(ItemXmlDataList.instance.GetCardItem(card, false));
+                }
+            } else ids.AddRange(new List<DiceCardXmlInfo>
+            {
+                ItemXmlDataList.instance.GetCardItem(1, false),
+                ItemXmlDataList.instance.GetCardItem(2, false),
+                ItemXmlDataList.instance.GetCardItem(3, false),
+                ItemXmlDataList.instance.GetCardItem(4, false),
+                ItemXmlDataList.instance.GetCardItem(5, false)
+            });
+        }
+
 
         #endregion
 

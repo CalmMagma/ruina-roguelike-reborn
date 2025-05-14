@@ -192,7 +192,6 @@ namespace RogueLike_Mod_Reborn
                     powerUp++; // if card is the same, add power
                 }
             }
-            powerUp--; // remove 1 power 'cause one of the cards is the one we played
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
             {
                 power = powerUp
