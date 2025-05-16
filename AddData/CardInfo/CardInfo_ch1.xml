@@ -174,9 +174,9 @@
   <Card ID="101001">
     <Name>내장담기</Name>
     <Artwork>Rats4</Artwork>
-    <Rarity>Rare</Rarity>
+    <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3" />
-    <Script />
+    <Script>RMR_GutHarvesting</Scrip>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Rats_J" Script="bleeding1atk" Desc="[적중] 출혈 1 부여" />
@@ -234,7 +234,7 @@
     <Artwork>Rats5</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_BackstreetsDash</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="8" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Rats_Z" Script="bleeding1atk" Desc="[적중] 출혈 1 부여" />
@@ -247,7 +247,7 @@
     <Artwork>Rats6</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_SkitterAway</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
@@ -260,7 +260,7 @@
   <Card ID="102001">
     <Name>진두지휘</Name>
     <Artwork>Yun2</Artwork>
-    <Rarity>Rare</Rarity>
+    <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3" />
     <Script>protection1friend</Script>
     <ScriptDesc>[사용시] 모든 아군에게 보호 1 부여</ScriptDesc>
@@ -309,8 +309,8 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="2" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="Basic_G" Script="downgradeNext1pw" Desc="[합 승리] 대상의 다음 주사위 약화" />
-      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Slash" Motion="H" EffectRes="Yun_H" Script="" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="Basic_G" Script="RMR_Add2PowerAllpw" Desc="" />
+      <Behaviour Min="3" Dice="4" Type="Atk" Detail="Slash" Motion="H" EffectRes="Yun_H" Script="" Desc="" />
       <Behaviour Min="2" Dice="3" Type="Atk" Detail="Slash" Motion="H" EffectRes="Yun_H" Script="" Desc="" />
     </BehaviourList>
     <Chapter>1</Chapter>
@@ -353,7 +353,7 @@
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Iron_Boom_Z" Script="paralysis1atk" Desc="[적중] 마비 1 부여" />
-      <Behaviour Min="2" Dice="5" Type="Atk" Detail="Hit" Motion="Z" EffectRes="Iron_Boom" Script="" Desc="" />
+      <Behaviour Min="2" Dice="5" Type="Atk" Detail="Hit" Motion="Z" EffectRes="Iron_Boom" Script="paralysis1atk" Desc="[적중] 마비 1 부여" />
     </BehaviourList>
     <Chapter>1</Chapter>
     <Priority>0</Priority>
@@ -363,7 +363,7 @@
     <Artwork>Iron2</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="3" />
-    <Script />
+    <Script>RMR_YouOnlyLiveOnce</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="12" Type="Atk" Detail="Hit" Motion="J" EffectRes="Iron_One" Script="paralysis2atk" Desc="[적중] 마비 2 부여" />
@@ -374,9 +374,10 @@
   <Card ID="103003">
     <Name>추충전</Name>
     <Artwork>Iron4</Artwork>
-    <Rarity>Rare</Rarity>
+    <Rarity>Unique</Rarity>
+	<Option>ExhaustOnUse</Option>
     <Spec Range="Near" Cost="0" />
-    <Script>energy1paralysis1</Script>
+    <Script>RMR_Chargeup</Script>
     <ScriptDesc>[사용시] 빛 1 회복. 마비 1를 받음</ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="3" Type="Atk" Detail="Hit" Motion="Z" EffectRes="Iron_Z" Script="" Desc="" />
@@ -417,8 +418,8 @@
     <Name>저절단</Name>
     <Artwork>Iron3</Artwork>
     <Rarity>Common</Rarity>
-    <Spec Range="Near" Cost="2" />
-    <Script />
+    <Spec Range="Near" Cost="1" />
+    <Script>RMR_ChopItOff</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="2" Dice="3" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Iron_Cut_Z" Script="" Desc="" />
@@ -447,7 +448,7 @@
     <Artwork>Hook6</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_GoinFirst</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="7" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
@@ -465,7 +466,7 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="H" EffectRes="Hook_H" Script="downgradeNext1pw" Desc="[합 승리] 상대의 다음 주사위 하나 약화" />
+      <Behaviour Min="4" Dice="5" Type="Atk" Detail="Hit" Motion="H" EffectRes="Hook_H" Script="downgradeNext1pw" Desc="[합 승리] 상대의 다음 주사위 하나 약화" />
       <Behaviour Min="3" Dice="4" Type="Atk" Detail="Penetrate" Motion="J" EffectRes="Hook_J" Script="bleeding2atk" Desc="[적중] 출혈 2 부여" />
     </BehaviourList>
     <Chapter>1</Chapter>
@@ -491,10 +492,10 @@
     <Artwork>Hook3</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script>recoverHp1</Script>
+    <Script>RMR_Track</Script>
     <ScriptDesc>[사용시] 체력 1 회복</ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="1" Dice="4" Type="Atk" Detail="Slash" Motion="H" EffectRes="Hook_H" Script="" Desc="" />
+      <Behaviour Min="1" Dice="4" Type="Atk" Detail="Slash" Motion="H" EffectRes="Hook_H" Script="RMR_Recover2HPSRatk" Desc="" />
     </BehaviourList>
     <Chapter>1</Chapter>
     <Priority>0</Priority>

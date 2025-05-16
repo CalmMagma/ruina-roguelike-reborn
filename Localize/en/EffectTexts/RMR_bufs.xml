@@ -11,6 +11,26 @@
 	  <Name>Critical Strike X</Name>
 	  <Desc>Attacks have X% chance to deal +50% damage and stagger damage.</Desc>
 	</BattleEffectText>
+	
+	<BattleEffectText ID="RMR_Shield">
+      <Name>Shield</Name>
+      <Desc>Prevent the next {0} damage taken for the Scene.</Desc>
+    </BattleEffectText>
 
+    <BattleEffectText ID="RMR_Shield_Keyword">
+      <Name>Shield X</Name>
+      <Desc>Prevent the next X damage taken for the Scene.</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_StaggerShield">
+      <Name>Stagger Shield</Name>
+      <Desc>Prevent the next {0} Stagger damage taken for the Scene.</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_StaggerShield_Keyword">
+      <Name>Stagger Shield X</Name>
+      <Desc>Prevent the next X Stagger damage taken for the Scene.</Desc>
+    </BattleEffectText>
+	
 	</effectTextList>
 </BattleEffectTextRoot>

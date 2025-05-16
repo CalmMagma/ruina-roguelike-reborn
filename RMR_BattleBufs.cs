@@ -12,8 +12,85 @@ namespace RogueLike_Mod_Reborn
     public static class RoguelikeBufs
     {
         public static KeywordBuf CritChance;
+        public static KeywordBuf RMRShield;
+        public static KeywordBuf RMRStaggerShield;
     }
 
+    public class BattleUnitBuf_RMR_Shield : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.RMRShield;
+            }
+        }
+        public override string keywordId => "RMR_Shield";
+        public override string keywordIconId => "RMRBuf_Shield";
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+        public override float DmgFactor(int dmg, DamageType type = DamageType.ETC, KeywordBuf keyword = KeywordBuf.None)
+        {
+            if (!this._owner.IsImmune(this.bufType) && !base.IsDestroyed())
+            {
+                if (dmg > this.stack)
+                {
+                    float num = (float)this.stack;
+                    this.Destroy();
+                    return ((float)dmg - num) / (float)dmg;
+                }
+                if (this.stack >= dmg)
+                {
+                    this.stack -= dmg;
+                    return 0f;
+                }
+            }
+            return base.DmgFactor(dmg, type, keyword);
+        }
+
+        public override void OnRoundEndTheLast()
+        {
+            base.OnRoundEndTheLast();
+            this.Destroy();
+        }
+    }
+
+    public class BattleUnitBuf_RMR_StaggerShield : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.RMRStaggerShield;
+            }
+        }
+        public override string keywordId => "RMR_StaggerShield";
+        public override string keywordIconId => "RMRBuf_StaggerShield";
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+        public override float BreakDmgFactor(int dmg, DamageType type = DamageType.ETC, KeywordBuf keyword = KeywordBuf.None)
+        {
+            if (!this._owner.IsImmune(this.bufType) && !base.IsDestroyed())
+            {
+                if (dmg > this.stack)
+                {
+                    float num = (float)this.stack;
+                    this.Destroy();
+                    return ((float)dmg - num) / (float)dmg;
+                }
+                if (this.stack >= dmg)
+                {
+                    this.stack -= dmg;
+                    return 0f;
+                }
+            }
+            return base.BreakDmgFactor(dmg, type, keyword);
+        }
+
+        public override void OnRoundEndTheLast()
+        {
+            base.OnRoundEndTheLast();
+            this.Destroy();
+        }
+    }
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
         private AudioClip critSfx = RMRCore.RMRMapHandler.GetAudioClip("critical.mp3");

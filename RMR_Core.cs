@@ -26,6 +26,7 @@ using Sound;
 using UnityEngine.SceneManagement;
 using EnumExtenderV2;
 using KeywordUtil;
+using Unity.Mathematics;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -273,6 +274,10 @@ namespace RogueLike_Mod_Reborn
         {
             if (AddNewKeywordBufToList("CalmMagma_RMR_CritChance", ref RoguelikeBufs.CritChance))
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_CritChance>();
+            if (AddNewKeywordBufToList("Lux_RMR_Shield", ref RoguelikeBufs.RMRShield))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_Shield>();
+            if (AddNewKeywordBufToList("Lux_RMR_StaggerShield", ref RoguelikeBufs.RMRStaggerShield))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_StaggerShield>();
         }
 
         #region literally do not use this ever
@@ -544,6 +549,137 @@ namespace RogueLike_Mod_Reborn
         /*
         
         */
+
+        public static bool CanIRedirectPls(BattlePlayingCardDataInUnitModel card, BattleUnitModel owner)
+        {
+            if (card.cardAbility != null && !card.cardAbility.IsTargetChangable(owner))
+            {
+                return false;
+            }
+            if (card.card.GetSpec().Ranged == CardRange.FarArea || card.card.GetSpec().Ranged == CardRange.FarAreaEach)
+            {
+                return false;
+            }
+            if (card.card.GetSpec().affection == CardAffection.TeamNear || card.card.GetSpec().affection == CardAffection.All)
+            {
+                return false;
+            }
+            return true;
+        }
+        public static void AddMaxLight(this BattleUnitCostUI costUI, int light)
+        {
+            costUI.fixedMaxcost += light;
+            for (int i = 0; i < light; i++)
+            {
+                var item = new BattleUnitCostUI.CostBattleUIImage(UnityEngine.Object.Instantiate(costUI.prefab_cost, costUI.lowerLine));
+                costUI.costLists.Add(item);
+                item.parent.SetActive(false);
+            }
+        }
+
+        public static void DeselectShitButActuallyWorks(BattleUnitModel owner)
+        {
+            int cardorder = owner.view.model.cardOrder;
+            for (int i = 0; i < owner.cardSlotDetail.cardAry.Count; i++)
+            {
+                if (owner.cardSlotDetail.cardAry[i] != null)
+                {
+                    owner.view.model.cardOrder = i;
+                    owner.view.speedDiceSetterUI._speedDices[i].DeselectCard();
+                    owner.view.speedDiceSetterUI._speedDices[i].HideDicePreview(false);
+                }
+
+            }
+            owner.view.model.cardOrder = cardorder;
+        }
+
+        public static void AddSpeedImmediately(this BattleUnitModel unit, int order, int speed, BattleUnitModel actor = null)
+        {
+            if (order < 0 || order >= unit.speedDiceResult.Count) return;
+            int changeValue = speed;
+            if (unit.speedDiceResult != null)
+            {
+                var speedDie = unit.speedDiceResult[order];
+                speedDie.value = AddSpeedWithCheck(speedDie.value, changeValue);
+
+                if (unit.view?.speedDiceSetterUI != null)
+                {
+                    List<(bool breaked, bool locked, bool blockedForcely)> diceStates = new List<(bool, bool, bool)>();
+                    foreach (var speedDieUi in unit.view.speedDiceSetterUI._speedDices)
+                    {
+                        diceStates.Add((speedDieUi._bBreakedDice, speedDieUi._lockDiceRoot.activeSelf, speedDieUi.anim_BlockSelectDice.GetBool("isSelected")));
+                    }
+                    unit.view.speedDiceSetterUI.SetSpeedDicesBeforeRoll(unit.speedDiceResult, unit.faction);
+                    unit.view.speedDiceSetterUI.SetSpeedDicesAfterRoll(unit.speedDiceResult);
+                    int i = 0;
+                    foreach (var speedDieUi in unit.view.speedDiceSetterUI._speedDices)
+                    {
+                        if (i < diceStates.Count)
+                        {
+                            speedDieUi.BreakDice(diceStates[i].breaked, diceStates[i].locked);
+                            speedDieUi.BlockDice(diceStates[i].blockedForcely, diceStates[i].blockedForcely);
+                            i++;
+                        }
+                    }
+                }
+            }
+            var card = unit.cardSlotDetail.cardAry[order];
+            if (card != null)
+            {
+                card.speedDiceResultValue = AddSpeedWithCheck(card.speedDiceResultValue, changeValue);
+            }
+
+
+
+            int AddSpeedWithCheck(int origin, int adder)
+            {
+                return math.clamp(origin + adder, Math.Min(origin, 1), Math.Max(origin, 999));
+            }
+        }
+
+        public static void AddSpeedBufImmediatelyAll(this BattleUnitModel unit, int stack, BattleUnitModel actor = null)
+        {
+            int changeValue = stack;
+            if (unit.speedDiceResult != null)
+            {
+                foreach (var speedDie in unit.speedDiceResult)
+                {
+                    speedDie.value = AddSpeedWithCheck(speedDie.value, changeValue);
+                }
+                if (unit.view?.speedDiceSetterUI != null)
+                {
+                    List<(bool breaked, bool locked, bool blockedForcely)> diceStates = new List<(bool, bool, bool)>();
+                    foreach (var speedDieUi in unit.view.speedDiceSetterUI._speedDices)
+                    {
+                        diceStates.Add((speedDieUi._bBreakedDice, speedDieUi._lockDiceRoot.activeSelf, speedDieUi.anim_BlockSelectDice.GetBool("isSelected")));
+                    }
+                    unit.view.speedDiceSetterUI.SetSpeedDicesBeforeRoll(unit.speedDiceResult, unit.faction);
+                    unit.view.speedDiceSetterUI.SetSpeedDicesAfterRoll(unit.speedDiceResult);
+                    int i = 0;
+                    foreach (var speedDieUi in unit.view.speedDiceSetterUI._speedDices)
+                    {
+                        if (i < diceStates.Count)
+                        {
+                            speedDieUi.BreakDice(diceStates[i].breaked, diceStates[i].locked);
+                            speedDieUi.BlockDice(diceStates[i].blockedForcely, diceStates[i].blockedForcely);
+                            i++;
+                        }
+                    }
+                }
+            }
+            foreach (var card in unit.cardSlotDetail.cardAry)
+            {
+                if (card != null)
+                {
+                    card.speedDiceResultValue = AddSpeedWithCheck(card.speedDiceResultValue, changeValue);
+                }
+            }
+
+            int AddSpeedWithCheck(int origin, int adder)
+            {
+                return math.clamp(origin + adder, Math.Min(origin, 1), Math.Max(origin, 999));
+            }
+        }
     }
 
     [Serializable]
