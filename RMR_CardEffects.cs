@@ -102,4 +102,10 @@ namespace RogueLike_Mod_Reborn
             
         }
     }
+
+    public class DiceCardSelfAbility_lux_test : DiceCardSelfAbilityBase
+    {
+
+        // this is a dummy ability to test branch
+    }
 }
