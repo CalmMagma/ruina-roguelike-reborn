@@ -3234,24 +3234,43 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Patch to add base deck cards onto the LogueBookModels card list
         /// </summary>
-        [HarmonyTranspiler, HarmonyPatch(typeof(LogueBookModels), nameof(LogueBookModels.GetCardListForInven))]
+        [HarmonyTranspiler, HarmonyPatch(typeof(LogueBookModels), nameof(LogueBookModels.GetCardList))]
         static IEnumerable<CodeInstruction> AddStartersIntoInv(IEnumerable<CodeInstruction> instructions)
         {
+            bool addedonce = false;
             List<CodeInstruction> ins = new List<CodeInstruction>();
             foreach (var instruction in instructions)
             {
                 ins.Add(instruction);
-                if (instruction.opcode == OpCodes.Stloc_0)
+                if (instruction.opcode == OpCodes.Stloc_2 && !addedonce)
                 {
-                    ins.AddItem(new CodeInstruction(OpCodes.Ldloc_0));
                     ins.AddItem(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))));
-                    ins.AddItem(new CodeInstruction(OpCodes.Stloc_0));
+                    ins.AddItem(new CodeInstruction(OpCodes.Stloc_2));
+                    addedonce = true;
                 }
             }
             return ins;
         }
-        static List<DiceCardXmlInfo> AddStarters(List<DiceCardXmlInfo> ids)
+        [HarmonyTranspiler, HarmonyPatch(typeof(LogueBookModels), nameof(LogueBookModels.GetCardListForInven))]
+        static IEnumerable<CodeInstruction> AddStartersIntoInvUI(IEnumerable<CodeInstruction> instructions)
         {
+            bool addedonce = false;
+            List<CodeInstruction> ins = new List<CodeInstruction>();
+            foreach (var instruction in instructions)
+            {
+                ins.Add(instruction);
+                if (instruction.opcode == OpCodes.Stloc_0 && !addedonce)
+                {
+                    ins.AddItem(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))));
+                    ins.AddItem(new CodeInstruction(OpCodes.Stloc_0));
+                    addedonce = true;
+                }
+            }
+            return ins;
+        }
+        static List<DiceCardXmlInfo> AddStarters()
+        {
+            var ids = new List<DiceCardXmlInfo>();
             if (RMRCore.CurrentGamemode.ReplaceBaseDeck)
             {
                 foreach (var card in DeckXmlList.Instance.GetData(RMRCore.CurrentGamemode.BaseDeckReplacement).cardIdList)
