@@ -550,6 +550,11 @@ namespace RogueLike_Mod_Reborn
         
         */
 
+        /// <summary>
+        /// Quick method to simply check if a card can redirect another.
+        /// </summary>
+        /// <param name="card">The card to redirect.</param>
+        /// <param name="owner">The owner of the card.</param>
         public static bool CanIRedirectPls(BattlePlayingCardDataInUnitModel card, BattleUnitModel owner)
         {
             if (card.cardAbility != null && !card.cardAbility.IsTargetChangable(owner))
@@ -566,6 +571,7 @@ namespace RogueLike_Mod_Reborn
             }
             return true;
         }
+        
         public static void AddMaxLight(this BattleUnitCostUI costUI, int light)
         {
             costUI.fixedMaxcost += light;
@@ -593,7 +599,12 @@ namespace RogueLike_Mod_Reborn
             owner.view.model.cardOrder = cardorder;
         }
 
-        public static void AddSpeedImmediately(this BattleUnitModel unit, int order, int speed, BattleUnitModel actor = null)
+        /// <summary>
+        /// Adds speed to a single Speed Die during the card selection phase.
+        /// </summary>
+        /// <param name="order">Which die to increase the speed of.</param>
+        /// <param name="speed">How much speed to increment.</param>
+        public static void AddSpeedImmediately(this BattleUnitModel unit, int order, int speed)
         {
             if (order < 0 || order >= unit.speedDiceResult.Count) return;
             int changeValue = speed;
@@ -637,7 +648,11 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public static void AddSpeedBufImmediatelyAll(this BattleUnitModel unit, int stack, BattleUnitModel actor = null)
+        /// <summary>
+        /// Adds speed to all Speed Die of an unit during the card selection phase.
+        /// </summary>
+        /// <param name="stack">How much speed to increment.</param>
+        public static void AddSpeedBufImmediatelyAll(this BattleUnitModel unit, int stack)
         {
             int changeValue = stack;
             if (unit.speedDiceResult != null)
