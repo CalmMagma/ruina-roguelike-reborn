@@ -57,7 +57,6 @@
     <BattleCardDesc ID="202002">
       <LocalizedName>Prepared Mind</LocalizedName>
       <Ability />
-      <Behaviour ID="0">[On Clash Win] Gain 1 Endurance next Scene</Behaviour>
     </BattleCardDesc>
     <BattleCardDesc ID="202003">
       <LocalizedName>Set Fire</LocalizedName>

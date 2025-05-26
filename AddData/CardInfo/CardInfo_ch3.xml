@@ -93,7 +93,7 @@
     <Script>endurance2</Script>
     <ScriptDesc>[사용시] 인내 2를 얻음</ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="1" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch3_E" Script="" Desc="" />
+      <Behaviour Min="1" Dice="8" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch3_E" Script="" Desc="" />
       <Behaviour Min="1" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Street_San_J" Script="" Desc="" />
       <Behaviour Min="1" Dice="4" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Street_San_Z" Script="" Desc="" />
     </BehaviourList>

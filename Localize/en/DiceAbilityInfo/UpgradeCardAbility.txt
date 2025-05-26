@@ -16,6 +16,172 @@
    <BattleCardAbility ID="RMR_Gain2AhnOnKill">
     <Desc>[On Kill] Gain 2 Ahn</Desc>
   </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Track">
+    <Desc>[On Use] Recover 4 HP</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_TrackUpgrade">
+    <Desc>[Combat Start] All Offensive dice the user plays this Scene gain ‘[On Hit] Recover 1 HP’
+[On Use] Recover 4 HP</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Recover2HPSRatk">
+    <Desc>[On Hit] Recover 2 HP and Stagger Resist</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Chargeup">
+    <Desc>[On Use] At the start of each Scene, restore 1 Light and inflict 1 Paralysis on self for the rest of the Act</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_ChargeupUpgrade">
+    <Desc>[Single-use]
+[On Use] Draw 1 page; at the start of each Scene, restore 1 Light and inflict 1 Paralysis on self for the rest of the Act</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_BackstreetsDash">
+    <Desc>[Start of Clash] Reduce Stagger damage of all target’s dice by 5</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_BackstreetsDashDie">
+    <Desc>[On Clash Win] Deal additional Stagger damage equal to target’s die value</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_SkitterAway">
+    <Desc>[On Play] This Speed die has [Speed +3]</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_SkitterAwayUpgrade">
+    <Desc>[On Play] This Speed die has [Speed +5]</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_EndureUpgrade">
+    <Desc>[On Use] Gain 1 Protection and Stagger Protection this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_DriedupUpgrade">
+    <Desc>[On Use] Gain 2 Strength and Haste next Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Add2PowerAllpw">
+    <Desc>[On Clash Win] Add +2 Power to all dice on this page</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_ChopItOff">
+    <Desc>Dice on this page gain Power equal to target’s Paralysis (Max. 3)</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_GoinFirst">
+    <Desc>[On Use] If this page is user’s first played Combat Page this Scene, boost min value of all dice on this page by +2</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_StruggleUpgrade">
+    <Desc>[On Use] Gain 2 Protection this Scene and next Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_YouOnlyLiveOnce">
+    <Desc>[Start of Clash] Dice on this page and opponent's page deal 50% more damage and Stagger damage</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_GutHarvesting">
+    <Desc>[On Kill] Gain 4 Ahn</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_GutHarvestingUpgrade">
+    <Desc> [On Kill] Gain Ahn depending on target’s Key page rarity (4/7/10/15)</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_GatherIntelUpgrade">
+    <Desc>[On Use] Draw all copies of a page of highest rarity in deck</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_whythefuckistherenoendurance1atk">
+    <Desc>[On Hit] Gain 1 Endurance next Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_whythefuckistherenobleeding1pw">
+    <Desc>[On Clash Win] Inflict 1 Bleed next Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Appetite">
+    <Desc>[On Hit] Recover HP equal to target’s Bleed (Max. 15)</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_QuickAttack">
+    <Desc>[On Use] Gain 2 Haste next Scene; if Speed is higher than the target's, all dice on this page gain +2 Power</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_bleed2atkcard">
+    <Desc>[On Hit] Inflict 2 Bleed next Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_PreparedMindLulu">
+    <Desc>[Combat Start] When inflicting Burn using Combat Pages this Scene, inflict 1 additional stack</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_PreparedMindLuluUpgrade">
+    <Desc>[Combat Start] When inflicting Burn using Combat Pages this Scene, inflict 1 additional stack and gain 1 Endurance this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_CrueltyDie">
+    <Desc>[On Hit] Recover HP and Stagger Resist equal to target’s Bleed (Max. 30)</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_CrueltyUpgradeDie">
+    <Desc>[On Hit] Recover HP and Stagger Resist equal to 2x the target’s Bleed (Max. 40)</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Endurance1start">
+    <Desc>[Combat Start] Gain 1 Endurance this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Endurance2start">
+    <Desc>[Combat Start] Gain 2 Endurance this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Multiblock">
+    <Desc>[Combat Start] Gain 3 Protection, Stagger Protection and 5 Shield this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_MultiblockUpgrade">
+    <Desc>[Combat Start] Gain 4 Protection, Stagger Protection and 10 Shield this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_FleetFootsteps">
+    <Desc>[On Play] This Speed die has [Speed +2]</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Deflect">
+    <Desc>[On Clash Win] Reduce Power of opponent's next die by 1</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_IngredientHunt">
+    <Desc>[On Use] Dice on this page gain +1 Power if target has Bleed</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_SetFireUpgradeDie">
+    <Desc>[On Hit] Inflict 5 Burn; Deal 3 damage to self</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Multihit">
+    <Desc>[On Use] All dice of this page gain ‘[On Hit] Recycle this die at a 33% chance (Up to 1 time)’</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Multihitdie">
+    <Desc>[On Hit] Recycle this die at a 33% chance (Up to 1 time)</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_break3atkcard">
+    <Desc>[On Hit] Deal 3 Stagger damage</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_NonstopAssault">
+    <Desc>[On Use] At the start of the next Scene, draw all copies of 'Nonstop Assault' from the deck</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_NonstopAssaultUpgrade">
+    <Desc>[On Use] Restore 1 Light; at the start of the next Scene, draw all copies of 'Nonstop Assault' from the deck</Desc>
+  </BattleCardAbility>
 
 
   <BattleCardAbility ID="protection2friendLog">

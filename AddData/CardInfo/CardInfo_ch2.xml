@@ -6,10 +6,10 @@
     <Artwork>ch2_1</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script />
+    <Script>RMR_break3atkcard</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="1" Dice="5" Type="Atk" Detail="Hit" Motion="Z" EffectRes="ch2_Z" Script="" Desc="" />
+      <Behaviour Min="1" Dice="5" Type="Atk" Detail="Hit" Motion="Z" EffectRes="ch2_Z" Script="RMR_RecycleOnClashLose" Desc="" />
     </BehaviourList>
     <Chapter>2</Chapter>
     <Priority>0</Priority>
@@ -19,12 +19,9 @@
     <Artwork>ch2_2</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_Multiblock</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="1" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="" Desc="" />
-      <Behaviour Min="3" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="" Desc="" />
-			<Behaviour Min="1" Dice="4" Type="Atk" Detail="Hit" Motion="J" EffectRes="ch2_J" Script="" Desc="" />
     </BehaviourList>
     <Chapter>2</Chapter>
     <Priority>0</Priority>
@@ -34,7 +31,7 @@
     <Artwork>ch2_3</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_Multihit</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="ch2_Z" Script="upgradeNext1pw" Desc="[합 승리] 자신의 다음 주사위 강화" />
@@ -49,7 +46,7 @@
     <Artwork>ch2_4</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>quickness2</Script>
+    <Script>RMR_QuickAttack</Script>
     <ScriptDesc>[사용시] 신속 2를 얻음</ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="3" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="ch2_Z" Script="" Desc="" />
@@ -63,7 +60,7 @@
     <Artwork>ch2_5</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="3" />
-    <Script />
+    <Script>RMR_break3atkcard</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="5" Dice="7" Type="Atk" Detail="Hit" Motion="H" EffectRes="ch2_H" Script="" Desc="" />
@@ -91,11 +88,11 @@
     <Artwork>Pierr5</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_bleed2atkcard</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="6" Type="Atk" Detail="Hit" Motion="J" EffectRes="Pierr_J" Script="paralysis1atk" Desc="[적중] 마비 1 부여" />
-      <Behaviour Min="1" Dice="4" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch2_E" Script="" Desc="" />
+      <Behaviour Min="1" Dice="4" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch2_E" Script="RMR_whythefuckistherenobleeding1pw" Desc="" />
     </BehaviourList>
     <Chapter>2</Chapter>
     <Priority>0</Priority>
@@ -133,7 +130,7 @@
     <Artwork>Pierr6</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_IngredientHunt</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="H" EffectRes="Pierr_H" Script="binding2atk" Desc="[적중] 속박 2 부여" />
@@ -150,7 +147,7 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Hit" Motion="J" EffectRes="Pierr_J" Script="pierre" Desc="[적중] 대상의 출혈 수만큼 체력 회복" />
+      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Hit" Motion="J" EffectRes="Pierr_J" Script="RMR_CrueltyDie" Desc="" />
       <Behaviour Min="2" Dice="3" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="" Desc="" />
     </BehaviourList>
     <Chapter>2</Chapter>
@@ -161,7 +158,7 @@
     <Artwork>Pierr1</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script />
+    <Script>RMR_Appetite</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="4" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Pierr_Z" Script="bleeding1atk_pierre" Desc="[적중] 출혈 1 부여" />
@@ -174,10 +171,10 @@
     <Artwork>Street6</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_Deflect</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="4" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="" Desc="" />
+      <Behaviour Min="4" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="" Desc="" />
       <Behaviour Min="1" Dice="4" Type="Atk" Detail="Hit" Motion="J" EffectRes="Street_Mas_J" Script="paralysis1atk" Desc="[적중] 마비 1 부여" />
       <Behaviour Min="1" Dice="4" Type="Atk" Detail="Slash" Motion="H" EffectRes="Street_Mas_H" Script="" Desc="" />
     </BehaviourList>
@@ -189,7 +186,7 @@
     <Artwork>Street7</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_Endurance1start</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="2" Dice="4" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="endurance1pw" Desc="[합 승리] 인내 1을 얻음" />
@@ -206,8 +203,8 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="H" EffectRes="Street_Fire_H" Script="ruru2" Desc="[적중] 화상 3 부여. 자신에게 피해 3" />
-      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="Street_Fire_J" Script="ruru2" Desc="[적중] 화상 3 부여. 자신에게 피해 3" />
+      <Behaviour Min="4" Dice="5" Type="Atk" Detail="Hit" Motion="H" EffectRes="Street_Fire_H" Script="ruru2" Desc="[적중] 화상 3 부여. 자신에게 피해 3" />
+      <Behaviour Min="4" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="Street_Fire_J" Script="ruru2" Desc="[적중] 화상 3 부여. 자신에게 피해 3" />
     </BehaviourList>
     <Chapter>2</Chapter>
     <Priority>0</Priority>
@@ -262,11 +259,11 @@
     <Artwork>Street4</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="3" />
-    <Script />
+    <Script>RMR_NonstopAssault</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="1" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="Street_J" Script="" Desc="" />
-      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="H" EffectRes="Street_H" Script="" Desc="" />
+      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="Street_J" Script="" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="H" EffectRes="Street_H" Script="" Desc="" />
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Street_J" Script="" Desc="" />
     </BehaviourList>
     <Chapter>2</Chapter>
@@ -277,7 +274,7 @@
     <Artwork>Street5</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_FleetFootsteps</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="2" Dice="3" Type="Atk" Detail="Slash" Motion="J" EffectRes="Street_J" Script="" Desc="" />
@@ -292,10 +289,10 @@
     <Artwork>Street2</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script />
+    <Script>drawCard</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="Z" EffectRes="" Script="" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="Z" EffectRes="" Script="RMR_whythefuckistherenoendurance1atk" Desc="" />
     </BehaviourList>
     <Chapter>2</Chapter>
     <Priority>0</Priority>
@@ -335,11 +332,11 @@
     <Artwork>Street10</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_PreparedMindLulu</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="1" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="endurance1pw" Desc="[합 승리] 인내 1을 얻음" />
-      <Behaviour Min="4" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="Street_Fire_J" Script="" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="ch2_G" Script="endurance1pw" Desc="[합 승리] 인내 1을 얻음" />
+      <Behaviour Min="4" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="Street_Fire_J" Script="burn1atk" Desc="" />
     </BehaviourList>
     <Chapter>2</Chapter>
     <Priority>0</Priority>
