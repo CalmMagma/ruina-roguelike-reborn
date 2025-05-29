@@ -2603,7 +2603,7 @@ namespace RogueLike_Mod_Reborn
         {
             if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
                 return ((GlobalRebornEffectBase)item).GetCredenzaEntry();
-            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc, item.GetStack()))
+            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
                 return loc.CatalogDesc;
             return item.GetEffectDesc();
         }
@@ -2826,7 +2826,7 @@ namespace RogueLike_Mod_Reborn
             }
             else if (desiredPos.y + __instance._curSize.y / 2 > 520)
                 desiredPos.y -= 520 - (desiredPos.y + __instance._curSize.y);
-            else if (desiredPos.y > 520f)
+            if (desiredPos.y > 520f)
                 desiredPos.y = 520f;
 
             __instance.tooltipPositionPivot.anchoredPosition = desiredPos;
@@ -3388,38 +3388,26 @@ namespace RogueLike_Mod_Reborn
         [HarmonyTranspiler, HarmonyPatch(typeof(LogueBookModels), nameof(LogueBookModels.GetCardList))]
         static IEnumerable<CodeInstruction> AddStartersIntoInv(IEnumerable<CodeInstruction> instructions)
         {
-            bool addedonce = false;
-            List<CodeInstruction> ins = new List<CodeInstruction>();
-            foreach (var instruction in instructions)
+            List<CodeInstruction> ins = new List<CodeInstruction>()
             {
-                ins.Add(instruction);
-                if (instruction.opcode == OpCodes.Stloc_2 && !addedonce)
-                {
-                    ins.AddItem(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))));
-                    ins.AddItem(new CodeInstruction(OpCodes.Stloc_2));
-                    addedonce = true;
-                }
-            }
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldarg_1),
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))),
+                new CodeInstruction(OpCodes.Ret)
+            };
             return ins;
         }
         [HarmonyTranspiler, HarmonyPatch(typeof(LogueBookModels), nameof(LogueBookModels.GetCardListForInven))]
         static IEnumerable<CodeInstruction> AddStartersIntoInvUI(IEnumerable<CodeInstruction> instructions)
         {
-            bool addedonce = false;
-            List<CodeInstruction> ins = new List<CodeInstruction>();
-            foreach (var instruction in instructions)
+            List<CodeInstruction> ins = new List<CodeInstruction>()
             {
-                ins.Add(instruction);
-                if (instruction.opcode == OpCodes.Stloc_0 && !addedonce)
-                {
-                    ins.AddItem(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStarters))));
-                    ins.AddItem(new CodeInstruction(OpCodes.Stloc_0));
-                    addedonce = true;
-                }
-            }
+                new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(RMR_Patches), nameof(RMR_Patches.AddStartersToInv))),
+                new CodeInstruction(OpCodes.Ret)
+            };
             return ins;
         }
-        static List<DiceCardXmlInfo> AddStarters()
+        static System.Collections.Generic.List<DiceCardItemModel> AddStartersToInv()
         {
             var ids = new List<DiceCardXmlInfo>();
             if (RMRCore.CurrentGamemode.ReplaceBaseDeck)
@@ -3437,7 +3425,79 @@ namespace RogueLike_Mod_Reborn
                 ItemXmlDataList.instance.GetCardItem(4, false),
                 ItemXmlDataList.instance.GetCardItem(5, false)
             });
-            return ids;
+            List<DiceCardItemModel> list3 = new List<DiceCardItemModel>();
+            for (int i = 0; i < ids.Count; i++)
+            {
+                list3.Add(new DiceCardItemModel(ids[i])
+                {
+                    num = 99
+                });
+            }
+            list3.AddRange(LogueBookModels.cardlist);
+            list3.Sort(new Comparison<DiceCardItemModel>(SortUtil.CardItemCompByCost));
+            return list3;
+        }
+        static System.Collections.Generic.List<DiceCardItemModel> AddStarters(bool RemoveBasic = false, bool Decks = false)
+        {
+            List<DiceCardItemModel> list = LogueBookModels.cardlist;
+            List<DiceCardItemModel> list2 = new List<DiceCardItemModel>();
+            var ids = new List<DiceCardXmlInfo>();
+            if (RMRCore.CurrentGamemode.ReplaceBaseDeck)
+            {
+                foreach (var card in DeckXmlList.Instance.GetData(RMRCore.CurrentGamemode.BaseDeckReplacement).cardIdList)
+                {
+                    ids.Add(ItemXmlDataList.instance.GetCardItem(card, false));
+                }
+            }
+            else ids.AddRange(new List<DiceCardXmlInfo>
+            {
+                ItemXmlDataList.instance.GetCardItem(1, false),
+                ItemXmlDataList.instance.GetCardItem(2, false),
+                ItemXmlDataList.instance.GetCardItem(3, false),
+                ItemXmlDataList.instance.GetCardItem(4, false),
+                ItemXmlDataList.instance.GetCardItem(5, false)
+            });
+            if (!RemoveBasic)
+            {
+                foreach (DiceCardXmlInfo xmlData in ids)
+                {
+                    list2.Add(new DiceCardItemModel(xmlData)
+                    {
+                        num = 99
+                    });
+                }
+            }
+            foreach (DiceCardItemModel diceCardItemModel in list)
+            {
+                list2.Add(new DiceCardItemModel(diceCardItemModel.ClassInfo)
+                {
+                    num = diceCardItemModel.num
+                });
+            }
+            if (Decks)
+            {
+                foreach (UnitDataModel unitDataModel in LogueBookModels.playerModel)
+                {
+                    if (unitDataModel.bookItem.GetCardListFromCurrentDeck() != null)
+                    {
+                        using (List<DiceCardXmlInfo>.Enumerator enumerator4 = unitDataModel.bookItem.GetCardListFromCurrentDeck().GetEnumerator())
+                        {
+                            while (enumerator4.MoveNext())
+                            {
+                                DiceCardXmlInfo deckcard = enumerator4.Current;
+                                DiceCardItemModel diceCardItemModel2 = list2.Find((DiceCardItemModel x) => x.ClassInfo.id == deckcard.id);
+                                if (diceCardItemModel2 != null)
+                                {
+                                    diceCardItemModel2.num++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            list2.RemoveAll((DiceCardItemModel x) => x.num <= 0);
+            list2.Sort(new Comparison<DiceCardItemModel>(SortUtil.CardItemCompByCost));
+            return list2;
         }
 
 

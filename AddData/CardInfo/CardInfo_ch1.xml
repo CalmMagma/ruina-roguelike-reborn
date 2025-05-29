@@ -176,7 +176,7 @@
     <Artwork>Rats4</Artwork>
     <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3" />
-    <Script>RMR_GutHarvesting</Scrip>
+    <Script>RMR_GutHarvesting</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Rats_J" Script="bleeding1atk" Desc="[적중] 출혈 1 부여" />
