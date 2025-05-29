@@ -49,7 +49,7 @@
 	
 	<!-- RMR ITEMS START HERE -->
 	<RewardList ID="90047" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_BigBrothersChains" ArtWork="RMR_BigBrothersChains"/>
-	<RewardList ID="90048" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_Crowbar" ArtWork="RMR_Crowbar"/>
+	<RewardList ID="90048" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_Crowbar" ArtWork="RMR_Crowbar"/>
 	<RewardList ID="90049" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_HarvestScythe" ArtWork="RMR_HarvestScythe"/>
 	<RewardList ID="90050" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_Remote" ArtWork="RMR_Remote"/>
 	

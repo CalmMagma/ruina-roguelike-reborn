@@ -279,7 +279,7 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public static Rarity ItemRarity = Rarity.Common;
+        public static Rarity ItemRarity = Rarity.Uncommon;
 
         public override string KeywordId => "RMR_Crowbar";
 
