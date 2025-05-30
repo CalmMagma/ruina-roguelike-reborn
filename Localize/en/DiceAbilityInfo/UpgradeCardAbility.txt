@@ -9,6 +9,10 @@
     <Desc>[On Use] Dice on this page gain +1 Power for each copy of this page being used against the same target</Desc>
   </BattleCardAbility>
   
+  <BattleCardAbility ID="RMR_HitAndRunBlockonEvade">
+    <Desc>[On Clash Lose] Reduce incoming damage and stagger damage by natural value</Desc>
+  </BattleCardAbility>
+  
    <BattleCardAbility ID="RMR_RecycleOnClashLose">
     <Desc>[On Clash Lose] Recycle this die</Desc>
   </BattleCardAbility>

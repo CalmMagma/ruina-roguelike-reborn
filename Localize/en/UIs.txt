@@ -11,6 +11,7 @@
 	 <text id="ui_ShopHide">Hide</text>
 	 <text id="ui_ShopShow">Return</text>
 	 <text id="ui_EmotionPositionChange">Change Position</text>
+	 <text id="ui_Money">Ahn</text>
 
 	 <text id="ui_RestLeave">Leave Resting Room</text>
 	 <text id="ui_RestHide">Hide</text>

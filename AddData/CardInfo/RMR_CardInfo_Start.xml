@@ -7,6 +7,7 @@
     <Artwork>Basic1</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0"/>
+	<Option>Basic</Option>
     <Script>RMR_Starter_Evade</Script>
     <ScriptDesc />
     <BehaviourList>
@@ -21,6 +22,7 @@
     <Artwork>Basic2</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1"/>
+	<Option>Basic</Option>
     <Script>drawCard</Script>
     <ScriptDesc />
     <BehaviourList>
@@ -36,6 +38,7 @@
     <Artwork>Basic3</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1"/>
+	<Option>Basic</Option>
     <Script>energy2</Script>
     <ScriptDesc />
     <BehaviourList>
@@ -52,10 +55,11 @@
     <Artwork>Basic4</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
+	<Option>Basic</Option>
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="" Script="" ActionScript="" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Basic_Z" Script="" ActionScript="" Desc="" />
       <Behaviour Min="2" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" ActionScript="" Desc="" />
     </BehaviourList>
     <Chapter>1</Chapter>
@@ -67,6 +71,7 @@
     <Artwork>Basic5</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="3" />
+	<Option>Basic</Option>
     <Script>RMR_Starter_CoordinatedStrikes</Script>
     <ScriptDesc />
     <BehaviourList>

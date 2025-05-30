@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using LOR_DiceSystem;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -16,6 +17,41 @@ namespace RogueLike_Mod_Reborn
         }
 
         // public static string Desc = "[On Clash Lose] Recycle this die";
+    }
+
+    public class DiceCardAbility_RMR_HitAndRunBlockonEvade : DiceCardAbilityBase
+    {
+        public override void OnRollDice()
+        {
+            base.OnRollDice();
+            owner.bufListDetail.AddBuf(new BattleUnitBuf_doNOTfuckingdareDie() { block = behavior.DiceVanillaValue});
+        }
+
+        public override void AfterAction()
+        {
+            base.AfterAction();
+            owner.bufListDetail.GetActivatedBufList().Find(x => x is BattleUnitBuf_doNOTfuckingdareDie).Destroy();
+        }
+
+        public class BattleUnitBuf_doNOTfuckingdareDie : BattleUnitBuf
+        {
+            public int block = 0;
+            public override int GetBreakDamageReduction(BehaviourDetail behaviourDetail)
+            {
+                return base.GetBreakDamageReduction(behaviourDetail) + block;
+            }
+            public override int GetDamageReduction(BattleDiceBehavior behavior)
+            {
+                return base.GetDamageReduction(behavior) + block;
+            }
+            public override void OnEndBattle(BattlePlayingCardDataInUnitModel curCard)
+            {
+                base.OnEndBattle(curCard);
+                this.Destroy();
+            }
+        }
+
+        // public static string Desc = "[On Clash Lose] Reduce incoming damage and stagger damage by natural value";
     }
 
     public class DiceCardAbility_RMR_Recover2HPSRatk : DiceCardAbilityBase
