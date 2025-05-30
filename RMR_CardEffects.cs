@@ -17,7 +17,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnUseCard();
             owner.allyCardDetail.DrawCards(1);
-            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Endurance, 1, owner);
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.Endurance, 1, owner);
         }
 
         // public static string Desc = "[On Use] Draw 1 page and gain 1 Endurance this Scene";

@@ -262,7 +262,7 @@ namespace RogueLike_Mod_Reborn
 
         public static bool AddNewKeywordBufToList(string keyword, ref KeywordBuf buf)
         {
-            if (EnumExtender.TryGetValueOf<KeywordBuf>(keyword, out var newKeyword) || EnumExtender.TryFindUnnamedValue(default(KeywordBuf), null, false, out newKeyword) || EnumExtender.TryAddName(keyword, newKeyword))
+            if (EnumExtender.TryGetValueOf<KeywordBuf>(keyword, out var newKeyword) || (EnumExtender.TryFindUnnamedValue(default(KeywordBuf), null, false, out newKeyword) && EnumExtender.TryAddName(keyword, newKeyword)))
             {
                 buf = newKeyword;
                 return true;
