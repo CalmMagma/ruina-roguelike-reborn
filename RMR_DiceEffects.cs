@@ -10,10 +10,15 @@ namespace RogueLike_Mod_Reborn
 {
     public class DiceCardAbility_RMR_RecycleOnClashLose : DiceCardAbilityBase
     {
+        int cap;
         public override void OnLoseParrying()
         {
             base.OnLoseParrying();
-            ActivateBonusAttackDice();
+            if (cap < 99)
+            {
+                cap++;
+                ActivateBonusAttackDice();
+            }
         }
 
         // public static string Desc = "[On Clash Lose] Recycle this die";

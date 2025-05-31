@@ -16,7 +16,7 @@ LogueBookModels.LoadFromSaveData() -> added ChapterGrade.Grade7
 abcdcode_LOGLIKE_MOD.CreaturePickUpModel.ApplyEmotionCard() -> no longer complains about NullReferenceExceptions
 LogLikeMod.BookModel_GetThumbSprite() -> added a null check and empty check
 MysteryChoiceInfo.desc -> assigned a default empty string value
-LogueBookModels.CreatePlayer() -> added Dhska
+LogueBookModels.CreatePlayer() -> added Dhska and Berbtha
 LogueBookModels.EquipNewPage() -> removed GetStartHp check for keepSuc which made HP reduction effects nonfunctional
 
 NEW StagesXmlList.RestoreToDefault(); + NEW _allInfos;

@@ -39,8 +39,7 @@
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_ChargeupUpgrade">
-    <Desc>[Single-use]
-[On Use] Draw 1 page; at the start of each Scene, restore 1 Light and inflict 1 Paralysis on self for the rest of the Act</Desc>
+    <Desc>[On Use] Draw 1 page; at the start of each Scene, restore 1 Light and inflict 1 Paralysis on self for the rest of the Act</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_BackstreetsDash">

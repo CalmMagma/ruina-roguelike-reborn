@@ -44,6 +44,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnInitializeMod()
         {
             base.OnInitializeMod();
+            RMRCore.RMRMapHandler = CustomMapHandler.GetCMU(packageId);
 
             if (!Directory.Exists(LogueSaveManager.Saveroot))
                 Directory.CreateDirectory(LogueSaveManager.Saveroot);
@@ -74,7 +75,6 @@ namespace RogueLike_Mod_Reborn
             }
 
             RegisterAllKeyword();
-            RMRCore.RMRMapHandler = CustomMapHandler.GetCMU(packageId);
 
             foreach (Assembly ass in LogLikeMod.GetAssemList().Distinct())
             {
@@ -3434,6 +3434,11 @@ namespace RogueLike_Mod_Reborn
                 });
             }
             list3.AddRange(LogueBookModels.cardlist);
+            foreach (var cardStack in list3)
+            {
+                if (list3.Count(x => cardStack.GetID() == x.GetID()) > 1)
+                    list3.Remove(cardStack);
+            }
             list3.Sort(new Comparison<DiceCardItemModel>(SortUtil.CardItemCompByCost));
             return list3;
         }

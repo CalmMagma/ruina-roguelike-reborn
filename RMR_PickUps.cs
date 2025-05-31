@@ -19,7 +19,10 @@ namespace RogueLike_Mod_Reborn
         {
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_BigBrotherChains());
         }
-
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
+        }
         public override string KeywordIconId => "RMR_BigBrothersChains";
 
         public override string KeywordId => "RMR_BigBrothersChains";
@@ -37,6 +40,10 @@ namespace RogueLike_Mod_Reborn
         public override void OnPickUpShop(ShopGoods good)
         {
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Crowbar());
+        }
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
         }
 
         public override string KeywordIconId => "RMR_Crowbar";
@@ -56,6 +63,11 @@ namespace RogueLike_Mod_Reborn
         public override void OnPickUpShop(ShopGoods good)
         {
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HarvesterScythe());
+        }
+
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
         }
 
         public override string KeywordIconId => "RMR_HarvestScythe";

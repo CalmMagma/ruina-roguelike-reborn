@@ -70,7 +70,7 @@ namespace RogueLike_Mod_Reborn
             list.SortByCost();
             if (list[0] != null)
             {
-                if (list[0]._originalXmlData != null)
+                if (list[0]._originalXmlData == null)
                     list[0].CopySelf();
                 List<DiceBehaviour> dicelist = list[0].XmlData.DiceBehaviourList;
                 dicelist.Add(battleDiceBehavior.behaviourInCard);
