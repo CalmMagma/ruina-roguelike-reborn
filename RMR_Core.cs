@@ -36,7 +36,7 @@ namespace RogueLike_Mod_Reborn
             Singleton<RoguelikeGamemodeController>.Instance.gamemodeList.Select(x => x.StageStart).ToArray();
           
         public static bool provideAdditionalLogging = true;
-        public static Dictionary<Assembly, string> ClassIds = new Dictionary<Assembly, string>();
+        public static Dictionary<string, string> ClassIds = new Dictionary<string, string>();
         public static RoguelikeGamemodeBase CurrentGamemode;
         public const string packageId = "abcdcodecalmmagma.LogueLikeReborn";
         public static CustomMapHandler RMRMapHandler;
@@ -80,15 +80,15 @@ namespace RogueLike_Mod_Reborn
             {
                 if (ass != null)
                 {
-                    var package = ModContentManager.Instance.GetAllMods().Find(x => ass.CodeBase.Contains(x.GetAssemPath()) || ass.EscapedCodeBase.Contains(x.GetAssemPath()) || ass.Location.Contains(x.GetAssemPath()));
+                    var package = ModContentManager.Instance.GetAllMods().Find(x => ass.CodeBase.Contains(x.GetAssemPath()) || ass.Location.Contains(x.GetAssemPath()));
                     if (package != null)
                     {
-                        ClassIds[ass] = package.invInfo.workshopInfo.uniqueId;
+                        ClassIds[ass.FullName] = package.invInfo.workshopInfo.uniqueId;
                     }
                 }
             }
-            ClassIds[this.GetType().Assembly] = RMRCore.packageId;
-            ClassIds[typeof(LogLikeMod).Assembly] = RMRCore.packageId;
+            ClassIds[this.GetType().Assembly.FullName] = RMRCore.packageId;
+            ClassIds[typeof(LogLikeMod).Assembly.FullName] = RMRCore.packageId;
 
             LogLikeMod.ModdedArtWorks = new LogLikeMod.CacheDic<(string, string), Sprite>(new LogLikeMod.CacheDic<(string, string), Sprite>.getdele(LoadSatelliteArtwork));
             LogueEffectXmlList.Instance.Init(TextDataModel.CurrentLanguage);
@@ -97,7 +97,6 @@ namespace RogueLike_Mod_Reborn
             RogueMysteryXmlList.Instance.Init(TextDataModel.CurrentLanguage);
             SceneManager.sceneLoaded += FindGamemodes;
             CurrentGamemode = new RoguelikeGamemode_RMR_Default();
-            ModContentManager.Instance.GetErrorLogs().RemoveAll(x => x.Contains("The same assembly name already exists."));
         }
 
         // This essentially guarantees that the gamemodes are only collected far after all mods are loaded
@@ -1292,7 +1291,7 @@ namespace RogueLike_Mod_Reborn
         /// </summary>
         public ShopPickUpRebornModel()
         {
-            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly]);
+            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
             if (info != null)
             {
                 this.Name = info.Name;
@@ -1308,7 +1307,7 @@ namespace RogueLike_Mod_Reborn
             LogueEffectXmlInfo info;
             try
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly]);
+                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
             }
             catch
             {
@@ -1346,7 +1345,7 @@ namespace RogueLike_Mod_Reborn
         /// </summary>
         public PickUpRebornModel()
         {
-            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly]);
+            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
             if (info != null)
             {
                 this.Name = info.Name;
@@ -1360,7 +1359,7 @@ namespace RogueLike_Mod_Reborn
             LogueEffectXmlInfo info;
             try
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly]);
+                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
             }
             catch
             {
@@ -1388,7 +1387,7 @@ namespace RogueLike_Mod_Reborn
             LogueEffectXmlInfo info;
             try
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly], this.GetStack());
+                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
             }
             catch
             {
@@ -1402,7 +1401,7 @@ namespace RogueLike_Mod_Reborn
             LogueEffectXmlInfo info;
             try
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly], this.GetStack());
+                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
             }
             catch
             {
@@ -1416,7 +1415,7 @@ namespace RogueLike_Mod_Reborn
             LogueEffectXmlInfo info;
             try
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly], this.GetStack());
+                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
             }
             catch
             {
@@ -1431,7 +1430,7 @@ namespace RogueLike_Mod_Reborn
             string id;
             try
             {
-                id = RMRCore.ClassIds[this.GetType().Assembly];
+                id = RMRCore.ClassIds[this.GetType().Assembly.FullName];
             }
             catch
             {
@@ -1934,9 +1933,9 @@ namespace RogueLike_Mod_Reborn
 
         /// <summary>
         /// The packageId to be used if any <see cref="ContentScope"/> methods are set to <see cref="ContentScope.ONLY_PACKAGEID"/>.<br></br>
-        /// Defaults to <b>this assembly's</b> current packageId. Do not ask how that is done. It simply is.
+        /// Defaults to <b><see cref="RMRCore.packageId"/></b>.
         /// </summary>
-        public virtual string GetContentScopePackageId => RMRCore.ClassIds[this.GetType().Assembly];
+        public virtual string GetContentScopePackageId => RMRCore.packageId;
 
         /// <summary>
         /// Determines whether to override the base deck or not.<br></br>
@@ -2559,9 +2558,9 @@ namespace RogueLike_Mod_Reborn
         {
             try
             {
-                if (RMRCore.ClassIds[item.GetType().Assembly] != RMRCore.packageId)
+                if (RMRCore.ClassIds[item.GetType().Assembly.FullName] != RMRCore.packageId)
                 {
-                    return LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[item.GetType().Assembly], item.ArtWork)];
+                    return LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[item.GetType().Assembly.FullName], item.ArtWork)];
                 }
                 else if (string.IsNullOrEmpty(item.ArtWork) && item.id != null)
                 {
@@ -2695,7 +2694,8 @@ namespace RogueLike_Mod_Reborn
                         "Class name: " + item.Effect.GetType().Name + "\n" +
                         "Full class path: " + item.Effect.GetType().FullName + "\n" +
                         "KeywordId: " + item.Effect.GetItemKeywordId() + "\n" +
-                        "PackageId/AssemblyId: " + RMRCore.ClassIds[item.Effect.GetType().Assembly] +
+                        "Assembly.FullName: " + item.Effect.GetType().Assembly.FullName + "\n" +
+                        "PackageId in assembly: " + RMRCore.ClassIds[item.Effect.GetType().Assembly.FullName] +
                         "\n--- DEBUGGING INFO ---\n\n" +
                         item.Effect.GetItemCredenzaEntry();
                 }
@@ -2710,7 +2710,8 @@ namespace RogueLike_Mod_Reborn
                         "Class name: " + item.Pickup.GetType().Name + "\n" +
                         "Full class path: " + item.Pickup.GetType().FullName + "\n" +
                         "KeywordId: " + item.Pickup.GetItemKeywordId() + "\n" +
-                        "PackageId/AssemblyId: " + RMRCore.ClassIds[item.Pickup.GetType().Assembly] +
+                        "Assembly.FullName: " + item.Pickup.GetType().Assembly.FullName + "\n" +
+                        "PackageId in assembly: " + RMRCore.ClassIds[item.Pickup.GetType().Assembly.FullName] +
                         "\n--- DEBUGGING INFO ---\n\n" +
                         item.Pickup.GetItemCredenzaEntry();
                 }
@@ -3001,15 +3002,15 @@ namespace RogueLike_Mod_Reborn
             {
                 if (buf == null) return;
                 string keyword = buf.keywordIconId == null ? buf.keywordId : buf.keywordIconId;
-                if (string.IsNullOrEmpty(keyword) || !RMRCore.ClassIds.ContainsKey(buf.GetType().Assembly)) return;
-                if (RMRCore.ClassIds[buf.GetType().Assembly] == RMRCore.packageId && LogLikeMod.ArtWorks.ContainsKey(keyword))
+                if (string.IsNullOrEmpty(keyword) || !RMRCore.ClassIds.ContainsKey(buf.GetType().Assembly.FullName)) return;
+                if (RMRCore.ClassIds[buf.GetType().Assembly.FullName] == RMRCore.packageId && LogLikeMod.ArtWorks.ContainsKey(keyword))
                 {
                     Sprite sprite = LogLikeMod.ArtWorks[keyword];
                     if (sprite != null) buf._bufIcon = sprite;
                 }
-                else if (LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[buf.GetType().Assembly], keyword)))
+                else if (LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[buf.GetType().Assembly.FullName], keyword)))
                 {
-                    Sprite sprite = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[buf.GetType().Assembly], keyword)];
+                    Sprite sprite = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[buf.GetType().Assembly.FullName], keyword)];
                     if (sprite != null) buf._bufIcon = sprite;
                 }
             }
@@ -3414,7 +3415,8 @@ namespace RogueLike_Mod_Reborn
             {
                 foreach (var card in DeckXmlList.Instance.GetData(RMRCore.CurrentGamemode.BaseDeckReplacement).cardIdList)
                 {
-                    ids.Add(ItemXmlDataList.instance.GetCardItem(card, false));
+                    if (ids.Count(x => x.id == card.id) == 0)
+                        ids.Add(ItemXmlDataList.instance.GetCardItem(card, false));
                 }
             } 
             else ids.AddRange(new List<DiceCardXmlInfo>
@@ -3434,11 +3436,6 @@ namespace RogueLike_Mod_Reborn
                 });
             }
             list3.AddRange(LogueBookModels.cardlist);
-            foreach (var cardStack in list3)
-            {
-                if (list3.Count(x => cardStack.GetID() == x.GetID()) > 1)
-                    list3.Remove(cardStack);
-            }
             list3.Sort(new Comparison<DiceCardItemModel>(SortUtil.CardItemCompByCost));
             return list3;
         }
@@ -3451,7 +3448,8 @@ namespace RogueLike_Mod_Reborn
             {
                 foreach (var card in DeckXmlList.Instance.GetData(RMRCore.CurrentGamemode.BaseDeckReplacement).cardIdList)
                 {
-                    ids.Add(ItemXmlDataList.instance.GetCardItem(card, false));
+                    if (ids.Count(x => x.id == card.id) == 0)
+                        ids.Add(ItemXmlDataList.instance.GetCardItem(card, false));
                 }
             }
             else ids.AddRange(new List<DiceCardXmlInfo>

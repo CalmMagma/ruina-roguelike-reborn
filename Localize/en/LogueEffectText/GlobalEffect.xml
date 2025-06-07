@@ -169,6 +169,13 @@ Immobilization</Desc>
     <FlavorText>&lt;color=#CACACA&gt;“Futures made of...”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
+
+ <LogueEffectInfo Id="GlobalEffect_KillingAura">
+    <Name>Killing Aura</Name> 
+    <Desc>[Global] All non-attack damage taken by enemies is doubled.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
   
   <!-- 
     <LogueEffectInfo Id="GlobalEffect_">

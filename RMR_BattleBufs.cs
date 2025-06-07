@@ -93,7 +93,7 @@ namespace RogueLike_Mod_Reborn
     }
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
-        private AudioClip critSfx = RMRCore.RMRMapHandler.GetAudioClip("critical.mp3");
+        private AudioClip critSfx => RMRCore.RMRMapHandler.GetAudioClip("critical.mp3");
         public override string keywordId => "RMR_CriticalStrike";
         public override string keywordIconId => "RMRBuf_CriticalStrike";
         public bool onCrit;
