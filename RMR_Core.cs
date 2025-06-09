@@ -27,6 +27,9 @@ using UnityEngine.SceneManagement;
 using EnumExtenderV2;
 using KeywordUtil;
 using Unity.Mathematics;
+using BattleCardEnhancedView;
+using static abcdcode_LOGLIKE_MOD.LogLikeMod;
+using System.Security.Policy;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -35,7 +38,7 @@ namespace RogueLike_Mod_Reborn
         public static LorId[] booksToAddToInventory =>
             Singleton<RoguelikeGamemodeController>.Instance.gamemodeList.Select(x => x.StageStart).ToArray();
           
-        public static bool provideAdditionalLogging = true;
+        public static bool provideAdditionalLogging = false;
         public static Dictionary<string, string> ClassIds = new Dictionary<string, string>();
         public static RoguelikeGamemodeBase CurrentGamemode;
         public const string packageId = "abcdcodecalmmagma.LogueLikeReborn";
@@ -46,32 +49,13 @@ namespace RogueLike_Mod_Reborn
             base.OnInitializeMod();
             RMRCore.RMRMapHandler = CustomMapHandler.GetCMU(packageId);
 
-            if (!Directory.Exists(LogueSaveManager.Saveroot))
-                Directory.CreateDirectory(LogueSaveManager.Saveroot);
-
-            if (!File.Exists(LogueSaveManager.Saveroot + "/RMR_Config.xml"))
-            {
-               using (var file = File.Create(LogueSaveManager.Saveroot + "/RMR_Config.xml")) {
-                    new XmlSerializer(typeof(RMRConfigRoot)).Serialize(file, new RMRConfigRoot());
-               }
-            }
-            using (var file = File.OpenRead(LogueSaveManager.Saveroot + "/RMR_Config.xml"))
-            {
-                RMRConfigRoot config = (RMRConfigRoot)(new XmlSerializer(typeof(RMRConfigRoot)).Deserialize(file));
-                RMRCore.provideAdditionalLogging = config.EnableAdditionalLogging;
-                GlobalLogueItemCatalogPanel.Instance.debugMode = config.ShowAllItemCatalog;
-            }
+            MakeDirectoriesAndLoadConfig();
 
             Harmony.CreateAndPatchAll(typeof(RMR_Patches), packageId);
-            if (!Directory.Exists(LogueSaveManager.Saveroot))
-                Directory.CreateDirectory(LogueSaveManager.Saveroot);
-            if (!File.Exists(LogueSaveManager.Saveroot + "/RMR_ItemCatalog"))
+            if (Harmony.HasAnyPatches("Cyaminthe.BattleCardEnhancedView"))
             {
-                SaveData data = new SaveData(SaveDataType.Dictionary);
-                using (FileStream fileStream = File.Create(LogueSaveManager.Saveroot + "/RMR_ItemCatalog"))
-                {
-                    new BinaryFormatter().Serialize(fileStream, data.GetSerializedData());
-                }
+                this.Log("INJECTING BATTLECARDENHANCEDVIEW INTO LOGLIKE CARD UIs");
+                Harmony.CreateAndPatchAll(typeof(RMR_Patches_BCEVLoglike), packageId);
             }
 
             RegisterAllKeyword();
@@ -215,6 +199,61 @@ namespace RogueLike_Mod_Reborn
 
             }
 
+        }
+
+        public static void MakeDirectoriesAndLoadConfig()
+        {
+            if (!Directory.Exists(LogueSaveManager.Saveroot))
+                Directory.CreateDirectory(LogueSaveManager.Saveroot);
+            if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "ModConfigs")))
+                Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "ModConfigs"));
+
+            // CLEAR OUT LEGACY CONFIGS
+            if (File.Exists(LogueSaveManager.Saveroot + "/RMR_Config.xml"))
+            {
+                RMRConfigRoot config;
+                using (var file = File.OpenRead(LogueSaveManager.Saveroot + "/RMR_Config.xml"))
+                {
+                    config = (RMRConfigRoot)(new XmlSerializer(typeof(RMRConfigRoot)).Deserialize(file));
+                    RMRCore.provideAdditionalLogging = config.EnableAdditionalLogging;
+                    GlobalLogueItemCatalogPanel.Instance.debugMode = config.ShowAllItemCatalog;
+                }
+
+                using (var file = File.OpenWrite(Path.Combine(Application.persistentDataPath, "ModConfigs", "RMR_Config.xml")))
+                {
+                    new XmlSerializer(typeof(RMRConfigRoot)).Serialize(file, config);
+                }
+
+                File.Delete(LogueSaveManager.Saveroot + "/RMR_Config.xml");
+            }
+            else
+            { 
+                if (File.Exists(Path.Combine(Application.persistentDataPath, "ModConfigs", "RMR_Config.xml")))
+                {
+                    using (var file = File.OpenRead(Path.Combine(Application.persistentDataPath, "ModConfigs", "RMR_Config.xml")))
+                    {
+                        RMRConfigRoot config = (RMRConfigRoot)(new XmlSerializer(typeof(RMRConfigRoot)).Deserialize(file));
+                        RMRCore.provideAdditionalLogging = config.EnableAdditionalLogging;
+                        GlobalLogueItemCatalogPanel.Instance.debugMode = config.ShowAllItemCatalog;
+                    }
+                } else
+                {
+                    using (var file = File.Create(Path.Combine(Application.persistentDataPath, "ModConfigs", "RMR_Config.xml")))
+                    {
+                        new XmlSerializer(typeof(RMRConfigRoot)).Serialize(file, new RMRConfigRoot());
+                    }
+                }
+            }
+
+            // CREATE ITEM CATALOG IF IT DOES NOT EXIST
+            if (!File.Exists(LogueSaveManager.Saveroot + "/RMR_ItemCatalog"))
+            {
+                SaveData data = new SaveData(SaveDataType.Dictionary);
+                using (FileStream fileStream = File.Create(LogueSaveManager.Saveroot + "/RMR_ItemCatalog"))
+                {
+                    new BinaryFormatter().Serialize(fileStream, data.GetSerializedData());
+                }
+            }
         }
 
         public static Sprite LoadSatelliteArtwork((string, string) ids)
@@ -1736,6 +1775,7 @@ namespace RogueLike_Mod_Reborn
         public void InitializeGamemode(RoguelikeGamemodeBase gamemode)
         {
             SaveData data = Singleton<LogueSaveManager>.Instance.LoadData(gamemode.SaveDataString);
+            RMRCore.CurrentGamemode = gamemode;
             gamemode.LoadFromSaveData(data);
         }
 
@@ -3253,10 +3293,13 @@ namespace RogueLike_Mod_Reborn
             StagesXmlList.Instance.RestoreToDefault();
             RewardPassivesList.Instance.RestoreToDefault();
             MysteryXmlList.Instance.RestoreToDefault();
+
+            RMRCore.CurrentGamemode = null;
+
             LorId invitation = inv.id;
             bool succes = false;
-            bool isContinue = invitation == new LorId(RMRCore.packageId, -855);
-            if (isContinue)
+
+            if (invitation == new LorId(RMRCore.packageId, -855))
             {
                 RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(invitation, true);
                 RMRCore.CurrentGamemode.FilterContent();
@@ -3531,5 +3574,668 @@ namespace RogueLike_Mod_Reborn
 
         #endregion
     }
+
+    #region BATTLE_CARD_ENHANCED_VIEW PARITY PATCHES
+    
+    /// <summary>
+    /// These patches were pretty much made by Cyaminthe in his BattleCardEnhancedView DLL.<br></br>
+    /// They are here to affect the BattleDiceCardUI copies abcdcode made for card rewards and upgrades.<br></br>
+    /// All credit of the patches in this class goes to Cyaminthe.
+    /// </summary>
+    [HarmonyPatch]
+    public class RMR_Patches_BCEVLoglike
+    {
+        // BattleCardEnhancedView.CardViewPatches
+        [HarmonyPatch(typeof(UILogBattleDiceCardUI), "SetCard")]
+        [HarmonyPostfix]
+        [HarmonyPriority(300)]
+        public static void BattleDiceCardUI_SetCard_Postfix(UILogBattleDiceCardUI __instance, BattleDiceCardModel cardModel, bool __state)
+        {
+            BCEVLoglikeExtensions.ForceUpdateLeftBehaviourMaterial(__instance);
+            if (cardModel != null && __instance.isProfileCard)
+            {
+                Vector3 localPosition = __instance.KeywordListUI.transform.localPosition;
+                if (__instance.transform.position.x < 0f)
+                {
+                    localPosition.x = -2200f;
+                }
+                else
+                {
+                    localPosition.x = 900f;
+                }
+                __instance.KeywordListUI.transform.localPosition = localPosition;
+                __instance.KeywordListUI.Activate();
+                __instance.KeywordListUI.Init(cardModel.XmlData, cardModel.XmlData.DiceBehaviourList);
+            }
+            if (__state)
+            {
+                LayoutRebuilder.MarkLayoutForRebuild(__instance.transform as RectTransform);
+            }
+            if (!__instance.name.Contains("PreviewCard"))
+            {
+                BCEVLoglikeExtensions.SetBattleCardPreview(__instance, cardModel, new BattleDiceCardUI.Option[]{ });
+            }
+        }
+
+        [HarmonyPatch(typeof(UILogBattleDiceCardUI), "SetCard")]
+        [HarmonyPrefix]
+        [HarmonyPriority(500)]
+        public static void BattleDiceCardUI_SetCard_Prefix(UILogBattleDiceCardUI __instance, BattleDiceCardModel cardModel, ref bool __state)
+        {
+            if (cardModel != __instance._cardModel)
+            {
+                __state = true;
+            }
+            BCEVLoglikeExtensions.ConfigureBattleCard(__instance, cardModel.GetBehaviourList().Count, cardModel != __instance._cardModel);
+        }
+    }
+
+    public class LogLikeBattleDiceCardPreviewUI : MonoBehaviour
+    {
+        public static LogLikeBattleDiceCardPreviewUI GetOrCreateUI(UILogBattleDiceCardUI mainUI, bool createIfNull)
+        {
+            LogLikeBattleDiceCardPreviewUI battleDiceCardPreviewUI = mainUI.GetComponent<LogLikeBattleDiceCardPreviewUI>();
+            if (battleDiceCardPreviewUI)
+            {
+                return battleDiceCardPreviewUI;
+            }
+            if (!createIfNull)
+            {
+                return null;
+            }
+            battleDiceCardPreviewUI = mainUI.gameObject.AddComponent<LogLikeBattleDiceCardPreviewUI>();
+            GameObject gameObject = new GameObject("[Rect]PreviewCardRoot");
+            battleDiceCardPreviewUI.previewRoot = gameObject;
+            RectTransform rectTransform = gameObject.AddComponent<RectTransform>();
+            rectTransform.SetParent(mainUI.transform);
+            rectTransform.localScale = Vector3.one * 0.95f;
+            rectTransform.localRotation = Quaternion.identity;
+            rectTransform.localPosition = new Vector3(0f, 1500f, 0f);
+            UILogBattleDiceCardUI battleDiceCardUI = UnityEngine.Object.Instantiate<UILogBattleDiceCardUI>(mainUI, rectTransform);
+            battleDiceCardPreviewUI.cardObject = battleDiceCardUI;
+            RectTransform rectTransform2 = battleDiceCardUI.transform as RectTransform;
+            rectTransform2.anchorMin = new Vector2(0.5f, 0.5f);
+            rectTransform2.anchorMax = new Vector2(0.5f, 0.5f);
+            rectTransform2.localPosition = new Vector2(0f, -50f);
+            rectTransform2.localScale = (mainUI.isProfileCard ? Vector3.one : (Vector3.one * 0.8f));
+            battleDiceCardUI.scaleOrigin = rectTransform2.localScale;
+            rectTransform2.localRotation = Quaternion.identity;
+            battleDiceCardUI.name = "[Rect]PreviewCardBattle";
+            GameObject gameObject2 = new GameObject("[Rect]PreviewSelectArrows");
+            battleDiceCardPreviewUI.arrowsRoot = gameObject2;
+            RectTransform rectTransform3 = gameObject2.AddComponent<RectTransform>();
+            rectTransform3.SetParent(rectTransform);
+            rectTransform3.pivot = new Vector2(0.5f, 0.65f);
+            rectTransform3.localRotation = Quaternion.identity;
+            rectTransform3.localPosition = new Vector3(0f, 750f, 0f);
+            rectTransform3.localScale = new Vector3(5f, 5f, 1f);
+            rectTransform3.sizeDelta = new Vector2(50f, 40f);
+            gameObject2.AddComponent<Image>().sprite = CardViewInternals.GetArrowsBgSprite();
+            GameObject gameObject3 = new GameObject("[Image]Left");
+            RectTransform rectTransform4 = gameObject3.AddComponent<RectTransform>();
+            rectTransform4.SetParent(rectTransform3);
+            rectTransform4.localScale = Vector3.one;
+            rectTransform4.localRotation = Quaternion.Euler(0f, 0f, -90f);
+            rectTransform4.sizeDelta = new Vector2(40f, 30f);
+            rectTransform4.anchoredPosition3D = new Vector3(-10f, 0f, 0f);
+            Image image = gameObject3.AddComponent<Image>();
+            image.sprite = CardViewInternals.GetArrowSprite();
+            battleDiceCardPreviewUI.prevArrow = image;
+            GameObject gameObject4 = new GameObject("[Image]Right");
+            RectTransform rectTransform5 = gameObject4.AddComponent<RectTransform>();
+            rectTransform5.SetParent(rectTransform3);
+            rectTransform5.localScale = Vector3.one;
+            rectTransform5.localRotation = Quaternion.Euler(0f, 0f, 90f);
+            rectTransform5.sizeDelta = new Vector2(40f, 30f);
+            rectTransform5.anchoredPosition3D = new Vector3(10f, 0f, 0f);
+            Image image2 = gameObject4.AddComponent<Image>();
+            image2.sprite = CardViewInternals.GetArrowSprite();
+            battleDiceCardPreviewUI.nextArrow = image2;
+            Graphic[] componentsInChildren = gameObject.GetComponentsInChildren<Graphic>(true);
+            for (int i = 0; i < componentsInChildren.Length; i++)
+            {
+                componentsInChildren[i].raycastTarget = false;
+            }
+            battleDiceCardPreviewUI.Awake();
+            return battleDiceCardPreviewUI;
+        }
+
+        public void SetCardList(List<BattleDiceCardModel> previewList, BattleDiceCardUI.Option[] options)
+        {
+            if (previewList == null || previewList.Count == 0)
+            {
+                this.previewRoot.SetActive(false);
+                this.cardList = null;
+                return;
+            }
+            this.cardList = previewList;
+            this.curIndex = 0;
+            this.curOptions = options;
+            if (this.cardList.Count == 1)
+            {
+                this.arrowsRoot.SetActive(false);
+            }
+            else
+            {
+                this.arrowsRoot.SetActive(true);
+                this.prevArrow.color = UIColorManager.Manager.GetUIColor(UIColor.Disabled);
+                this.nextArrow.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
+            }
+            if (this.cardObject.isProfileCard)
+            {
+                this.SetCard(previewList[0], options);
+                return;
+            }
+            this.previewRoot.SetActive(false);
+        }
+        public void NextCard()
+        {
+            if (this.cardList == null)
+            {
+                return;
+            }
+            if (this.curIndex >= this.cardList.Count - 1)
+            {
+                return;
+            }
+            this.curIndex++;
+            this.SetCard(this.cardList[this.curIndex], this.curOptions);
+            this.prevArrow.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
+            if (this.curIndex == this.cardList.Count - 1)
+            {
+                this.nextArrow.color = UIColorManager.Manager.GetUIColor(UIColor.Disabled);
+            }
+        }
+        public void PrevCard()
+        {
+            if (this.cardList == null)
+            {
+                return;
+            }
+            if (this.curIndex <= 0)
+            {
+                return;
+            }
+            this.curIndex--;
+            this.SetCard(this.cardList[this.curIndex], this.curOptions);
+            this.nextArrow.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
+            if (this.curIndex == 0)
+            {
+                this.prevArrow.color = UIColorManager.Manager.GetUIColor(UIColor.Disabled);
+            }
+        }
+
+        public void ShowCard()
+        {
+            if (this.cardList == null || this.curIndex < 0 || this.curIndex >= this.cardList.Count)
+            {
+                return;
+            }
+            this.SetCard(this.cardList[this.curIndex], this.curOptions);
+        }
+
+        public void HideCard()
+        {
+            this.SetCard(null, null);
+        }
+        public void SetCard(BattleDiceCardModel card, BattleDiceCardUI.Option[] options)
+        {
+            if (card == null)
+            {
+                this.previewRoot.SetActive(false);
+                return;
+            }
+            this.previewRoot.SetActive(true);
+            this.cardObject.SetCard(card);
+        }
+        public void Awake()
+        {
+            if (this.cardObject)
+            {
+                foreach (object obj in this.cardObject.transform)
+                {
+                    Transform transform = (Transform)obj;
+                    if (transform.name.Contains("PreviewCard"))
+                    {
+                        UnityEngine.Object.Destroy(transform.gameObject);
+                    }
+                }
+                BattleDiceCardPreviewUI component = this.cardObject.GetComponent<BattleDiceCardPreviewUI>();
+                if (component)
+                {
+                    UnityEngine.Object.Destroy(component);
+                }
+            }
+        }
+
+        public void Update()
+        {
+            if (this.previewRoot.activeSelf)
+            {
+                if (this.cardObject.isProfileCard)
+                {
+                    if (this.previewRoot.transform.localPosition.y > 0f)
+                    {
+                        Vector3 localPosition = this.previewRoot.transform.localPosition;
+                        localPosition.y = -localPosition.y;
+                        this.previewRoot.transform.localPosition = localPosition;
+                    }
+                }
+                else if (this.previewRoot.transform.localPosition.y < 0f)
+                {
+                    Vector3 localPosition2 = this.previewRoot.transform.localPosition;
+                    localPosition2.y = -localPosition2.y;
+                    this.previewRoot.transform.localPosition = localPosition2;
+                }
+                if (Input.GetKeyDown(CardViewInternals.NextCardKey))
+                {
+                    this.NextCard();
+                    this.cooldown = CardViewInternals.CardChangeHoldDelay;
+                    return;
+                }
+                if (Input.GetKeyDown(CardViewInternals.PrevCardKey))
+                {
+                    this.PrevCard();
+                    this.cooldown = CardViewInternals.CardChangeHoldDelay;
+                    return;
+                }
+                bool key = Input.GetKey(CardViewInternals.NextCardKey);
+                bool key2 = Input.GetKey(CardViewInternals.PrevCardKey);
+                if (!key && !key2)
+                {
+                    this.cooldown = 0f;
+                    return;
+                }
+                this.cooldown -= Time.deltaTime;
+                if (this.cooldown > 0f)
+                {
+                    return;
+                }
+                if (key && key2)
+                {
+                    return;
+                }
+                this.cooldown = CardViewInternals.CardChangeRepeatHoldDelay;
+                if (key)
+                {
+                    this.NextCard();
+                    return;
+                }
+                this.PrevCard();
+            }
+        }
+
+        [SerializeField]
+        public UILogBattleDiceCardUI cardObject;
+
+        [SerializeField]
+        public Image nextArrow;
+
+        [SerializeField]
+        public Image prevArrow;
+
+        [SerializeField]
+        public GameObject arrowsRoot;
+
+        [SerializeField]
+        public GameObject previewRoot;
+
+        public List<BattleDiceCardModel> cardList;
+
+        public int curIndex;
+
+        public BattleDiceCardUI.Option[] curOptions;
+
+        public float cooldown;
+    }
+
+    /// <summary>
+    /// This is quite literally just a bunch of code adapted from BattleCardEnhancedView<br></br> 
+    /// made to work with abcdcode's custom card UI class.
+    /// </summary>
+    public static class BCEVLoglikeExtensions
+    {
+        public static void ConfigureBattleCard(UILogBattleDiceCardUI __instance, int cardCount, bool resetScrolls)
+        {
+            UICardSlotScroller uicardSlotScroller = __instance.GetComponent<UICardSlotScroller>();
+            CardViewPatches.ConfigureKeywordList(__instance.KeywordListUI, __instance.gameObject, ref uicardSlotScroller, true);
+            RectTransform rectTransform = __instance.img_behaviourDetatilList[0].transform.parent as RectTransform;
+            RectTransform rectTransform2 = rectTransform.parent as RectTransform;
+            if (!rectTransform2.GetComponent<ScrollRect>())
+            {
+                Vector2 anchoredPosition = rectTransform.anchoredPosition;
+                anchoredPosition.x = 0f;
+                if (__instance.isProfileCard)
+                {
+                    if (anchoredPosition.y < -400f)
+                    {
+                        anchoredPosition.y = -400f;
+                    }
+                    foreach (TextMeshProUGUI textMeshProUGUI in __instance.txt_Resist)
+                    {
+                        textMeshProUGUI.transform.localPosition = new Vector2(-10f, -130f);
+                    }
+                    foreach (TextMeshProUGUI textMeshProUGUI2 in __instance.txt_bpResist)
+                    {
+                        textMeshProUGUI2.transform.localPosition = new Vector2(-20f, -220f);
+                    }
+                }
+                rectTransform.anchoredPosition = anchoredPosition;
+                GameObject gameObject = new GameObject("[RectMask]BehaviourDetailList");
+                RectTransform rectTransform3 = gameObject.AddComponent<RectTransform>();
+                rectTransform3.SetParent(rectTransform2);
+                rectTransform3.SetSiblingIndex(rectTransform.GetSiblingIndex());
+                rectTransform3.localScale = Vector3.one;
+                rectTransform3.localRotation = Quaternion.identity;
+                rectTransform3.anchoredPosition3D = new Vector3(0f, -500f, 0f);
+                rectTransform3.sizeDelta = new Vector2(870f, 1000f);
+                gameObject.AddComponent<Image>().raycastTarget = false;
+                gameObject.AddComponent<Mask>().showMaskGraphic = false;
+                rectTransform.SetParent(rectTransform3, true);
+                rectTransform2.localScale = Vector3.one;
+                GameObject gameObject2 = new GameObject("[ScrollRect]BehaviourDetailList");
+                RectTransform rectTransform4 = gameObject2.AddComponent<RectTransform>();
+                rectTransform4.SetParent(rectTransform3);
+                rectTransform4.localRotation = rectTransform.localRotation;
+                rectTransform4.localScale = Vector3.one;
+                rectTransform4.pivot = rectTransform.pivot;
+                rectTransform4.anchorMin = rectTransform.anchorMin;
+                rectTransform4.anchorMax = rectTransform.anchorMax;
+                rectTransform4.anchoredPosition3D = rectTransform.anchoredPosition3D;
+                rectTransform4.sizeDelta = new Vector2(925f, rectTransform.sizeDelta.y);
+                rectTransform.SetParent(rectTransform4, true);
+                rectTransform2.localScale = Vector3.one;
+                rectTransform.pivot = new Vector2(0f, 0.5f);
+                if (!rectTransform.GetComponent<ContentSizeFitter>())
+                {
+                    ContentSizeFitter contentSizeFitter = rectTransform.gameObject.AddComponent<ContentSizeFitter>();
+                    contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
+                    contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+                }
+                ScrollRect scrollRect = gameObject2.AddComponent<ScrollRect>();
+                scrollRect.vertical = false;
+                scrollRect.horizontal = true;
+                scrollRect.content = rectTransform;
+                scrollRect.scrollSensitivity = 250f;
+                scrollRect.movementType = ScrollRect.MovementType.Clamped;
+                if (!uicardSlotScroller)
+                {
+                    uicardSlotScroller = __instance.gameObject.AddComponent<UICardSlotScroller>();
+                }
+                ScrollRectHandler scrollRectHandler = gameObject2.AddComponent<ScrollRectHandler>();
+                scrollRectHandler.scrollRect = scrollRect;
+                scrollRectHandler.axis = RectTransform.Axis.Horizontal;
+                uicardSlotScroller.scrollHandlers.Add(scrollRectHandler);
+            }
+            RectTransform rectTransform5 = __instance.ui_behaviourDescList[0].transform.parent as RectTransform;
+            RectTransform rectTransform6 = rectTransform5.parent as RectTransform;
+            if (!rectTransform6.GetComponent<ScrollRect>())
+            {
+                float num = CardViewInternals.Config.CardAbilityMaxFontSize * 10f;
+                float num2 = CardViewInternals.Config.CardAbilityMinFontSize * 10f;
+                float num3 = num2 * (float)CardViewInternals.Config.CardAbilityMaxBaseLines;
+                List<AbilityDescSizeController> list = null;
+                if (!CardViewInternals.Config.DisableDiceLayoutChange)
+                {
+                    list = new List<AbilityDescSizeController>();
+                    foreach (BattleDiceCard_BehaviourDescUI battleDiceCard_BehaviourDescUI in __instance.ui_behaviourDescList)
+                    {
+                        RectTransform rectTransform7 = battleDiceCard_BehaviourDescUI.transform as RectTransform;
+                        rectTransform7.pivot = new Vector2(0.5f, 1f);
+                        TextMeshProUGUI txt_range = battleDiceCard_BehaviourDescUI.txt_range;
+                        RectTransform rectTransform8 = txt_range.transform as RectTransform;
+                        if (rectTransform8.parent != rectTransform7)
+                        {
+                            rectTransform8.SetParent(rectTransform7, true);
+                        }
+                        if (rectTransform8.anchorMin.y == 0.5f && rectTransform8.anchorMax.y == 0.5f)
+                        {
+                            Vector2 anchoredPosition2 = rectTransform8.anchoredPosition;
+                            anchoredPosition2.y = 0f;
+                            rectTransform8.anchoredPosition = anchoredPosition2;
+                        }
+                        RectTransform rectTransform9 = battleDiceCard_BehaviourDescUI.img_detail.transform as RectTransform;
+                        while (rectTransform9 && rectTransform9 != rectTransform7)
+                        {
+                            if (rectTransform9.anchorMin.y == 0.5f && rectTransform9.anchorMax.y == 0.5f)
+                            {
+                                Vector2 anchoredPosition3 = rectTransform9.anchoredPosition;
+                                anchoredPosition3.y = 0f;
+                                rectTransform9.anchoredPosition = anchoredPosition3;
+                            }
+                            rectTransform9 = (rectTransform9.parent as RectTransform);
+                        }
+                        rectTransform7.sizeDelta = new Vector2(rectTransform7.sizeDelta.x, num3);
+                        foreach (object obj in rectTransform7)
+                        {
+                            RectTransform rectTransform10 = ((Transform)obj) as RectTransform;
+                            if (rectTransform10 != null && rectTransform10.anchorMin.y == 0.5f && rectTransform10.anchorMax.y == 0.5f)
+                            {
+                                Vector3 localPosition = rectTransform10.localPosition;
+                                rectTransform10.anchorMin = new Vector2(rectTransform10.anchorMin.x, 1f);
+                                rectTransform10.anchorMax = new Vector2(rectTransform10.anchorMax.x, 1f);
+                                rectTransform10.localPosition = localPosition;
+                            }
+                        }
+                        txt_range.alignment = TextAlignmentOptions.Left;
+                        txt_range.fontSizeMax = 100f;
+                        txt_range.enableWordWrapping = true;
+                        rectTransform8.anchorMin = new Vector2(0f, 1f);
+                        rectTransform8.offsetMin = new Vector2(150f, -num3);
+                        rectTransform8.anchorMax = new Vector2(1f, 1f);
+                        rectTransform8.offsetMax = new Vector2(0f, 0f);
+                        TextMeshProUGUI txt_ability = battleDiceCard_BehaviourDescUI.txt_ability;
+                        RectTransform rectTransform11 = txt_ability.transform as RectTransform;
+                        txt_ability.fontSizeMax = num;
+                        txt_ability.fontSizeMin = num2;
+                        txt_ability.alignment = TextAlignmentOptions.Left;
+                        rectTransform11.transform.localScale = Vector3.one;
+                        rectTransform11.pivot = new Vector2(0.5f, 1f);
+                        rectTransform11.anchorMin = new Vector2(0f, 1f);
+                        rectTransform11.offsetMin = new Vector2(300f, -(num3 + num2 * 0.1f));
+                        rectTransform11.anchorMax = new Vector2(1f, 1f);
+                        rectTransform11.offsetMax = new Vector2(0f, num2 * 0.1f);
+                        GameObject gameObject3 = new GameObject("[Text]Behaviour_Ability_Overflow");
+                        RectTransform rectTransform12 = gameObject3.AddComponent<RectTransform>();
+                        rectTransform12.SetParent(rectTransform8);
+                        rectTransform12.localScale = Vector3.one;
+                        rectTransform12.localRotation = Quaternion.identity;
+                        rectTransform12.pivot = new Vector2(0.5f, 1f);
+                        rectTransform12.anchorMin = new Vector2(0f, 0f);
+                        rectTransform12.offsetMin = new Vector2(-50f, -50f);
+                        rectTransform12.anchorMax = new Vector2(1f, 0f);
+                        rectTransform12.offsetMax = new Vector2(0f, 0f);
+                        TextMeshProUGUI textMeshProUGUI3 = gameObject3.AddComponent<TextMeshProUGUI>();
+                        textMeshProUGUI3.fontSize = txt_ability.fontSizeMin;
+                        if (txt_ability.font)
+                        {
+                            textMeshProUGUI3.font = txt_ability.font;
+                        }
+                        textMeshProUGUI3.color = txt_ability.color;
+                        textMeshProUGUI3.overflowMode = TextOverflowModes.Overflow;
+                        textMeshProUGUI3.alignment = TextAlignmentOptions.Left;
+                        textMeshProUGUI3.ignoreRectMaskCulling = true;
+                        txt_ability.overflowMode = TextOverflowModes.Linked;
+                        txt_ability.linkedTextComponent = textMeshProUGUI3;
+                        AbilityDescSizeController abilityDescSizeController = battleDiceCard_BehaviourDescUI.gameObject.AddComponent<AbilityDescSizeController>();
+                        abilityDescSizeController.rect = rectTransform7;
+                        abilityDescSizeController.baselineText = txt_range;
+                        abilityDescSizeController.abilityTextFixed = txt_ability;
+                        abilityDescSizeController.abilityTextFlex = textMeshProUGUI3;
+                        abilityDescSizeController.abilityTextMinHeight = 75f;
+                        abilityDescSizeController.fixedAbilityTextHSpacing = 20f;
+                        abilityDescSizeController.flexCheck = new Vector2(-50f, -50f);
+                        list.Add(abilityDescSizeController);
+                    }
+                    RectTransform rectTransform13 = __instance.selfAbilityArea.transform as RectTransform;
+                    RectTransform rectTransform14 = __instance.txt_selfAbility.transform as RectTransform;
+                    rectTransform13.pivot = new Vector2(0.5f, 1f);
+                    rectTransform14.anchorMin = new Vector2(rectTransform14.anchorMin.x, 1f);
+                    rectTransform14.anchorMax = new Vector2(rectTransform14.anchorMax.x, 1f);
+                    rectTransform14.pivot = new Vector2(rectTransform14.pivot.x, 1f);
+                    rectTransform14.anchoredPosition = new Vector2(rectTransform14.anchoredPosition.x, 0f);
+                    rectTransform14.offsetMin = new Vector2(rectTransform14.offsetMin.x - 100f, rectTransform14.offsetMin.y);
+                    __instance.txt_selfAbility.fontSizeMax = num;
+                    __instance.txt_selfAbility.fontSizeMin = num2;
+                    __instance.txt_selfAbility.overflowMode = TextOverflowModes.Overflow;
+                    AbilityDescSizeController abilityDescSizeController2 = __instance.selfAbilityArea.gameObject.AddComponent<AbilityDescSizeController>();
+                    abilityDescSizeController2.rect = rectTransform13;
+                    abilityDescSizeController2.abilityTextFlex = __instance.txt_selfAbility;
+                    abilityDescSizeController2.abilityTextMinHeight = num;
+                    list.Add(abilityDescSizeController2);
+                }
+                GameObject gameObject4 = new GameObject("[ScrollRect]BehaviourList");
+                RectTransform rectTransform15 = gameObject4.AddComponent<RectTransform>();
+                rectTransform15.SetParent(rectTransform6);
+                rectTransform15.localScale = rectTransform5.localScale;
+                rectTransform15.localRotation = rectTransform5.localRotation;
+                rectTransform15.anchorMin = rectTransform5.anchorMin;
+                rectTransform15.anchorMax = rectTransform5.anchorMax;
+                VerticalLayoutGroup component = rectTransform5.GetComponent<VerticalLayoutGroup>();
+                int top = component.padding.top;
+                component.padding.top = 30;
+                component.padding.bottom = 50;
+                if (component.spacing < 15f)
+                {
+                    component.spacing = 15f;
+                }
+                Vector2 offsetMin = rectTransform5.offsetMin;
+                Vector2 offsetMax = rectTransform5.offsetMax;
+                offsetMax.y -= (float)top;
+                RectTransform rectTransform16 = rectTransform15;
+                RectTransform rectTransform17 = rectTransform5;
+                Vector2 vector = new Vector2(0.5f, 1f);
+                rectTransform17.pivot = vector;
+                rectTransform16.pivot = vector;
+                RectTransform rectTransform18 = rectTransform15;
+                vector = (rectTransform5.offsetMin = offsetMin);
+                rectTransform18.offsetMin = vector;
+                RectTransform rectTransform19 = rectTransform15;
+                vector = (rectTransform5.offsetMax = offsetMax);
+                rectTransform19.offsetMax = vector;
+                rectTransform5.sizeDelta = new Vector2(rectTransform5.sizeDelta.x, 1340f);
+                rectTransform15.sizeDelta = new Vector2(900f, 1340f);
+                rectTransform5.gameObject.AddComponent<LayoutElement>().minHeight = 1340f;
+                rectTransform5.SetParent(rectTransform15, true);
+                rectTransform5.localScale = Vector3.one;
+                rectTransform5.anchoredPosition3D = Vector3.zero;
+                if (list != null)
+                {
+                    AbilityDescListSizeFitter abilityDescListSizeFitter = rectTransform5.gameObject.AddComponent<AbilityDescListSizeFitter>();
+                    abilityDescListSizeFitter.subControllers = list;
+                    using (List<AbilityDescSizeController>.Enumerator enumerator4 = list.GetEnumerator())
+                    {
+                        while (enumerator4.MoveNext())
+                        {
+                            AbilityDescSizeController abilityDescSizeController3 = enumerator4.Current;
+                            abilityDescSizeController3.mainController = abilityDescListSizeFitter;
+                        }
+                        goto IL_B4B;
+                    }
+                }
+                ContentSizeFitter contentSizeFitter2 = rectTransform5.gameObject.AddComponent<ContentSizeFitter>();
+                contentSizeFitter2.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+                contentSizeFitter2.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            IL_B4B:
+                ScrollRect scrollRect2 = gameObject4.AddComponent<ScrollRect>();
+                scrollRect2.horizontal = false;
+                scrollRect2.vertical = true;
+                scrollRect2.content = rectTransform5;
+                scrollRect2.scrollSensitivity = 250f;
+                scrollRect2.movementType = ScrollRect.MovementType.Clamped;
+                gameObject4.AddComponent<Image>().raycastTarget = false;
+                gameObject4.AddComponent<Mask>().showMaskGraphic = false;
+                if (!uicardSlotScroller)
+                {
+                    uicardSlotScroller = __instance.gameObject.AddComponent<UICardSlotScroller>();
+                }
+                ScrollRectHandler scrollRectHandler2 = gameObject4.AddComponent<ScrollRectHandler>();
+                scrollRectHandler2.scrollRect = scrollRect2;
+                uicardSlotScroller.scrollHandlers.Add(scrollRectHandler2);
+            }
+            int count = __instance.img_behaviourDetatilList.Count;
+            if (count < cardCount)
+            {
+                Image image = __instance.img_behaviourDetatilList[0];
+                for (int i = count; i < cardCount; i++)
+                {
+                    Image image2 = UnityEngine.Object.Instantiate<Image>(image, image.transform.parent);
+                    image2.name = string.Format("[Image]Behaviour_Detail{0} (1)", i + 1);
+                    __instance.img_behaviourDetatilList.Add(image2);
+                    __instance.hsv_behaviourIcons.Add(image2.GetComponent<RefineHsv>());
+                    TextMeshProUGUI[] componentsInChildren = image2.GetComponentsInChildren<TextMeshProUGUI>(true);
+                    if (__instance.isProfileCard)
+                    {
+                        componentsInChildren[0].transform.localPosition = new Vector2(-10f, -130f);
+                        componentsInChildren[1].transform.localPosition = new Vector2(-20f, -220f);
+                    }
+                    __instance.txt_Resist.Add(componentsInChildren[0]);
+                    __instance.txt_bpResist.Add(componentsInChildren[1]);
+                }
+            }
+            int count2 = __instance.ui_behaviourDescList.Count;
+            if (count2 < cardCount)
+            {
+                BattleDiceCard_BehaviourDescUI battleDiceCard_BehaviourDescUI2 = __instance.ui_behaviourDescList[0];
+                for (int j = count2; j < cardCount; j++)
+                {
+                    BattleDiceCard_BehaviourDescUI battleDiceCard_BehaviourDescUI3 = UnityEngine.Object.Instantiate<BattleDiceCard_BehaviourDescUI>(battleDiceCard_BehaviourDescUI2, battleDiceCard_BehaviourDescUI2.transform.parent);
+                    battleDiceCard_BehaviourDescUI3.name = string.Format("[Image]Behaviour_Baseline ({0})", j);
+                    __instance.ui_behaviourDescList.Add(battleDiceCard_BehaviourDescUI3);
+                }
+            }
+            if (uicardSlotScroller)
+            {
+                if (__instance.isProfileCard)
+                {
+                    uicardSlotScroller.isFocused = true;
+                }
+                if (resetScrolls)
+                {
+                    if (uicardSlotScroller.scrollHandlers.Exists((ScrollRectHandler h) => h.axis == RectTransform.Axis.Horizontal))
+                    {
+                        if (cardCount <= 5)
+                        {
+                            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+                        }
+                        else
+                        {
+                            rectTransform.pivot = new Vector2(0f, 0.5f);
+                        }
+                        rectTransform.anchoredPosition = Vector2.zero;
+                    }
+                    uicardSlotScroller.ResetScrolls();
+                }
+            }
+        }
+
+        public static void SetBattleCardPreview(UILogBattleDiceCardUI mainUI, BattleDiceCardModel card, BattleDiceCardUI.Option[] options)
+        {
+            LogLikeBattleDiceCardPreviewUI orCreateUI;
+            if (card != null)
+            {
+                List<BattleDiceCardModel> battleCardPreviewList = CardViewInternals.GetBattleCardPreviewList(card, options);
+                if (battleCardPreviewList.Count > 0)
+                {
+                    orCreateUI = LogLikeBattleDiceCardPreviewUI.GetOrCreateUI(mainUI, true);
+                    orCreateUI.SetCardList(battleCardPreviewList, options);
+                    return;
+                }
+            }
+            orCreateUI = LogLikeBattleDiceCardPreviewUI.GetOrCreateUI(mainUI, false);
+            if (orCreateUI)
+            {
+                orCreateUI.SetCardList(null, null);
+            }
+        }
+        public static void ForceUpdateLeftBehaviourMaterial(UILogBattleDiceCardUI cardUI)
+        {
+            GameObject gameObject = cardUI.hsv_behaviourIcons[0].transform.parent.gameObject;
+            gameObject.SetActive(false);
+            gameObject.SetActive(true);
+        }
+    }
+    #endregion
+
     #endregion
 }

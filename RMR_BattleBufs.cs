@@ -97,6 +97,7 @@ namespace RogueLike_Mod_Reborn
         public override string keywordId => "RMR_CriticalStrike";
         public override string keywordIconId => "RMRBuf_CriticalStrike";
         public bool onCrit;
+        private GameObject effect;
         public override KeywordBuf bufType
         {
             get
@@ -108,6 +109,20 @@ namespace RogueLike_Mod_Reborn
         private void OnCritEffect()
         {
             critSfx.PlaySound(_owner.view.transform);
+            Sprite sprite = LogLikeMod.ArtWorks["OnCritEffect"];
+            this.effect = new GameObject();
+            this.effect.transform.localScale = new Vector3(2f, 2f);
+            this.effect.transform.parent = _owner.view.transform;
+            this.effect.layer = LayerMask.NameToLayer("Effect");
+            this.effect.transform.localPosition = new Vector3(0f, 0f);
+            SpriteRenderer spriteRenderer = this.effect.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = sprite;
+            Color color = spriteRenderer.color;
+            color.a = 1f;
+            spriteRenderer.color = color;
+            this.effect.AddComponent<CritSfx>();
+            spriteRenderer.enabled = true;
+            this.effect.SetActive(true);
         }
 
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
@@ -134,13 +149,39 @@ namespace RogueLike_Mod_Reborn
                 }
             }
         }
-
         public override void OnSuccessAttack(BattleDiceBehavior behavior)
         {
             base.OnSuccessAttack(behavior);
             // reset crit here
             onCrit = false;
 
+        }
+
+        public class CritSfx : MonoBehaviour
+        {
+            SpriteRenderer renderer;
+
+            public void Start()
+            {
+                renderer = base.gameObject.GetComponent<SpriteRenderer>();
+            }
+
+            public void Update()
+            {
+                this.timer += Time.deltaTime;
+                base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer/4f);
+                Color color = renderer.color;
+                color.a = 1f - timer / 3f;
+                renderer.color = color;
+                if (this.timer >= this.deathtimer)
+                {
+                    UnityEngine.Object.Destroy(base.gameObject);
+                }
+            }
+
+            public float timer;
+
+            public float deathtimer = 3f;
         }
     }
 
