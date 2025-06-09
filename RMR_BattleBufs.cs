@@ -169,9 +169,9 @@ namespace RogueLike_Mod_Reborn
             public void Update()
             {
                 this.timer += Time.deltaTime;
-                base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer/4f);
+                base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer/8f);
                 Color color = renderer.color;
-                color.a = 1f - timer / 3f;
+                color.a = 1f - timer / 2f;
                 renderer.color = color;
                 if (this.timer >= this.deathtimer)
                 {
