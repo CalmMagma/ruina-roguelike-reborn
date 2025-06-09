@@ -97,7 +97,8 @@ namespace RogueLike_Mod_Reborn
         public override string keywordId => "RMR_CriticalStrike";
         public override string keywordIconId => "RMRBuf_CriticalStrike";
         public bool onCrit;
-        private GameObject effect;
+
+        Sprite sprite = LogLikeMod.ArtWorks["OnCritEffect"];
         public override KeywordBuf bufType
         {
             get
@@ -109,20 +110,19 @@ namespace RogueLike_Mod_Reborn
         private void OnCritEffect()
         {
             critSfx.PlaySound(_owner.view.transform);
-            Sprite sprite = LogLikeMod.ArtWorks["OnCritEffect"];
-            this.effect = new GameObject();
-            this.effect.transform.localScale = new Vector3(2f, 2f);
-            this.effect.transform.parent = _owner.view.transform;
-            this.effect.layer = LayerMask.NameToLayer("Effect");
-            this.effect.transform.localPosition = new Vector3(0f, 0f);
-            SpriteRenderer spriteRenderer = this.effect.AddComponent<SpriteRenderer>();
+            var effect = new GameObject();
+            effect.transform.localScale = new Vector3(2f, 2f);
+            effect.transform.parent = _owner.view.transform;
+            effect.layer = LayerMask.NameToLayer("Effect");
+            effect.transform.localPosition = new Vector3(0f, 0f);
+            SpriteRenderer spriteRenderer = effect.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = sprite;
             Color color = spriteRenderer.color;
             color.a = 1f;
             spriteRenderer.color = color;
-            this.effect.AddComponent<CritSfx>();
+            effect.AddComponent<CritSfx>();
             spriteRenderer.enabled = true;
-            this.effect.SetActive(true);
+            effect.SetActive(true);
         }
 
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
