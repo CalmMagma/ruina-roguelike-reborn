@@ -1,0 +1,313 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: abcdcode_LOGLIKE_MOD.ExtensionUtils
+// Assembly: abcdcode_LOGLIKE_MOD, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
+// Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
+
+using GameSave;
+using HarmonyLib;
+using LOR_DiceSystem;
+using Mod;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using UI;
+using UnityEngine;
+using UnityEngine.UI;
+using RogueLike_Mod_Reborn;
+
+
+namespace abcdcode_LOGLIKE_MOD
+{
+
+    public static class ExtensionUtils
+    {
+        public static LorId GetOriginalId(this LorId id)
+        {
+            UpgradeMetadata metadata;
+            return !UpgradeMetadata.UnpackPid(id.packageId, out metadata) ? id : new LorId(metadata.actualPid, id.id);
+        }
+
+        public static bool CheckCanUpgrade(this DiceCardXmlInfo info)
+        {
+            bool flag = info.CheckUpgradeCard();
+            UpgradeMetadata metadata;
+            return UpgradeMetadata.UnpackPid(info.id.packageId, out metadata) ? metadata.canStack : !flag;
+        }
+
+        public static bool CheckUpgradeCard(this DiceCardXmlInfo info)
+        {
+            return info.id.packageId.Contains(LogCardUpgradeManager.UpgradeKeyword);
+        }
+
+        public static void LogAddModCard(this ItemXmlDataList datalist, DiceCardXmlInfo cardinfo)
+        {
+            Dictionary<string, List<DiceCardXmlInfo>> fieldValue1 = LogLikeMod.GetFieldValue<Dictionary<string, List<DiceCardXmlInfo>>>((object)datalist, "_workshopDict");
+            if (!fieldValue1.ContainsKey(cardinfo.workshopID))
+                fieldValue1[cardinfo.workshopID] = new List<DiceCardXmlInfo>();
+            if (fieldValue1[cardinfo.workshopID].Find((Predicate<DiceCardXmlInfo>)(x => x.id == cardinfo.id)) == null)
+                fieldValue1[cardinfo.workshopID].Add(cardinfo);
+            List<DiceCardXmlInfo> fieldValue2 = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>((object)datalist, "_cardInfoList");
+            Dictionary<LorId, DiceCardXmlInfo> fieldValue3 = LogLikeMod.GetFieldValue<Dictionary<LorId, DiceCardXmlInfo>>((object)datalist, "_cardInfoTable");
+            if (fieldValue2.Find((Predicate<DiceCardXmlInfo>)(x => x.id == cardinfo.id)) != null)
+                return;
+            fieldValue2.Add(cardinfo);
+            fieldValue3[cardinfo.id] = cardinfo;
+        }
+
+        public static void SetLayerAll(this GameObject obj, int layer)
+        {
+            if (obj.transform.childCount > 0)
+            {
+                for (int index = 0; index < obj.transform.childCount; ++index)
+                    obj.transform.GetChild(index).gameObject.SetLayerAll(layer);
+            }
+            obj.layer = layer;
+        }
+
+        public static void SetLayerAll(this GameObject obj, string name)
+        {
+            if (obj.transform.childCount > 0)
+            {
+                for (int index = 0; index < obj.transform.childCount; ++index)
+                    obj.transform.GetChild(index).gameObject.SetLayerAll(name);
+            }
+            obj.layer = LayerMask.NameToLayer(name);
+        }
+
+        public static void LocalEachScalingAll(this GameObject obj, float x, float y, float z = 0.0f)
+        {
+            if (obj.transform.childCount > 0)
+            {
+                for (int index = 0; index < obj.transform.childCount; ++index)
+                    obj.transform.GetChild(index).gameObject.LocalEachScalingAll(x, y, z);
+            }
+            Vector3 localScale = obj.transform.localScale;
+            obj.transform.localScale = new Vector3(localScale.x * x, localScale.y * y, localScale.z * z);
+        }
+
+        public static void LocalScalingAll(this GameObject obj, float x, float y, float z = 0.0f)
+        {
+            if (obj.transform.childCount > 0)
+            {
+                for (int index = 0; index < obj.transform.childCount; ++index)
+                    obj.transform.GetChild(index).gameObject.LocalScalingAll(x, y, z);
+            }
+            obj.transform.localScale = new Vector3(x, y, z);
+        }
+
+        public static SaveData GetSaveDataPassiveModel(this PassiveModel __instance)
+        {
+            SaveData data = new SaveData();
+            if (__instance.originData != null && __instance.originData.currentpassive != null)
+                data.AddData("passivecurrentid", __instance.originData.currentpassive.id.LogGetSaveData());
+            if (__instance.originpassive != null)
+            {
+                data.AddData("passiveprevid", __instance.originpassive.id.LogGetSaveData());
+                data.AddData("receivebookinstanceid", __instance.originData.receivepassivebookId);
+                data.AddData("givebookinstanceid", __instance.originData.givePassiveBookId);
+            }
+            return data;
+        }
+
+        public static void LoadFromSaveDataPassiveModel(this PassiveModel __instance, SaveData data)
+        {
+            SaveData data1 = data.GetData("passivecurrentid");
+            LorId id1 = LorId.None;
+            if (data1 != null)
+                id1 = ExtensionUtils.LogLoadFromSaveData(data1);
+            SaveData data2 = data.GetData("passiveprevid");
+            LorId id2 = LorId.None;
+            if (data2 != null)
+                id2 = ExtensionUtils.LogLoadFromSaveData(data2);
+            PassiveXmlInfo data3 = Singleton<PassiveXmlList>.Instance.GetData(id1);
+            __instance.originpassive = Singleton<PassiveXmlList>.Instance.GetData(id2);
+            int receivepassivebookId = data.GetInt("receivebookinstanceid");
+            int givePassiveBookId = data.GetInt("givebookinstanceid");
+            __instance.originData = new PassiveModel.PassiveModelSavedData(data3, receivepassivebookId, givePassiveBookId);
+        }
+
+        public static void SetData(this SaveData save, string key, SaveData data)
+        {
+            SaveDataType fieldValue1 = LogLikeMod.GetFieldValue<SaveDataType>((object)save, "_type");
+            Dictionary<string, SaveData> fieldValue2 = LogLikeMod.GetFieldValue<Dictionary<string, SaveData>>((object)save, "_dic");
+            if (fieldValue1 != SaveDataType.None && fieldValue1 != SaveDataType.Dictionary)
+                Debug.LogError((object)"SaveData cannot have multiple type");
+            LogLikeMod.SetFieldValue((object)save, "_type", (object)SaveDataType.Dictionary);
+            fieldValue2[key] = data;
+        }
+
+        public static void AddData(this SaveData data, string key, string value)
+        {
+            data.AddData(key, new SaveData(value));
+        }
+
+        public static void AddData(this SaveData data, string key, int value)
+        {
+            data.AddData(key, new SaveData(value));
+        }
+
+        public static void RefreshEquip(this UnitDataModel model)
+        {
+            LogueBookModels.EquipNewPage(model, LogueBookModels.CurPlayerEquipInfo(model));
+        }
+
+        public static void RefreshEquip(this UnitBattleDataModel model)
+        {
+            LogueBookModels.EquipNewPage(model, LogueBookModels.CurPlayerEquipInfo(model.unitData));
+        }
+
+        public static void EquipNewPage(this UnitDataModel model, BookXmlInfo info)
+        {
+            LogueBookModels.EquipNewPage(model, info);
+        }
+
+        public static void EquipNewPage(this UnitBattleDataModel model, BookXmlInfo info)
+        {
+            LogueBookModels.EquipNewPage(model, info);
+        }
+
+        public static string LogId(this object obj) => LogLikeMod.ModId;
+
+        public static bool IsDead(this UnitDataModel model)
+        {
+            return LogueBookModels.playerBattleModel.Find((Predicate<UnitBattleDataModel>)(x => x.unitData == model)).isDead;
+        }
+
+        public static CardDropTableXmlRoot Convert(this abcdcode_LOGLIKE_MOD_Extension.CardDropTableXmlRoot info)
+        {
+            CardDropTableXmlRoot dropTableXmlRoot = new CardDropTableXmlRoot();
+            dropTableXmlRoot.dropTableXmlList = new List<CardDropTableXmlInfo>();
+            foreach (abcdcode_LOGLIKE_MOD_Extension.CardDropTableXmlInfo dropTableXml in info.dropTableXmlList)
+                dropTableXmlRoot.dropTableXmlList.Add(dropTableXml.Convert());
+            return dropTableXmlRoot;
+        }
+
+        public static CardDropTableXmlInfo Convert(this abcdcode_LOGLIKE_MOD_Extension.CardDropTableXmlInfo info)
+        {
+            return new CardDropTableXmlInfo()
+            {
+                cardIdList = info.cardIdList,
+                workshopId = info.pid,
+                _cardIdList = info._cardIdList,
+                _id = info._id,
+                _validCardIdList = info._validCardIdList
+            };
+        }
+
+        public static string GetLogArtWorkPath(this ModContentInfo info)
+        {
+            return Path.Combine(info.GetLogDllPath(), "ArtWork");
+        }
+
+        public static string GetAssemPath(this ModContentInfo info)
+        {
+            return Path.Combine(info.dirInfo.FullName, "Assemblies");
+        }
+
+        public static DirectoryInfo GetLogDllDir(this ModContentInfo info)
+        {
+            return Directory.Exists(info.GetLogDllPath()) ? new DirectoryInfo(info.GetLogDllPath()) : (DirectoryInfo)null;
+        }
+
+        public static string GetLogDllPath(this ModContentInfo info)
+        {
+            return Path.Combine(Path.Combine(info.dirInfo.FullName, "Assemblies"), "Roguedlls");
+        }
+
+        public static void Log(this object obj, string str)
+        {
+            if (RMRCore.provideAdditionalLogging)
+            {
+                if (obj != null)
+                    Debug.Log((object)$"Log : {obj.GetType().Name} {str}");
+                else
+                    Debug.Log((object)("Log : " + str));
+            }
+        }
+
+        public static void LogError(this object obj, Exception e)
+        {
+            if (obj != null)
+                Debug.Log((object)$"Log : {obj.GetType().Name}{e.Message}{Environment.NewLine}{e.StackTrace}");
+            else
+                Debug.Log((object)$"Log : {e.Message}{Environment.NewLine}{e.StackTrace}");
+        }
+
+        public static Predicate<DiceMatch> NotFirstAttackDice()
+        {
+            int index = -1;
+            return (Predicate<DiceMatch>)(match =>
+            {
+                if (index != -1 || match.abiliity.behaviourInCard.Type != BehaviourType.Atk)
+                    return true;
+                index = match.index;
+                return false;
+            });
+        }
+
+        public static Predicate<DiceMatch> NotFirstDice() => (Predicate<DiceMatch>)(x => x.index != 0);
+
+        public static List<T> RandomPickUp<T>(this List<T> list, int count)
+        {
+            List<T> objList = new List<T>((IEnumerable<T>)list);
+            while (objList.Count > count)
+                objList.RemoveAt(UnityEngine.Random.Range(0, objList.Count - 1));
+            return objList;
+        }
+
+        public static SaveData LogGetSaveData(this LorId id)
+        {
+            SaveData saveData = new SaveData();
+            saveData.AddData("_id", new SaveData(id.id));
+            if (id.packageId != null)
+                saveData.AddData("workshopId", new SaveData(id.packageId));
+            else
+                saveData.AddData("workshopId", new SaveData(""));
+            return saveData;
+        }
+
+        public static LorId LogLoadFromSaveData(SaveData data)
+        {
+            int id = data.GetInt("_id");
+            return new LorId(data.GetString("workshopId"), id);
+        }
+
+        public static void InternalSetItemTooltip(
+          this UIMainOverlayManager __instance,
+          string name,
+          string content,
+          Rarity rare,
+          RectTransform rectTransform)
+        {
+            __instance.Open();
+            TextMeshProUGUI textMeshProUgui1 = (TextMeshProUGUI)__instance.GetType().GetField("tooltipName", AccessTools.all).GetValue((object)__instance);
+            TextMeshProMaterialSetter proMaterialSetter = (TextMeshProMaterialSetter)__instance.GetType().GetField("setter_tooltipname", AccessTools.all).GetValue((object)__instance);
+            TextMeshProUGUI textMeshProUgui2 = (TextMeshProUGUI)__instance.GetType().GetField("tooltipDesc", AccessTools.all).GetValue((object)__instance);
+            textMeshProUgui1.text = name;
+            textMeshProUgui1.rectTransform.sizeDelta = new Vector2(__instance.tooltipName.rectTransform.sizeDelta.x, 20f);
+            Camera cam = (Camera)null;
+            if ((UnityEngine.Object)rectTransform != (UnityEngine.Object)null)
+            {
+                Graphic componentInChildren = rectTransform.GetComponentInChildren<Graphic>();
+                if ((UnityEngine.Object)componentInChildren != (UnityEngine.Object)null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
+                    cam = Camera.main;
+            }
+            Color color = Color.white;
+            if (rare >= Rarity.Common && rare <= Rarity.Unique)
+                color = UIColorManager.Manager.GetEquipRarityColor(rare);
+            else if (rare == Rarity.Special)
+                color = UIColorManager.Manager.Error;
+            textMeshProUgui1.color = color;
+            proMaterialSetter.underlayColor = color;
+            textMeshProUgui2.text = content;
+            __instance.SetTooltipOverlayBoxSize(UIToolTipPanelType.OnlyContent);
+            __instance.SetTooltipOverlayBoxPosition(cam, rectTransform);
+            proMaterialSetter.enabled = false;
+            proMaterialSetter.enabled = true;
+            textMeshProUgui1.enabled = false;
+            textMeshProUgui1.enabled = true;
+        }
+    }
+}

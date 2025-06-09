@@ -1,0 +1,231 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: abcdcode_LOGLIKE_MOD.GlobalLogueInventoryPanel
+// Assembly: abcdcode_LOGLIKE_MOD, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
+// Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
+
+using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using TMPro;
+using UI;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+ 
+namespace abcdcode_LOGLIKE_MOD {
+
+public class GlobalLogueInventoryPanel : Singleton<GlobalLogueInventoryPanel>
+{
+  public GameObject root;
+  public List<GlobalLogueInventoryPanel.LogueEffectImage_Inventory> sprites;
+
+  public static GameObject GetLogUIObj(int index)
+  {
+    GameObject gameObject1 = (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel).EditPanel.BattleCardPanel.gameObject;
+    GameObject gameObject2 = UnityEngine.Object.Instantiate<Transform>(gameObject1.transform, gameObject1.transform.parent).gameObject;
+    UnityEngine.Object.Destroy((UnityEngine.Object) gameObject2.GetComponent<UIBattleSettingPanel>());
+    for (int index1 = 0; index1 < gameObject2.transform.childCount; ++index1)
+      UnityEngine.Object.Destroy((UnityEngine.Object) gameObject2.transform.GetChild(index1).gameObject);
+    gameObject2.SetActive(true);
+    gameObject2.transform.localPosition = new Vector3(0.0f, 0.0f);
+    gameObject2.transform.localScale = gameObject1.transform.localScale;
+    gameObject2.GetComponent<Canvas>().enabled = true;
+    gameObject2.GetComponent<Canvas>().sortingOrder += index;
+    gameObject2.GetComponent<CanvasGroup>().alpha = 1f;
+    gameObject2.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    gameObject2.GetComponent<CanvasGroup>().interactable = true;
+    return gameObject2;
+  }
+
+  public void Init()
+  {
+    if ((UnityEngine.Object) this.root == (UnityEngine.Object) null)
+    {
+      this.root = GlobalLogueInventoryPanel.GetLogUIObj(1);
+      this.sprites = new List<GlobalLogueInventoryPanel.LogueEffectImage_Inventory>();
+      ModdingUtils.CreateImage(this.root.transform, "LogLikeModIcon", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f));
+      for (int index1 = 0; index1 < 8; ++index1)
+      {
+        for (int index2 = 0; index2 < 10; ++index2)
+          this.sprites.Add(ModdingUtils.CreateImage(this.root.transform, (Sprite) null, new Vector2(1f, 1f), new Vector2((float) (index2 * 100 - 420), (float) (360 - index1 * 100)), new Vector2(80f, 80f)).gameObject.AddComponent<GlobalLogueInventoryPanel.LogueEffectImage_Inventory>());
+      }
+    }
+    this.root.SetActive(true);
+  }
+
+  public void SetActive(bool value)
+  {
+    if (value)
+    {
+      this.Init();
+      this.UpdateSprites();
+    }
+    else if ((UnityEngine.Object) this.root != (UnityEngine.Object) null)
+      this.root.SetActive(false);
+  }
+
+  public void UpdateSprites()
+  {
+    int index = 0;
+    foreach (Component sprite in this.sprites)
+      sprite.gameObject.SetActive(false);
+    List<GlobalLogueEffectBase> once = Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().FindAll((Predicate<GlobalLogueEffectBase>) (x => x is OnceEffect));
+    foreach (GlobalLogueEffectBase effect in Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().FindAll((Predicate<GlobalLogueEffectBase>) (x => !once.Contains(x))))
+    {
+      if ((UnityEngine.Object) effect.GetSprite() != (UnityEngine.Object) null)
+      {
+        this.sprites[index].Init(effect);
+        ++index;
+      }
+      if (index == this.sprites.Count)
+        break;
+    }
+    foreach (GlobalLogueEffectBase effect in once)
+    {
+      if ((UnityEngine.Object) effect.GetSprite() != (UnityEngine.Object) null)
+      {
+        this.sprites[index].Init(effect);
+        ++index;
+      }
+      if (index == this.sprites.Count)
+        break;
+    }
+  }
+
+  public class LogueEffectImage_Inventory : MonoBehaviour
+  {
+    public bool update;
+    public GlobalLogueEffectBase effect;
+    public UILogCustomSelectable selectable;
+    public Sprite sprite;
+    public Image image;
+    public Image baseimage;
+    public TextMeshProUGUI text;
+
+    public void Init(GlobalLogueEffectBase effect)
+    {
+      if (effect == null)
+      {
+        this.gameObject.SetActive(false);
+      }
+      else
+      {
+        this.effect = effect;
+        this.image = this.gameObject.GetComponent<Image>();
+        this.image.sprite = LogLikeMod.ArtWorks["ShopGoodRewardFrame"];
+        this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
+        bool flag;
+        if ((UnityEngine.Object) this.text == (UnityEngine.Object) null)
+        {
+          Color defFontColor = LogLikeMod.DefFontColor;
+          flag = (UnityEngine.Object) LogLikeMod.DefFont_TMP != (UnityEngine.Object) null;
+        }
+        else
+          flag = false;
+        if (flag)
+          this.text = ModdingUtils.CreateText_TMP(this.gameObject.transform, new Vector2(0.0f, 0.0f), 30, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.BottomRight, Color.white, LogLikeMod.DefFont_TMP);
+        if ((UnityEngine.Object) effect.GetSprite() == (UnityEngine.Object) null)
+        {
+          this.Log("effect is null");
+          this.gameObject.SetActive(false);
+        }
+        else
+        {
+          if ((UnityEngine.Object) this.baseimage == (UnityEngine.Object) null)
+            this.baseimage = ModdingUtils.CreateImage(this.transform, "ShopGoodRewardFrame", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(70f, 70f));
+          if ((UnityEngine.Object) this.text != (UnityEngine.Object) null)
+          {
+            int stack = effect.GetStack();
+            stack.Log("cur Effect Stack : " + stack.ToString());
+            this.text.text = stack >= 0 ? stack.ToString() : string.Empty;
+          }
+          this.sprite = effect.GetSprite();
+          this.baseimage.sprite = this.sprite;
+          if ((UnityEngine.Object) this.selectable == (UnityEngine.Object) null)
+          {
+            this.selectable = this.gameObject.AddComponent<UILogCustomSelectable>();
+            this.selectable.targetGraphic = (Graphic) this.image;
+            this.selectable.SelectEvent = new UnityEventBasedata();
+            this.selectable.SelectEvent.AddListener((UnityAction<BaseEventData>) (e => this.OnEnterImage()));
+            this.selectable.DeselectEvent = new UnityEventBasedata();
+            this.selectable.DeselectEvent.AddListener((UnityAction<BaseEventData>) (e => this.OnExitImage()));
+          }
+          this.gameObject.SetActive(true);
+          this.update = false;
+          if (!((UnityEngine.Object) SingletonBehavior<UIMainOverlayManager>.Instance != (UnityEngine.Object) null))
+            return;
+          SingletonBehavior<UIMainOverlayManager>.Instance.Close();
+        }
+      }
+    }
+
+    public void OnEnterImage()
+    {
+      if (string.IsNullOrEmpty(this.effect.GetEffectDesc()))
+        return;
+      this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Highlighted);
+      FieldInfo field = this.effect.GetType().GetField("ItemRarity", BindingFlags.Static | BindingFlags.Public);
+      Rarity rare = !(field != (FieldInfo) null) ? Rarity.Special : (Rarity) field.GetValue((object) null);
+      this.SetTooltip(SingletonBehavior<UIMainOverlayManager>.Instance, this.effect.GetEffectName(), $"{this.effect.GetEffectDesc()}\n<color=#{ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(rare))}>{rare.ToString()}</color>", this.transform as RectTransform, UIToolTipPanelType.OnlyContent);
+      this.update = true;
+    }
+
+    public void OnExitImage()
+    {
+      this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
+      SingletonBehavior<UIMainOverlayManager>.Instance.Close();
+      this.update = false;
+    }
+
+    public void SetTooltip(
+      UIMainOverlayManager __instance,
+      string name,
+      string content,
+      RectTransform rectTransform,
+      UIToolTipPanelType panelType = UIToolTipPanelType.Normal)
+    {
+      __instance.GetType().GetMethod("Open", AccessTools.all).Invoke((object) __instance, (object[]) null);
+      TextMeshProUGUI fieldValue1 = LogLikeMod.GetFieldValue<TextMeshProUGUI>((object) __instance, "tooltipName");
+      TextMeshProUGUI fieldValue2 = LogLikeMod.GetFieldValue<TextMeshProUGUI>((object) __instance, "tooltipDesc");
+      fieldValue1.text = name;
+      fieldValue1.rectTransform.sizeDelta = new Vector2(fieldValue1.rectTransform.sizeDelta.x, 20f);
+      Camera camera = (Camera) null;
+      if ((UnityEngine.Object) rectTransform != (UnityEngine.Object) null)
+      {
+        Graphic componentInChildren = rectTransform.GetComponentInChildren<Graphic>();
+        if ((UnityEngine.Object) componentInChildren != (UnityEngine.Object) null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
+          camera = Camera.main;
+      }
+      FieldInfo field = this.effect.GetType().GetField("ItemRarity", BindingFlags.Static | BindingFlags.Public);
+      Rarity rare = !(field != (FieldInfo) null) ? Rarity.Special : (Rarity) field.GetValue((object) null);
+      string str = content;
+      fieldValue2.text = str;
+      Color color = Color.white;
+      if (rare >= Rarity.Common && rare <= Rarity.Unique)
+        color = UIColorManager.Manager.GetEquipRarityColor(rare);
+      else if (rare == Rarity.Special)
+        color = UIColorManager.Manager.Error;
+      fieldValue1.color = color;
+      TextMeshProMaterialSetter fieldValue3 = LogLikeMod.GetFieldValue<TextMeshProMaterialSetter>((object) __instance, "setter_tooltipname");
+      fieldValue3.underlayColor = color;
+      fieldValue3.enabled = false;
+      fieldValue3.enabled = true;
+      fieldValue1.enabled = false;
+      fieldValue1.enabled = true;
+      __instance.GetType().GetMethod("SetTooltipOverlayBoxSize", AccessTools.all).Invoke((object) __instance, new object[1]
+      {
+        (object) panelType
+      });
+      __instance.GetType().GetMethod("SetTooltipOverlayBoxPosition", AccessTools.all).Invoke((object) __instance, new object[2]
+      {
+        (object) camera,
+        (object) rectTransform
+      });
+    }
+  }
+}
+}
