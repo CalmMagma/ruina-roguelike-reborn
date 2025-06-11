@@ -6,65 +6,53 @@
 
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_ShopGood15 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood15()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570015));
-    this.Name = LogueEffectXmlList.AutoLocalizeVanillaName((PickUpModelBase) this, this.KeywordId);
-    this.Desc = LogueEffectXmlList.AutoLocalizeVanillaDesc((PickUpModelBase) this, this.KeywordId);
-    this.id = new LorId(LogLikeMod.ModId, 90015);
-  }
 
-  public override bool IsCanPickUp(UnitDataModel target)
-  {
-    return base.IsCanPickUp(target) && !target.IsDead();
-  }
-
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    int stack = 3;
-    model.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Quickness, stack);
-    SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfile(model, model.faction, model.hp, model.breakDetail.breakGauge, model.bufListDetail.GetBufUIDataList());
-  }
-
-  public override void OnPickUpShop(ShopGoods good)
-  {
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_ShopGood15.QuickService());
-  }
-
-  public string KeywordId => "GlobalEffect_W1dStim";
-
-  public class QuickService : OnceEffect
-  {
-    public static Rarity ItemRarity = Rarity.Uncommon;
-
-    public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive15"];
-
-    public override string GetEffectName()
+    public class PickUpModel_ShopGood15 : ShopPickUpModel
     {
-      return LogueEffectXmlList.AutoLocalizeVanillaName((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public PickUpModel_ShopGood15() : base()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570015));
+            this.id = new LorId(LogLikeMod.ModId, 90015);
+        }
 
-    public override string GetEffectDesc()
-    {
-      return LogueEffectXmlList.AutoLocalizeVanillaDesc((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public override bool IsCanPickUp(UnitDataModel target)
+        {
+            return base.IsCanPickUp(target) && !target.IsDead();
+        }
 
-    public override void OnClick()
-    {
-      base.OnClick();
-      if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase)
-        return;
-      ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 90015));
-      this.Use();
-    }
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            int stack = 3;
+            model.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Quickness, stack);
+            SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfile(model, model.faction, model.hp, model.breakDetail.breakGauge, model.bufListDetail.GetBufUIDataList());
+        }
 
-    public string KeywordId => "GlobalEffect_W1dStim";
-  }
-}
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood15.QuickService());
+        }
+        public override string KeywordId => "GlobalEffect_W1dStim";
+        public override string KeywordIconId => "ShopPassive15";
+
+        public class QuickService : OnceEffect
+        {
+            public static Rarity ItemRarity = Rarity.Uncommon;
+
+            public override void OnClick()
+            {
+                base.OnClick();
+                if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase)
+                    return;
+                ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 90015));
+                this.Use();
+            }
+
+            public override string KeywordId => "GlobalEffect_W1dStim";
+            public override string KeywordIconId => "ShopPassive15";
+        }
+    }
 }

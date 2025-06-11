@@ -6,64 +6,52 @@
 
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-[HideFromItemCatalog]
-public class PickUpModel_ShopGood8 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood8()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570008));
-    this.Name = LogueEffectXmlList.AutoLocalizeVanillaName((PickUpModelBase) this, this.KeywordId);
-    this.Desc = LogueEffectXmlList.AutoLocalizeVanillaDesc((PickUpModelBase) this, this.KeywordId);
-    this.id = new LorId(LogLikeMod.ModId, 90008);
-  }
 
-  public override bool IsCanPickUp(UnitDataModel target)
-  {
-    return base.IsCanPickUp(target) && !target.IsDead();
-  }
-
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    model.RecoverHP(model.MaxHp / 10 * 3);
-  }
-
-  public override void OnPickUpShop(ShopGoods good)
-  {
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_ShopGood8.HealHpBullet());
-  }
-
-  public string KeywordId => "GlobalEffect_HpBullet";
-
-  public class HealHpBullet : OnceEffect
-  {
-    public static Rarity ItemRarity = Rarity.Rare;
-
-    public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive8"];
-
-    public override string GetEffectName()
+    [HideFromItemCatalog]
+    public class PickUpModel_ShopGood8 : ShopPickUpModel
     {
-      return LogueEffectXmlList.AutoLocalizeVanillaName((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public PickUpModel_ShopGood8() : base()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570008));
+            this.id = new LorId(LogLikeMod.ModId, 90008);
+        }
 
-    public override string GetEffectDesc()
-    {
-      return LogueEffectXmlList.AutoLocalizeVanillaDesc((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public override bool IsCanPickUp(UnitDataModel target)
+        {
+            return base.IsCanPickUp(target) && !target.IsDead();
+        }
 
-    public override void OnClick()
-    {
-      base.OnClick();
-      if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase)
-        return;
-      ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 90008));
-      this.Use();
-    }
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            model.RecoverHP(model.MaxHp / 10 * 3);
+        }
 
-    public string KeywordId => "GlobalEffect_HpBullet";
-  }
-}
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_ShopGood8.HealHpBullet());
+        }
+        public override string KeywordId => "GlobalEffect_HpBullet";
+        public override string KeywordIconId => "ShopPassive8";
+
+        public class HealHpBullet : OnceEffect
+        {
+            public static Rarity ItemRarity = Rarity.Rare;
+
+            public override void OnClick()
+            {
+                base.OnClick();
+                if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase)
+                    return;
+                ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 90008));
+                this.Use();
+            }
+
+            public override string KeywordId => "GlobalEffect_HpBullet";
+            public override string KeywordIconId => "ShopPassive8";
+        }
+    }
 }

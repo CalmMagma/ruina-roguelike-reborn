@@ -55,17 +55,13 @@ namespace RogueLike_Mod_Reborn
 
             foreach (Assembly ass in LogLikeMod.GetAssemList().Distinct())
             {
-                if (ass != null)
+                var package = ModContentManager.Instance.GetAllMods().Find(x => ass.CodeBase.Contains(x.GetAssemPath()) || ass.Location.Contains(x.GetAssemPath()));
+                if (package != null)
                 {
-                    var package = ModContentManager.Instance.GetAllMods().Find(x => ass.CodeBase.Contains(x.GetAssemPath()) || ass.Location.Contains(x.GetAssemPath()));
-                    if (package != null)
-                    {
-                        ClassIds[ass.FullName] = package.invInfo.workshopInfo.uniqueId;
-                    }
+                    ClassIds[ass.FullName] = package.invInfo.workshopInfo.uniqueId;
                 }
             }
             ClassIds[this.GetType().Assembly.FullName] = RMRCore.packageId;
-            ClassIds[typeof(LogLikeMod).Assembly.FullName] = RMRCore.packageId;
 
             LogLikeMod.ModdedArtWorks = new LogLikeMod.CacheDic<(string, string), Sprite>(new LogLikeMod.CacheDic<(string, string), Sprite>.getdele(LoadSatelliteArtwork));
             LogueEffectXmlList.Instance.Init(TextDataModel.CurrentLanguage);
@@ -392,8 +388,7 @@ namespace RogueLike_Mod_Reborn
             BattleUnitBuf_RMR_CritChance buf = (model.bufListDetail.GetActivatedBuf(RoguelikeBufs.CritChance) as BattleUnitBuf_RMR_CritChance);
             if (buf != null)
             {
-                if (buf.onCrit) return true;
-
+                return buf.onCrit;
             }
             return false;
         }
@@ -570,7 +565,7 @@ namespace RogueLike_Mod_Reborn
             List<TypeInfo> items = new List<TypeInfo>();
             foreach (var assembly in LogLikeMod.GetAssemList())
             {
-                var randomItems = assembly.DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(GlobalLogueEffectBase)) || x.IsSubclassOf(typeof(GlobalRebornEffectBase))).FindAll(x => x.GetField("IsRandom", BindingFlags.Static | BindingFlags.Public) is var randomy && randomy != null && (bool)randomy.GetValue(null));
+                var randomItems = assembly.DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(GlobalLogueEffectBase))).FindAll(x => x.GetField("IsRandom", BindingFlags.Static | BindingFlags.Public) is var randomy && randomy != null && (bool)randomy.GetValue(null));
                 var randomItemsRare = randomItems.FindAll(x => x.GetField("ItemRarity", BindingFlags.Static | BindingFlags.Public) is var rare && rare != null && (Rarity)rare.GetValue(null) == rarity);
                 items.AddRange(randomItemsRare);
             }
@@ -1294,243 +1289,6 @@ namespace RogueLike_Mod_Reborn
     }
     #endregion
 
-    #region ITEM LOCALIZATION
-    [HideFromItemCatalog]
-    public class ShopPickUpRebornModel : ShopPickUpModel
-    {
-        /// <value>
-        /// Override this with the ID provided within the effect's respective localization XML.
-        /// </value>
-        public virtual string KeywordId { get; }
-
-        /// <value>
-        /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
-        /// </value>
-        public virtual string KeywordIconId { get; }
-
-        /// <summary>
-        /// Do <b>NOT</b> forget to inherit this constructor on your derived <see cref="ShopPickUpRebornModel"/>.
-        /// <code>
-        /// // You can do it like this:
-        /// public class PickUpModel_MyCoolItem : ShopPickUpRebornModel
-        /// {
-        ///     public PickUpModel_MyCoolItem() : base() // do not forget this : base() part
-        ///     {
-        ///         this.id = new LorId(myModInitializer.packageId, 1984);
-        ///         this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(myModInitializer.packageId, 1984));
-        ///     }
-        /// }</code>
-        /// </summary>
-        public ShopPickUpRebornModel()
-        {
-            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
-            if (info != null)
-            {
-                this.Name = info.Name;
-                this.Desc = info.Desc;
-                this.FlaverText = info.FlavorText;
-                this.ArtWork = KeywordIconId == null ? KeywordId : KeywordIconId;
-            }
-            this.basepassive = null;
-        }
-
-        public virtual string GetCredenzaEntry()
-        {
-            LogueEffectXmlInfo info;
-            try
-            {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
-            }
-            catch
-            {
-                info = null;
-            }
-            return info == null ? "" : info.CatalogDesc;
-        }
-    }
-
-    [HideFromItemCatalog]
-    public class PickUpRebornModel : PickUpModelBase
-    {
-        /// <value>
-        /// Override this with the ID provided within the effect's respective localization XML.
-        /// </value>
-        public virtual string KeywordId { get; }
-
-        /// <value>
-        /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
-        /// </value>
-        public virtual string KeywordIconId { get; }
-
-        /// <summary>
-        /// Do <b>NOT</b> forget to inherit this constructor on your derived <see cref="PickUpRebornModel"/>.
-        /// <code>
-        /// // You can do it like this:
-        /// public class PickUpModel_MyCoolItem : PickUpRebornModel
-        /// {
-        ///     public PickUpModel_MyCoolItem() : base() // do not forget this : base() part
-        ///     {
-        ///         this.id = new LorId(myModInitializer.packageId, 1984);
-        ///         this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(myModInitializer.packageId, 1984));
-        ///     }
-        /// }</code>
-        /// </summary>
-        public PickUpRebornModel()
-        {
-            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
-            if (info != null)
-            {
-                this.Name = info.Name;
-                this.Desc = info.Desc;
-                this.FlaverText = info.FlavorText;
-                this.ArtWork = KeywordIconId == null ? KeywordId : KeywordIconId;            }
-        }
-
-        public virtual string GetCredenzaEntry()
-        {
-            LogueEffectXmlInfo info;
-            try
-            {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
-            }
-            catch
-            {
-                info = null;
-            }
-            return info == null ? "" : info.CatalogDesc;
-        }
-    }
-
-    [HideFromItemCatalog]
-    public class GlobalRebornEffectBase : GlobalLogueEffectBase
-    {
-        /// <value>
-        /// Override this with the ID provided within the effect's respective localization XML.
-        /// </value>
-        public virtual string KeywordId { get; }
-
-        /// <value>
-        /// Override this with the filename of the effect's icon. Defaults to <see cref="KeywordId"/> if not provided.
-        /// </value>
-        public virtual string KeywordIconId { get; }
-
-        public override string GetEffectDesc()
-        {
-            LogueEffectXmlInfo info;
-            try
-            {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
-            }
-            catch
-            {
-                info = null;
-            }
-            return info == null ? "" : info.Desc + "\n\n" + info.FlavorText;
-        }
-
-        public virtual string GetCredenzaEntry()
-        {
-            LogueEffectXmlInfo info;
-            try
-            {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
-            }
-            catch
-            {
-                info = null;
-            }
-            return info == null ? "" : info.CatalogDesc;
-        }
-
-        public override string GetEffectName()
-        {
-            LogueEffectXmlInfo info;
-            try
-            {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
-            }
-            catch
-            {
-                info = null;
-            }
-            return info == null ? "" : info.Name;
-        }
-
-        public override Sprite GetSprite()
-        {
-            Sprite sprite;
-            string id;
-            try
-            {
-                id = RMRCore.ClassIds[this.GetType().Assembly.FullName];
-            }
-            catch
-            {
-                return null;
-            }
-            try
-            {
-                if (id == RMRCore.packageId)
-                    sprite = LogLikeMod.ArtWorks[KeywordIconId == null ? KeywordId : KeywordIconId];
-                else
-                    sprite = LogLikeMod.ModdedArtWorks[(id, KeywordIconId == null ? KeywordId : KeywordIconId)];
-            }
-            catch
-            {
-                return null;
-            }
-            return sprite;
-        }
-    }
-
-    [HideFromItemCatalog]
-    public class GlobalRebornOnceEffectBase : GlobalRebornEffectBase
-    {
-        public override void AddedNew()
-        {
-            this.stack++;
-            Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
-        }
-
-        public override bool CanDupliacte()
-        {
-            return true;
-        }
-
-        public override SaveData GetSaveData()
-        {
-            SaveData saveData = base.GetSaveData();
-            saveData.AddData("stack", this.stack);
-            return saveData;
-        }
-
-        public override void LoadFromSaveData(SaveData save)
-        {
-            base.LoadFromSaveData(save);
-            this.stack = save.GetInt("stack");
-        }
-
-        public virtual void Use()
-        {
-            this.stack--;
-            bool flag = this.stack <= 0;
-            if (flag)
-            {
-                this.Destroy();
-            }
-            Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
-        }
-
-        public override int GetStack()
-        {
-            return this.stack;
-        }
-
-        public int stack = 1;
-    }
-
-    #endregion
-
     #region MYSTERY EVENT LOC.
     public class RogueMysteryXmlList : Singleton<RogueMysteryXmlList>
     {
@@ -2198,7 +1956,7 @@ namespace RogueLike_Mod_Reborn
             Assembly[] assemblies = LogLikeMod.GetAssemList().Distinct().ToArray();
             for (int b = 0; b < assemblies.Length; b++)
             {  
-                TypeInfo[] effects = assemblies[b].DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(GlobalLogueEffectBase)) || x.IsSubclassOf(typeof(OnceEffect)) || x.IsSubclassOf(typeof(GlobalRebornEffectBase))).ToArray();
+                TypeInfo[] effects = assemblies[b].DefinedTypes.ToList().FindAll(x => x.IsSubclassOf(typeof(GlobalLogueEffectBase))).ToArray();
                 for (int i = 0; i < effects.Length; i++)
                 {
                     try
@@ -2211,7 +1969,7 @@ namespace RogueLike_Mod_Reborn
                     }
                 }
                 
-                TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => (x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel)) || x.IsSubclassOf(typeof(PickUpRebornModel))) && !x.IsSubclassOf(typeof(CreaturePickUpModel))).ToArray();
+                TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => (x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel))) && !x.IsSubclassOf(typeof(CreaturePickUpModel))).ToArray();
                 for (int i = 0; i < pickups.Length; i++)
                 {
                     try { 
@@ -2630,39 +2388,13 @@ namespace RogueLike_Mod_Reborn
             return Rarity.Special;
         }
 
-
-        public static string GetItemCredenzaEntry(this GlobalLogueEffectBase item)
-        {
-            if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
-                return ((GlobalRebornEffectBase)item).GetCredenzaEntry();
-            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
-                return loc.CatalogDesc;
-            return item.GetEffectDesc();
-        }
-        public static string GetItemCredenzaEntry(this PickUpModelBase item)
-        {
-            if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
-                return ((PickUpRebornModel)item).GetCredenzaEntry();
-            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
-                return loc.CatalogDesc;
-            return item.Desc;
-        }
-
         public static string GetItemKeywordId(this GlobalLogueEffectBase item)
         {
-            if (item.GetType().IsSubclassOf(typeof(GlobalRebornEffectBase)))
-                return ((GlobalRebornEffectBase)item).KeywordId;
-            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
-                return loc.Id;
-            return "NO_KEYWORD_GIVEN";
+            return string.IsNullOrEmpty(item.KeywordId) ? "NO_KEYWORD_GIVEN" : item.KeywordId;
         }
         public static string GetItemKeywordId(this PickUpModelBase item)
         {
-            if (item.GetType().IsSubclassOf(typeof(PickUpRebornModel)))
-                return ((PickUpRebornModel)item).KeywordId;
-            if (Singleton<LogueEffectXmlList>.Instance.TryGetVanillaEffectInfo(item, out LogueEffectXmlInfo loc))
-                return loc.Id;
-            return "NO_KEYWORD_GIVEN";
+            return string.IsNullOrEmpty(item.KeywordId) ? "NO_KEYWORD_GIVEN" : item.KeywordId;
         }
 
         public static int GetItemObtainCount(this GlobalLogueEffectBase item)
@@ -2730,9 +2462,9 @@ namespace RogueLike_Mod_Reborn
                         "Assembly.FullName: " + item.Effect.GetType().Assembly.FullName + "\n" +
                         "PackageId in assembly: " + RMRCore.ClassIds[item.Effect.GetType().Assembly.FullName] +
                         "\n--- DEBUGGING INFO ---\n\n" +
-                        item.Effect.GetItemCredenzaEntry();
+                        item.Effect.GetCredenzaEntry();
                 }
-                else panel.equipPageStory.text = item.isObtained ? item.Effect.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
+                else panel.equipPageStory.text = item.isObtained ? item.Effect.GetCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
                 panel.equipPageName.text = item.isObtained ? item.Effect.GetEffectName() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
             }
             else
@@ -2746,9 +2478,9 @@ namespace RogueLike_Mod_Reborn
                         "Assembly.FullName: " + item.Pickup.GetType().Assembly.FullName + "\n" +
                         "PackageId in assembly: " + RMRCore.ClassIds[item.Pickup.GetType().Assembly.FullName] +
                         "\n--- DEBUGGING INFO ---\n\n" +
-                        item.Pickup.GetItemCredenzaEntry();
+                        item.Pickup.GetCredenzaEntry();
                 }
-                else panel.equipPageStory.text = item.isObtained ? item.Pickup.GetItemCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
+                else panel.equipPageStory.text = item.isObtained ? item.Pickup.GetCredenzaEntry() : TextDataModel.GetText("ui_RMR_ItemNotObtained_Credenza");
                 panel.equipPageName.text = item.isObtained ? item.Pickup.Name : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name");
             }
             panel.portrait.sprite = item.isObtained ? item.sprite : LogLikeMod.ArtWorks["ItemNotFoundIcon"];
@@ -2804,7 +2536,7 @@ namespace RogueLike_Mod_Reborn
             UnityEngine.Object.Destroy(panel.slotsLayoutGroup.gameObject);
         }
 
-        public static void SetTooltip(this UIMainOverlayManager __instance, string name, string content, RectTransform rectTransform, Rarity rare = (Rarity)69, UIToolTipPanelType panelType = UIToolTipPanelType.Normal)
+        public static void SetTooltip(this UIMainOverlayManager __instance, string name, string content, RectTransform rectTransform, Rarity rare = (Rarity)69, UIToolTipPanelType panelType = UIToolTipPanelType.OnlyContent)
         {
             __instance.Open();
             __instance.tooltipName.text = name;

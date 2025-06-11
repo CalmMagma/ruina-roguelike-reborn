@@ -8,7 +8,7 @@ using abcdcode_LOGLIKE_MOD;
 namespace RogueLike_Mod_Reborn
 {
     [HideFromItemCatalog]
-    public class PickUpModel_RMR_BigBrothersChains : ShopPickUpRebornModel
+    public class PickUpModel_RMR_BigBrothersChains : ShopPickUpModel
     {
         public PickUpModel_RMR_BigBrothersChains() : base()
         {
@@ -30,7 +30,7 @@ namespace RogueLike_Mod_Reborn
     }
 
     [HideFromItemCatalog]
-    public class PickUpModel_RMR_Crowbar : ShopPickUpRebornModel
+    public class PickUpModel_RMR_Crowbar : ShopPickUpModel
     {
         public PickUpModel_RMR_Crowbar() : base()
         {
@@ -53,7 +53,7 @@ namespace RogueLike_Mod_Reborn
     }
 
     [HideFromItemCatalog]
-    public class PickUpModel_RMR_HarvestScythe : ShopPickUpRebornModel
+    public class PickUpModel_RMR_HarvestScythe : ShopPickUpModel
     {
         public PickUpModel_RMR_HarvestScythe() : base()
         {
@@ -77,7 +77,7 @@ namespace RogueLike_Mod_Reborn
     }
 
     [HideFromItemCatalog]
-    public class PickUpModel_RMR_Remote : ShopPickUpRebornModel
+    public class PickUpModel_RMR_Remote : ShopPickUpModel
     {
         public PickUpModel_RMR_Remote() : base()
         {

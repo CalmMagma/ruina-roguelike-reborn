@@ -6,54 +6,55 @@
 
 using System.Collections.Generic;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class RewardInfo
+namespace abcdcode_LOGLIKE_MOD
 {
-  public ChapterGrade grade;
-  public List<RewardPassiveInfo> rewards;
 
-  public RewardInfo()
-  {
-    this.grade = ChapterGrade.Grade1;
-    this.rewards = new List<RewardPassiveInfo>();
-  }
-
-  public static RewardInfo GetCurChapterCommonReward(ChapterGrade grade)
-  {
-    return new RewardInfo()
+    public class RewardInfo
     {
-      grade = grade,
-      rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.CommonReward, LorId.None)
-    };
-  }
+        public ChapterGrade grade;
+        public List<RewardPassiveInfo> rewards;
 
-  public static RewardInfo GetCurChapterEliteReward(ChapterGrade grade)
-  {
-    return new RewardInfo()
-    {
-      grade = grade,
-      rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.EliteReward, LorId.None)
-    };
-  }
+        public RewardInfo()
+        {
+            this.grade = ChapterGrade.Grade1;
+            this.rewards = new List<RewardPassiveInfo>();
+        }
 
-  public static RewardInfo GetCurChapterBossReward(ChapterGrade grade)
-  {
-    return new RewardInfo()
-    {
-      grade = grade,
-      rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.BossReward, LorId.None)
-    };
-  }
+        public static RewardInfo GetCurChapterCommonReward(ChapterGrade grade)
+        {
+            return new RewardInfo()
+            {
+                grade = grade,
+                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.CommonReward, LorId.None)
+            };
+        }
 
-  public static RewardInfo GetCurChapterCreature(ChapterGrade grade)
-  {
-    return new RewardInfo()
-    {
-      grade = grade,
-      rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.Creature, LorId.None)
-    };
-  }
-}
+        public static RewardInfo GetCurChapterEliteReward(ChapterGrade grade)
+        {
+            return new RewardInfo()
+            {
+                grade = grade,
+                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.EliteReward, LorId.None)
+            };
+        }
+
+        public static RewardInfo GetCurChapterBossReward(ChapterGrade grade)
+        {
+            return new RewardInfo()
+            {
+                grade = grade,
+                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.BossReward, LorId.None)
+            };
+        }
+
+        public static RewardInfo GetCurChapterCreature(ChapterGrade grade)
+        {
+            return new RewardInfo()
+            {
+                grade = grade,
+                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.Creature, LorId.None)
+            };
+        }
+    }
 }

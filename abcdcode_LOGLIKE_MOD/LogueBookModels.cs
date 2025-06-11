@@ -453,16 +453,16 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.RemainStageList = new Dictionary<ChapterGrade, List<LogueStageInfo>>();
             SaveData data1 = save.GetData("RemainStageList");
             foreach (ChapterGrade key in new List<ChapterGrade>()
-    {
-      ChapterGrade.Grade1,
-      ChapterGrade.Grade2,
-      ChapterGrade.Grade3,
-      ChapterGrade.Grade4,
-      ChapterGrade.Grade5,
-      ChapterGrade.Grade6,
-      ChapterGrade.Grade7
-    })
-            {
+                {
+                      ChapterGrade.Grade1,
+                      ChapterGrade.Grade2,
+                      ChapterGrade.Grade3,
+                      ChapterGrade.Grade4,
+                      ChapterGrade.Grade5,
+                      ChapterGrade.Grade6,
+                      ChapterGrade.Grade7
+                    })
+                {
                 if (data1.GetData(key.ToString()) != null)
                 {
                     List<LogueStageInfo> logueStageInfoList = new List<LogueStageInfo>();
@@ -1104,10 +1104,11 @@ namespace abcdcode_LOGLIKE_MOD
           List<LogueStageInfo> allstage,
           object stageinfoV)
         {
-            int num1 = (int)stageinfoV.GetType().GetMethod("get_NormalV", AccessTools.all).Invoke(stageinfoV, (object[])null);
-            int num2 = (int)stageinfoV.GetType().GetMethod("get_MysteryV", AccessTools.all).Invoke(stageinfoV, (object[])null) - 1;
-            int num3 = (int)stageinfoV.GetType().GetMethod("get_ShopV", AccessTools.all).Invoke(stageinfoV, (object[])null);
-            int num4 = (int)stageinfoV.GetType().GetMethod("get_BossV", AccessTools.all).Invoke(stageinfoV, (object[])null);
+            int numNormal = (int)stageinfoV.GetType().GetMethod("get_NormalV", AccessTools.all).Invoke(stageinfoV, (object[])null);
+            int numMystery = (int)stageinfoV.GetType().GetMethod("get_MysteryV", AccessTools.all).Invoke(stageinfoV, (object[])null) - 1;
+            int numShop = (int)stageinfoV.GetType().GetMethod("get_ShopV", AccessTools.all).Invoke(stageinfoV, (object[])null);
+            int numBoss = (int)stageinfoV.GetType().GetMethod("get_BossV", AccessTools.all).Invoke(stageinfoV, (object[])null);
+            int numElite = (int)stageinfoV.GetType().GetMethod("get_EliteV", AccessTools.all).Invoke(stageinfoV, (object[])null);
             List<LogueStageInfo> mstage = Singleton<StagesXmlList>.Instance.GetChapterData((ChapterGrade)stageinfoV.GetType().GetMethod("get_ChapV", AccessTools.all).Invoke(stageinfoV, (object[])null), true).FindAll((Predicate<LogueStageInfo>)(x => x.type == StageType.Mystery));
             ModdingUtils.SuffleList<LogueStageInfo>(mstage);
             stage.Add(mstage[0]);
@@ -1115,30 +1116,35 @@ namespace abcdcode_LOGLIKE_MOD
             ModdingUtils.SuffleList<LogueStageInfo>(allstage);
             foreach (LogueStageInfo logueStageInfo in allstage)
             {
-                if (logueStageInfo.type == StageType.Boss && num4 > 0)
+                if (logueStageInfo.type == StageType.Boss && numBoss > 0)
                 {
                     stage.Add(logueStageInfo);
-                    --num4;
+                    --numBoss;
                 }
-                else if (logueStageInfo.type == StageType.Normal && num1 > 0)
+                else if (logueStageInfo.type == StageType.Normal && numNormal > 0)
                 {
                     stage.Add(logueStageInfo);
-                    --num1;
+                    --numNormal;
                 }
-                else if (logueStageInfo.type == StageType.Mystery && num2 > 0)
+                else if (logueStageInfo.type == StageType.Mystery && numMystery > 0)
                 {
                     stage.Add(logueStageInfo);
-                    --num2;
+                    --numMystery;
                 }
-                else if (logueStageInfo.type == StageType.Shop && num3 > 0)
+                else if (logueStageInfo.type == StageType.Shop && numShop > 0)
                 {
                     stage.Add(logueStageInfo);
-                    --num3;
+                    --numShop;
+                }
+                else if (logueStageInfo.type == StageType.Elite && numElite > 0)
+                {
+                    stage.Add(logueStageInfo);
+                    --numElite;
                 }
             }
-            int num5 = (int)stageinfoV.GetType().GetMethod("get_Rest", AccessTools.all).Invoke(stageinfoV, (object[])null);
+            int numRest = (int)stageinfoV.GetType().GetMethod("get_Rest", AccessTools.all).Invoke(stageinfoV, (object[])null);
             LogueStageInfo stageInfo = Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 855));
-            for (int index = 0; index < num5; ++index)
+            for (int index = 0; index < numRest; ++index)
                 stage.Add(stageInfo);
         }
 
@@ -1149,6 +1155,7 @@ namespace abcdcode_LOGLIKE_MOD
             var stageinfoV1 = new
             {
                 NormalV = 3,
+                EliteV = 0,
                 MysteryV = 3,
                 ShopV = 1,
                 BossV = 1,
@@ -1164,6 +1171,7 @@ namespace abcdcode_LOGLIKE_MOD
             var stageinfoV2 = new
             {
                 NormalV = 3,
+                EliteV = 0,
                 MysteryV = 3,
                 ShopV = 1,
                 BossV = 1,
@@ -1179,6 +1187,7 @@ namespace abcdcode_LOGLIKE_MOD
             var stageinfoV3 = new
             {
                 NormalV = 4,
+                EliteV = 0,
                 MysteryV = 3,
                 ShopV = 2,
                 BossV = 1,
@@ -1194,6 +1203,7 @@ namespace abcdcode_LOGLIKE_MOD
             var stageinfoV4 = new
             {
                 NormalV = 4,
+                EliteV = 0,
                 MysteryV = 3,
                 ShopV = 2,
                 BossV = 1,
@@ -1209,6 +1219,7 @@ namespace abcdcode_LOGLIKE_MOD
             var stageinfoV5 = new
             {
                 NormalV = 5,
+                EliteV = 0,
                 MysteryV = 3,
                 ShopV = 2,
                 BossV = 1,
@@ -1221,6 +1232,7 @@ namespace abcdcode_LOGLIKE_MOD
             var stageinfoV6 = new
             {
                 NormalV = 5,
+                EliteV = 0,
                 MysteryV = 3,
                 ShopV = 2,
                 BossV = 1,

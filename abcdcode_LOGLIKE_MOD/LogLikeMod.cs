@@ -1942,8 +1942,6 @@ namespace abcdcode_LOGLIKE_MOD
                 this.Patching(harmony, (MethodBase)typeof(BookModel).GetMethod("GetMaxPassiveCost", AccessTools.all), postfix: postfix44);
                 LogLikeMod.LogModAssemblys = new List<Assembly>();
                 LogLikeMod.LoadSpineAssets();
-                foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
-                    LogLikeMod.ModLoader.OnInitializeMod(logMod.GetAssemPath(), logMod.invInfo.workshopInfo.uniqueId);
                 LogLikeMod.ArtWorks = new LogLikeMod.CacheDic<string, Sprite>(new LogLikeMod.CacheDic<string, Sprite>.getdele(LogLikeMod.GetArtWorks));
                 LogLikeMod.LogUIObjs = new LogLikeMod.CacheDic<int, GameObject>(new LogLikeMod.CacheDic<int, GameObject>.getdele(LogLikeMod.GetLogUIObj));
                 this.LoadStages();
@@ -1962,7 +1960,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.LoadTextData(TextDataModel.CurrentLanguage);
                 LogLikeMod.spinemotions = new Dictionary<string, Dictionary<ActionDetail, Dictionary<GameObject, SkeletonAnimation>>>();
                 FormationXmlRoot formationXmlRoot;
-                using (StringReader stringReader = new StringReader(File.ReadAllText(LogLikeMod.path + "/AddData/FormationInfo/FormationInfo.txt")))
+                using (StringReader stringReader = new StringReader(File.ReadAllText(LogLikeMod.path + "/AddData/FormationInfo.txt")))
                     formationXmlRoot = (FormationXmlRoot)new XmlSerializer(typeof(FormationXmlRoot)).Deserialize((TextReader)stringReader);
                 ((List<FormationXmlInfo>)typeof(FormationXmlList).GetField("_list", AccessTools.all).GetValue((object)Singleton<FormationXmlList>.Instance)).AddRange((IEnumerable<FormationXmlInfo>)formationXmlRoot.list);
                 LogLikeMod.CheckExceptionModList = new List<string>();
@@ -1972,6 +1970,8 @@ namespace abcdcode_LOGLIKE_MOD
                 preLoader.StartUpgradeInfoPreload();
                 preLoader.StartCreatureTabPreload();
                 preLoader.StartSoundPreload();
+                foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
+                    LogLikeMod.ModLoader.OnInitializeMod(logMod.GetAssemPath(), logMod.invInfo.workshopInfo.uniqueId);
             }
             catch (Exception ex)
             {
@@ -4425,8 +4425,12 @@ namespace abcdcode_LOGLIKE_MOD
                     else
                         --LogLikeMod.NormalRewardCool;
                 }
-                if (LogLikeMod.curstagetype == StageType.Elite)
-                    LogLikeMod.rewards_passive.Add(RewardInfo.GetCurChapterEliteReward(LogLikeMod.curchaptergrade));
+                if (LogLikeMod.curstagetype == StageType.Elite) 
+                {
+                    RewardInfo eliteReward = RewardInfo.GetCurChapterEliteReward(LogLikeMod.curchaptergrade);
+                    if (eliteReward != null)
+                        LogLikeMod.rewards_passive.Add(eliteReward);
+                }
                 if (LogLikeMod.curChStageStep != 0 && LogLikeMod.curstagetype == StageType.Boss && LogueBookModels.RemainStageList.ContainsKey(LogLikeMod.curchaptergrade + 1))
                 {
                     RewardInfo chapterBossReward = RewardInfo.GetCurChapterBossReward(LogLikeMod.curchaptergrade);

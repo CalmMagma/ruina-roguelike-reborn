@@ -274,40 +274,5 @@ namespace abcdcode_LOGLIKE_MOD
             return new LorId(data.GetString("workshopId"), id);
         }
 
-        public static void InternalSetItemTooltip(
-          this UIMainOverlayManager __instance,
-          string name,
-          string content,
-          Rarity rare,
-          RectTransform rectTransform)
-        {
-            __instance.Open();
-            TextMeshProUGUI textMeshProUgui1 = (TextMeshProUGUI)__instance.GetType().GetField("tooltipName", AccessTools.all).GetValue((object)__instance);
-            TextMeshProMaterialSetter proMaterialSetter = (TextMeshProMaterialSetter)__instance.GetType().GetField("setter_tooltipname", AccessTools.all).GetValue((object)__instance);
-            TextMeshProUGUI textMeshProUgui2 = (TextMeshProUGUI)__instance.GetType().GetField("tooltipDesc", AccessTools.all).GetValue((object)__instance);
-            textMeshProUgui1.text = name;
-            textMeshProUgui1.rectTransform.sizeDelta = new Vector2(__instance.tooltipName.rectTransform.sizeDelta.x, 20f);
-            Camera cam = (Camera)null;
-            if ((UnityEngine.Object)rectTransform != (UnityEngine.Object)null)
-            {
-                Graphic componentInChildren = rectTransform.GetComponentInChildren<Graphic>();
-                if ((UnityEngine.Object)componentInChildren != (UnityEngine.Object)null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
-                    cam = Camera.main;
-            }
-            Color color = Color.white;
-            if (rare >= Rarity.Common && rare <= Rarity.Unique)
-                color = UIColorManager.Manager.GetEquipRarityColor(rare);
-            else if (rare == Rarity.Special)
-                color = UIColorManager.Manager.Error;
-            textMeshProUgui1.color = color;
-            proMaterialSetter.underlayColor = color;
-            textMeshProUgui2.text = content;
-            __instance.SetTooltipOverlayBoxSize(UIToolTipPanelType.OnlyContent);
-            __instance.SetTooltipOverlayBoxPosition(cam, rectTransform);
-            proMaterialSetter.enabled = false;
-            proMaterialSetter.enabled = true;
-            textMeshProUgui1.enabled = false;
-            textMeshProUgui1.enabled = true;
-        }
     }
 }

@@ -6,42 +6,43 @@
 
 using GameSave;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class OnceEffect : GlobalLogueEffectBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public int stack = 1;
 
-  public override void AddedNew()
-  {
-    ++this.stack;
-    Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
-  }
+    public class OnceEffect : GlobalLogueEffectBase
+    {
+        public int stack = 1;
 
-  public override bool CanDupliacte() => true;
+        public override void AddedNew()
+        {
+            ++this.stack;
+            Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
+        }
 
-  public override SaveData GetSaveData()
-  {
-    SaveData saveData = base.GetSaveData();
-    saveData.AddData("stack", this.stack);
-    return saveData;
-  }
+        public override bool CanDupliacte() => true;
 
-  public override void LoadFromSaveData(SaveData save)
-  {
-    base.LoadFromSaveData(save);
-    this.stack = save.GetInt("stack");
-  }
+        public override SaveData GetSaveData()
+        {
+            SaveData saveData = base.GetSaveData();
+            saveData.AddData("stack", this.stack);
+            return saveData;
+        }
 
-  public virtual void Use()
-  {
-    --this.stack;
-    if (this.stack <= 0)
-      this.Destroy();
-    Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
-  }
+        public override void LoadFromSaveData(SaveData save)
+        {
+            base.LoadFromSaveData(save);
+            this.stack = save.GetInt("stack");
+        }
 
-  public override int GetStack() => this.stack;
-}
+        public virtual void Use()
+        {
+            --this.stack;
+            if (this.stack <= 0)
+                this.Destroy();
+            Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
+        }
+
+        public override int GetStack() => this.stack;
+    }
 }

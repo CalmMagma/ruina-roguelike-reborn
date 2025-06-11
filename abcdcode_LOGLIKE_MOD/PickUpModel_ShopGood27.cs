@@ -7,89 +7,74 @@
 using Sound;
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_ShopGood27 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood27()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570027));
-    this.Name = LogueEffectXmlList.AutoLocalizeVanillaName((PickUpModelBase) this, this.KeywordId);
-    this.Desc = LogueEffectXmlList.AutoLocalizeVanillaDesc((PickUpModelBase) this, this.KeywordId);
-    this.id = new LorId(LogLikeMod.ModId, 90027);
-  }
 
-  public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
-
-  public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
-
-  public override void OnPickUpShop(ShopGoods good)
-  {
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_ShopGood27.Shop27Effect());
-  }
-
-  public string KeywordId => "GlobalEffect_BloodShed";
-
-  public class Shop27Effect : GlobalLogueEffectBase
-  {
-    public bool CanUse;
-    public bool EffectOn;
-    public static Rarity ItemRarity = Rarity.Unique;
-
-    public override Sprite GetSprite()
+    public class PickUpModel_ShopGood27 : ShopPickUpModel
     {
-      return !this.EffectOn ? LogLikeMod.ArtWorks["ShopPassive27"] : LogLikeMod.ArtWorks["ShopPassive27_On"];
-    }
+        public PickUpModel_ShopGood27() : base()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570027));
+            this.id = new LorId(LogLikeMod.ModId, 90027);
+        }
 
-    public override string GetEffectName()
-    {
-      return LogueEffectXmlList.AutoLocalizeVanillaName((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
 
-    public override string GetEffectDesc()
-    {
-      return LogueEffectXmlList.AutoLocalizeVanillaDesc((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
 
-    public override void OnStartBattle()
-    {
-      base.OnStartBattle();
-      this.CanUse = true;
-      this.EffectOn = false;
-    }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood27.Shop27Effect());
+        }
 
-    public override void OnRoundStart(StageController stage)
-    {
-      base.OnRoundStart(stage);
-      this.EffectOn = false;
-      Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
-    }
+        public override string KeywordId => "GlobalEffect_BloodShed";
+        public override string KeywordIconId => "ShopPassive27";
+        public class Shop27Effect : GlobalLogueEffectBase
+        {
+            public bool CanUse;
+            public bool EffectOn;
+            public static Rarity ItemRarity = Rarity.Unique;
 
-    public override void BeforeRollDice(BattleDiceBehavior behavior)
-    {
-      base.BeforeRollDice(behavior);
-      if (!this.EffectOn)
-        return;
-      behavior.ApplyDiceStatBonus(new DiceStatBonus()
-      {
-        dmgRate = 100,
-        breakRate = 100
-      });
-    }
+            public override void OnStartBattle()
+            {
+                base.OnStartBattle();
+                this.CanUse = true;
+                this.EffectOn = false;
+            }
 
-    public override void OnClick()
-    {
-      base.OnClick();
-      if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase || !this.CanUse)
-        return;
-      this.EffectOn = true;
-      this.CanUse = false;
-      Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
-      SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/Wolf_FogChange", volume: 0.85f);
-    }
+            public override void OnRoundStart(StageController stage)
+            {
+                base.OnRoundStart(stage);
+                this.EffectOn = false;
+                Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
+            }
 
-    public string KeywordId => "GlobalEffect_BloodShed";
-  }
-}
+            public override void BeforeRollDice(BattleDiceBehavior behavior)
+            {
+                base.BeforeRollDice(behavior);
+                if (!this.EffectOn)
+                    return;
+                behavior.ApplyDiceStatBonus(new DiceStatBonus()
+                {
+                    dmgRate = 100,
+                    breakRate = 100
+                });
+            }
+
+            public override void OnClick()
+            {
+                base.OnClick();
+                if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase || !this.CanUse)
+                    return;
+                this.EffectOn = true;
+                this.CanUse = false;
+                Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
+                SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/Wolf_FogChange", volume: 0.85f);
+            }
+
+            public override string KeywordId => "GlobalEffect_BloodShed";
+            public override string KeywordIconId => this.EffectOn ? "ShopPassive27_On" : "ShopPassive27";
+        }
+    }
 }

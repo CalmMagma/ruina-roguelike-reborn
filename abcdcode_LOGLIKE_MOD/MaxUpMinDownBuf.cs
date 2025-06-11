@@ -6,71 +6,72 @@
 
 using HarmonyLib;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class MaxUpMinDownBuf : BattleUnitBuf
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override string keywordId => "LogueLikeMod_MaxUpMinDownBuf";
 
-  public override void Init(BattleUnitModel owner)
-  {
-    base.Init(owner);
-    typeof (BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue((object) this, (object) LogLikeMod.ArtWorks["buff_MaxUpMinDown"]);
-    typeof (BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue((object) this, (object) true);
-  }
-
-  public override void OnRoundEnd()
-  {
-    base.OnRoundEnd();
-    --this.stack;
-    if (this.stack > 0)
-      return;
-    this.Destroy();
-  }
-
-  public override void BeforeRollDice(BattleDiceBehavior behavior)
-  {
-    base.BeforeRollDice(behavior);
-    behavior.ApplyDiceStatBonus(new DiceStatBonus()
+    public class MaxUpMinDownBuf : BattleUnitBuf
     {
-      min = -1,
-      max = 2
-    });
-  }
+        public override string keywordId => "LogueLikeMod_MaxUpMinDownBuf";
 
-  public static MaxUpMinDownBuf IshaveBuf(BattleUnitModel target, bool findready = false)
-  {
-    foreach (BattleUnitBuf activatedBuf in target.bufListDetail.GetActivatedBufList())
-    {
-      if (activatedBuf is MaxUpMinDownBuf)
-        return activatedBuf as MaxUpMinDownBuf;
+        public override void Init(BattleUnitModel owner)
+        {
+            base.Init(owner);
+            this._bufIcon = LogLikeMod.ArtWorks["buff_MaxUpMinDown"];
+            this._iconInit = true;
+        }
+
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            --this.stack;
+            if (this.stack > 0)
+                return;
+            this.Destroy();
+        }
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            behavior.ApplyDiceStatBonus(new DiceStatBonus()
+            {
+                min = -1,
+                max = 2
+            });
+        }
+
+        public static MaxUpMinDownBuf IshaveBuf(BattleUnitModel target, bool findready = false)
+        {
+            foreach (BattleUnitBuf activatedBuf in target.bufListDetail.GetActivatedBufList())
+            {
+                if (activatedBuf is MaxUpMinDownBuf)
+                    return activatedBuf as MaxUpMinDownBuf;
+            }
+            if (findready)
+            {
+                foreach (BattleUnitBuf readyBuf in target.bufListDetail.GetReadyBufList())
+                {
+                    if (readyBuf is MaxUpMinDownBuf)
+                        return readyBuf as MaxUpMinDownBuf;
+                }
+            }
+            return (MaxUpMinDownBuf)null;
+        }
+
+        public static void GiveBufThisRound(BattleUnitModel target, int stack)
+        {
+            MaxUpMinDownBuf maxUpMinDownBuf = MaxUpMinDownBuf.IshaveBuf(target);
+            if (maxUpMinDownBuf != null)
+            {
+                maxUpMinDownBuf.stack += stack;
+            }
+            else
+            {
+                MaxUpMinDownBuf buf = new MaxUpMinDownBuf();
+                buf.stack = stack;
+                buf.Init(target);
+                target.bufListDetail.AddBuf((BattleUnitBuf)buf);
+            }
+        }
     }
-    if (findready)
-    {
-      foreach (BattleUnitBuf readyBuf in target.bufListDetail.GetReadyBufList())
-      {
-        if (readyBuf is MaxUpMinDownBuf)
-          return readyBuf as MaxUpMinDownBuf;
-      }
-    }
-    return (MaxUpMinDownBuf) null;
-  }
-
-  public static void GiveBufThisRound(BattleUnitModel target, int stack)
-  {
-    MaxUpMinDownBuf maxUpMinDownBuf = MaxUpMinDownBuf.IshaveBuf(target);
-    if (maxUpMinDownBuf != null)
-    {
-      maxUpMinDownBuf.stack += stack;
-    }
-    else
-    {
-      MaxUpMinDownBuf buf = new MaxUpMinDownBuf();
-      buf.stack = stack;
-      buf.Init(target);
-      target.bufListDetail.AddBuf((BattleUnitBuf) buf);
-    }
-  }
-}
 }

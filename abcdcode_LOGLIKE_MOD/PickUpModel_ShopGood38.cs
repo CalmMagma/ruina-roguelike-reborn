@@ -6,58 +6,47 @@
 
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_ShopGood38 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood38()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570038));
-    this.Name = LogueEffectXmlList.AutoLocalizeVanillaName((PickUpModelBase) this, this.KeywordId);
-    this.Desc = LogueEffectXmlList.AutoLocalizeVanillaDesc((PickUpModelBase) this, this.KeywordId);
-    this.id = new LorId(LogLikeMod.ModId, 90038);
-  }
 
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    MaxUpMinDownBuf.GiveBufThisRound(model, 2);
-  }
-
-  public override void OnPickUpShop(ShopGoods good)
-  {
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_ShopGood38.Shop38Effect());
-  }
-
-  public string KeywordId => "GlobalEffect_G1sSteroids";
-
-  public class Shop38Effect : OnceEffect
-  {
-    public static Rarity ItemRarity = Rarity.Rare;
-
-    public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive38"];
-
-    public override string GetEffectName()
+    public class PickUpModel_ShopGood38 : ShopPickUpModel
     {
-      return LogueEffectXmlList.AutoLocalizeVanillaName((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public PickUpModel_ShopGood38() : base()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570038));
+            this.id = new LorId(LogLikeMod.ModId, 90038);
+        }
 
-    public override string GetEffectDesc()
-    {
-      return LogueEffectXmlList.AutoLocalizeVanillaDesc((GlobalLogueEffectBase) this, this.KeywordId);
-    }
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            MaxUpMinDownBuf.GiveBufThisRound(model, 2);
+        }
 
-    public override void OnClick()
-    {
-      base.OnClick();
-      if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase)
-        return;
-      ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 90038));
-      this.Use();
-    }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood38.Shop38Effect());
+        }
 
-    public string KeywordId => "GlobalEffect_G1sSteroids";
-  }
-}
+        public override string KeywordId => "GlobalEffect_G1sSteroids";
+        public override string KeywordIconId => "ShopPassive38";
+
+        public class Shop38Effect : OnceEffect
+        {
+            public static Rarity ItemRarity = Rarity.Rare;
+
+            public override void OnClick()
+            {
+                base.OnClick();
+                if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase)
+                    return;
+                ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 90038));
+                this.Use();
+            }
+
+            public override string KeywordId => "GlobalEffect_G1sSteroids";
+            public override string KeywordIconId => "ShopPassive38";
+        }
+    }
 }

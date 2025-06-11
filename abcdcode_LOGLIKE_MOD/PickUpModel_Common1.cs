@@ -7,78 +7,79 @@
 using HarmonyLib;
 using System.Collections.Generic;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_Common1 : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override bool IsCanPickUp(UnitDataModel target)
-  {
-    foreach (AtkResist atkResist in new Dictionary<string, AtkResist>()
-    {
-      {
-        "SResist",
-        target.bookItem.equipeffect.SResist
-      },
-      {
-        "SBResist",
-        target.bookItem.equipeffect.SBResist
-      },
-      {
-        "PResist",
-        target.bookItem.equipeffect.PResist
-      },
-      {
-        "PBResist",
-        target.bookItem.equipeffect.PBResist
-      },
-      {
-        "HResist",
-        target.bookItem.equipeffect.HResist
-      },
-      {
-        "HBResist",
-        target.bookItem.equipeffect.HBResist
-      }
-    }.Values)
-    {
-      if (atkResist <= AtkResist.Normal)
-        return true;
-    }
-    return false;
-  }
 
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    Dictionary<string, AtkResist> dic = new Dictionary<string, AtkResist>();
-    dic.Add("SResist", model.UnitData.unitData.bookItem.equipeffect.SResist);
-    dic.Add("SBResist", model.UnitData.unitData.bookItem.equipeffect.SBResist);
-    dic.Add("PResist", model.UnitData.unitData.bookItem.equipeffect.PResist);
-    dic.Add("PBResist", model.UnitData.unitData.bookItem.equipeffect.PBResist);
-    dic.Add("HResist", model.UnitData.unitData.bookItem.equipeffect.HResist);
-    dic.Add("HBResist", model.UnitData.unitData.bookItem.equipeffect.HBResist);
-    string str;
-    do
+    public class PickUpModel_Common1 : PickUpModelBase
     {
-      str = ModdingUtils.PickoneKeyInDic<string, AtkResist>(dic);
-      switch (dic[str])
-      {
-        case AtkResist.Weak:
-        case AtkResist.Vulnerable:
-        case AtkResist.Normal:
-          goto label_1;
-        default:
-          dic.Remove(str);
-          continue;
-      }
+        public override bool IsCanPickUp(UnitDataModel target)
+        {
+            foreach (AtkResist atkResist in new Dictionary<string, AtkResist>()
+            {
+              {
+                "SResist",
+                target.bookItem.equipeffect.SResist
+              },
+              {
+                "SBResist",
+                target.bookItem.equipeffect.SBResist
+              },
+              {
+                "PResist",
+                target.bookItem.equipeffect.PResist
+              },
+              {
+                "PBResist",
+                target.bookItem.equipeffect.PBResist
+              },
+              {
+                "HResist",
+                target.bookItem.equipeffect.HResist
+              },
+              {
+                "HBResist",
+                target.bookItem.equipeffect.HBResist
+              }
+            }.Values)
+            {
+                if (atkResist <= AtkResist.Normal)
+                    return true;
+            }
+            return false;
+        }
+
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            Dictionary<string, AtkResist> dic = new Dictionary<string, AtkResist>();
+            dic.Add("SResist", model.UnitData.unitData.bookItem.equipeffect.SResist);
+            dic.Add("SBResist", model.UnitData.unitData.bookItem.equipeffect.SBResist);
+            dic.Add("PResist", model.UnitData.unitData.bookItem.equipeffect.PResist);
+            dic.Add("PBResist", model.UnitData.unitData.bookItem.equipeffect.PBResist);
+            dic.Add("HResist", model.UnitData.unitData.bookItem.equipeffect.HResist);
+            dic.Add("HBResist", model.UnitData.unitData.bookItem.equipeffect.HBResist);
+            string str;
+            do
+            {
+                str = ModdingUtils.PickoneKeyInDic<string, AtkResist>(dic);
+                switch (dic[str])
+                {
+                    case AtkResist.Weak:
+                    case AtkResist.Vulnerable:
+                    case AtkResist.Normal:
+                        goto label_1;
+                    default:
+                        dic.Remove(str);
+                        continue;
+                }
+            }
+            while (dic.Count != 0);
+            goto label_3;
+        label_1:
+            typeof(BookEquipEffect).GetField(str, AccessTools.all).SetValue((object)model.UnitData.unitData.bookItem.equipeffect, (object)(dic[str] + 1));
+            return;
+        label_3:;
+        }
     }
-    while (dic.Count != 0);
-    goto label_3;
-label_1:
-    typeof (BookEquipEffect).GetField(str, AccessTools.all).SetValue((object) model.UnitData.unitData.bookItem.equipeffect, (object) (dic[str] + 1));
-    return;
-label_3:;
-  }
-}
 }

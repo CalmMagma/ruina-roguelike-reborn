@@ -9,7 +9,7 @@ using LOR_DiceSystem;
 namespace RogueLike_Mod_Reborn
 {
     #region STARTER ITEMS
-    public class RMREffect_IronHeart : GlobalRebornEffectBase
+    public class RMREffect_IronHeart : GlobalLogueEffectBase
     {
         public override void OnStartBattleAfter()
         {
@@ -26,7 +26,7 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_IronHeart";
     }
 
-    public class RMREffect_HunterCloak : GlobalRebornEffectBase
+    public class RMREffect_HunterCloak : GlobalLogueEffectBase
     {
         public override void OnStartBattleAfter()
         {
@@ -51,7 +51,7 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_HunterCloak";
     }
 
-    public class RMREffect_ViciousGlasses : GlobalRebornEffectBase
+    public class RMREffect_ViciousGlasses : GlobalLogueEffectBase
     {
         public override void OnStartBattleAfter()
         {
@@ -70,7 +70,7 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_ViciousGlasses";
     }
 
-    public class RMREffect_StrangeOrb : GlobalRebornEffectBase
+    public class RMREffect_StrangeOrb : GlobalLogueEffectBase
     {
         public override void OnStartBattleAfter()
         {
@@ -137,7 +137,7 @@ namespace RogueLike_Mod_Reborn
     #endregion
 
 
-    public class RMREffect_HarvesterScythe : GlobalRebornEffectBase
+    public class RMREffect_HarvesterScythe : GlobalLogueEffectBase
     {
         public static Rarity ItemRarity = Rarity.Uncommon;
         public override string KeywordId => "RMR_HarvestScythe";
@@ -159,7 +159,7 @@ namespace RogueLike_Mod_Reborn
         }
     }
     
-    public class RMREffect_Remote : GlobalRebornEffectBase
+    public class RMREffect_Remote : GlobalLogueEffectBase
     {
         public static Rarity ItemRarity = Rarity.Uncommon;
         public override string KeywordId => "RMR_Remote";
@@ -175,7 +175,7 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class RMREffect_BigBrotherChains : GlobalRebornEffectBase
+    public class RMREffect_BigBrotherChains : GlobalLogueEffectBase
     {
         int powerUp = 0;
         public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
@@ -215,7 +215,7 @@ namespace RogueLike_Mod_Reborn
     }
 
     // NEEDS LOCALIZATION, OBTAINMENT METHOD AND TESTING
-    public class RMREffect_ZeroCounterplay : GlobalRebornEffectBase
+    public class RMREffect_ZeroCounterplay : GlobalLogueEffectBase
     {
         bool ZCActive = false;
         int diceTicks = 3;
@@ -251,7 +251,7 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class RMREffect_Crowbar : GlobalRebornEffectBase
+    public class RMREffect_Crowbar : GlobalLogueEffectBase
     {
         public class CrowbarDamageBuf : BattleUnitBuf
         {

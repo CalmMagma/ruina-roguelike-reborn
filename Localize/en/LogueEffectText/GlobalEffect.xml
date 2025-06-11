@@ -10,7 +10,7 @@
   
   <LogueEffectInfo Id="GlobalEffect_ShopThiefPenalty">
     <Name>Bad Manners!</Name> 
-    <Desc>You're unable to visit shops this act.</Desc> 
+    <Desc>You're unable to buy any more items this shop.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Etiquette, you troglodyte!”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 

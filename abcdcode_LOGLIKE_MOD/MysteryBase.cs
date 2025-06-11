@@ -177,12 +177,10 @@ namespace abcdcode_LOGLIKE_MOD
             TextMeshProUGUI textTmp1 = ModdingUtils.CreateText_TMP(image2.transform, new Vector2(0.0f, 0.0f), 45, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.Midline, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
             textTmp1.text = this.GetCurFrameTitle();
             this.FrameObj.Add("Title", textTmp1.gameObject);
-            int choicevalue = 0;
+
             int choiceAmount = this.curFrame.choices.Count;
-            foreach (MysteryChoiceInfo choice1 in this.curFrame.choices)
+            foreach (MysteryChoiceInfo choice in this.curFrame.choices)
             {
-                MysteryChoiceInfo choice = choice1;
-                ++choicevalue;
                 UILogCustomSelectable btn;
                 if (choiceAmount < 5)
                 {
@@ -208,7 +206,7 @@ namespace abcdcode_LOGLIKE_MOD
                 string text = string.Empty;
                 if (loc != null)
                 {
-                    text = loc.GetFrameById(this.curFrame.FrameID).GetChoiceById(choice1.ChoiceID).Desc;
+                    text = loc.GetFrameById(this.curFrame.FrameID).GetChoiceById(choice.ChoiceID).Desc;
                 }
                 else text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(choice.desc);
                 text.ReplaceColorShorthands();
@@ -216,7 +214,7 @@ namespace abcdcode_LOGLIKE_MOD
                 textTmp2.transform.Rotate(0.0f, 0.0f, 2.5f);
                 this.FrameObj.Add("Desc" + choice.ChoiceID.ToString(), textTmp2.gameObject);
             }
-            this.CreateDia(choicevalue, image1.gameObject);
+            this.CreateDia(choiceAmount - 1, image1.gameObject);
             if (this.animator == null)
                 this.animator = image1.gameObject.AddComponent<AnimUpdater>();
             this.animator.SetAnim(new MysteryAnimatorDefault(), this);
