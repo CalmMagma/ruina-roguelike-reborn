@@ -43,17 +43,14 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static void LogAddModCard(this ItemXmlDataList datalist, DiceCardXmlInfo cardinfo)
         {
-            Dictionary<string, List<DiceCardXmlInfo>> fieldValue1 = LogLikeMod.GetFieldValue<Dictionary<string, List<DiceCardXmlInfo>>>((object)datalist, "_workshopDict");
-            if (!fieldValue1.ContainsKey(cardinfo.workshopID))
-                fieldValue1[cardinfo.workshopID] = new List<DiceCardXmlInfo>();
-            if (fieldValue1[cardinfo.workshopID].Find((Predicate<DiceCardXmlInfo>)(x => x.id == cardinfo.id)) == null)
-                fieldValue1[cardinfo.workshopID].Add(cardinfo);
-            List<DiceCardXmlInfo> fieldValue2 = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>((object)datalist, "_cardInfoList");
-            Dictionary<LorId, DiceCardXmlInfo> fieldValue3 = LogLikeMod.GetFieldValue<Dictionary<LorId, DiceCardXmlInfo>>((object)datalist, "_cardInfoTable");
-            if (fieldValue2.Find((Predicate<DiceCardXmlInfo>)(x => x.id == cardinfo.id)) != null)
+            if (!datalist._workshopDict.ContainsKey(cardinfo.workshopID))
+                datalist._workshopDict[cardinfo.workshopID] = new List<DiceCardXmlInfo>();
+            if (datalist._workshopDict[cardinfo.workshopID].Find((Predicate<DiceCardXmlInfo>)(x => x.id == cardinfo.id)) == null)
+                datalist._workshopDict[cardinfo.workshopID].Add(cardinfo);
+            if (datalist._cardInfoList.Find(x => x.id == cardinfo.id) != null)
                 return;
-            fieldValue2.Add(cardinfo);
-            fieldValue3[cardinfo.id] = cardinfo;
+            datalist._cardInfoList.Add(cardinfo);
+            datalist._cardInfoTable[cardinfo.id] = cardinfo;
         }
 
         public static void SetLayerAll(this GameObject obj, int layer)

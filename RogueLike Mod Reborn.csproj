@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RogueLike_Mod_Reborn</RootNamespace>
     <AssemblyName>RogueLike Mod Reborn</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -176,7 +177,7 @@
     <Compile Include="abcdcode_LOGLIKE_MOD\CraftEffect.cs" />
     <Compile Include="abcdcode_Refactored\AbnormalityPickUpModels.cs" />
     <Compile Include="abcdcode_Refactored\CraftEquipChapterModels.cs" />
-	<Compile Include="abcdcode_Refactored\Upgrades.cs" />
+    <Compile Include="abcdcode_Refactored\Upgrades.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\CreaturePickUpModel.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\DebugEffect_Damage.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\DiceCardAbility_binding2pwLog.cs" />
