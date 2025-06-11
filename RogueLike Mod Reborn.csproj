@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RogueLike_Mod_Reborn</RootNamespace>
     <AssemblyName>RogueLike Mod Reborn</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -674,6 +674,7 @@
     <Compile Include="CommonModApi\ReflectionHelper.cs" />
     <Compile Include="CommonModApi\Tuple.cs" />
     <Compile Include="CommonModApi\Tuple`2.cs" />
+    <Compile Include="abcdcode_Refactored\LogLikePatches.cs" />
     <Compile Include="RMR_CardEffects.cs" />
     <Compile Include="RMR_ActionScripts.cs" />
     <Compile Include="RMR_BattleBufs.cs" />

@@ -184,15 +184,15 @@ namespace abcdcode_LOGLIKE_MOD
                 UILogCustomSelectable btn;
                 if (choiceAmount < 5)
                 {
-                    btn = ModdingUtils.CreateLogSelectable(image2.transform, "MysteryButton_Enable", new Vector2(1f, 1f), new Vector2(525f, (float)(-370 + choice.ChoiceID * 195)));
+                    btn = ModdingUtils.CreateLogSelectable(image2.transform, "MysteryButton_Enable", new Vector2(1f, 1f), new Vector2(100f, (float)(-200 - choice.ChoiceID * 200)));
                 }
                 else if (choiceAmount < 9)
                 {
-                    btn = ModdingUtils.CreateLogSelectable(image2.transform, "MysteryButton_Enable", new Vector2(1f, 1f), new Vector2(430f + (float)(choice.ChoiceID / 4 * 560), (float)(-372 + choice.ChoiceID % 4 * 158)), new Vector2(551f, 154f));
+                    btn = ModdingUtils.CreateLogSelectable(image2.transform, "MysteryButton_Enable", new Vector2(1f, 1f), new Vector2(-150f + (float)(choice.ChoiceID / 4 * 410), (float)(-200 + (choice.ChoiceID % 4) * -140)), new Vector2(401f, 114f));
                 }
                 else
                 {
-                    btn = ModdingUtils.CreateLogSelectable(image2.transform, "MysteryButton_Enable", new Vector2(1f, 1f), new Vector2(335f + (float)(choice.ChoiceID / 6 * 410), (float)(-375 + choice.ChoiceID % 6 * 120)), new Vector2(401f, 114f));
+                    btn = ModdingUtils.CreateLogSelectable(image2.transform, "MysteryButton_Enable", new Vector2(1f, 1f), new Vector2(-150f + (float)(choice.ChoiceID / 6 * 410), (float)(-200 + (choice.ChoiceID % 6) * -125)), new Vector2(401f, 114f));
                 }
                 Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
                 buttonClickedEvent.AddListener((UnityAction)(() => this.OnClickChoiceCheckAlpha(btn.gameObject, choice.ChoiceID)));
