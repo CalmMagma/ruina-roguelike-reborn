@@ -56,7 +56,7 @@ public class TutorialManager : Singleton<TutorialManager>
 
   public TutorialManager.TutoInfo FindLogTuto(UIManualScreenPage page)
   {
-    return this.TutorialDic.Values.ToList<TutorialManager.TutoInfo>().Find((Predicate<TutorialManager.TutoInfo>) (x => (UnityEngine.Object) x.Tutopage == (UnityEngine.Object) page));
+    return this.TutorialDic.Values.ToList<TutorialManager.TutoInfo>().Find((Predicate<TutorialManager.TutoInfo>) (x =>  x.Tutopage ==  page));
   }
 
   public void ConnectTuto(string prev, string next)
@@ -75,9 +75,9 @@ public class TutorialManager : Singleton<TutorialManager>
     Transform child1 = manualScreenPage.transform.GetChild(0).GetChild(1);
     Transform child2 = manualScreenPage.transform.GetChild(0).GetChild(2);
     Transform child3 = manualScreenPage.transform.GetChild(0).GetChild(3);
-    UnityEngine.Object.DestroyImmediate((UnityEngine.Object) child1.gameObject);
-    UnityEngine.Object.DestroyImmediate((UnityEngine.Object) child2.gameObject);
-    UnityEngine.Object.DestroyImmediate((UnityEngine.Object) child3.gameObject);
+    UnityEngine.Object.DestroyImmediate( child1.gameObject);
+    UnityEngine.Object.DestroyImmediate( child2.gameObject);
+    UnityEngine.Object.DestroyImmediate( child3.gameObject);
     manualScreenPage.panel = content.panel;
     manualScreenPage.currentid.titleid = 1;
     manualScreenPage.currentid.subtitleid = 1;

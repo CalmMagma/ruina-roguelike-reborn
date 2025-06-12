@@ -212,13 +212,11 @@ namespace abcdcode_LOGLIKE_MOD
 
         public LorId BookXmlInfo_get_DeckId(Func<BookXmlInfo, LorId> orig, BookXmlInfo self)
         {
-            if (self.id == new LorId(LogLikeMod.ModId, -854) && RMRCore.CurrentGamemode.ReplaceBaseDeck)
+            if (self.id == new LorId(LogLikeMod.ModId, -854) && RMRCore.CurrentGamemode.ReplaceBaseDeck && !(StageController.Instance._stageModel._classInfo.id == new LorId(LogLikeMod.ModId, -855)))
             {
                 return RMRCore.CurrentGamemode.BaseDeckReplacement;
             }
             return orig(self);
-
-
         }
 
         public void UIBattleSettingPanel_SetCurrentSephirahButton(
@@ -576,7 +574,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 TextMeshProUGUI textMeshProUgui1 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_SelectDesc", AccessTools.all).GetValue((object)self);
                 TextMeshProUGUI textMeshProUgui2 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_BtnSelectDesc", AccessTools.all).GetValue((object)self);
-                if ((UnityEngine.Object)LogLikeMod.skipPanel == (UnityEngine.Object)null)
+                if (LogLikeMod.skipPanel == null)
                 {
                     Button button = ModdingUtils.CreateButton(self.selectablePanel.transform.parent, "AbCardSelection_Skip", new Vector2(1f, 1f), new Vector2(650f, 385f));
                     Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
@@ -602,7 +600,7 @@ namespace abcdcode_LOGLIKE_MOD
                     LogLikeMod.skipPanel = button;
                     LogLikeMod.skipPanelText = ModdingUtils.CreateText_TMP(button.transform, new Vector2(-10f, 0.0f), (int)textMeshProUgui2.fontSize, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.Midline, textMeshProUgui2.color, textMeshProUgui2.font);
                 }
-                if ((UnityEngine.Object)LogLikeMod.StageRemainText == (UnityEngine.Object)null)
+                if (LogLikeMod.StageRemainText == null)
                 {
                     UILogCustomSelectable BackGround = ModdingUtils.CreateLogSelectable(self.selectablePanel.transform.parent, "AbCardSelection_Skip", new Vector2(1f, 1f), new Vector2(0.0f, 500f));
                     BackGround.SelectEvent = new UnityEventBasedata();
@@ -692,7 +690,7 @@ namespace abcdcode_LOGLIKE_MOD
                 textMeshProUgui1.text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("BattleEnd_NextStage");
                 textMeshProUgui2.text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("BattleEnd_NextStage");
             }
-            else if ((UnityEngine.Object)LogLikeMod.skipPanel != (UnityEngine.Object)null)
+            else if (LogLikeMod.skipPanel != null)
                 LogLikeMod.skipPanel.gameObject.SetActive(false);
         }
 
@@ -786,7 +784,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.CheckStage())
             {
-                if ((UnityEngine.Object)LogLikeMod.InvenBtn == (UnityEngine.Object)null)
+                if (LogLikeMod.InvenBtn == null)
                 {
                     Button fieldValue = LogLikeMod.GetFieldValue<Button>((object)self, "button_BattleCard");
                     LogLikeMod.InvenBtn = UnityEngine.Object.Instantiate<Button>(fieldValue, fieldValue.transform.parent);
@@ -800,7 +798,7 @@ namespace abcdcode_LOGLIKE_MOD
                     LogLikeMod.InvenBtnFrame = LogLikeMod.InvenBtn.transform.GetChild(0).gameObject.GetComponent<Image>();
                     LogLikeMod.InvenBtnFrame.enabled = false;
                 }
-                if ((UnityEngine.Object)LogLikeMod.CreatureBtn == (UnityEngine.Object)null)
+                if (LogLikeMod.CreatureBtn == null)
                 {
                     Button fieldValue = LogLikeMod.GetFieldValue<Button>((object)self, "button_BattleCard");
                     LogLikeMod.CreatureBtn = UnityEngine.Object.Instantiate<Button>(fieldValue, fieldValue.transform.parent);
@@ -814,7 +812,7 @@ namespace abcdcode_LOGLIKE_MOD
                     LogLikeMod.CreatureBtnFrame = LogLikeMod.CreatureBtn.transform.GetChild(0).gameObject.GetComponent<Image>();
                     LogLikeMod.CreatureBtnFrame.enabled = false;
                 }
-                if ((UnityEngine.Object)LogLikeMod.CraftBtn == (UnityEngine.Object)null)
+                if (LogLikeMod.CraftBtn == null)
                 {
                     Button fieldValue = LogLikeMod.GetFieldValue<Button>((object)self, "button_BattleCard");
                     LogLikeMod.CraftBtn = UnityEngine.Object.Instantiate<Button>(fieldValue, fieldValue.transform.parent);
@@ -1301,7 +1299,7 @@ namespace abcdcode_LOGLIKE_MOD
     {
         #region PREFIXES 
 
-        [HarmonyPrefix, HarmonyPatch(typeof(EmotionEgoXmlInfo), "get_CardId")]
+        [HarmonyPrefix, HarmonyPatch(typeof(EmotionEgoXmlInfo), "CardId", MethodType.Getter)]
         public static bool EmotionEgoXmlInfo_get_CardId(EmotionEgoXmlInfo __instance, ref LorId __result)
         {
             if (LogLikeMod.RewardCardDic_Dummy == null)
@@ -1353,6 +1351,7 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
+        /*
         [HarmonyPrefix, HarmonyPatch(typeof(StageController), nameof(StageController.StartParrying))]
         public static bool StageController_StartParrying(
           StageController __instance,
@@ -1375,9 +1374,10 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<BattleOneSidePlayManager>.Instance.StartOneSidePlay(cardB);
             return false;
         }
+        */
 
-        /*
-        [HarmonyPrefix, HarmonyPatch(typeof(UISpriteDataManager), "GetStoryIcon")]
+
+        [HarmonyPrefix, HarmonyPatch(typeof(UISpriteDataManager), nameof(UISpriteDataManager.GetStoryIcon))]
         public static bool UISpriteDataManager_GetStoryIcon(
           string story,
           ref UIIconManager.IconSet __result)
@@ -1395,8 +1395,6 @@ namespace abcdcode_LOGLIKE_MOD
                 };
             return false;
         }
-        */
-
 
         [HarmonyPrefix, HarmonyPatch(typeof(UIBattleSettingEditPanel), nameof(UIBattleSettingEditPanel.SetBUttonState))]
         public static bool UIBattleSettingEditPanel_SetBUttonState(
@@ -1517,7 +1515,7 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(UIPopupWindowManager), "Update")]
+        [HarmonyPrefix, HarmonyPatch(typeof(UIPopupWindowManager), nameof(UIPopupWindowManager.Update))]
         public static bool UIPopupWindowManager_Update()
         {
             return !LogLikeMod.CheckStage() || UI.UIController.Instance.CurrentUIPhase != UIPhase.BattleSetting;
@@ -1545,7 +1543,7 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(UICharacterListPanel), "RefreshBattleUnitDataModel")]
+        [HarmonyPrefix, HarmonyPatch(typeof(UICharacterListPanel), nameof(UICharacterListPanel.RefreshBattleUnitDataModel))]
         public static bool UICharacterListPanel_RefreshBattleUnitDataModel(
           UICharacterListPanel __instance,
           UnitDataModel data)
@@ -1557,7 +1555,7 @@ namespace abcdcode_LOGLIKE_MOD
             if (battledata != null)
             {
                 UICharacterSlot uiCharacterSlot = LogLikeMod.GetFieldValue<UICharacterList>((object)__instance, "CharacterList").slotList.Find((Predicate<UICharacterSlot>)(x => x.unitBattleData == battledata));
-                if ((UnityEngine.Object)uiCharacterSlot != (UnityEngine.Object)null && uiCharacterSlot.unitBattleData != null)
+                if (uiCharacterSlot != null && uiCharacterSlot.unitBattleData != null)
                 {
                     uiCharacterSlot.ReloadHpBattleSettingSlot();
                     __instance.Log("Refrash Character success");
@@ -1605,6 +1603,7 @@ namespace abcdcode_LOGLIKE_MOD
             return !LogLikeMod.CheckStage() || Singleton<MysteryManager>.Instance.curMystery == null && (Singleton<MysteryManager>.Instance.interruptMysterys == null || Singleton<MysteryManager>.Instance.interruptMysterys.Count <= 0) && Singleton<ShopManager>.Instance.curshop == null && !LogLikeMod.PauseBool;
         }
 
+        /*
         [HarmonyPostfix, HarmonyPatch(typeof(BattleDiceCardUI), nameof(BattleDiceCardUI.GetClickableState))]
         public static void BattleDiceCardUI_GetClickableState(
           BattleDiceCardUI __instance,
@@ -1614,13 +1613,7 @@ namespace abcdcode_LOGLIKE_MOD
             if (owner == null || PassiveAbility_ShopPassiveMook9.HasPassive(owner) == null || __result != BattleDiceCardUI.ClickableState.NotEnoughCost)
                 return;
             __result = BattleDiceCardUI.ClickableState.CanClick;
-        }
-
-        /*
-        [HarmonyPostfix, HarmonyPatch(typeof(BattleDiceCardModel), nameof(BattleDiceCardModel.GetCost))]
-        public static void BattleDiceCardModel_GetCost(BattleDiceCardModel __instance, ref int __result)
-        {
-        }
+        } 
         */
 
         [HarmonyPrefix, HarmonyPatch(typeof(SpecialCardListModel), nameof(SpecialCardListModel.ReturnCardToHand))]
@@ -1706,17 +1699,6 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitBuf), nameof(BattleUnitBuf.Destroy))]
-        public static void BattleUnitBuf_Destroy(BattleUnitBuf __instance)
-        {
-            if (!LogLikeMod.CheckStage())
-                return;
-            BattleUnitModel fieldValue = ModdingUtils.GetFieldValue<BattleUnitModel>("_owner", (object)__instance);
-            if (!(__instance is BattleUnitBuf_burn) || fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) == null)
-                return;
-            (fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) as PassiveAbility_ShopPassiveStigma5).Recovering();
-        }
-
         [HarmonyPrefix, HarmonyPatch(typeof(BattleUnitBuf_burn), nameof(BattleUnitBuf_burn.OnRoundEnd))]
         public static bool BattleUnitBuf_burn_OnRoundEnd(BattleUnitBuf_burn __instance)
         {
@@ -1749,19 +1731,6 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitPassiveDetail), nameof(BattleUnitPassiveDetail.OnKill))]
-        public static void BattleUnitPassiveDetail_OnKill(
-          BattleUnitPassiveDetail __instance,
-          BattleUnitModel target)
-        {
-            Singleton<GlobalLogueEffectManager>.Instance.OnKillUnit(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance), target);
-        }
-
-        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitPassiveDetail), nameof(BattleUnitPassiveDetail.OnDie))]
-        public static void BattleUnitPassiveDetail_OnDie(BattleUnitPassiveDetail __instance)
-        {
-            Singleton<GlobalLogueEffectManager>.Instance.OnDieUnit(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance));
-        }
 
         [HarmonyPrefix, HarmonyPatch(typeof(BattleUnitBufListDetail), nameof(BattleUnitBufListDetail.ChangeDiceResult))]
         public static void BattleUnitBufListDetail_ChangeDiceResult(
@@ -1772,29 +1741,6 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage())
                 return;
             Singleton<GlobalLogueEffectManager>.Instance.ChangeDiceResult(behavior, ref diceResult);
-        }
-
-        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitBufListDetail), nameof(BattleUnitBufListDetail.CheckGift))]
-        public static void BattleUnitBufListDetail_CheckGift(
-          BattleUnitBufListDetail __instance,
-          KeywordBuf bufType,
-          int stack,
-          BattleUnitModel actor)
-        {
-            if (bufType != KeywordBuf.Bleeding || actor.passiveDetail.PassiveList.Find((Predicate<PassiveAbilityBase>)(x => x is PassiveAbility_ShopPassiveUnion2)) == null)
-                return;
-            ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance).TakeDamage(stack);
-        }
-
-        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitPassiveDetail), nameof(BattleUnitPassiveDetail.DmgFactor))]
-        public static void BattleUnitPassiveDetail_DmgFactor(
-          BattleUnitPassiveDetail __instance,
-          ref float __result,
-          int dmg,
-          DamageType type = DamageType.ETC,
-          KeywordBuf keyword = KeywordBuf.None)
-        {
-            __result = Singleton<GlobalLogueEffectManager>.Instance.DmgFactor(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance), dmg, type, keyword);
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(BattleUnitModel), nameof(BattleUnitModel.BeforeRollDice))]
@@ -1814,7 +1760,7 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(BookPassiveInfo), "get_name")]
+        [HarmonyPrefix, HarmonyPatch(typeof(BookPassiveInfo), "name", MethodType.Getter)]
         public static bool BookPassiveInfo_get_name(BookPassiveInfo __instance, ref string __result)
         {
             string name = Singleton<PassiveDescXmlList>.Instance.GetName(__instance.passive.id);
@@ -1824,7 +1770,7 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(BookPassiveInfo), "get_desc")]
+        [HarmonyPrefix, HarmonyPatch(typeof(BookPassiveInfo), "desc", MethodType.Getter)]
         public static bool BookPassiveInfo_get_desc(BookPassiveInfo __instance, ref string __result)
         {
             string desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(__instance.passive.id);
@@ -1855,7 +1801,7 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(BattleEmotionCoinUI), "Init")]
+        [HarmonyPrefix, HarmonyPatch(typeof(BattleEmotionCoinUI), nameof(BattleEmotionCoinUI.Init))]
         public static bool BattleEmotionCoinUI_Init(BattleEmotionCoinUI __instance)
         {
             if (__instance.enermy.Length < 10)
@@ -1888,7 +1834,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             try
             {
-                if ((UnityEngine.Object)__instance.gameObject.GetComponent<ScrollRect>() == (UnityEngine.Object)null)
+                if (__instance.gameObject.GetComponent<ScrollRect>() == null)
                 {
                     List<Transform> transformList = new List<Transform>();
                     Texture2D texture2D = new Texture2D(2, 2);
@@ -1925,7 +1871,7 @@ namespace abcdcode_LOGLIKE_MOD
                     {
                         UIBattleSettingWaveSlot waveSlot = __instance.waveSlots[__instance.waveSlots.Count - 1];
                         __instance.waveSlots.Remove(waveSlot);
-                        UnityEngine.Object.DestroyImmediate((UnityEngine.Object)waveSlot);
+                        UnityEngine.Object.DestroyImmediate(waveSlot);
                     }
                 }
                 LogLikeRoutines.InitUIBattleSettingWaveSlots(__instance.waveSlots, __instance);
@@ -1965,6 +1911,64 @@ namespace abcdcode_LOGLIKE_MOD
 
         #region POSTFIXES 
 
+        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitBuf), nameof(BattleUnitBuf.Destroy))]
+        public static void BattleUnitBuf_Destroy(BattleUnitBuf __instance)
+        {
+            if (!LogLikeMod.CheckStage())
+                return;
+            BattleUnitModel fieldValue = ModdingUtils.GetFieldValue<BattleUnitModel>("_owner", (object)__instance);
+            if (!(__instance is BattleUnitBuf_burn) || fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) == null)
+                return;
+            (fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) as PassiveAbility_ShopPassiveStigma5).Recovering();
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(BattleDiceCardUI), nameof(BattleDiceCardUI.GetClickableState))]
+        public static void BattleDiceCardUI_GetClickableState(
+          BattleDiceCardUI __instance,
+          ref BattleDiceCardUI.ClickableState __result)
+        {
+            BattleUnitModel owner = __instance.CardModel.owner;
+            if (owner == null || PassiveAbility_ShopPassiveMook9.HasPassive(owner) == null || __result != BattleDiceCardUI.ClickableState.NotEnoughCost)
+                return;
+            __result = BattleDiceCardUI.ClickableState.CanClick;
+        }
+        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitPassiveDetail), nameof(BattleUnitPassiveDetail.OnKill))]
+        public static void BattleUnitPassiveDetail_OnKill(
+          BattleUnitPassiveDetail __instance,
+          BattleUnitModel target)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.OnKillUnit(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance), target);
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitPassiveDetail), nameof(BattleUnitPassiveDetail.OnDie))]
+        public static void BattleUnitPassiveDetail_OnDie(BattleUnitPassiveDetail __instance)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.OnDieUnit(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance));
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitBufListDetail), nameof(BattleUnitBufListDetail.CheckGift))]
+        public static void BattleUnitBufListDetail_CheckGift(
+          BattleUnitBufListDetail __instance,
+          KeywordBuf bufType,
+          int stack,
+          BattleUnitModel actor)
+        {
+            if (bufType != KeywordBuf.Bleeding || actor.passiveDetail.PassiveList.Find((Predicate<PassiveAbilityBase>)(x => x is PassiveAbility_ShopPassiveUnion2)) == null)
+                return;
+            ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance).TakeDamage(stack);
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitPassiveDetail), nameof(BattleUnitPassiveDetail.DmgFactor))]
+        public static void BattleUnitPassiveDetail_DmgFactor(
+          BattleUnitPassiveDetail __instance,
+          ref float __result,
+          int dmg,
+          DamageType type = DamageType.ETC,
+          KeywordBuf keyword = KeywordBuf.None)
+        {
+            __result = Singleton<GlobalLogueEffectManager>.Instance.DmgFactor(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance), dmg, type, keyword);
+        }
+
         [HarmonyPostfix, HarmonyPatch(typeof(EmotionPassiveCardUI), nameof(EmotionPassiveCardUI.SetSprites))]
         public static void EmotionPassiveCardUI_SetSprites(EmotionPassiveCardUI __instance)
         {
@@ -1979,7 +1983,7 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(UIOptionWindow), nameof(UIOptionWindow.Open))]
         public static void UIOptionWindow_Open(UIOptionWindow __instance)
         {
-            if (!((UnityEngine.Object)LogLikeMod.DefFont == (UnityEngine.Object)null))
+            if (!(LogLikeMod.DefFont == null))
                 return;
             LogLikeMod.DefFont = UnityEngine.Resources.GetBuiltinResource<Font>("Arial.ttf");
             LogLikeMod.DefFontColor = UIColorManager.Manager.GetUIColor(UIColor.Default);
@@ -1994,6 +1998,7 @@ namespace abcdcode_LOGLIKE_MOD
             LoguePlayDataSaver.SavePlayData_Menu();
         }
 
+        /*
         [HarmonyPostfix, HarmonyPatch(typeof(BattleDiceCardUI), nameof(BattleDiceCardUI.SetCard))]
         public static void BattleDiceCardUI_SetCard(
           BattleDiceCardUI __instance,
@@ -2003,7 +2008,9 @@ namespace abcdcode_LOGLIKE_MOD
                 return;
             __instance.img_artwork.sprite = LogLikeMod.ArtWorks[cardModel.GetArtworkSrc()];
         }
+        */
 
+        /*
         [HarmonyPostfix, HarmonyPatch(typeof(UIOriginCardSlot), nameof(UIOriginCardSlot.SetData))]
         public static void UIOriginCardSlot_SetData(
           UIOriginCardSlot __instance,
@@ -2018,6 +2025,7 @@ namespace abcdcode_LOGLIKE_MOD
                 image.sprite = LogLikeMod.ArtWorks[cardmodel.GetArtworkSrc()];
             }
         }
+        */
 
         [HarmonyPostfix, HarmonyPatch(typeof(EmotionPassiveCardUI), nameof(EmotionPassiveCardUI.Init))]
         public static void EmotionPassiveCardUI_Init(EmotionPassiveCardUI __instance)
@@ -2025,7 +2033,7 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage())
                 return;
             bool fieldValue = LogLikeMod.GetFieldValue<bool>((object)__instance, "_isForceOpen");
-            if ((UnityEngine.Object)LogLikeMod.ChangeEmotinCardBtn == (UnityEngine.Object)null)
+            if (LogLikeMod.ChangeEmotinCardBtn == null)
             {
                 LogLikeMod.ChangeEmotinCardBtn = ModdingUtils.CreateButton(SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.selectedEmotionCardBg.transform.parent.parent, "AbCardSelection_Skip", new Vector2(1f, 1f), new Vector2(0.0f, -480f));
                 LogLikeMod.ChangeEmotinCardBtn.onClick.AddListener((UnityAction)(() => LogLikeRoutines.ChangeEPCUTransform(__instance)));
@@ -2107,7 +2115,6 @@ namespace abcdcode_LOGLIKE_MOD
             __result = bookModelList1;
         }
 
-
         [HarmonyPostfix, HarmonyPatch(typeof(CharacterAppearance), nameof(CharacterAppearance.ChangeMotion))]
         public static void CharacterAppearance_ChangeMotion(
           CharacterAppearance __instance,
@@ -2120,13 +2127,13 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     Camera camera = SingletonBehavior<UICharacterRenderer>.Instance.cameraList[index];
                     camera.cullingMask = -1;
-                    if ((UnityEngine.Object)camera.gameObject.GetComponent("CameraRender") == (UnityEngine.Object)null)
+                    if (camera.gameObject.GetComponent("CameraRender") == null)
                         camera.gameObject.AddComponent<CameraRender>().index = index;
                 }
                 LogLikeMod.Temp = false;
             }
             WorkshopSkinDataSetter setter = __instance.GetComponent<WorkshopSkinDataSetter>();
-            if ((UnityEngine.Object)setter == (UnityEngine.Object)null)
+            if (setter == null)
                 return;
             WorkshopSkinData workshopSkinData = Singleton<CustomizingBookSkinLoader>.Instance.GetWorkshopBookSkinData(LogLikeMod.ModId).Find((Predicate<WorkshopSkinData>)(x => x.dic == setter.dic));
             if (workshopSkinData == null)
@@ -2190,7 +2197,7 @@ namespace abcdcode_LOGLIKE_MOD
             PassiveAbility_MoneyCheck.AddMoney(__instance.UnitData.unitData.ExpDrop);
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(BookPassiveInfo), "get_name")]
+        [HarmonyPostfix, HarmonyPatch(typeof(BookPassiveInfo), "desc", MethodType.Getter)]
         public static void BookPassiveInfo_get_desc_postfix(
           BookPassiveInfo __instance,
           ref string __result)
@@ -2214,7 +2221,7 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(UIInvitationRightMainPanel), nameof(UIInvitationRightMainPanel.OpenInit))]
         public static void UIInvitationRightMainPanel_OpenInit(UIInvitationRightMainPanel __instance)
         {
-            if ((UnityEngine.Object)LogLikeMod.LogOpenButton == (UnityEngine.Object)null)
+            if (LogLikeMod.LogOpenButton == null)
             {
                 LogLikeMod.LogOpenButton = ModdingUtils.CreateButton(__instance.transform, "LogLikeModIcon", new Vector2(1f, 1f), new Vector2(-70f, 350f), new Vector2(100f, 100f));
                 LogLikeMod.LogOpenButton.gameObject.AddComponent<FrameDummy>();
@@ -2246,7 +2253,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }));
                 LogLikeMod.LogOpenButton.onClick = buttonClickedEvent;
             }
-            if ((UnityEngine.Object)LogLikeMod.LogContinueButton == (UnityEngine.Object)null)
+            if (LogLikeMod.LogContinueButton == null)
             {
                 LogLikeMod.LogContinueButton = ModdingUtils.CreateButton(__instance.transform, "LogLikeModIcon_Continue", new Vector2(1f, 1f), new Vector2(-70f, 250f), new Vector2(100f, 100f));
                 LogLikeMod.LogContinueButton.gameObject.AddComponent<FrameDummy>();
@@ -2343,7 +2350,7 @@ namespace abcdcode_LOGLIKE_MOD
             __result = unitBattleDataModelList;
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(StageWaveModel), nameof(StageWaveModel_Init))]
+        [HarmonyPostfix, HarmonyPatch(typeof(StageWaveModel), nameof(StageWaveModel.Init))]
         public static void StageWaveModel_Init(StageWaveModel __instance)
         {
             List<int> fieldValue = ModdingUtils.GetFieldValue<List<int>>("_formationIndex", __instance);
@@ -2383,7 +2390,7 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(UI.UIController), nameof(UI.UIController.Awake))]
         public static void UIController_Awake()
         {
-            if (!((UnityEngine.Object)LogLikeMod.UILogCardSlot.Original == (UnityEngine.Object)null))
+            if (!(LogLikeMod.UILogCardSlot.Original == null))
                 return;
             LogLikeMod.UILogCardSlot.Original = LogLikeMod.UILogCardSlot.SlotCopying();
         }
@@ -2511,7 +2518,7 @@ namespace abcdcode_LOGLIKE_MOD
                 __instance.resistSlash.text = $"<color=red>{data.bookItem.GetResistBP_Text(BehaviourDetail.Hit)}</color>";
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(BookModel), "GetMaxPassiveCost")]
+        [HarmonyPostfix, HarmonyPatch(typeof(BookModel), nameof(BookModel.GetMaxPassiveCost))]
         public static void BookModel_GetMaxPassiveCost(ref int __result)
         {
             if (!LogLikeMod.CheckStage())
@@ -2522,7 +2529,7 @@ namespace abcdcode_LOGLIKE_MOD
             __result = num;
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(BookModel), "GetThumbSprite")]
+        [HarmonyPostfix, HarmonyPatch(typeof(BookModel), nameof(BookModel.GetThumbSprite))]
         public static void BookModel_GetThumbSprite(BookModel __instance, ref Sprite __result)
         {
             if (!LogLikeMod.CheckStage() || __instance.ClassInfo.CharacterSkin == null)
@@ -2553,10 +2560,12 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
+        /*
         [HarmonyPostfix, HarmonyPatch(typeof(StageController), nameof(StageController.GameOver))]
         public static void StageController_GameOver(bool iswin, bool isbackbutton = false)
         {
         }
+        */
 
         [HarmonyPostfix, HarmonyPatch(typeof(StageController), nameof(StageController.ActivateStartBattleEffectPhase))]
         public static void StageController_ActivateStartBattleEffectPhase(StageController __instance)

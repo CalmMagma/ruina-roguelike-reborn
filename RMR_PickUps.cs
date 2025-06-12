@@ -89,9 +89,9 @@ namespace RogueLike_Mod_Reborn
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Remote());
         }
 
-        public override string KeywordIconId => "RMR_HarvestScythe";
+        public override string KeywordIconId => "RMR_Remote";
 
-        public override string KeywordId => "RMR_HarvestScythe";
+        public override string KeywordId => "RMR_Remote";
 
     }
 }

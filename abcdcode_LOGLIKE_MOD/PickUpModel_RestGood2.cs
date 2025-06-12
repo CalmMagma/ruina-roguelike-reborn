@@ -5,56 +5,61 @@
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
 using System;
+using UI;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_RestGood2 : RestPickUp
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_RestGood2()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 800002));
-    this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
-    this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
-    this.id = new LorId(LogLikeMod.ModId, 800002);
-    this.type = RestPickUp.RestPickUpType.Main;
-  }
 
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    LogStatAdder adder = new LogStatAdder()
+    public class PickUpModel_RestGood2 : RestPickUp
     {
-      maxbreakpercent = 5,
-      maxhppercent = 5
-    };
-    LogueBookModels.AddPlayerStat(model.UnitData, adder);
-  }
+        public PickUpModel_RestGood2()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 800002));
+            this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
+            this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
+            this.id = new LorId(LogLikeMod.ModId, 800002);
+            this.type = RestPickUp.RestPickUpType.Main;
+        }
 
-  public override bool CheckCondition()
-  {
-    return LogueBookModels.GetCardList(true, true).FindAll((Predicate<DiceCardItemModel>) (x => x.ClassInfo.CheckCanUpgrade())).Count > 0;
-  }
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            LogStatAdder adder = new LogStatAdder()
+            {
+                maxbreakpercent = 5,
+                maxhppercent = 5
+            };
+            LogueBookModels.AddPlayerStat(model.UnitData, adder);
+        }
 
-  public override void OnChoice(RestGood good)
-  {
-    MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(true, true).FindAll((Predicate<DiceCardItemModel>) (x => x.ClassInfo.CheckCanUpgrade())), new MysteryModel_CardChoice.ChoiceResult(this.UpgradeCard), MysteryModel_CardChoice.ChoiceDescType.UpgradeDesc);
-  }
+        public override bool CheckCondition()
+        {
+            bool condition = LogueBookModels.GetCardList(true, true).FindAll(x => x.ClassInfo.CheckCanUpgrade()).Count > 0;
+            if (!condition)
+                UI.UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CardCheckPopUp_CannotUpgrade"));
+            return condition;
+        }
 
-  public void UpgradeCard(MysteryModel_CardChoice mystery, DiceCardItemModel model)
-  {
-    MysteryModel_UpgradeCheckPopup.PopupUpgradeCheck(model.GetID(), (MysteryModel_UpgradeCheckPopup.CheckResult) (my => this.UpgradedCard(mystery, my, model.GetID())));
-  }
+        public override void OnChoice(RestGood good)
+        {
+            MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(true, true).FindAll((Predicate<DiceCardItemModel>)(x => x.ClassInfo.CheckCanUpgrade())), new MysteryModel_CardChoice.ChoiceResult(this.UpgradeCard), MysteryModel_CardChoice.ChoiceDescType.UpgradeDesc);
+        }
 
-  public void UpgradedCard(
-    MysteryModel_CardChoice mystery,
-    MysteryModel_UpgradeCheckPopup mystery2,
-    LorId cardid)
-  {
-    LogueBookModels.DeleteCard(cardid);
-    LogueBookModels.AddUpgradeCard(cardid);
-    Singleton<MysteryManager>.Instance.EndMystery((MysteryBase) mystery);
-    Singleton<MysteryManager>.Instance.EndMystery((MysteryBase) mystery2);
-  }
-}
+        public void UpgradeCard(MysteryModel_CardChoice mystery, DiceCardItemModel model)
+        {
+            MysteryModel_UpgradeCheckPopup.PopupUpgradeCheck(model.GetID(), my => this.UpgradedCard(mystery, my, model.GetID()));
+        }
+
+        public void UpgradedCard(
+          MysteryModel_CardChoice mystery,
+          MysteryModel_UpgradeCheckPopup mystery2,
+          LorId cardid)
+        {
+            LogueBookModels.DeleteCard(cardid);
+            LogueBookModels.AddUpgradeCard(cardid, mystery2.metadata.index, mystery2.metadata.count);
+            Singleton<MysteryManager>.Instance.EndMystery(mystery);
+            Singleton<MysteryManager>.Instance.EndMystery(mystery2);
+        }
+    }
 }

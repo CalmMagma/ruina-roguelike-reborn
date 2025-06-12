@@ -146,7 +146,8 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual void Init()
         {
-            this.loc = RogueMysteryXmlList.Instance.GetLocalizedMystery(this.xmlinfo.StageId);
+            if (this.xmlinfo != null)
+                this.loc = RogueMysteryXmlList.Instance.GetLocalizedMystery(this.xmlinfo.StageId);
             this.FrameObj = new Dictionary<string, GameObject>();
             this.SwapFrame(0);
             LoguePlayDataSaver.LoadMystery(this);
@@ -205,11 +206,10 @@ namespace abcdcode_LOGLIKE_MOD
                 TextMeshProUGUI textTmp2 = ModdingUtils.CreateText_TMP(btn.transform, new Vector2(20f, 0f), 32 - (choiceAmount >= 12 ? 8 : (choiceAmount - choiceAmount % 4)), new Vector2(0.05f, 0f), new Vector2(0.95f, 1f), new Vector2(0f, 0f), TextAlignmentOptions.Center, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
                 string text = string.Empty;
                 if (loc != null)
-                {
                     text = loc.GetFrameById(this.curFrame.FrameID).GetChoiceById(choice.ChoiceID).Desc;
-                }
-                else text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(choice.desc);
-                text.ReplaceColorShorthands();
+                else 
+                    text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(choice.desc);
+                text = text.ReplaceColorShorthands();
                 textTmp2.text = text;
                 textTmp2.transform.Rotate(0.0f, 0.0f, 2.5f);
                 this.FrameObj.Add("Desc" + choice.ChoiceID.ToString(), textTmp2.gameObject);
@@ -275,14 +275,14 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual void OnEnterChoice(int choiceid)
         {
-            if (!((UnityEngine.Object)this.FrameObj["choice_btn" + (object)choiceid].GetComponent<Image>().sprite != (UnityEngine.Object)LogLikeMod.ArtWorks["disabledButton"]))
+            if (!(this.FrameObj["choice_btn" + (object)choiceid].GetComponent<Image>().sprite != LogLikeMod.ArtWorks["disabledButton"]))
                 return;
             this.FrameObj["choice_btn" + (object)choiceid].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["MysteryButton_Hover"];
         }
 
         public virtual void OnExitChoice(int choiceid)
         {
-            if (!((UnityEngine.Object)this.FrameObj["choice_btn" + (object)choiceid].GetComponent<Image>().sprite != (UnityEngine.Object)LogLikeMod.ArtWorks["disabledButton"]))
+            if (!(this.FrameObj["choice_btn" + (object)choiceid].GetComponent<Image>().sprite != LogLikeMod.ArtWorks["disabledButton"]))
                 return;
             this.FrameObj["choice_btn" + (object)choiceid].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["MysteryButton_Enable"];
         }
@@ -320,21 +320,21 @@ namespace abcdcode_LOGLIKE_MOD
         public virtual string GetCurFrameDia()
         {
             string curFrameDia = string.Empty;
-            if (this.curFrame.Dialog.Count > 0)
-            {
-                foreach (string id in this.curFrame.Dialog)
-                    curFrameDia = curFrameDia + abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(id) + Environment.NewLine;
-            }
-
             try
             {
                 if (loc != null)
                 {
                     curFrameDia = loc.GetFrameById(this.curFrame.FrameID).Dialogs;
                 }
+                else if (this.curFrame.Dialog.Count > 0)
+                { 
+                    foreach (string id in this.curFrame.Dialog)
+                        curFrameDia = curFrameDia + abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(id) + Environment.NewLine;
+                }
+                
             }
             catch (Exception e) { Debug.Log("Failed to localize frame dialog: " + e); }
-            return curFrameDia;
+            return curFrameDia.ReplaceColorShorthands();
         }
 
         public virtual void EndMystery() => this.RemoveCurFrame();
@@ -347,8 +347,8 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 try
                 {
-                    if ((UnityEngine.Object)gameObject != (UnityEngine.Object)null)
-                        UnityEngine.Object.Destroy((UnityEngine.Object)gameObject);
+                    if (gameObject != null)
+                        UnityEngine.Object.Destroy(gameObject);
                 }
                 catch
                 {

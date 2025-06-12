@@ -27,7 +27,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override void OnPickUpShop(ShopGoods good)
         {
-            List<ShopGoods> shopGoodsList = Singleton<ShopManager>.Instance.curshop.Goods.FindAll((Predicate<ShopGoods>)(x => (UnityEngine.Object)x != (UnityEngine.Object)good && x.gameObject.activeSelf)).RandomPickUp<ShopGoods>(3);
+            List<ShopGoods> shopGoodsList = Singleton<ShopManager>.Instance.curshop.Goods.FindAll((Predicate<ShopGoods>)(x => x != good && x.gameObject.activeSelf)).RandomPickUp<ShopGoods>(3);
             if (shopGoodsList.Count > 0)
             {
                 foreach (ShopGoods shopGoods in shopGoodsList)
@@ -45,7 +45,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public void ChangeAlpha(GameObject obj, float alpha)
             {
-                if (!((UnityEngine.Object)obj.GetComponent<Image>() != (UnityEngine.Object)null))
+                if (!(obj.GetComponent<Image>() != null))
                     return;
                 Color color = obj.GetComponent<Image>().color;
                 obj.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);

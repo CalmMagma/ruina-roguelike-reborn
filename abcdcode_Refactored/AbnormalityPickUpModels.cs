@@ -448,7 +448,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     base.Init(owner);
                     Battle.CreatureEffect.CreatureEffect fxCreatureEffect = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("5_T/FX_IllusionCard_5_T_Rage", 1f, owner.view, owner.view);
-                    this.aura = (UnityEngine.Object)fxCreatureEffect != (UnityEngine.Object)null ? fxCreatureEffect.gameObject : (GameObject)null;
+                    this.aura = fxCreatureEffect != null ? fxCreatureEffect.gameObject : (GameObject)null;
                     SoundEffectPlayer.PlaySound("Creature/Angry_Meet");
                 }
 
@@ -466,9 +466,9 @@ namespace abcdcode_LOGLIKE_MOD
 
                 public void DestroyAura()
                 {
-                    if (!((UnityEngine.Object)this.aura != (UnityEngine.Object)null))
+                    if (!(this.aura != null))
                         return;
-                    UnityEngine.Object.Destroy((UnityEngine.Object)this.aura);
+                    UnityEngine.Object.Destroy(this.aura);
                     this.aura = (GameObject)null;
                 }
             }
@@ -538,13 +538,13 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 CameraFilterUtil.EarthQuake(0.08f, 0.02f, 50f, 0.6f);
                 Battle.CreatureEffect.CreatureEffect original = Resources.Load<Battle.CreatureEffect.CreatureEffect>("Prefabs/Battle/CreatureEffect/New_IllusionCardFX/5_T/FX_IllusionCard_5_T_SmokeWater");
-                if (!((UnityEngine.Object)original != (UnityEngine.Object)null))
+                if (!(original != null))
                     return;
                 Battle.CreatureEffect.CreatureEffect creatureEffect = UnityEngine.Object.Instantiate<Battle.CreatureEffect.CreatureEffect>(original, SingletonBehavior<BattleSceneRoot>.Instance.transform);
-                if (((UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? (UnityEngine.Object)creatureEffect.gameObject.GetComponent<AutoDestruct>() : (UnityEngine.Object)null) == (UnityEngine.Object)null)
+                if ((creatureEffect != null ? creatureEffect.gameObject.GetComponent<AutoDestruct>() : null) == null)
                 {
-                    AutoDestruct autoDestruct = (UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
-                    if ((UnityEngine.Object)autoDestruct != (UnityEngine.Object)null)
+                    AutoDestruct autoDestruct = creatureEffect != null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
+                    if (autoDestruct != null)
                     {
                         autoDestruct.time = 3f;
                         autoDestruct.DestroyWhenDisable();
@@ -1831,13 +1831,13 @@ namespace abcdcode_LOGLIKE_MOD
                 if (this._owner.bufListDetail.GetActivatedBufList().Find((Predicate<BattleUnitBuf>)(x => x is EmotionCardAbility_bluestar3.BattleUnitBuf_Emotion_BlueStar_SoundBuf)) == null)
                     return;
                 Battle.CreatureEffect.CreatureEffect original = Resources.Load<Battle.CreatureEffect.CreatureEffect>("Prefabs/Battle/CreatureEffect/New_IllusionCardFX/9_H/FX_IllusionCard_9_H_Voice");
-                if ((UnityEngine.Object)original != (UnityEngine.Object)null)
+                if (original != null)
                 {
                     Battle.CreatureEffect.CreatureEffect creatureEffect = UnityEngine.Object.Instantiate<Battle.CreatureEffect.CreatureEffect>(original, SingletonBehavior<BattleSceneRoot>.Instance.transform);
-                    if (((UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? (UnityEngine.Object)creatureEffect.gameObject.GetComponent<AutoDestruct>() : (UnityEngine.Object)null) == (UnityEngine.Object)null)
+                    if ((creatureEffect != null ? creatureEffect.gameObject.GetComponent<AutoDestruct>() : null) == null)
                     {
-                        AutoDestruct autoDestruct = (UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
-                        if ((UnityEngine.Object)autoDestruct != (UnityEngine.Object)null)
+                        AutoDestruct autoDestruct = creatureEffect != null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
+                        if (autoDestruct != null)
                         {
                             autoDestruct.time = 5f;
                             autoDestruct.DestroyWhenDisable();
@@ -1846,7 +1846,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 SoundEffectPlayer.PlaySound("Creature/BlueStar_Atk");
                 SingletonBehavior<BattleSoundManager>.Instance.EndBgm();
-                if ((UnityEngine.Object)this._loop == (UnityEngine.Object)null)
+                if (this._loop == null)
                     this._loop = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/BlueStar_Bgm", true, parent: SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject.transform);
             }
 
@@ -1864,7 +1864,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public void DestroyLoopSound()
             {
-                if (!((UnityEngine.Object)this._loop != (UnityEngine.Object)null))
+                if (!(this._loop != null))
                     return;
                 SingletonBehavior<BattleSoundManager>.Instance.StartBgm();
                 this._loop.ManualDestroy();
@@ -2820,8 +2820,8 @@ namespace abcdcode_LOGLIKE_MOD
                 public void Groggy()
                 {
                     BattleCamManager instance = SingletonBehavior<BattleCamManager>.Instance;
-                    Camera effectCam = (UnityEngine.Object)instance != (UnityEngine.Object)null ? instance.EffectCam : (Camera)null;
-                    if ((UnityEngine.Object)effectCam.GetComponent<CameraFilterPack_Broken_Screen>() == (UnityEngine.Object)null)
+                    Camera effectCam = instance != null ? instance.EffectCam : (Camera)null;
+                    if (effectCam.GetComponent<CameraFilterPack_Broken_Screen>() == null)
                     {
                         CameraFilterPack_Broken_Screen r = effectCam.gameObject.AddComponent<CameraFilterPack_Broken_Screen>();
                         AutoScriptDestruct autoScriptDestruct = effectCam.gameObject.AddComponent<AutoScriptDestruct>();
@@ -2838,7 +2838,7 @@ namespace abcdcode_LOGLIKE_MOD
                     while ((double)elapsed < 1.0)
                     {
                         elapsed += Time.deltaTime * 2f;
-                        if ((UnityEngine.Object)r != (UnityEngine.Object)null)
+                        if (r != null)
                             r.Fade = (float)(0.75 - (double)elapsed * 0.75);
                         yield return YieldCache.waitFixedUpdate;
                     }
@@ -2990,10 +2990,10 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     this._effect = this.MakeEffect("1/Fairy_Gluttony") as CreatureEffect_Anim;
                     CreatureEffect_Anim effect = this._effect;
-                    if ((UnityEngine.Object)effect != (UnityEngine.Object)null)
+                    if (effect != null)
                         effect.SetLayer("Character");
                     SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/Fariy_Special");
-                    if (!((UnityEngine.Object)soundEffectPlayer != (UnityEngine.Object)null))
+                    if (!(soundEffectPlayer != null))
                         return;
                     soundEffectPlayer.SetGlobalPosition(this._owner.view.WorldPosition);
                 }
@@ -3010,13 +3010,13 @@ namespace abcdcode_LOGLIKE_MOD
                     int num = Mathf.Min((int)((double)this._owner.MaxHp * 0.15000000596046448), 18);
                     this._owner.RecoverHP(num);
                     ++this._count;
-                    if ((UnityEngine.Object)this._effect != (UnityEngine.Object)null)
+                    if (this._effect != null)
                         this._effect.SetTrigger("Recover");
                     this._owner.view.RecoverHp(num);
                 }
                 if (this._count < 3)
                     return;
-                if ((UnityEngine.Object)this._effect != (UnityEngine.Object)null)
+                if (this._effect != null)
                 {
                     this._effect.SetTrigger("Disappear");
                     this._effect.gameObject.AddComponent<AutoDestruct>().time = 2f;
@@ -3036,14 +3036,14 @@ namespace abcdcode_LOGLIKE_MOD
                     this._owner.battleCardResultLog?.SetDamageTaken(dmg1, atkDice.behaviourInCard.Dice, atkDice.Detail);
                     this._owner.battleCardResultLog?.SetEmotionAbility(true, this._emotionCard, 1, ResultOption.Default, dmg1);
                     this._destroy = true;
-                    if ((bool)(UnityEngine.Object)this._effect)
+                    if ((bool)this._effect)
                         this.ApplyCreatureEffect((Battle.CreatureEffect.CreatureEffect)this._effect);
                 }
                 else
                 {
                     this._hit = true;
                     ++this._hitCount;
-                    if ((bool)(UnityEngine.Object)this._effect)
+                    if ((bool)this._effect)
                         this.ApplyCreatureEffect((Battle.CreatureEffect.CreatureEffect)this._effect);
                 }
                 this._owner?.battleCardResultLog?.SetCreatureEffectSound("Creature/Fairy_Dead");
@@ -3053,7 +3053,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (this._hit)
                 {
-                    if ((UnityEngine.Object)this._effect != (UnityEngine.Object)null)
+                    if (this._effect != null)
                         this._effect.SetTrigger("Hit");
                     --this._hitCount;
                     if (this._hitCount == 0)
@@ -3062,14 +3062,14 @@ namespace abcdcode_LOGLIKE_MOD
                 if (!this._destroy)
                     return;
                 this._destroy = false;
-                if ((UnityEngine.Object)this._effect != (UnityEngine.Object)null)
+                if (this._effect != null)
                     this._effect.SetTrigger("Disappear");
                 this._effect = (CreatureEffect_Anim)null;
             }
 
             public override void OnLayerChanged(string layerName)
             {
-                if (!((UnityEngine.Object)this._effect == (UnityEngine.Object)null))
+                if (!(this._effect == null))
                     return;
                 this._effect.SetLayer(layerName);
             }
@@ -4412,7 +4412,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     base.Init(owner);
                     Battle.CreatureEffect.CreatureEffect creatureEffect = SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect("7/WayBeckHome_Emotion_Way", 1f, owner.view, owner.view);
-                    this.aura = (UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? creatureEffect.gameObject : (GameObject)null;
+                    this.aura = creatureEffect != null ? creatureEffect.gameObject : (GameObject)null;
                 }
 
                 public override void OnRoundEnd()
@@ -4435,9 +4435,9 @@ namespace abcdcode_LOGLIKE_MOD
 
                 public void DestroyAura()
                 {
-                    if (!((UnityEngine.Object)this.aura != (UnityEngine.Object)null))
+                    if (!(this.aura != null))
                         return;
-                    UnityEngine.Object.Destroy((UnityEngine.Object)this.aura);
+                    UnityEngine.Object.Destroy(this.aura);
                     this.aura = (GameObject)null;
                 }
             }
@@ -4688,7 +4688,7 @@ namespace abcdcode_LOGLIKE_MOD
                 try
                 {
                     SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/KnightOfDespair_Gaho");
-                    if (!((UnityEngine.Object)soundEffectPlayer != (UnityEngine.Object)null))
+                    if (!(soundEffectPlayer != null))
                         return;
                     soundEffectPlayer.SetGlobalPosition(this._owner.view.WorldPosition);
                 }
@@ -6189,13 +6189,13 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 CameraFilterUtil.EarthQuake(0.18f, 0.16f, 90f, 0.45f);
                 Battle.CreatureEffect.CreatureEffect original1 = Resources.Load<Battle.CreatureEffect.CreatureEffect>("Prefabs/Battle/CreatureEffect/6/Dango_Emotion_Effect");
-                if ((UnityEngine.Object)original1 != (UnityEngine.Object)null)
+                if (original1 != null)
                 {
                     Battle.CreatureEffect.CreatureEffect creatureEffect = UnityEngine.Object.Instantiate<Battle.CreatureEffect.CreatureEffect>(original1, SingletonBehavior<BattleSceneRoot>.Instance.transform);
-                    if (((UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? (UnityEngine.Object)creatureEffect.gameObject.GetComponent<AutoDestruct>() : (UnityEngine.Object)null) == (UnityEngine.Object)null)
+                    if ((creatureEffect != null ? creatureEffect.gameObject.GetComponent<AutoDestruct>() : null) == null)
                     {
-                        AutoDestruct autoDestruct = (UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
-                        if ((UnityEngine.Object)autoDestruct != (UnityEngine.Object)null)
+                        AutoDestruct autoDestruct = creatureEffect != null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
+                        if (autoDestruct != null)
                         {
                             autoDestruct.time = 3f;
                             autoDestruct.DestroyWhenDisable();
@@ -6203,13 +6203,13 @@ namespace abcdcode_LOGLIKE_MOD
                     }
                 }
                 Battle.CreatureEffect.CreatureEffect original2 = Resources.Load<Battle.CreatureEffect.CreatureEffect>("Prefabs/Battle/CreatureEffect/7/Lumberjack_final_blood_1st");
-                if (!((UnityEngine.Object)original2 != (UnityEngine.Object)null))
+                if (!(original2 != null))
                     return;
                 Battle.CreatureEffect.CreatureEffect creatureEffect1 = UnityEngine.Object.Instantiate<Battle.CreatureEffect.CreatureEffect>(original2, SingletonBehavior<BattleSceneRoot>.Instance.transform);
-                if (((UnityEngine.Object)creatureEffect1 != (UnityEngine.Object)null ? (UnityEngine.Object)creatureEffect1.gameObject.GetComponent<AutoDestruct>() : (UnityEngine.Object)null) == (UnityEngine.Object)null)
+                if ((creatureEffect1 != null ? creatureEffect1.gameObject.GetComponent<AutoDestruct>() : null) == null)
                 {
-                    AutoDestruct autoDestruct = (UnityEngine.Object)creatureEffect1 != (UnityEngine.Object)null ? creatureEffect1.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
-                    if ((UnityEngine.Object)autoDestruct != (UnityEngine.Object)null)
+                    AutoDestruct autoDestruct = creatureEffect1 != null ? creatureEffect1.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
+                    if (autoDestruct != null)
                     {
                         autoDestruct.time = 3f;
                         autoDestruct.DestroyWhenDisable();
@@ -7184,13 +7184,13 @@ namespace abcdcode_LOGLIKE_MOD
             public void BloodFilter()
             {
                 Battle.CreatureEffect.CreatureEffect original = Resources.Load<Battle.CreatureEffect.CreatureEffect>("Prefabs/Battle/CreatureEffect/7/Lumberjack_final_blood_1st");
-                if ((UnityEngine.Object)original != (UnityEngine.Object)null)
+                if (original != null)
                 {
                     Battle.CreatureEffect.CreatureEffect creatureEffect = UnityEngine.Object.Instantiate<Battle.CreatureEffect.CreatureEffect>(original, SingletonBehavior<BattleSceneRoot>.Instance.transform);
-                    if (((UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? (UnityEngine.Object)creatureEffect.gameObject.GetComponent<AutoDestruct>() : (UnityEngine.Object)null) == (UnityEngine.Object)null)
+                    if ((creatureEffect != null ? creatureEffect.gameObject.GetComponent<AutoDestruct>() : null) == null)
                     {
-                        AutoDestruct autoDestruct = (UnityEngine.Object)creatureEffect != (UnityEngine.Object)null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
-                        if ((UnityEngine.Object)autoDestruct != (UnityEngine.Object)null)
+                        AutoDestruct autoDestruct = creatureEffect != null ? creatureEffect.gameObject.AddComponent<AutoDestruct>() : (AutoDestruct)null;
+                        if (autoDestruct != null)
                         {
                             autoDestruct.time = 3f;
                             autoDestruct.DestroyWhenDisable();
@@ -7518,9 +7518,9 @@ namespace abcdcode_LOGLIKE_MOD
 
                 public void DestroyAura()
                 {
-                    if (!((UnityEngine.Object)this._aura != (UnityEngine.Object)null))
+                    if (!(this._aura != null))
                         return;
-                    UnityEngine.Object.Destroy((UnityEngine.Object)this._aura.gameObject);
+                    UnityEngine.Object.Destroy(this._aura.gameObject);
                     this._aura = (Battle.CreatureEffect.CreatureEffect)null;
                 }
             }
@@ -7594,7 +7594,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     new GameObject().AddComponent<SpriteFilter_Queenbee_Spore>().Init("EmotionCardFilter/QueenBee_Filter_Spore", false, 2f);
                     SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/QueenBee_Funga");
-                    if ((UnityEngine.Object)soundEffectPlayer != (UnityEngine.Object)null)
+                    if (soundEffectPlayer != null)
                         soundEffectPlayer.SetGlobalPosition(this._owner.view.WorldPosition);
                     foreach (BattleUnitModel alive in BattleObjectManager.instance.GetAliveList(this._owner.faction))
                         alive.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.Strength, stack);
@@ -8207,7 +8207,7 @@ namespace abcdcode_LOGLIKE_MOD
                     {
                         alive.bufListDetail.AddBufWithoutDuplication((BattleUnitBuf)new PickUpModel_RedShoes1.LogEmotionCardAbility_RedShoes1.BattleUnitBuf_redshoes(this._emotionCard, alive, this._owner, this));
                         SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/RedShoes_On");
-                        if ((UnityEngine.Object)soundEffectPlayer != (UnityEngine.Object)null)
+                        if (soundEffectPlayer != null)
                             soundEffectPlayer.SetGlobalPosition(alive.view.WorldPosition);
                     }
                 }
@@ -8282,7 +8282,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     CreatureEffect_FaceAttacher effectFaceAttacher = this._script.MakeFaceEffect(this._owner.view);
                     effectFaceAttacher.SetLayer("Character");
-                    if (!(bool)(UnityEngine.Object)effectFaceAttacher)
+                    if (!(bool)effectFaceAttacher)
                         return;
                     this._faceEffect.Add(effectFaceAttacher);
                 }
@@ -8301,7 +8301,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     foreach (CreatureEffect_FaceAttacher effectFaceAttacher in this._faceEffect)
                     {
-                        if ((UnityEngine.Object)effectFaceAttacher != (UnityEngine.Object)null)
+                        if (effectFaceAttacher != null)
                             effectFaceAttacher.ManualDestroy();
                     }
                     this._faceEffect.Clear();
@@ -8312,7 +8312,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     foreach (CreatureEffect_FaceAttacher effectFaceAttacher in this._faceEffect)
                     {
-                        if ((UnityEngine.Object)effectFaceAttacher != (UnityEngine.Object)null)
+                        if (effectFaceAttacher != null)
                             effectFaceAttacher.ManualDestroy();
                     }
                     this._faceEffect.Clear();
@@ -8855,7 +8855,7 @@ namespace abcdcode_LOGLIKE_MOD
                 target?.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Burn, PickUpModel_ScorchedGirl2.LogEmotionCardAbility_ScorchedGirl2.Burn, this._owner);
                 target?.TakeDamage(v, DamageType.Emotion);
                 SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/MatchGirl_Explosion");
-                if ((UnityEngine.Object)soundEffectPlayer != (UnityEngine.Object)null)
+                if (soundEffectPlayer != null)
                     soundEffectPlayer.SetGlobalPosition(this._owner.view.WorldPosition);
                 this._effect = this.MakeEffect("1/MatchGirl_Footfall", destroyTime: 2f, apply: false);
                 this._effect.AttachEffectLayer();
@@ -9009,7 +9009,7 @@ namespace abcdcode_LOGLIKE_MOD
                         return;
                     SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect("1/MatchGirl_Footfall", 1f, this._owner.view, (BattleUnitView)null, 2f).AttachEffectLayer();
                     SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/MatchGirl_Explosion");
-                    if ((UnityEngine.Object)soundEffectPlayer != (UnityEngine.Object)null)
+                    if (soundEffectPlayer != null)
                         soundEffectPlayer.SetGlobalPosition(this._owner.view.WorldPosition);
                     this._triggered = false;
                 }
@@ -9541,23 +9541,23 @@ namespace abcdcode_LOGLIKE_MOD
                 public override void OnRoundStart()
                 {
                     base.OnRoundStart();
-                    if (!((UnityEngine.Object)this._effect == (UnityEngine.Object)null))
+                    if (!(this._effect == null))
                         return;
                     this._effect = SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect("4/SingingMachine_NoteAura", 1f, this._owner.view, (BattleUnitView)null);
                     Battle.CreatureEffect.CreatureEffect effect = this._effect;
-                    if ((UnityEngine.Object)effect != (UnityEngine.Object)null)
+                    if (effect != null)
                         effect.SetLayer("Character");
                     SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/Singing_Rhythm");
-                    if ((UnityEngine.Object)soundEffectPlayer == (UnityEngine.Object)null)
+                    if (soundEffectPlayer == null)
                         return;
                     soundEffectPlayer.SetGlobalPosition(this._owner.view.WorldPosition);
                 }
 
                 public override void Destroy()
                 {
-                    if ((UnityEngine.Object)this._effect != (UnityEngine.Object)null)
+                    if (this._effect != null)
                     {
-                        UnityEngine.Object.Destroy((UnityEngine.Object)this._effect.gameObject);
+                        UnityEngine.Object.Destroy(this._effect.gameObject);
                         this._effect = (Battle.CreatureEffect.CreatureEffect)null;
                     }
                     base.Destroy();
@@ -9565,7 +9565,7 @@ namespace abcdcode_LOGLIKE_MOD
 
                 public override void OnLayerChanged(string layerName)
                 {
-                    if (!((UnityEngine.Object)this._effect != (UnityEngine.Object)null))
+                    if (!(this._effect != null))
                         return;
                     this._effect.SetLayer(layerName);
                 }
@@ -10357,7 +10357,7 @@ namespace abcdcode_LOGLIKE_MOD
                     if (this._owner != null)
                     {
                         Battle.CreatureEffect.CreatureEffect fxCreatureEffect = SingletonBehavior<DiceEffectManager>.Instance.CreateNewFXCreatureEffect("0_K/FX_IllusionCard_0_K_SnowAura", 1f, this._owner.view, this._owner.view);
-                        this.aura = (UnityEngine.Object)fxCreatureEffect != (UnityEngine.Object)null ? fxCreatureEffect.gameObject : (GameObject)null;
+                        this.aura = fxCreatureEffect != null ? fxCreatureEffect.gameObject : (GameObject)null;
                     }
                     SoundEffectPlayer.PlaySound("Creature/SnowQueen_Freeze");
                 }
@@ -10382,9 +10382,9 @@ namespace abcdcode_LOGLIKE_MOD
 
                 public void DestroyAura()
                 {
-                    if (!((UnityEngine.Object)this.aura != (UnityEngine.Object)null))
+                    if (!(this.aura != null))
                         return;
-                    UnityEngine.Object.Destroy((UnityEngine.Object)this.aura.gameObject);
+                    UnityEngine.Object.Destroy(this.aura.gameObject);
                     this.aura = (GameObject)null;
                 }
             }
@@ -10505,9 +10505,9 @@ namespace abcdcode_LOGLIKE_MOD
                 public override void OnRoundEnd()
                 {
                     base.OnRoundEnd();
-                    if ((UnityEngine.Object)this._aura != (UnityEngine.Object)null)
+                    if (this._aura != null)
                     {
-                        UnityEngine.Object.Destroy((UnityEngine.Object)this._aura.gameObject);
+                        UnityEngine.Object.Destroy(this._aura.gameObject);
                         this._aura = (Battle.CreatureEffect.CreatureEffect)null;
                         this._owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
                     }
@@ -10904,10 +10904,10 @@ namespace abcdcode_LOGLIKE_MOD
                 try
                 {
                     SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/Cosmos_Sing");
-                    if ((UnityEngine.Object)soundEffectPlayer != (UnityEngine.Object)null)
+                    if (soundEffectPlayer != null)
                         soundEffectPlayer.SetGlobalPosition(this._owner.view.WorldPosition);
                     BattleCamManager instance = SingletonBehavior<BattleCamManager>.Instance;
-                    if (!((UnityEngine.Object)instance != (UnityEngine.Object)null))
+                    if (!(instance != null))
                         return;
                     instance.AddCameraFilter<CameraFilterCustom_universe>(true);
                 }

@@ -76,7 +76,7 @@ public class LogAssetBundleManager : Singleton<LogAssetBundleManager>
     foreach (AssetBundle bundle in this.bundles)
     {
       GameObject original = bundle.LoadAsset<GameObject>(name);
-      if ((UnityEngine.Object) original != (UnityEngine.Object) null)
+      if ( original !=  null)
       {
         this.GObjList.Add(new LogAssetBundleManager.GameObjectBundleCache()
         {

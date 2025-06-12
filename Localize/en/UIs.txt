@@ -49,13 +49,14 @@
   <text id="CardChoicePopUp_RemoveDesc">Select Combat Page to remove</text>
   <text id="CardChoicePopUp_TransformDesc">Select Combat Page to change</text>
   <text id="CardChoicePopUp_RewardDesc">Select Combat Page to get</text>
-  <text id="CardChoicePopUp_UpgradeDesc">Select Combat Page to enforce</text>
+  <text id="CardChoicePopUp_UpgradeDesc">Select Combat Page to upgrade</text>
 
   <text id="CardCheckPopUp_InvenDesc">Owned Combat Page</text>
   <text id="CardCheckPopUp_RewardDesc">Acquired Combat Page</text>
   <text id="CardCheckPopUp_Close">Return</text>
   <text id="CardCheckPopUp_UpgradeOk">Confirm</text>
   <text id="CardCheckPopUp_UpgradeNo">Cancel</text>
+  <text id="CardCheckPopUp_CannotUpgrade">You have no upgradeable Combat Pages.</text>
 
   <text id="ui_Inventory">Item</text>
   <text id="ui_CreatureTab">Abnormality</text>

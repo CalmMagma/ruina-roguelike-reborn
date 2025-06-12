@@ -205,7 +205,7 @@ public class MysteryModel_CardCheck : MysteryBase
 
   public void OnPointerExit(LogLikeMod.UILogCardSlot CardSlot)
   {
-    if (!((UnityEngine.Object) LogLikeMod.UILogBattleDiceCardUI.Instance != (UnityEngine.Object) null))
+    if (!( LogLikeMod.UILogBattleDiceCardUI.Instance !=  null))
       return;
     LogLikeMod.UILogBattleDiceCardUI.Instance.gameObject.SetActive(false);
   }

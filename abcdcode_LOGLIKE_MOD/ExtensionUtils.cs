@@ -26,14 +26,14 @@ namespace abcdcode_LOGLIKE_MOD
         public static LorId GetOriginalId(this LorId id)
         {
             UpgradeMetadata metadata;
-            return !UpgradeMetadata.UnpackPid(id.packageId, out metadata) ? id : new LorId(metadata.actualPid, id.id);
+            return UpgradeMetadata.UnpackPid(id.packageId, out metadata) ? new LorId(metadata.actualPid, id.id) : id;
         }
 
         public static bool CheckCanUpgrade(this DiceCardXmlInfo info)
         {
             bool flag = info.CheckUpgradeCard();
             UpgradeMetadata metadata;
-            return UpgradeMetadata.UnpackPid(info.id.packageId, out metadata) ? metadata.canStack : !flag;
+            return UpgradeMetadata.UnpackPid(info.id.packageId, out metadata) ? metadata.canStack : true;
         }
 
         public static bool CheckUpgradeCard(this DiceCardXmlInfo info)
@@ -43,14 +43,27 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static void LogAddModCard(this ItemXmlDataList datalist, DiceCardXmlInfo cardinfo)
         {
-            if (!datalist._workshopDict.ContainsKey(cardinfo.workshopID))
-                datalist._workshopDict[cardinfo.workshopID] = new List<DiceCardXmlInfo>();
-            if (datalist._workshopDict[cardinfo.workshopID].Find((Predicate<DiceCardXmlInfo>)(x => x.id == cardinfo.id)) == null)
-                datalist._workshopDict[cardinfo.workshopID].Add(cardinfo);
-            if (datalist._cardInfoList.Find(x => x.id == cardinfo.id) != null)
-                return;
-            datalist._cardInfoList.Add(cardinfo);
-            datalist._cardInfoTable[cardinfo.id] = cardinfo;
+            string workshopId = cardinfo.id.packageId;
+            if (datalist._workshopDict == null)
+            {
+                datalist._workshopDict = new Dictionary<string, List<DiceCardXmlInfo>>();
+            }
+
+            if (!datalist._workshopDict.ContainsKey(workshopId))
+            {
+                datalist._workshopDict[workshopId] = new List<DiceCardXmlInfo>();
+            }
+            if (!datalist._workshopDict[workshopId].Exists(x => x.id == cardinfo.id))
+            {
+                datalist._workshopDict[workshopId].Add(cardinfo);
+            }
+
+            if (!datalist._cardInfoTable.ContainsKey(cardinfo.id))
+            {
+                datalist._cardInfoList.Add(cardinfo);
+                datalist._cardInfoTable.Add(cardinfo.id, cardinfo);
+            }
+            
         }
 
         public static void SetLayerAll(this GameObject obj, int layer)

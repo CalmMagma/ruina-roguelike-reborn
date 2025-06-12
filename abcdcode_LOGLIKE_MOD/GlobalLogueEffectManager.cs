@@ -67,7 +67,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.IsOn = true;
             this.First = true;
             this.index = 0;
-            int num = (UnityEngine.Object)SingletonBehavior<BattleTutorialManagerUI>.Instance == (UnityEngine.Object)null ? 1 : 0;
+            int num = SingletonBehavior<BattleTutorialManagerUI>.Instance == null ? 1 : 0;
             GameObject logUiObj = LogLikeMod.LogUIObjs[100];
             Image image1 = ModdingUtils.CreateImage(logUiObj.transform, "MaskSpace", new Vector2(1f, 1f), new Vector2(0.0f, 400f), new Vector2(1920f, 110f));
             Mask mask = image1.gameObject.AddComponent<Mask>();
@@ -423,7 +423,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (this.effects == null)
                 this.effects = new List<GlobalLogueEffectBase>();
-            return new List<GlobalLogueEffectBase>((IEnumerable<GlobalLogueEffectBase>)this.effects);
+            return new List<GlobalLogueEffectBase>(this.effects);
         }
 
         public void OnClickNext()
@@ -455,7 +455,7 @@ namespace abcdcode_LOGLIKE_MOD
             List<GlobalLogueEffectBase> globalLogueEffectBaseList = new List<GlobalLogueEffectBase>();
             foreach (GlobalLogueEffectBase globalLogueEffectBase in all)
             {
-                if ((UnityEngine.Object)globalLogueEffectBase.GetSprite() != (UnityEngine.Object)null)
+                if (globalLogueEffectBase.GetSprite() != null)
                 {
                     globalLogueEffectBaseList.Add(globalLogueEffectBase);
                     ++num1;
@@ -463,7 +463,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             foreach (GlobalLogueEffectBase globalLogueEffectBase in once)
             {
-                if ((UnityEngine.Object)globalLogueEffectBase.GetSprite() != (UnityEngine.Object)null)
+                if (globalLogueEffectBase.GetSprite() != null)
                 {
                     globalLogueEffectBaseList.Add(globalLogueEffectBase);
                     ++num1;
@@ -590,18 +590,18 @@ namespace abcdcode_LOGLIKE_MOD
                     this.image = this.gameObject.GetComponent<Image>();
                     this.image.sprite = LogLikeMod.ArtWorks["ShopGoodRewardFrame"];
                     this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
-                    if ((UnityEngine.Object)this.text == (UnityEngine.Object)null)
+                    if (this.text == null)
                         this.text = ModdingUtils.CreateText_TMP(this.gameObject.transform, new Vector2(0.0f, 0.0f), 25, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.BottomRight, Color.white, LogLikeMod.DefFont_TMP);
-                    if ((UnityEngine.Object)effect.GetSprite() == (UnityEngine.Object)null)
+                    if (effect.GetSprite() == null)
                     {
                         this.Log("effect is null");
                         this.gameObject.SetActive(false);
                     }
                     else
                     {
-                        if ((UnityEngine.Object)this.baseimage == (UnityEngine.Object)null)
+                        if (this.baseimage == null)
                             this.baseimage = ModdingUtils.CreateImage(this.transform, "ShopGoodRewardFrame", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(70f, 70f));
-                        if ((UnityEngine.Object)this.text != (UnityEngine.Object)null)
+                        if (this.text != null)
                         {
                             int stack = effect.GetStack();
                             stack.Log("cur Effect Stack : " + stack.ToString());
@@ -609,7 +609,7 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         this.sprite = effect.GetSprite();
                         this.baseimage.sprite = this.sprite;
-                        if ((UnityEngine.Object)this.selectable == (UnityEngine.Object)null)
+                        if (this.selectable == null)
                         {
                             this.selectable = this.gameObject.AddComponent<UILogCustomSelectable>();
                             this.selectable.targetGraphic = (Graphic)this.image;
@@ -623,7 +623,7 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         this.gameObject.SetActive(true);
                         this.update = false;
-                        if (!((UnityEngine.Object)SingletonBehavior<UIMainOverlayManager>.Instance != (UnityEngine.Object)null))
+                        if (!(SingletonBehavior<UIMainOverlayManager>.Instance != null))
                             return;
                         SingletonBehavior<UIMainOverlayManager>.Instance.Close();
                     }
@@ -643,8 +643,10 @@ namespace abcdcode_LOGLIKE_MOD
                     return;
                 this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Highlighted);
                 FieldInfo field = this.effect.GetType().GetField("ItemRarity", BindingFlags.Static | BindingFlags.Public);
-                Rarity rare = !(field != (FieldInfo)null) ? Rarity.Special : (Rarity)field.GetValue((object)null);
+                Rarity rare = this.effect.GetRarity();
                 SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(this.effect.GetEffectName(), $"{this.effect.GetEffectDesc()}\n<color=#{ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(rare))}>{rare.ToString()}</color>", this.transform as RectTransform, rare);
+                var pivot = SingletonBehavior<UIMainOverlayManager>.Instance.tooltipPositionPivot;
+                pivot.anchoredPosition = new Vector2(pivot.anchoredPosition.x - 100f, 440f);
                 this.update = true;
             }
 

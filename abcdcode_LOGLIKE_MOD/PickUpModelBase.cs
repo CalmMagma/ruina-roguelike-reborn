@@ -36,13 +36,16 @@ namespace abcdcode_LOGLIKE_MOD
         /// </summary>
         public PickUpModelBase()
         {
-            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
-            if (info != null)
+            if (!string.IsNullOrEmpty(this.KeywordId))
             {
-                this.Name = info.Name;
-                this.Desc = info.Desc;
-                this.FlaverText = info.FlavorText;
-                this.ArtWork = KeywordIconId ?? KeywordId;
+                var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
+                if (info != null)
+                {
+                    this.Name = info.Name;
+                    this.Desc = info.Desc;
+                    this.FlaverText = info.FlavorText;
+                    this.ArtWork = KeywordIconId ?? KeywordId;
+                }
             }
         }
 
@@ -66,14 +69,17 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual string GetCredenzaEntry()
         {
-            LogueEffectXmlInfo info;
-            try
+            LogueEffectXmlInfo info = null;
+            if (!string.IsNullOrEmpty(this.KeywordId))
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
-            }
-            catch
-            {
-                info = null;
+                try
+                {
+                    info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
+                }
+                catch
+                {
+                    info = null;
+                }
             }
             return info == null ? this.Desc : info.CatalogDesc;
         }

@@ -20,13 +20,16 @@ namespace abcdcode_LOGLIKE_MOD
 
         public ShopPickUpModel()
         {
-            var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
-            if (info != null)
+            if (!string.IsNullOrEmpty(this.KeywordId))
             {
-                this.Name = info.Name;
-                this.Desc = info.Desc;
-                this.FlaverText = info.FlavorText;
-                this.ArtWork = KeywordIconId ?? KeywordId;
+                var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
+                if (info != null)
+                {
+                    this.Name = info.Name;
+                    this.Desc = info.Desc;
+                    this.FlaverText = info.FlavorText;
+                    this.ArtWork = KeywordIconId ?? KeywordId;
+                }
             }
         }
 

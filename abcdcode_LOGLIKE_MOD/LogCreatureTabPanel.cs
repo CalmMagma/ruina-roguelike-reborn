@@ -31,9 +31,9 @@ namespace abcdcode_LOGLIKE_MOD
         {
             GameObject gameObject1 = (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel).EditPanel.BattleCardPanel.gameObject;
             GameObject gameObject2 = UnityEngine.Object.Instantiate<Transform>(gameObject1.transform, gameObject1.transform.parent).gameObject;
-            UnityEngine.Object.Destroy((UnityEngine.Object)gameObject2.GetComponent<UIBattleSettingPanel>());
+            UnityEngine.Object.Destroy(gameObject2.GetComponent<UIBattleSettingPanel>());
             for (int index1 = 0; index1 < gameObject2.transform.childCount; ++index1)
-                UnityEngine.Object.Destroy((UnityEngine.Object)gameObject2.transform.GetChild(index1).gameObject);
+                UnityEngine.Object.Destroy(gameObject2.transform.GetChild(index1).gameObject);
             gameObject2.SetActive(true);
             gameObject2.transform.localPosition = new Vector3(0.0f, 0.0f);
             gameObject2.transform.localScale = gameObject1.transform.localScale;
@@ -142,7 +142,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (value)
                 this.Init();
-            else if ((UnityEngine.Object)this.root != (UnityEngine.Object)null)
+            else if (this.root != null)
                 this.root.SetActive(false);
         }
 
@@ -158,7 +158,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             foreach (KeyValuePair<int, List<LogCreatureTabPanel.LogueImage_CreatureTab>> tabGroup in this.TabGroups)
             {
-                if ((bool)(UnityEngine.Object)tabGroup.Value.Find((Predicate<LogCreatureTabPanel.LogueImage_CreatureTab>)(x => x.effect == model)))
+                if ((bool)tabGroup.Value.Find((Predicate<LogCreatureTabPanel.LogueImage_CreatureTab>)(x => x.effect == model)))
                 {
                     foreach (LogCreatureTabPanel.LogueImage_CreatureTab imageCreatureTab in tabGroup.Value)
                     {
@@ -196,18 +196,18 @@ namespace abcdcode_LOGLIKE_MOD
                     this.image = this.gameObject.GetComponent<Image>();
                     this.image.sprite = LogLikeMod.ArtWorks["ShopGoodRewardFrame"];
                     this.image.enabled = false;
-                    if ((UnityEngine.Object)effect.GetSprite() == (UnityEngine.Object)null)
+                    if (effect.GetSprite() == null)
                     {
                         this.Log("effect is null");
                         this.gameObject.SetActive(false);
                     }
                     else
                     {
-                        if ((UnityEngine.Object)this.baseimage == (UnityEngine.Object)null)
+                        if (this.baseimage == null)
                             this.baseimage = ModdingUtils.CreateImage(this.transform, "ShopGoodRewardFrame", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(70f, 70f));
                         this.sprite = effect.GetSprite();
                         this.baseimage.sprite = this.sprite;
-                        if ((UnityEngine.Object)this.selectable == (UnityEngine.Object)null)
+                        if (this.selectable == null)
                         {
                             this.selectable = this.gameObject.AddComponent<UILogCustomSelectable>();
                             this.selectable.targetGraphic = (Graphic)this.image;
@@ -221,7 +221,7 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         this.gameObject.SetActive(true);
                         this.update = false;
-                        if (!((UnityEngine.Object)SingletonBehavior<UIMainOverlayManager>.Instance != (UnityEngine.Object)null))
+                        if (!(SingletonBehavior<UIMainOverlayManager>.Instance != null))
                             return;
                         SingletonBehavior<UIMainOverlayManager>.Instance.Close();
                     }

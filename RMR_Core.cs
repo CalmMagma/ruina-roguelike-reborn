@@ -1969,7 +1969,7 @@ namespace RogueLike_Mod_Reborn
                     }
                 }
                 
-                TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => (x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel))) && !x.IsSubclassOf(typeof(CreaturePickUpModel))).ToArray();
+                TypeInfo[] pickups = assemblies[b].DefinedTypes.ToList().FindAll(x => (x.IsSubclassOf(typeof(PickUpModelBase)) || x.IsSubclassOf(typeof(ShopPickUpModel))) && !x.IsSubclassOf(typeof(CreaturePickUpModel)) && !x.IsSubclassOf(typeof(RestPickUp))).ToArray();
                 for (int i = 0; i < pickups.Length; i++)
                 {
                     try { 
@@ -2545,8 +2545,7 @@ namespace RogueLike_Mod_Reborn
             if (rectTransform != null)
             {
                 Graphic componentInChildren = rectTransform.GetComponentInChildren<Graphic>();
-                bool flag2 = componentInChildren != null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera;
-                if (flag2)
+                if (componentInChildren != null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
                 {
                     camera = Camera.main;
                 }
@@ -2594,7 +2593,8 @@ namespace RogueLike_Mod_Reborn
                 desiredPos.y -= 520 - (desiredPos.y + __instance._curSize.y);
             if (desiredPos.y > 520f)
                 desiredPos.y = 520f;
-
+            if (Environment.StackTrace.Contains("GlobalLogueEffectManager.LogueEffectImage"))
+                desiredPos.y = 440f;
             __instance.tooltipPositionPivot.anchoredPosition = desiredPos;
         }
     }

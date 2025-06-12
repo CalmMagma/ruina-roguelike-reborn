@@ -26,9 +26,9 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
   {
     GameObject gameObject1 = (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel).EditPanel.BattleCardPanel.gameObject;
     GameObject gameObject2 = UnityEngine.Object.Instantiate<Transform>(gameObject1.transform, gameObject1.transform.parent).gameObject;
-    UnityEngine.Object.Destroy((UnityEngine.Object) gameObject2.GetComponent<UIBattleSettingPanel>());
+    UnityEngine.Object.Destroy( gameObject2.GetComponent<UIBattleSettingPanel>());
     for (int index1 = 0; index1 < gameObject2.transform.childCount; ++index1)
-      UnityEngine.Object.Destroy((UnityEngine.Object) gameObject2.transform.GetChild(index1).gameObject);
+      UnityEngine.Object.Destroy( gameObject2.transform.GetChild(index1).gameObject);
     gameObject2.SetActive(true);
     gameObject2.transform.localPosition = new Vector3(0.0f, 0.0f);
     gameObject2.transform.localScale = gameObject1.transform.localScale;
@@ -42,7 +42,7 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
 
   public void Init()
   {
-    if ((UnityEngine.Object) this.root == (UnityEngine.Object) null)
+    if ( this.root ==  null)
     {
       this.root = LogCraftPanel.GetLogUIObj(1);
       this.sprites = new List<LogCraftPanel.LogueEffectImage_Craft>();
@@ -62,7 +62,7 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
       this.Init();
       this.UpdateSprites();
     }
-    else if ((UnityEngine.Object) this.root != (UnityEngine.Object) null)
+    else if ( this.root !=  null)
       this.root.SetActive(false);
   }
 
@@ -77,7 +77,7 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
     foreach (GlobalLogueEffectBase globalLogueEffectBase in all2)
     {
       CraftEffect effect = globalLogueEffectBase as CraftEffect;
-      if ((UnityEngine.Object) effect.GetCraftSprite() != (UnityEngine.Object) null)
+      if ( effect.GetCraftSprite() !=  null)
       {
         this.sprites[index].Init(effect);
         ++index;
@@ -87,7 +87,7 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
     }
     foreach (CraftEffect effect in all3)
     {
-      if ((UnityEngine.Object) effect.GetCraftSprite() != (UnityEngine.Object) null)
+      if ( effect.GetCraftSprite() !=  null)
       {
         this.sprites[index].Init(effect);
         ++index;
@@ -118,30 +118,30 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
         this.effect = effect;
         this.image = this.gameObject.GetComponent<Image>();
         int num;
-        if ((UnityEngine.Object) this.text == (UnityEngine.Object) null)
+        if ( this.text ==  null)
         {
           Color defFontColor = LogLikeMod.DefFontColor;
-          num = (UnityEngine.Object) LogLikeMod.DefFont_TMP != (UnityEngine.Object) null ? 1 : 0;
+          num =  LogLikeMod.DefFont_TMP !=  null ? 1 : 0;
         }
         else
           num = 0;
         if (num != 0)
           this.text = ModdingUtils.CreateText_TMP(this.gameObject.transform, new Vector2(0.0f, 0.0f), 30, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.BottomRight, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
-        if ((UnityEngine.Object) effect.GetCraftSprite() == (UnityEngine.Object) null)
+        if ( effect.GetCraftSprite() ==  null)
         {
           this.Log("effect is null");
           this.gameObject.SetActive(false);
         }
         else
         {
-          if ((UnityEngine.Object) this.text != (UnityEngine.Object) null)
+          if ( this.text !=  null)
           {
             int stack = effect.GetStack();
             this.text.text = stack >= 0 ? stack.ToString() : string.Empty;
           }
           this.sprite = effect.GetCraftSprite();
           this.image.sprite = this.sprite;
-          if ((UnityEngine.Object) this.selectable == (UnityEngine.Object) null)
+          if ( this.selectable ==  null)
           {
             this.selectable = this.gameObject.AddComponent<UILogCustomSelectable>();
             this.selectable.targetGraphic = (Graphic) this.image;
@@ -155,7 +155,7 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
           }
           this.gameObject.SetActive(true);
           this.update = false;
-          if (!((UnityEngine.Object) SingletonBehavior<UIMainOverlayManager>.Instance != (UnityEngine.Object) null))
+          if (!( SingletonBehavior<UIMainOverlayManager>.Instance !=  null))
             return;
           SingletonBehavior<UIMainOverlayManager>.Instance.Close();
         }
@@ -203,10 +203,10 @@ public class LogCraftPanel : Singleton<LogCraftPanel>
       fieldValue1.text = name;
       fieldValue1.rectTransform.sizeDelta = new Vector2(fieldValue1.rectTransform.sizeDelta.x, 20f);
       Camera camera = (Camera) null;
-      if ((UnityEngine.Object) rectTransform != (UnityEngine.Object) null)
+      if ( rectTransform !=  null)
       {
         Graphic componentInChildren = rectTransform.GetComponentInChildren<Graphic>();
-        if ((UnityEngine.Object) componentInChildren != (UnityEngine.Object) null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
+        if ( componentInChildren !=  null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
           camera = Camera.main;
       }
       string str = content;

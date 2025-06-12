@@ -4,50 +4,67 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
+using RogueLike_Mod_Reborn;
 using System.Collections.Generic;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class RestPickUp : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public RestPickUp.RestPickUpType type;
-  public PassiveXmlInfo basepassive;
 
-  public virtual bool CheckCondition() => true;
-
-  public virtual void Init()
-  {
-  }
-
-  public static void AddPassiveReward(LorId id)
-  {
-    RewardInfo rewardInfo = new RewardInfo()
+    public class RestPickUp : PickUpModelBase
     {
-      grade = ChapterGrade.GradeAll,
-      rewards = new List<RewardPassiveInfo>()
-    };
-    rewardInfo.rewards.Add(Singleton<RewardPassivesList>.Instance.GetPassiveInfo(id));
-    LogLikeMod.rewards_InStage.Add(rewardInfo);
-    if (Singleton<MysteryManager>.Instance.curMystery == null || !(Singleton<MysteryManager>.Instance.curMystery is MysteryModel_Rest))
-      return;
-    (Singleton<MysteryManager>.Instance.curMystery as MysteryModel_Rest).HideRest();
-  }
+        public RestPickUp.RestPickUpType type;
+        public PassiveXmlInfo basepassive;
 
-  public virtual bool OnChoiceOther(RestGood other)
-  {
-    return this.type != RestPickUp.RestPickUpType.Main || other.GoodScript.type != RestPickUp.RestPickUpType.Main;
-  }
+        public RestPickUp()
+        {
+            if (!string.IsNullOrEmpty(this.KeywordId))
+            {
+                var info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName]);
+                if (info != null)
+                {
+                    this.Name = info.Name;
+                    this.Desc = info.Desc;
+                    this.FlaverText = info.FlavorText;
+                    this.ArtWork = KeywordIconId ?? KeywordId;
+                }
+            }
+        }
 
-  public virtual void OnChoice(RestGood good)
-  {
-  }
+        public virtual bool CheckCondition() => true;
 
-  public enum RestPickUpType
-  {
-    Main,
-    Sub,
-    Etc,
-  }
-}
+        public virtual void Init()
+        {
+        }
+
+        public static void AddPassiveReward(LorId id)
+        {
+            RewardInfo rewardInfo = new RewardInfo()
+            {
+                grade = ChapterGrade.GradeAll,
+                rewards = new List<RewardPassiveInfo>()
+            };
+            rewardInfo.rewards.Add(Singleton<RewardPassivesList>.Instance.GetPassiveInfo(id));
+            LogLikeMod.rewards_InStage.Add(rewardInfo);
+            if (Singleton<MysteryManager>.Instance.curMystery == null || !(Singleton<MysteryManager>.Instance.curMystery is MysteryModel_Rest))
+                return;
+            (Singleton<MysteryManager>.Instance.curMystery as MysteryModel_Rest).HideRest();
+        }
+
+        public virtual bool OnChoiceOther(RestGood other)
+        {
+            return this.type != RestPickUp.RestPickUpType.Main || other.GoodScript.type != RestPickUp.RestPickUpType.Main;
+        }
+
+        public virtual void OnChoice(RestGood good)
+        {
+        }
+
+        public enum RestPickUpType
+        {
+            Main,
+            Sub,
+            Etc,
+        }
+    }
 }

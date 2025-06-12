@@ -29,6 +29,7 @@ using BattleCardEnhancedView;
 using RogueLike_Mod_Reborn;
 using CommonModApi;
 using Workshop;
+using HarmonyLib.Tools;
 
 
 namespace abcdcode_LOGLIKE_MOD
@@ -189,9 +190,9 @@ namespace abcdcode_LOGLIKE_MOD
         public static GameObject GetLogUIObj(int index)
         {
             GameObject gameObject = UnityEngine.Object.Instantiate<Transform>(SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.transform, SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.transform.parent).gameObject;
-            UnityEngine.Object.Destroy((UnityEngine.Object)gameObject.GetComponent<LevelUpUI>());
+            UnityEngine.Object.Destroy(gameObject.GetComponent<LevelUpUI>());
             for (int index1 = 0; index1 < gameObject.transform.childCount; ++index1)
-                UnityEngine.Object.Destroy((UnityEngine.Object)gameObject.transform.GetChild(index1).gameObject);
+                UnityEngine.Object.Destroy(gameObject.transform.GetChild(index1).gameObject);
             gameObject.SetActive(true);
             gameObject.AddComponent<LogLikeMod.UIActiveChecker>();
             gameObject.transform.localPosition = SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.transform.localPosition;
@@ -226,7 +227,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             get
             {
-                if ((UnityEngine.Object)LogLikeMod._DefFont_TMP == (UnityEngine.Object)null)
+                if (LogLikeMod._DefFont_TMP == null)
                     LogLikeMod._DefFont_TMP = LogLikeMod.GetFieldValue<TMP_FontAsset>((object)SingletonBehavior<LocalizedFontSetter>.Instance, "font_NotoSans");
                 return LogLikeMod._DefFont_TMP;
             }
@@ -270,7 +271,7 @@ namespace abcdcode_LOGLIKE_MOD
                 foreach (DirectoryInfo directory in dir.GetDirectories())
                 {
                     Sprite artWorks = LogLikeMod.GetArtWorks(directory, name);
-                    if ((UnityEngine.Object)artWorks != (UnityEngine.Object)null)
+                    if (artWorks != null)
                         return artWorks;
                 }
             }
@@ -295,7 +296,7 @@ namespace abcdcode_LOGLIKE_MOD
                 foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
                 {
                     Sprite artWorks = LogLikeMod.GetArtWorks(directory, name);
-                    if ((UnityEngine.Object)artWorks != (UnityEngine.Object)null)
+                    if (artWorks != null)
                         return artWorks;
                 }
             }
@@ -1179,7 +1180,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             typeof(StageController).GetMethod("set_phase", AccessTools.all).Invoke((object)__instance, new object[1]
             {
-      (object) phase
+                phase
             });
         }
 
@@ -1756,12 +1757,169 @@ namespace abcdcode_LOGLIKE_MOD
             try
             {
                 LogLikeMod.path = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
-                LogLikeMod.Debugging = LogLikeMod.path.Contains("LogLikeMod_DebugP");
                 LogLikeMod.logLikeHooks = new LogLikeHooks();
                 base.OnInitializeMod();
-                
-                // do harmony patches
-                Harmony.CreateAndPatchAll(typeof(LogLikePatches), "abcdcode.LogLikeMOD");
+
+                Harmony harmony = new Harmony("abcdcode.LogLikeMOD");
+
+                harmony.PatchAll(typeof(LogLikePatches));
+
+                /*
+                try
+                {
+                    HarmonyMethod postfix1 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageController_ClearBattle), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageController).GetMethod("ClearBattle", AccessTools.all), postfix: postfix1);
+                    HarmonyMethod postfix2 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIController_CallUIPhase), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UI.UIController).GetMethod("CallUIPhase", AccessTools.all, (System.Reflection.Binder)null, new System.Type[1]
+                    {
+                    typeof (UIPhase)
+                    }, (ParameterModifier[])null), postfix: postfix2);
+                    HarmonyMethod prefix1 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleAllyCardDetail_ReturnCardToHand), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleAllyCardDetail).GetMethod("ReturnCardToHand", AccessTools.all), prefix1);
+                    HarmonyMethod prefix2 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleEmotionCoinUI_Init), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleEmotionCoinUI).GetMethod("Init", AccessTools.all), prefix2);
+                    HarmonyMethod prefix3 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleEmotionInfo_CenterBtn_OnPointerUp), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleEmotionInfo_CenterBtn).GetMethod("OnPointerUp", AccessTools.all), prefix3);
+                    HarmonyMethod prefix4 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleEmotionRewardInfoUI_SetData), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleEmotionRewardInfoUI).GetMethod("SetData", AccessTools.all), prefix4);
+                    HarmonyMethod prefix5 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattlePlayingCardDataInUnitModel_OnUseCard), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattlePlayingCardDataInUnitModel).GetMethod("OnUseCard", AccessTools.all), prefix5);
+                    HarmonyMethod prefix6 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattlePlayingCardSlotDetail_OnApplyCard), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattlePlayingCardSlotDetail).GetMethod("OnApplyCard", AccessTools.all), prefix6);
+                    HarmonyMethod prefix7 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattlePersonalEgoCardDetail_ReturnCardToHand), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattlePersonalEgoCardDetail).GetMethod("ReturnCardToHand", AccessTools.all), prefix7);
+
+                    HarmonyMethod postfix4 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleDiceCardUI_GetClickableState), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleDiceCardUI).GetMethod("GetClickableState", AccessTools.all), postfix: postfix4);
+                    HarmonyMethod prefix9 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitInfoManagerUI_Initialize), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitInfoManagerUI).GetMethod("Initialize", AccessTools.all), prefix9);
+                    HarmonyMethod postfix5 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitModel_OnDie), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitModel).GetMethod("OnDie", AccessTools.all), postfix: postfix5);
+                    HarmonyMethod postfix6 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitPassiveDetail_DmgFactor), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitPassiveDetail).GetMethod("DmgFactor", AccessTools.all), postfix: postfix6);
+                    HarmonyMethod prefix10 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitModel_BeforeRollDice), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitModel).GetMethod("BeforeRollDice", AccessTools.all), prefix10);
+                    HarmonyMethod postfix7 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitBuf_Destroy), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitBuf).GetMethod("Destroy", AccessTools.all), postfix: postfix7);
+                    HarmonyMethod prefix11 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitBuf_burn_OnRoundEnd), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitBuf_burn).GetMethod("OnRoundEnd", AccessTools.all), prefix11);
+                    HarmonyMethod postfix8 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitBufListDetail_CheckGift), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitBufListDetail).GetMethod("CheckGift", AccessTools.all), postfix: postfix8);
+                    HarmonyMethod postfix9 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitPassiveDetail_OnDie), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitPassiveDetail).GetMethod("OnDie", AccessTools.all), postfix: postfix9);
+                    HarmonyMethod postfix10 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BattleUnitPassiveDetail_OnKill), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BattleUnitPassiveDetail).GetMethod("OnKill", AccessTools.all), postfix: postfix10);
+                    HarmonyMethod postfix11 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookInventoryModel_GetBookList_PassiveEquip), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookInventoryModel).GetMethod("GetBookList_PassiveEquip", AccessTools.all), postfix: postfix11);
+                    HarmonyMethod postfix12 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookInventoryModel_GetBookListAll), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookInventoryModel).GetMethod("GetBookListAll", AccessTools.all), postfix: postfix12);
+                    HarmonyMethod postfix13 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookInventoryModel_GetBookByInstanceId), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookInventoryModel).GetMethod("GetBookByInstanceId", AccessTools.all), postfix: postfix13);
+                    HarmonyMethod postfix14 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookInventoryModel_GetAllBookByInstanceId), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookInventoryModel).GetMethod("GetAllBookByInstanceId", AccessTools.all), postfix: postfix14);
+                    HarmonyMethod postfix15 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookPassiveInfo_get_desc_postfix), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookPassiveInfo).GetMethod("get_desc", AccessTools.all), postfix: postfix15);
+                    HarmonyMethod prefix12 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookPassiveInfo_get_desc), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookPassiveInfo).GetMethod("get_desc", AccessTools.all), prefix12);
+                    HarmonyMethod prefix13 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookPassiveInfo_get_name), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookPassiveInfo).GetMethod("get_name", AccessTools.all), prefix13);
+                    HarmonyMethod prefix14 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.CharacterAppearance_ChangeMotion_prefix), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(CharacterAppearance).GetMethod("ChangeMotion", AccessTools.all), prefix14);
+                    HarmonyMethod postfix16 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.CharacterAppearance_ChangeMotion), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(CharacterAppearance).GetMethod("ChangeMotion", AccessTools.all), postfix: postfix16);
+                    HarmonyMethod postfix17 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.CustomizingCardArtworkLoader_GetSpecificArtworkSprite), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(CustomizingCardArtworkLoader).GetMethod("GetSpecificArtworkSprite", AccessTools.all), postfix: postfix17);
+                    HarmonyMethod prefix15 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.EmotionEgoXmlInfo_get_CardId), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(EmotionEgoXmlInfo).GetMethod("get_CardId", AccessTools.all), prefix15);
+                    HarmonyMethod postfix18 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.EmotionPassiveCardUI_SetSprites), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(EmotionPassiveCardUI).GetMethod("SetSprites", AccessTools.all), postfix: postfix18);
+                    HarmonyMethod postfix19 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.EmotionPassiveCardUI_Init), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(EmotionPassiveCardUI).GetMethod("Init", AccessTools.all), postfix: postfix19);
+                    HarmonyMethod prefix16 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.ItemXmlDataList_GetCardItem), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(ItemXmlDataList).GetMethod("GetCardItem", AccessTools.all, (System.Reflection.Binder)null, new System.Type[2]
+                    {
+                    typeof (LorId),
+                    typeof (bool)
+                    }, (ParameterModifier[])null), prefix16);
+                    HarmonyMethod postfix20 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.LevelUpUI_OnClickTargetUnit), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(LevelUpUI).GetMethod("OnClickTargetUnit", AccessTools.all), postfix: postfix20);
+                    HarmonyMethod postfix21 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.LocalizedTextLoader_LoadOthers), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(LocalizedTextLoader).GetMethod("LoadOthers", AccessTools.all), postfix: postfix21);
+                    HarmonyMethod prefix17 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.SpecialCardListModel_ReturnCardToHand), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(SpecialCardListModel).GetMethod("ReturnCardToHand", AccessTools.all), prefix17);
+                    
+                    HarmonyMethod postfix23 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageController_OnFixedUpdateLate), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageController).GetMethod("OnFixedUpdateLate", AccessTools.all), postfix: postfix23);
+                    HarmonyMethod postfix24 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageController_ActivateStartBattleEffectPhase), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageController).GetMethod("ActivateStartBattleEffectPhase", AccessTools.all), postfix: postfix24);
+
+                    HarmonyMethod prefix18 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageController_RoundStartPhase_System), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageController).GetMethod("RoundStartPhase_System", AccessTools.all), prefix18);
+                    HarmonyMethod prefix19 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageController_CheckStoryAfterBattle), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageController).GetMethod("CheckStoryAfterBattle", AccessTools.all), prefix19);
+                    HarmonyMethod postfix26 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageModel_GetFrontAvailableFloor), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageModel).GetMethod("GetFrontAvailableFloor", AccessTools.all), postfix: postfix26);
+                    HarmonyMethod postfix27 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageWaveModel_Init), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageWaveModel).GetMethod("Init", AccessTools.all), postfix: postfix27);
+                    HarmonyMethod postfix28 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.StageWaveModel_GetUnitBattleDataListByFormation), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(StageWaveModel).GetMethod("GetUnitBattleDataListByFormation", AccessTools.all), postfix: postfix28);
+                    HarmonyMethod prefix20 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.TextDataModel_GetText), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(TextDataModel).GetMethod("GetText", AccessTools.all), prefix20);
+
+                    HarmonyMethod postfix30 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIBattleSettingEditPanel_Close), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIBattleSettingEditPanel).GetMethod("Close", AccessTools.all), postfix: postfix30);
+                    HarmonyMethod prefix21 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIBattleSettingEditPanel_SetBUttonState), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIBattleSettingEditPanel).GetMethod("SetBUttonState", AccessTools.all), prefix21);
+                    HarmonyMethod prefix22 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIBattleSettingPanel_OnClickBackButton), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIBattleSettingPanel).GetMethod("OnClickBackButton", AccessTools.all), prefix22);
+                    HarmonyMethod prefix23 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIBattleSettingWaveList_SetData), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIBattleSettingWaveList).GetMethod("SetData", AccessTools.all), prefix23);
+                    HarmonyMethod postfix31 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIColorManager_GetSephirahColor), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIColorManager).GetMethod("GetSephirahColor", AccessTools.all), postfix: postfix31);
+                    HarmonyMethod postfix32 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIColorManager_GetSephirahGlowColor), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIColorManager).GetMethod("GetSephirahGlowColor", AccessTools.all), postfix: postfix32);
+                    HarmonyMethod postfix33 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIController_Awake), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UI.UIController).GetMethod("Awake", AccessTools.all), postfix: postfix33);
+                    HarmonyMethod postfix34 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UICharacterStatInfoPanel_SetData), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UICharacterStatInfoPanel).GetMethod("SetData", AccessTools.all, (System.Reflection.Binder)null, new System.Type[1]
+                    {
+                     typeof (UnitDataModel)
+                    }, (ParameterModifier[])null), postfix: postfix34);
+                    HarmonyMethod postfix35 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIEmotionPassiveCardInven_SetSprites), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIEmotionPassiveCardInven).GetMethod("SetSprites", AccessTools.all), postfix: postfix35);
+                    HarmonyMethod postfix36 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIInvitationRightMainPanel_OpenInit), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIInvitationRightMainPanel).GetMethod("OpenInit", AccessTools.all), postfix: postfix36);
+                    HarmonyMethod postfix37 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UILibrarianEquipInfoSlot_SetData), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UILibrarianEquipInfoSlot).GetMethod("SetData", AccessTools.all), postfix: postfix37);
+                    HarmonyMethod postfix38 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIManualContentPanel_SetData), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIManualContentPanel).GetMethod("SetData", AccessTools.all), postfix: postfix38);
+                    HarmonyMethod postfix39 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIManualScreenPage_LoadContent), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIManualScreenPage).GetMethod("LoadContent", AccessTools.all), postfix: postfix39);
+                    HarmonyMethod postfix40 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIOptionWindow_Open), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIOptionWindow).GetMethod("Open", AccessTools.all), postfix: postfix40);
+                    HarmonyMethod postfix41 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIPassiveSuccessionPopup_InitReservedData), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIPassiveSuccessionPopup).GetMethod("InitReservedData", AccessTools.all), postfix: postfix41);
+                    HarmonyMethod prefix24 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIPassiveSuccessionSlot_SetDataModel), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIPassiveSuccessionSlot).GetMethod("SetDataModel", AccessTools.all), prefix24);
+                    HarmonyMethod prefix25 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIPopupWindowManager_Update), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIPopupWindowManager).GetMethod("Update", AccessTools.all), prefix25);
+                    HarmonyMethod prefix26 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UISpriteDataManager_GetStoryIcon), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UISpriteDataManager).GetMethod("GetStoryIcon", AccessTools.all), prefix26);
+                    HarmonyMethod postfix42 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UIBattleSettingLibrarianInfoPanel_SetData), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UIBattleSettingLibrarianInfoPanel).GetMethod("SetData", AccessTools.all), postfix: postfix42);
+                    HarmonyMethod prefix27 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UnitDataModel_EquipBookForUI), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UnitDataModel).GetMethod("EquipBookForUI", AccessTools.all), prefix27);
+                    HarmonyMethod prefix28 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.UICharacterListPanel_RefreshBattleUnitDataModel), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(UICharacterListPanel).GetMethod("RefreshBattleUnitDataModel", AccessTools.all), prefix28);
+                    HarmonyMethod postfix43 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookModel_GetThumbSprite), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookModel).GetMethod("GetThumbSprite", AccessTools.all), postfix: postfix43);
+                    HarmonyMethod postfix44 = new HarmonyMethod(typeof(LogLikePatches).GetMethod(nameof(LogLikePatches.BookModel_GetMaxPassiveCost), AccessTools.all));
+                    this.Patching(harmony, (MethodBase)typeof(BookModel).GetMethod("GetMaxPassiveCost", AccessTools.all), postfix: postfix44);
+                } catch (Exception e)
+                {
+                    this.Log(e.Message + "\n" + e.StackTrace);
+                }
+                */
 
                 // do monomod hooks
                 HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ChoiceEmotionCard", LogLikeMod.logLikeHooks, "StageController_RoundEndPhase_ChoiceEmotionCard");
@@ -1769,14 +1927,13 @@ namespace abcdcode_LOGLIKE_MOD
                 HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ReturnUnit", LogLikeMod.logLikeHooks, "RoundEndPhase_ReturnUnit");
                 HookHelper.CreateHook(typeof(StageController), (MethodBase)typeof(StageController).GetMethod("CreateLibrarianUnit", AccessTools.all, (System.Reflection.Binder)null, new System.Type[1]
                 {
-        typeof (SephirahType)
+                    typeof (SephirahType)
                 }, (ParameterModifier[])null), LogLikeMod.logLikeHooks, "StageController_CreateLibrarianUnit");
                 HookHelper.CreateHook(typeof(StageController), "StartBattle", LogLikeMod.logLikeHooks, "StageController_StartBattle");
                 HookHelper.CreateHook(typeof(StageController), "OnEnemyDropBookForAdded", LogLikeMod.logLikeHooks, "StageController_OnEnemyDropBookForAdded");
                 HookHelper.CreateHook(typeof(StageController), "EndBattlePhase", LogLikeMod.logLikeHooks, "StageController_EndBattlePhase");
                 HookHelper.CreateHook(typeof(StageController), "EndBattle", LogLikeMod.logLikeHooks, "StageController_EndBattle");
-            
-                HookHelper.CreateHook(typeof(StageController), "OnUpdate", LogLikeMod.logLikeHooks, "StageController_OnUpdate");
+
                 HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickPassiveCard", LogLikeMod.logLikeHooks, "StageLibraryFloorModel_OnPickPassiveCard");
                 HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickEgoCard", LogLikeMod.logLikeHooks, "StageLibraryFloorModel_OnPickEgoCard");
                 HookHelper.CreateHook(typeof(LevelUpUI), "InitBase", LogLikeMod.logLikeHooks, "LevelUpUI_InitBase");
@@ -1842,7 +1999,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             catch (Exception ex)
             {
-                Debug.Log((object)(ex.Message + Environment.NewLine + ex.StackTrace));
+                Debug.Log(ex.Message + Environment.NewLine + ex.StackTrace);
                 Singleton<ModContentManager>.Instance.AddErrorLog($"LogLikeMod Init error : {ex.Message}{Environment.NewLine}{ex.StackTrace}");
             }
         }
@@ -1949,7 +2106,7 @@ namespace abcdcode_LOGLIKE_MOD
                     {
                         string name = strArray[index];
                         GameObject Gobj = bundle.LoadAsset<GameObject>(name);
-                        if ((UnityEngine.Object)Gobj != (UnityEngine.Object)null)
+                        if (Gobj != null)
                         {
                             LogAssetBundleManager.GameObjectBundleCache cache = new LogAssetBundleManager.GameObjectBundleCache()
                             {
@@ -2269,8 +2426,8 @@ namespace abcdcode_LOGLIKE_MOD
                 original.txt_bookNum = (TextMeshProUGUI)typeof(UIInvitationDropBookSlot).GetField("txt_bookNum", AccessTools.all).GetValue((object)bookSlot);
                 original.ob_tutorialhighlight = (GameObject)typeof(UIInvitationDropBookSlot).GetField("ob_tutorialhighlight", AccessTools.all).GetValue((object)bookSlot);
                 LogLikeMod.LogUIBookSlot logUiBookSlot = UnityEngine.Object.Instantiate<LogLikeMod.LogUIBookSlot>(original);
-                UnityEngine.Object.Destroy((UnityEngine.Object)logUiBookSlot.gameObject.GetComponent<UIInvitationDropBookSlot>());
-                UnityEngine.Object.Destroy((UnityEngine.Object)original);
+                UnityEngine.Object.Destroy(logUiBookSlot.gameObject.GetComponent<UIInvitationDropBookSlot>());
+                UnityEngine.Object.Destroy(original);
                 logUiBookSlot.selectable.SubmitEvent.RemoveAllListeners();
                 logUiBookSlot.selectable.SubmitEvent.AddListener(new UnityAction<BaseEventData>(logUiBookSlot.OnPointerClick));
                 logUiBookSlot.selectable.SelectEvent.RemoveAllListeners();
@@ -2304,12 +2461,12 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     this.SetActivatedSlot(true);
                     this.BookName.text = this.bookInfo.Name;
-                    if ((UnityEngine.Object)this.Icon != (UnityEngine.Object)null)
+                    if (this.Icon != null)
                         this.Icon.sprite = this.bookInfo.bookIcon;
-                    if ((UnityEngine.Object)this.IconGlow != (UnityEngine.Object)null)
+                    if (this.IconGlow != null)
                         this.IconGlow.sprite = this.bookInfo.bookIconGlow;
                     this.SetHighlighted(false);
-                    if (!((UnityEngine.Object)this.bookNumRoot != (UnityEngine.Object)null))
+                    if (!(this.bookNumRoot != null))
                         return;
                     if (!this.bookNumRoot.activeSelf)
                         this.bookNumRoot.SetActive(true);
@@ -2320,21 +2477,21 @@ namespace abcdcode_LOGLIKE_MOD
             public void SetEmptyViewSlot()
             {
                 this.BookName.text = TextDataModel.GetText("ui_book_bookname_emptybook");
-                if ((UnityEngine.Object)this.Icon != (UnityEngine.Object)null)
+                if (this.Icon != null)
                 {
                     Image icon = this.Icon;
                     UISpriteDataManager instance = UISpriteDataManager.instance;
-                    icon.sprite = (UnityEngine.Object)instance != (UnityEngine.Object)null ? instance.GetStoryIcon("None").icon : (Sprite)null;
+                    icon.sprite = instance != null ? instance.GetStoryIcon("None").icon : (Sprite)null;
                 }
-                if ((UnityEngine.Object)this.IconGlow != (UnityEngine.Object)null)
+                if (this.IconGlow != null)
                 {
                     Image iconGlow = this.IconGlow;
                     UISpriteDataManager instance = UISpriteDataManager.instance;
-                    iconGlow.sprite = (UnityEngine.Object)instance != (UnityEngine.Object)null ? instance.GetStoryIcon("None").iconGlow : (Sprite)null;
+                    iconGlow.sprite = instance != null ? instance.GetStoryIcon("None").iconGlow : (Sprite)null;
                 }
                 this.SetDisabled(true);
                 GameObject bookNumRoot = this.bookNumRoot;
-                if ((UnityEngine.Object)bookNumRoot != (UnityEngine.Object)null)
+                if (bookNumRoot != null)
                     bookNumRoot.SetActive(false);
                 if (!this.ob_tutorialhighlight.activeSelf)
                     return;
@@ -2415,7 +2572,7 @@ namespace abcdcode_LOGLIKE_MOD
                     this.cg.alpha = 1f;
                     this.cg.interactable = true;
                     this.cg.blocksRaycasts = true;
-                    if (!((UnityEngine.Object)this.selectable != (UnityEngine.Object)null))
+                    if (!(this.selectable != null))
                         return;
                     this.selectable.interactable = true;
                 }
@@ -2424,7 +2581,7 @@ namespace abcdcode_LOGLIKE_MOD
                     this.cg.alpha = 0.0f;
                     this.cg.interactable = false;
                     this.cg.blocksRaycasts = false;
-                    if ((UnityEngine.Object)this.selectable != (UnityEngine.Object)null)
+                    if (this.selectable != null)
                         this.selectable.interactable = false;
                     this._bookId = LorId.None;
                     this.bookInfo = (DropBookXmlInfo)null;
@@ -2436,10 +2593,10 @@ namespace abcdcode_LOGLIKE_MOD
             public void SetGlowColor(Color c)
             {
                 this.FrameGlow.color = c;
-                if ((UnityEngine.Object)this.IconGlow != (UnityEngine.Object)null)
+                if (this.IconGlow != null)
                     this.IconGlow.color = c;
                 TextMeshProMaterialSetter component = this.BookName.GetComponent<TextMeshProMaterialSetter>();
-                if ((UnityEngine.Object)component != (UnityEngine.Object)null)
+                if (component != null)
                     component.underlayColor = c;
                 component.enabled = false;
                 component.enabled = true;
@@ -2508,7 +2665,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 base.Initialized();
                 this.SetActiveOperatinPanel(false);
-                if (!((UnityEngine.Object)this.selectable == (UnityEngine.Object)null))
+                if (!(this.selectable == null))
                     return;
                 this.selectable = this.GetComponent<UICustomSelectable>();
             }
@@ -2530,7 +2687,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     if (this._bookDataModel != UI.UIController.Instance.CurrentUnit.bookItem)
                     {
-                        if ((UnityEngine.Object)this.img_equipFrame != (UnityEngine.Object)null && (UnityEngine.Object)this.faceEditor != (UnityEngine.Object)null)
+                        if (this.img_equipFrame != null && this.faceEditor != null)
                         {
                             if (book.owner.isSephirah)
                                 this.faceEditor.InitBySephirah(book.owner.defaultBook.GetBookClassInfoId());
@@ -2547,13 +2704,13 @@ namespace abcdcode_LOGLIKE_MOD
                     this.SetColorFrame(UIEquipPageSlotState.SuccessionMatter);
                 this.SetActiveOperatinPanel(false);
                 this.SetOperatingPanel();
-                if ((UnityEngine.Object)this.ob_blockFrame != (UnityEngine.Object)null)
+                if (this.ob_blockFrame != null)
                 {
                     if (this.ob_blockFrame.activeSelf)
                         this.ob_blockFrame.gameObject.SetActive(false);
                     this.isBlock = false;
                 }
-                if (LibraryModel.Instance.PlayHistory.Start_TheBlueReverberationPrimaryBattle != 1 || !((UnityEngine.Object)this.ob_blockFrame != (UnityEngine.Object)null))
+                if (LibraryModel.Instance.PlayHistory.Start_TheBlueReverberationPrimaryBattle != 1 || !(this.ob_blockFrame != null))
                     return;
                 SephirahType index = this._bookDataModel.IsCanUsingEquipPageWhenBlueReverberation();
                 if (index == SephirahType.None)
@@ -2572,11 +2729,11 @@ namespace abcdcode_LOGLIKE_MOD
 
             public override void SetActiveOperatinPanel(bool on)
             {
-                if (!((UnityEngine.Object)this.ob_OperatingPanel != (UnityEngine.Object)null))
+                if (!(this.ob_OperatingPanel != null))
                     return;
                 if (!this.ob_OperatingPanel.gameObject.activeSelf)
                     this.ob_OperatingPanel.gameObject.SetActive(true);
-                if ((UnityEngine.Object)this.cg_operatingPanel == (UnityEngine.Object)null)
+                if (this.cg_operatingPanel == null)
                     return;
                 this.cg_operatingPanel.alpha = on ? 1f : 0.0f;
                 this.cg_operatingPanel.blocksRaycasts = on;
@@ -2585,7 +2742,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public void SetOperatingPanel()
             {
-                if ((UnityEngine.Object)this.ob_OperatingPanel == (UnityEngine.Object)null)
+                if (this.ob_OperatingPanel == null)
                     return;
                 if (this._bookDataModel == null)
                 {
@@ -2647,7 +2804,7 @@ namespace abcdcode_LOGLIKE_MOD
                 this.SetActiveOperatinPanel(false);
                 this.cg_equiproot.alpha = 0.0f;
                 base.SetEmptySlot();
-                if (!((UnityEngine.Object)this.ob_blockFrame != (UnityEngine.Object)null))
+                if (!(this.ob_blockFrame != null))
                     return;
                 if (this.ob_blockFrame.activeSelf)
                     this.ob_blockFrame.gameObject.SetActive(false);
@@ -2712,7 +2869,7 @@ namespace abcdcode_LOGLIKE_MOD
                     else
                     {
                         UICustomSelectable component = this.selectable.FindSelectableOnLeft().GetComponent<UICustomSelectable>();
-                        if ((UnityEngine.Object)component == (UnityEngine.Object)null)
+                        if (component == null)
                             UIControlManager.Instance.SelectSelectableForcely(this.selectable);
                         else
                             UIControlManager.Instance.SelectSelectableForcely(component);
@@ -2742,7 +2899,7 @@ namespace abcdcode_LOGLIKE_MOD
                     else
                     {
                         UICustomSelectable component = this.selectable.FindSelectableOnLeft().GetComponent<UICustomSelectable>();
-                        if ((UnityEngine.Object)component == (UnityEngine.Object)null)
+                        if (component == null)
                             UIControlManager.Instance.SelectSelectableForcely(this.selectable);
                         else
                             UIControlManager.Instance.SelectSelectableForcely(component);
@@ -2767,7 +2924,7 @@ namespace abcdcode_LOGLIKE_MOD
                 else
                 {
                     UICustomSelectable component = this.selectable.FindSelectableOnLeft().GetComponent<UICustomSelectable>();
-                    if ((UnityEngine.Object)component == (UnityEngine.Object)null)
+                    if (component == null)
                         UIControlManager.Instance.SelectSelectableForcely(this.selectable);
                     else
                         UIControlManager.Instance.SelectSelectableForcely(component);
@@ -2787,7 +2944,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 else
                     this.SetHighlighted(true, this.listRoot.CurrentSelectedBook == this._bookDataModel);
-                if (!((UnityEngine.Object)this.GetEquipInvenPanel().CurrentSelectedSlot == (UnityEngine.Object)null))
+                if (!(this.GetEquipInvenPanel().CurrentSelectedSlot == null))
                     return;
                 this.GetEquipInvenPanel().currentOverSlot = (UIOriginEquipPageSlot)this;
                 this.GetEquipInvenPanel().ShowPreviewPanel((UIOriginEquipPageSlot)this);
@@ -2795,7 +2952,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public void OnPointerExit(BaseEventData eventData)
             {
-                if ((UnityEngine.Object)this.GetEquipInvenPanel().CurrentSelectedSlot == (UnityEngine.Object)null)
+                if (this.GetEquipInvenPanel().CurrentSelectedSlot == null)
                 {
                     this.GetEquipInvenPanel().currentOverSlot = (UIOriginEquipPageSlot)null;
                     this.GetEquipInvenPanel().HidePreviewPanel();
@@ -2863,7 +3020,7 @@ namespace abcdcode_LOGLIKE_MOD
                 original.txt_Name = LogLikeMod.GetFieldValue<TextMeshProUGUI>((object)baseobj, "txt_Name");
                 original.rewardtexts = LogLikeMod.GetFieldValue<List<TextMeshProUGUI>>((object)baseobj, "rewardtexts");
                 LogLikeMod.LogBattleEmotionRewardSlotUI emotionRewardSlotUi1 = UnityEngine.Object.Instantiate<LogLikeMod.LogBattleEmotionRewardSlotUI>(original, original.transform.parent);
-                BattleEmotionRewardSlotUI emotionRewardSlotUi2 = (UnityEngine.Object)emotionRewardSlotUi1.GetComponent<BattleEmotionRewardSlotUI>() == (UnityEngine.Object)null ? emotionRewardSlotUi1.gameObject.AddComponent<BattleEmotionRewardSlotUI>() : emotionRewardSlotUi1.GetComponent<BattleEmotionRewardSlotUI>();
+                BattleEmotionRewardSlotUI emotionRewardSlotUi2 = emotionRewardSlotUi1.GetComponent<BattleEmotionRewardSlotUI>() == null ? emotionRewardSlotUi1.gameObject.AddComponent<BattleEmotionRewardSlotUI>() : emotionRewardSlotUi1.GetComponent<BattleEmotionRewardSlotUI>();
                 LogLikeMod.SetFieldValue((object)emotionRewardSlotUi2, "panel", (object)emotionRewardSlotUi1.panel);
                 LogLikeMod.SetFieldValue((object)emotionRewardSlotUi2, "rect", (object)emotionRewardSlotUi1.rect);
                 LogLikeMod.SetFieldValue((object)emotionRewardSlotUi2, "rect_frame", (object)emotionRewardSlotUi1.rect_frame);
@@ -2871,8 +3028,8 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.SetFieldValue((object)emotionRewardSlotUi2, "img_emotionlevel", (object)emotionRewardSlotUi1.img_emotionlevel);
                 LogLikeMod.SetFieldValue((object)emotionRewardSlotUi2, "txt_Name", (object)emotionRewardSlotUi1.txt_Name);
                 LogLikeMod.SetFieldValue((object)emotionRewardSlotUi2, "rewardtexts", (object)emotionRewardSlotUi1.rewardtexts);
-                UnityEngine.Object.Destroy((UnityEngine.Object)original);
-                UnityEngine.Object.Destroy((UnityEngine.Object)emotionRewardSlotUi1);
+                UnityEngine.Object.Destroy(original);
+                UnityEngine.Object.Destroy(emotionRewardSlotUi1);
                 return emotionRewardSlotUi2;
             }
         }
@@ -2927,7 +3084,7 @@ namespace abcdcode_LOGLIKE_MOD
                 original._battleDialogLinearDodge = LogLikeMod.GetFieldValue<Image>((object)baseobj, "_battleDialogLinearDodge");
                 original.isLeft = true;
                 LogLikeMod.LogBattleCharacterProfileUI characterProfileUi1 = UnityEngine.Object.Instantiate<LogLikeMod.LogBattleCharacterProfileUI>(original, original.transform.parent);
-                BattleCharacterProfileUI characterProfileUi2 = (UnityEngine.Object)characterProfileUi1.GetComponent<BattleCharacterProfileUI>() == (UnityEngine.Object)null ? characterProfileUi1.gameObject.AddComponent<BattleCharacterProfileUI>() : characterProfileUi1.GetComponent<BattleCharacterProfileUI>();
+                BattleCharacterProfileUI characterProfileUi2 = characterProfileUi1.GetComponent<BattleCharacterProfileUI>() == null ? characterProfileUi1.gameObject.AddComponent<BattleCharacterProfileUI>() : characterProfileUi1.GetComponent<BattleCharacterProfileUI>();
                 LogLikeMod.SetFieldValue((object)characterProfileUi2, "uiRoot", (object)characterProfileUi1.uiRoot);
                 LogLikeMod.SetFieldValue((object)characterProfileUi2, "img_bg", (object)characterProfileUi1.img_bg);
                 LogLikeMod.SetFieldValue((object)characterProfileUi2, "_emotionLvTooltip", (object)characterProfileUi1._emotionLvTooltip);
@@ -2949,8 +3106,8 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.SetFieldValue((object)characterProfileUi2, "_battleDialogChildImg", (object)characterProfileUi1._battleDialogChildImg);
                 LogLikeMod.SetFieldValue((object)characterProfileUi2, "_battleDialogLinearDodge", (object)characterProfileUi1._battleDialogLinearDodge);
                 LogLikeMod.SetFieldValue((object)characterProfileUi2, "isLeft", (object)characterProfileUi1.isLeft);
-                UnityEngine.Object.Destroy((UnityEngine.Object)original);
-                UnityEngine.Object.Destroy((UnityEngine.Object)characterProfileUi1);
+                UnityEngine.Object.Destroy(original);
+                UnityEngine.Object.Destroy(characterProfileUi1);
                 return characterProfileUi2;
             }
         }
@@ -3079,7 +3236,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 get
                 {
-                    if ((UnityEngine.Object)LogLikeMod.UILogBattleDiceCardUI._instance == (UnityEngine.Object)null)
+                    if (LogLikeMod.UILogBattleDiceCardUI._instance == null)
                         LogLikeMod.UILogBattleDiceCardUI._instance = LogLikeMod.UILogBattleDiceCardUI.SlotCopying();
                     return LogLikeMod.UILogBattleDiceCardUI._instance;
                 }
@@ -3331,8 +3488,8 @@ namespace abcdcode_LOGLIKE_MOD
                     RefineHsv refineHsv = (RefineHsv)(type.GetField(name)).GetValue((object)battleDiceCardUi2);
                     hsvEgoLockFrames[index28] = refineHsv;
                 }
-                UnityEngine.Object.Destroy((UnityEngine.Object)original);
-                UnityEngine.Object.Destroy((UnityEngine.Object)battleDiceCardUi2.gameObject.GetComponent<BattleDiceCardUI>());
+                UnityEngine.Object.Destroy(original);
+                UnityEngine.Object.Destroy(battleDiceCardUi2.gameObject.GetComponent<BattleDiceCardUI>());
                 battleDiceCardUi2.gameObject.AddComponent<FrameDummy>();
                 return battleDiceCardUi2;
             }
@@ -3345,7 +3502,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     if (index1 < this.bufIconListUI.Length)
                     {
-                        if (!((UnityEngine.Object)cardBuf.GetBufIcon() == (UnityEngine.Object)null))
+                        if (!(cardBuf.GetBufIcon() == null))
                         {
                             this.bufIconListUI[index1].SetBufIcon(cardBuf);
                             this.bufIconListUI[index1].SetEnable(true);
@@ -3364,7 +3521,7 @@ namespace abcdcode_LOGLIKE_MOD
                 Color color = on ? UIColorManager.Manager.GetUIColor(UIColor.Disabled) : Color.white;
                 foreach (Graphic graphicsEgoLockFrame in this.graphics_EgoLockFrames)
                 {
-                    if (!((UnityEngine.Object)graphicsEgoLockFrame == (UnityEngine.Object)null))
+                    if (!(graphicsEgoLockFrame == null))
                         graphicsEgoLockFrame.color = color;
                 }
                 float num = on ? 0.0f : 1f;
@@ -3392,14 +3549,14 @@ namespace abcdcode_LOGLIKE_MOD
 
             public void SetEgoCoolTimeGauge()
             {
-                if ((UnityEngine.Object)this.ob_EgoCoolTime == (UnityEngine.Object)null)
+                if (this.ob_EgoCoolTime == null)
                     return;
                 if (!this._cardModel.XmlData.IsEgo())
                 {
                     this.ob_EgoCoolTime.SetActive(false);
                     this.SetEgoFrameLockColor(false);
                 }
-                else if ((this.isProfileCard || this.isEmotionSelectedPopup) && (UnityEngine.Object)this.ob_EgoCoolTime != (UnityEngine.Object)null && this.ob_EgoCoolTime.activeSelf)
+                else if ((this.isProfileCard || this.isEmotionSelectedPopup) && this.ob_EgoCoolTime != null && this.ob_EgoCoolTime.activeSelf)
                 {
                     this.ob_EgoCoolTime.gameObject.SetActive(false);
                 }
@@ -3445,9 +3602,9 @@ namespace abcdcode_LOGLIKE_MOD
             public void SetRangeIconHsv(Vector3 hsvvalue)
             {
                 this.img_icon.color = Color.white;
-                if ((UnityEngine.Object)this.hsv_rangeIcon == (UnityEngine.Object)null)
+                if (this.hsv_rangeIcon == null)
                     this.hsv_rangeIcon = this.img_icon.GetComponent<RefineHsv>();
-                if ((UnityEngine.Object)this.hsv_rangeIcon == (UnityEngine.Object)null)
+                if (this.hsv_rangeIcon == null)
                 {
                     Debug.LogError((object)"Hsv Not Reference");
                 }
@@ -3555,7 +3712,7 @@ namespace abcdcode_LOGLIKE_MOD
                     float preferredHeight = this.txt_selfAbility.preferredHeight;
                     int num = Mathf.Min((double)preferredHeight >= 260.0 ? ((double)preferredHeight >= 480.0 ? ((double)preferredHeight >= 700.0 ? 3 : 2) : 1) : 0, b);
                     RectTransform component = this.selfAbilityArea.GetComponent<RectTransform>();
-                    if ((UnityEngine.Object)component != (UnityEngine.Object)null)
+                    if (component != null)
                     {
                         switch (num)
                         {
@@ -3603,7 +3760,7 @@ namespace abcdcode_LOGLIKE_MOD
                 if (this._editor)
                     return;
                 Sprite sprite1 = !LorId.IsModId(cardModel.XmlData.workshopID) ? Singleton<AssetBundleManagerRemake>.Instance.LoadCardSprite(cardModel.GetArtworkSrc()) : Singleton<CustomizingCardArtworkLoader>.Instance.GetSpecificArtworkSprite(cardModel.XmlData.workshopID, cardModel.GetArtworkSrc());
-                if ((UnityEngine.Object)sprite1 != (UnityEngine.Object)null)
+                if (sprite1 != null)
                     this.img_artwork.sprite = sprite1;
                 else
                     Debug.Log((object)"Can't find sprite");
@@ -4359,7 +4516,7 @@ namespace abcdcode_LOGLIKE_MOD
                 logDetailCardSlot.rightDescSlotList[2] = logDetailCardSlot.rightDescSlotList_3;
                 logDetailCardSlot.rightDescSlotList[3] = logDetailCardSlot.rightDescSlotList_4;
                 logDetailCardSlot.rightDescSlotList[4] = logDetailCardSlot.rightDescSlotList_5;
-                UnityEngine.Object.Destroy((UnityEngine.Object)original);
+                UnityEngine.Object.Destroy(original);
                 logDetailCardSlot.gameObject.AddComponent<FrameDummy>();
                 logDetailCardSlot.transform.GetChild(0).transform.localPosition = new Vector3(0.0f, 0.0f);
                 return logDetailCardSlot;
@@ -4370,7 +4527,7 @@ namespace abcdcode_LOGLIKE_MOD
                 for (int index = 0; index < this.img_linearDodge.Length; ++index)
                 {
                     this.img_linearDodge[index].color = c;
-                    if (!((UnityEngine.Object)this.img_linearDodge[index] == (UnityEngine.Object)null))
+                    if (!(this.img_linearDodge[index] == null))
                         this.img_linearDodge[index].color = c;
                 }
             }
@@ -4380,7 +4537,7 @@ namespace abcdcode_LOGLIKE_MOD
                 for (int index = 0; index < this.img_Frames.Length; ++index)
                 {
                     this.img_Frames[index].color = c;
-                    if (!((UnityEngine.Object)this.img_Frames[index] == (UnityEngine.Object)null))
+                    if (!(this.img_Frames[index] == null))
                         this.img_Frames[index].color = c;
                 }
             }
@@ -4388,9 +4545,9 @@ namespace abcdcode_LOGLIKE_MOD
             public void SetRangeIconHsv(Vector3 hsvvalue)
             {
                 this.img_RangeIcon.color = Color.white;
-                if ((UnityEngine.Object)this.hsv_rangeIcon == (UnityEngine.Object)null)
+                if (this.hsv_rangeIcon == null)
                     this.hsv_rangeIcon = this.img_RangeIcon.GetComponent<RefineHsv>();
-                if ((UnityEngine.Object)this.hsv_rangeIcon == (UnityEngine.Object)null)
+                if (this.hsv_rangeIcon == null)
                 {
                     Debug.LogError((object)"Hsv Not Reference");
                 }
@@ -4444,12 +4601,12 @@ namespace abcdcode_LOGLIKE_MOD
                     if (LorId.IsModId(this._cardModel.ClassInfo.workshopID))
                     {
                         sprite1 = Singleton<CustomizingCardArtworkLoader>.Instance.GetSpecificArtworkSprite(this._cardModel.ClassInfo.workshopID, this._cardModel.GetArtworkSrc());
-                        if ((UnityEngine.Object)sprite1 == (UnityEngine.Object)null)
+                        if (sprite1 == null)
                             sprite1 = Singleton<AssetBundleManagerRemake>.Instance.LoadCardSprite(this._cardModel.GetArtworkSrc());
                     }
                     else
                         sprite1 = Singleton<AssetBundleManagerRemake>.Instance.LoadCardSprite(this._cardModel.GetArtworkSrc());
-                    if ((UnityEngine.Object)sprite1 != (UnityEngine.Object)null)
+                    if (sprite1 != null)
                         this.img_Artwork.sprite = sprite1;
                     else
                         Debug.Log((object)"Can't find sprite");
@@ -4468,7 +4625,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     List<DiceBehaviour> behaviourList = this._cardModel.GetBehaviourList();
                     int b = 4 - behaviourList.Count;
-                    if ((UnityEngine.Object)this.ob_selfAbility != (UnityEngine.Object)null)
+                    if (this.ob_selfAbility != null)
                     {
                         string text = Singleton<BattleCardDescXmlList>.Instance.GetAbilityDesc(this._cardModel.GetID());
                         if (string.IsNullOrEmpty(text))
@@ -4490,7 +4647,7 @@ namespace abcdcode_LOGLIKE_MOD
                             float preferredHeight = this.txt_selfAbility.preferredHeight;
                             int num = Mathf.Min((double)preferredHeight >= 26.0 ? ((double)preferredHeight >= 48.0 ? ((double)preferredHeight >= 70.0 ? 3 : 2) : 1) : 0, b);
                             RectTransform component = this.ob_selfAbility.GetComponent<RectTransform>();
-                            if ((UnityEngine.Object)component != (UnityEngine.Object)null)
+                            if (component != null)
                             {
                                 switch (num)
                                 {
@@ -4528,12 +4685,12 @@ namespace abcdcode_LOGLIKE_MOD
                     {
                         if ((double)this.keywordListUI_R.GetComponent<RectTransform>().position.x / (double)Screen.width > 0.75)
                         {
-                            if ((UnityEngine.Object)this.keywordListUI_L != (UnityEngine.Object)null)
+                            if (this.keywordListUI_L != null)
                             {
                                 this.keywordListUI_L.Init(this._cardModel.ClassInfo, this._cardModel.GetBehaviourList());
                                 this.keywordListUI_L.Activate();
                             }
-                            if (!((UnityEngine.Object)this.keywordListUI_R != (UnityEngine.Object)null))
+                            if (!(this.keywordListUI_R != null))
                                 return;
                             this.keywordListUI_R.Deactivate();
                         }
@@ -4541,7 +4698,7 @@ namespace abcdcode_LOGLIKE_MOD
                         {
                             this.keywordListUI_R.Init(this._cardModel.ClassInfo, this._cardModel.GetBehaviourList());
                             this.keywordListUI_R.Activate();
-                            if (!((UnityEngine.Object)this.keywordListUI_L != (UnityEngine.Object)null))
+                            if (!(this.keywordListUI_L != null))
                                 return;
                             this.keywordListUI_L.Deactivate();
                         }
@@ -4690,10 +4847,10 @@ namespace abcdcode_LOGLIKE_MOD
                 uiLogCardSlot.gs_BehaviourIcons[2] = uiLogCardSlot.gs_BehaviourIcons_3;
                 uiLogCardSlot.gs_BehaviourIcons[3] = uiLogCardSlot.gs_BehaviourIcons_4;
                 uiLogCardSlot.gs_BehaviourIcons[4] = uiLogCardSlot.gs_BehaviourIcons_5;
-                UnityEngine.Object.Destroy((UnityEngine.Object)original);
+                UnityEngine.Object.Destroy(original);
                 typeof(UIInvenCardSlot).GetField("EquipInfoButton", AccessTools.all).SetValue((object)uiLogCardSlot.gameObject.GetComponent<UIInvenCardSlot>(), (object)null);
                 typeof(UIInvenCardSlot).GetField("EquipInfoButtonAnim", AccessTools.all).SetValue((object)uiLogCardSlot.gameObject.GetComponent<UIInvenCardSlot>(), (object)null);
-                UnityEngine.Object.Destroy((UnityEngine.Object)uiLogCardSlot.gameObject.GetComponent<UIInvenCardSlot>());
+                UnityEngine.Object.Destroy(uiLogCardSlot.gameObject.GetComponent<UIInvenCardSlot>());
                 uiLogCardSlot.selectable.SubmitEvent.RemoveAllListeners();
                 uiLogCardSlot.selectable.SubmitEvent.AddListener(new UnityAction<BaseEventData>(uiLogCardSlot.OnPointerClick));
                 uiLogCardSlot.selectable.SelectEvent.RemoveAllListeners();
@@ -4701,13 +4858,13 @@ namespace abcdcode_LOGLIKE_MOD
                 uiLogCardSlot.selectable.DeselectEvent.RemoveAllListeners();
                 uiLogCardSlot.selectable.DeselectEvent.AddListener(new UnityAction<BaseEventData>(uiLogCardSlot.OnPointerExit));
                 uiLogCardSlot.selectable.XEvent.RemoveAllListeners();
-                UnityEngine.Object.Destroy((UnityEngine.Object)uiLogCardSlot.EquipInfoButton.gameObject);
+                UnityEngine.Object.Destroy(uiLogCardSlot.EquipInfoButton.gameObject);
                 return uiLogCardSlot;
             }
 
             public void SetCgLeftPanel(bool on)
             {
-                if ((UnityEngine.Object)this.cg_LeftPanel == (UnityEngine.Object)null)
+                if (this.cg_LeftPanel == null)
                     return;
                 this.cg_LeftPanel.alpha = on ? 1f : 0.0f;
                 this.cg_LeftPanel.blocksRaycasts = on;
@@ -4725,7 +4882,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public void OnPointerExit(BaseEventData eventData)
             {
-                if (!((UnityEngine.Object)LogLikeMod.UILogBattleDiceCardUI.Instance != (UnityEngine.Object)null))
+                if (!(LogLikeMod.UILogBattleDiceCardUI.Instance != null))
                     return;
                 LogLikeMod.UILogBattleDiceCardUI.Instance.gameObject.SetActive(false);
             }
@@ -4738,7 +4895,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 for (int index = 0; index < this.img_linearDodge.Length; ++index)
                 {
-                    if (!((UnityEngine.Object)this.img_linearDodge[index] == (UnityEngine.Object)null))
+                    if (!(this.img_linearDodge[index] == null))
                         this.img_linearDodge[index].color = c;
                 }
             }
@@ -4747,7 +4904,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 for (int index = 0; index < this.img_Frames.Length; ++index)
                 {
-                    if (!((UnityEngine.Object)this.img_Frames[index] == (UnityEngine.Object)null))
+                    if (!(this.img_Frames[index] == null))
                         this.img_Frames[index].color = c;
                 }
             }
@@ -4755,9 +4912,9 @@ namespace abcdcode_LOGLIKE_MOD
             public void SetRangeIconHsv(Vector3 hsvvalue)
             {
                 this.img_RangeIcon.color = Color.white;
-                if ((UnityEngine.Object)this.hsv_rangeIcon == (UnityEngine.Object)null)
+                if (this.hsv_rangeIcon == null)
                     this.hsv_rangeIcon = this.img_RangeIcon.GetComponent<RefineHsv>();
-                if ((UnityEngine.Object)this.hsv_rangeIcon == (UnityEngine.Object)null)
+                if (this.hsv_rangeIcon == null)
                 {
                     Debug.LogError((object)"Hsv Not Reference");
                 }
@@ -4820,12 +4977,12 @@ namespace abcdcode_LOGLIKE_MOD
                     if (LorId.IsModId(this._cardModel.ClassInfo.workshopID))
                     {
                         sprite1 = Singleton<CustomizingCardArtworkLoader>.Instance.GetSpecificArtworkSprite(this._cardModel.ClassInfo.workshopID, this._cardModel.GetArtworkSrc());
-                        if ((UnityEngine.Object)sprite1 == (UnityEngine.Object)null)
+                        if (sprite1 == null)
                             sprite1 = Singleton<AssetBundleManagerRemake>.Instance.LoadCardSprite(this._cardModel.GetArtworkSrc());
                     }
                     else
                         sprite1 = Singleton<AssetBundleManagerRemake>.Instance.LoadCardSprite(this._cardModel.GetArtworkSrc());
-                    if ((UnityEngine.Object)sprite1 != (UnityEngine.Object)null)
+                    if (sprite1 != null)
                         this.img_Artwork.sprite = sprite1;
                     else
                         Debug.Log((object)"Can't find sprite");
@@ -4834,7 +4991,7 @@ namespace abcdcode_LOGLIKE_MOD
                         return;
                     this.SetSlotState();
                     this.isEmpty = false;
-                    if ((UnityEngine.Object)this.cg_EmptyFrameRoot != (UnityEngine.Object)null)
+                    if (this.cg_EmptyFrameRoot != null)
                         this.cg_EmptyFrameRoot.alpha = 0.0f;
                     this.SetCgLeftPanel(true);
                 }
@@ -4847,7 +5004,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public static void Create()
             {
-                if ((UnityEngine.Object)LogLikeMod.DefFont == (UnityEngine.Object)null)
+                if (LogLikeMod.DefFont == null)
                 {
                     LogLikeMod.DefFont = UnityEngine.Resources.GetBuiltinResource<Font>("Arial.ttf");
                     LogLikeMod.DefFontColor = UIColorManager.Manager.GetUIColor(UIColor.Default);

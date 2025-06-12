@@ -4,7 +4,6 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
-using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -19,7 +18,6 @@ using RogueLike_Mod_Reborn;
 
 namespace abcdcode_LOGLIKE_MOD
 {
-
     public class GlobalLogueInventoryPanel : Singleton<GlobalLogueInventoryPanel>
     {
         public GameObject root;
@@ -29,9 +27,9 @@ namespace abcdcode_LOGLIKE_MOD
         {
             GameObject gameObject1 = (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel).EditPanel.BattleCardPanel.gameObject;
             GameObject gameObject2 = UnityEngine.Object.Instantiate<Transform>(gameObject1.transform, gameObject1.transform.parent).gameObject;
-            UnityEngine.Object.Destroy((UnityEngine.Object)gameObject2.GetComponent<UIBattleSettingPanel>());
+            UnityEngine.Object.Destroy(gameObject2.GetComponent<UIBattleSettingPanel>());
             for (int index1 = 0; index1 < gameObject2.transform.childCount; ++index1)
-                UnityEngine.Object.Destroy((UnityEngine.Object)gameObject2.transform.GetChild(index1).gameObject);
+                UnityEngine.Object.Destroy(gameObject2.transform.GetChild(index1).gameObject);
             gameObject2.SetActive(true);
             gameObject2.transform.localPosition = new Vector3(0.0f, 0.0f);
             gameObject2.transform.localScale = gameObject1.transform.localScale;
@@ -45,11 +43,11 @@ namespace abcdcode_LOGLIKE_MOD
 
         public void Init()
         {
-            if ((UnityEngine.Object)this.root == (UnityEngine.Object)null)
+            if (this.root == null)
             {
                 this.root = GlobalLogueInventoryPanel.GetLogUIObj(1);
                 this.sprites = new List<GlobalLogueInventoryPanel.LogueEffectImage_Inventory>();
-                ModdingUtils.CreateImage(this.root.transform, "LogLikeModIcon", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f));
+                ModdingUtils.CreateImage(this.root.transform, "RogueLikeRebornIconAlt", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f));
                 for (int index1 = 0; index1 < 8; ++index1)
                 {
                     for (int index2 = 0; index2 < 10; ++index2)
@@ -66,7 +64,7 @@ namespace abcdcode_LOGLIKE_MOD
                 this.Init();
                 this.UpdateSprites();
             }
-            else if ((UnityEngine.Object)this.root != (UnityEngine.Object)null)
+            else if (this.root != null)
                 this.root.SetActive(false);
         }
 
@@ -78,7 +76,7 @@ namespace abcdcode_LOGLIKE_MOD
             List<GlobalLogueEffectBase> once = Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().FindAll((Predicate<GlobalLogueEffectBase>)(x => x is OnceEffect));
             foreach (GlobalLogueEffectBase effect in Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().FindAll((Predicate<GlobalLogueEffectBase>)(x => !once.Contains(x))))
             {
-                if ((UnityEngine.Object)effect.GetSprite() != (UnityEngine.Object)null)
+                if (effect.GetSprite() != null)
                 {
                     this.sprites[index].Init(effect);
                     ++index;
@@ -88,7 +86,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             foreach (GlobalLogueEffectBase effect in once)
             {
-                if ((UnityEngine.Object)effect.GetSprite() != (UnityEngine.Object)null)
+                if (effect.GetSprite() != null)
                 {
                     this.sprites[index].Init(effect);
                     ++index;
@@ -121,25 +119,25 @@ namespace abcdcode_LOGLIKE_MOD
                     this.image.sprite = LogLikeMod.ArtWorks["ShopGoodRewardFrame"];
                     this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
                     bool flag;
-                    if ((UnityEngine.Object)this.text == (UnityEngine.Object)null)
+                    if (this.text == null)
                     {
                         Color defFontColor = LogLikeMod.DefFontColor;
-                        flag = (UnityEngine.Object)LogLikeMod.DefFont_TMP != (UnityEngine.Object)null;
+                        flag = LogLikeMod.DefFont_TMP != null;
                     }
                     else
                         flag = false;
                     if (flag)
                         this.text = ModdingUtils.CreateText_TMP(this.gameObject.transform, new Vector2(0.0f, 0.0f), 30, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.BottomRight, Color.white, LogLikeMod.DefFont_TMP);
-                    if ((UnityEngine.Object)effect.GetSprite() == (UnityEngine.Object)null)
+                    if (effect.GetSprite() == null)
                     {
                         this.Log("effect is null");
                         this.gameObject.SetActive(false);
                     }
                     else
                     {
-                        if ((UnityEngine.Object)this.baseimage == (UnityEngine.Object)null)
+                        if (this.baseimage == null)
                             this.baseimage = ModdingUtils.CreateImage(this.transform, "ShopGoodRewardFrame", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(70f, 70f));
-                        if ((UnityEngine.Object)this.text != (UnityEngine.Object)null)
+                        if (this.text != null)
                         {
                             int stack = effect.GetStack();
                             stack.Log("cur Effect Stack : " + stack.ToString());
@@ -147,7 +145,7 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         this.sprite = effect.GetSprite();
                         this.baseimage.sprite = this.sprite;
-                        if ((UnityEngine.Object)this.selectable == (UnityEngine.Object)null)
+                        if (this.selectable == null)
                         {
                             this.selectable = this.gameObject.AddComponent<UILogCustomSelectable>();
                             this.selectable.targetGraphic = (Graphic)this.image;
@@ -158,7 +156,7 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         this.gameObject.SetActive(true);
                         this.update = false;
-                        if (!((UnityEngine.Object)SingletonBehavior<UIMainOverlayManager>.Instance != (UnityEngine.Object)null))
+                        if (!(SingletonBehavior<UIMainOverlayManager>.Instance != null))
                             return;
                         SingletonBehavior<UIMainOverlayManager>.Instance.Close();
                     }

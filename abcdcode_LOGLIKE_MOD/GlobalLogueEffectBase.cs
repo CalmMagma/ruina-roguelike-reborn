@@ -193,7 +193,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual Sprite GetSprite()
         {
-            Sprite sprite;
+            Sprite sprite = null;
             string id;
             try
             {
@@ -203,58 +203,70 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 return null;
             }
-            try
+            if (!string.IsNullOrEmpty(id))
             {
-                if (id == RMRCore.packageId)
-                    sprite = LogLikeMod.ArtWorks[KeywordIconId == null ? KeywordId : KeywordIconId];
-                else
-                    sprite = LogLikeMod.ModdedArtWorks[(id, KeywordIconId == null ? KeywordId : KeywordIconId)];
-            }
-            catch
-            {
-                return null;
+                try
+                {
+                    if (id == RMRCore.packageId)
+                        sprite = LogLikeMod.ArtWorks[KeywordIconId ?? KeywordId];
+                    else
+                        sprite = LogLikeMod.ModdedArtWorks[(id, KeywordIconId ?? KeywordId)];
+                }
+                catch
+                {
+                    return null;
+                }
             }
             return sprite;
         }
 
         public virtual string GetEffectName()
         {
-            LogueEffectXmlInfo info;
-            try
+            LogueEffectXmlInfo info = null;
+            if (!string.IsNullOrEmpty(this.KeywordId))
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
-            }
-            catch
-            {
-                info = null;
+                try
+                {
+                    info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
+                }
+                catch
+                {
+                    info = null;
+                }
             }
             return info == null ? "" : info.Name;
         }
 
         public virtual string GetEffectDesc()
         {
-            LogueEffectXmlInfo info;
-            try
+            LogueEffectXmlInfo info = null;
+            if (!string.IsNullOrEmpty(this.KeywordId))
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
-            }
-            catch
-            {
-                info = null;
+                try
+                {
+                    info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
+                }
+                catch
+                {
+                    info = null;
+                }
             }
             return info == null ? "" : info.Desc + "\n\n" + info.FlavorText;
         }
 
         public virtual string GetCredenzaEntry()
         {
-            LogueEffectXmlInfo info;
-            try
+            LogueEffectXmlInfo info = null;
+            if (!string.IsNullOrEmpty(this.KeywordId))
             {
-                info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
-            }
-            catch
-            {
-                info = null;
+                try
+                {
+                    info = LogueEffectXmlList.Instance.GetEffectInfo(KeywordId, RMRCore.ClassIds[this.GetType().Assembly.FullName], this.GetStack());
+                }
+                catch
+                {
+                    info = null;
+                }
             }
             return info == null ? this.GetEffectDesc() : info.CatalogDesc;
         }

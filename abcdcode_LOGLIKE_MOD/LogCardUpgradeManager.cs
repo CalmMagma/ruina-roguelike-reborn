@@ -32,8 +32,6 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
-        public UpgradeBase FindUpgradeInfo(LorId cardid) => this.FindUpgradeInfo(cardid, 0, 1);
-
         public DiceCardXmlInfo GetUpgradeCard(LorId cardid) => this.GetUpgradeCard(cardid, 0, 1);
 
         public void ReLoadCurAllUpgradeCard()
@@ -51,28 +49,36 @@ namespace abcdcode_LOGLIKE_MOD
         public Dictionary<int, DiceCardXmlInfo> GetAllUpgradesCard(LorId cardId, int count = 1)
         {
             Dictionary<int, DiceCardXmlInfo> dictionary = new Dictionary<int, DiceCardXmlInfo>();
-            Dictionary<int, UpgradeBase> upgrades;
-            if (this.UpgradeInfoDic.TryGetValue(cardId, out upgrades))
+            if (UpgradeMetadata.UnpackPid(cardId.packageId, out UpgradeMetadata metadata))
+            {
+                if (metadata.canStack)
+                {
+                    DiceCardXmlInfo upgradeInfo = GetUpgradeCard(cardId);
+                    dictionary.Add(metadata.index, upgradeInfo);
+                }
+                return dictionary;
+            }
+
+            if (this.UpgradeInfoDic.TryGetValue(cardId, out Dictionary<int, UpgradeBase> upgrades))
             {
                 foreach (KeyValuePair<int, UpgradeBase> pair in upgrades)
                 {
                     DiceCardXmlInfo upgradeInfo = pair.Value.GetUpgradeInfo(pair.Key, count);
-                    ItemXmlDataList.instance.LogAddModCard(upgradeInfo);
                     dictionary.Add(pair.Key, upgradeInfo);
                 }
             }
-            
+
+            if (this.UpgradeInfoCache == null)
+                this.SetInfoCache();
             foreach (System.Type type in this.UpgradeInfoCache.ToArray())
             {
                 try
                 {
                     if (Activator.CreateInstance(type) is UpgradeBase instance)
                     {
-                        instance.Log("Created Custom UpgradeInfo");
                         instance.Init();
                         instance.baseinfo = ItemXmlDataList.instance.GetCardItem(instance.baseid, true);
-                        if (instance.baseinfo == null)
-                            this.Log($"Error! baseinfo NULL cardid : {cardId.packageId} _ {cardId.id.ToString()} _ {instance.index}");
+
                         if (!this.UpgradeInfoDic.TryGetValue(instance.baseid, out Dictionary<int, UpgradeBase> _))
                             this.UpgradeInfoDic.Add(instance.baseid, new Dictionary<int, UpgradeBase>()
                             {
@@ -83,20 +89,28 @@ namespace abcdcode_LOGLIKE_MOD
                             });
                         else
                             this.UpgradeInfoDic[instance.baseid][instance.index] = instance;
+
                         if (!instance.CanRepeatUpgrade())
+                        {
+                            instance.Log("Created Custom UpgradeInfo");
                             this.UpgradeInfoCache.Remove(type);
+                        }
                         if (instance.baseid == cardId)
                         {
                             DiceCardXmlInfo upgradeInfo = instance.GetUpgradeInfo(instance.index, count);
-                            ItemXmlDataList.instance.LogAddModCard(upgradeInfo);
                             dictionary.Add(instance.index, upgradeInfo);
                         }
                     }
                 }
-                catch
+                catch (Exception e)
                 {
-                    this.Log("Error Catched by Create " + type.Name);
+                    this.Log("Error Catched by Create " + type.Name + "\n" + e);
                 }
+            }
+
+            foreach (var card in dictionary.Values)
+            {
+                ItemXmlDataList.instance.LogAddModCard(card);
             }
 
             return dictionary;
@@ -105,9 +119,14 @@ namespace abcdcode_LOGLIKE_MOD
         public DiceCardXmlInfo GetUpgradeCard(LorId cardid, int index = 0, int count = 1)
         {
             Dictionary<int, UpgradeBase> dictionary;
-            if (this.UpgradeInfoDic.TryGetValue(cardid, out dictionary) && dictionary.TryGetValue(index, out UpgradeBase _))
+            if (UpgradeMetadata.UnpackPid(cardid.packageId, out UpgradeMetadata metadata))
             {
-                DiceCardXmlInfo upgradeInfo = dictionary[index].GetUpgradeInfo(index, count);
+                count += metadata.count;
+                index = metadata.index;
+            }
+            if (this.UpgradeInfoDic.TryGetValue(cardid, out dictionary) && dictionary.TryGetValue(index, out UpgradeBase upgrade))
+            {
+                DiceCardXmlInfo upgradeInfo = upgrade.GetUpgradeInfo(index, count);
                 ItemXmlDataList.instance.LogAddModCard(upgradeInfo);
                 return upgradeInfo;
             }

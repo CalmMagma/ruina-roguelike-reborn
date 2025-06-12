@@ -122,7 +122,7 @@ public class PassiveAbility_230016Log : PassiveAbilityBase
       this.owner.UnitData.unitData.InitBattleDialogByDefaultBook(new LorId(LogLikeMod.ModId, 130017));
       UnityEngine.Object original = Resources.Load("Prefabs/Battle/SpecialEffect/TomerryChangeAppearanceEffect");
       SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Tomary_Phase2");
-      if (original != (UnityEngine.Object) null)
+      if (original !=  null)
         (UnityEngine.Object.Instantiate(original, this.owner.view.charAppearance.transform) as GameObject).transform.localPosition = new Vector3(0.0f, 3f, 0.0f);
       this._bPhase2Initialized = true;
     }
@@ -145,9 +145,9 @@ public class PassiveAbility_230016Log : PassiveAbilityBase
   public void StartEffect()
   {
     BattleCamManager instance1 = SingletonBehavior<BattleCamManager>.Instance;
-    CameraFilterPack_Blur_Radial r = (UnityEngine.Object) instance1 != (UnityEngine.Object) null ? instance1.AddCameraFilter<CameraFilterPack_Blur_Radial>() : (CameraFilterPack_Blur_Radial) null;
+    CameraFilterPack_Blur_Radial r =  instance1 !=  null ? instance1.AddCameraFilter<CameraFilterPack_Blur_Radial>() : (CameraFilterPack_Blur_Radial) null;
     BattleCamManager instance2 = SingletonBehavior<BattleCamManager>.Instance;
-    if ((UnityEngine.Object) instance2 == (UnityEngine.Object) null)
+    if ( instance2 ==  null)
       return;
     instance2.StartCoroutine(this.Pinpong(r));
   }
@@ -162,7 +162,7 @@ public class PassiveAbility_230016Log : PassiveAbilityBase
       yield return (object) new WaitForEndOfFrame();
     }
     BattleCamManager instance = SingletonBehavior<BattleCamManager>.Instance;
-    if ((UnityEngine.Object) instance != (UnityEngine.Object) null)
+    if ( instance !=  null)
       instance.RemoveCameraFilter<CameraFilterPack_Blur_Radial>();
   }
 }

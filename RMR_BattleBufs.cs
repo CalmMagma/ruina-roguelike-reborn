@@ -98,7 +98,7 @@ namespace RogueLike_Mod_Reborn
         public override string keywordIconId => "RMRBuf_CriticalStrike";
         public bool onCrit;
 
-        Sprite sprite = LogLikeMod.ArtWorks["OnCritEffect"];
+        Sprite sprite;
         public override KeywordBuf bufType
         {
             get
@@ -129,6 +129,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.BeforeGiveDamage(behavior);
             critSfx = RMRCore.RMRMapHandler.GetAudioClip("critical.mp3");
+            sprite = LogLikeMod.ArtWorks["OnCritEffect"];
             if (behavior.owner?.currentDiceAction?.target != null)
             {
                 var target = behavior.owner?.currentDiceAction?.target;

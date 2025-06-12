@@ -81,7 +81,7 @@ public class PassiveAbility_250422Log : PassiveAbilityBase
   {
     if (!this._egoCancel)
       return;
-    if ((UnityEngine.Object) this.aura != (UnityEngine.Object) null)
+    if ( this.aura !=  null)
       this.aura.ManualDestroy();
     this.owner.personalEgoDetail.RemoveCard(new LorId(LogLikeMod.ModId, 607021));
     this.owner.passiveDetail.DestroyPassive((PassiveAbilityBase) this);
@@ -121,7 +121,7 @@ public class PassiveAbility_250422Log : PassiveAbilityBase
   public void SetParticle()
   {
     UnityEngine.Object original = Resources.Load("Prefabs/Battle/SpecialEffect/RedMistRelease_ActivateParticle");
-    if (original != (UnityEngine.Object) null)
+    if (original !=  null)
     {
       GameObject gameObject = UnityEngine.Object.Instantiate(original) as GameObject;
       gameObject.transform.parent = this.owner.view.charAppearance.transform;
@@ -139,14 +139,14 @@ public class PassiveAbility_250422Log : PassiveAbilityBase
     this._bDoneEffect = true;
     this.owner.view.ChangeSkin("TheRedMist");
     this.owner.view.charAppearance.ChangeMotion(ActionDetail.Default);
-    if ((UnityEngine.Object) this.aura == (UnityEngine.Object) null)
+    if ( this.aura ==  null)
       this.aura = SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect(this.path, 1f, this.owner.view, this.owner.view);
     this.SetParticle();
     int emotionTotalCoinNumber = Singleton<StageController>.Instance.GetCurrentStageFloorModel().team.emotionTotalCoinNumber;
     Singleton<StageController>.Instance.GetCurrentWaveModel().team.emotionTotalBonus = emotionTotalCoinNumber + 1;
     AudioClip[] enemyThemes = new AudioClip[3];
     AudioClip audioClip = Resources.Load<AudioClip>("Sounds/Battle/RedMistBgm");
-    if ((UnityEngine.Object) audioClip != (UnityEngine.Object) null)
+    if ( audioClip !=  null)
     {
       for (int index = 0; index < enemyThemes.Length; ++index)
         enemyThemes[index] = audioClip;
