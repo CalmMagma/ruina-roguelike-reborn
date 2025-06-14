@@ -149,6 +149,20 @@ Can be used once per battle.</Desc>
     <FlavorText>&lt;color=#CACACA&gt;“It takes a brave man to look death in the eye and claim they don't need help.”&lt;/color&gt;</FlavorText>
     <CatalogDesc>.</CatalogDesc>
   </LogueEffectInfo> 
+
+    <LogueEffectInfo Id="RMR_CorrodedChains">
+    <Name>Corroded Chains</Name> 
+    <Desc>All allies now inflict Bleed on hit equal to half of their current Bleed stacks.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Blood, rust and metal shavings seem to blend together from excessive use of these chains.”&lt;/color&gt;</FlavorText>
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
+
+  <LogueEffectInfo Id="RMR_BleedingSpleen">
+    <Name>Bleeding Spleen</Name> 
+    <Desc>Inflict 2 Bleed On Crit; Enemies with at least 10 Bleed explode on death, dealing (Bleed /2) Damage to all other enemies.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“WIP”&lt;/color&gt;</FlavorText>
+    <CatalogDesc>.</CatalogDesc>
+  </LogueEffectInfo> 
   
     <LogueEffectInfo Id="RMR_Remote">
     <Name>The Remote</Name> 
