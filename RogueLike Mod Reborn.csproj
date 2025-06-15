@@ -693,6 +693,7 @@ xcopy /Y /E /Q "$(SolutionDir)\SpecialStaticInfo\*.*" "C:\Users\Usuário\Desktop
 xcopy /Y /E /Q "$(SolutionDir)\StoryInfo\*.*" "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls\StoryInfo"
 rmdir "C:\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Mods\! RogueLike Mod REBORN" /Q /S
 mkdir "C:\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Mods\! RogueLike Mod REBORN"
-xcopy /Y /E /Q "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN" "C:\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Mods\! RogueLike Mod REBORN"</PostBuildEvent>
+xcopy /Y /E /Q "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN" "C:\Program Files (x86)\Steam\steamapps\common\Library Of Ruina\LibraryOfRuina_Data\Mods\! RogueLike Mod REBORN"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
