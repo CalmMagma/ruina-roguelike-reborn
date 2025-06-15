@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using GameSave;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -93,5 +95,77 @@ namespace RogueLike_Mod_Reborn
 
         public override string KeywordId => "RMR_Remote";
 
+    }
+
+    public class PickUpModel_RMR_Polyhedra : ShopPickUpModel
+    {
+        public PickUpModel_RMR_Polyhedra() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90069);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90069));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            AddPassiveReward(this.id);
+        }
+
+        public override bool IsCanAddShop()
+        {
+            return LogueBookModels.shopPick.Contains(this.id);
+        }
+
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            LogueBookModels.AddPlayerStat(model.UnitData, new LogStatAdder()
+            {
+                maxhp = 1,
+                maxbreak = 1,
+                speedmax = 1,
+                speedmin = 1,
+                maxplaypoint = 1,
+                startplaypoint = 1
+            });
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Hidden_Polyhedra() { unitIndex = LogueBookModels.GetIndexOfUnit(model) });
+        }
+
+        public override string KeywordIconId => "RMR_Polyhedra";
+
+        public override string KeywordId => "RMRPickUp_Polyhedra";
+
+        [HideFromItemCatalog]
+        public class RMREffect_Hidden_Polyhedra : GlobalLogueEffectBase
+        {
+            public int unitIndex;
+
+            public override void BeforeRollDice(BattleDiceBehavior behavior)
+            {
+                base.BeforeRollDice(behavior);
+                if (behavior.owner.UnitData.unitData == LogueBookModels.playerModel[unitIndex])
+                {
+                    behavior.ApplyDiceStatBonus(new DiceStatBonus
+                    {
+                        dmg = 1,
+                        breakDmg = 1,
+                        guardBreakAdder = 1,
+                        min = 1,
+                        max = 1
+                    });
+                }
+            }
+
+            public override SaveData GetSaveData()
+            {
+                SaveData data = base.GetSaveData();
+                data.AddData("savedUnit", unitIndex);
+                return data;
+            }
+
+            public override void LoadFromSaveData(SaveData save)
+            {
+                base.LoadFromSaveData(save);
+                this.unitIndex = save.GetInt("savedUnit");
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace abcdcode_LOGLIKE_MOD
 {
-
+    [HideFromItemCatalog]
     public class PickUpModel_ShopGoodLogic4 : ShopPickUpModel
     {
         public PickUpModel_ShopGoodLogic4() : base()

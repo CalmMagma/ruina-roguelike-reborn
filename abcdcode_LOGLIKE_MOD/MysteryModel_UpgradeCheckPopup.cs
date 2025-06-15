@@ -11,7 +11,6 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
-using System.Collections.Generic;
 using UI;
 
 namespace abcdcode_LOGLIKE_MOD

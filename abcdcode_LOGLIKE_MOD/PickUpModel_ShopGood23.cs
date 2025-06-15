@@ -6,56 +6,57 @@
 
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_ShopGood23 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood23()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570023));
-    this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
-    this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
-    this.id = new LorId(LogLikeMod.ModId, 90023);
-  }
-
-  public override string[] Keywords
-  {
-    get => new string[1]{ "LogueLikeMod_LuckyBuf_Page" };
-  }
-
-  public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
-
-  public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
-
-  public override void OnPickUpShop(ShopGoods good)
-  {
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_ShopGood23.Shop23Effect());
-  }
-
-  public class Shop23Effect : GlobalLogueEffectBase
-  {
-    public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive23"];
-
-    public override string GetEffectName()
+    [HideFromItemCatalog]
+    public class PickUpModel_ShopGood23 : ShopPickUpModel
     {
-      return Singleton<PassiveDescXmlList>.Instance.GetName(new LorId(LogLikeMod.ModId, 8570023));
-    }
+        public PickUpModel_ShopGood23()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570023));
+            this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
+            this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
+            this.id = new LorId(LogLikeMod.ModId, 90023);
+        }
 
-    public override string GetEffectDesc()
-    {
-      return Singleton<PassiveDescXmlList>.Instance.GetDesc(new LorId(LogLikeMod.ModId, 8570023));
-    }
+        public override string[] Keywords
+        {
+            get => new string[1] { "LogueLikeMod_LuckyBuf_Page" };
+        }
 
-    public override void OnRoundStart(StageController stage)
-    {
-      base.OnRoundStart(stage);
-      foreach (BattleUnitModel target in BattleObjectManager.instance.GetAliveList(Faction.Player).RandomPickUp<BattleUnitModel>(1))
-      {
-        LuckyBuf.GiveLuckyThisRound(target, 1);
-        SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfileAll();
-      }
+        public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
+
+        public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
+
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood23.Shop23Effect());
+        }
+
+        public class Shop23Effect : GlobalLogueEffectBase
+        {
+            public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive23"];
+
+            public override string GetEffectName()
+            {
+                return Singleton<PassiveDescXmlList>.Instance.GetName(new LorId(LogLikeMod.ModId, 8570023));
+            }
+
+            public override string GetEffectDesc()
+            {
+                return Singleton<PassiveDescXmlList>.Instance.GetDesc(new LorId(LogLikeMod.ModId, 8570023));
+            }
+
+            public override void OnRoundStart(StageController stage)
+            {
+                base.OnRoundStart(stage);
+                foreach (BattleUnitModel target in BattleObjectManager.instance.GetAliveList(Faction.Player).RandomPickUp<BattleUnitModel>(1))
+                {
+                    LuckyBuf.GiveLuckyThisRound(target, 1);
+                    SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfileAll();
+                }
+            }
+        }
     }
-  }
-}
 }

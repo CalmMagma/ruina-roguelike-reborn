@@ -17,6 +17,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using RogueLike_Mod_Reborn;
+using static abcdcode_LOGLIKE_MOD.MysteryModel_ChStart.StartBoostData;
 
 
 namespace abcdcode_LOGLIKE_MOD
@@ -405,7 +406,7 @@ namespace abcdcode_LOGLIKE_MOD
                     Singleton<LogueSaveManager>.Instance.AddToObtainCount((object)effect);
                 this.UpdateSprites();
             }
-        }
+        }  
 
         public void RemoveEffect(GlobalLogueEffectBase effect)
         {
@@ -417,6 +418,16 @@ namespace abcdcode_LOGLIKE_MOD
                 this.effects.Remove(effect);
             }
             this.UpdateSprites();
+        }
+
+        /// <summary>
+        /// Returns the first instance of a GlobalLogueEffectBase in inventory.<br></br>
+        /// If it does not exist, returns <see cref="null"/>.
+        /// </summary>
+        public T GetEffect<T>() where T : GlobalLogueEffectBase
+        {
+            var effect = this.GetEffectList().Find(x => x is T);
+            return (T)(effect ?? null);
         }
 
         public List<GlobalLogueEffectBase> GetEffectList()

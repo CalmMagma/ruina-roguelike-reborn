@@ -1021,15 +1021,38 @@ namespace abcdcode_LOGLIKE_MOD
             int maxHp = (model.unitData.bookItem.HP + hp) * hpPercent / 100;
             if (maxHp < 1)
                 maxHp = 1;
+
             int bp = LogueBookModels.StatAdderManager.GetBp(adder);
             int bpPercent = LogueBookModels.StatAdderManager.GetBpPercent(adder);
             int maxBp = (model.unitData.bookItem.Break + bp) * bpPercent / 100;
             if (maxBp < 1)
                 maxBp = 1;
+
             model.unitData.bookItem.ClassInfo.EquipEffect.Hp = maxHp;
             model.unitData.bookItem.SetHp(maxHp);
             model.unitData.bookItem.ClassInfo.EquipEffect.Break = maxBp;
             model.unitData.bookItem.SetBp(maxBp);
+
+            int speedDiceNum = model.unitData.bookItem.SpeedDiceNum + StatAdderManager.GetSpeedDiceNum(adder);
+            model.unitData.bookItem.ClassInfo.EquipEffect.SpeedDiceNum = speedDiceNum;
+            model.unitData.bookItem.SetSpeedDiceNum(speedDiceNum);
+
+            int speedMax = model.unitData.bookItem.SpeedMax + StatAdderManager.GetSpeedMax(adder);
+            model.unitData.bookItem.ClassInfo.EquipEffect.Speed = speedMax;
+            model.unitData.bookItem.SetSpeedDiceMax(speedMax);
+
+            int speedMin = model.unitData.bookItem.SpeedMax + StatAdderManager.GetSpeedMin(adder);
+            model.unitData.bookItem.ClassInfo.EquipEffect.SpeedMin = speedMin;
+            model.unitData.bookItem.SetSpeedDiceMin(speedMin);
+
+            int startPlayPoint = model.unitData.bookItem.GetStartPlayPoint() + StatAdderManager.GetStartPlayPoint(adder);
+            model.unitData.bookItem.ClassInfo.EquipEffect.StartPlayPoint = startPlayPoint;
+            model.unitData.bookItem.SetStartPlayPoint(startPlayPoint);
+
+            int maxPlayPoint = model.unitData.bookItem.GetMaxPlayPoint() + StatAdderManager.GetMaxPlayPoint(adder);
+            model.unitData.bookItem.ClassInfo.EquipEffect.StartPlayPoint = maxPlayPoint;
+            model.unitData.bookItem.SetStartPlayPoint(maxPlayPoint);
+
             foreach (LogStatAdder logStatAdder in adder)
                 model.unitData.bookItem.ClassInfo.RangeType = logStatAdder.GetRangeType(model.unitData.bookItem.ClassInfo.RangeType);
             foreach (LogStatAdder logStatAdder in adder)
@@ -1326,6 +1349,16 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.AddCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardid, index, count).id);
         }
 
+        public static int GetIndexOfUnit(BattleUnitModel model)
+        {
+            return playerModel.IndexOf(model.UnitData.unitData);
+        }
+
+        public static int GetIndexOfUnit(UnitBattleDataModel model)
+        {
+            return playerBattleModel.IndexOf(model);
+        }
+
         public class StatAdderManager
         {
             public static int GetHp(List<LogStatAdder> adder)
@@ -1358,6 +1391,46 @@ namespace abcdcode_LOGLIKE_MOD
                 foreach (LogStatAdder logStatAdder in adder)
                     bpPercent += logStatAdder.maxbreakpercent;
                 return bpPercent;
+            }
+
+            public static int GetStartPlayPoint(List<LogStatAdder> adder)
+            {
+                int startplaypoint = 0;
+                foreach (LogStatAdder logStatAdder in adder)
+                    startplaypoint += logStatAdder.startplaypoint;
+                return startplaypoint;
+            }
+
+            public static int GetMaxPlayPoint(List<LogStatAdder> adder)
+            {
+                int maxplaypoint = 0;
+                foreach (LogStatAdder logStatAdder in adder)
+                    maxplaypoint += logStatAdder.maxplaypoint;
+                return maxplaypoint;
+            }
+
+            public static int GetSpeedDiceNum(List<LogStatAdder> adder)
+            {
+                int speeddicenum = 0;
+                foreach (LogStatAdder logStatAdder in adder)
+                    speeddicenum += logStatAdder.speeddicenum;
+                return speeddicenum;
+            }
+
+            public static int GetSpeedMax(List<LogStatAdder> adder)
+            {
+                int speedmax = 0;
+                foreach (LogStatAdder logStatAdder in adder)
+                    speedmax += logStatAdder.speedmax;
+                return speedmax;
+            }
+
+            public static int GetSpeedMin(List<LogStatAdder> adder)
+            {
+                int speedmin = 0;
+                foreach (LogStatAdder logStatAdder in adder)
+                    speedmin += logStatAdder.speedmin;
+                return speedmin;
             }
         }
 

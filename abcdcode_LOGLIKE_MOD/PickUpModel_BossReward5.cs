@@ -7,63 +7,66 @@
 using System;
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_BossReward5 : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_BossReward5()
-  {
-    this.Name = TextDataModel.GetText("BossReward5Name");
-    this.Desc = TextDataModel.GetText("BossReward5Desc");
-    this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-    this.ArtWork = "BossReward5";
-  }
-
-  public override bool IsCanPickUp(UnitDataModel target)
-  {
-    return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>) (x => x is PickUpModel_BossReward5.WildCardEffect)) == null;
-  }
-
-  public override void OnPickUp()
-  {
-    base.OnPickUp();
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_BossReward5.WildCardEffect());
-  }
-
-  public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
-
-  public class WildCardEffect : GlobalLogueEffectBase
-  {
-    public bool CanUse;
-
-    public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward5"];
-
-    public override string GetEffectName() => TextDataModel.GetText("BossReward5Name");
-
-    public override string GetEffectDesc() => TextDataModel.GetText("BossReward5Desc");
-
-    public override void OnStartBattle()
+    [HideFromItemCatalog]
+    public class PickUpModel_BossReward5 : PickUpModelBase
     {
-      base.OnStartBattle();
-      this.CanUse = true;
-    }
+        public PickUpModel_BossReward5()
+        {
+            this.Name = TextDataModel.GetText("BossReward5Name");
+            this.Desc = TextDataModel.GetText("BossReward5Desc");
+            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
+            this.ArtWork = "BossReward5";
+        }
 
-    public override void OnClick()
-    {
-      base.OnClick();
-      if (!this.CanUse)
-        return;
-      MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(), new MysteryModel_CardChoice.ChoiceResult(this.ChooseCard), MysteryModel_CardChoice.ChoiceDescType.ChooseDesc);
-      this.CanUse = false;
-    }
+        public override bool IsCanPickUp(UnitDataModel target)
+        {
+            return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_BossReward5.WildCardEffect)) == null;
+        }
 
-    public void ChooseCard(MysteryModel_CardChoice mystery, DiceCardItemModel model)
-    {
-      PickUpModel_BossReward5_1.card = model.ClassInfo;
-      ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 1000051));
-      Singleton<MysteryManager>.Instance.EndMystery((MysteryBase) mystery);
+        public override void OnPickUp()
+        {
+            base.OnPickUp();
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_BossReward5.WildCardEffect());
+        }
+
+        public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
+
+        public class WildCardEffect : GlobalLogueEffectBase
+        {
+            public bool CanUse;
+
+            public static Rarity ItemRarity = Rarity.Rare;
+
+            public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward5"];
+
+            public override string GetEffectName() => TextDataModel.GetText("BossReward5Name");
+
+            public override string GetEffectDesc() => TextDataModel.GetText("BossReward5Desc");
+
+            public override void OnStartBattle()
+            {
+                base.OnStartBattle();
+                this.CanUse = true;
+            }
+
+            public override void OnClick()
+            {
+                base.OnClick();
+                if (!this.CanUse)
+                    return;
+                MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(), new MysteryModel_CardChoice.ChoiceResult(this.ChooseCard), MysteryModel_CardChoice.ChoiceDescType.ChooseDesc);
+                this.CanUse = false;
+            }
+
+            public void ChooseCard(MysteryModel_CardChoice mystery, DiceCardItemModel model)
+            {
+                PickUpModel_BossReward5_1.card = model.ClassInfo;
+                ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 1000051));
+                Singleton<MysteryManager>.Instance.EndMystery((MysteryBase)mystery);
+            }
+        }
     }
-  }
-}
 }

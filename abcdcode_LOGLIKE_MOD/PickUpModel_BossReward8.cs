@@ -7,39 +7,42 @@
 using System;
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_BossReward8 : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_BossReward8()
-  {
-    this.Name = TextDataModel.GetText("BossReward8Name");
-    this.Desc = TextDataModel.GetText("BossReward8Desc");
-    this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-    this.ArtWork = "BossReward8";
-  }
+    [HideFromItemCatalog]
+    public class PickUpModel_BossReward8 : PickUpModelBase
+    {
+        public PickUpModel_BossReward8()
+        {
+            this.Name = TextDataModel.GetText("BossReward8Name");
+            this.Desc = TextDataModel.GetText("BossReward8Desc");
+            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
+            this.ArtWork = "BossReward8";
+        }
 
-  public override bool IsCanPickUp(UnitDataModel target)
-  {
-    return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>) (x => x is PickUpModel_BossReward8.DragonLightRoadEffect)) == null;
-  }
+        public override bool IsCanPickUp(UnitDataModel target)
+        {
+            return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_BossReward8.DragonLightRoadEffect)) == null;
+        }
 
-  public override void OnPickUp()
-  {
-    base.OnPickUp();
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_BossReward8.DragonLightRoadEffect());
-  }
+        public override void OnPickUp()
+        {
+            base.OnPickUp();
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_BossReward8.DragonLightRoadEffect());
+        }
 
-  public class DragonLightRoadEffect : GlobalLogueEffectBase
-  {
-    public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward8"];
+        public class DragonLightRoadEffect : GlobalLogueEffectBase
+        {
+            public static Rarity ItemRarity = Rarity.Unique;
 
-    public override string GetEffectName() => TextDataModel.GetText("BossReward8Name");
+            public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward8"];
 
-    public override string GetEffectDesc() => TextDataModel.GetText("BossReward8Desc");
+            public override string GetEffectName() => TextDataModel.GetText("BossReward8Name");
 
-    public override float CraftCostMultiple(CraftEffect effect) => 0.8f;
-  }
-}
+            public override string GetEffectDesc() => TextDataModel.GetText("BossReward8Desc");
+
+            public override float CraftCostMultiple(CraftEffect effect) => 0.8f;
+        }
+    }
 }

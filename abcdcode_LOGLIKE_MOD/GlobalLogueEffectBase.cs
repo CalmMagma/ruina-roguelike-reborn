@@ -32,7 +32,14 @@ namespace abcdcode_LOGLIKE_MOD
         /// </value>
         public virtual string KeywordIconId { get; }
 
-
+        /// <summary>
+        /// Used for storing persistent information to save file.<br></br>
+        /// It is recommended to start the method like so:
+        /// <code>SaveData data = base.GetSaveData();</code><br></br>
+        /// As base.GetSaveData contains the TypeName of the effect,<br></br>
+        /// which is necessary for loading the effect from a save file.
+        /// </summary>
+        /// <returns>The <see cref="SaveData"/> containing any data that </returns>
         public virtual SaveData GetSaveData()
         {
             SaveData saveData = new SaveData();
@@ -58,16 +65,30 @@ namespace abcdcode_LOGLIKE_MOD
             return (GlobalLogueEffectBase)null;
         }
 
+        /// <summary>
+        /// Used for loading persistent information from save file.<br></br>
+        /// </summary>
+        /// <param name="save">The SaveData for this effect that is being loaded.</param>
         public virtual void LoadFromSaveData(SaveData save)
         {
         }
 
+        /// <summary>
+        /// Runs immediately when the effect is added to the player's inventory.
+        /// </summary>
         public virtual void AddedNew()
         {
         }
 
+        /// <summary>
+        /// Determines whether or not the item can stack.<br></br>
+        /// <b>Does not prevent multiple copies of an item from being given.</b>
+        /// </summary>
         public virtual bool CanDupliacte() => false;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual void Destroy() => Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect(this);
 
         public virtual void OnDestroy()

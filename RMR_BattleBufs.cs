@@ -93,6 +93,7 @@ namespace RogueLike_Mod_Reborn
     }
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
+        bool initResources;
         private AudioClip critSfx;
         public override string keywordId => "RMR_CriticalStrike";
         public override string keywordIconId => "RMRBuf_CriticalStrike";
@@ -120,7 +121,7 @@ namespace RogueLike_Mod_Reborn
             Color color = spriteRenderer.color;
             color.a = 1f;
             spriteRenderer.color = color;
-            effect.AddComponent<CritSfx>();
+            effect.AddComponent<CritVfx>();
             spriteRenderer.enabled = true;
             effect.SetActive(true);
         }
@@ -128,8 +129,13 @@ namespace RogueLike_Mod_Reborn
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
             base.BeforeGiveDamage(behavior);
-            critSfx = RMRCore.RMRMapHandler.GetAudioClip("critical.mp3");
-            sprite = LogLikeMod.ArtWorks["OnCritEffect"];
+            onCrit = false;
+            if (!initResources) // cache resources into memory to prevent slowdowns/stutters
+            {
+                critSfx = RMRCore.RMRMapHandler.GetAudioClip("critical.mp3");
+                sprite = LogLikeMod.ArtWorks["OnCritEffect"];
+                initResources = true;
+            }
             if (behavior.owner?.currentDiceAction?.target != null)
             {
                 var target = behavior.owner?.currentDiceAction?.target;
@@ -151,15 +157,13 @@ namespace RogueLike_Mod_Reborn
                 }
             }
         }
-        public override void OnSuccessAttack(BattleDiceBehavior behavior)
-        {
-            base.OnSuccessAttack(behavior);
-            // reset crit here
-            onCrit = false;
 
+        public override void AfterDiceAction(BattleDiceBehavior behavior)
+        {
+            onCrit = false;
         }
 
-        public class CritSfx : MonoBehaviour
+        public class CritVfx : MonoBehaviour
         {
             SpriteRenderer renderer;
 
@@ -173,6 +177,8 @@ namespace RogueLike_Mod_Reborn
                 this.timer += Time.deltaTime;
                 base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer/8f);
                 Color color = renderer.color;
+                color.r = 0f + timer / 3f;
+                color.g = 1f - timer / 3f;
                 color.a = 1f - timer / 2f;
                 renderer.color = color;
                 if (this.timer >= this.deathtimer)

@@ -9,7 +9,7 @@
 
     </Wave> 
 
-    <Name> </Name>
+    <Name>Roguelike Reborn</Name>
     <FloorNum>0</FloorNum>
     <Invitation Combine="BookRecipe">
     <Book>-853</Book> 
@@ -25,7 +25,7 @@
 
     </Wave> 
 
-    <Name> </Name>
+    <Name>Roguelike Classic</Name>
     <FloorNum>0</FloorNum>
     <Invitation Combine="BookRecipe">
      <Book>-854</Book> 
@@ -39,7 +39,7 @@
       <Formation>1</Formation>
      <Unit>854</Unit>
     </Wave>
-    <Name> </Name>
+    <Name>Roguelike</Name>
     <FloorNum>0</FloorNum>
     <Invitation Combine="BookRecipe">
      <Book>-855</Book> 

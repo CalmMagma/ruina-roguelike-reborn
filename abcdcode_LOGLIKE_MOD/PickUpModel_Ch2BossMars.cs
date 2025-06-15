@@ -4,23 +4,24 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_Ch2BossMars : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override void LoadFromSaveData(LogueStageInfo stage)
-  {
-    stage.type = StageType.Boss;
-    stage.stageid = 20005;
-  }
+    [HideFromItemCatalog]
+    public class PickUpModel_Ch2BossMars : PickUpModelBase
+    {
+        public override void LoadFromSaveData(LogueStageInfo stage)
+        {
+            stage.type = StageType.Boss;
+            stage.stageid = 20005;
+        }
 
-  public PickUpModel_Ch2BossMars()
-  {
-    this.Name = TextDataModel.GetText("Stage_BossMars");
-    this.Desc = TextDataModel.GetText("Stage_BossMars_Desc");
-    this.FlaverText = "";
-    this.ArtWork = "Stage_ch2_BossMars";
-  }
-}
+        public PickUpModel_Ch2BossMars()
+        {
+            this.Name = TextDataModel.GetText("Stage_BossMars");
+            this.Desc = TextDataModel.GetText("Stage_BossMars_Desc");
+            this.FlaverText = "";
+            this.ArtWork = "Stage_ch2_BossMars";
+        }
+    }
 }

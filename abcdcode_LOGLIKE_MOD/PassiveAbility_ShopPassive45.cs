@@ -6,16 +6,17 @@
 
 using System;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PassiveAbility_ShopPassive45 : PassiveAbilityBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override string debugDesc => "막 시작 시 50% 확률로 속도 주사위 슬롯 + 1(중복 불가)";
 
-  public override int SpeedDiceNumAdder()
-  {
-    return Singleton<Random>.Instance.Next(0, 2) != 1 ? base.SpeedDiceNumAdder() : 1;
-  }
-}
+    public class PassiveAbility_ShopPassive45 : PassiveAbilityBase
+    {
+        public override string debugDesc => "막 시작 시 50% 확률로 속도 주사위 슬롯 + 1(중복 불가)";
+
+        public override int SpeedDiceNumAdder()
+        {
+            return Singleton<Random>.Instance.Next(0, 2) != 1 ? base.SpeedDiceNumAdder() : 1;
+        }
+    }
 }

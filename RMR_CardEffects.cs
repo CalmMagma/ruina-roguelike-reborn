@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
 using LOR_BattleUnit_UI;
 using LOR_DiceSystem;
@@ -94,10 +91,10 @@ namespace RogueLike_Mod_Reborn
             }
             targetUnit.cardSlotDetail.SetPlayPoint(0);
             SingletonBehavior<BattleManagerUI>.Instance.ui_TargetArrow.UpdateTargetList();
-            GlobalLogueEffectBase effect = GlobalLogueEffectManager.Instance.GetEffectList().Find(x => x is RMREffect_Remote);
+            GlobalLogueEffectBase effect = GlobalLogueEffectManager.Instance.GetEffect<RMREffect_Remote>();
             if (effect != null)
             {
-                GlobalLogueEffectManager.Instance.RemoveEffect(effect);
+                effect.Destroy();
             }
             
         }
@@ -275,7 +272,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnUseCard()
         {
             base.OnUseCard();
-            if (owner.cardHistory.GetCurrentRoundCardList(Singleton<StageController>.Instance.RoundTurn).Count <= 0)
+            if (owner.cardSlotDetail.cardQueue.Peek() == card)
             {
                 card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
                 {

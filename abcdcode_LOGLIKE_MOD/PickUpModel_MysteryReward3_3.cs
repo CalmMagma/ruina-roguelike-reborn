@@ -6,27 +6,28 @@
 
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_MysteryReward3_3 : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_MysteryReward3_3()
-  {
-    this.Name = TextDataModel.GetText("MysteryCh3_3RewardName");
-    this.Desc = TextDataModel.GetText("MysteryCh3_3RewardDesc");
-    this.FlaverText = "";
-    this.ArtWork = "Mystery_Ch3_3Reward";
-  }
-
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    LogueBookModels.AddPlayerStat(model.UnitData, new LogStatAdder()
+    [HideFromItemCatalog]
+    public class PickUpModel_MysteryReward3_3 : PickUpModelBase
     {
-      maxhp = Random.Range(1, 16 /*0x10*/),
-      maxbreak = Random.Range(1, 6)
-    });
-  }
-}
+        public PickUpModel_MysteryReward3_3()
+        {
+            this.Name = TextDataModel.GetText("MysteryCh3_3RewardName");
+            this.Desc = TextDataModel.GetText("MysteryCh3_3RewardDesc");
+            this.FlaverText = "";
+            this.ArtWork = "Mystery_Ch3_3Reward";
+        }
+
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            LogueBookModels.AddPlayerStat(model.UnitData, new LogStatAdder()
+            {
+                maxhp = Random.Range(1, 16 /*0x10*/),
+                maxbreak = Random.Range(1, 6)
+            });
+        }
+    }
 }

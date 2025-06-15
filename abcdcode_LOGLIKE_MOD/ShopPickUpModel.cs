@@ -69,6 +69,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual void EditDesc(ref string desc)
         {
+            
             if (this.Keywords.Length == 0)
                 return;
             for (int index = 0; index < this.Keywords.Length; ++index)
@@ -77,6 +78,7 @@ namespace abcdcode_LOGLIKE_MOD
                 desc += Environment.NewLine;
                 desc = desc + Singleton<BattleEffectTextsXmlList>.Instance.GetEffectTextName(this.Keywords[index]) + Environment.NewLine + Singleton<BattleEffectTextsXmlList>.Instance.GetEffectTextDesc(this.Keywords[index]);
             }
+            
         }
 
         public virtual ShopRewardType GetShopType()

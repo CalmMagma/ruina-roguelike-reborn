@@ -7,48 +7,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_ShopGood31 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood31()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570031));
-    this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
-    this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
-    this.id = new LorId(LogLikeMod.ModId, 90031);
-  }
-
-  public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
-
-  public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
-
-  public override void OnPickUpShop(ShopGoods good)
-  {
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_ShopGood31.Shop31Effect());
-  }
-
-  public class Shop31Effect : GlobalLogueEffectBase
-  {
-    public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive31"];
-
-    public override string GetEffectName()
+    [HideFromItemCatalog]
+    public class PickUpModel_ShopGood31 : ShopPickUpModel
     {
-      return Singleton<PassiveDescXmlList>.Instance.GetName(new LorId(LogLikeMod.ModId, 8570031));
-    }
+        public PickUpModel_ShopGood31()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570031));
+            this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
+            this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
+            this.id = new LorId(LogLikeMod.ModId, 90031);
+        }
 
-    public override string GetEffectDesc()
-    {
-      return Singleton<PassiveDescXmlList>.Instance.GetDesc(new LorId(LogLikeMod.ModId, 8570031));
-    }
+        public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
 
-    public override void ChangeRestChoice(MysteryBase currest, ref List<RewardPassiveInfo> choices)
-    {
-      base.ChangeRestChoice(currest, ref choices);
-      RewardPassiveInfo passiveInfo = Singleton<RewardPassivesList>.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 800004));
-      choices.Add(passiveInfo);
+        public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
+
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood31.Shop31Effect());
+        }
+
+        public class Shop31Effect : GlobalLogueEffectBase
+        {
+            public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive31"];
+
+            public override string GetEffectName()
+            {
+                return Singleton<PassiveDescXmlList>.Instance.GetName(new LorId(LogLikeMod.ModId, 8570031));
+            }
+
+            public override string GetEffectDesc()
+            {
+                return Singleton<PassiveDescXmlList>.Instance.GetDesc(new LorId(LogLikeMod.ModId, 8570031));
+            }
+
+            public override void ChangeRestChoice(MysteryBase currest, ref List<RewardPassiveInfo> choices)
+            {
+                base.ChangeRestChoice(currest, ref choices);
+                RewardPassiveInfo passiveInfo = Singleton<RewardPassivesList>.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 800004));
+                choices.Add(passiveInfo);
+            }
+        }
     }
-  }
-}
 }

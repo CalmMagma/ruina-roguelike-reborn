@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 namespace abcdcode_LOGLIKE_MOD
 {
-
+    [HideFromItemCatalog]
     public class PickUpModel_ShopGood6_Lagacy : ShopPickUpModel
     {
         public PickUpModel_ShopGood6_Lagacy()
@@ -60,6 +60,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
+        [HideFromItemCatalog]
         public class ShopThiefPenalty : GlobalLogueEffectBase
         {
             public static Rarity ItemRarity = Rarity.Special;

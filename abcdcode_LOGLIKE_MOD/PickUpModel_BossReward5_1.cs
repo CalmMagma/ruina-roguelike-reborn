@@ -6,25 +6,26 @@
 
 using LOR_DiceSystem;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_BossReward5_1 : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public static DiceCardXmlInfo card;
+    [HideFromItemCatalog]
+    public class PickUpModel_BossReward5_1 : PickUpModelBase
+    {
+        public static DiceCardXmlInfo card;
 
-  public PickUpModel_BossReward5_1()
-  {
-    this.Name = TextDataModel.GetText("BossReward5_1Name");
-    this.Desc = TextDataModel.GetText("BossReward5_1Desc", PickUpModel_BossReward5_1.card == null ? (object) "[card]" : (object) PickUpModel_BossReward5_1.card.Name);
-    this.ArtWork = "BossReward5";
-  }
+        public PickUpModel_BossReward5_1()
+        {
+            this.Name = TextDataModel.GetText("BossReward5_1Name");
+            this.Desc = TextDataModel.GetText("BossReward5_1Desc", PickUpModel_BossReward5_1.card == null ? (object)"[card]" : (object)PickUpModel_BossReward5_1.card.Name);
+            this.ArtWork = "BossReward5";
+        }
 
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    BattleDiceCardModel playingCard = BattleDiceCardModel.CreatePlayingCard(PickUpModel_BossReward5_1.card);
-    model.allyCardDetail.AddCardToHand(playingCard);
-  }
-}
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            BattleDiceCardModel playingCard = BattleDiceCardModel.CreatePlayingCard(PickUpModel_BossReward5_1.card);
+            model.allyCardDetail.AddCardToHand(playingCard);
+        }
+    }
 }

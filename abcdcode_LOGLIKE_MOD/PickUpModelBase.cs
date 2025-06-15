@@ -67,6 +67,9 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
+        /// <summary>
+        /// Displays the credenza entry within the Item Catalog.
+        /// </summary>
         public virtual string GetCredenzaEntry()
         {
             LogueEffectXmlInfo info = null;
@@ -84,10 +87,18 @@ namespace abcdcode_LOGLIKE_MOD
             return info == null ? this.Desc : info.CatalogDesc;
         }
 
+        /// <summary>
+        /// Manipulates the stage which this PickUp sends to upon being chosen.
+        /// </summary>
         public virtual void LoadFromSaveData(LogueStageInfo stage)
         {
         }
 
+        /// <summary>
+        /// Instantly creates a passive attribution keypage and gives it to an unit.
+        /// </summary>
+        /// <param name="id">The LorId of the passive ability.</param>
+        /// <param name="model">The unit to give the passive to.</param>
         public void GivePassive(LorId id, BattleUnitModel model)
         {
             model.UnitData.unitData.bookItem.ClassInfo.EquipEffect.PassiveList.Add(id);
@@ -95,6 +106,11 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.playersperpassives[model.UnitData.unitData].Add(id);
         }
 
+        /// <summary>
+        /// Instantly removes a passive attribution keypage from an unit.
+        /// </summary>
+        /// <param name="id">The LorId of the passive ability.</param>
+        /// <param name="model">The unit to remove the passive from.</param>
         public void RemovePassive(LorId id, BattleUnitModel model)
         {
             model.UnitData.unitData.bookItem.ClassInfo.EquipEffect.PassiveList.RemoveAll((Predicate<LorId>)(x => x == id));
@@ -102,8 +118,16 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.playersperpassives[model.UnitData.unitData].RemoveAll((Predicate<LorId>)(x => x == id));
         }
 
+        /// <summary>
+        /// Determines the list of units to be given as a choice for the pickup.<br></br>
+        /// If null, then all allied units are valid targets. (returns null by default)
+        /// </summary>
         public virtual List<BattleUnitModel> GetPickupTarget() => (List<BattleUnitModel>)null;
 
+        /// <summary>
+        /// Determines whether a given unit can be given the item.
+        /// </summary>
+        /// <param name="target"></param>
         public virtual bool IsCanPickUp(UnitDataModel target)
         {
             RewardPassiveInfo passiveInfo = Singleton<RewardPassivesList>.Instance.GetPassiveInfo(this.id);
@@ -127,13 +151,22 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
+        /// <summary>
+        /// Executes upon being picked up or added via ShopPickUpModel.AddPassiveReward().
+        /// </summary>
         public virtual void OnPickUp()
         {
         }
 
+        /// <summary>
+        /// Executes upon being picked up or added via ShopPickUpModel.AddPassiveReward().<br></br>
+        /// Only executes for PassiveRewardType.SelectOne passives.
+        /// </summary>
+        /// <param name="model">The unit chosen by the player to give the reward to.</param>
         public virtual void OnPickUp(BattleUnitModel model)
         {
         }
+
 
         public static bool CheckDead(UnitDataModel model)
         {

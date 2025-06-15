@@ -51,7 +51,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.TabGroups = new Dictionary<int, List<LogCreatureTabPanel.LogueImage_CreatureTab>>();
             while (true)
             {
-                yield return (object)new WaitForEndOfFrame();
+                yield return new WaitForEndOfFrame();
                 try
                 {
                     this.root = LogCreatureTabPanel.GetLogUIObj(1);
@@ -70,7 +70,7 @@ namespace abcdcode_LOGLIKE_MOD
                     Image image = ModdingUtils.CreateImage(this.root.transform, (Sprite)null, new Vector2(1f, 1f), new Vector2((float)(i * 100 - 420), (float)(360 - j * 150)), new Vector2(80f, 80f));
                     LogCreatureTabPanel.LogueImage_CreatureTab logueimage = image.gameObject.AddComponent<LogCreatureTabPanel.LogueImage_CreatureTab>();
                     this.TabGroups[j].Add(logueimage);
-                    yield return (object)new WaitForEndOfFrame();
+                    yield return new WaitForEndOfFrame();
                     image = (Image)null;
                     logueimage = (LogCreatureTabPanel.LogueImage_CreatureTab)null;
                 }
@@ -80,43 +80,43 @@ namespace abcdcode_LOGLIKE_MOD
             this.TabGroups[0][2].Init((CreaturePickUpModel)new PickUpModel_ForsakenMurderer0());
             this.TabGroups[0][3].Init((CreaturePickUpModel)new PickUpModel_ShyLookToday0());
             this.TabGroups[0][4].Init((CreaturePickUpModel)new PickUpModel_UniverseZogak0());
-            yield return (object)new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             this.TabGroups[0][5].Init((CreaturePickUpModel)new PickUpModel_QueenOfHatred0());
             this.TabGroups[0][6].Init((CreaturePickUpModel)new PickUpModel_Redhood0());
             this.TabGroups[0][7].Init((CreaturePickUpModel)new PickUpModel_ScareCrow0());
             this.TabGroups[0][8].Init((CreaturePickUpModel)new PickUpModel_Bigbird0());
             this.TabGroups[0][9].Init((CreaturePickUpModel)new PickUpModel_Bloodytree0());
-            yield return (object)new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             this.TabGroups[1][0].Init((CreaturePickUpModel)new PickUpModel_HeartofAspiration0());
             this.TabGroups[1][1].Init((CreaturePickUpModel)new PickUpModel_HappyTeddyBear0());
             this.TabGroups[1][2].Init((CreaturePickUpModel)new PickUpModel_LittleHelper0());
             this.TabGroups[1][3].Init((CreaturePickUpModel)new PickUpModel_RedShoes0());
             this.TabGroups[1][4].Init((CreaturePickUpModel)new PickUpModel_ChildofGalaxy0());
-            yield return (object)new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             this.TabGroups[1][5].Init((CreaturePickUpModel)new PickUpModel_KnightOfDespair0());
             this.TabGroups[1][6].Init((CreaturePickUpModel)new PickUpModel_BigBadWolf0());
             this.TabGroups[1][7].Init((CreaturePickUpModel)new PickUpModel_LumberJack0());
             this.TabGroups[1][8].Init((CreaturePickUpModel)new PickUpModel_SmallBird0());
             this.TabGroups[1][9].Init((CreaturePickUpModel)new PickUpModel_Clock0());
-            yield return (object)new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             this.TabGroups[2][0].Init((CreaturePickUpModel)new PickUpModel_Pinocchio0());
             this.TabGroups[2][1].Init((CreaturePickUpModel)new PickUpModel_FairyCarnival0());
             this.TabGroups[2][2].Init((CreaturePickUpModel)new PickUpModel_SingingMachine0());
             this.TabGroups[2][3].Init((CreaturePickUpModel)new PickUpModel_SpiderBud0());
             this.TabGroups[2][4].Init((CreaturePickUpModel)new PickUpModel_Porccubus0());
-            yield return (object)new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             this.TabGroups[2][5].Init((CreaturePickUpModel)new PickUpModel_Greed0());
             this.TabGroups[2][6].Init((CreaturePickUpModel)new PickUpModel_Mountain0());
             this.TabGroups[2][7].Init((CreaturePickUpModel)new PickUpModel_House0());
             this.TabGroups[2][8].Init((CreaturePickUpModel)new PickUpModel_LongBird0());
             this.TabGroups[2][9].Init((CreaturePickUpModel)new PickUpModel_BlueStar0());
-            yield return (object)new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             this.TabGroups[3][0].Init((CreaturePickUpModel)new PickUpModel_TheSnowQueen0());
             this.TabGroups[3][1].Init((CreaturePickUpModel)new PickUpModel_QueenBee0());
             this.TabGroups[3][2].Init((CreaturePickUpModel)new PickUpModel_Butterfly0());
             this.TabGroups[3][3].Init((CreaturePickUpModel)new PickUpModel_Laetitia0());
             this.TabGroups[3][4].Init((CreaturePickUpModel)new PickUpModel_Alriune0());
-            yield return (object)new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             this.TabGroups[3][5].Init((CreaturePickUpModel)new PickUpModel_Angry0());
             this.TabGroups[3][6].Init((CreaturePickUpModel)new PickUpModel_Nosferatu0());
             this.TabGroups[3][7].Init((CreaturePickUpModel)new PickUpModel_Ozma0());

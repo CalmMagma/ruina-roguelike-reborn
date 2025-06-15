@@ -2269,7 +2269,7 @@ namespace RogueLike_Mod_Reborn
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
                         this.isObtained ? this.Pickup.Name : TextDataModel.GetText("ui_RMR_ItemNotObtained_Name"),
-                        this.isObtained ? this.Pickup.Desc + "\n"
+                        this.isObtained ? this.Pickup.Desc + "\n" + "\n" + this.Pickup.FlaverText + "\n"
                         + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.Pickup.GetRarity())) + ">" + this.Pickup.GetRarity().ToString() + "</color>" + "\n\n"
                         + TextDataModel.GetText("ui_RMR_ItemObtainCount", this.Pickup.GetItemObtainCount()) : TextDataModel.GetText("ui_RMR_ItemNotObtained_Desc"),
                         base.transform as RectTransform,
@@ -2342,7 +2342,7 @@ namespace RogueLike_Mod_Reborn
 
         public Image baseimage;
     }
-
+    
     public static class UIItemCatalogPanel
     {
         public static Sprite GetSprite(this PickUpModelBase item)

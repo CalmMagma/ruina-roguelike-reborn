@@ -110,6 +110,7 @@ namespace abcdcode_LOGLIKE_MOD
             public override EquipRangeType GetRangeType(EquipRangeType cur) => EquipRangeType.Hybrid;
         }
 
+       
         public class LogicRangeGlobalEffect : GlobalLogueEffectBase
         {
             public static Rarity ItemRarity = Rarity.Rare;

@@ -7,56 +7,57 @@
 using LOR_DiceSystem;
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_ShopGood33 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood33()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570033));
-    this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
-    this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
-    this.id = new LorId(LogLikeMod.ModId, 90033);
-  }
-
-  public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
-
-  public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
-
-  public override string[] Keywords
-  {
-    get => new string[1]{ "LogueLikeMod_LuckyBuf_Page" };
-  }
-
-  public override void OnPickUpShop(ShopGoods good)
-  {
-    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase) new PickUpModel_ShopGood33.MenualEvadeEffect());
-  }
-
-  public class MenualEvadeEffect : MenualGlobalEffect
-  {
-    public override Sprite GetSprite()
+    [HideFromItemCatalog]
+    public class PickUpModel_ShopGood33 : ShopPickUpModel
     {
-      return MenualGlobalEffect.CurEffect == this ? LogLikeMod.ArtWorks["ShopPassive33_on"] : LogLikeMod.ArtWorks["ShopPassive33"];
-    }
+        public PickUpModel_ShopGood33()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570033));
+            this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
+            this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
+            this.id = new LorId(LogLikeMod.ModId, 90033);
+        }
 
-    public override string GetEffectName()
-    {
-      return Singleton<PassiveDescXmlList>.Instance.GetName(new LorId(LogLikeMod.ModId, 8570033));
-    }
+        public override bool IsCanAddShop() => !LogueBookModels.shopPick.Contains(this.id);
 
-    public override string GetEffectDesc()
-    {
-      return Singleton<PassiveDescXmlList>.Instance.GetDesc(new LorId(LogLikeMod.ModId, 8570033));
-    }
+        public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
 
-    public override void ChangeDiceResult(BattleDiceBehavior behavior, ref int diceResult)
-    {
-      if (MenualGlobalEffect.CurEffect != this || behavior.owner.faction != Faction.Player || behavior.behaviourInCard.Detail != BehaviourDetail.Evasion)
-        return;
-      LuckyBuf.ChangeDiceResult(behavior, 1, ref diceResult);
+        public override string[] Keywords
+        {
+            get => new string[1] { "LogueLikeMod_LuckyBuf_Page" };
+        }
+
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood33.MenualEvadeEffect());
+        }
+
+        public class MenualEvadeEffect : MenualGlobalEffect
+        {
+            public override Sprite GetSprite()
+            {
+                return MenualGlobalEffect.CurEffect == this ? LogLikeMod.ArtWorks["ShopPassive33_on"] : LogLikeMod.ArtWorks["ShopPassive33"];
+            }
+
+            public override string GetEffectName()
+            {
+                return Singleton<PassiveDescXmlList>.Instance.GetName(new LorId(LogLikeMod.ModId, 8570033));
+            }
+
+            public override string GetEffectDesc()
+            {
+                return Singleton<PassiveDescXmlList>.Instance.GetDesc(new LorId(LogLikeMod.ModId, 8570033));
+            }
+
+            public override void ChangeDiceResult(BattleDiceBehavior behavior, ref int diceResult)
+            {
+                if (MenualGlobalEffect.CurEffect != this || behavior.owner.faction != Faction.Player || behavior.behaviourInCard.Detail != BehaviourDetail.Evasion)
+                    return;
+                LuckyBuf.ChangeDiceResult(behavior, 1, ref diceResult);
+            }
+        }
     }
-  }
-}
 }

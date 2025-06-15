@@ -4,33 +4,34 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_MysteryReward3_4 : PickUpModelBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_MysteryReward3_4()
-  {
-    this.Name = TextDataModel.GetText("MysteryCh3_4RewardName");
-    this.Desc = TextDataModel.GetText("MysteryCh3_4RewardDesc");
-    this.FlaverText = "";
-    this.ArtWork = "Mystery_Ch3_4Reward";
-  }
-
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    model.RecoverHP(10000);
-    UnitDataModel unitData = model.UnitData.unitData;
-    LogueBookModels.playersperpassives[unitData].Clear();
-    BookXmlInfo data = Singleton<BookXmlList>.Instance.GetData(RewardingModel.GetReward(Singleton<RewardPassivesList>.Instance.GetChapterData(ChapterGrade.Grade3, PassiveRewardListType.CommonReward, LorId.None)).id);
-    if (data == null)
-      return;
-    LogLikeMod.PlayerEquipOrders.Add(new EquipChangeOrder()
+    [HideFromItemCatalog]
+    public class PickUpModel_MysteryReward3_4 : PickUpModelBase
     {
-      equip = data,
-      model = model.UnitData
-    });
-  }
-}
+        public PickUpModel_MysteryReward3_4()
+        {
+            this.Name = TextDataModel.GetText("MysteryCh3_4RewardName");
+            this.Desc = TextDataModel.GetText("MysteryCh3_4RewardDesc");
+            this.FlaverText = "";
+            this.ArtWork = "Mystery_Ch3_4Reward";
+        }
+
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            model.RecoverHP(10000);
+            UnitDataModel unitData = model.UnitData.unitData;
+            LogueBookModels.playersperpassives[unitData].Clear();
+            BookXmlInfo data = Singleton<BookXmlList>.Instance.GetData(RewardingModel.GetReward(Singleton<RewardPassivesList>.Instance.GetChapterData(ChapterGrade.Grade3, PassiveRewardListType.CommonReward, LorId.None)).id);
+            if (data == null)
+                return;
+            LogLikeMod.PlayerEquipOrders.Add(new EquipChangeOrder()
+            {
+                equip = data,
+                model = model.UnitData
+            });
+        }
+    }
 }
