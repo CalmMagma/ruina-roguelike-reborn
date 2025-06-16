@@ -43,7 +43,7 @@
 
   <text id="LogueLike_PlayerName">Player</text>
 
-  <text id="Shop_EquipPrevious">[Ability][Cost : {0}]</text>
+  <text id="Shop_EquipPrevious">[Passive Ability (Cost: {0})] </text>
 
   <text id="CardChoicePopUp_ChooseDesc">Select Combat Page</text>
   <text id="CardChoicePopUp_RemoveDesc">Select Combat Page to remove</text>

@@ -37,11 +37,18 @@ namespace abcdcode_LOGLIKE_MOD
 
     public class LogLikeMod : ModInitializer
     {
+        /// <summary>
+        /// A dictionary containing several cached UI objects for ready-initialization.
+        /// </summary>
         public static LogLikeMod.CacheDic<int, GameObject> LogUIObjs;
         public static bool purpleexcept;
         public static List<string> CheckExceptionModList;
         public static bool saveloading;
         public static bool see;
+        /// <summary>
+        /// Pauses the combat scene if set to true.<br></br>
+        /// Irrelevant if there is a currently running shop, mystery event or mystery interrupt.
+        /// </summary>
         public static bool PauseBool = false;
         public static List<Assembly> LogModAssemblys;
         public static EquipChangeOrder NextPlayerOrder;
@@ -56,18 +63,45 @@ namespace abcdcode_LOGLIKE_MOD
         public static Dictionary<string, List<EmotionEgoXmlInfo>> RewardCardDic_Dummy;
         public static int curChStageStep;
         public static int NormalRewardCool = 0;
+        /// <summary>
+        /// Determines end-of-act keypage and combat page rewards.
+        /// </summary>
         public static List<DropBookXmlInfo> rewards;
+        /// <summary>
+        /// Determines end-of-act passive choices. (Used mostly for boss rewards)
+        /// </summary>
         public static List<RewardInfo> rewards_passive;
+        /// <summary>
+        /// Determines mid-battle rewards.<br></br>
+        /// Commonly used for passing information to <see cref="PickUpModelBase.OnPickUp(BattleUnitModel)"/>.
+        /// </summary>
         public static List<RewardInfo> rewards_InStage;
+        /// <summary>
+        /// Runs events at the end of the act. <b>These are given out *before* <see cref="LogLikeMod.rewards"/>.</b><br></br>
+        /// Unused in vanilla Roguelike, but still works.
+        /// </summary>
         public static List<LorId> rewardsMystery;
+        /// <summary>
+        /// Determines the next set of stages/encounters for the playe to choose.
+        /// </summary>
         public static List<EmotionCardXmlInfo> nextlist;
+        /// <summary>
+        /// The current chapter the player is in.
+        /// </summary>
         public static ChapterGrade curchaptergrade;
+        /// <summary>
+        /// The current type of stage the playe is in.
+        /// </summary>
         public static StageType curstagetype;
+        /// <summary>
+        /// The current *actual* reception the player is in within Roguelike.<br></br>
+        /// When checking IDs, use this instead of <see cref="StageController.GetStageModel()"/>.
+        /// </summary>
         public static LorId curstageid;
         public static Font DefFont;
         public static TMP_FontAsset _DefFont_TMP;
         public static Color _DefFontColor = new Color(0.9372549f, 0.7607843f, 0.5058824f, 1f);
-        public static string ModId = "abcdcodecalmmagma.LogueLikeReborn";
+        public const string ModId = "abcdcodecalmmagma.LogueLikeReborn";
         public static string path;
         public static Dictionary<string, Dictionary<ActionDetail, Dictionary<GameObject, SkeletonAnimation>>> spinemotions;
         public static Dictionary<string, SpineStandingData> spinedatas;
@@ -75,7 +109,7 @@ namespace abcdcode_LOGLIKE_MOD
         public static LogLikeMod.CacheDic<string, UnityEngine.Object> AssetBundles;
         public static LogLikeMod.CacheDic<string, Sprite> ArtWorks;
         public static bool CreatedShopEquipPages = false;
-        public static bool Debugging;
+
         public static bool Temp = true;
         public static Button LogOpenButton;
         public static Button LogContinueButton;
@@ -1733,25 +1767,6 @@ namespace abcdcode_LOGLIKE_MOD
             return bookXmlInfoList;
         }
 
-        public void Patching(
-          Harmony harmony,
-          MethodBase original,
-          HarmonyMethod prefix = null,
-          HarmonyMethod postfix = null,
-          HarmonyMethod transpiler = null,
-          HarmonyMethod finalizer = null,
-          HarmonyMethod ilmanipulator = null,
-          bool Debug = false)
-        {
-            Debug = LogLikeMod.Debugging;
-            if (Debug)
-                Debug.Log(("Patch : " + original.Name));
-            harmony.Patch(original, prefix, postfix, transpiler, finalizer, ilmanipulator);
-            if (!Debug)
-                return;
-            Debug.Log(("Patch Successs : " + original.Name));
-        }
-
         public override void OnInitializeMod()
         {
             try
@@ -1760,9 +1775,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.logLikeHooks = new LogLikeHooks();
                 base.OnInitializeMod();
 
-                Harmony harmony = new Harmony("abcdcode.LogLikeMOD");
-
-                harmony.PatchAll(typeof(LogLikePatches));
+                Harmony.CreateAndPatchAll(typeof(LogLikePatches), "abcdcode.LogLikeMOD");
 
                 /*
                 try
@@ -1922,47 +1935,49 @@ namespace abcdcode_LOGLIKE_MOD
                 */
 
                 // do monomod hooks
-                HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ChoiceEmotionCard", LogLikeMod.logLikeHooks, "StageController_RoundEndPhase_ChoiceEmotionCard");
-                HookHelper.CreateHook(typeof(StageController), "InitStageByInvitation", LogLikeMod.logLikeHooks, "StageController_InitStageByInvitation");
-                HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ReturnUnit", LogLikeMod.logLikeHooks, "RoundEndPhase_ReturnUnit");
+                HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ChoiceEmotionCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_RoundEndPhase_ChoiceEmotionCard));
+                HookHelper.CreateHook(typeof(StageController), "InitStageByInvitation", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_InitStageByInvitation));
+                HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ReturnUnit", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.RoundEndPhase_ReturnUnit));
                 HookHelper.CreateHook(typeof(StageController), (MethodBase)typeof(StageController).GetMethod("CreateLibrarianUnit", AccessTools.all, (System.Reflection.Binder)null, new System.Type[1]
                 {
                     typeof (SephirahType)
-                }, (ParameterModifier[])null), LogLikeMod.logLikeHooks, "StageController_CreateLibrarianUnit");
-                HookHelper.CreateHook(typeof(StageController), "StartBattle", LogLikeMod.logLikeHooks, "StageController_StartBattle");
-                HookHelper.CreateHook(typeof(StageController), "OnEnemyDropBookForAdded", LogLikeMod.logLikeHooks, "StageController_OnEnemyDropBookForAdded");
-                HookHelper.CreateHook(typeof(StageController), "EndBattlePhase", LogLikeMod.logLikeHooks, "StageController_EndBattlePhase");
-                HookHelper.CreateHook(typeof(StageController), "EndBattle", LogLikeMod.logLikeHooks, "StageController_EndBattle");
+                }, (ParameterModifier[])null), LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_CreateLibrarianUnit));
+                HookHelper.CreateHook(typeof(StageController), "StartBattle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_StartBattle));
+                HookHelper.CreateHook(typeof(StageController), "OnEnemyDropBookForAdded", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_OnEnemyDropBookForAdded));
+                HookHelper.CreateHook(typeof(StageController), "EndBattlePhase", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_EndBattlePhase));
+                HookHelper.CreateHook(typeof(StageController), "EndBattle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_EndBattle));
+                
+                HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickPassiveCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageLibraryFloorModel_OnPickPassiveCard));
+                HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickEgoCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageLibraryFloorModel_OnPickEgoCard));
+                HookHelper.CreateHook(typeof(LevelUpUI), "InitBase", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.LevelUpUI_InitBase));
+                HookHelper.CreateHook(typeof(LevelUpUI), "SetEmotionPerDataUI", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.LevelUpUI_SetEmotionPerDataUI));
+                HookHelper.CreateHook(typeof(LevelUpUI), "OnSelectRoutine", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.LevelUpUI_OnSelectRoutine));
+                HookHelper.CreateHook(typeof(DropBookInventoryModel), "GetBookList_invitationBookList", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DropBookInventoryModel_GetBookList_invitationBookList));
+                HookHelper.CreateHook(typeof(BookInventoryModel), "GetBookList_equip", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookInventoryModel_GetBookList_equip));
+                HookHelper.CreateHook(typeof(UIBattleSettingPanel), "SetCurrentSephirahButton", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIBattleSettingPanel_SetCurrentSephirahButton));
+                HookHelper.CreateHook(typeof(UILibrarianCharacterListPanel), "InitSephirahSelectionButtonsInBattle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UILibrarianCharacterListPanel_InitSephirahSelectionButtonsInBattle));
+                HookHelper.CreateHook(typeof(UILibrarianCharacterListPanel), "SetLibrarianCharacterListPanel_Battle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UILibrarianCharacterListPanel_SetLibrarianCharacterListPanel_Battle));
+                HookHelper.CreateHook(typeof(UIInvitationRightMainPanel), "ConfirmSendInvitation", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvitationRightMainPanel_ConfirmSendInvitation));
+                HookHelper.CreateHook(typeof(UIInvenCardSlot), "SetSlotState", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardSlot_SetSlotState));
+                HookHelper.CreateHook(typeof(UIInvenCardSlot), "OnClickCardEquipInfoButton", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardSlot_OnClickCardEquipInfoButton));
+                HookHelper.CreateHook(typeof(UnitDataModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UnitDataModel_AddCardFromInventory));
+                HookHelper.CreateHook(typeof(UIInvenCardListScroll), "SetData", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardListScroll_SetData));
+                HookHelper.CreateHook(typeof(DeckModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DeckModel_AddCardFromInventory));
+                HookHelper.CreateHook(typeof(DeckModel), "MoveCardToInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DeckModel_MoveCardToInventory));
+                HookHelper.CreateHook(typeof(BattleUnitCardsInHandUI), "SetCardsObject", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleUnitCardsInHandUI_SetCardsObject));
+                HookHelper.CreateHook(typeof(BattleDiceCardUI), "SetEgoCardForPopup", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleDiceCardUI_SetEgoCardForPopup));
+                HookHelper.CreateHook(typeof(UIBattleSettingLibrarianInfoPanel), "SetBattleCardSlotState", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIBattleSettingLibrarianInfoPanel_SetBattleCardSlotState));
+                HookHelper.CreateHook(typeof(UIBattleSettingLibrarianInfoPanel), "SetEquipPageSlotState", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIBattleSettingLibrarianInfoPanel_SetEquipPageSlotState));
+                HookHelper.CreateHook(typeof(UIBattleSettingEditPanel), "Open", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIBattleSettingEditPanel_Open));
+                HookHelper.CreateHook(typeof(BattleUnitEmotionDetail), "CreateEmotionCoin", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleUnitEmotionDetail_CreateEmotionCoin));
+                HookHelper.CreateHook(typeof(BattleUnitEmotionDetail), "Reset", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleUnitEmotionDetail_Reset));
+                HookHelper.CreateHook(typeof(WorkshopSkinDataSetter), "LateInit", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.WorkshopSkinDataSetter_LateInit));
+                HookHelper.CreateHook(typeof(BookXmlInfo), "get_DeckId", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookXmlInfo_get_DeckId));
+                HookHelper.CreateHook(typeof(UnitDataModel), "GetDeckForBattle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UnitDataModel_GetDeckForBattle));
 
-                HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickPassiveCard", LogLikeMod.logLikeHooks, "StageLibraryFloorModel_OnPickPassiveCard");
-                HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickEgoCard", LogLikeMod.logLikeHooks, "StageLibraryFloorModel_OnPickEgoCard");
-                HookHelper.CreateHook(typeof(LevelUpUI), "InitBase", LogLikeMod.logLikeHooks, "LevelUpUI_InitBase");
-                HookHelper.CreateHook(typeof(LevelUpUI), "SetEmotionPerDataUI", LogLikeMod.logLikeHooks, "LevelUpUI_SetEmotionPerDataUI");
-                HookHelper.CreateHook(typeof(LevelUpUI), "OnSelectRoutine", LogLikeMod.logLikeHooks, "LevelUpUI_OnSelectRoutine");
-                HookHelper.CreateHook(typeof(DropBookInventoryModel), "GetBookList_invitationBookList", LogLikeMod.logLikeHooks, "DropBookInventoryModel_GetBookList_invitationBookList");
-                HookHelper.CreateHook(typeof(BookInventoryModel), "GetBookList_equip", LogLikeMod.logLikeHooks, "BookInventoryModel_GetBookList_equip");
-                HookHelper.CreateHook(typeof(UIBattleSettingPanel), "SetCurrentSephirahButton", LogLikeMod.logLikeHooks, "UIBattleSettingPanel_SetCurrentSephirahButton");
-                HookHelper.CreateHook(typeof(UILibrarianCharacterListPanel), "InitSephirahSelectionButtonsInBattle", LogLikeMod.logLikeHooks, "UILibrarianCharacterListPanel_InitSephirahSelectionButtonsInBattle");
-                HookHelper.CreateHook(typeof(UILibrarianCharacterListPanel), "SetLibrarianCharacterListPanel_Battle", LogLikeMod.logLikeHooks, "UILibrarianCharacterListPanel_SetLibrarianCharacterListPanel_Battle");
-                HookHelper.CreateHook(typeof(UIInvitationRightMainPanel), "ConfirmSendInvitation", LogLikeMod.logLikeHooks, "UIInvitationRightMainPanel_ConfirmSendInvitation");
-                HookHelper.CreateHook(typeof(UIInvenCardSlot), "SetSlotState", LogLikeMod.logLikeHooks, "UIInvenCardSlot_SetSlotState");
-                HookHelper.CreateHook(typeof(UIInvenCardSlot), "OnClickCardEquipInfoButton", LogLikeMod.logLikeHooks, "UIInvenCardSlot_OnClickCardEquipInfoButton");
-                HookHelper.CreateHook(typeof(UnitDataModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, "UnitDataModel_AddCardFromInventory");
-                HookHelper.CreateHook(typeof(UIInvenCardListScroll), "SetData", LogLikeMod.logLikeHooks, "UIInvenCardListScroll_SetData");
-                HookHelper.CreateHook(typeof(DeckModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, "DeckModel_AddCardFromInventory");
-                HookHelper.CreateHook(typeof(DeckModel), "MoveCardToInventory", LogLikeMod.logLikeHooks, "DeckModel_MoveCardToInventory");
-                HookHelper.CreateHook(typeof(BattleUnitCardsInHandUI), "SetCardsObject", LogLikeMod.logLikeHooks, "BattleUnitCardsInHandUI_SetCardsObject");
-                HookHelper.CreateHook(typeof(BattleDiceCardUI), "SetEgoCardForPopup", LogLikeMod.logLikeHooks, "BattleDiceCardUI_SetEgoCardForPopup");
-                HookHelper.CreateHook(typeof(UIBattleSettingLibrarianInfoPanel), "SetBattleCardSlotState", LogLikeMod.logLikeHooks, "UIBattleSettingLibrarianInfoPanel_SetBattleCardSlotState");
-                HookHelper.CreateHook(typeof(UIBattleSettingLibrarianInfoPanel), "SetEquipPageSlotState", LogLikeMod.logLikeHooks, "UIBattleSettingLibrarianInfoPanel_SetEquipPageSlotState");
-                HookHelper.CreateHook(typeof(UIBattleSettingEditPanel), "Open", LogLikeMod.logLikeHooks, "UIBattleSettingEditPanel_Open");
-                HookHelper.CreateHook(typeof(BattleUnitEmotionDetail), "CreateEmotionCoin", LogLikeMod.logLikeHooks, "BattleUnitEmotionDetail_CreateEmotionCoin");
-                HookHelper.CreateHook(typeof(BattleUnitEmotionDetail), "Reset", LogLikeMod.logLikeHooks, "BattleUnitEmotionDetail_Reset");
-                HookHelper.CreateHook(typeof(WorkshopSkinDataSetter), "LateInit", LogLikeMod.logLikeHooks, "WorkshopSkinDataSetter_LateInit");
-                HookHelper.CreateHook(typeof(BookXmlInfo), "get_DeckId", LogLikeMod.logLikeHooks, "BookXmlInfo_get_DeckId");
-                HookHelper.CreateHook(typeof(BattleSceneRoot), "Update", LogLikeMod.logLikeHooks, "BattleSceneRoot_Update");
-                HookHelper.CreateHook(typeof(UIGetAbnormalityPanel), "PointerClickButton", LogLikeMod.logLikeHooks, "UIGetAbnormalityPanel_PointerClickButton");
-                HookHelper.CreateHook(typeof(AbnormalityCardDescXmlList), "GetAbnormalityCard", LogLikeMod.logLikeHooks, "AbnormalityCardDescXmlList_GetAbnormalityCard");
+                HookHelper.CreateHook(typeof(BattleSceneRoot), "Update", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleSceneRoot_Update));
+                HookHelper.CreateHook(typeof(UIGetAbnormalityPanel), "PointerClickButton", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIGetAbnormalityPanel_PointerClickButton));
+                HookHelper.CreateHook(typeof(AbnormalityCardDescXmlList), "GetAbnormalityCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.AbnormalityCardDescXmlList_GetAbnormalityCard));
 
                 LogLikeMod.LogModAssemblys = new List<Assembly>();
                 LogLikeMod.LoadSpineAssets();
@@ -4882,7 +4897,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public void OnPointerExit(BaseEventData eventData)
             {
-                if (!(LogLikeMod.UILogBattleDiceCardUI.Instance != null))
+                if (LogLikeMod.UILogBattleDiceCardUI.Instance == null)
                     return;
                 LogLikeMod.UILogBattleDiceCardUI.Instance.gameObject.SetActive(false);
             }

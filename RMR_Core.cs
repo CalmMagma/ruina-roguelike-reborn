@@ -2559,7 +2559,6 @@ namespace RogueLike_Mod_Reborn
             __instance.setter_tooltipname.underlayColor = toolColor;
             __instance.tooltipDesc.text = content;
             __instance.SetTooltipOverlayBoxSize(panelType);
-            __instance.SetFixedTooltipOverlayBoxPosition(camera, rectTransform);
             // ----
             __instance.setter_tooltipname.enabled = false;
             __instance.setter_tooltipname.enabled = true;
@@ -2567,6 +2566,8 @@ namespace RogueLike_Mod_Reborn
             __instance.tooltipName.enabled = true;
             // for some reason this fixes the color glow not updating??? what the fuck??
             // P.S.: it's also in the vanilla game!! what the actual fuck??
+            if (rectTransform != null)
+                __instance.SetFixedTooltipOverlayBoxPosition(camera, rectTransform);
         }
 
         public static void SetFixedTooltipOverlayBoxPosition(this UIMainOverlayManager __instance, Camera cam, RectTransform targeTranseForm)
@@ -2593,8 +2594,6 @@ namespace RogueLike_Mod_Reborn
                 desiredPos.y -= 520 - (desiredPos.y + __instance._curSize.y);
             if (desiredPos.y > 520f)
                 desiredPos.y = 520f;
-            if (Environment.StackTrace.Contains("GlobalLogueEffectManager.LogueEffectImage"))
-                desiredPos.y = 440f;
             __instance.tooltipPositionPivot.anchoredPosition = desiredPos;
         }
     }
@@ -2861,6 +2860,16 @@ namespace RogueLike_Mod_Reborn
         [HarmonyPatch(typeof(Workshop.WorkshopSkinDataSetter), nameof(Workshop.WorkshopSkinDataSetter.LateInit))]
         [HarmonyFinalizer]
         static Exception WorkshopSkinDataSetter_LateInit_Finalizer(Exception __exception)
+        {
+            return __exception is NullReferenceException ? null : __exception;
+        }
+
+        /// <summary>
+        /// Makes UI.UISelectableIconController.HideIcon stop bitching
+        /// </summary>
+        [HarmonyPatch(typeof(UI.UISelectableIconController), nameof(UI.UISelectableIconController.HideIcon))]
+        [HarmonyFinalizer]
+        static Exception UISelectableIconController_HideIcon(Exception __exception)
         {
             return __exception is NullReferenceException ? null : __exception;
         }

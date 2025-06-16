@@ -182,7 +182,13 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static bool IsDead(this UnitDataModel model)
         {
-            return LogueBookModels.playerBattleModel.Find((Predicate<UnitBattleDataModel>)(x => x.unitData == model)).isDead;
+            try
+            {
+                return LogueBookModels.playerBattleModel.Find(x => x.unitData == model).isDead;
+            } catch
+            {
+                return false;
+            }
         }
 
         public static CardDropTableXmlRoot Convert(this abcdcode_LOGLIKE_MOD_Extension.CardDropTableXmlRoot info)

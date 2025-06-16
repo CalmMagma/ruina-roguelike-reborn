@@ -230,20 +230,20 @@ namespace abcdcode_LOGLIKE_MOD
             this.FrameObj.Add("Mask", image1.gameObject);
             TextMeshProUGUI textTmp = ModdingUtils.CreateText_TMP(image1.transform, new Vector2(0.0f, 0.0f), 30, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.TopLeft, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
             textTmp.text = this.GetCurFrameDia();
-            textTmp.preferredHeight.Log("preferredHeight : " + ((int)textTmp.preferredHeight).ToString());
+            textTmp.preferredHeight.Log("preferredHeight: " + ((int)textTmp.preferredHeight).ToString());
             float maxDown = textTmp.preferredHeight - y;
             if ((double)maxDown > 0.0)
             {
                 MysteryBase.TextUpDown textUpDown = textTmp.gameObject.AddComponent<MysteryBase.TextUpDown>();
                 textUpDown.Init(textTmp.gameObject, 0.0f, maxDown);
-                Image image2 = ModdingUtils.CreateImage(curFrame.transform, "MysteryArrow", new Vector2(1f, -1f), new Vector2(770f, 300f), new Vector2(40f, 40f));
+                Image image2 = ModdingUtils.CreateImage(curFrame.transform, "MysteryArrow", new Vector2(1f, -1f), new Vector2(75f, -200f), new Vector2(40f, 40f));
                 MysteryBase.TextUpDownButton textUpDownButton1 = image2.gameObject.AddComponent<MysteryBase.TextUpDownButton>();
-                textUpDownButton1.targetGraphic = (Graphic)image2;
+                textUpDownButton1.targetGraphic = image2;
                 textUpDownButton1.Init(new MysteryBase.TextUpDownButton.DownEvent(textUpDown.ScrollUp));
                 this.FrameObj.Add("TextUpDown_Up", textUpDownButton1.gameObject);
-                Image image3 = ModdingUtils.CreateImage(curFrame.transform, "MysteryArrow", new Vector2(1f, 1f), new Vector2(770f, 300f - y), new Vector2(40f, 40f));
+                Image image3 = ModdingUtils.CreateImage(curFrame.transform, "MysteryArrow", new Vector2(1f, 1f), new Vector2(75f, -200f - y), new Vector2(40f, 40f));
                 MysteryBase.TextUpDownButton textUpDownButton2 = image3.gameObject.AddComponent<MysteryBase.TextUpDownButton>();
-                textUpDownButton2.targetGraphic = (Graphic)image3;
+                textUpDownButton2.targetGraphic = image3;
                 textUpDownButton2.Init(new MysteryBase.TextUpDownButton.DownEvent(textUpDown.ScrollDown));
                 this.FrameObj.Add("TextUpDown_Down", textUpDownButton2.gameObject);
             }

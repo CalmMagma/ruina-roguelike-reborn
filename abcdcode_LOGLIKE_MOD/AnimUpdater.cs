@@ -6,24 +6,25 @@
 
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class AnimUpdater : MonoBehaviour
+namespace abcdcode_LOGLIKE_MOD
 {
-  public MysteryAnimatorDefault animator;
 
-  public void SetAnim(MysteryAnimatorDefault anim, MysteryBase mysterybase)
-  {
-    this.animator = anim;
-    this.animator.Init(mysterybase);
-  }
+    public class AnimUpdater : MonoBehaviour
+    {
+        public MysteryAnimatorDefault animator;
 
-  public void Update()
-  {
-    if (this.animator == null)
-      return;
-    this.animator.Update();
-  }
-}
+        public void SetAnim(MysteryAnimatorDefault anim, MysteryBase mysterybase)
+        {
+            this.animator = anim;
+            this.animator.Init(mysterybase);
+        }
+
+        public void Update()
+        {
+            if (this.animator == null)
+                return;
+            this.animator.Update();
+        }
+    }
 }

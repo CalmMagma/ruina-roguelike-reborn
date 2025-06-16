@@ -4,33 +4,34 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PickUpModel_ShopGood1 : ShopPickUpModel
+namespace abcdcode_LOGLIKE_MOD
 {
-  public PickUpModel_ShopGood1()
-  {
-    this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570001));
-    this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
-    this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
-    this.id = new LorId(LogLikeMod.ModId, 90001);
-  }
 
-  public override bool IsEquipReward()
-  {
-    this.Log(nameof (IsEquipReward));
-    return true;
-  }
+    public class PickUpModel_ShopGood1 : ShopPickUpModel
+    {
+        public PickUpModel_ShopGood1()
+        {
+            this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 8570001));
+            this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
+            this.Desc = Singleton<PassiveDescXmlList>.Instance.GetDesc(this.basepassive.id);
+            this.id = new LorId(LogLikeMod.ModId, 90001);
+        }
 
-  public override bool IsCanPickUp(UnitDataModel target) => base.IsCanPickUp(target);
+        public override bool IsEquipReward()
+        {
+            this.Log(nameof(IsEquipReward));
+            return true;
+        }
 
-  public override void OnPickUp(BattleUnitModel model)
-  {
-    base.OnPickUp(model);
-    this.GivePassive(new LorId(LogLikeMod.ModId, 8570001), model);
-  }
+        public override bool IsCanPickUp(UnitDataModel target) => base.IsCanPickUp(target);
 
-  public override void OnPickUpShop(ShopGoods good) => ShopPickUpModel.AddEquipPage(this.id);
-}
+        public override void OnPickUp(BattleUnitModel model)
+        {
+            base.OnPickUp(model);
+            this.GivePassive(new LorId(LogLikeMod.ModId, 8570001), model);
+        }
+
+        public override void OnPickUpShop(ShopGoods good) => ShopPickUpModel.AddEquipPage(this.id);
+    }
 }

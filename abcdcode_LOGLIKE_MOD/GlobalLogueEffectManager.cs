@@ -17,7 +17,6 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using RogueLike_Mod_Reborn;
-using static abcdcode_LOGLIKE_MOD.MysteryModel_ChStart.StartBoostData;
 
 
 namespace abcdcode_LOGLIKE_MOD

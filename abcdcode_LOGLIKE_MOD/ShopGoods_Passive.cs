@@ -22,6 +22,7 @@ namespace abcdcode_LOGLIKE_MOD
     {
         public ShopPickUpModel GoodScript;
         public Sprite GoodSprite;
+        public UILogCustomSelectable customSelectable;
         public bool update;
 
         public override SaveData GetSaveData()
@@ -106,18 +107,18 @@ namespace abcdcode_LOGLIKE_MOD
                 this.GoodSprite = LogLikeMod.ArtWorks[goodinfo.artwork];
             else if (LogLikeMod.ModdedArtWorks.ContainsKey((goodinfo.id.packageId, goodinfo.artwork)))
                 this.GoodSprite = LogLikeMod.ModdedArtWorks[(goodinfo.id.packageId, goodinfo.artwork)];
-            UILogCustomSelectable customSelectable = (UILogCustomSelectable)null;
+            customSelectable = null;
             if (goodinfo.id.packageId == LogLikeMod.ModId)
                 customSelectable = ModdingUtils.CreateLogSelectable(this.transform, goodinfo.iconartwork, new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(180f, 180f));
             else if (LogLikeMod.ModdedArtWorks.ContainsKey((goodinfo.id.packageId, goodinfo.iconartwork)))
                 customSelectable = ModdingUtils.CreateLogSelectable(this.transform, LogLikeMod.ModdedArtWorks[(goodinfo.id.packageId, goodinfo.iconartwork)], new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(180f, 180f));
             Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
-            buttonClickedEvent.AddListener((UnityAction)(() => this.OnClickGoods()));
+            buttonClickedEvent.AddListener(() => this.OnClickGoods());
             customSelectable.onClick = buttonClickedEvent;
             customSelectable.SelectEvent = new UnityEventBasedata();
-            customSelectable.SelectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerEnter()));
+            customSelectable.SelectEvent.AddListener(e => this.OnPointerEnter());
             customSelectable.DeselectEvent = new UnityEventBasedata();
-            customSelectable.DeselectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerExit()));
+            customSelectable.DeselectEvent.AddListener(e => this.OnPointerExit());
             Image image = ModdingUtils.CreateImage(this.transform, "MoneyIcon", new Vector2(1f, 1f), new Vector2(-10f, -90f));
             this.moneyicon = image;
             TextMeshProUGUI textTmp = ModdingUtils.CreateText_TMP(image.transform, new Vector2(40f, 0.0f), 25, new Vector2(0.5f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.MidlineLeft, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
@@ -164,19 +165,22 @@ namespace abcdcode_LOGLIKE_MOD
             this.GoodScript.EditDesc(ref desc1);
             if (flag)
             {
-                string desc2 = $"{TextDataModel.GetText("Shop_EquipPrevious", (object)this.GoodScript.basepassive.cost)} {desc1}";
+                string desc2 = $"{TextDataModel.GetText("Shop_EquipPrevious", this.GoodScript.basepassive.cost)}{desc1}";
                 SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(name, desc2 + "\n" + "\n" + this.GoodScript.FlaverText + "\n"
                         + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.GoodScript.GetRarity())) + ">" + this.GoodScript.GetRarity().ToString() + "</color>",
-                        this.gameObject.transform as RectTransform,
+                        this.customSelectable.transform as RectTransform,
                         this.GoodScript.GetRarity(),
                         UIToolTipPanelType.OnlyContent);
             }
             else
                 SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(name, desc1 + "\n" + "\n" + this.GoodScript.FlaverText + "\n"
                         + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.GoodScript.GetRarity())) + ">" + this.GoodScript.GetRarity().ToString() + "</color>",
-                        this.gameObject.transform as RectTransform,
+                        this.customSelectable.transform as RectTransform,
                         this.GoodScript.GetRarity(),
                         UIToolTipPanelType.OnlyContent);
+            var instance = SingletonBehavior<UIMainOverlayManager>.Instance;
+            var curPos = instance.tooltipPositionPivot.position;
+            instance.tooltipPositionPivot.position = new Vector2(curPos.x - 80f, curPos.y + 100f);
         }
 
         public void OnPointerExit()

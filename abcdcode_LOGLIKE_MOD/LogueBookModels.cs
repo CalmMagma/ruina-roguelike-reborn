@@ -127,21 +127,29 @@ namespace abcdcode_LOGLIKE_MOD
             }
             SaveData data7 = data.GetData("deck");
             int num1 = data7.GetListCount() > 0 ? 1 : 0;
-            Debug.Log((object)"INITIALIZING DECKS");
+            model.Log("INITIALIZING DECKS");
             if (num1 != 0)
             {
                 foreach (SaveData data8 in data7)
                 {
                     LorId cardId = ExtensionUtils.LogLoadFromSaveData(data8);
-                    Debug.Log((object)$"INITIALIZING DECK FOR UNIT : {cardId.packageId}, {cardId.id.ToString()}");
+                    model.Log($"INITIALIZING DECK FOR UNIT : {cardId.packageId}, {cardId.id.ToString()}");
                     LogueBookModels.AddCard(cardId);
                     int num2 = (int)model.unitData.AddCardFromInventory(cardId);
                 }
             }
-            SaveData data9 = data.GetData("equipedbooklist");
+            SaveData data9 = data.GetData("equipedbooklist");  
             model.unitData.bookItem.originData.equipedBookIdListInPassive = new List<int>();
             foreach (SaveData saveData in data9)
                 model.unitData.bookItem.originData.equipedBookIdListInPassive.Add(saveData.GetIntSelf());
+            
+            var data10 = data.GetData("customizedAppearance");
+            if (data10 != null)
+                model.unitData.customizeData.LoadFromSaveData(data10);
+
+            var data11 = data.GetData("nuggetName");
+            if (data11 != null)
+                model.unitData.SetCustomName(data11.GetStringSelf());
         }
 
         public static SaveData GetSaveData_UnitBattleDataModel(UnitBattleDataModel model)
@@ -209,6 +217,10 @@ namespace abcdcode_LOGLIKE_MOD
                     data8.AddToList(diceCardXmlInfo.id.LogGetSaveData());
             }
             data1.AddData("_onlyCard", data8);
+            var data9 = model.unitData.customizeData.GetSaveData();
+            data1.AddData("customizedAppearance", data9);
+            var data10 = model.unitData.name;
+            data1.AddData("nuggetName", data10);
             return data1;
         }
 
@@ -790,8 +802,10 @@ namespace abcdcode_LOGLIKE_MOD
             player.bookItem.ClassInfo.Chapter = 1;
             player.bookItem.ClassInfo.RangeType = EquipRangeType.Melee;
             player.bookItem.ClassInfo.EquipEffect = LogueBookModels.CopyEquipEffect(LogueBookModels.BaseEquipStat);
-            player.bookItem.ClassInfo.CharacterSkin = new List<string>();
-            player.bookItem.ClassInfo.CharacterSkin.Add("Roland");
+            player.bookItem.ClassInfo.CharacterSkin = new List<string>()
+            {
+                "Roland"
+            };
             player.bookItem.TryGainUniquePassive();
             player.bookItem.SetOriginalStat();
             player.bookItem.SetOriginalSpeed();
@@ -847,22 +861,21 @@ namespace abcdcode_LOGLIKE_MOD
                 SaveData data = Singleton<LogueSaveManager>.Instance.LoadData("dshka");
                 player.SetCustomName(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("LogueLike_PlayerNugget_Dshka"));
                 player.customizeData.LoadFromSaveData(data);
-                player.customizeData.SetCustomData(true);
+                
             }
             else if (File.Exists(LogueSaveManager.Saveroot + "/Beta14"))
             {
                 SaveData data = Singleton<LogueSaveManager>.Instance.LoadData("Beta14");
                 player.SetCustomName(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("LogueLike_PlayerNugget_Berbtha"));
                 player.customizeData.LoadFromSaveData(data);
-                player.customizeData.SetCustomData(true);
             }
             else
             {
                 player.SetCustomName(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("LogueLike_PlayerName"));
                 player.customizeData.Copy(LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[0].customizeData);
                 player.customizeData.specialCustomID = new LorId(10);
-                player.customizeData.SetCustomData(true);
             }
+            player.customizeData.SetCustomData(true);
             player.bookItem.TryGainUniquePassive();
             LogueBookModels.playerModel.Add(player);
             LogLikeMod.curstagetype = StageType.Start;
@@ -1100,19 +1113,31 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static void AddSubPlayer()
         {
-            if (LogueBookModels.playerModel.Count == 5)
+            if (LogueBookModels.playerModel.Count >= 5)
                 return;
             UnitDataModel unitDataModel = new UnitDataModel(new LorId(LogLikeMod.ModId, -854 - LogueBookModels.playerModel.Count));
             unitDataModel.bookItem.instanceId = LogueBookModels.nextinstanceid++;
             unitDataModel.bookItem.ClassInfo.EquipEffect.PassiveList.Clear();
-            unitDataModel.SetCustomName(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("LogueLike_PlayerName") + (LogueBookModels.playerModel.Count + 1).ToString());
-            unitDataModel.customizeData.Copy(LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[LogueBookModels.playerModel.Count].customizeData);
-            unitDataModel.customizeData.SetCustomData(true);
-            LogueBookModels.ResetPlayerData(unitDataModel);
-            unitDataModel.bookItem.ClassInfo.CharacterSkin = new List<string>();
-            unitDataModel.bookItem.ClassInfo.CharacterSkin.Add("KetherLibrarian");
-            typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue((object)unitDataModel.bookItem, (object)unitDataModel.bookItem.ClassInfo.CharacterSkin[0]);
-            typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue((object)unitDataModel.bookItem, (object)unitDataModel.bookItem.ClassInfo.CharacterSkin[0]);
+            try
+            {
+                var unitCustomData = StageController.Instance.GetStageModel().GetFrontAvailableFloor()._floorModel.GetUnitDataList()[LogueBookModels.playerModel.Count];
+                unitDataModel.SetCustomName(unitCustomData.name);
+                unitDataModel.customizeData.Copy(unitCustomData.customizeData);
+                unitDataModel.customizeData.SetCustomData(true);
+                LogueBookModels.ResetPlayerData(unitDataModel);
+            } catch (ArgumentOutOfRangeException e)
+            {
+                Debug.Log("subplayer is shitting itself again: " + e);
+            } catch (Exception e)
+            {
+                Debug.Log("OKAY REAL SHIT IS GOING ON IN SUBPLAYER ACTUALLY: " + e);
+            }
+            unitDataModel.bookItem.ClassInfo.CharacterSkin = new List<string>()
+                {
+                    "KetherLibrarian"
+                };
+            unitDataModel.bookItem._selectedOriginalSkin = unitDataModel.bookItem.ClassInfo.CharacterSkin[0];
+            unitDataModel.bookItem._characterSkin = unitDataModel.bookItem.ClassInfo.CharacterSkin[0];
             LogueBookModels.playerModel.Add(unitDataModel);
             UnitBattleDataModel unitBattleDataModel = new UnitBattleDataModel(Singleton<StageController>.Instance.GetStageModel(), unitDataModel);
             LogueBookModels.playerBattleModel.Add(unitBattleDataModel);

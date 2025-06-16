@@ -97,9 +97,9 @@ namespace abcdcode_LOGLIKE_MOD
             CardSlot.selectable.SubmitEvent.RemoveAllListeners();
             CardSlot.selectable.SubmitEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnClickCard()));
             CardSlot.selectable.SelectEvent.RemoveAllListeners();
-            CardSlot.selectable.SelectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerEnter(CardSlot)));
+            CardSlot.selectable.SelectEvent.AddListener((UnityAction<BaseEventData>)(e => CardSlot.OnPointerEnter(e)));
             CardSlot.selectable.DeselectEvent.RemoveAllListeners();
-            CardSlot.selectable.DeselectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerExit(CardSlot)));
+            CardSlot.selectable.DeselectEvent.AddListener((UnityAction<BaseEventData>)(e => CardSlot.OnPointerExit(e)));
             CardSlot.txt_cardNumbers.text = goods_count.ToString();
             this.parent.FrameObj.Add($"CardSlot{cardinfo.id.packageId}{cardinfo.id.id.ToString()}", CardSlot.gameObject);
             this.count = goods_count;
@@ -112,24 +112,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.parent.FrameObj.Add($"Money{cardinfo.id.packageId}{cardinfo.id.id.ToString()}", CardSlot.gameObject);
             this.price = int.Parse(textTmp.text);
             this.Money = textTmp;
-        }
-
-        public void OnPointerEnter(LogLikeMod.UILogCardSlot CardSlot)
-        {
-            LogLikeMod.UILogBattleDiceCardUI instance = LogLikeMod.UILogBattleDiceCardUI.Instance;
-            instance.transform.SetParent(this.transform.parent);
-            instance.gameObject.SetActive(true);
-            instance.SetCard(BattleDiceCardModel.CreatePlayingCard(CardSlot._cardModel.ClassInfo));
-            instance.transform.localPosition = CardSlot.transform.parent.localPosition + ((double)CardSlot.transform.parent.localPosition.x > 0.0 ? new Vector3(-270f, -150f) : new Vector3(270f, -150f));
-            instance.transform.localScale = new Vector3(0.2f, 0.2f);
-            instance.gameObject.layer = LayerMask.NameToLayer("UI");
-        }
-
-        public void OnPointerExit(LogLikeMod.UILogCardSlot CardSlot)
-        {
-            if (!((Object)LogLikeMod.UILogBattleDiceCardUI.Instance != (Object)null))
-                return;
-            LogLikeMod.UILogBattleDiceCardUI.Instance.gameObject.SetActive(false);
         }
 
         public override void Purchase()
@@ -168,7 +150,7 @@ namespace abcdcode_LOGLIKE_MOD
                 this.time -= Time.deltaTime;
                 if ((double)this.time >= 0.0)
                     return;
-                Object.Destroy((Object)this.gameObject);
+                Object.Destroy(this.gameObject);
             }
         }
     }

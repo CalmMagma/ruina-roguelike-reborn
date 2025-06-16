@@ -164,6 +164,27 @@ namespace abcdcode_LOGLIKE_MOD
 
     public class LogLikeHooks
     {
+        public List<DiceCardXmlInfo> UnitDataModel_GetDeckForBattle(Func<UnitDataModel, int, List<DiceCardXmlInfo>> orig, UnitDataModel self, int index)
+        {
+            if (LogLikeMod.CheckStage(true) && RMRCore.CurrentGamemode.ReplaceBaseDeck)
+            {
+                List<DiceCardXmlInfo> list = new List<DiceCardXmlInfo>();
+                list.AddRange(self.GetCardList(index));
+                int deckSize = self.GetDeckSize();
+                int curSize = list.Count;
+                if (self.bookItem.ClassInfo.RangeType != EquipRangeType.Range && curSize < deckSize)
+                {
+                    var defaultDeck = DeckXmlList.Instance.GetData(RMRCore.CurrentGamemode.BaseDeckReplacement).cardIdList;
+                    for (int i = curSize; i < deckSize; i++)
+                    {
+                        list.Add(ItemXmlDataList.instance.GetCardItem(defaultDeck[i], false));
+                    }                 
+                }
+                return list;
+            }
+            return orig(self, index);
+        }
+
         public AbnormalityCard AbnormalityCardDescXmlList_GetAbnormalityCard(
           Func<AbnormalityCardDescXmlList, string, AbnormalityCard> orig,
           AbnormalityCardDescXmlList self,
@@ -212,12 +233,12 @@ namespace abcdcode_LOGLIKE_MOD
 
         public LorId BookXmlInfo_get_DeckId(Func<BookXmlInfo, LorId> orig, BookXmlInfo self)
         {
-            if (self.id == new LorId(LogLikeMod.ModId, -854) && RMRCore.CurrentGamemode.ReplaceBaseDeck && !(StageController.Instance._stageModel._classInfo.id == new LorId(LogLikeMod.ModId, -855)))
+            if (self.id.packageId == LogLikeMod.ModId && self.id.id >= -858 && self.id.id <= -854 && RMRCore.CurrentGamemode.ReplaceBaseDeck && !(StageController.Instance._stageModel._classInfo.id == new LorId(LogLikeMod.ModId, -855)))
             {
                 return RMRCore.CurrentGamemode.BaseDeckReplacement;
             }
             return orig(self);
-        }
+        }  
 
         public void UIBattleSettingPanel_SetCurrentSephirahButton(
           Action<UIBattleSettingPanel> orig,
@@ -320,7 +341,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogueBookModels.selectedEmotion = new List<RewardPassiveInfo>();
                 LogueBookModels.EmotionCardList = new List<RewardPassiveInfo>();
                 foreach (KeyValuePair<int, int> keyValuePair in LogueBookModels.EmotionSelectDic)
-                    LogueBookModels.EmotionCardList.AddRange((IEnumerable<RewardPassiveInfo>)Singleton<LogCreatureTabPanel>.Instance.GetCreaturePickUpByIndex(keyValuePair.Key, keyValuePair.Value));
+                    LogueBookModels.EmotionCardList.AddRange(Singleton<LogCreatureTabPanel>.Instance.GetCreaturePickUpByIndex(keyValuePair.Key, keyValuePair.Value));
                 LogLikeMod.curemotion = 0;
                 LogLikeMod.purpleexcept = false;
                 LogLikeMod.rewards_InStage = new List<RewardInfo>();
@@ -1108,9 +1129,10 @@ namespace abcdcode_LOGLIKE_MOD
           UIInvitationRightMainPanel self)
         {
             StageClassInfo bookRecipe = self.GetBookRecipe();
-            StagesXmlList.Instance.RestoreToDefault();
-            RewardPassivesList.Instance.RestoreToDefault();
-            MysteryXmlList.Instance.RestoreToDefault();
+            Singleton<StagesXmlList>.Instance.RestoreToDefault();
+            Singleton<RewardPassivesList>.Instance.RestoreToDefault();
+            Singleton<MysteryXmlList>.Instance.RestoreToDefault();
+            Singleton<CardDropValueList>.Instance.RestoreToDefault();
 
             RMRCore.CurrentGamemode = null;
 
@@ -2611,10 +2633,6 @@ namespace abcdcode_LOGLIKE_MOD
             StageModel stageModel = __instance.GetStageModel();
             if ((stageModel.GetFrontAvailableWave() == null ? 1 : (stageModel.GetFrontAvailableFloor() == null ? 1 : 0)) != 0)
                 LoguePlayDataSaver.RemovePlayerData();
-            Singleton<StagesXmlList>.Instance.RestoreToDefault();
-            Singleton<RewardPassivesList>.Instance.RestoreToDefault();
-            Singleton<MysteryXmlList>.Instance.RestoreToDefault();
-            Singleton<CardDropValueList>.Instance.RestoreToDefault();
         }
 
         #endregion

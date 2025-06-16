@@ -62,7 +62,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 PickUpModel_ShopGood40Effect.curcard = model.ClassInfo;
                 ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 900401));
-                Singleton<MysteryManager>.Instance.EndMystery((MysteryBase)mystery);
+                Singleton<MysteryManager>.Instance.EndMystery(mystery);
             }
         }
     }

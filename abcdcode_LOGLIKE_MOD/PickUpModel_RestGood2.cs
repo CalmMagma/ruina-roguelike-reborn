@@ -58,6 +58,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             LogueBookModels.DeleteCard(cardid);
             LogueBookModels.AddUpgradeCard(cardid, mystery2.metadata.index, mystery2.metadata.count);
+            UISoundManager.instance.PlayEffectSound(UISoundType.Card_Apply);
             Singleton<MysteryManager>.Instance.EndMystery(mystery);
             Singleton<MysteryManager>.Instance.EndMystery(mystery2);
         }

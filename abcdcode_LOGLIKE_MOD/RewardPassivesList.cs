@@ -44,21 +44,21 @@ namespace abcdcode_LOGLIKE_MOD
           bool ExceptionAll = false)
         {
             List<RewardPassiveInfo> rewardPassiveInfoList = new List<RewardPassiveInfo>();
-            List<RewardPassivesInfo> all = this.infos.FindAll((Predicate<RewardPassivesInfo>)(x =>
+            List<RewardPassivesInfo> all = this.infos.FindAll(x =>
             {
                 if (x.chapter != chapter && (x.chapter != ChapterGrade.GradeAll || ExceptionAll) || x.rewardtype != type)
                     return false;
                 return id == -1 || x.Id == id;
-            }));
+            });
             List<RewardPassiveInfo> chapterData;
             if (all.Count == 0)
             {
-                chapterData = (List<RewardPassiveInfo>)null;
+                chapterData = null;
             }
             else
             {
                 foreach (RewardPassivesInfo rewardPassivesInfo in all)
-                    rewardPassiveInfoList.AddRange((IEnumerable<RewardPassiveInfo>)rewardPassivesInfo.RewardPassiveList);
+                    rewardPassiveInfoList.AddRange(rewardPassivesInfo.RewardPassiveList);
                 chapterData = rewardPassiveInfoList;
             }
             return chapterData;
