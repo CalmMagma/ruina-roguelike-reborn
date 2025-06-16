@@ -97,7 +97,7 @@ namespace abcdcode_LOGLIKE_MOD
             CardSlot.selectable.SubmitEvent.RemoveAllListeners();
             CardSlot.selectable.SubmitEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnClickCard()));
             CardSlot.selectable.SelectEvent.RemoveAllListeners();
-            CardSlot.selectable.SelectEvent.AddListener((UnityAction<BaseEventData>)(e => CardSlot.OnPointerEnter(e)));
+            CardSlot.selectable.SelectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerEnter(e)));
             CardSlot.selectable.DeselectEvent.RemoveAllListeners();
             CardSlot.selectable.DeselectEvent.AddListener((UnityAction<BaseEventData>)(e => CardSlot.OnPointerExit(e)));
             CardSlot.txt_cardNumbers.text = goods_count.ToString();
@@ -112,6 +112,12 @@ namespace abcdcode_LOGLIKE_MOD
             this.parent.FrameObj.Add($"Money{cardinfo.id.packageId}{cardinfo.id.id.ToString()}", CardSlot.gameObject);
             this.price = int.Parse(textTmp.text);
             this.Money = textTmp;
+        }
+
+        public void OnPointerEnter(BaseEventData e)
+        {
+            this.CardSlot.OnPointerEnter(e);
+            this.gameObject.transform.SetAsLastSibling();
         }
 
         public override void Purchase()

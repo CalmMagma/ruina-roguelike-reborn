@@ -2559,13 +2559,14 @@ namespace RogueLike_Mod_Reborn
             __instance.setter_tooltipname.underlayColor = toolColor;
             __instance.tooltipDesc.text = content;
             __instance.SetTooltipOverlayBoxSize(panelType);
+            
             // ----
             __instance.setter_tooltipname.enabled = false;
             __instance.setter_tooltipname.enabled = true;
             __instance.tooltipName.enabled = false;
             __instance.tooltipName.enabled = true;
             // for some reason this fixes the color glow not updating??? what the fuck??
-            // P.S.: it's also in the vanilla game!! what the actual fuck??
+            // P.S.: it's also in the vanilla game!! what the actual fuck??               
             if (rectTransform != null)
                 __instance.SetFixedTooltipOverlayBoxPosition(camera, rectTransform);
         }
