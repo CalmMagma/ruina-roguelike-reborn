@@ -233,7 +233,10 @@ namespace abcdcode_LOGLIKE_MOD
 
         public LorId BookXmlInfo_get_DeckId(Func<BookXmlInfo, LorId> orig, BookXmlInfo self)
         {
-            if (self.id.packageId == LogLikeMod.ModId && self.id.id >= -858 && self.id.id <= -854 && RMRCore.CurrentGamemode.ReplaceBaseDeck && !(StageController.Instance._stageModel._classInfo.id == new LorId(LogLikeMod.ModId, -855)))
+            var stage = Singleton<StageController>.Instance.GetStageModel();
+            if (self.id.packageId == LogLikeMod.ModId // check for roguelike 
+                && ((stage == null || stage.ClassInfo.id == RMRCore.CurrentGamemode.StageStart) && self.id.id == -854) // check for wave start + main player
+                || (LogLikeMod.AddPlayer && self.id.id >= -858 && self.id.id <= -855)) // if not above, then check if player is just being added
             {
                 return RMRCore.CurrentGamemode.BaseDeckReplacement;
             }

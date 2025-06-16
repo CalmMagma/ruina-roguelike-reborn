@@ -121,7 +121,13 @@ namespace abcdcode_LOGLIKE_MOD
         public static Button InvenBtn;
         public static Image InvenBtnFrame;
         public static bool EndBattle;
+        /// <summary>
+        /// Determines to whether or not add a new player at the end of the act.
+        /// </summary>
         public static bool AddPlayer;
+        /// <summary>
+        /// Determines to whether or not add revive a player at the end of the act.
+        /// </summary>
         public static bool RecoverPlayers;
         public static Dictionary<string, System.Type> FindPickUpCache;
         public static LogLikeMod.CacheDic<(string, string), Sprite> ModdedArtWorks;
