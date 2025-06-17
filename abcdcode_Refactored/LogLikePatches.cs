@@ -164,6 +164,9 @@ namespace abcdcode_LOGLIKE_MOD
 
     public class LogLikeHooks
     {
+        /// <summary>
+        /// Hook for changing empty/partially empty decks giving out default pages.
+        /// </summary>
         public List<DiceCardXmlInfo> UnitDataModel_GetDeckForBattle(Func<UnitDataModel, int, List<DiceCardXmlInfo>> orig, UnitDataModel self, int index)
         {
             if (LogLikeMod.CheckStage(true) && RMRCore.CurrentGamemode.ReplaceBaseDeck)
@@ -185,6 +188,9 @@ namespace abcdcode_LOGLIKE_MOD
             return orig(self, index);
         }
 
+        /// <summary>
+        /// Hook for relocalizing abnormality pages.
+        /// </summary>
         public AbnormalityCard AbnormalityCardDescXmlList_GetAbnormalityCard(
           Func<AbnormalityCardDescXmlList, string, AbnormalityCard> orig,
           AbnormalityCardDescXmlList self,
@@ -214,6 +220,9 @@ namespace abcdcode_LOGLIKE_MOD
             return abnormalityCard;
         }
 
+        /// <summary>
+        /// Hook for closing the abno page UI.
+        /// </summary>
         public void UIGetAbnormalityPanel_PointerClickButton(
           Action<UIGetAbnormalityPanel> orig,
           UIGetAbnormalityPanel self)
@@ -224,6 +233,13 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
         }
 
+        /// <summary>
+        /// Hook for pausing the battle scene whenever:<br></br>
+        /// - <see cref="LogLikeMod.PauseBool"/> is true
+        /// - A mystery event is currently running
+        /// - An event interrupt is currently running
+        /// - A shop is currently running
+        /// </summary>
         public void BattleSceneRoot_Update(Action<BattleSceneRoot> orig, BattleSceneRoot self)
         {
             if (LogLikeMod.CheckStage() && (Singleton<MysteryManager>.Instance.curMystery != null || Singleton<MysteryManager>.Instance.interruptMysterys != null && Singleton<MysteryManager>.Instance.interruptMysterys.Count > 0 || Singleton<ShopManager>.Instance.curshop != null || LogLikeMod.PauseBool))
@@ -231,6 +247,9 @@ namespace abcdcode_LOGLIKE_MOD
             orig(self);
         }
 
+        /// <summary>
+        /// Hook for giving newly-generated units their adequate default deck replacements.
+        /// </summary>
         public LorId BookXmlInfo_get_DeckId(Func<BookXmlInfo, LorId> orig, BookXmlInfo self)
         {
             var stage = Singleton<StageController>.Instance.GetStageModel();
@@ -241,8 +260,11 @@ namespace abcdcode_LOGLIKE_MOD
                 return RMRCore.CurrentGamemode.BaseDeckReplacement;
             }
             return orig(self);
-        }  
+        }
 
+        /// <summary>
+        /// Hook for disabling the sephirah buttons.
+        /// </summary>
         public void UIBattleSettingPanel_SetCurrentSephirahButton(
           Action<UIBattleSettingPanel> orig,
           UIBattleSettingPanel self)
@@ -254,26 +276,18 @@ namespace abcdcode_LOGLIKE_MOD
                 uiSephirahButton.SetButtonState(UISephirahButton.ButtonState.Close);
         }
 
+        /* UNUSED
         public void WorkshopSkinDataSetter_LateInit(
           Action<WorkshopSkinDataSetter> orig,
           WorkshopSkinDataSetter self)
         {
             orig(self);
         }
+        */
 
-        public void BattleUnitEmotionDetail_Reset(
-          Action<BattleUnitEmotionDetail> orig,
-          BattleUnitEmotionDetail self)
-        {
-            try
-            {
-                orig(self);
-            }
-            catch
-            {
-            }
-        }
-
+        /// <summary>
+        /// Hook for limiting emotion level gain depending on the chapter.
+        /// </summary>
         public int BattleUnitEmotionDetail_CreateEmotionCoin(
           Func<BattleUnitEmotionDetail, EmotionCoinType, int, int> orig,
           BattleUnitEmotionDetail self,
@@ -311,6 +325,9 @@ namespace abcdcode_LOGLIKE_MOD
             return count;
         }
 
+        /// <summary>
+        /// Hook for resetting the emotion level of all librarians and clearing out abno pages.
+        /// </summary>
         public void StageController_EndBattlePhase(
           Action<StageController, float> orig,
           StageController self,
@@ -331,11 +348,14 @@ namespace abcdcode_LOGLIKE_MOD
                         battleUnitModel.emotionDetail.PassiveList.Clear();
                     }
                 }
-                orig(self, deltaTime);
             }
-            else
-                orig(self, deltaTime);
+            orig(self, deltaTime);
         }
+
+        /// <summary>
+        /// Hook for initializing stage rewards and enabling money UI.
+        /// Also runs <see cref="GlobalLogueEffectManager.OnStartBattle"/> (and OnStartBattleAfter).
+        /// </summary>
         public void StageController_StartBattle(Action<StageController> orig, StageController self)
         {
             if (LogLikeMod.CheckStage())
@@ -397,6 +417,9 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<GlobalLogueEffectManager>.Instance.OnStartBattleAfter();
         }
 
+        /// <summary>
+        /// Hook for initializing librarian units in roguelike.
+        /// </summary>
         public void StageController_CreateLibrarianUnit(
           Action<StageController, SephirahType> orig,
           StageController self,
@@ -429,6 +452,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self, sephirah);
         }
 
+        /// <summary>
+        /// Hook for prompting abno page choice screens.
+        /// </summary>
         public bool StageController_RoundEndPhase_ChoiceEmotionCard(
           Func<StageController, bool> orig,
           StageController self)
@@ -443,7 +469,7 @@ namespace abcdcode_LOGLIKE_MOD
             return RewardingModel.EmotionChoice();
         }
 
-
+        /* UNUSED
         public void StageController_InitStageByInvitation(
           Action<StageController, StageClassInfo, List<LorId>> orig,
           StageController self,
@@ -452,7 +478,11 @@ namespace abcdcode_LOGLIKE_MOD
         {
             orig(self, stage, books);
         }
+        */
 
+        /// <summary>
+        /// Hook for transferring enemy book rewards into the reward pool at the end of the Act.
+        /// </summary>
         public void StageController_OnEnemyDropBookForAdded(
           Action<StageController, DropBookDataForAddedReward> orig,
           StageController self,
@@ -467,6 +497,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self, data);
         }
 
+        /// <summary>
+        /// Hook for handling Roguelike acts actually ending.
+        /// </summary>
         public void StageController_EndBattle(Action<StageController> orig, StageController self)
         {
             if (LogLikeMod.CheckStage(true) && self.Phase != StageController.StagePhase.EndBattle)
@@ -478,6 +511,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
         }
 
+        /// <summary>
+        /// Hook for manipulating the UI for PickUpModel abno page popup screen.
+        /// </summary>
         public IEnumerator LevelUpUI_OnSelectRoutine(Func<LevelUpUI, IEnumerator> orig, LevelUpUI self)
         {
             if (LogLikeMod.CheckStage())
@@ -560,6 +596,9 @@ namespace abcdcode_LOGLIKE_MOD
                 yield return (object)orig(self);
         }
 
+        /// <summary>
+        /// Hook for manipulating the UI for PickUpModel abno page popup screen.
+        /// </summary>
         public void LevelUpUI_SetEmotionPerDataUI(
           Action<LevelUpUI, float, float> orig,
           LevelUpUI self,
@@ -587,6 +626,9 @@ namespace abcdcode_LOGLIKE_MOD
             orig(self, positivevalue, negativevalue);
         }
 
+        /// <summary>
+        /// Hook for manipulating the UI for rewards. All of them.
+        /// </summary>
         public void LevelUpUI_InitBase(
           Action<LevelUpUI, int, bool> orig,
           LevelUpUI self,
@@ -718,6 +760,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.skipPanel.gameObject.SetActive(false);
         }
 
+        /* UNUSED
         public bool RoundEndPhase_ReturnUnit(
           Func<StageController, float, bool> orig,
           StageController self,
@@ -725,7 +768,11 @@ namespace abcdcode_LOGLIKE_MOD
         {
             return orig(self, deltaTime);
         }
+        */
 
+        /// <summary>
+        /// Hook for hijacking EGO page screen to give card rewards instead.
+        /// </summary>
         public void StageLibraryFloorModel_OnPickEgoCard(
           Action<StageLibraryFloorModel, EmotionEgoXmlInfo> orig,
           StageLibraryFloorModel self,
@@ -744,6 +791,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self, egoCard);
         }
 
+        /// <summary>
+        /// Hook for handling next stage choice and passive reward giving.
+        /// </summary>
         public void StageLibraryFloorModel_OnPickPassiveCard(
           Action<StageLibraryFloorModel, EmotionCardXmlInfo, BattleUnitModel> orig,
           StageLibraryFloorModel self,
@@ -801,6 +851,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self, card, target);
         }
 
+        /// <summary>
+        /// Hook for initializing inventory, abnormality and crafting screens.
+        /// </summary>
         public void UIBattleSettingEditPanel_Open(
           Action<UIBattleSettingEditPanel, UIBattleSettingEditTap> orig,
           UIBattleSettingEditPanel self,
@@ -870,6 +923,9 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
+        /// <summary>
+        /// Hook for unlocking BattleSetting combat page customization even after an Act.
+        /// </summary>
         public void UIBattleSettingLibrarianInfoPanel_SetBattleCardSlotState(
           Action<UIBattleSettingLibrarianInfoPanel> orig,
           UIBattleSettingLibrarianInfoPanel self)
@@ -882,6 +938,9 @@ namespace abcdcode_LOGLIKE_MOD
             self.SetBattlePageSlotColor(uiColor);
         }
 
+        /// <summary>
+        /// Hook for unlocking BattleSetting key page customization even after an Act.
+        /// </summary>
         public void UIBattleSettingLibrarianInfoPanel_SetEquipPageSlotState(
           Action<UIBattleSettingLibrarianInfoPanel> orig,
           UIBattleSettingLibrarianInfoPanel self)
@@ -894,6 +953,7 @@ namespace abcdcode_LOGLIKE_MOD
             self.SetEquipPageSlotColor(uiColor);
         }
 
+        /* NOT IMPLEMENTED
         public void BattleDiceCardUI_ShowDetail(Action<BattleDiceCardUI> orig, BattleDiceCardUI self)
         {
             orig(self);
@@ -901,7 +961,11 @@ namespace abcdcode_LOGLIKE_MOD
                 return;
             self.KeywordListUI.Activate();
         }
+        */
 
+        /// <summary>
+        /// Hijacks and adjusts the ego card popup UI for miscellaneous purposes.
+        /// </summary>
         public void BattleDiceCardUI_SetEgoCardForPopup(
           Action<BattleDiceCardUI, EmotionEgoXmlInfo> orig,
           BattleDiceCardUI self,
@@ -930,6 +994,10 @@ namespace abcdcode_LOGLIKE_MOD
             self.SetLinearDodgeColor(true);
         }
 
+        /// <summary>
+        /// Sets card states for UI purposes.<br></br>
+        /// Not entirely sure if this is necessary. Won't bother touching it though. -CalmMagma
+        /// </summary>
         public void BattleUnitCardsInHandUI_SetCardsObject(
           Action<BattleUnitCardsInHandUI, BattleUnitModel, bool> orig,
           BattleUnitCardsInHandUI self,
@@ -966,6 +1034,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self, unitModel, isClicked);
         }
 
+        /// <summary>
+        /// Hook for de-equipping combat pages from the deck.
+        /// </summary>
         public bool DeckModel_MoveCardToInventory(
           Func<DeckModel, LorId, bool> orig,
           DeckModel self,
@@ -979,6 +1050,9 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
+        /// <summary>
+        /// Hook for equipping combat pages from the inventory.
+        /// </summary>
         public CardEquipState DeckModel_AddCardFromInventory(
           Func<DeckModel, LorId, CardEquipState> orig,
           DeckModel self,
@@ -1018,6 +1092,9 @@ namespace abcdcode_LOGLIKE_MOD
             return cardEquipState;
         }
 
+        /// <summary>
+        /// Hook for overriding combat page list with the roguelike's.
+        /// </summary>
         public void UIInvenCardListScroll_SetData(
           Action<UIInvenCardListScroll, List<DiceCardItemModel>, UnitDataModel> orig,
           UIInvenCardListScroll self,
@@ -1029,6 +1106,9 @@ namespace abcdcode_LOGLIKE_MOD
             orig(self, cards, unitData);
         }
 
+        /// <summary>
+        /// Hook for equipping a combat page into an unit.
+        /// </summary>
         public CardEquipState UnitDataModel_AddCardFromInventory(
           Func<UnitDataModel, LorId, CardEquipState> orig,
           UnitDataModel self,
@@ -1039,6 +1119,9 @@ namespace abcdcode_LOGLIKE_MOD
             return ItemXmlDataList.instance.GetCardItem(cardId) == null ? CardEquipState.ERROR : self.bookItem.AddCardFromInventoryToCurrentDeck(cardId);
         }
 
+        /// <summary>
+        /// Hook for overriding keypage list with Roguelike's.
+        /// </summary>
         public List<BookModel> BookInventoryModel_GetBookList_equip(
           Func<BookInventoryModel, List<BookModel>> orig,
           BookInventoryModel self)
@@ -1046,12 +1129,13 @@ namespace abcdcode_LOGLIKE_MOD
             return LogLikeMod.CheckStage() ? LogueBookModels.booklist : orig(self);
         }
 
+        /* DEPRECATED, MOVED TO RMRCORE.BOOKSTOADDTOINVENTORY
         public List<LorId> DropBookInventoryModel_GetBookList_invitationBookList(
           Func<DropBookInventoryModel, List<LorId>> orig,
           DropBookInventoryModel self)
         {
             List<LorId> invitationBookList = orig(self);
-            invitationBookList.Add(new LorId(LogLikeMod.ModId, -854));
+
             if (LoguePlayDataSaver.CheckPlayerData())
                 invitationBookList.Add(new LorId(LogLikeMod.ModId, -855));
             invitationBookList.Add(new LorId(LogLikeMod.ModId, -2854));
@@ -1060,7 +1144,11 @@ namespace abcdcode_LOGLIKE_MOD
             invitationBookList.Add(new LorId(LogLikeMod.ModId, -5854));
             return invitationBookList;
         }
+        */
 
+        /// <summary>
+        /// Hook to disable the card equip info button.
+        /// </summary>
         public void UIInvenCardSlot_OnClickCardEquipInfoButton(
           Action<UIInvenCardSlot> orig,
           UIInvenCardSlot self)
@@ -1070,6 +1158,9 @@ namespace abcdcode_LOGLIKE_MOD
             orig(self);
         }
 
+        /// <summary>
+        /// Hook to manipulate card slot states to refer to the roguelike inventory.
+        /// </summary>
         public void UIInvenCardSlot_SetSlotState(Action<UIInvenCardSlot> orig, UIInvenCardSlot self)
         {
             if (LogLikeMod.CheckStage())
@@ -1127,6 +1218,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
         }
 
+        /// <summary>
+        /// Hook to initialize roguelike reception and gamemodes.
+        /// </summary>
         public void UIInvitationRightMainPanel_ConfirmSendInvitation(
           Action<UIInvitationRightMainPanel> orig,
           UIInvitationRightMainPanel self)
@@ -1279,7 +1373,9 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
-
+        /// <summary>
+        /// Hook to force the character list panel to render unitData based on <see cref="LogueBookModels.playerBattleModel"/>.
+        /// </summary>
         public void UILibrarianCharacterListPanel_SetLibrarianCharacterListPanel_Battle(
           Action<UILibrarianCharacterListPanel> orig,
           UILibrarianCharacterListPanel self)
@@ -1292,14 +1388,16 @@ namespace abcdcode_LOGLIKE_MOD
                 uiCharacterList.InitUnitListFromBattleData(playerBattleModel);
                 typeof(UILibrarianCharacterListPanel).GetMethod("UpdateFrameToSephirah", AccessTools.all).Invoke((object)self, new object[1]
                 {
-        (object) SephirahType.None
+                    (object) SephirahType.None
                 });
             }
             else
                 orig(self);
         }
 
-
+        /// <summary>
+        /// Hook to disable sephirot selection buttons.
+        /// </summary>
         public void UILibrarianCharacterListPanel_InitSephirahSelectionButtonsInBattle(
           Action<UILibrarianCharacterListPanel, List<StageLibraryFloorModel>> orig,
           UILibrarianCharacterListPanel self,
@@ -1323,7 +1421,9 @@ namespace abcdcode_LOGLIKE_MOD
     public class LogLikePatches
     {
         #region PREFIXES 
-
+        /// <summary>
+        /// 
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(EmotionEgoXmlInfo), "CardId", MethodType.Getter)]
         public static bool EmotionEgoXmlInfo_get_CardId(EmotionEgoXmlInfo __instance, ref LorId __result)
         {
@@ -2595,7 +2695,7 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(StageController), nameof(StageController.ActivateStartBattleEffectPhase))]
         public static void StageController_ActivateStartBattleEffectPhase(StageController __instance)
         {
-            foreach (BattlePlayingCardDataInUnitModel card in ModdingUtils.GetFieldValue<List<BattlePlayingCardDataInUnitModel>>("_allCardList", (object)__instance))
+            foreach (BattlePlayingCardDataInUnitModel card in ModdingUtils.GetFieldValue<List<BattlePlayingCardDataInUnitModel>>("_allCardList", __instance))
                 Singleton<GlobalLogueEffectManager>.Instance.OnStartBattle_AfterCardSet(card);
         }
 
@@ -2637,6 +2737,16 @@ namespace abcdcode_LOGLIKE_MOD
             if ((stageModel.GetFrontAvailableWave() == null ? 1 : (stageModel.GetFrontAvailableFloor() == null ? 1 : 0)) != 0)
                 LoguePlayDataSaver.RemovePlayerData();
         }
+
+        #endregion
+
+        #region FINALIZERS
+        [HarmonyFinalizer, HarmonyPatch(typeof(BattleUnitEmotionDetail), nameof(BattleUnitEmotionDetail.Reset))]
+        static Exception BattleUnitEmotionDetail_Reset(Exception __exception)
+        {
+            return null;
+        }
+
 
         #endregion
     }

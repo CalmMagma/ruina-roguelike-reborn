@@ -18,9 +18,7 @@
     <Name>Hunter's Cloak</Name> 
     <Desc>The Patron Librarian draws 2 pages at the start of each Act. At the start of each Scene, add a copy of 'Shiv' to the hand of the Patron Librarian.</Desc>
     <FlavorText>&lt;color=#08CA12&gt;"Torn and worn, and yet littered with seemingly endless shivs."&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by BloobCake
-	
-	A cloak made from a rugged and tough cloth material, whose forest green hue has mostly faded. Rumor has it, it was once worn by a Color Fixer, from ages long past, but nobody you ask seems to know exactly whom.
+    <CatalogDesc>	A cloak made from a rugged and tough cloth material, whose forest green hue has mostly faded. Rumor has it, it was once worn by a Color Fixer, from ages long past, but nobody you ask seems to know exactly whom.
 
 	The cloak houses a few small throwing daggers in pockets on its interior. No matter how many you remove, there is always a new dagger every time you peer inside of it.</CatalogDesc>
   </LogueEffectInfo> 
@@ -29,22 +27,22 @@
     <Name>Strange Orb</Name>
     <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered and is able to inflict 1 Paralysis to all enemies, make 2 random allies restore 1 Light, make 2 random allies draw 1 page or give all allies 1 Damage Up. The Orb will choose one of these actions at random each Scene while alive.</Desc> 
     <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>    Not many minds remember the days before the Grand War - something so horrible and so extensive, something so feared and so forgotten - only embers remain of the "Old World", roaming its ruins for a long-lost purpose. One such case is seen with an amalgam - a union that can only be described as an anomaly.
+    <CatalogDesc>	Not many minds remember the days before the Grand War - something so horrible and so extensive, something so feared and so forgotten - only embers remain of the "Old World", roaming its ruins for a long-lost purpose. One such case is seen with an amalgam - a union that can only be described as an anomaly.
 
-    After the Old World was shattered into its many unfathomable pieces, they were still there: Divided, but standing together mere moments after the lights that brought end to all reason. They wondered and wandered, finding themselves in familiar yet alien ruins of their old homes, schools and roads. The fires still fought to the bitter end, and life would only be ruin from now on.
+	After the Old World was shattered into its many unfathomable pieces, they were still there: Divided, but standing together mere moments after the lights that brought end to all reason. They wondered and wandered, finding themselves in familiar yet alien ruins of their old homes, schools and roads. The fires still fought to the bitter end, and life would only be ruin from now on.
 
-    Many years later the fires had almost been extinguished - a new beacon of cold lights forming itself in a distance - they thought that perhaps their embers could reach the promised cold of its inner walls, but they were left outside - fending for themselves in the ruins they were so familiar with. Eventually, through so much pressure and years of single minded thoughts - they focused, undying like the fires they descended from.
+	Many years later the fires had almost been extinguished - a new beacon of cold lights forming itself in a distance - they thought that perhaps their embers could reach the promised cold of its inner walls, but they were left outside - fending for themselves in the ruins they were so familiar with. Eventually, through so much pressure and years of single minded thoughts - they focused, undying like the fires they descended from.
 
-    From a voice it became two, and two became many. Thoughts and words drooled and fused into single, overloaded actions - they could look, but not see. Touch, but not feel . Argue, but not speak. Such was the sentence of embers as bright as theirs - destined to become one with the reluctant fires of the Old World, forced to be deprived of themselves.
+	From a voice it became two, and two became many. Thoughts and words drooled and fused into single, overloaded actions - they could look, but not see. Touch, but not feel . Argue, but not speak. Such was the sentence of embers as bright as theirs - destined to become one with the reluctant fires of the Old World, forced to be deprived of themselves.
 
-    Yet, through some mysterious means, they find themselves here - familiar and alien as before. Although forever changed, their hearts remained the same: Perhaps they could find answers in this place, or a final gust of wind to fade into the New World.</CatalogDesc>
+	Yet, through some mysterious means, they find themselves here - familiar and alien as before. Although forever changed, their hearts remained the same: Perhaps they could find answers in this place, or a final gust of wind to fade into the New World.</CatalogDesc>
   </LogueEffectInfo> 
 
   <LogueEffectInfo Id="RMR_ViciousGlasses">
     <Name>Vicious Glasses</Name>
     <Desc>At the start of the Act, give 10 Critical Strike to all allies.</Desc> 
     <FlavorText>&lt;color=#CA08A9&gt;"Glas"&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by BloobCake</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
  
   

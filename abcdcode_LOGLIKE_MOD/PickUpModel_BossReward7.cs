@@ -59,7 +59,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     if (!info.CheckCanUpgrade())
                         diceCardXmlInfoList.Add(info);
-                    else if ((double)UnityEngine.Random.value < 0.15000000596046448)
+                    else if ((double)UnityEngine.Random.value < 0.15)
                         diceCardXmlInfoList.Add(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(info.id));
                     else
                         diceCardXmlInfoList.Add(info);

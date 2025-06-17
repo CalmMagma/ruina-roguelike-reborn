@@ -170,7 +170,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static bool CheckDead(UnitDataModel model)
         {
-            return BattleObjectManager.instance.GetAliveList().Find((Predicate<BattleUnitModel>)(x => x.UnitData.unitData == model)) == null;
+            return BattleObjectManager.instance.GetAliveList().Find(x => x.UnitData.unitData == model) == null;
         }
     }
 }

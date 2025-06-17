@@ -120,6 +120,9 @@ namespace abcdcode_LOGLIKE_MOD
         public static Image CreatureBtnFrame;
         public static Button InvenBtn;
         public static Image InvenBtnFrame;
+        /// <summary>
+        /// Determines to whether or not the act is actually supposed to end at the end of the scene.
+        /// </summary>
         public static bool EndBattle;
         /// <summary>
         /// Determines to whether or not add a new player at the end of the act.
@@ -130,6 +133,11 @@ namespace abcdcode_LOGLIKE_MOD
         /// </summary>
         public static bool RecoverPlayers;
         public static Dictionary<string, System.Type> FindPickUpCache;
+        /// <summary>
+        /// Contains modded artworks from mod folders [root]/Resource/CustomArtwork.<br></br>
+        /// You can obtain a sprite from it like so: 
+        /// <code>var sprite = LogLikeMod.ModdedArtworks[(packageId, fileName)];</code>
+        /// </summary>
         public static LogLikeMod.CacheDic<(string, string), Sprite> ModdedArtWorks;
         public static bool itemCatalogActive;
         public static LogLikeHooks logLikeHooks;
@@ -166,6 +174,9 @@ namespace abcdcode_LOGLIKE_MOD
             PassiveAbility_MoneyCheck.SetMoney(data.GetInt("Money"));
         }
 
+        /// <summary>
+        /// Sets the next act's reception.
+        /// </summary>
         public static void SetNextStage(LorId stageid, StageType stagetype = StageType.Custom, NextStageSetType settype = NextStageSetType.Default)
         {
             StageModel stageModel = Singleton<StageController>.Instance.GetStageModel();
@@ -176,7 +187,7 @@ namespace abcdcode_LOGLIKE_MOD
             StageWaveModel stageWaveModel = new StageWaveModel();
             stageWaveModel.Init(stageModel, wave);
             List<StageWaveModel> stageWaveModelList = (List<StageWaveModel>)typeof(StageModel).GetField("_waveList", AccessTools.all).GetValue((object)stageModel);
-            if (settype == NextStageSetType.BySave || settype == NextStageSetType.CustomGamemode)
+            if (settype == NextStageSetType.BySave)
                 stageWaveModelList[0] = stageWaveModel;
             else
                 stageWaveModelList.Add(stageWaveModel);
@@ -243,6 +254,9 @@ namespace abcdcode_LOGLIKE_MOD
             return gameObject;
         }
 
+        /// <summary>
+        /// Disables the money counter, ends mystery events, closes shops and disables the dropdown item inventory.
+        /// </summary>
         public static void ResetUIs()
         {
             foreach (GameObject gameObject in LogLikeMod.LogUIObjs.dic.Values)
@@ -253,11 +267,24 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<GlobalLogueEffectManager>.Instance.ClearList();
         }
 
+        /// <summary>
+        /// Shorthand for getting private fields.
+        /// </summary>
+        /// <typeparam name="T">The type of the field you wish you get.</typeparam>
+        /// <param name="obj">The object that has the field.</param>
+        /// <param name="name">The name of the field.</param>
         public static T GetFieldValue<T>(object obj, string name)
         {
             return (T)obj.GetType().GetField(name, AccessTools.all | BindingFlags.FlattenHierarchy).GetValue(obj);
         }
 
+        /// <summary>
+        /// Shorthand for setting private fields.
+        /// </summary>
+        /// <typeparam name="T">The type of the field you wish you get.</typeparam>
+        /// <param name="obj">The object that has the field.</param>
+        /// <param name="name">The name of the field.</param>
+        /// <param name="value">The value to override the field with.</param>
         public static void SetFieldValue(object obj, string name, object value)
         {
             obj.GetType().GetField(name, AccessTools.all | BindingFlags.FlattenHierarchy).SetValue(obj, value);
@@ -280,6 +307,9 @@ namespace abcdcode_LOGLIKE_MOD
             set => LogLikeMod._DefFontColor = value;
         }
 
+        /// <summary>
+        /// Checks for mod incompatibilities.
+        /// </summary>
         public static bool CheckExceptionModExist(out List<string> ExceptModNames)
         {
             ExceptModNames = new List<string>();
@@ -291,6 +321,9 @@ namespace abcdcode_LOGLIKE_MOD
             return ExceptModNames.Count > 0;
         }
 
+        /// <summary>
+        /// Returns a list of mod metadata for all satellite mods.
+        /// </summary>
         public static List<ModContentInfo> GetLogMods()
         {
             if (LogLikeMod.LogMods != null)
@@ -1942,8 +1975,8 @@ namespace abcdcode_LOGLIKE_MOD
 
                 // do monomod hooks
                 HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ChoiceEmotionCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_RoundEndPhase_ChoiceEmotionCard));
-                HookHelper.CreateHook(typeof(StageController), "InitStageByInvitation", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_InitStageByInvitation));
-                HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ReturnUnit", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.RoundEndPhase_ReturnUnit));
+                // UNUSED // HookHelper.CreateHook(typeof(StageController), "InitStageByInvitation", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_InitStageByInvitation));
+                // UNUSED // HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ReturnUnit", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.RoundEndPhase_ReturnUnit));
                 HookHelper.CreateHook(typeof(StageController), (MethodBase)typeof(StageController).GetMethod("CreateLibrarianUnit", AccessTools.all, (System.Reflection.Binder)null, new System.Type[1]
                 {
                     typeof (SephirahType)
@@ -1958,7 +1991,7 @@ namespace abcdcode_LOGLIKE_MOD
                 HookHelper.CreateHook(typeof(LevelUpUI), "InitBase", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.LevelUpUI_InitBase));
                 HookHelper.CreateHook(typeof(LevelUpUI), "SetEmotionPerDataUI", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.LevelUpUI_SetEmotionPerDataUI));
                 HookHelper.CreateHook(typeof(LevelUpUI), "OnSelectRoutine", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.LevelUpUI_OnSelectRoutine));
-                HookHelper.CreateHook(typeof(DropBookInventoryModel), "GetBookList_invitationBookList", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DropBookInventoryModel_GetBookList_invitationBookList));
+                // DEPRECATED // HookHelper.CreateHook(typeof(DropBookInventoryModel), "GetBookList_invitationBookList", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DropBookInventoryModel_GetBookList_invitationBookList));
                 HookHelper.CreateHook(typeof(BookInventoryModel), "GetBookList_equip", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookInventoryModel_GetBookList_equip));
                 HookHelper.CreateHook(typeof(UIBattleSettingPanel), "SetCurrentSephirahButton", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIBattleSettingPanel_SetCurrentSephirahButton));
                 HookHelper.CreateHook(typeof(UILibrarianCharacterListPanel), "InitSephirahSelectionButtonsInBattle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UILibrarianCharacterListPanel_InitSephirahSelectionButtonsInBattle));
@@ -1976,8 +2009,8 @@ namespace abcdcode_LOGLIKE_MOD
                 HookHelper.CreateHook(typeof(UIBattleSettingLibrarianInfoPanel), "SetEquipPageSlotState", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIBattleSettingLibrarianInfoPanel_SetEquipPageSlotState));
                 HookHelper.CreateHook(typeof(UIBattleSettingEditPanel), "Open", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIBattleSettingEditPanel_Open));
                 HookHelper.CreateHook(typeof(BattleUnitEmotionDetail), "CreateEmotionCoin", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleUnitEmotionDetail_CreateEmotionCoin));
-                HookHelper.CreateHook(typeof(BattleUnitEmotionDetail), "Reset", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleUnitEmotionDetail_Reset));
-                HookHelper.CreateHook(typeof(WorkshopSkinDataSetter), "LateInit", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.WorkshopSkinDataSetter_LateInit));
+                // TURNED INTO FINALIZER // HookHelper.CreateHook(typeof(BattleUnitEmotionDetail), "Reset", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BattleUnitEmotionDetail_Reset));
+                // UNUSED // HookHelper.CreateHook(typeof(WorkshopSkinDataSetter), "LateInit", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.WorkshopSkinDataSetter_LateInit));
                 HookHelper.CreateHook(typeof(BookXmlInfo), "get_DeckId", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookXmlInfo_get_DeckId));
                 HookHelper.CreateHook(typeof(UnitDataModel), "GetDeckForBattle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UnitDataModel_GetDeckForBattle));
 

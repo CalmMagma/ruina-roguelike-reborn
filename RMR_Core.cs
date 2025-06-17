@@ -33,9 +33,22 @@ namespace RogueLike_Mod_Reborn
 {
     public class RMRCore : ModInitializer
     {
-        public static LorId[] booksToAddToInventory =>
-            Singleton<RoguelikeGamemodeController>.Instance.gamemodeList.Select(x => x.StageStart).ToArray();
-          
+        public static LorId[] booksToAddToInventory 
+        {
+            get {
+                var books = new List<LorId>()
+                {
+                    LoguePlayDataSaver.CheckPlayerData() ? new LorId(LogLikeMod.ModId, -855) : null,
+                    new LorId(LogLikeMod.ModId, -2854),
+                    new LorId(LogLikeMod.ModId, -3854),
+                    new LorId(LogLikeMod.ModId, -4854),
+                    new LorId(LogLikeMod.ModId, -5854)//, new LorId(LogLikeMod.ModId, -6854)
+                };
+                books.AddRange(Singleton<RoguelikeGamemodeController>.Instance.gamemodeList.Select(x => x.StageStart));
+                books.RemoveAll(x => x == null);
+                return books.ToArray();
+            }
+        }
         public static bool provideAdditionalLogging = false;
         public static Dictionary<string, string> ClassIds = new Dictionary<string, string>();
         public static RoguelikeGamemodeBase CurrentGamemode;
@@ -251,10 +264,11 @@ namespace RogueLike_Mod_Reborn
             {
                 if (ids.Item1 == RMRCore.packageId)
                 {
-                    if (provideAdditionalLogging && !Environment.StackTrace.Contains("abcdcode_LOGLIKE_MOD.LogLikeMod+CacheDic`2[Tkey,TValue].ContainsKey (Tkey key)")) Debug.Log("Unnecessary custom artwork call for vanilla artwork! Coming from " + Environment.StackTrace);
+                    if (!Environment.StackTrace.Contains("abcdcode_LOGLIKE_MOD.LogLikeMod+CacheDic`2[Tkey,TValue].ContainsKey (Tkey key)")) 
+                        "".Log("Unnecessary custom artwork call for vanilla artwork! Coming from " + Environment.StackTrace);
                     if (LogLikeMod.ArtWorks.ContainsKey(ids.Item2))
                         return LogLikeMod.ArtWorks[ids.Item2];
-                    else if (provideAdditionalLogging) Debug.Log("Failed to obtain sprite altogether!! REAL SHIT!!!");
+                    else "".Log("Failed to obtain sprite altogether!! REAL SHIT!!!");
                 }
                 else
                 {
@@ -282,7 +296,7 @@ namespace RogueLike_Mod_Reborn
                 }
             } catch (Exception e)
             {
-                if (provideAdditionalLogging) Debug.Log("Failed to obtain custom artwork: " + e);
+                "".Log("Failed to obtain custom artwork: " + e);
             }
             return null;
         }
@@ -2615,7 +2629,9 @@ namespace RogueLike_Mod_Reborn
         #endregion
 
         #region POSTFIXES
-        // Responsible for making the Item Catalog Credenza tab activate and deactivate other panels
+        /// <summary>
+        /// Responsible for making the Item Catalog Credenza tab activate and deactivate other panels
+        /// </summary>
         [HarmonyPostfix, HarmonyPatch(typeof(UIStoryArchivesPanel), nameof(UIStoryArchivesPanel.TabControllerUpdated))]
         static void OpenItemCatalogTab_Post(UIStoryArchivesPanel __instance)
         {
@@ -2632,7 +2648,9 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        // Patch that initializes the Item Catalog panel; runs after the credenza is done initializing
+        /// <summary>
+        /// Patch that initializes the Item Catalog panel; runs after the credenza is done initializing
+        /// </summary>
         [HarmonyPostfix, HarmonyPatch(typeof(UIStoryArchivesPanel), nameof(UIStoryArchivesPanel.InitData))]
         static void InitItemCatalogTab_Post(UIStoryArchivesPanel __instance)
         {
@@ -2652,7 +2670,9 @@ namespace RogueLike_Mod_Reborn
             Singleton<GlobalLogueItemCatalogPanel>.Instance.button.TabName.text = TextDataModel.GetText("ui_RMR_ItemCatalog");
         }
 
-        // Patch that adds books into the book list
+        /// <summary>
+        /// Patch that adds books into the book list
+        /// </summary>
         [HarmonyPostfix, HarmonyPatch(typeof(DropBookInventoryModel), "GetBookList_invitationBookList")]
         static List<LorId> AddInvitationBooks(List<LorId> result)
         {
@@ -2808,6 +2828,10 @@ namespace RogueLike_Mod_Reborn
             return sprite;
         }
 
+        /// <summary>
+        /// Second part of the keypage thumbnail patch.<br></br>
+        /// Refer to <see cref="BookModel_GetThumbSprite_Trans"/> for the first patch.
+        /// </summary>
         [HarmonyTranspiler, HarmonyPatch(typeof(BookXmlInfo), nameof(BookXmlInfo.GetThumbSprite))]
         static IEnumerable<CodeInstruction> BookXmlInfo_GetThumbSprite_Trans(IEnumerable<CodeInstruction> instructions)
         {
