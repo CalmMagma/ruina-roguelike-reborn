@@ -8,52 +8,53 @@ using LOR_DiceSystem;
 using System;
 using System.Collections.Generic;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PassiveAbility_ShopPassiveLogic2 : PassiveAbilityBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public bool Used;
 
-  public override string debugDesc => "원거리 책장으로 근접 책장과 합할때 내 책장의 주사위를 모두 소모했다면 합을 강제로 종료함(막당 1회)";
-
-  public override void OnRoundStart()
-  {
-    base.OnRoundStart();
-    this.Used = false;
-  }
-
-  public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
-  {
-    base.OnUseCard(curCard);
-    if (this.Used || curCard.card.GetSpec().Ranged != CardRange.Far || curCard.target.currentDiceAction == null && curCard.target.currentDiceAction.card.GetSpec().Ranged == CardRange.Near)
-      return;
-    List<BattleDiceBehavior> diceBehaviorList = curCard.GetDiceBehaviorList();
-    diceBehaviorList.RemoveAll((Predicate<BattleDiceBehavior>) (x => x.Type != 0));
-    if (diceBehaviorList.Count <= 0)
-      return;
-    diceBehaviorList[diceBehaviorList.Count - 1].AddAbility((DiceCardAbilityBase) new PassiveAbility_ShopPassiveLogic2.EndParryingAbility());
-    this.Used = true;
-  }
-
-  public class EndParryingAbility : DiceCardAbilityBase
-  {
-    public override void AfterAction()
+    public class PassiveAbility_ShopPassiveLogic2 : PassiveAbilityBase
     {
-      base.AfterAction();
-      BattleUnitModel target = this.owner.currentDiceAction.target;
-      if (target == null)
-        return;
-      Queue<BattleDiceBehavior> battleDiceBehaviorQueue = new Queue<BattleDiceBehavior>((IEnumerable<BattleDiceBehavior>) target.currentDiceAction.cardBehaviorQueue);
-      List<BattleDiceBehavior> behaviourList = new List<BattleDiceBehavior>();
-      while (battleDiceBehaviorQueue.Count > 0)
-      {
-        BattleDiceBehavior battleDiceBehavior = battleDiceBehaviorQueue.Dequeue();
-        behaviourList.Add(battleDiceBehavior);
-      }
-      target.cardSlotDetail.keepCard.AddBehaviours(target.currentDiceAction.card, behaviourList);
-      target.currentDiceAction.cardBehaviorQueue.Clear();
+        public bool Used;
+
+        public override string debugDesc => "원거리 책장으로 근접 책장과 합할때 내 책장의 주사위를 모두 소모했다면 합을 강제로 종료함(막당 1회)";
+
+        public override void OnRoundStart()
+        {
+            base.OnRoundStart();
+            this.Used = false;
+        }
+
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
+        {
+            base.OnUseCard(curCard);
+            if (this.Used || curCard.card.GetSpec().Ranged != CardRange.Far || curCard.target.currentDiceAction == null || curCard.target.currentDiceAction.card.GetSpec().Ranged > CardRange.Near)
+                return;
+            List<BattleDiceBehavior> diceBehaviorList = curCard.GetDiceBehaviorList();
+            diceBehaviorList.RemoveAll(x => x.Type != 0);
+            if (diceBehaviorList.Count <= 0)
+                return;
+            diceBehaviorList[diceBehaviorList.Count - 1].AddAbility(new PassiveAbility_ShopPassiveLogic2.EndParryingAbility());
+            this.Used = true;
+        }
+
+        public class EndParryingAbility : DiceCardAbilityBase
+        {
+            public override void AfterAction()
+            {
+                base.AfterAction();
+                BattleUnitModel target = this.owner.currentDiceAction.target;
+                if (target == null)
+                    return;
+                Queue<BattleDiceBehavior> battleDiceBehaviorQueue = new Queue<BattleDiceBehavior>(target.currentDiceAction.cardBehaviorQueue);
+                List<BattleDiceBehavior> behaviourList = new List<BattleDiceBehavior>();
+                while (battleDiceBehaviorQueue.Count > 0)
+                {
+                    BattleDiceBehavior battleDiceBehavior = battleDiceBehaviorQueue.Dequeue();
+                    behaviourList.Add(battleDiceBehavior);
+                }
+                target.cardSlotDetail.keepCard.AddBehaviours(target.currentDiceAction.card, behaviourList);
+                target.currentDiceAction.cardBehaviorQueue.Clear();
+            }
+        }
     }
-  }
-}
 }

@@ -3,8 +3,8 @@
              <text id="MysteryCh3_1Title">Brawl</text>
              <text id="MysteryCh3_1Frame0Dia0">You can hear the sound of flesh being torn, blood splattered, and bones breaking.
 A fierce battle for supremacy in the territory. It's common in Backstreets.
-It's best to avoid it...but it seems that the Library doesn't allow it.
-Maybe we cna get some profit from this mess.</text>
+It's best to avoid it... but it seems that the Library doesn't allow it.
+Maybe we can get some profit from this mess.</text>
              <text id="MysteryCh3_1Frame0Choice0Desc">Cut in.</text>
 
              <text id="MysteryCh3_2Title">Trafficker</text>

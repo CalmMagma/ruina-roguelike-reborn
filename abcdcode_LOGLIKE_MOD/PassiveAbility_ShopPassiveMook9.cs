@@ -7,32 +7,33 @@
 using System;
 using System.Collections.Generic;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PassiveAbility_ShopPassiveMook9 : PassiveAbilityBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public Dictionary<BattleDiceCardModel, int> cards;
 
-  public override string debugDesc => "빛이 부족해도 대신 비용*3 만큼 흐트러짐 저항을 소모해 책장 사용 가능";
+    public class PassiveAbility_ShopPassiveMook9 : PassiveAbilityBase
+    {
+        public Dictionary<BattleDiceCardModel, int> cards;
 
-  public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
-  {
-    base.OnUseCard(curCard);
-    if (this.cards == null || !this.cards.ContainsKey(curCard.card))
-      return;
-    this.owner.TakeBreakDamage(this.cards[curCard.card] * 3);
-  }
+        public override string debugDesc => "빛이 부족해도 대신 비용*3 만큼 흐트러짐 저항을 소모해 책장 사용 가능";
 
-  public override void OnRoundStart()
-  {
-    base.OnRoundStart();
-    this.cards = new Dictionary<BattleDiceCardModel, int>();
-  }
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
+        {
+            base.OnUseCard(curCard);
+            if (this.cards == null || !this.cards.ContainsKey(curCard.card))
+                return;
+            this.owner.TakeBreakDamage(this.cards[curCard.card] * 3);
+        }
 
-  public static PassiveAbility_ShopPassiveMook9 HasPassive(BattleUnitModel model)
-  {
-    return model == null || !model.passiveDetail.HasPassive<PassiveAbility_ShopPassiveMook9>() ? (PassiveAbility_ShopPassiveMook9) null : model.passiveDetail.PassiveList.Find((Predicate<PassiveAbilityBase>) (x => x is PassiveAbility_ShopPassiveMook9)) as PassiveAbility_ShopPassiveMook9;
-  }
-}
+        public override void OnRoundStart()
+        {
+            base.OnRoundStart();
+            this.cards = new Dictionary<BattleDiceCardModel, int>();
+        }
+
+        public static PassiveAbility_ShopPassiveMook9 HasPassive(BattleUnitModel model)
+        {
+            return model == null || !model.passiveDetail.HasPassive<PassiveAbility_ShopPassiveMook9>() ? (PassiveAbility_ShopPassiveMook9)null : model.passiveDetail.PassiveList.Find((Predicate<PassiveAbilityBase>)(x => x is PassiveAbility_ShopPassiveMook9)) as PassiveAbility_ShopPassiveMook9;
+        }
+    }
 }

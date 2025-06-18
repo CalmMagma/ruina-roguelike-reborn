@@ -168,19 +168,50 @@ namespace abcdcode_LOGLIKE_MOD
                 string desc2 = $"{TextDataModel.GetText("Shop_EquipPrevious", this.GoodScript.basepassive.cost)}{desc1}";
                 SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(name, desc2 + "\n" + "\n" + this.GoodScript.FlaverText + "\n"
                         + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.GoodScript.GetRarity())) + ">" + this.GoodScript.GetRarity().ToString() + "</color>",
-                        this.customSelectable.transform as RectTransform,
+                        this.transform as RectTransform,
                         this.GoodScript.GetRarity(),
                         UIToolTipPanelType.OnlyContent);
             }
             else
                 SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(name, desc1 + "\n" + "\n" + this.GoodScript.FlaverText + "\n"
                         + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(this.GoodScript.GetRarity())) + ">" + this.GoodScript.GetRarity().ToString() + "</color>",
-                        this.customSelectable.transform as RectTransform,
+                        this.transform as RectTransform,
                         this.GoodScript.GetRarity(),
                         UIToolTipPanelType.OnlyContent);
             var instance = SingletonBehavior<UIMainOverlayManager>.Instance;
-            var curPos = instance.tooltipPositionPivot.position;
-            instance.tooltipPositionPivot.position = new Vector2(curPos.x - 80f, curPos.y + 100f);
+            this.SetSpecificPosForTooltip(instance);
+            var curPos = instance.tooltipPositionPivot.anchoredPosition;
+            // additional adjustment for better placement specific to shops
+            instance.tooltipPositionPivot.anchoredPosition = new Vector2(curPos.x - 80f, curPos.y + 100f);
+        }
+
+        public void SetSpecificPosForTooltip(UIMainOverlayManager __instance)
+        {
+            RectTransform rect = __instance.tooltipCanvas.transform as RectTransform;
+            var targeTranseForm = this.transform;
+            var pos = targeTranseForm.position;
+            Vector3 worldPoint = targeTranseForm.TransformPoint(new Vector3(pos.x - 90f, pos.y + 90f));
+            Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPoint);
+            Vector2 desiredPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, __instance.tooltipCanvas.worldCamera, out desiredPos);
+            Vector2 vector2 = new Vector2(desiredPos.x + __instance._curSize.x, desiredPos.y - __instance._curSize.y);
+            if (vector2.x > __instance._rightDownPivot.x)
+            {
+                desiredPos.x -= __instance._curSize.x + __instance.tooltipSizePivot.anchoredPosition.x * 2f;
+            }
+            if (vector2.y < __instance._rightDownPivot.y)
+            {
+                desiredPos.y += __instance._curSize.y - __instance.tooltipSizePivot.anchoredPosition.x * 2f;
+            }
+            if ((desiredPos.y - __instance._curSize.y) < -500)
+            {
+                desiredPos.y -= 500 + (desiredPos.y - __instance._curSize.y);
+            }
+            else if (desiredPos.y + __instance._curSize.y / 2 > 520)
+                desiredPos.y -= 520 - (desiredPos.y + __instance._curSize.y);
+            if (desiredPos.y > 520f)
+                desiredPos.y = 520f;
+            __instance.tooltipPositionPivot.anchoredPosition = desiredPos;
         }
 
         public void OnPointerExit()

@@ -1741,6 +1741,9 @@ namespace abcdcode_LOGLIKE_MOD
         } 
         */
 
+        /// <summary>
+        /// Harmony patch to handle Mook9
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(SpecialCardListModel), nameof(SpecialCardListModel.ReturnCardToHand))]
         public static bool SpecialCardListModel_ReturnCardToHand(
           SpecialCardListModel __instance,
@@ -1761,6 +1764,9 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
+        /// <summary>
+        /// Harmony patch to handle Mook9
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(BattlePersonalEgoCardDetail), nameof(BattlePersonalEgoCardDetail.ReturnCardToHand))]
         public static bool BattlePersonalEgoCardDetail_ReturnCardToHand(
           BattlePersonalEgoCardDetail __instance,
@@ -1781,6 +1787,9 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
+        /// <summary>
+        /// Harmony patch to handle Mook9
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(BattleAllyCardDetail), nameof(BattleAllyCardDetail.ReturnCardToHand))]
         public static bool BattleAllyCardDetail_ReturnCardToHand(
           BattleAllyCardDetail __instance,
@@ -1801,6 +1810,9 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
+        /// <summary>
+        /// Patch for handling Mook9
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(BattlePlayingCardSlotDetail), nameof(BattlePlayingCardSlotDetail.OnApplyCard))]
         public static bool BattlePlayingCardSlotDetail_OnApplyCard(
           BattlePlayingCardSlotDetail __instance,

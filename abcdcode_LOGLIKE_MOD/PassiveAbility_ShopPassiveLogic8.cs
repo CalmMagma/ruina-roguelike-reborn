@@ -4,22 +4,23 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PassiveAbility_ShopPassiveLogic8 : PassiveAbilityBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override string debugDesc => "원거리 책장으로 일방 공격 시 피해량 + 3";
 
-  public override void BeforeGiveDamage(BattleDiceBehavior behavior)
-  {
-    base.BeforeGiveDamage(behavior);
-    if (behavior.IsParrying())
-      return;
-    behavior.ApplyDiceStatBonus(new DiceStatBonus()
+    public class PassiveAbility_ShopPassiveLogic8 : PassiveAbilityBase
     {
-      dmg = 3
-    });
-  }
-}
+        public override string debugDesc => "원거리 책장으로 일방 공격 시 피해량 + 3";
+
+        public override void BeforeGiveDamage(BattleDiceBehavior behavior)
+        {
+            base.BeforeGiveDamage(behavior);
+            if (behavior.IsParrying() || behavior.card.card.GetSpec().Ranged != LOR_DiceSystem.CardRange.Far)
+                return;
+            behavior.ApplyDiceStatBonus(new DiceStatBonus()
+            {
+                dmg = 3
+            });
+        }
+    }
 }

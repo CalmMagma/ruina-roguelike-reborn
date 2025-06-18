@@ -2555,15 +2555,15 @@ namespace RogueLike_Mod_Reborn
             __instance.Open();
             __instance.tooltipName.text = name;
             __instance.tooltipName.rectTransform.sizeDelta = new Vector2(__instance.tooltipName.rectTransform.sizeDelta.x, 20f);
-            Camera camera = null;
-            if (rectTransform != null)
-            {
-                Graphic componentInChildren = rectTransform.GetComponentInChildren<Graphic>();
-                if (componentInChildren != null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
-                {
-                    camera = Camera.main;
-                }
-            }
+            Camera camera = Camera.main;
+            //if (rectTransform != null)
+            //{
+            //    Graphic componentInChildren = rectTransform.GetComponentInChildren<Graphic>();
+            //    if (componentInChildren != null && componentInChildren.canvas.renderMode == RenderMode.ScreenSpaceCamera)
+            //    {
+            //        camera = Camera.main;
+            //    }
+            //}
             Color toolColor = Color.white;
             if (rare >= Rarity.Common && rare <= Rarity.Unique)
             {
@@ -2573,18 +2573,20 @@ namespace RogueLike_Mod_Reborn
             __instance.setter_tooltipname.underlayColor = toolColor;
             __instance.tooltipDesc.text = content;
             __instance.SetTooltipOverlayBoxSize(panelType);
-            
+            if (rectTransform != null)
+                __instance.SetFixedTooltipOverlayBoxPosition(camera, rectTransform);
             // ----
             __instance.setter_tooltipname.enabled = false;
             __instance.setter_tooltipname.enabled = true;
             __instance.tooltipName.enabled = false;
             __instance.tooltipName.enabled = true;
             // for some reason this fixes the color glow not updating??? what the fuck??
-            // P.S.: it's also in the vanilla game!! what the actual fuck??               
-            if (rectTransform != null)
-                __instance.SetFixedTooltipOverlayBoxPosition(camera, rectTransform);
+            // P.S.: it's also in the vanilla game!! what the actual fuck??
         }
 
+        /// <summary>
+        /// Basically the vanilla version but with some extra checks to prevent off-screen placement/overflowing.
+        /// </summary>
         public static void SetFixedTooltipOverlayBoxPosition(this UIMainOverlayManager __instance, Camera cam, RectTransform targeTranseForm)
         {
             RectTransform rect = __instance.tooltipCanvas.transform as RectTransform;
@@ -2593,6 +2595,8 @@ namespace RogueLike_Mod_Reborn
             Vector2 desiredPos;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, __instance.tooltipCanvas.worldCamera, out desiredPos);
             Vector2 vector2 = new Vector2(desiredPos.x + __instance._curSize.x, desiredPos.y - __instance._curSize.y);
+            
+            // the below is just some schizo off-screen/overflow checking
             if (vector2.x > __instance._rightDownPivot.x)
             {
                 desiredPos.x -= __instance._curSize.x + __instance.tooltipSizePivot.anchoredPosition.x * 2f;
@@ -2607,10 +2611,12 @@ namespace RogueLike_Mod_Reborn
             }
             else if (desiredPos.y + __instance._curSize.y / 2 > 520)
                 desiredPos.y -= 520 - (desiredPos.y + __instance._curSize.y);
-            if (desiredPos.y > 520f)
+            if (desiredPos.y > 520f) // bottom boundary
                 desiredPos.y = 520f;
             __instance.tooltipPositionPivot.anchoredPosition = desiredPos;
         }
+    
+    
     }
 
     

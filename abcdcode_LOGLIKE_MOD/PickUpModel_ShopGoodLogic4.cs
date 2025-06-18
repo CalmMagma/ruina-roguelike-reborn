@@ -39,20 +39,9 @@ namespace abcdcode_LOGLIKE_MOD
 
             public override void BeforeRollDice(BattleDiceBehavior behavior)
             {
-                if (ModdingUtils.GetFieldValue<List<BattlePlayingCardDataInUnitModel>>("_allCardList", Singleton<StageController>.Instance).Find(x => x.owner != behavior.owner && x.card.GetSpec().Ranged == CardRange.Far && behavior.card.target == x.target) == null)
+                if (behavior.owner.faction == Faction.Enemy || ModdingUtils.GetFieldValue<List<BattlePlayingCardDataInUnitModel>>("_allCardList", Singleton<StageController>.Instance).Find(x => x.owner != behavior.owner && x.card.GetSpec().Ranged == CardRange.Far && behavior.card.target == x.target) == null)
                     return;
                 behavior.ApplyDiceStatBonus(new DiceStatBonus()
-                {
-                    power = 1
-                });
-            }
-
-            public override void OnStartBattle(BattlePlayingCardDataInUnitModel card)
-            {
-                base.OnStartBattle(card);
-                if (ModdingUtils.GetFieldValue<List<BattlePlayingCardDataInUnitModel>>("_allCardList", Singleton<StageController>.Instance).Find(x => x.owner != card.owner && x.card.GetSpec().Ranged == CardRange.Far && card.target == x.target) == null)
-                    return;
-                card.ApplyDiceStatBonus(DiceMatch.AllAttackDice, new DiceStatBonus()
                 {
                     power = 1
                 });
