@@ -5,42 +5,42 @@
     <Name>Atelier Logic Training Certificate</Name> 
     <Desc>All Librarians can use Ranged Combat Pages.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Proof that you can handle firearms, at least ineffectively.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo>
   
   <LogueEffectInfo Id="GlobalEffect_ShopThiefPenalty">
     <Name>Bad Manners!</Name> 
     <Desc>You're unable to buy any more items this shop.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Etiquette, you troglodyte!”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
   <LogueEffectInfo Id="GlobalEffect_RolandNft">
     <Name>Rare Street Thug Action Figure</Name> 
     <Desc>[Consumable] Upon use, gain {0} Ahn. This item's value grows by 3 for every battle won.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“I have nothing but my— holy shit is that Roland the Street Thug™!?”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
   <LogueEffectInfo Id="GlobalEffect_SlowBurn">
     <Name>Slow Burn</Name> 
     <Desc>Burn stacks reduce by 1/4 instead of 1/3 at the end of the Scene.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Arsonist's #1 choice!”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
  
   <LogueEffectInfo Id="GlobalEffect_EgoWeed">
     <Name>Enkephalin Sticker</Name> 
     <Desc>All Librarians start combat at Emotion Level 1.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Love, heart, control Enkephalin! It gets you going.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
  
   <LogueEffectInfo Id="GlobalEffect_NineFourteen">
     <Name>9-14</Name> 
     <Desc>All future cards will appear as upgraded versions of themselves.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Ps: Tuned to 'Very Fine'.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
   <LogueEffectInfo Id="GlobalEffect_SuppressiveFire">
@@ -48,56 +48,56 @@
     <Desc>Ranged Offensive Die gain +1 Power against enemies targeted by other Librarian’s Ranged Combat Pages.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Enemies in that direction!
 Copy. Erasing that direction.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
  
    <LogueEffectInfo Id="GlobalEffect_ScrapShield">
     <Name>Scrap Shield</Name> 
     <Desc>[Consumable] Adds 1 Counter Die (Block, 2-5) to the selected Librarian’s queue. Min. and Max. value increases by 1 per chapter.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Sticks and stones may just break your bones.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @T_Blanket_</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
     <LogueEffectInfo Id="GlobalEffect_HpBullet">
     <Name>HP Bullet</Name> 
     <Desc>[Consumable] Selected Librarian recovers 30% HP.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“This will hurt...”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
      <LogueEffectInfo Id="GlobalEffect_StrStim">
     <Name>Aggro Stim</Name> 
     <Desc>[Consumable] Selected Librarian gains 2 Strength this Scene.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“To become Her greatest soldier one must also be Her greatest eeper.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
       <LogueEffectInfo Id="GlobalEffect_RfxStim">
     <Name>RFLX Stim</Name> 
     <Desc>[Consumable] Selected Librarian gains 2 Endurance this Scene.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“*Miss* *Miss* *Miss*”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
    <LogueEffectInfo Id="GlobalEffect_W1dStim">
     <Name>W1-ND</Name> 
     <Desc>[Consumable] Selected Librarian gains 3 Haste this Scene.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Index targeting? We’ll see about that.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
    <LogueEffectInfo Id="GlobalEffect_IrnStim">
     <Name>1R0N Stim</Name> 
     <Desc>[Consumable] Selected Librarian gains 3 Protection and Stagger Protection this Scene.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Because L34D wasn't that popular.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
    <LogueEffectInfo Id="RMR_Crowbar">
     <Name>Crowbar</Name> 
     <Desc>Attacks deal +50% damage and stagger damage to targets above 90% HP.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“To deal with unforeseen consequences.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @The_UnitDown</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
     <LogueEffectInfo Id="GlobalEffect_BloodShed">
@@ -105,63 +105,63 @@ Copy. Erasing that direction.”&lt;/color&gt;</FlavorText>
     <Desc>All characters deal double damage and stagger damage this Scene.
 Can be used once per battle.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“The man in the mirror nods his head...”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="GlobalEffect_G1sSteroids">
     <Name>Grade-1 Steroids</Name> 
     <Desc>[Consumable] Selected Librarian's dice have their max value increased by 2 and min value lowered by 1 for two Scenes.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Also known as ‘Fool’s Strength’.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @T_Blanket_</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="GlobalEffect_CaffPills">
     <Name>Caffeine Pills</Name> 
     <Desc>[Consumable] Selected Librarian's dice have their min value increased by 2 and max value lowered by 1 for two Scenes.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“For late night requests.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>Art by @T_Blanket_</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="GlobalEffect_LightFrag">
     <Name>Light Fragment</Name> 
     <Desc>[Consumable] The selected fallen Librarian is revived with half of their max HP.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“For a single moment you are embraced by endless self fulfillment.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="GlobalEffect_THEPAST">
     <Name>The Past</Name> 
     <Desc>Combat Page rewards do not show up anymore.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“The bell has tolled...”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="RMR_BigBrothersChains">
     <Name>Big Brother's Chains</Name> 
     <Desc>When using a Combat Page, all dice on that page gain Power equal to the amount of copies of the Combat Page in hand.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Etched within one of the chains, one can barely read 'Big Rich'”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="RMR_HarvestScythe">
     <Name>Harvester's Scythe</Name> 
     <Desc>At the start of the Act, give 5 Critical Strike to all allies. Whenever any character crits, they restore 5 HP.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“It takes a brave man to look death in the eye and claim they don't need help.”&lt;/color&gt;</FlavorText>
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
     <LogueEffectInfo Id="RMR_CorrodedChains">
     <Name>Corroded Chains</Name> 
     <Desc>All allies now inflict Bleed on hit equal to half of their current Bleed stacks.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Blood, rust and metal shavings seem to blend together from excessive use of these chains.”&lt;/color&gt;</FlavorText>
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
   <LogueEffectInfo Id="RMR_BleedingSpleen">
     <Name>Bleeding Spleen</Name> 
     <Desc>Inflict 2 Bleed On Crit; Enemies with at least 10 Bleed explode on death, dealing (Bleed /2) Damage to all other enemies.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“WIP”&lt;/color&gt;</FlavorText>
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
     <LogueEffectInfo Id="RMR_Remote">
@@ -169,7 +169,7 @@ Can be used once per battle.</Desc>
     <Desc>Adds a Single-Use, [On Play] page at the start of the Act to the Patron Librarian's hand that removes all of the target's Light and unslots any non-0 Cost pages. 
 This item is removed upon using the page.</Desc>
     <FlavorText>&lt;color=#CACACA&gt;“You have a feeling someone messed up their wiring somewhere...”&lt;/color&gt;</FlavorText>
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
   <LogueEffectInfo Id="GlobalEffect_Inspiration">
@@ -181,14 +181,14 @@ This item is removed upon using the page.</Desc>
 3 Fragile
 Immobilization</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Futures made of...”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 
  <LogueEffectInfo Id="GlobalEffect_KillingAura">
     <Name>Killing Aura</Name> 
     <Desc>[Global] All non-attack damage taken by enemies is doubled.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
   <!-- 
@@ -196,7 +196,7 @@ Immobilization</Desc>
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
   
@@ -204,7 +204,7 @@ Immobilization</Desc>
     <Name>Dshka</Name> 
     <Desc>Dshka</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“Dshka”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>.</CatalogDesc>
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
   SAVE THIS FOR BAYARD'S CAPE
