@@ -53,7 +53,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (metadata.canStack)
                 {
-                    DiceCardXmlInfo upgradeInfo = GetUpgradeCard(cardId);
+                    DiceCardXmlInfo upgradeInfo = GetUpgradeCard(new LorId(metadata.actualPid, cardId.id), metadata.index, metadata.count + count);
                     dictionary.Add(metadata.index, upgradeInfo);
                 }
                 return dictionary;
@@ -119,11 +119,6 @@ namespace abcdcode_LOGLIKE_MOD
         public DiceCardXmlInfo GetUpgradeCard(LorId cardid, int index = 0, int count = 1)
         {
             Dictionary<int, UpgradeBase> dictionary;
-            if (UpgradeMetadata.UnpackPid(cardid.packageId, out UpgradeMetadata metadata))
-            {
-                count += metadata.count;
-                index = metadata.index;
-            }
             if (this.UpgradeInfoDic.TryGetValue(cardid, out dictionary) && dictionary.TryGetValue(index, out UpgradeBase upgrade))
             {
                 DiceCardXmlInfo upgradeInfo = upgrade.GetUpgradeInfo(index, count);

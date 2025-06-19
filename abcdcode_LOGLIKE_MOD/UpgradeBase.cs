@@ -6,7 +6,7 @@
 
 using LOR_DiceSystem;
 using System.Collections.Generic;
-
+using LOR_Localize;
 
 namespace abcdcode_LOGLIKE_MOD
 {
