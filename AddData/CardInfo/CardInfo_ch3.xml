@@ -5,11 +5,11 @@
     <Artwork>ch3_1</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script />
+    <Script>RMR_Diversion</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="1" Dice="3" Type="Atk" Detail="Slash" Motion="H" EffectRes="ch3_H" Script="" Desc="" />
-      <Behaviour Min="1" Dice="4" Type="Atk" Detail="Hit" Motion="J" EffectRes="ch3_J" Script="" Desc="" />
+      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Slash" Motion="H" EffectRes="ch3_H" Script="" Desc="" />
+      <Behaviour Min="1" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="ch3_J" Script="" Desc="" />
     </BehaviourList>
     <Chapter>3</Chapter>
     <Priority>0</Priority>
@@ -19,7 +19,7 @@
     <Artwork>ch3_2</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_SharpSwipe</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="ch3_Z" Script="" Desc="" />
@@ -32,7 +32,7 @@
     <Artwork>ch3_3</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_BackAttack</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="8" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch3_E" Script="" Desc="" />
@@ -47,7 +47,7 @@
     <Artwork>ch3_4</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_Standoff</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="ch3_J" Script="recoverHp2atk" Desc="[적중] 체력 2 회복" />
@@ -61,8 +61,8 @@
     <Artwork>ch3_5</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>discardAndEnergy</Script>
-    <ScriptDesc>[사용시] 비용이 가장 낮은 카드 1장을 버림. 코스트 2 회복</ScriptDesc>
+    <Script>RMR_Outburst</Script>
+    <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="H" EffectRes="ch3_H" Script="" Desc="" />
       <Behaviour Min="3" Dice="4" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="ch3_Z" Script="" Desc="" />
@@ -93,7 +93,7 @@
     <Script>endurance2</Script>
     <ScriptDesc>[사용시] 인내 2를 얻음</ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="1" Dice="8" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch3_E" Script="" Desc="" />
+      <Behaviour Min="1" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch3_E" Script="" Desc="" />
       <Behaviour Min="1" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Street_San_J" Script="" Desc="" />
       <Behaviour Min="1" Dice="4" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Street_San_Z" Script="" Desc="" />
     </BehaviourList>
@@ -120,10 +120,10 @@
     <Artwork>Zwei3</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_5shield</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="2" Dice="4" Type="Def" Detail="Guard" Motion="G" EffectRes="Zwei_Named_G" Script="damage2pw" Desc="[합 승리] 대상에게 피해 2" />
+      <Behaviour Min="4" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="Zwei_Named_G" Script="damage2pw" Desc="[합 승리] 대상에게 피해 2" />
       <Behaviour Min="2" Dice="5" Type="Atk" Detail="Slash" Motion="H" EffectRes="Zwei_Named_H" Script="" Desc="" />
       <Behaviour Min="2" Dice="5" Type="Atk" Detail="Slash" Motion="J" EffectRes="Zwei_Named_J" Script="" Desc="" />
     </BehaviourList>
@@ -150,7 +150,7 @@
     <Artwork>Zwei8</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_BladeWhirl</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Zwei_Named_Z" Script="paralysis1atk" Desc="[적중] 마비 1 부여" />
@@ -193,7 +193,7 @@
     <Artwork>Zwei6</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_Avert</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="2" Dice="4" Type="Def" Detail="Guard" Motion="G" EffectRes="Zwei_G" Script="" Desc="" />
@@ -225,7 +225,7 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Zwei_J" Script="damage2pw" Desc="[합 승리] 상대에게 피해 2" />
+      <Behaviour Min="2" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="Zwei_J" Script="RMR_LawOrder" Desc="" />
     </BehaviourList>
     <Chapter>3</Chapter>
     <Priority>0</Priority>
@@ -307,7 +307,7 @@
     <Artwork>Molar3</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>quickness1</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="8" Type="Def" Detail="Evasion" Motion="E" EffectRes="ch3_E" Script="" Desc="" />
@@ -324,9 +324,9 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="1" Dice="3" Type="Atk" Detail="Slash" Motion="H" EffectRes="Molar_H" Script="" Desc="" />
-      <Behaviour Min="1" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Molar_J" Script="" Desc="" />
-      <Behaviour Min="1" Dice="3" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Molar_Z" Script="" Desc="" />
+      <Behaviour Min="2" Dice="3" Type="Atk" Detail="Slash" Motion="H" EffectRes="Molar_H" Script="" Desc="" />
+      <Behaviour Min="3" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Molar_J" Script="" Desc="" />
+      <Behaviour Min="2" Dice="3" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Molar_Z" Script="" Desc="" />
     </BehaviourList>
     <Chapter>3</Chapter>
     <Priority>0</Priority>
@@ -381,7 +381,7 @@
     <Artwork>Stray1</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_StartinLightly</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="2" Dice="4" Type="Atk" Detail="Hit" Motion="Z" EffectRes="Stray_Z" Script="" Desc="" />
@@ -395,7 +395,7 @@
     <Artwork>Stray5</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_SearingBlow</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="4" Dice="12" Type="Atk" Detail="Hit" Motion="J" EffectRes="Stray_J" Script="" Desc="" />
@@ -411,7 +411,7 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="1" Dice="15" Type="Atk" Detail="Slash" Motion="Z" EffectRes="Stray_Z" Script="" Desc="" />
+      <Behaviour Min="1" Dice="15" Type="Atk" Detail="Slash" Motion="Z" EffectRes="Stray_Z" Script="RMR_recover5breakpw" Desc="" />
     </BehaviourList>
     <Chapter>3</Chapter>
     <Priority>0</Priority>
@@ -421,7 +421,7 @@
     <Artwork>Stray9</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_CutIn</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Hit" Motion="J" EffectRes="Stray_J" Script="" Desc="" />
@@ -436,7 +436,7 @@
     <Artwork>Stray3</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_break2atk</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Hit" Motion="J" EffectRes="Stray_J" Script="bleeding2atk" Desc="[적중] 출혈 2 부여" />
@@ -458,4 +458,35 @@
     <Chapter>3</Chapter>
     <Priority>0</Priority>
   </Card>
+  
+  <!-- this is law and order defense queue die -->
+  <Card ID="390001">
+    <Name>치안 수호</Name>
+    <Artwork>Zwei1</Artwork>
+    <Rarity>Common</Rarity>
+    <Spec Range="Near" Cost="0" />
+    <Script />
+    <ScriptDesc />
+    <BehaviourList>
+      <Behaviour Min="3" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="Zwei_G" Script="" Desc="" />
+    </BehaviourList>
+    <Chapter>3</Chapter>
+    <Priority>0</Priority>
+  </Card>
+  
+  <Card ID="390002">
+    <Name>치안 수호</Name>
+    <Artwork>Zwei1</Artwork>
+    <Rarity>Common</Rarity>
+    <Spec Range="Near" Cost="0" />
+    <Script />
+    <ScriptDesc />
+    <BehaviourList>
+      <Behaviour Min="3" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="Zwei_G" Script="" Desc="" />
+      <Behaviour Min="3" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="Zwei_G" Script="" Desc="" />
+    </BehaviourList>
+    <Chapter>3</Chapter>
+    <Priority>0</Priority>
+  </Card>
+  
 </DiceCardXmlRoot>

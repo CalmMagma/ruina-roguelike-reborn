@@ -642,4 +642,377 @@ namespace RogueLike_Mod_Reborn
 
 
     }
+
+    public class DiceCardAbilityBase_RMR_LawOrder : DiceCardAbilityBase
+    {
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            DiceCardXmlInfo cardItem = ItemXmlDataList.instance.GetCardItem(new LorId(LogLikeMod.ModId, 390001));
+            List <BattleDiceBehavior> list = new List<BattleDiceBehavior>();
+            int num = 0;
+            foreach (DiceBehaviour diceBehaviour in cardItem.DiceBehaviourList)
+            {
+                BattleDiceBehavior battleDiceBehavior = new BattleDiceBehavior();
+                battleDiceBehavior.behaviourInCard = diceBehaviour.Copy();
+                battleDiceBehavior.SetIndex(num++);
+                list.Add(battleDiceBehavior);
+            }
+            owner.cardSlotDetail.keepCard.AddBehaviours(cardItem, list);
+        }
+    }
+
+    public class DiceCardAbilityBase_RMR_LawOrderUpgrade : DiceCardAbilityBase
+    {
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            DiceCardXmlInfo cardItem = ItemXmlDataList.instance.GetCardItem(new LorId(LogLikeMod.ModId, 390002));
+            List<BattleDiceBehavior> list = new List<BattleDiceBehavior>();
+            int num = 0;
+            foreach (DiceBehaviour diceBehaviour in cardItem.DiceBehaviourList)
+            {
+                BattleDiceBehavior battleDiceBehavior = new BattleDiceBehavior();
+                battleDiceBehavior.behaviourInCard = diceBehaviour.Copy();
+                battleDiceBehavior.SetIndex(num++);
+                list.Add(battleDiceBehavior);
+            }
+            owner.cardSlotDetail.keepCard.AddBehaviours(cardItem, list);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_Diversion : DiceCardSelfAbilityBase
+    {
+        public override void OnStartBattle()
+        {
+            base.OnStartBattle();
+            if (this.card.targetSlotOrder < this.card.target.cardSlotDetail.cardAry.Count)
+            {
+                BattlePlayingCardDataInUnitModel fish = this.card.target.cardSlotDetail.cardAry[this.card.targetSlotOrder];
+                if (fish != null)
+                {
+                    if (fish.target != this.owner)
+                    {
+                        fish.target = this.owner;
+                        fish.targetSlotOrder = this.card.slotOrder;
+                    }
+
+                }
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_SharpSwipe : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
+        public override void OnStartBattle()
+        {
+            base.OnStartBattle();
+            owner.bufListDetail.AddBuf(new agagagagbleeeeed());
+        }
+
+        public class agagagagbleeeeed : BattleUnitBuf
+        {
+            public override void BeforeRollDice(BattleDiceBehavior behavior)
+            {
+                base.BeforeRollDice(behavior);
+                behavior.AddAbility(new DiceCardAbility_bleeding1atk());
+            }
+            public override void OnRoundEnd()
+            {
+                base.OnRoundEnd();
+                this.Destroy();
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_Standoff : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "RMR_Shield_Keyword", "RMR_StaggerShield_Keyword" };
+        public override void OnStartParrying()
+        {
+            base.OnStartParrying();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRShield, 5, owner);
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRStaggerShield, 5, owner);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_StandoffUpgrade : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "RMR_Shield_Keyword", "RMR_StaggerShield_Keyword" };
+        public override void OnStartParrying()
+        {
+            base.OnStartParrying();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRShield, 8, owner);
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRStaggerShield, 8, owner);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_Avert : DiceCardSelfAbilityBase
+    {
+        public override void OnStartParrying()
+        {
+            base.OnStartParrying();
+            if (card?.target?.currentDiceAction?.earlyTarget?.faction == owner.faction && card?.target?.currentDiceAction?.earlyTarget != owner)
+            {
+                card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+                {
+                    power = 2
+                });
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_StartinLightly : DiceCardSelfAbilityBase
+    {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.HitPowerUp, 1, owner);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_GuardianUpgrade : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Endurance_Keyword", "Quickness_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            foreach (BattleUnitModel amog in BattleObjectManager.instance.GetAliveList(owner.faction))
+            {
+                amog.bufListDetail.AddKeywordBufByCard(KeywordBuf.Endurance, 1, owner);
+                amog.bufListDetail.AddKeywordBufByCard(KeywordBuf.Quickness, 1, owner);
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_GambleUpgrade : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            var x = owner.allyCardDetail.DiscardACardLowest();
+            if (x.GetCost() != 0)
+            {
+                // change this to 2 luck once luck is no longer busted, or keep it as is if it feels funny
+                owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.CritChance, x.GetCost(), owner);
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_BackAttack : DiceCardSelfAbilityBase
+    {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList())
+            {
+                foreach (var c in unit.cardSlotDetail.cardAry)
+                {
+                    if (c != null && c.target == card.target && c.card.GetCost() >= 3 && unit.faction == owner.faction)
+                    {
+                        card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus { power = 1 });
+                    }
+                }
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_SliceUpgrade : DiceCardSelfAbilityBase
+    {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.allyCardDetail.DiscardACardLowest();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.SlashPowerUp, 1, owner);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_StayClamUpgrade : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "DrawCard_Keyword", "RMR_StaggerShield_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.allyCardDetail.DrawCards(1);
+        }
+
+        public override void OnDiscard(BattleUnitModel unit, BattleDiceCardModel self)
+        {
+            base.OnDiscard(unit, self);
+            unit.allyCardDetail.DrawCards(1);
+            unit.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRStaggerShield, 3, unit);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_FishOnslaughtUpgrade : DiceCardSelfAbilityBase
+    {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.allyCardDetail.DiscardACardLowest();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.DmgUp, 1, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_recover5breakpw : DiceCardAbilityBase
+    {
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            owner.breakDetail.RecoverBreak(5);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_SearingBlow : DiceCardSelfAbilityBase
+    {
+        // empty for description
+    }
+
+    public class DiceCardSelfAbility_RMR_Outburst : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Energy_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.allyCardDetail.DiscardACardLowest();
+            owner.cardSlotDetail.RecoverPlayPointByCard(3);
+        }
+    }
+
+    public class DiceCardAbility_RMR_allydraw1pw : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[] { "DrawCard_Keyword" };
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            List<BattleUnitModel> gooners = BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner);
+            if (gooners.Count > 0)
+            {
+                RandomUtil.SelectOne<BattleUnitModel>(gooners).allyCardDetail.DrawCards(1);
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_break2atk : DiceCardSelfAbilityBase
+    {
+        public override void OnSucceedAttack()
+        {
+            base.OnSucceedAttack();
+            card.target.breakDetail.TakeBreakDamage(2, DamageType.Card_Ability, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_paralysisbind1atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Paralysis_Keyword", "Binding_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Paralysis, 1, owner);
+            target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Binding, 1, owner);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_CutIn : DiceCardSelfAbilityBase
+    {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            if (card.target.cardSlotDetail.cardQueue.Count > 0)
+            {
+                card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+                {
+                    min = card.target.cardSlotDetail.cardQueue.Count
+                });
+            }
+        }
+    }
+    /* uncomment this if its fine
+    public class DiceCardSelfAbility_RMR_MeatJamUpgrade : DiceCardSelfAbilityBase
+    {
+        public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
+        {
+            base.OnUseInstance(unit, self, targetUnit);
+            unit.RecoverHP(20);
+            BookModel bookItem = unit.UnitData.unitData.bookItem;
+            this.DeleteCard(unit, new LorId(LogLikeMod.ModId, 2000002));
+            if (!bookItem.GetDeckAll_nocopy()[bookItem.GetCurrentDeckIndex()].MoveCardToInventory(new LorId(LogLikeMod.ModId, 2000002)))
+              return;
+            LogueBookModels.DeleteCard(new LorId(LogLikeMod.ModId, 2000002));
+        }
+    } */
+
+    public class DiceCardSelFAbility_RMR_5shield : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "RMR_Shield_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRShield, 5, owner);
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_BladeWhirl : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Endurance_Keyword", "DrawCard_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            if (owner.bufListDetail.GetActivatedBuf(KeywordBuf.Endurance) != null)
+            {
+                owner.allyCardDetail.DrawCards(1);
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_BladeWhirlUpgrade : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Endurance_Keyword", "DrawCard_Keyword", "Energy_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            if (owner.bufListDetail.GetActivatedBuf(KeywordBuf.Endurance) != null)
+            {
+                owner.allyCardDetail.DrawCards(1);
+                owner.cardSlotDetail.RecoverPlayPointByCard(1);
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_HandlingWorkUpgrade : DiceCardSelfAbilityBase
+    {
+        public override void OnStartBattle()
+        {
+            base.OnStartBattle();
+            owner.bufListDetail.AddBuf(new googoogaagaaresistances());
+        }
+
+        public class googoogaagaaresistances : BattleUnitBuf
+        {
+            public override void OnRoundEnd()
+            {
+                base.OnRoundEnd();
+                this.Destroy();
+            }
+            public override AtkResist GetResistBP(AtkResist origin, BehaviourDetail detail)
+            {
+                if (origin == AtkResist.Vulnerable || origin == AtkResist.Weak)
+                {
+                    return AtkResist.Normal;
+                }
+                return base.GetResistBP(origin, detail);
+            }
+            public override AtkResist GetResistHP(AtkResist origin, BehaviourDetail detail)
+            {
+                if (origin == AtkResist.Vulnerable || origin == AtkResist.Weak)
+                {
+                    return AtkResist.Normal;
+                }
+                return base.GetResistHP(origin, detail);
+            }
+        }
+    }
+
 }
