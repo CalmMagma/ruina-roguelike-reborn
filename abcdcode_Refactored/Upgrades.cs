@@ -3513,7 +3513,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Wedge2 : UpgradeBase
     {
         public override void Init()
@@ -3523,7 +3522,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 408002);
         }
     }
-
 
     public class UpgradeModel_Wedge3 : UpgradeBase
     {
@@ -3535,7 +3533,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 408003);
         }
     }
-
 
     public class UpgradeModel_Wedge4 : UpgradeBase
     {
@@ -3549,7 +3546,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Wedge5 : UpgradeBase
     {
         public override void Init()
@@ -3562,7 +3558,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Wedge8 : UpgradeBase
     {
         public override void Init()
@@ -3572,7 +3567,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 408012);
         }
     }
-
 
     public class UpgradeModel_work1_1 : UpgradeBase
     {
@@ -3587,7 +3581,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_work1 : UpgradeBase
     {
         public override void Init()
@@ -3600,7 +3593,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_work2 : UpgradeBase
     {
         public override void Init()
@@ -3612,7 +3604,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 615002);
         }
     }
-
 
     public class UpgradeModel_work3 : UpgradeBase
     {
@@ -3628,7 +3619,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_work4 : UpgradeBase
     {
         public override void Init()
@@ -3641,7 +3631,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_work5 : UpgradeBase
     {
         public override void Init()
@@ -3652,7 +3641,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_workshopfixer1 : UpgradeBase
     {
         public override void Init()
@@ -3662,7 +3650,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 410001);
         }
     }
-
 
     public class UpgradeModel_workshopfixer2 : UpgradeBase
     {
@@ -3675,7 +3662,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_workshopfixer3 : UpgradeBase
     {
         public override void Init()
@@ -3686,7 +3672,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 410002);
         }
     }
-
 
     public class UpgradeModel_workshopfixer4 : UpgradeBase
     {
@@ -3701,7 +3686,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Yan1 : UpgradeBase
     {
         public override void Init()
@@ -3712,7 +3696,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 611001);
         }
     }
-
 
     public class UpgradeModel_Yan2 : UpgradeBase
     {
@@ -3727,7 +3710,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Yan3 : UpgradeBase
     {
         public override void Init()
@@ -3739,7 +3721,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Yan4 : UpgradeBase
     {
         public override void Init()
@@ -3749,7 +3730,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 611004);
         }
     }
-
 
     public class UpgradeModel_Yan5 : UpgradeBase
     {
@@ -3764,7 +3744,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Yan6 : UpgradeBase
     {
         public override void Init()
@@ -3777,7 +3756,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Yan7 : UpgradeBase
     {
         public override void Init()
@@ -3788,7 +3766,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Yun1 : UpgradeBase
     {
         public override void Init()
@@ -3798,7 +3775,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 102005);
         }
     }
-
 
     public class UpgradeModel_Yun2 : UpgradeBase
     {
@@ -3813,7 +3789,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
     public class UpgradeModel_Yun3 : UpgradeBase
     {
         public override void Init()
@@ -3825,8 +3800,6 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
-
-
     public class UpgradeModel_Zwei10 : UpgradeBase
     {
         public override void Init()
@@ -3837,11 +3810,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 301008);
         }
     }
-
-
-
-
-
 
     public class UpgradeModel_Zwei9 : UpgradeBase
     {
