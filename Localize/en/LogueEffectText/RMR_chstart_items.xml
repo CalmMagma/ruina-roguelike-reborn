@@ -41,7 +41,7 @@
   <LogueEffectInfo Id="RMR_ViciousGlasses">
     <Name>Vicious Glasses</Name>
     <Desc>At the start of the Act, give 10 Critical Strike to all allies.</Desc> 
-    <FlavorText>&lt;color=#CA08A9&gt;"Glas"&lt;/color&gt;</FlavorText> 
+    <FlavorText>&lt;color=#CA08A9&gt;"You hear various voices crying for afar, demanding removal of these so called 'Random Crits'."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
  
