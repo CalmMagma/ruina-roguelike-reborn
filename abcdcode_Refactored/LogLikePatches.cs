@@ -1842,13 +1842,13 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage())
                 return true;
             BattleUnitModel fieldValue = ModdingUtils.GetFieldValue<BattleUnitModel>("_owner", (object)__instance);
-            if (fieldValue.passiveDetail.PassiveList.Find((Predicate<PassiveAbilityBase>)(x => x is PassiveAbility_ShopPassiveStigma5)) != null)
+            if (fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) != null)
             {
-                PassiveAbility_ShopPassiveStigma5 shopPassiveStigma5 = fieldValue.passiveDetail.PassiveList.Find((Predicate<PassiveAbilityBase>)(x => x is PassiveAbility_ShopPassiveStigma5)) as PassiveAbility_ShopPassiveStigma5;
+                PassiveAbility_ShopPassiveStigma5 shopPassiveStigma5 = fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) as PassiveAbility_ShopPassiveStigma5;
                 if (shopPassiveStigma5.stack < __instance.stack)
                     shopPassiveStigma5.stack = __instance.stack;
             }
-            if (Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_ShopGoodStigma1.Stigma1Effect)) == null)
+            if (Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_ShopGoodStigma1.Stigma1Effect) == null)
                 return true;
             if (!fieldValue.IsImmune(__instance.bufType))
             {

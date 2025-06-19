@@ -6,9 +6,8 @@
       <AvailableUnit>5</AvailableUnit>
       <Formation>1</Formation>
       <Unit>854</Unit>
-
     </Wave> 
-
+	<MapInfo>SparklingMirrorMapManager</MapInfo>
     <Name>Roguelike Reborn</Name>
     <FloorNum>0</FloorNum>
     <Invitation Combine="BookRecipe">

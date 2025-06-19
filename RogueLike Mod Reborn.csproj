@@ -676,6 +676,7 @@
     <Compile Include="RMR_BattleBufs.cs" />
     <Compile Include="RMR_DiceCardPriorities.cs" />
     <Compile Include="RMR_GlobalEffects.cs" />
+    <Compile Include="RMR_MapManagers.cs" />
     <Compile Include="RMR_Upgrades.cs" />
     <Compile Include="RMR_Shops.cs" />
     <Compile Include="RMR_PickUps.cs" />

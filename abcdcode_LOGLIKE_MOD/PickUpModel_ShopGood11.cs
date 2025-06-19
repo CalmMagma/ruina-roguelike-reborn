@@ -32,7 +32,7 @@ namespace abcdcode_LOGLIKE_MOD
             base.OnPickUp(model);
             Singleton<LogAssetBundleManager>.Instance.LoadEffectEachScale(model.view.transform, new Vector3(0.3f, 0.3f, 0.3f), new Vector3(0.0f, 1f), "loglike_smokebullet");
             DiceCardSelfAbility_ozma_forgotten.BattleUnitBuf_ozma_forgotten buf = new DiceCardSelfAbility_ozma_forgotten.BattleUnitBuf_ozma_forgotten();
-            model.bufListDetail.AddBuf((BattleUnitBuf)buf);
+            model.bufListDetail.AddBuf(buf);
             List<BattleUnitModel> actionableEnemyList = Singleton<StageController>.Instance.GetActionableEnemyList();
             if (model.faction != Faction.Player)
                 return;

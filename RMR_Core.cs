@@ -339,41 +339,6 @@ namespace RogueLike_Mod_Reborn
 
     #region TECHNICAL INFRASTRUCTURE
 
-    public static class RMRMysteryExtensions
-    {
-        public static void DisableButton(this MysteryBase mystery, int button)
-        {
-            string btn = button.ToString();
-            mystery.FrameObj["choice_btn" + btn].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["disabledButton"];
-            mystery.FrameObj["Desc" + btn].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText("Mystery_RequireCondition") + mystery.FrameObj["Desc" + btn].GetComponent<TextMeshProUGUI>().text;
-        }
-
-        public static void ShowOverlayOverButton(this MysteryBase mystery, BattleUnitBuf buf, int button)
-        {
-            SingletonBehavior<UIBattleOverlayManager>.Instance.EnableBufOverlay(buf.bufActivatedName, buf.bufActivatedText, buf.GetBufIcon(), mystery.FrameObj["choice_btn" + button.ToString()]);
-        }
-
-        public static void ShowOverlayOverButton(this MysteryBase mystery, GlobalLogueEffectBase item, int button)
-        {
-            SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(item.GetEffectName(), item.GetEffectDesc() + "\n"
-                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(item.GetRarity())) + ">" + item.GetRarity().ToString() + "</color>", mystery.FrameObj["choice_btn" + button.ToString()].transform as RectTransform, item.GetRarity(), UIToolTipPanelType.OnlyContent);
-        }
-
-        public static void ShowOverlayOverButton(this MysteryBase mystery, PickUpModelBase item, int button)
-        {
-            SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(item.Name, item.Desc + "\n"
-                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(item.GetRarity())) + ">" + item.GetRarity().ToString() + "</color>", mystery.FrameObj["choice_btn" + button.ToString()].transform as RectTransform, item.GetRarity(), UIToolTipPanelType.OnlyContent);
-        }
-
-        public static void CloseOverlayOverButton(this MysteryBase mystery)
-        {
-            if (SingletonBehavior<UIBattleOverlayManager>.Instance.isActiveAndEnabled)
-                SingletonBehavior<UIBattleOverlayManager>.Instance.DisableOverlay();
-            if (SingletonBehavior<UIMainOverlayManager>.Instance.IsOpened())
-                SingletonBehavior<UIMainOverlayManager>.Instance.Close();
-        }
-    }
-
     public static class RMRUtilityExtensions
     {
         /// <summary>
@@ -555,8 +520,6 @@ namespace RogueLike_Mod_Reborn
 
         /// <summary>
         /// Replaces color shorthands from the XMLs.
-        /// <br></br>[green] - #33DD11
-        /// <br></br>[red] - #DD3311
         /// </summary>
         public static string ReplaceColorShorthands(this string input)
         {
@@ -570,8 +533,13 @@ namespace RogueLike_Mod_Reborn
 
         public static Dictionary<string, string> colorShorthands = new Dictionary<string, string>
         {
-            {"[green]", "<color=#33DD11>"},
-            {"[red]", "<color=#DD3311>"}
+            {"[/color]", "</color>" }, // close color tag
+            {"[green]", "<color=#33DD11>"}, // open green color tag 
+            {"[red]", "<color=#DD3311>"}, // open red color tag
+            {"[mirror]", "<color=#5163D6>" }, // open light blue color tag
+            {"[yellow]", "<color=#FFD800>" }, // open yellow color tag
+            {"[i]", "<i>"}, // open italicized tag
+            {"[/i]", "</i>" } // close italicized tag
         };
 
         public static GlobalLogueEffectBase GetRandomEffect(this GlobalLogueEffectManager manager, Rarity rarity)
@@ -585,10 +553,6 @@ namespace RogueLike_Mod_Reborn
             }
             return (GlobalLogueEffectBase)Activator.CreateInstance(items.SelectOneRandom().AsType());
         }
-
-        /*
-        
-        */
 
         /// <summary>
         /// Quick method to simply check if a card can redirect another.

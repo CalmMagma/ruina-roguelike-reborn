@@ -358,6 +358,45 @@ namespace abcdcode_LOGLIKE_MOD
             this.FrameObj.Clear();
         }
 
+        public void DisableButton(int button)
+        {
+            string btn = button.ToString();
+            this.FrameObj["choice_btn" + btn].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["disabledButton"];
+            this.FrameObj["Desc" + btn].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText("Mystery_RequireCondition") + this.FrameObj["Desc" + btn].GetComponent<TextMeshProUGUI>().text;
+        }
+
+        public void ReformatButton(int button, params object[] parameters)
+        {
+            string btn = button.ToString();
+            var tmpro = this.FrameObj["Desc" + btn].GetComponent<TextMeshProUGUI>();
+            tmpro.text = string.Format(tmpro.text, parameters);
+        }
+
+        public void ShowOverlayOverButton(BattleUnitBuf buf, int button)
+        {
+            SingletonBehavior<UIBattleOverlayManager>.Instance.EnableBufOverlay(buf.bufActivatedName, buf.bufActivatedText, buf.GetBufIcon(), this.FrameObj["choice_btn" + button.ToString()]);
+        }
+
+        public void ShowOverlayOverButton(GlobalLogueEffectBase item, int button)
+        {
+            SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(item.GetEffectName(), item.GetEffectDesc() + "\n"
+                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(item.GetRarity())) + ">" + item.GetRarity().ToString() + "</color>", this.FrameObj["choice_btn" + button.ToString()].transform as RectTransform, item.GetRarity(), UIToolTipPanelType.OnlyContent);
+        }
+
+        public void ShowOverlayOverButton(PickUpModelBase item, int button)
+        {
+            SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(item.Name, item.Desc + "\n"
+                        + "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(item.GetRarity())) + ">" + item.GetRarity().ToString() + "</color>", this.FrameObj["choice_btn" + button.ToString()].transform as RectTransform, item.GetRarity(), UIToolTipPanelType.OnlyContent);
+        }
+
+        public void CloseOverlayOverButton()
+        {
+            if (SingletonBehavior<UIBattleOverlayManager>.Instance.isActiveAndEnabled)
+                SingletonBehavior<UIBattleOverlayManager>.Instance.DisableOverlay();
+            if (SingletonBehavior<UIMainOverlayManager>.Instance.IsOpened())
+                SingletonBehavior<UIMainOverlayManager>.Instance.Close();
+        }
+
         public class TextUpDownButton : Selectable
         {
             public MysteryBase.TextUpDownButton.DownEvent down;

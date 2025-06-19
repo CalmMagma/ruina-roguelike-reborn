@@ -4,17 +4,18 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class UnionWeaponPassiveAbilityBase : PassiveAbilityBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override string debugDesc => "막 시작 시 체력 5% 잃음";
 
-  public override void OnRoundStart()
-  {
-    base.OnRoundStart();
-    this.owner.TakeDamage(this.owner.MaxHp / 20 > 12 ? 12 : this.owner.MaxHp / 20, DamageType.Passive);
-  }
-}
+    public class UnionWeaponPassiveAbilityBase : PassiveAbilityBase
+    {
+        public override string debugDesc => "막 시작 시 체력 5% 잃음";
+
+        public override void OnRoundStart()
+        {
+            base.OnRoundStart();
+            this.owner.TakeDamage(this.owner.MaxHp / 20 > 12 ? 12 : this.owner.MaxHp / 20, DamageType.Passive);
+        }
+    }
 }

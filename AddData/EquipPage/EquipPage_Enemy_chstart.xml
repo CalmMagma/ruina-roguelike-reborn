@@ -22,8 +22,8 @@
 			<Passive Level="1">854</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>The Sparkling Mirror</CharacterSkin>
-    		<CharacterSkinType>Custom</CharacterSkinType>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+    	<CharacterSkinType>Custom</CharacterSkinType>
 		<Rarity>Special</Rarity>
 		<SkinGender>N</SkinGender>
     	<RandomFace>false</RandomFace>
@@ -49,8 +49,8 @@
 			<Passive Level="1">855</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>The Sparkling Mirror</CharacterSkin>
-    		<CharacterSkinType>Custom</CharacterSkinType>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+    	<CharacterSkinType>Custom</CharacterSkinType>
 		<Rarity>Special</Rarity>
 		<SkinGender>N</SkinGender>
     	<RandomFace>false</RandomFace>
