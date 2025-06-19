@@ -181,7 +181,7 @@ namespace abcdcode_LOGLIKE_MOD
                     for (int i = curSize; i < deckSize; i++)
                     {
                         list.Add(ItemXmlDataList.instance.GetCardItem(defaultDeck[i], false));
-                    }                 
+                    }
                 }
                 return list;
             }
@@ -1440,7 +1440,7 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
-        [HarmonyPrefix, HarmonyPatch(typeof(ItemXmlDataList), nameof(ItemXmlDataList.GetCardItem), new Type[2]{typeof (LorId),typeof (bool)})]
+        [HarmonyPrefix, HarmonyPatch(typeof(ItemXmlDataList), nameof(ItemXmlDataList.GetCardItem), new Type[2] { typeof(LorId), typeof(bool) })]
         public static bool ItemXmlDataList_GetCardItem(
           ItemXmlDataList __instance,
           LorId id,

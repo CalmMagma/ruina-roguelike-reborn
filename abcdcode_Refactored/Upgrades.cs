@@ -534,65 +534,12 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_ch3_1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 0, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 300001);
-        }
-    }
 
 
-    public class UpgradeModel_ch3_2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 300002);
-        }
-    }
 
 
-    public class UpgradeModel_ch3_3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 2);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 300003);
-        }
-    }
 
 
-    public class UpgradeModel_ch3_4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 0);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 300004);
-        }
-    }
-
-
-    public class UpgradeModel_ch3_5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 300005);
-        }
-    }
 
 
     public class UpgradeModel_Circus1 : UpgradeBase
@@ -1718,51 +1665,10 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Molar1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 302001);
-        }
-    }
 
 
-    public class UpgradeModel_Molar2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 2);
-            this.upgradeinfo.SetDice(1, 0, 2);
-            this.baseid = new LorId(LogLikeMod.ModId, 302003);
-        }
-    }
 
 
-    public class UpgradeModel_Molar3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 4);
-            this.baseid = new LorId(LogLikeMod.ModId, 302006);
-        }
-    }
-
-
-    public class UpgradeModel_Molar4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 302005);
-        }
-    }
 
 
     public class UpgradeModel_Molar5 : UpgradeBase
@@ -1774,18 +1680,6 @@ namespace abcdcode_LOGLIKE_MOD
             this.baseid = new LorId(LogLikeMod.ModId, 302002);
         }
     }
-
-
-    public class UpgradeModel_Molar6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 302007);
-        }
-    }
-
 
     public class UpgradeModel_Molar7 : UpgradeBase
     {
@@ -2883,62 +2777,7 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Stray1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 2);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 303004);
-        }
-    }
 
-
-    public class UpgradeModel_Stray2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 303003);
-        }
-    }
-
-
-    public class UpgradeModel_Stray3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 303008);
-        }
-    }
-
-
-    public class UpgradeModel_Stray4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 5);
-            this.baseid = new LorId(LogLikeMod.ModId, 303006);
-        }
-    }
-
-
-    public class UpgradeModel_Stray5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 3);
-            this.baseid = new LorId(LogLikeMod.ModId, 303005);
-        }
-    }
 
 
     public class UpgradeModel_Stray6 : UpgradeBase
@@ -2993,15 +2832,6 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Street1_1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 301002);
-        }
-    }
 
 
     public class UpgradeModel_Street1 : UpgradeBase
@@ -3015,17 +2845,6 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Street3_2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 2);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 301001);
-        }
-    }
 
 
     public class UpgradeModel_Street3 : UpgradeBase
@@ -4007,16 +3826,6 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Zwei1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 2);
-            this.baseid = new LorId(LogLikeMod.ModId, 301011);
-        }
-    }
-
 
     public class UpgradeModel_Zwei10 : UpgradeBase
     {
@@ -4030,80 +3839,8 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Zwei2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 2);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 301010);
-        }
-    }
 
 
-    public class UpgradeModel_Zwei3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 0, 1);
-            this.upgradeinfo.SetDice(2, 0, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 301004);
-        }
-    }
-
-
-    public class UpgradeModel_Zwei5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 2);
-            this.upgradeinfo.SetDice(1, 0, 2);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 301003);
-        }
-    }
-
-
-    public class UpgradeModel_Zwei6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 2);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 301009);
-        }
-    }
-
-
-    public class UpgradeModel_Zwei7 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 301007);
-        }
-    }
-
-
-    public class UpgradeModel_Zwei8 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 0);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 301006);
-        }
-    }
 
 
     public class UpgradeModel_Zwei9 : UpgradeBase

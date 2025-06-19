@@ -407,7 +407,7 @@ namespace RogueLike_Mod_Reborn
             this.baseid = new LorId(LogLikeMod.ModId, 202007);
         }
     }
-    /* uncomment this if its fine
+    
     public class UpgradeModel_RMR_MeatJam : UpgradeBase
     {
         public override void Init()
@@ -418,7 +418,7 @@ namespace RogueLike_Mod_Reborn
             this.upgradeinfo.SetCost(1);
             this.baseid = new LorId(LogLikeMod.ModId, 2000002);
         }
-    } */
+    } 
 
 
     public class UpgradeModel_RMR_LawOrder : UpgradeBase
@@ -634,7 +634,7 @@ namespace RogueLike_Mod_Reborn
             this.upxmlinfo.DiceBehaviourList.Add(die2);
             this.upxmlinfo.DiceBehaviourList.Add(die3);
             
-            return base.GetUpgradeInfo(index, count);
+            return this.upxmlinfo;
         }
     }
 
@@ -661,6 +661,7 @@ namespace RogueLike_Mod_Reborn
             this.upgradeinfo.SetDice(0, 0, 5);
             this.baseid = new LorId(LogLikeMod.ModId, 303006);
         }
+
     }
 
     public class UpgradeModel_RMR_SearingBlow : UpgradeBase

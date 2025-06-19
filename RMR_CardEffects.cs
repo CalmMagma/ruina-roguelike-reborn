@@ -929,7 +929,7 @@ namespace RogueLike_Mod_Reborn
             }
         }
     }
-    /* uncomment this if its fine
+    
     public class DiceCardSelfAbility_RMR_MeatJamUpgrade : DiceCardSelfAbilityBase
     {
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
@@ -937,12 +937,11 @@ namespace RogueLike_Mod_Reborn
             base.OnUseInstance(unit, self, targetUnit);
             unit.RecoverHP(20);
             BookModel bookItem = unit.UnitData.unitData.bookItem;
-            this.DeleteCard(unit, new LorId(LogLikeMod.ModId, 2000002));
             if (!bookItem.GetDeckAll_nocopy()[bookItem.GetCurrentDeckIndex()].MoveCardToInventory(new LorId(LogLikeMod.ModId, 2000002)))
               return;
             LogueBookModels.DeleteCard(new LorId(LogLikeMod.ModId, 2000002));
         }
-    } */
+    }
 
     public class DiceCardSelFAbility_RMR_5shield : DiceCardSelfAbilityBase
     {
