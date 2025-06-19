@@ -1118,24 +1118,27 @@ namespace abcdcode_LOGLIKE_MOD
             UnitDataModel unitDataModel = new UnitDataModel(new LorId(LogLikeMod.ModId, -854 - LogueBookModels.playerModel.Count));
             unitDataModel.bookItem.instanceId = LogueBookModels.nextinstanceid++;
             unitDataModel.bookItem.ClassInfo.EquipEffect.PassiveList.Clear();
+            UnitDataModel nugget = null;
             try
             {
-                var unitCustomData = StageController.Instance.GetStageModel().GetFrontAvailableFloor()._floorModel.GetUnitDataList()[LogueBookModels.playerModel.Count];
-                unitDataModel.SetCustomName(unitCustomData.name);
-                unitDataModel.customizeData.Copy(unitCustomData.customizeData);
-                unitDataModel.customizeData.SetCustomData(true);
-                LogueBookModels.ResetPlayerData(unitDataModel);
+                nugget = StageController.Instance.GetStageModel().GetFrontAvailableFloor()._floorModel.GetUnitDataList()[LogueBookModels.playerModel.Count];
+                unitDataModel.SetCustomName(nugget.name);
             } catch (ArgumentOutOfRangeException e)
             {
-                Debug.Log("subplayer is shitting itself again: " + e);
+                Debug.Log($"Player nugget {LogueBookModels.playerModel.Count} at currently selected floor does not exist: {e}");
+                nugget = LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[1];
+                unitDataModel.SetCustomName(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("LogueLike_PlayerName") + " " + LogueBookModels.playerModel.Count.ToString());
             } catch (Exception e)
             {
                 Debug.Log("OKAY REAL SHIT IS GOING ON IN SUBPLAYER ACTUALLY: " + e);
             }
+            unitDataModel.customizeData.Copy(nugget.customizeData);
+            unitDataModel.customizeData.SetCustomData(true);
+            LogueBookModels.ResetPlayerData(unitDataModel);
             unitDataModel.bookItem.ClassInfo.CharacterSkin = new List<string>()
-                {
-                    "KetherLibrarian"
-                };
+            {
+                "KetherLibrarian"
+            };
             unitDataModel.bookItem._selectedOriginalSkin = unitDataModel.bookItem.ClassInfo.CharacterSkin[0];
             unitDataModel.bookItem._characterSkin = unitDataModel.bookItem.ClassInfo.CharacterSkin[0];
             LogueBookModels.playerModel.Add(unitDataModel);

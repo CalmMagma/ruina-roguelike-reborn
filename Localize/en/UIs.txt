@@ -70,4 +70,5 @@
   <text id="ui_RMR_ItemNotObtained_Name">???</text>
   <text id="ui_RMR_ItemNotObtained_Desc">You have yet to find this item.</text>
   <text id="ui_RMR_ItemNotObtained_Credenza">No information available.</text>
+  <text id="ui_RMR_ItemNoEntry_Credenza">[No entry for now.]</text>
 </localize>

@@ -131,7 +131,7 @@ namespace abcdcode_LOGLIKE_MOD
                 this.gameObject.SetActive(false);
                 LogLikeMod.UILogBattleDiceCardUI.Instance.gameObject.SetActive(false);
             }
-            SingletonBehavior<BattleSoundManager>.Instance.PlaySound(EffectSoundType.CARD_SELECT, this.transform.position);
+            SingletonBehavior<BattleSoundManager>.Instance.PlaySound(EffectSoundType.CARD_APPLY, this.transform.position);
         }
 
         public virtual void OnClickCard()

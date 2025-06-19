@@ -235,9 +235,9 @@ namespace abcdcode_LOGLIKE_MOD
 
         /// <summary>
         /// Hook for pausing the battle scene whenever:<br></br>
-        /// - <see cref="LogLikeMod.PauseBool"/> is true
-        /// - A mystery event is currently running
-        /// - An event interrupt is currently running
+        /// - <see cref="LogLikeMod.PauseBool"/> is true<br></br>
+        /// - A mystery event is currently running<br></br>
+        /// - An event interrupt is currently running<br></br>
         /// - A shop is currently running
         /// </summary>
         public void BattleSceneRoot_Update(Action<BattleSceneRoot> orig, BattleSceneRoot self)
@@ -2083,6 +2083,9 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<GlobalLogueEffectManager>.Instance.OnDieUnit(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance));
         }
 
+        /// <summary>
+        /// Postfix patch for Union2's effect
+        /// </summary>
         [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitBufListDetail), nameof(BattleUnitBufListDetail.CheckGift))]
         public static void BattleUnitBufListDetail_CheckGift(
           BattleUnitBufListDetail __instance,
@@ -2090,11 +2093,14 @@ namespace abcdcode_LOGLIKE_MOD
           int stack,
           BattleUnitModel actor)
         {
-            if (bufType != KeywordBuf.Bleeding || actor.passiveDetail.PassiveList.Find((Predicate<PassiveAbilityBase>)(x => x is PassiveAbility_ShopPassiveUnion2)) == null)
+            if (bufType != KeywordBuf.Bleeding || actor.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveUnion2) == null)
                 return;
             ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance).TakeDamage(stack);
         }
 
+        /// <summary>
+        /// Postfix patch to hook GlobalLogueEffectBase.DmgFactor
+        /// </summary>
         [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitPassiveDetail), nameof(BattleUnitPassiveDetail.DmgFactor))]
         public static void BattleUnitPassiveDetail_DmgFactor(
           BattleUnitPassiveDetail __instance,
@@ -2106,13 +2112,16 @@ namespace abcdcode_LOGLIKE_MOD
             __result = Singleton<GlobalLogueEffectManager>.Instance.DmgFactor(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance), dmg, type, keyword);
         }
 
+        /// <summary>
+        /// Postfix patch to set abnormality combat page arts
+        /// </summary>
         [HarmonyPostfix, HarmonyPatch(typeof(EmotionPassiveCardUI), nameof(EmotionPassiveCardUI.SetSprites))]
         public static void EmotionPassiveCardUI_SetSprites(EmotionPassiveCardUI __instance)
         {
             if (!LogLikeMod.CheckStage())
                 return;
-            Image image = (Image)typeof(EmotionPassiveCardUI).GetField("_artwork", AccessTools.all).GetValue((object)__instance);
-            EmotionCardXmlInfo emotionCardXmlInfo = (EmotionCardXmlInfo)typeof(EmotionPassiveCardUI).GetField("_card", AccessTools.all).GetValue((object)__instance);
+            Image image = (Image)typeof(EmotionPassiveCardUI).GetField("_artwork", AccessTools.all).GetValue(__instance);
+            EmotionCardXmlInfo emotionCardXmlInfo = (EmotionCardXmlInfo)typeof(EmotionPassiveCardUI).GetField("_card", AccessTools.all).GetValue(__instance);
             if (LogLikeMod.ArtWorks.ContainsKey(emotionCardXmlInfo.Artwork))
                 image.sprite = LogLikeMod.ArtWorks[emotionCardXmlInfo.Artwork];
         }

@@ -64,6 +64,7 @@ namespace RogueLike_Mod_Reborn
             BattleDiceCardModel cardItem = BattleDiceCardModel.CreatePlayingCard(ItemXmlDataList.instance.GetCardItem(new LorId(RMRCore.packageId, -100)));
             BattleDiceBehavior battleDiceBehavior = cardItem.CreateDiceCardBehaviorList()[0];
             var list = unit.allyCardDetail.GetHand();
+            list.RemoveAll(x => x.GetID() == self.GetID());
             list.SortByCost();
             if (list[0] != null)
             {

@@ -4,6 +4,7 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
+using abcdcode_LOGLIKE_MOD_Extension;
 using RogueLike_Mod_Reborn;
 using System;
 using System.Collections.Generic;
@@ -84,7 +85,7 @@ namespace abcdcode_LOGLIKE_MOD
                     info = null;
                 }
             }
-            return info == null ? this.Desc : info.CatalogDesc;
+            return info == null ? TextDataModel.GetText("ui_RMR_ItemNoEntry_Credenza") : info.CatalogDesc;
         }
 
         /// <summary>

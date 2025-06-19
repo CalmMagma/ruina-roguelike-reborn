@@ -6,9 +6,14 @@
 	</PassiveDesc>
 	
 	<PassiveDesc ID="854">
-		<Name>스파클링</Name>
+		<Name>Sparkling</Name>
 		<Desc>With me you shall walk through endless, ever so sparkling possibilities.</Desc>
 	</PassiveDesc>
+	
+   <PassiveDesc ID="28480004">
+    <Name>Night in the Backstreets</Name>
+    <Desc>Ends the Act forcibly at the end of the third Scene.</Desc>
+   </PassiveDesc>
   
 </PassiveDescRoot>
   

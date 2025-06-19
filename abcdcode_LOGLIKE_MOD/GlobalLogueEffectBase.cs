@@ -446,7 +446,7 @@ namespace abcdcode_LOGLIKE_MOD
                     info = null;
                 }
             }
-            return info == null ? this.GetEffectDesc() : info.CatalogDesc;
+            return info == null ? TextDataModel.GetText("ui_RMR_ItemNoEntry_Credenza") : info.CatalogDesc;
         }
 
         /// <summary>
