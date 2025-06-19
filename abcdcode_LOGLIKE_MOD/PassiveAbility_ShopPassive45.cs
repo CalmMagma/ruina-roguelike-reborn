@@ -14,9 +14,21 @@ namespace abcdcode_LOGLIKE_MOD
     {
         public override string debugDesc => "막 시작 시 50% 확률로 속도 주사위 슬롯 + 1(중복 불가)";
 
+        private bool rolled;
+
         public override int SpeedDiceNumAdder()
         {
-            return Singleton<Random>.Instance.Next(0, 2) != 1 ? base.SpeedDiceNumAdder() : 1;
+            rolled = Singleton<Random>.Instance.Next(0, 2) == 1;
+            return rolled ? 1 : base.SpeedDiceNumAdder();
+        }
+
+        public override void OnAfterRollSpeedDice()
+        {
+            base.OnAfterRollSpeedDice();
+            if (rolled)
+            {
+                owner.RollSpeedDice();
+            }
         }
     }
 }

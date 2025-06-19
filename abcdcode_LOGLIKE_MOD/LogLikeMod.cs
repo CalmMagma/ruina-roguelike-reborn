@@ -111,8 +111,8 @@ namespace abcdcode_LOGLIKE_MOD
         public static bool CreatedShopEquipPages = false;
 
         public static bool Temp = true;
-        public static Button LogOpenButton;
-        public static Button LogContinueButton;
+        public static UILogCustomSelectable LogOpenButton;
+        public static UILogCustomSelectable LogContinueButton;
         public static Button ChangeEmotinCardBtn;
         public static Button CraftBtn;
         public static Image CraftBtnFrame;

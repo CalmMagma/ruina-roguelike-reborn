@@ -71,4 +71,11 @@
   <text id="ui_RMR_ItemNotObtained_Desc">You have yet to find this item.</text>
   <text id="ui_RMR_ItemNotObtained_Credenza">No information available.</text>
   <text id="ui_RMR_ItemNoEntry_Credenza">[No entry for now.]</text>
+
+  <text id="ui_RMR_StartNewRun">New Run</text>
+  <text id="ui_RMR_StartNewRunDesc">Start a new Roguelike run. If you have an on-going run, it will be overriden.</text>
+  <text id="ui_RMR_ContinueRun">Continue Run</text>
+  <text id="ui_RMR_ContinueRunDesc">Continue a previous Roguelike run.</text>
+
+
 </localize>

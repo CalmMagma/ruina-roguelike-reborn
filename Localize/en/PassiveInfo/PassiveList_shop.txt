@@ -8,68 +8,68 @@
 
 	<PassiveDesc ID="8570001">
 		<Name>Act - Exposition</Name>
-		<Desc>All dice gain +1 Power for the first Scene.</Desc>
+		<Desc>Gain +1 Power for the first Scene.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570002">
 		<Name>Act - Complication</Name>
-		<Desc>All dice gain +2 Power for the second Scene.</Desc>
+		<Desc>Gain +2 Power for the second Scene.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570003">
 		<Name>Act - Crisis</Name>
-		<Desc>All dice gain +3 Power for the third Scene.</Desc>
+		<Desc>Gain +3 Power for the third Scene.</Desc>
 	</PassiveDesc>
   
 	<PassiveDesc ID="8570004">
 		<Name>Act - Climax</Name>
-		<Desc>All dice gain +4 Power for the fourth Scene.</Desc>
+		<Desc>Gain +4 Power for the fourth Scene.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570005">
 		<Name>Act - Resolution</Name>
-		<Desc>All dice gain +5 Power for the fifth Scene.</Desc>
+		<Desc>Gain +5 Power for the fifth Scene.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570006">
     <Name>Ban Command</Name>
-    <Desc>[Consumable] Instantly end Act if used in normal battle.</Desc>
+    <Desc>[Consumable] Instantly end the Act when used in a normal battle.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570007">
 		<Name>Original Intention</Name>
-		<Desc>[Global] Upon using previous chapter's Combat Pages, all dice on the Page gain + 1 Power. Combat Pages from the previous chapter appears in the shop.</Desc>
+		<Desc>[Global] When using a Combat Page from a previous chapter, all dice on the page gain +1 Power. Combat Pages from the previous chapter can appear in the shop.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570010">
 		<Name>Lottery</Name>
-		<Desc>Receive 10 ~ 300% of the purchasing amount of Ahn.</Desc>
+		<Desc>Receive a random amount of Ahn between 10 ~ 300% of the item's purchase cost.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570011">
     <Name>Smoke Bomb</Name>
-    <Desc>[Consumable] Changes the dice assigned to the selected librarian to another target. Cannot be used when there is only one Librarian</Desc>
+    <Desc>[Consumable] Forces attacks targeting the selected Librarian to retarget another Librarian. Cannot be used when there is only one Librarian.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570013">
     <Name>Bomb</Name>
-    <Desc>[Consumable] Deal 8 damage to all enemies. Increases damage by 3 per chapter</Desc>
+    <Desc>[Consumable] Deal 8 damage to all enemies. Increases damage by 3 per chapter.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570014">
     <Name>Sprout</Name>
-    <Desc>[Consumable] Select a dead Librarian and revives it with half of its HP. Cannot be used without a dead Librarian</Desc>
+    <Desc>[Consumable] Select a dead Librarian to revive them with half of their Max. HP. Cannot be used without a dead Librarian.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570018">
     <Name>Savings Product</Name>
-    <Desc>[Consumable] Get 1 point for every entry into a normal battle. Upon use, get point * 3 Ahn.</Desc>
+    <Desc>[Consumable] Gain 1 point for every entry into a normal battle. When used, recieve Ahn equal to points * 3.</Desc>
 	</PassiveDesc>
 	<!-- Keep in just so the mod doesn't break -->
 	
 	<PassiveDesc ID="8570019">
     <Name>Bucket</Name>
-    <Desc>[Consumable] Upon use, pay 1 Ahn. When a certain amount of Ahn is consumed, 150% of the consumed Ahn returns and the Bucket disappears.</Desc>
+    <Desc>[Consumable] When used, pay 1 Ahn. When a certain amount of Ahn is consumed, recieve Ahn equal to 150% of the Ahn consumed and the Bucket disappears.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570020">
@@ -84,17 +84,17 @@
 
 	<PassiveDesc ID="8570022">
     <Name>Compress</Name>
-    <Desc>[Consumable] Removes Bleed from one ally</Desc>
+    <Desc>[Consumable] Remove Bleed from the selected Librarian.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570023">
     <Name>Three-Leaf Clover</Name>
-    <Desc>[Global] At the start of the Scene, a random Librarian gain 1 Luck.</Desc>
+    <Desc>[Global] At the start of the Scene, a random Librarian gains 1 Luck.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570024">
     <Name>Whetstone</Name>
-    <Desc>[Consumable] All Librarian gain Damage + 1 this Scene.</Desc>
+    <Desc>[Consumable] All Librarians gain 1 Damage Up this Scene.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570025">
@@ -106,62 +106,62 @@ The second Librarian cannot act this Scene.</Desc>
 
 	<PassiveDesc ID="8570026">
     <Name>First Aid Kit</Name>
-    <Desc>Recovers 1 HP when taking damage(Max. 5 per Scene)</Desc>
+    <Desc>Upon taking damage, recover 1 HP. (Max. 5 per Scene)</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570028">
     <Name>Bookmark</Name>
-    <Desc>[Consumable] Add 1 Stack Room to this Chapter's Reception list. Cannot be used in boss battles</Desc>
+    <Desc>[Consumable] Add 1 Stack Room to this Chapter's Reception list. Cannot be used in boss battles.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570029">
     <Name>Desiccant</Name>
-    <Desc>[Global] Add 'Moisture Proof Treatment' option in the Stack Room. Increases one Librarian's every damage resistance by 1 level for this Chapter when selected.</Desc>
+    <Desc>[Global] Add 'Moisture Proof Treatment' option in the Stack Room. Increases all damage resistances of one Librarian by 1 level for this Chapter when selected.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570030">
     <Name>Full Restoration</Name>
-    <Desc>[Global] HP recovered by the 'Restoration' option in the Stack Room increase from 40% to 100%</Desc>
+    <Desc>[Global] HP recovered by the 'Restoration' option in the Stack Room increases from 40% to 100%.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570031">
     <Name>Conversion</Name>
-    <Desc>[Global] Add 'Conversion' option in the Stack Room. Get 15 ahn when selected</Desc>
+    <Desc>[Global] Add 'Conversion' option in the Stack Room. Get 15 Ahn when selected.</Desc>
 	</PassiveDesc>
 
 <PassiveDesc ID="8570032">
     <Name>Fabric</Name>
-    <Desc>Gain one Key Page reward</Desc>
+    <Desc>Gain one Key Page reward.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570033">
     <Name>Textbook - Evade</Name>
-    <Desc>[Global] During activation, Every Librarian's Evade dice gain Luck 1.
-Cannot be Stacked with other Textbook Global effects</Desc>
+    <Desc>[Global] While activated, all Librarians gain Luck +1 for Evade dice.
+Cannot be Stacked with other Textbook Global effects.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570034">
     <Name>Textbook - Block</Name>
-    <Desc>[Global] During activation, Every Librarian's Block dice gain Luck 1.
-Cannot be Stacked with other Textbook Global effects</Desc>
+    <Desc>[Global] While activated, all Librarians gain Luck +1 for Block dice.
+Cannot be Stacked with other Textbook Global effects.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570035">
     <Name>Textbook - Slash</Name>
-    <Desc>[Global] During activation, Every Librarian's Slash dice gain Luck 1.
-Cannot be Stacked with other Textbook Global effects</Desc>
+    <Desc>[Global] While activated, all Librarians gain Luck +1 for Slash dice.
+Cannot be Stacked with other Textbook Global effects.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570036">
     <Name>Textbook - Pierce</Name>
-    <Desc>[Global] During activation, Every Librarian's Pierce dice gain Luck 1.
-Cannot be Stacked with other Textbook Global effects</Desc>
+    <Desc>[Global] While activated, all Librarians gain Luck +1 for Pierce dice.
+Cannot be Stacked with other Textbook Global effects.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570037">
     <Name>Textbook - Blunt</Name>
-    <Desc>[Global] During activation, Every Librarian's Blunt dice gain Luck 1.
-Cannot be Stacked with other Textbook Global effects</Desc>
+    <Desc>[Global] While activated, all Librarians gain Luck +1 for Blunt dice.
+Cannot be Stacked with other Textbook Global effects.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570038">
@@ -176,37 +176,37 @@ Cannot be Stacked with other Textbook Global effects</Desc>
 
 	<PassiveDesc ID="8570040">
     <Name>Science Kit</Name>
-    <Desc>[Consumable] Select and add 1 current Chapter's Combat Page to hand. It costs 0 until used.</Desc>
+    <Desc>[Consumable] Select and add 1 Combat Page from the current Chapter to hand. It costs 0 until used.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570041">
     <Name>Photon Collector</Name>
-    <Desc>[Global] At the start of the Scene, restores a random librarian's Light by 1.(Priority to Librarians who doesn't have maximum light)</Desc>
+    <Desc>[Global] At the start of the Scene, a random Librarian restores 1 additional Light. (Prioritizes Librarians without maximum Light)</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570042">
     <Name>Candlelight</Name>
-    <Desc>[Consumable] Restore a Librarian's Light by 1.</Desc>
+    <Desc>[Consumable] Selected Librarian restores 1 Light.</Desc>
 	</PassiveDesc>	
 
 	<PassiveDesc ID="8570043">
     <Name>Pocket</Name>
-    <Desc>[Global] Maximum Passive Cost + 1. Duplicate possible.</Desc>
+    <Desc>[Global] Maximum Attribution Points +1. Can be Duplicated.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570044">
     <Name>Old Coin</Name>
-    <Desc>[Consumable] Choose 1 Librarian to give 1~2 Lucky this Scene</Desc>
+    <Desc>[Consumable] Selected Librarian gains 1~2 Luck this Scene.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570045">
     <Name>Unstable Speed</Name>
-    <Desc>Gain +1 Speed Dice Slot at a 50% Chance (Cannot Overlap)</Desc>
+    <Desc>At the start of the Scene, gain an additional Speed die at a 50% Chance (Cannot Overlap)</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8570046">
     <Name>Surprise Box</Name>
-    <Desc>[Consumable] Cancel 1 random Combat Pages on the target's Speed dice.</Desc>
+    <Desc>[Consumable] Cancel 1 random Combat Page on the target's Speed dice.</Desc>
 	</PassiveDesc>
 </PassiveDescRoot>
   

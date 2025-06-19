@@ -14,7 +14,7 @@
 
 	<PassiveDesc ID="8573003">
     <Name>Molar</Name>
-    <Desc>Gain a Page discarded by Combat Page(Once per Act)</Desc>
+    <Desc>Gain a copy of the first Page discarded by a Combat Page each Act.</Desc>
 	</PassiveDesc>
 
 </PassiveDescRoot>

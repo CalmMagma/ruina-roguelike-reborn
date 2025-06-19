@@ -2369,7 +2369,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.LogOpenButton == null)
             {
-                LogLikeMod.LogOpenButton = ModdingUtils.CreateButton(__instance.transform, "LogLikeModIcon", new Vector2(1f, 1f), new Vector2(-70f, 350f), new Vector2(100f, 100f));
+                LogLikeMod.LogOpenButton = ModdingUtils.CreateLogSelectable(__instance.transform, "LogLikeModIcon", new Vector2(1f, 1f), new Vector2(-70f, 350f), new Vector2(100f, 100f));
                 LogLikeMod.LogOpenButton.gameObject.AddComponent<FrameDummy>();
                 Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
                 buttonClickedEvent.AddListener((UnityAction)(() =>
@@ -2398,13 +2398,24 @@ namespace abcdcode_LOGLIKE_MOD
                     }
                 }));
                 LogLikeMod.LogOpenButton.onClick = buttonClickedEvent;
+                LogLikeMod.LogOpenButton.SelectEvent.AddListener((BaseEventData e) =>
+                {
+                    SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
+                        TextDataModel.GetText("ui_RMR_StartNewRun"),
+                        TextDataModel.GetText("ui_RMR_StartNewRunDesc"), 
+                        LogLikeMod.LogOpenButton.transform as RectTransform);
+                });
+                LogLikeMod.LogOpenButton.DeselectEvent.AddListener((BaseEventData e) =>
+                {
+                    SingletonBehavior<UIMainOverlayManager>.Instance.Close();
+                });
             }
             if (LogLikeMod.LogContinueButton == null)
             {
-                LogLikeMod.LogContinueButton = ModdingUtils.CreateButton(__instance.transform, "LogLikeModIcon_Continue", new Vector2(1f, 1f), new Vector2(-70f, 250f), new Vector2(100f, 100f));
+                LogLikeMod.LogContinueButton = ModdingUtils.CreateLogSelectable(__instance.transform, "LogLikeModIcon_Continue", new Vector2(1f, 1f), new Vector2(-70f, 250f), new Vector2(100f, 100f));
                 LogLikeMod.LogContinueButton.gameObject.AddComponent<FrameDummy>();
                 Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
-                buttonClickedEvent.AddListener((UnityAction)(() =>
+                buttonClickedEvent.AddListener((() =>
                 {
                     List<string> ExceptModNames;
                     if (LogLikeMod.CheckExceptionModExist(out ExceptModNames))
@@ -2430,6 +2441,17 @@ namespace abcdcode_LOGLIKE_MOD
                     }
                 }));
                 LogLikeMod.LogContinueButton.onClick = buttonClickedEvent;
+                LogLikeMod.LogContinueButton.SelectEvent.AddListener((BaseEventData e) =>
+                {
+                    SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
+                        TextDataModel.GetText("ui_RMR_ContinueRun"),
+                        TextDataModel.GetText("ui_RMR_ContinueRunDesc"),
+                        LogLikeMod.LogContinueButton.transform as RectTransform);
+                });
+                LogLikeMod.LogOpenButton.DeselectEvent.AddListener((BaseEventData e) =>
+                {
+                    SingletonBehavior<UIMainOverlayManager>.Instance.Close();
+                });
             }
             LogLikeMod.LogContinueButton.gameObject.SetActive(LoguePlayDataSaver.CheckPlayerData());
         }

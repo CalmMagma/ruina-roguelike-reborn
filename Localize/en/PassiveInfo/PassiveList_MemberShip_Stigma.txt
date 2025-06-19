@@ -13,7 +13,7 @@
 
 	<PassiveDesc ID="8582002">
     <Name>Bringing up the Past for Nothing</Name>
-    <Desc>When inflicting Burn using Combat Pages, Inflict same amount of Burn after 4 Scenes.</Desc>
+    <Desc>When inflicting Burn using Combat Pages, inflict the same amount of Burn 4 Scenes after.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8582003">
@@ -23,32 +23,32 @@
 
 	<PassiveDesc ID="8582004">
     <Name>Parting Flame</Name>
-    <Desc>[Global] Upon death, all allies receive half of its Burn.</Desc>
+    <Desc>[Global] If a character with Burn is defeated, all of their allies are inflicted with Burn equal to half of the amount of burn that character had. (Min. 1)</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8582005">
     <Name>Ash</Name>
-    <Desc>When the Burn disappears, restore HP equal to the maximum Burn value obtained in this battle.</Desc>
+    <Desc>When Burn on this character expires, recover HP equal to the highest stack of Burn on this character in this battle.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8582006">
     <Name>Fast and Urgent Like a Star</Name>
-    <Desc>Instantly inflicts Burn damage when attacking an enemy in Burn state.</Desc>
+    <Desc>On a successful hit, trigger target's Burn once if the target has Burn.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8582007">
     <Name>Stigma</Name>
-    <Desc>Inflicts Burn to the enemy equal to the original cost of the Combat Page when using a Page (If a Combat Page costs 0, inflict 1 instead).</Desc>
+    <Desc>When using a Combat Page, inflict Burn equal to the page's Cost. (Min. 1)</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8582008">
     <Name>Ignition</Name>
-    <Desc>At the start of the Act, Give 'Ignition' Combat Page to your hand. Upon use, inflict 5 Burn to designed target</Desc>
+    <Desc>At the start of the Act, add a copy of 'Ignition' to hand. 'Ignition' inflicts 5 Burn to the target when played.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8582009">
     <Name>Brazier</Name>
-    <Desc>While the character has Burn, inflict Burn to the target equal to the amount of Burn you have when the target got hit by one-sided attack.</Desc>
+    <Desc>If this character has Burn, inflict Burn to the attacker equal to the amount of Burn on this character when targeted by a one-sided attack.</Desc>
 	</PassiveDesc>
 
 
