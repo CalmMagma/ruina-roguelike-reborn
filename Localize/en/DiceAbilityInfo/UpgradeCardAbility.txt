@@ -185,6 +185,107 @@
   <BattleCardAbility ID="RMR_NonstopAssaultUpgrade">
     <Desc>[On Use] Restore 1 Light; at the start of the next Scene, draw all copies of 'Nonstop Assault' from the deck</Desc>
   </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_LawOrder">
+    <Desc>[On Clash Win] Add a Block die (Roll: 3-8) to the counter queue</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_LawOrderUpgrade">
+    <Desc>[On Clash Win] Add two Block dice (Roll: 3-8) to the counter queue</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Diversion">
+    <Desc>[Combat Start] Targeted page is forced to clash against this page</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_SharpSwipe">
+    <Desc>[Combat Start] All Offensive dice the user plays this Scene gain ‘[On Hit] Inflict 1 Bleed next Scene’</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Standoff">
+    <Desc>[Start of Clash] Gain 5 Shield and Stagger Shield this Scene</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_StandoffUpgrade">
+    <Desc>[Start of Clash] Gain 8 Shield and Stagger Shield this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Avert">
+    <Desc>[Start of Clash] If opponent’s page was initially targeting another ally, all dice on this page gain +2 Power</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_StartinLightly">
+    <Desc>[On Use] Gain 1 Blunt Power-Up this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_GuardianUpgrade">
+    <Desc>[On Use] Give 1 Endurance and Haste to all allies next Scene</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_GambleUpgrade">
+    <Desc>[On Use] Discard a page with the lowest Cost; if the discarded page’s Cost is not 0, gain Critical Strike equal to the Cost</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_BackAttack">
+    <Desc>[On Use] If target is targeted by another ally's page whose Cost is 3 or higher, all dice on this page gain +1 Power</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_SliceUpgrade">
+    <Desc>[On Use] Discard a page with the lowest Cost and gain 1 Slash Power-Up this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_StayClamUpgrade">
+    <Desc>[On Use] Draw 1 page
+Draw a page and gain 3 Stagger Shield this Scene upon discarding this page</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_FishOnslaughtUpgrade">
+    <Desc>[On Use] Discard a page with the lowest Cost and gain 1 Damage Up this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_recover5breakpw">
+    <Desc>[On Clash Win] Recover 5 Stagger Resist</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_SearingBlow">
+    <Desc>This page can be upgraded any number of times</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Outburst">
+    <Desc>[On Use] Discard a page with the lowest Cost and restore 3 Light</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_allydraw1pw">
+    <Desc>[On Clash Win] A random other ally draws 1 page</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_break2atk">
+    <Desc>[On Hit] Deal 2 Stagger damage to target</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_paralysisbind1atk">
+    <Desc>[On Hit] Inflict 1 Paralysis and Bind next Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_CutIn">
+    <Desc>[On Use] For every page target has yet to use this Scene, boost min value of all dice on this page by +1</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_5shield">
+    <Desc>[On Use] Gain 5 Shield this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_BladeWhirl">
+    <Desc>[On Use] If user has Endurance, draw 1 page</Desc>
+  </BattleCardAbility>
+
+  <BattleCardAbility ID="RMR_BladeWhirlUpgrade">
+    <Desc>[On Use] If user has Endurance, draw 1 page and restore 1 Light</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_HandlingWorkUpgrade">
+    <Desc>[Combat Start] If user has any ‘Fatal’ or ‘Weak’ resistances, set them to ‘Normal’ for this Scene</Desc>
+  </BattleCardAbility>
 
 
   <BattleCardAbility ID="protection2friendLog">
