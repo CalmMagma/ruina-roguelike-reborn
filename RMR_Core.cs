@@ -539,7 +539,13 @@ namespace RogueLike_Mod_Reborn
             {"[mirror]", "<color=#5163D6>" }, // open light blue color tag
             {"[yellow]", "<color=#FFD800>" }, // open yellow color tag
             {"[i]", "<i>"}, // open italicized tag
-            {"[/i]", "</i>" } // close italicized tag
+            {"[/i]", "</i>" }, // close italicized tag
+
+            // rarities
+            {"[common]", "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(Rarity.Common)) +">"  },
+            {"[uncommon]", "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(Rarity.Uncommon)) +">"  },
+            {"[rare]", "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(Rarity.Rare)) +">"  },
+            {"[unique]", "<color=#" + ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(Rarity.Unique)) +">"  }
         };
 
         public static GlobalLogueEffectBase GetRandomEffect(this GlobalLogueEffectManager manager, Rarity rarity)
