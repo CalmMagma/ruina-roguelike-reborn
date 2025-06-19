@@ -33,7 +33,7 @@
 
 	<PassiveDesc ID="8583006">
     <Name>Cut Off</Name>
-    <Desc>On a successful hit, inflict 5 Bleed and 2 Paralysis next scene if more than 15 damage or more than 10% of the target's Max. HP was dealt.
+    <Desc>On a successful hit, inflict 5 Bleed and 2 Paralysis next scene if more than 15 damage or more than 10% of the target's Max. HP was dealt.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8583007">
@@ -43,7 +43,7 @@
 
 	<PassiveDesc ID="8583008">
     <Name>Afterimage</Name>
-	<Desc>If the first Offensive die of a Combat Page wins a clash, the die is reused as a one-sided attack against the target.
+	<Desc>If the first Offensive die of a Combat Page wins a clash, the die is reused as a one-sided attack against the target.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="8583009">

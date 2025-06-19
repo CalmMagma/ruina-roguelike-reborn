@@ -235,8 +235,7 @@
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_StayClamUpgrade">
-    <Desc>[On Use] Draw 1 page
-Draw a page and gain 3 Stagger Shield this Scene upon discarding this page</Desc>
+    <Desc>Draw a page and gain 3 Stagger Shield this Scene upon discarding this page [On Use] Draw 1 page</Desc>
   </BattleCardAbility>
 
   <BattleCardAbility ID="RMR_FishOnslaughtUpgrade">

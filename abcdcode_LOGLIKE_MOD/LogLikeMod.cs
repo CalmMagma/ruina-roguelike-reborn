@@ -3544,7 +3544,6 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 UnityEngine.Object.Destroy(original);
                 UnityEngine.Object.Destroy(battleDiceCardUi2.gameObject.GetComponent<BattleDiceCardUI>());
-                battleDiceCardUi2.gameObject.AddComponent<FrameDummy>();
                 return battleDiceCardUi2;
             }
 
@@ -4571,7 +4570,6 @@ namespace abcdcode_LOGLIKE_MOD
                 logDetailCardSlot.rightDescSlotList[3] = logDetailCardSlot.rightDescSlotList_4;
                 logDetailCardSlot.rightDescSlotList[4] = logDetailCardSlot.rightDescSlotList_5;
                 UnityEngine.Object.Destroy(original);
-                logDetailCardSlot.gameObject.AddComponent<FrameDummy>();
                 logDetailCardSlot.transform.GetChild(0).transform.localPosition = new Vector3(0.0f, 0.0f);
                 return logDetailCardSlot;
             }

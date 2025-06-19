@@ -925,7 +925,7 @@ namespace RogueLike_Mod_Reborn
             {
                 card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
                 {
-                    min = card.target.cardSlotDetail.cardQueue.Count
+                    min = StageController.Instance._allCardList.Count(x => x.owner == card.target)
                 });
             }
         }

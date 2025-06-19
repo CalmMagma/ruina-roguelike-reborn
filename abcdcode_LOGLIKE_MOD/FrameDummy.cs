@@ -7,45 +7,46 @@
 using System.IO;
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class FrameDummy : MonoBehaviour
+namespace abcdcode_LOGLIKE_MOD
 {
-  public void Update()
-  {
-    Vector3 localPosition;
-    if (Input.GetKey(KeyCode.LeftArrow))
+
+    public class FrameDummy : MonoBehaviour
     {
-      this.gameObject.transform.localPosition += new Vector3(-1f, 0.0f);
-      string path = Application.dataPath + "/BaseMods/curposition.txt";
-      localPosition = this.gameObject.transform.localPosition;
-      string contents = localPosition.ToString();
-      File.WriteAllText(path, contents);
+        public void Update()
+        {
+            Vector3 localPosition;
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.gameObject.transform.localPosition += new Vector3(-1f, 0.0f);
+                string path = Application.persistentDataPath + "/ModConfigs/curposition.txt";
+                localPosition = this.gameObject.transform.localPosition;
+                string contents = localPosition.ToString();
+                File.WriteAllText(path, contents);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                this.gameObject.transform.localPosition += new Vector3(1f, 0.0f);
+                string path = Application.persistentDataPath + "/ModConfigs/curposition.txt";
+                localPosition = this.gameObject.transform.localPosition;
+                string contents = localPosition.ToString();
+                File.WriteAllText(path, contents);
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                this.gameObject.transform.localPosition += new Vector3(0.0f, 1f);
+                string path = Application.persistentDataPath + "/ModConfigs/curposition.txt";
+                localPosition = this.gameObject.transform.localPosition;
+                string contents = localPosition.ToString();
+                File.WriteAllText(path, contents);
+            }
+            if (!Input.GetKey(KeyCode.DownArrow))
+                return;
+            this.gameObject.transform.localPosition += new Vector3(0.0f, -1f);
+            string path1 = Application.persistentDataPath + "/ModConfigs/curposition.txt";
+            localPosition = this.gameObject.transform.localPosition;
+            string contents1 = localPosition.ToString();
+            File.WriteAllText(path1, contents1);
+        }
     }
-    if (Input.GetKey(KeyCode.RightArrow))
-    {
-      this.gameObject.transform.localPosition += new Vector3(1f, 0.0f);
-      string path = Application.dataPath + "/BaseMods/curposition.txt";
-      localPosition = this.gameObject.transform.localPosition;
-      string contents = localPosition.ToString();
-      File.WriteAllText(path, contents);
-    }
-    if (Input.GetKey(KeyCode.UpArrow))
-    {
-      this.gameObject.transform.localPosition += new Vector3(0.0f, 1f);
-      string path = Application.dataPath + "/BaseMods/curposition.txt";
-      localPosition = this.gameObject.transform.localPosition;
-      string contents = localPosition.ToString();
-      File.WriteAllText(path, contents);
-    }
-    if (!Input.GetKey(KeyCode.DownArrow))
-      return;
-    this.gameObject.transform.localPosition += new Vector3(0.0f, -1f);
-    string path1 = Application.dataPath + "/BaseMods/curposition.txt";
-    localPosition = this.gameObject.transform.localPosition;
-    string contents1 = localPosition.ToString();
-    File.WriteAllText(path1, contents1);
-  }
-}
 }

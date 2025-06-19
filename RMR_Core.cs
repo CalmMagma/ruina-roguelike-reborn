@@ -2774,18 +2774,26 @@ namespace RogueLike_Mod_Reborn
         {
             try
             {
-                if (buf == null) return;
-                string keyword = buf.keywordIconId == null ? buf.keywordId : buf.keywordIconId;
-                if (string.IsNullOrEmpty(keyword) || !RMRCore.ClassIds.ContainsKey(buf.GetType().Assembly.FullName)) return;
-                if (RMRCore.ClassIds[buf.GetType().Assembly.FullName] == RMRCore.packageId && LogLikeMod.ArtWorks.ContainsKey(keyword))
+                if (buf == null) 
+                    return;
+                Debug.Log($"GETTING ICON FOR BUF - {buf.GetType().Name}");
+                string keyword = buf.keywordIconId ?? buf.keywordId;
+                string fullName = buf.GetType().Assembly.FullName;
+                if (string.IsNullOrEmpty(keyword) || !RMRCore.ClassIds.ContainsKey(fullName)) 
+                    return;
+                if (RMRCore.ClassIds[fullName] == RMRCore.packageId && LogLikeMod.ArtWorks.ContainsKey(keyword))
                 {
                     Sprite sprite = LogLikeMod.ArtWorks[keyword];
-                    if (sprite != null) buf._bufIcon = sprite;
+                    if (sprite != null) 
+                        buf._bufIcon = sprite;
+                    Debug.Log($"GOT ICON FOR BUF - {buf.GetType().Name}");
                 }
-                else if (LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[buf.GetType().Assembly.FullName], keyword)))
+                else if (LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[fullName], keyword)))
                 {
-                    Sprite sprite = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[buf.GetType().Assembly.FullName], keyword)];
-                    if (sprite != null) buf._bufIcon = sprite;
+                    Sprite sprite = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[fullName], keyword)];
+                    if (sprite != null) 
+                        buf._bufIcon = sprite;
+                    Debug.Log($"GOT ICON FOR BUF - {buf.GetType().Name}");
                 }
             }
             catch (Exception e)

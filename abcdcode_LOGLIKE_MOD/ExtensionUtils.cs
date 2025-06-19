@@ -263,13 +263,13 @@ namespace abcdcode_LOGLIKE_MOD
             });
         }
 
-        public static Predicate<DiceMatch> NotFirstDice() => (Predicate<DiceMatch>)(x => x.index != 0);
+        public static Predicate<DiceMatch> NotFirstDice() => x => x.index != 0;
 
         public static List<T> RandomPickUp<T>(this List<T> list, int count)
         {
-            List<T> objList = new List<T>((IEnumerable<T>)list);
+            List<T> objList = new List<T>(list);
             while (objList.Count > count)
-                objList.RemoveAt(UnityEngine.Random.Range(0, objList.Count - 1));
+                objList.RemoveAt(Singleton<System.Random>.Instance.Next(0, objList.Count));
             return objList;
         }
 

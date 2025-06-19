@@ -6,24 +6,35 @@
 
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class MysteryModel_Mystery_Ch4_2 : MysteryBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override void OnClickChoice(int choiceid)
-  {
-    if (this.curFrame.FrameID == 0 && choiceid == 0)
-      LogueBookModels.AddMoney(Random.Range(30, 51));
-    if (this.curFrame.FrameID == 1)
+
+    public class MysteryModel_Mystery_Ch4_2 : MysteryBase
     {
-      LogueStageInfo stageInfo = Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 1400021));
-      stageInfo.type = StageType.Normal;
-      MysteryBase.AddStageList(stageInfo, ChapterGrade.Grade4);
-      MysteryBase.AddStageList(stageInfo, ChapterGrade.Grade4);
-      MysteryBase.AddStageList(stageInfo, ChapterGrade.Grade4);
+        int money = 0;
+
+        public override void OnClickChoice(int choiceid)
+        {
+            if (this.curFrame.FrameID == 0 && choiceid == 0)
+            {
+                money = Random.Range(30, 51);
+                LogueBookModels.AddMoney(money);
+            }
+            if (this.curFrame.FrameID == 1)
+            {
+                MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 40012), StageType.Normal); 
+            }
+            base.OnClickChoice(choiceid);
+        }
+
+        public override void SwapFrame(int id)
+        {
+            base.SwapFrame(id);
+            if (this.curFrame.FrameID == 1)
+            {
+                this.ReformatButton(0, money);
+            }
+        }
     }
-    base.OnClickChoice(choiceid);
-  }
-}
 }

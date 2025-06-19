@@ -25,8 +25,10 @@ namespace abcdcode_LOGLIKE_MOD
             base.OnPickUp(model);
             LogueBookModels.AddPlayerStat(model.UnitData, new LogStatAdder()
             {
-                maxhp = Random.Range(1, 16 /*0x10*/),
-                maxbreak = Random.Range(1, 6)
+                maxhp = Random.Range(5, 11),
+                maxbreak = Random.Range(5, 11),
+                speedmin = -1,
+                speedmax = -1
             });
         }
     }

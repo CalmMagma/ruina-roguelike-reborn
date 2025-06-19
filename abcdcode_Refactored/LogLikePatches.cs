@@ -2178,12 +2178,11 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return;
-            bool fieldValue = LogLikeMod.GetFieldValue<bool>((object)__instance, "_isForceOpen");
+            bool fieldValue = LogLikeMod.GetFieldValue<bool>(__instance, "_isForceOpen");
             if (LogLikeMod.ChangeEmotinCardBtn == null)
             {
                 LogLikeMod.ChangeEmotinCardBtn = ModdingUtils.CreateButton(SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.selectedEmotionCardBg.transform.parent.parent, "AbCardSelection_Skip", new Vector2(1f, 1f), new Vector2(0.0f, -480f));
-                LogLikeMod.ChangeEmotinCardBtn.onClick.AddListener((UnityAction)(() => LogLikeRoutines.ChangeEPCUTransform(__instance)));
-                LogLikeMod.ChangeEmotinCardBtn.gameObject.AddComponent<FrameDummy>();
+                LogLikeMod.ChangeEmotinCardBtn.onClick.AddListener(() => LogLikeRoutines.ChangeEPCUTransform(__instance));
                 ModdingUtils.CreateText_TMP(LogLikeMod.ChangeEmotinCardBtn.transform, new Vector2(-30f, 0.0f), 40, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.Midline, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP).text = TextDataModel.GetText("ui_EmotionPositionChange");
             }
             LogLikeMod.ChangeEmotinCardBtn.gameObject.SetActive(fieldValue);
@@ -2398,6 +2397,7 @@ namespace abcdcode_LOGLIKE_MOD
                     }
                 }));
                 LogLikeMod.LogOpenButton.onClick = buttonClickedEvent;
+                LogLikeMod.LogOpenButton.SelectEvent = new UnityEventBasedata();
                 LogLikeMod.LogOpenButton.SelectEvent.AddListener((BaseEventData e) =>
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
@@ -2405,6 +2405,7 @@ namespace abcdcode_LOGLIKE_MOD
                         TextDataModel.GetText("ui_RMR_StartNewRunDesc"), 
                         LogLikeMod.LogOpenButton.transform as RectTransform);
                 });
+                LogLikeMod.LogOpenButton.DeselectEvent = new UnityEventBasedata();
                 LogLikeMod.LogOpenButton.DeselectEvent.AddListener((BaseEventData e) =>
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.Close();
@@ -2441,6 +2442,7 @@ namespace abcdcode_LOGLIKE_MOD
                     }
                 }));
                 LogLikeMod.LogContinueButton.onClick = buttonClickedEvent;
+                LogLikeMod.LogContinueButton.SelectEvent = new UnityEventBasedata();
                 LogLikeMod.LogContinueButton.SelectEvent.AddListener((BaseEventData e) =>
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(
@@ -2448,7 +2450,8 @@ namespace abcdcode_LOGLIKE_MOD
                         TextDataModel.GetText("ui_RMR_ContinueRunDesc"),
                         LogLikeMod.LogContinueButton.transform as RectTransform);
                 });
-                LogLikeMod.LogOpenButton.DeselectEvent.AddListener((BaseEventData e) =>
+                LogLikeMod.LogContinueButton.DeselectEvent = new UnityEventBasedata();
+                LogLikeMod.LogContinueButton.DeselectEvent.AddListener((BaseEventData e) =>
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.Close();
                 });

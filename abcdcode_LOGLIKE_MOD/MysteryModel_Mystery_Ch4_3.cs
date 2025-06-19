@@ -8,36 +8,37 @@ using System;
 using TMPro;
 using UnityEngine.UI;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class MysteryModel_Mystery_Ch4_3 : MysteryBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override void SwapFrame(int id)
-  {
-    base.SwapFrame(id);
-    if (this.Condition() || id != 0)
-      return;
-    this.FrameObj["choice_btn1"].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["disabledButton"];
-    this.FrameObj["Desc1"].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText("Mystery_RequireCondition") + this.FrameObj["Desc1"].GetComponent<TextMeshProUGUI>().text;
-  }
 
-  public bool Condition()
-  {
-    return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>) (x => x is PickUpModel_ShopGood11.Hiding)) != null;
-  }
-
-  public override void OnClickChoice(int choiceid)
-  {
-    if (choiceid == 0)
-      MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1400031));
-    if (choiceid == 1)
+    public class MysteryModel_Mystery_Ch4_3 : MysteryBase
     {
-      if (!this.Condition())
-        return;
-      (Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>) (x => x is PickUpModel_ShopGood11.Hiding)) as OnceEffect).Use();
+        public override void SwapFrame(int id)
+        {
+            base.SwapFrame(id);
+            if (this.Condition() || id != 0)
+                return;
+            this.FrameObj["choice_btn1"].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["disabledButton"];
+            this.FrameObj["Desc1"].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText("Mystery_RequireCondition") + this.FrameObj["Desc1"].GetComponent<TextMeshProUGUI>().text;
+        }
+
+        public bool Condition()
+        {
+            return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_ShopGood11.Hiding) != null;
+        }
+
+        public override void OnClickChoice(int choiceid)
+        {
+            if (choiceid == 0)
+                MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1400031));
+            if (choiceid == 1)
+            {
+                if (!this.Condition())
+                    return;
+                (Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_ShopGood11.Hiding) as OnceEffect).Use();
+            }
+            base.OnClickChoice(choiceid);
+        }
     }
-    base.OnClickChoice(choiceid);
-  }
-}
 }

@@ -91,6 +91,7 @@ namespace RogueLike_Mod_Reborn
             this.Destroy();
         }
     }
+
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
         bool initResources;
@@ -175,7 +176,7 @@ namespace RogueLike_Mod_Reborn
             public void Update()
             {
                 this.timer += Time.deltaTime;
-                base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer/8f);
+                base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer / 8f);
                 Color color = renderer.color;
                 color.r = 0f + timer / 3f;
                 color.g = 1f - timer / 3f;

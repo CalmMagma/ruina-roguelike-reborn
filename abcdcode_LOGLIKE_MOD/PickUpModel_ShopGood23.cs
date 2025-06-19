@@ -4,6 +4,7 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
+using RogueLike_Mod_Reborn;
 using UnityEngine;
 
 
@@ -51,9 +52,10 @@ namespace abcdcode_LOGLIKE_MOD
             public override void OnRoundStart(StageController stage)
             {
                 base.OnRoundStart(stage);
-                foreach (BattleUnitModel target in BattleObjectManager.instance.GetAliveList(Faction.Player).RandomPickUp<BattleUnitModel>(1))
+                var unit = BattleObjectManager.instance.GetAliveList(Faction.Player).SelectOneRandom();
+                if (unit != null)
                 {
-                    LuckyBuf.GiveLuckyThisRound(target, 1);
+                    LuckyBuf.GiveLuckyThisRound(unit, 1);
                     SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfileAll();
                 }
             }
