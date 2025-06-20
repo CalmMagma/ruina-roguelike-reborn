@@ -1118,21 +1118,22 @@ namespace abcdcode_LOGLIKE_MOD
             UnitDataModel unitDataModel = new UnitDataModel(new LorId(LogLikeMod.ModId, -854 - LogueBookModels.playerModel.Count));
             unitDataModel.bookItem.instanceId = LogueBookModels.nextinstanceid++;
             unitDataModel.bookItem.ClassInfo.EquipEffect.PassiveList.Clear();
-            UnitDataModel nugget = null;
             try
             {
-                nugget = StageController.Instance.GetStageModel().GetFrontAvailableFloor()._floorModel.GetUnitDataList()[LogueBookModels.playerModel.Count];
+                var floormodel = StageController.Instance.GetStageModel().GetFrontAvailableFloor();
+                UnitDataModel nugget = floormodel == null ? LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[LogueBookModels.playerModel.Count] : floormodel._floorModel.GetUnitDataList()[LogueBookModels.playerModel.Count];
                 unitDataModel.SetCustomName(nugget.name);
+                unitDataModel.customizeData.Copy(nugget.customizeData);
             } catch (ArgumentOutOfRangeException e)
             {
-                Debug.Log($"Player nugget {LogueBookModels.playerModel.Count} at currently selected floor does not exist: {e}");
-                nugget = LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[1];
+                "".Log($"Player nugget {LogueBookModels.playerModel.Count} at currently selected floor does not exist: {e}");
+                SaveData beta14 = SaveManager.Instance.LoadData(LogLikeMod.path + "/DevNuggets/Beta14");
+                unitDataModel.customizeData.LoadFromSaveData(beta14);
                 unitDataModel.SetCustomName(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("LogueLike_PlayerName") + " " + LogueBookModels.playerModel.Count.ToString());
             } catch (Exception e)
             {
-                Debug.Log("OKAY REAL SHIT IS GOING ON IN SUBPLAYER ACTUALLY: " + e);
+                Debug.LogWarning("OKAY REAL SHIT IS GOING ON IN SUBPLAYER ACTUALLY: " + e);
             }
-            unitDataModel.customizeData.Copy(nugget.customizeData);
             unitDataModel.customizeData.SetCustomData(true);
             LogueBookModels.ResetPlayerData(unitDataModel);
             unitDataModel.bookItem.ClassInfo.CharacterSkin = new List<string>()

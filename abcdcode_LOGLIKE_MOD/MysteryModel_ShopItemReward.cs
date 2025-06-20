@@ -210,9 +210,15 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 this.goodinfo = goodinfo;
                 this.GoodScript = LogLikeMod.FindPickUp(goodinfo.script);
-                this.GoodSprite = LogLikeMod.ArtWorks[goodinfo.artwork];
-                Image image = ModdingUtils.CreateImage(this.transform, "ShopGoodRewardFrame", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(150f, 150f));
-                UILogCustomSelectable logSelectable = ModdingUtils.CreateLogSelectable(this.transform, goodinfo.iconartwork, new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(150f, 150f));
+                if (goodinfo.id.packageId == LogLikeMod.ModId)
+                    this.GoodSprite = LogLikeMod.ArtWorks[goodinfo.artwork];
+                else if (LogLikeMod.ModdedArtWorks.ContainsKey((goodinfo.id.packageId, goodinfo.artwork)))
+                    this.GoodSprite = LogLikeMod.ModdedArtWorks[(goodinfo.id.packageId, goodinfo.artwork)];
+                UILogCustomSelectable logSelectable = null;
+                if (goodinfo.id.packageId == LogLikeMod.ModId)
+                    logSelectable = ModdingUtils.CreateLogSelectable(this.transform, goodinfo.iconartwork, new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(150f, 150f));
+                else if (LogLikeMod.ModdedArtWorks.ContainsKey((goodinfo.id.packageId, goodinfo.iconartwork)))
+                    logSelectable = ModdingUtils.CreateLogSelectable(this.transform, LogLikeMod.ModdedArtWorks[(goodinfo.id.packageId, goodinfo.iconartwork)], new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(150f, 150f));
                 Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
                 buttonClickedEvent.AddListener((UnityAction)(() => this.OnClickGoods()));
                 logSelectable.onClick = buttonClickedEvent;

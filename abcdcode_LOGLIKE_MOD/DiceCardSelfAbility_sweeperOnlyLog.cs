@@ -4,19 +4,20 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class DiceCardSelfAbility_sweeperOnlyLog : DiceCardSelfAbilityBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override string[] Keywords
-  {
-    get => new string[1]{ "onlypage_sweeper_Keyword" };
-  }
 
-  public override void OnUseCard()
-  {
-    this.card.ApplyDiceAbility(DiceMatch.AllDice, (DiceCardAbilityBase) new DiceCardAbility_recoverHp3atk());
-  }
-}
+    public class DiceCardSelfAbility_sweeperOnlyLog : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords
+        {
+            get => new string[1] { "onlypage_sweeper_Keyword" };
+        }
+
+        public override void OnUseCard()
+        {
+            this.card.ApplyDiceAbility(DiceMatch.AllDice, (DiceCardAbilityBase)new DiceCardAbility_recoverHp3atk());
+        }
+    }
 }

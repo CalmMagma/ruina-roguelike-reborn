@@ -6,7 +6,6 @@
       <AvailableUnit>5</AvailableUnit>
       <Formation>1</Formation>
       <Unit>854</Unit>
-	  <ManagerScript>SparklingMirrorStageManager</ManagerScript>
     </Wave> 
 	<MapInfo>SparklingMirrorMapManager</MapInfo>
     <Name>Roguelike Reborn</Name>

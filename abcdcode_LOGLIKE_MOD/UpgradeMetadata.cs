@@ -29,16 +29,17 @@ namespace abcdcode_LOGLIKE_MOD
                 return false;
             string[] strArray1 = packageId.Split(new string[1]
             {
-      LogCardUpgradeManager.UpgradeKeyword
-            }, StringSplitOptions.RemoveEmptyEntries);
+                LogCardUpgradeManager.UpgradeKeyword
+            }, StringSplitOptions.None);
             string[] strArray2 = strArray1[0].Split(':');
             metadata = new UpgradeMetadata()
             {
                 canStack = bool.Parse(strArray2[0]),
                 index = int.Parse(strArray2[1]),
-                count = int.Parse(strArray2[2]),
-                actualPid = strArray1.Length > 1 ? strArray1[1] : ""
+                count = int.Parse(strArray2[2])
             };
+            metadata.actualPid = packageId.Substring(
+                string.Concat(metadata.canStack.ToString(), ":",metadata.index.ToString(),":",metadata.count.ToString(),LogCardUpgradeManager.UpgradeKeyword).Length);
             return true;
         }
     }

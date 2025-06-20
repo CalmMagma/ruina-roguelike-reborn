@@ -108,6 +108,7 @@ namespace RogueLike_Mod_Reborn
                 return RoguelikeBufs.CritChance;
             }
         }
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
 
         private void OnCritEffect()
         {

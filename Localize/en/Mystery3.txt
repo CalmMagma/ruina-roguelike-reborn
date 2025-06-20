@@ -11,7 +11,7 @@
 
 "Tell you what, though, I can make them all [green]S-A-F-E[/color]! Just like that~" She snaps lower left arm's fingers. "All you have to do is buy this Hana-Approved VIP pass! Now now, it may be a tad... flimsy in nature, but it'll work! As long as you ain't tryna rush on the big boys~." She extends her ams and displays what looks like a plastic card with the official Hana Section-1 stamp. You can tell that its fake from very up close, and that so would others, but it might [i]just[/i] work.
 
-"So? Whaddya say?" Six-Six asks expectantly.
+"So? Whaddya say?" Six-Six asks expectantly.</text>
              <text id="MysteryCh3_2Frame0Choice0Desc">Buy the pass, it might be useful ([red]Pay 15[/color] [yellow]Ahn[/color])</text>
              <text id="MysteryCh3_2Frame0Choice1Desc">Don't buy it, you're not looking for trouble</text>
 

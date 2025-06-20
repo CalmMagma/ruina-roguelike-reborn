@@ -130,6 +130,11 @@ namespace RogueLike_Mod_Reborn
             {
                 return true;
             }
+
+            public override AtkResist GetResistHP(AtkResist origin, BehaviourDetail detail)
+            {
+                return (AtkResist)Math.Min((int)LogLikeMod.curchaptergrade + 1, 4);
+            }
         }
 
 
@@ -175,7 +180,7 @@ namespace RogueLike_Mod_Reborn
             base.OnKillUnit(killer, target);
             int BleedToTransfer = target.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding);
             BleedToTransfer /= 2;
-            List<BattleUnitModel> EnemyList =  target.Team.GetList();
+            List<BattleUnitModel> EnemyList = target.Team.GetList();
             for (int i = 0; i < EnemyList.Count; i++)
             {
                 if (EnemyList[i] != target)
@@ -205,7 +210,7 @@ namespace RogueLike_Mod_Reborn
             critter?.RecoverHP(5);
         }
     }
-    
+
     public class RMREffect_Remote : GlobalLogueEffectBase
     {
         public static Rarity ItemRarity = Rarity.Uncommon;
@@ -231,7 +236,7 @@ namespace RogueLike_Mod_Reborn
             base.OnUseCard(card);
             powerUp = 0;
             var list = card.owner.allyCardDetail.GetHand();
-            
+
             foreach (BattleDiceCardModel c in list)
             {
                 if (c != null && c.GetID() == card.card.GetID())
@@ -278,14 +283,14 @@ namespace RogueLike_Mod_Reborn
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             base.BeforeRollDice(behavior);
-            if(ZCActive && behavior.TargetDice != null && behavior.TargetDice.card.GetDiceBehaviorList().Count() > 0)
+            if (ZCActive && behavior.TargetDice != null && behavior.TargetDice.card.GetDiceBehaviorList().Count() > 0)
             {
                 var list = behavior.TargetDice.card.owner.cardSlotDetail.keepCard;
-                if(list != null && behavior.TargetDice.card == list)
+                if (list != null && behavior.TargetDice.card == list)
                 {
-                    foreach(var d in list.cardBehaviorQueue)
+                    foreach (var d in list.cardBehaviorQueue)
                     {
-                        if(diceTicks > 0)
+                        if (diceTicks > 0)
                         {
                             d.DestroyDice(DiceUITiming.AttackAfter);
                             diceTicks--;
@@ -306,14 +311,14 @@ namespace RogueLike_Mod_Reborn
             {
                 base.BeforeRollDice(behavior);
                 var enemy = behavior.card.target;
-                    // this is how you select the enemy 
-                    if (enemy == null) return;
-                    if (enemy.hp/(float)enemy.MaxHp >= 0.9) // float thingy means 0.9 = 90%
-                    {
-                        behavior.ApplyDiceStatBonus(new DiceStatBonus { dmgRate = 50, breakRate = 50 });
-                        //applying extra damage to the funny die
-                    }
-            }           
+                // this is how you select the enemy 
+                if (enemy == null) return;
+                if (enemy.hp / (float)enemy.MaxHp >= 0.9) // float thingy means 0.9 = 90%
+                {
+                    behavior.ApplyDiceStatBonus(new DiceStatBonus { dmgRate = 50, breakRate = 50 });
+                    //applying extra damage to the funny die
+                }
+            }
         }
 
         //hidden buf because pm are terrible people
