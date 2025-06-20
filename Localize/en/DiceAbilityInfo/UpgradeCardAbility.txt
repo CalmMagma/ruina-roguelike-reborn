@@ -20,7 +20,7 @@
   </BattleCardAbility>
 
    <BattleCardAbility ID="RMR_RecycleOnClashLose">
-    <Desc>[On Clash Lose] Recycle this die (Up to 3 times)</Desc>
+    <Desc>[On Clash Lose] Recycle this die (Up to 10 times)</Desc>
   </BattleCardAbility>
   
    <BattleCardAbility ID="RMR_Gain2AhnOnKill">

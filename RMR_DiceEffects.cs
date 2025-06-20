@@ -14,7 +14,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnLoseParrying()
         {
             base.OnLoseParrying();
-            if (cap < 10)
+            if (cap < 10 && !owner.breakDetail.IsBreakLifeZero())
             {
                 cap++;
                 ActivateBonusAttackDice();

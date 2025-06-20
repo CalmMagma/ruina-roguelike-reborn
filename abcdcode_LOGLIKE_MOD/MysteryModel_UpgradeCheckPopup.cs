@@ -64,13 +64,16 @@ namespace abcdcode_LOGLIKE_MOD
             this.FrameObj.Add("NoText", textTmp2.gameObject);
             LogLikeMod.UILogCardSlot curcard = LogLikeMod.UILogCardSlot.SlotCopyingByOrig();
             this.metadata = null;
+
             var upgradeList = Singleton<LogCardUpgradeManager>.Instance.GetAllUpgradesCard(this.cardid, 1).Values.ToList();
             upgradeList.Sort((x, y) => UpgradeMetadata.UnpackPidUnsafe(x.id.packageId).index > UpgradeMetadata.UnpackPidUnsafe(y.id.packageId).index ? 1 : 0);
 
-            this.Log("FINDING UPGRADES");
+            Debug.Log("FINDING UPGRADES");
             foreach (var upgrade in upgradeList)
             {
-                this.Log(upgrade.id.packageId + " --- " + upgrade.id.id);
+                if (upgrade.id.packageId.Contains(LogCardUpgradeManager.UpgradeKeyword)) Debug.Log("THIS IS SEARING BLOW!!!");
+                Debug.Log(upgrade.id.packageId + " --- " + upgrade.id.id);
+                Debug.Log("IF IT SHOWS UP AS True:0:number<keyword>packageId THEN WE SHOULD BE GOOD");
             }
             curcard.transform.SetParent(image.transform);
             curcard.transform.localScale = new Vector3(1.5f, 1.5f);

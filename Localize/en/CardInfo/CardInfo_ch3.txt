@@ -119,7 +119,7 @@
       <Ability />
     </BattleCardDesc>
     <BattleCardDesc ID="303007">
-      <LocalizedName>Cut in</LocalizedName>
+      <LocalizedName>Cut In</LocalizedName>
       <Ability />
     </BattleCardDesc>
     <BattleCardDesc ID="303008">
