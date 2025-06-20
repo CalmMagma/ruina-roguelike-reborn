@@ -206,10 +206,9 @@ namespace abcdcode_LOGLIKE_MOD
                 TextMeshProUGUI textTmp2 = ModdingUtils.CreateText_TMP(btn.transform, new Vector2(20f, 0f), 32 - (choiceAmount >= 12 ? 8 : (choiceAmount - choiceAmount % 4)), new Vector2(0.05f, 0f), new Vector2(0.95f, 1f), new Vector2(0f, 0f), TextAlignmentOptions.Center, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
                 string text = string.Empty;
                 if (loc != null)
-                    text = loc.GetFrameById(this.curFrame.FrameID).GetChoiceById(choice.ChoiceID).Desc;
+                    text = loc.GetFrameById(this.curFrame.FrameID).GetChoiceById(choice.ChoiceID).Desc.ReplaceColorShorthands();
                 else 
-                    text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(choice.desc);
-                text = text.ReplaceColorShorthands();
+                    text = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText(choice.desc).ReplaceColorShorthands();
                 textTmp2.text = text;
                 textTmp2.transform.Rotate(0.0f, 0.0f, 2.5f);
                 this.FrameObj.Add("Desc" + choice.ChoiceID.ToString(), textTmp2.gameObject);
@@ -437,14 +436,14 @@ namespace abcdcode_LOGLIKE_MOD
             public void ScrollUp()
             {
                 if ((double)this.target.transform.localPosition.y > (double)this.maxUp)
-                    this.target.transform.localPosition -= new Vector3(0.0f, 5f);
+                    this.target.transform.localPosition -= new Vector3(0.0f, 7.5f);
                 this.CheckUpDownFit();
             }
 
             public void ScrollDown()
             {
                 if ((double)this.target.transform.localPosition.y < (double)this.maxDown)
-                    this.target.transform.localPosition += new Vector3(0.0f, 5f);
+                    this.target.transform.localPosition += new Vector3(0.0f, 7.5f);
                 this.CheckUpDownFit();
             }
 

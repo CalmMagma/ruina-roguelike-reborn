@@ -31,12 +31,9 @@ namespace abcdcode_LOGLIKE_MOD
             if (id != 0)
                 return;
             int curchaptergrade = (int)LogLikeMod.curchaptergrade;
-            MysteryChoiceInfo mysteryChoiceInfo1 = this.curFrame.choices.Find((Predicate<MysteryChoiceInfo>)(x => x.ChoiceID == 0));
-            this.FrameObj["Desc0"].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText(mysteryChoiceInfo1.desc, (object)this.CardValue[curchaptergrade]);
-            MysteryChoiceInfo mysteryChoiceInfo2 = this.curFrame.choices.Find((Predicate<MysteryChoiceInfo>)(x => x.ChoiceID == 1));
-            this.FrameObj["Desc1"].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText(mysteryChoiceInfo2.desc, (object)this.EquipValue[curchaptergrade]);
-            MysteryChoiceInfo mysteryChoiceInfo3 = this.curFrame.choices.Find((Predicate<MysteryChoiceInfo>)(x => x.ChoiceID == 2));
-            this.FrameObj["Desc2"].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText(mysteryChoiceInfo3.desc, (object)this.MoneyValue[curchaptergrade]);
+            this.ReformatButton(0, this.CardValue[curchaptergrade]);
+            this.ReformatButton(1, this.EquipValue[curchaptergrade]);
+            this.ReformatButton(2, this.MoneyValue[curchaptergrade]);
         }
 
         public override void OnClickChoice(int choiceid)

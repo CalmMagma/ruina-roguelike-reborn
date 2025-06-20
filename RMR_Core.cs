@@ -523,12 +523,12 @@ namespace RogueLike_Mod_Reborn
         /// </summary>
         public static string ReplaceColorShorthands(this string input)
         {
-            string colored = input;
-            foreach (var values in colorShorthands)
+            string newString = input;
+            foreach (KeyValuePair<string, string> pair in colorShorthands)
             {
-                colored = colored.Replace(values.Key, values.Value);
+                newString = newString.Replace(pair.Key, pair.Value);
             }
-            return colored;
+            return newString;
         }
 
         public static Dictionary<string, string> colorShorthands = new Dictionary<string, string>
@@ -1796,7 +1796,8 @@ namespace RogueLike_Mod_Reborn
 
         public override void OnWaveStartInitialEvent()
         {
-            Singleton<MysteryManager>.Instance.StartMystery(Singleton<MysteryXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -100)));
+            RMRCore.RMRMapHandler.StartActAsCustomMap<SparklingMirrorMapManager>("SparklingMirrorMapManager");
+            Singleton<MysteryManager>.Instance.StartMystery(Singleton<MysteryXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -100)));   
         }
 
         public override bool ReplaceBaseDeck => true;
@@ -2776,24 +2777,29 @@ namespace RogueLike_Mod_Reborn
             {
                 if (buf == null) 
                     return;
-                Debug.Log($"GETTING ICON FOR BUF - {buf.GetType().Name}");
                 string keyword = buf.keywordIconId ?? buf.keywordId;
                 string fullName = buf.GetType().Assembly.FullName;
                 if (string.IsNullOrEmpty(keyword) || !RMRCore.ClassIds.ContainsKey(fullName)) 
                     return;
                 if (RMRCore.ClassIds[fullName] == RMRCore.packageId && LogLikeMod.ArtWorks.ContainsKey(keyword))
                 {
+                    "".Log("ATTEMPTING TO GET BUF ICON FOR KEYWORD ID : " + buf.keywordIconId);
                     Sprite sprite = LogLikeMod.ArtWorks[keyword];
-                    if (sprite != null) 
+                    if (sprite != null)
+                    {
                         buf._bufIcon = sprite;
-                    Debug.Log($"GOT ICON FOR BUF - {buf.GetType().Name}");
+                        buf._iconInit = true;
+                        "".Log("GOT ICON FOR BUF ICON FOR KEYWORD ID : " + buf.keywordIconId);
+                    } else "".Log("!!! FAILED TO GET ICON FOR KEYWORD ID : " + buf.keywordIconId);
                 }
                 else if (LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[fullName], keyword)))
                 {
                     Sprite sprite = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[fullName], keyword)];
-                    if (sprite != null) 
+                    if (sprite != null)
+                    {
                         buf._bufIcon = sprite;
-                    Debug.Log($"GOT ICON FOR BUF - {buf.GetType().Name}");
+                        buf._iconInit = true;
+                    }
                 }
             }
             catch (Exception e)
@@ -2910,6 +2916,22 @@ namespace RogueLike_Mod_Reborn
         {
             return __exception is NullReferenceException ? null : __exception;
         }
+
+
+        /// <summary>
+        /// Makes BattleEmotionCardModel's constructor stop bitching
+        /// </summary>
+        [HarmonyPatch(typeof(BattleEmotionCardModel), MethodType.Constructor, new Type[2]
+        {
+            typeof(EmotionCardXmlInfo),
+            typeof(BattleUnitModel)
+        })]
+        [HarmonyFinalizer]
+        static Exception BattleEmotionCardModel_Constructor(Exception __exception)
+        {
+            return __exception is ArgumentNullException ? null : __exception;
+        }
+
 
         #endregion
     }

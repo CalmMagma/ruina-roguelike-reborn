@@ -11,18 +11,4 @@ namespace RogueLike_Mod_Reborn
     {
 
     }
-    public class SparklingMirrorStageManager : EnemyTeamStageManager
-    {
-        public override void OnWaveStart()
-        {
-            base.OnWaveStart();
-            RMRCore.RMRMapHandler.InitCustomMap<SparklingMirrorMapManager>("SparklingMirrorMapManager");
-        }
-
-        public override void OnRoundStart()
-        {
-            base.OnRoundStart();
-            RMRCore.RMRMapHandler.EnforceMap(0);
-        }
-    }
 }

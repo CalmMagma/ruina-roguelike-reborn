@@ -8,7 +8,7 @@ using LOR_XML;
 
 namespace RogueLike_Mod_Reborn
 {
-    public class DiceSelfCardAbility_RMR_Starter_Evade : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_Starter_Evade : DiceCardSelfAbilityBase
     {
         public override void OnUseCard()
         {
@@ -22,7 +22,7 @@ namespace RogueLike_Mod_Reborn
         "DrawCard_Keyword", "Endurance_Keyword"
         };
     }
-    public class DiceSelfCardAbility_RMR_Starter_CoordinatedStrikes : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_Starter_CoordinatedStrikes : DiceCardSelfAbilityBase
     {
         public override void OnUseCard()
         {
@@ -377,7 +377,7 @@ namespace RogueLike_Mod_Reborn
             List<BattleDiceCardModel> drawpile = owner.allyCardDetail.GetDeck();
             if (drawpile.Count > 0)
             {
-                 owner.allyCardDetail.DrawCardsAllSpecific(drawpile.OrderBy(x => x.GetRarity()).Last().GetID());
+                 owner.allyCardDetail.DrawCardsAllSpecific(drawpile.SortReturn((x, y) => x.GetRarity() - y.GetRarity()).Last().GetID());
             }
         }
     }

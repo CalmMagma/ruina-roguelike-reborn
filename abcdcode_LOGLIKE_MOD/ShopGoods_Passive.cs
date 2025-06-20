@@ -135,7 +135,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogueBookModels.shopPick.Add(this.GoodScript.id);
             }
             this.gameObject.SetActive(false);
-            SingletonBehavior<UIBattleOverlayManager>.Instance.DisableOverlay();
+            SingletonBehavior<UIMainOverlayManager>.Instance.Close();
         }
 
         public virtual void OnClickGoods()

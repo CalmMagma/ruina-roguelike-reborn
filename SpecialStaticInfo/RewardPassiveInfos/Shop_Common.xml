@@ -44,7 +44,7 @@
     <RewardList ID="90042" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood42" ArtWork="ShopPassive42"/>
     <RewardList ID="90043" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood43" ArtWork="ShopPassive43"/>
     <RewardList ID="90044" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood44" ArtWork="ShopPassive44"/>
-    <RewardList ID="90045" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood45" ArtWork="ShopPassive45"/>
+    <!-- <RewardList ID="90045" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood45" ArtWork="ShopPassive45"/> -->
     <RewardList ID="90046" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood46" ArtWork="ShopPassive46"/>
 	
 	<!-- RMR ITEMS START HERE -->

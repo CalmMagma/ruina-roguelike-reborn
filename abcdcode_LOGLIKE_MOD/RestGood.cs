@@ -34,15 +34,15 @@ namespace abcdcode_LOGLIKE_MOD
         {
             this.goodinfo = goodinfo;
             this.GoodScript = LogLikeMod.FindPickUp(goodinfo.script) as RestPickUp;
-            this.GoodSprite = !(this.goodinfo.id.packageId != LogLikeMod.ModId) || !LogLikeMod.ModdedArtWorks.ContainsKey((this.goodinfo.id.packageId, this.goodinfo.artwork)) ? LogLikeMod.ArtWorks[goodinfo.artwork] : LogLikeMod.ModdedArtWorks[(this.goodinfo.id.packageId, this.goodinfo.artwork)];
-            UILogCustomSelectable customSelectable = !LogLikeMod.ModdedArtWorks.ContainsKey((this.goodinfo.id.packageId, this.goodinfo.iconartwork)) ? ModdingUtils.CreateLogSelectable(this.transform, goodinfo.iconartwork, new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(150f, 150f)) : ModdingUtils.CreateLogSelectable(this.transform, LogLikeMod.ModdedArtWorks[(this.goodinfo.id.packageId, this.goodinfo.iconartwork)], new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(150f, 150f));
+            this.GoodSprite = this.goodinfo.id.packageId == LogLikeMod.ModId ? LogLikeMod.ArtWorks[goodinfo.iconartwork] : LogLikeMod.ModdedArtWorks[(this.goodinfo.id.packageId, this.goodinfo.iconartwork)];
+            UILogCustomSelectable customSelectable = ModdingUtils.CreateLogSelectable(this.transform, this.GoodSprite, new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), new Vector2(150f, 150f));
             Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
-            buttonClickedEvent.AddListener((UnityAction)(() => this.OnClickGoods()));
+            buttonClickedEvent.AddListener(() => this.OnClickGoods());
             customSelectable.onClick = buttonClickedEvent;
             customSelectable.SelectEvent = new UnityEventBasedata();
-            customSelectable.SelectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerEnter()));
+            customSelectable.SelectEvent.AddListener(e => this.OnPointerEnter());
             customSelectable.DeselectEvent = new UnityEventBasedata();
-            customSelectable.DeselectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerExit()));
+            customSelectable.DeselectEvent.AddListener(e => this.OnPointerExit());
         }
 
         public void OnClickGoods()
