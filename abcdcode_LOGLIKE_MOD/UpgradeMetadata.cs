@@ -12,7 +12,7 @@ namespace abcdcode_LOGLIKE_MOD
 
     public class UpgradeMetadata
     {
-        public bool canStack;
+        public bool canStack = false;
         public int index;
         public int count = 1;
         public string actualPid = LogLikeMod.ModId;
@@ -22,6 +22,7 @@ namespace abcdcode_LOGLIKE_MOD
             UpgradeMetadata.UnpackPid(packageId, out UpgradeMetadata data);
             return data;
         }
+
         public static bool UnpackPid(string packageId, out UpgradeMetadata metadata)
         {
             metadata = new UpgradeMetadata();
@@ -38,8 +39,7 @@ namespace abcdcode_LOGLIKE_MOD
                 index = int.Parse(strArray2[1]),
                 count = int.Parse(strArray2[2])
             };
-            metadata.actualPid = packageId.Substring(
-                string.Concat(metadata.canStack.ToString(), ":",metadata.index.ToString(),":",metadata.count.ToString(),LogCardUpgradeManager.UpgradeKeyword).Length);
+            metadata.actualPid = strArray1[1];
             return true;
         }
     }

@@ -71,7 +71,7 @@ namespace abcdcode_LOGLIKE_MOD
             Debug.Log("FINDING UPGRADES");
             foreach (var upgrade in upgradeList)
             {
-                if (upgrade.id.packageId.Contains(LogCardUpgradeManager.UpgradeKeyword)) Debug.Log("THIS IS SEARING BLOW!!!");
+                if (cardid.packageId.Contains(LogCardUpgradeManager.UpgradeKeyword)) Debug.Log("THIS IS SEARING BLOW!!!");
                 Debug.Log(upgrade.id.packageId + " --- " + upgrade.id.id);
                 Debug.Log("IF IT SHOWS UP AS True:0:number<keyword>packageId THEN WE SHOULD BE GOOD");
             }

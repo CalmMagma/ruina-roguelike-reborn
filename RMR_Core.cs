@@ -2783,16 +2783,14 @@ namespace RogueLike_Mod_Reborn
                     return;
                 if (RMRCore.ClassIds[fullName] == RMRCore.packageId && LogLikeMod.ArtWorks.ContainsKey(keyword))
                 {
-                    "".Log("ATTEMPTING TO GET BUF ICON FOR KEYWORD ID : " + buf.keywordIconId);
                     Sprite sprite = LogLikeMod.ArtWorks[keyword];
                     if (sprite != null)
                     {
                         buf._bufIcon = sprite;
                         buf._iconInit = true;
-                        "".Log("GOT ICON FOR BUF ICON FOR KEYWORD ID : " + buf.keywordIconId);
-                    } else "".Log("!!! FAILED TO GET ICON FOR KEYWORD ID : " + buf.keywordIconId);
+                    } 
                 }
-                else if (LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[fullName], keyword)))
+                else if (RMRCore.ClassIds.ContainsKey(fullName) && LogLikeMod.ModdedArtWorks.ContainsKey((RMRCore.ClassIds[fullName], keyword)))
                 {
                     Sprite sprite = LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[fullName], keyword)];
                     if (sprite != null)
@@ -2917,11 +2915,11 @@ namespace RogueLike_Mod_Reborn
             return __exception is NullReferenceException ? null : __exception;
         }
 
-
+        /*
         /// <summary>
         /// Makes BattleEmotionCardModel's constructor stop bitching
         /// </summary>
-        [HarmonyPatch(typeof(System.Activator), MethodType.Constructor, new Type[2]
+        [HarmonyPatch(typeof(System.Activator), nameof(System.Activator.CreateInstance), new Type[2]
         {
             typeof(System.Type),
             typeof(System.Boolean)
@@ -2931,7 +2929,7 @@ namespace RogueLike_Mod_Reborn
         {
             return __exception is ArgumentNullException ? null : __exception;
         }
-
+        */
 
         #endregion
     }

@@ -25,15 +25,12 @@ namespace abcdcode_LOGLIKE_MOD
     {
         public static LorId GetOriginalId(this LorId id)
         {
-            UpgradeMetadata metadata;
-            return UpgradeMetadata.UnpackPid(id.packageId, out metadata) ? new LorId(metadata.actualPid, id.id) : id;
+            return UpgradeMetadata.UnpackPid(id.packageId, out UpgradeMetadata metadata) ? new LorId(metadata.actualPid, id.id) : id;
         }
 
         public static bool CheckCanUpgrade(this DiceCardXmlInfo info)
         {
-            bool flag = info.CheckUpgradeCard();
-            UpgradeMetadata metadata;
-            return UpgradeMetadata.UnpackPid(info.id.packageId, out metadata) ? metadata.canStack : true;
+            return UpgradeMetadata.UnpackPid(info.workshopID, out UpgradeMetadata metadata) ? metadata.canStack : true;
         }
 
         public static bool CheckUpgradeCard(this DiceCardXmlInfo info)

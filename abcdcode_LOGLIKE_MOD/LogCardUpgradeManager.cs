@@ -53,7 +53,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (metadata.canStack)
                 {
-                    DiceCardXmlInfo upgradeInfo = GetUpgradeCard(new LorId(metadata.actualPid, cardId.id), metadata.index, metadata.count + count);
+                    DiceCardXmlInfo upgradeInfo = GetUpgradeCard(cardId.GetOriginalId(), metadata.index, metadata.count + count);
                     dictionary.Add(metadata.index, upgradeInfo);
                 }
                 return dictionary;

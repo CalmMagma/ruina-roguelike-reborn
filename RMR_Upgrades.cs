@@ -146,7 +146,6 @@ namespace RogueLike_Mod_Reborn
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 0, 1);
             this.upgradeinfo.SetDice(1, 0, 2);
-            this.upgradeinfo.SetDice(2, 0, 2);
             this.baseid = new LorId(LogLikeMod.ModId, 104002);
         }
     }
@@ -374,7 +373,6 @@ namespace RogueLike_Mod_Reborn
         {
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 2);
             this.upgradeinfo.SetDice(1, 2, 1);
             this.upgradeinfo.SetDice(2, 2, 1);
             this.baseid = new LorId(LogLikeMod.ModId, 200003);
