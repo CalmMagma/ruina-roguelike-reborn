@@ -80,6 +80,7 @@ namespace abcdcode_LOGLIKE_MOD
                         instance.baseinfo = ItemXmlDataList.instance.GetCardItem(instance.baseid, true);
 
                         if (!this.UpgradeInfoDic.TryGetValue(instance.baseid, out Dictionary<int, UpgradeBase> _))
+                        {
                             this.UpgradeInfoDic.Add(instance.baseid, new Dictionary<int, UpgradeBase>()
                             {
                                 {
@@ -87,8 +88,11 @@ namespace abcdcode_LOGLIKE_MOD
                                     instance
                                 }
                             });
+                        }
                         else
+                        {
                             this.UpgradeInfoDic[instance.baseid][instance.index] = instance;
+                        }
 
                         if (!instance.CanRepeatUpgrade())
                         {

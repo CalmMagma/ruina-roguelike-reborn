@@ -18,6 +18,19 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual string[] Keywords => new string[0];
 
+        /// <summary>
+        /// Do <b>NOT</b> forget to inherit this constructor on your derived <see cref="ShopPickUpModel"/>.
+        /// <code>
+        /// // You can do it like this:
+        /// public class PickUpModel_MyCoolItem : ShopPickUpModel
+        /// {
+        ///     public PickUpModel_MyCoolItem() : base() // do not forget this : base() part
+        ///     {
+        ///         this.id = new LorId(myModInitializer.packageId, 1984);
+        ///         this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(myModInitializer.packageId, 1984));
+        ///     }
+        /// }</code>
+        /// </summary>
         public ShopPickUpModel()
         {
             if (!string.IsNullOrEmpty(this.KeywordId))
@@ -33,6 +46,10 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
+        /// <summary>
+        /// Adds a key page to the player's inventory.
+        /// </summary>
+        /// <param name="id">The LorId of the key page.</param>
         public static void AddEquipPage(LorId id)
         {
             BookModel bookModel = new BookModel(Singleton<BookXmlList>.Instance.GetData(id));
@@ -69,7 +86,6 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual void EditDesc(ref string desc)
         {
-            
             if (this.Keywords.Length == 0)
                 return;
             for (int index = 0; index < this.Keywords.Length; ++index)
@@ -90,9 +106,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public virtual bool IsCanAddShop() => true;
 
-        public virtual void OnPickUpShop(ShopGoods good)
-        {
-        }
+        public virtual void OnPickUpShop(ShopGoods good) { }
 
         public override void OnPickUp() => base.OnPickUp();
     }

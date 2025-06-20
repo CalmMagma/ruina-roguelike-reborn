@@ -2921,10 +2921,10 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Makes BattleEmotionCardModel's constructor stop bitching
         /// </summary>
-        [HarmonyPatch(typeof(BattleEmotionCardModel), MethodType.Constructor, new Type[2]
+        [HarmonyPatch(typeof(System.Activator), MethodType.Constructor, new Type[2]
         {
-            typeof(EmotionCardXmlInfo),
-            typeof(BattleUnitModel)
+            typeof(System.Type),
+            typeof(System.Boolean)
         })]
         [HarmonyFinalizer]
         static Exception BattleEmotionCardModel_Constructor(Exception __exception)

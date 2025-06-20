@@ -63,12 +63,12 @@ namespace abcdcode_LOGLIKE_MOD
                 if (LogLikeMod.curstagetype == StageType.Boss)
                 {
                     MysteryBase.AddStageList(Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 220001)), LogLikeMod.curchaptergrade + 1);
-                    Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect((GlobalLogueEffectBase)this);
+                    Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect(this);
                 }
                 else
                 {
                     MysteryBase.AddStageList(Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 220001)), LogLikeMod.curchaptergrade);
-                    Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect((GlobalLogueEffectBase)this);
+                    Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect(this);
                 }
             }
         }

@@ -7,7 +7,7 @@
     </BattleCardDesc>
     <BattleCardDesc ID="2000002">
       <LocalizedName>Meat Jam</LocalizedName>
-      <Ability>[On Play] Restore 15 HP, then removed from deck.</Ability>
+      <Ability>[On Play] Recover 20 HP and remove a copy of this page from inventory</Ability>
     </BattleCardDesc>
 
   </cardDescList>

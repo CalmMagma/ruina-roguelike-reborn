@@ -43,7 +43,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override void OnChoice(RestGood good)
         {
-            MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(true, true).FindAll((Predicate<DiceCardItemModel>)(x => x.ClassInfo.CheckCanUpgrade())), new MysteryModel_CardChoice.ChoiceResult(this.UpgradeCard), MysteryModel_CardChoice.ChoiceDescType.UpgradeDesc);
+            MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(true, true).FindAll(x => x.ClassInfo.CheckCanUpgrade()), new MysteryModel_CardChoice.ChoiceResult(this.UpgradeCard), MysteryModel_CardChoice.ChoiceDescType.UpgradeDesc);
         }
 
         public void UpgradeCard(MysteryModel_CardChoice mystery, DiceCardItemModel model)

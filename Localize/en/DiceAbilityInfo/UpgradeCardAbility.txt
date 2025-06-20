@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BattleCardAbilityDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
+
+
   <BattleCardAbility ID="RMR_Starter_Evade">
     <Desc>[On Use] Draw 1 page and gain 1 Endurance this Scene</Desc>
   </BattleCardAbility>
@@ -13,6 +15,10 @@
     <Desc>[On Clash Lose] Reduce incoming damage and stagger damage by natural value</Desc>
   </BattleCardAbility>
   
+  <BattleCardAbility ID="RMR_MeatJamUpgrade">
+    <Desc>[On Play] Recover 30 HP and remove a copy of this page from inventory</Desc>
+  </BattleCardAbility>
+
    <BattleCardAbility ID="RMR_RecycleOnClashLose">
     <Desc>[On Clash Lose] Recycle this die (Up to 3 times)</Desc>
   </BattleCardAbility>

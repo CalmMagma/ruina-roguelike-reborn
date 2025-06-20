@@ -936,7 +936,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             base.OnUseInstance(unit, self, targetUnit);
-            unit.RecoverHP(20);
+            unit.RecoverHP(30);
             BookModel bookItem = unit.UnitData.unitData.bookItem;
             if (!bookItem.GetDeckAll_nocopy()[bookItem.GetCurrentDeckIndex()].MoveCardToInventory(new LorId(LogLikeMod.ModId, 2000002)))
               return;
