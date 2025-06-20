@@ -172,6 +172,9 @@ namespace RogueLike_Mod_Reborn
             public void Start()
             {
                 renderer = base.gameObject.GetComponent<SpriteRenderer>();
+                Color color = renderer.color;
+                color.b = 0f;
+                renderer.color = color;
             }
 
             public void Update()
