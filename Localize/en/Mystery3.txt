@@ -42,7 +42,7 @@ You will now avoid any Association-related battles during the Urban Legend Chapt
              <text id="MysteryCh3_4Frame0Choice0Desc">[i][mirror]Wash Yourself Now[/color][/i] </text>
              <text id="MysteryCh3_4Frame0Choice1Desc">You're clean enough as is.</text>
 			 
-             <text id="MysteryCh3_4Frame1Dia0">Watching your clothes tumble inside the machine would've been enough, but you decied to throw yourself in as well -- much to the dismay of the staff -- this somehow worked, however, and now you feel better than ever.</text>
+             <text id="MysteryCh3_4Frame1Dia0">Watching your clothes tumble inside the machine would've been enough, but you decied to throw yourself in as well - much to the dismay of the staff - this somehow worked, however, and now you feel better than ever.</text>
              <text id="MysteryCh3_4Frame1Choice0Desc">Walk away enjoying your new self (Librarian equips a random Key page, recovers all HP and removes all attributed Passives)</text>
 	
              <text id="MysteryCh3_4Frame2Dia0">You walk away from the Laundry, telling yourself you need no such things. People exchange glances at each other as you pass by</text>

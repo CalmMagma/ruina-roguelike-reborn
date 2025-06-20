@@ -5,7 +5,7 @@
          
 <text id="MemberShipTitle">Workshop Contract Offer</text>
              <text id="MemberShipFrame0Dia0">Your prowess and resourcefulness has attracted the attention of several workshops, urging for a contract.
-These contracts are nearly always positive, especially in great quantities, unfortunately for you the nature of the situation prevents y9ou from signing more than one.
+These contracts are nearly always positive, but unfortunately for you the nature of the situation prevents you from signing more than one.
 Choose carefully.
 
 -The shop of the selected workshop will appear once per chapter.
@@ -18,19 +18,19 @@ Choose carefully.
              <text id="MemberShipFrame1DiaLogic">Atelier Logic
 -Specialized in the use of Ranged Pages and raw damage
 -Upon singing the contract all librarians will be trained, allowing them to use Ranged Pages
--Key Keywords : Damage, Power, One-sided attack</text>
+-Keywords: Damage, Power, One-sided attack</text>
 
              <text id="MemberShipFrame1DiaUnion">Union Workshop
 -Specialized in boosting, retaining dice and healing
--Key Keywords : Luck, Diversity, HP recovery</text>
+-Keywords: Luck, Diversity, HP recovery</text>
 
              <text id="MemberShipFrame1DiaStigma">Stigma Workshop
 -Specialized in maximizing burn application
--Key Keywords : Burn, Status ailment</text>
+-Keywords: Burn, Status ailment</text>
 
              <text id="MemberShipFrame1DiaMook">Mook Workshop
 -Specialized in supporting singular-die pages and greater damage
--주요 키워드 : Damage, Resistance, Singular Strike</text>
+-Keywords: Damage, Resistance, Singular Strike</text>
 
            <text id="MemberShipFrame1Choice0Desc">Sign the contract</text>
            <text id="MemberShipFrame1Choice1Desc">Choose another</text>
