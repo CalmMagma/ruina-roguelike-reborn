@@ -8,7 +8,7 @@ You explain that you're upset about the delay in your food, quickly joined by ot
 "Yes, Jack?" A short white-haired woman walked in front the kitchen, bits and pieces of gore covering her apron. She approaches the counter with enthusiasm, despite her tired expression. "Ahh, is this about the wait times again? Well, listen here [mirror]Shard[/color]..."
 
 "If you're in such a hurry why don'tcha go grab some ingredients for us, then?" She leans over with a sly smile. "That or we can turn [i]you[/i] into one right now~!" A bloodstained kitchen knife danced in her fingers</text>
-             <text id="MysteryCh2_1Frame0Choice0Desc">Agree to hunt ingredients for Pierre ([green]Gain 20~30[/color] [yellow]Ahn[/color]</text>
+             <text id="MysteryCh2_1Frame0Choice0Desc">Agree to hunt ingredients for Pierre ([green]Gain 20~30[/color] [yellow]Ahn[/color])</text>
              <text id="MysteryCh2_1Frame0Choice1Desc">Refuse politely and try to leave</text>
 
              <text id="MysteryCh2_1Frame1Dia0">"Alright! I'll be waiting for ya~" Pierre let out a big smile.</text>

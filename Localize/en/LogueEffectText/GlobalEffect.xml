@@ -17,7 +17,7 @@
   
   <LogueEffectInfo Id="GlobalEffect_RolandNft">
     <Name>Rare Street Thug Action Figure</Name> 
-    <Desc>[Consumable] Upon use, gain {0} Ahn. This item's value grows by 3 for every battle won.</Desc> 
+    <Desc>[Consumable] Upon use, gain {0} Ahn. This item's value grows by 3 for every battle won or event passed.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“I have nothing but my— holy shit is that Roland the Street Thug™!?”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
@@ -66,9 +66,9 @@ Copy. Erasing that direction.”&lt;/color&gt;</FlavorText>
   </LogueEffectInfo> 
   
      <LogueEffectInfo Id="GlobalEffect_StrStim">
-    <Name>Aggro Stim</Name> 
+    <Name>4GGR0 Stim</Name> 
     <Desc>[Consumable] Selected Librarian gains 2 Strength this Scene.</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“To become Her greatest soldier one must also be Her greatest eeper.”&lt;/color&gt;</FlavorText> 
+    <FlavorText>&lt;color=#CACACA&gt;“Social fight chance factor ×400”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
@@ -173,14 +173,14 @@ This item is removed upon using the page.</Desc>
   </LogueEffectInfo> 
   
   <LogueEffectInfo Id="GlobalEffect_Inspiration">
-    <Name>Insanity</Name> 
+    <Name>Inspiration</Name> 
     <Desc>At the start of each Scene for the duration of this Chapter, all Librarians share one of the following effects:
 3 Strength
 3 Endurance
 3 Protection
 3 Fragile
 Immobilization</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“Futures made of...”&lt;/color&gt;</FlavorText> 
+    <FlavorText>&lt;color=#CACACA&gt;“A taste of Oswald's soul.”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
 

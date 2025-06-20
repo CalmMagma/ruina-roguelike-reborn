@@ -5,7 +5,7 @@
          
 <text id="MemberShipTitle">Workshop Contract Offer</text>
              <text id="MemberShipFrame0Dia0">Your prowess and resourcefulness has attracted the attention of several workshops, urging for a contract.
-These contracts are nearly always positive, especially in great quantities, unfortunately for you the nature of the situation prevents y9ou from signing more than one.
+These contracts are nearly always positive, especially in great quantities, unfortunately for you the nature of the situation prevents you from signing more than one.
 Choose carefully.
 
 -The shop of the selected workshop will appear once per chapter.
@@ -30,7 +30,7 @@ Choose carefully.
 
              <text id="MemberShipFrame1DiaMook">Mook Workshop
 -Specialized in supporting singular-die pages and greater damage
--주요 키워드 : Damage, Resistance, Singular Strike</text>
+-Key Keywords : Damage, Resistance, Singular Strike</text>
 
            <text id="MemberShipFrame1Choice0Desc">Sign the contract</text>
            <text id="MemberShipFrame1Choice1Desc">Choose another</text>

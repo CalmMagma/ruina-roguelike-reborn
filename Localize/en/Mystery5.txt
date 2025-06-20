@@ -5,7 +5,7 @@
 			 
 "Ah! [mirror]Shard[/color]! How nice it is to see you here~~" His tower body moves to extreme, expressive poses. "Ohh my poor poor self is in a terrible situation! My actors have all... had an acccident, yes!? And as such a need new ones for the show! Ohhh, [mirror]Shard[/color], wont you help me? The performance is so soon..."
 			 
-This clown is certainly bizarre, though you can't hope but feel compelled to perform. Looking at the schedule posted on the circus' wall reveals that the performace might be a bit tiresome...</text>
+This clown is certainly bizarre, though you can't hope but feel compelled to perform. Looking at the schedule posted on the circus' wall reveals that the performance might be a bit tiresome...</text>
              <text id="MysteryCh5_1Frame0Choice0Desc">[yellow]Perform! Whats not to like?[/color] ([red]All Librarians: -20% HP[/color]. [green]Gain[/color] [unique]'Inspiration'[/color])</text>
              <text id="MysteryCh5_1Frame0Choice1Desc">Walk away, you're no clown</text>
              <text id="MysteryCh5_1Frame1Dia0">You put on a costume and perform for what felt like an eternity, dancing until your bones creaked and eyes grew bags under their bags -- it was a tiresome performance for sure, but you feel... inspired to do much much more. Definitely outside of here.</text>
