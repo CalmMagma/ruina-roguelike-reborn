@@ -2469,6 +2469,9 @@ namespace abcdcode_LOGLIKE_MOD
             LogLikeMod.GetFieldValue<Image>((object)__instance, "_artwork").sprite = LogLikeMod.ArtWorks[__instance.Card.Artwork];
         }
 
+        /// <summary>
+        /// Patch responsible for equipping Key Pages(??)
+        /// </summary>
         [HarmonyPostfix, HarmonyPatch(typeof(UIBattleSettingLibrarianInfoPanel), nameof(UIBattleSettingLibrarianInfoPanel.SetData))]
         public static void UIBattleSettingLibrarianInfoPanel_SetData(
           UIBattleSettingLibrarianInfoPanel __instance,
@@ -2480,7 +2483,7 @@ namespace abcdcode_LOGLIKE_MOD
             __instance.PassiveListSelectable.SubmitEvent.AddListener((UnityAction<BaseEventData>)(e => UIPassiveSuccessionPopup.Instance.SetData(data, (UIPassiveSuccessionPopup.ApplyEvent)(() =>
             {
                 __instance.passiveSlotsPanel.SetStatsDataInEquipBook(data.bookItem);
-                (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel).EditPanel.EquipPagePanel.ChangeEquipBook((UnitDataModel)null);
+                (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel).EditPanel.EquipPagePanel.ChangeEquipBook(null);
                 UIControlManager.Instance.SelectSelectableForcely(__instance.PassiveListSelectable);
                 LoguePlayDataSaver.SavePlayData_Menu();
             }))));

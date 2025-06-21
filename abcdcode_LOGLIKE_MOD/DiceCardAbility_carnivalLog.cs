@@ -4,16 +4,17 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class DiceCardAbility_carnivalLog : DiceCardAbilityBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public override void AfterAction()
-  {
-    LorId id = Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(new LorId(LogLikeMod.ModId, 401007)).id;
-    this.owner.allyCardDetail.AddNewCard(id);
-    this.card.target?.allyCardDetail.AddNewCard(id);
-  }
-}
+
+    public class DiceCardAbility_carnivalLog : DiceCardAbilityBase
+    {
+        public override void AfterAction()
+        {
+            LorId id = Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(new LorId(LogLikeMod.ModId, 401007)).id;
+            this.owner.allyCardDetail.AddNewCard(id);
+            this.card.target?.allyCardDetail.AddNewCard(id);
+        }
+    }
 }

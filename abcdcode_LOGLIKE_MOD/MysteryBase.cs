@@ -170,7 +170,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             this.RemoveCurFrame();
             this.curFrame = this.xmlinfo.GetFrame(id);
-            this.FrameObj.Add("FrameArt", ModdingUtils.CreateImage(LogLikeMod.LogUIObjs[90].transform, this.curFrame.ArtWork, new Vector2(1f, 1f), new Vector2(-280f, 180f), new Vector2(1300f, 730f)).gameObject);
+            this.FrameObj.Add("FrameArt", ModdingUtils.CreateImage(LogLikeMod.LogUIObjs[90].transform, this.curFrame.ArtWork, new Vector2(1f, 1f), new Vector2(-280f, 180f), new Vector2(1320f, 743f)).gameObject);
             Image image1 = ModdingUtils.CreateImage(LogLikeMod.LogUIObjs[90].transform, "MysteryPanel", new Vector2(1f, 1f), new Vector2(0.0f, 0.0f));
             this.FrameObj.Add("Frame", image1.gameObject);
             Image image2 = ModdingUtils.CreateImage(image1.transform, "RMRMysteryTitleBG", new Vector2(1f, 1f), new Vector2(430f, 410f));

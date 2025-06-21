@@ -61,7 +61,18 @@ namespace abcdcode_LOGLIKE_MOD
         public static Dictionary<string, List<EmotionCardXmlInfo>> PickUpXml_Dummy_Stage;
         public static Dictionary<string, List<EmotionCardXmlInfo>> PickUpXml_Dummy_Passive;
         public static Dictionary<string, List<EmotionEgoXmlInfo>> RewardCardDic_Dummy;
+        /// <summary>
+        /// Number of Acts the player has gone through this chapter.
+        /// </summary>
         public static int curChStageStep;
+        /// <summary>
+        /// Number of total Acts available to the player this chapter.
+        /// </summary>
+        public static int curChRemainCount => LogueBookModels.RemainStageList[LogLikeMod.curchaptergrade].Count;
+        /// <summary>
+        /// Current mystery title- used by Discord Rich Presence.
+        /// </summary>
+        public static string curMysteryTitle => MysteryManager.Instance.curMystery.FrameObj["Title"].GetComponent<TextMeshProUGUI>().GetParsedText();
         public static int NormalRewardCool = 0;
         /// <summary>
         /// Determines end-of-act keypage and combat page rewards.

@@ -123,13 +123,13 @@ namespace abcdcode_LOGLIKE_MOD
         public DiceCardXmlInfo GetUpgradeCard(LorId cardid, int index = 0, int count = 1)
         {
             Dictionary<int, UpgradeBase> dictionary;
-            if (this.UpgradeInfoDic.TryGetValue(cardid, out dictionary) && dictionary.TryGetValue(index, out UpgradeBase upgrade))
+            if (this.UpgradeInfoDic.TryGetValue(cardid.GetOriginalId(), out dictionary) && dictionary.TryGetValue(index, out UpgradeBase upgrade))
             {
                 DiceCardXmlInfo upgradeInfo = upgrade.GetUpgradeInfo(index, count);
                 ItemXmlDataList.instance.LogAddModCard(upgradeInfo);
                 return upgradeInfo;
             }
-            DiceCardXmlInfo upgradeInfo1 = this.FindUpgradeInfo(cardid, index, count).GetUpgradeInfo(index, count);
+            DiceCardXmlInfo upgradeInfo1 = this.FindUpgradeInfo(cardid.GetOriginalId(), index, count).GetUpgradeInfo(index, count);
             ItemXmlDataList.instance.LogAddModCard(upgradeInfo1);
             return upgradeInfo1;
         }

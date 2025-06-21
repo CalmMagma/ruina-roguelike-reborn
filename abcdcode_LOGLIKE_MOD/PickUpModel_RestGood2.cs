@@ -5,6 +5,7 @@
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
 using System;
+using System.Reflection;
 using UI;
 
 
@@ -63,7 +64,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             LogueBookModels.DeleteCard(cardid);
             if (UpgradeMetadata.UnpackPid(cardid.packageId, out UpgradeMetadata outdatedData))
-                LogueBookModels.AddUpgradeCard(new LorId(outdatedData.actualPid, cardid.id), mystery2.metadata.index, mystery2.metadata.count);
+                LogueBookModels.AddCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardid.GetOriginalId(), mystery2.metadata.index, mystery2.metadata.count).id);
             else
                 LogueBookModels.AddUpgradeCard(cardid, mystery2.metadata.index, mystery2.metadata.count);
             UISoundManager.instance.PlayEffectSound(UISoundType.Card_Apply);

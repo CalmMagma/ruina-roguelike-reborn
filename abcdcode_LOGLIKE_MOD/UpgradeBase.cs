@@ -7,6 +7,7 @@
 using LOR_DiceSystem;
 using System.Collections.Generic;
 using LOR_Localize;
+using System;
 
 namespace abcdcode_LOGLIKE_MOD
 {
@@ -54,22 +55,15 @@ namespace abcdcode_LOGLIKE_MOD
                         if (keyValuePair.Value != string.Empty)
                             this.upxmlinfo.DiceBehaviourList[keyValuePair.Key].Script = keyValuePair.Value;
                     }
-                    foreach (KeyValuePair<int, string> keyValuePair in this.upgradeinfo.abilitydata)
-                    {
-                        if (keyValuePair.Value != string.Empty)
-                            this.upxmlinfo.DiceBehaviourList[keyValuePair.Key].Script = keyValuePair.Value;
-                    }
                     if (this.upgradeinfo.costdata != -100)
                     {
                         int num = this.DoesCostReductionStack() ? this.upgradeinfo.costdata * count : this.upgradeinfo.costdata;
-                        if (this.upxmlinfo.Spec.Cost - num < 0)
-                            this.upxmlinfo.Spec.Cost = 0;
-                        else
-                            this.upxmlinfo.Spec.Cost -= num;
+                        this.upxmlinfo.Spec.Cost = Math.Max(0, num);
                     }
                     foreach (KeyValuePair<int, UpgradeBase.UpgradeInfo.DiceChangeData> keyValuePair in this.upgradeinfo.diceChangeData)
                     {
                         this.upxmlinfo.DiceBehaviourList[keyValuePair.Key].Detail = keyValuePair.Value.detail;
+                        this.upxmlinfo.DiceBehaviourList[keyValuePair.Key].Type = keyValuePair.Value.type;
                         this.upxmlinfo.DiceBehaviourList[keyValuePair.Key].MotionDetail = keyValuePair.Value.motion;
                     }
                     if (!this.DoesAddedDiceStack())
@@ -77,7 +71,7 @@ namespace abcdcode_LOGLIKE_MOD
                         foreach (DiceBehaviour addedDie in this.upgradeinfo.addedDice)
                             this.upxmlinfo.DiceBehaviourList.Add(addedDie);
                     }
-                    for (int index1 = 0; index1 < count; ++index1)
+                    for (int index1 = 0; index1 < count; index1++)
                     {
                         foreach (KeyValuePair<int, int> keyValuePair in this.upgradeinfo.mindata)
                             this.upxmlinfo.DiceBehaviourList[keyValuePair.Key].Min += keyValuePair.Value;
@@ -177,6 +171,7 @@ namespace abcdcode_LOGLIKE_MOD
             public void ChangeDiceType(int index, BehaviourDetail detail)
             {
                 MotionDetail motionDetail = MotionDetail.G;
+                BehaviourType typeShit = BehaviourType.Atk;
                 switch (detail)
                 {
                     case BehaviourDetail.Slash:
@@ -195,9 +190,22 @@ namespace abcdcode_LOGLIKE_MOD
                         motionDetail = MotionDetail.E;
                         break;
                 }
+                switch (detail)
+                {
+                    case BehaviourDetail.Slash:
+                    case BehaviourDetail.Penetrate:
+                    case BehaviourDetail.Hit:
+                        typeShit = BehaviourType.Atk;
+                        break;
+                    case BehaviourDetail.Guard:
+                    case BehaviourDetail.Evasion:
+                        typeShit = BehaviourType.Atk;
+                        break;
+                }
                 this.diceChangeData[index] = new UpgradeBase.UpgradeInfo.DiceChangeData()
                 {
                     detail = detail,
+                    type = typeShit,
                     motion = motionDetail
                 };
             }
@@ -257,6 +265,7 @@ namespace abcdcode_LOGLIKE_MOD
             public class DiceChangeData
             {
                 public BehaviourDetail detail;
+                public BehaviourType type;
                 public MotionDetail motion;
             }
         }

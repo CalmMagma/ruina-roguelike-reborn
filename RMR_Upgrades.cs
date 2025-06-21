@@ -670,7 +670,7 @@ namespace RogueLike_Mod_Reborn
             base.Init();
             // uhh idk if upgradebase persists between upgrades so Idk if I can make it increment max increase by 1
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 1);
+            this.upgradeinfo.SetDice(0, 2, 3);
             this.baseid = new LorId(LogLikeMod.ModId, 303005);
         }
     }

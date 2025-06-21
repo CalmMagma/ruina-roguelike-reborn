@@ -987,19 +987,21 @@ namespace abcdcode_LOGLIKE_MOD
             model.unitData.bookItem.ClassInfo.RangeType = page.RangeType;
             model.unitData.bookItem.TryGainUniquePassive();
             model.unitData.bookItem.SetOriginalStat();
-            if (LogueBookModels.playersstatadders[model.unitData].Count > 0)
-                LogueBookModels.ApplyPlayerStat(model, LogueBookModels.playersstatadders[model.unitData]);
             model.unitData.bookItem.SetOriginalSpeed();
             model.unitData.bookItem.SetOriginalResists();
             model.unitData.bookItem.SetOriginalPlayPoint();
+            if (LogueBookModels.playersstatadders[model.unitData].Count > 0)
+                LogueBookModels.ApplyPlayerStat(model, LogueBookModels.playersstatadders[model.unitData]);
             model.unitData.bookItem.SetOriginalCharacterName();
             typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue((object)model.unitData.bookItem, (object)classInfo.CharacterSkin[0]);
             typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue((object)model.unitData.bookItem, (object)classInfo.CharacterSkin[0]);
             model.hp = (float)Mathf.RoundToInt(num * (float)model.MaxHp);
+            double startHp = model.hp;
             foreach (PassiveAbilityBase passive in model.unitData.bookItem.CreatePassiveList())
             {
-                double startHp = (double)passive.GetStartHp((float)(int)model.hp);
+                startHp = (double)passive.GetStartHp((float)(int)model.hp);
             }
+            model.hp = (float)startHp;
             if ((double)model.hp <= 0.0 && !model.isDead)
                 model.hp = 1f;
             List<DiceCardXmlInfo> fieldValue = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>((object)unitData.bookItem, "_onlyCards");
@@ -1054,16 +1056,15 @@ namespace abcdcode_LOGLIKE_MOD
             model.unitData.bookItem.ClassInfo.EquipEffect.Speed = speedMax;
             model.unitData.bookItem.SetSpeedDiceMax(speedMax);
 
-            int speedMin = model.unitData.bookItem.SpeedMax + StatAdderManager.GetSpeedMin(adder);
-            model.unitData.bookItem.ClassInfo.EquipEffect.SpeedMin = speedMin;
+            int speedMin = model.unitData.bookItem.SpeedMin + StatAdderManager.GetSpeedMin(adder);
+            model.unitData.bookItem.ClassInfo.EquipEffect.Speed = speedMin;
             model.unitData.bookItem.SetSpeedDiceMin(speedMin);
 
             int startPlayPoint = model.unitData.bookItem.GetStartPlayPoint() + StatAdderManager.GetStartPlayPoint(adder);
             model.unitData.bookItem.ClassInfo.EquipEffect.StartPlayPoint = startPlayPoint;
             model.unitData.bookItem.SetStartPlayPoint(startPlayPoint);
 
-            int maxPlayPoint = model.unitData.bookItem.GetMaxPlayPoint() + StatAdderManager.GetMaxPlayPoint(adder);
-            model.unitData.bookItem.ClassInfo.EquipEffect.StartPlayPoint = maxPlayPoint;
+            int maxPlayPoint = model.unitData.bookItem.ClassInfo.EquipEffect.MaxPlayPoint + StatAdderManager.GetMaxPlayPoint(adder);
             model.unitData.bookItem.SetStartPlayPoint(maxPlayPoint);
 
             foreach (LogStatAdder logStatAdder in adder)
