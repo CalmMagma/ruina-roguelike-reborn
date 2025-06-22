@@ -69,11 +69,12 @@ namespace RogueLike_Mod_Reborn
                         self.CopySelf();
                     self.AddCost(-1);
                     List<DiceBehaviour> dicelist = card.DiceBehaviourList;
-                    dicelist[0].Min -= 2;
-                    dicelist[0].Dice -= 2;
+                    dicelist[0].Min = 1 + (2 * self.GetCost());
+                    dicelist[0].Dice = 3 + (2 * self.GetCost());
                     card.DiceBehaviourList = dicelist;
                 }
             }
+
 
             public override void OnScrollUp(BattleUnitModel unit, BattleDiceCardModel self)
             {
@@ -85,8 +86,8 @@ namespace RogueLike_Mod_Reborn
                         self.CopySelf();
                     self.AddCost(1);
                     List<DiceBehaviour> dicelist = card.DiceBehaviourList;
-                    dicelist[0].Min += 2;
-                    dicelist[0].Dice += 2;
+                    dicelist[0].Min = 1 + (2 * self.GetCost());
+                    dicelist[0].Dice = 3 + (2 * self.GetCost());
                     card.DiceBehaviourList = dicelist;
                 }
             }
@@ -96,6 +97,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnAddToHand(owner);
             owner.AddScrollAbility<ScrollAbility_RMR_Shiv>(card.card);
+            card.card.ResetToOriginalData();
         }
         
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
