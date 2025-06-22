@@ -53,9 +53,9 @@ namespace RogueLike_Mod_Reborn
 
     public class RMREffect_ViciousGlasses : GlobalLogueEffectBase
     {
-        public override void OnStartBattleAfter()
+        public override void OnRoundStart(StageController stage)
         {
-            base.OnStartBattleAfter();
+            base.OnRoundStart(stage);   
             var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
             for (int i = 0; i < list.Count; i++)
             {
@@ -170,6 +170,15 @@ namespace RogueLike_Mod_Reborn
         public static Rarity ItemRarity = Rarity.Rare;
         public override string KeywordId => "RMR_BleedingSpleen";
         public override string KeywordIconId => "RMR_BleedingSpleen";
+        public override void OnRoundStart(StageController stage)
+        {
+            base.OnRoundStart(stage);
+            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].bufListDetail.AddKeywordBufByEtc(RoguelikeBufs.CritChance, 5);
+            }
+        }
         public override void OnCrit(BattleUnitModel critter, BattleUnitModel target)
         {
             base.OnCrit(critter, target);
@@ -179,13 +188,14 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnKillUnit(killer, target);
             int BleedToTransfer = target.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding);
+            if (BleedToTransfer < 10) return;
             BleedToTransfer /= 2;
             List<BattleUnitModel> EnemyList = target.Team.GetList();
             for (int i = 0; i < EnemyList.Count; i++)
             {
                 if (EnemyList[i] != target)
                 {
-                    EnemyList[i].bufListDetail.AddKeywordBufByEtc(KeywordBuf.Bleeding, BleedToTransfer, killer);
+                    EnemyList[i].TakeDamage(BleedToTransfer, DamageType.ETC, killer);
                 }
             }
         }
@@ -195,9 +205,9 @@ namespace RogueLike_Mod_Reborn
         public static Rarity ItemRarity = Rarity.Uncommon;
         public override string KeywordId => "RMR_HarvestScythe";
         public override string KeywordIconId => "RMR_HarvestScythe";
-        public override void OnStartBattleAfter()
+        public override void OnRoundStart(StageController stage)
         {
-            base.OnStartBattleAfter();
+            base.OnRoundStart(stage);
             var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
             for (int i = 0; i < list.Count; i++)
             {
