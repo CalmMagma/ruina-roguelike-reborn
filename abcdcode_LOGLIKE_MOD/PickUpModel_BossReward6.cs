@@ -13,12 +13,11 @@ namespace abcdcode_LOGLIKE_MOD
     [HideFromItemCatalog]
     public class PickUpModel_BossReward6 : PickUpModelBase
     {
-        public PickUpModel_BossReward6()
+        public override string KeywordId => "GlobalEffect_TwoLeafClover";
+        public override string KeywordIconId => "BossReward6";
+        public PickUpModel_BossReward6():base()
         {
-            this.Name = TextDataModel.GetText("BossReward6Name");
-            this.Desc = TextDataModel.GetText("BossReward6Desc");
-            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-            this.ArtWork = "BossReward6";
+
         }
 
         public override bool IsCanPickUp(UnitDataModel target)
@@ -37,13 +36,10 @@ namespace abcdcode_LOGLIKE_MOD
 
         public class FourCloverEffect : GlobalLogueEffectBase
         {
-            public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward6"];
+            public override string KeywordId => "GlobalEffect_TwoLeafClover";
+            public override string KeywordIconId => "BossReward6";
 
             public static Rarity ItemRarity = Rarity.Unique;
-
-            public override string GetEffectName() => TextDataModel.GetText("BossReward6_1Name");
-
-            public override string GetEffectDesc() => TextDataModel.GetText("BossReward6_1Desc");
 
             public override int ChangeSuccCostValue() => 1;
 

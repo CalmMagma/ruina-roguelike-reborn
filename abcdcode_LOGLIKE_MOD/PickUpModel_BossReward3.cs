@@ -12,23 +12,20 @@ namespace abcdcode_LOGLIKE_MOD
     {
         public static int[] MoneyRewardTable = new int[6]
         {
-    20,
-    25,
     30,
-    35,
     40,
-    50
+    50,
+    60,
+    70,
+    80
         };
-
-        public PickUpModel_BossReward3()
+        public override string KeywordId => "GlobalEffect_LuckyTael";
+        public override string KeywordIconId => "BossReward3";
+        public PickUpModel_BossReward3():base()
         {
             int index = (int)LogLikeMod.curchaptergrade;
             if (index > 5)
                 index = 5;
-            this.Name = TextDataModel.GetText("BossReward3Name");
-            this.Desc = TextDataModel.GetText("BossReward3Desc", (object)PickUpModel_BossReward3.MoneyRewardTable[index]);
-            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-            this.ArtWork = "BossReward3";
         }
 
         public override void OnPickUp()

@@ -13,12 +13,11 @@ namespace abcdcode_LOGLIKE_MOD
     public class PickUpModel_BossReward5_1 : PickUpModelBase
     {
         public static DiceCardXmlInfo card;
-
-        public PickUpModel_BossReward5_1()
+        public override string KeywordId => "GlobalEffect_CupOfGreed_Effect";
+        public override string KeywordIconId => "BossReward5";
+        public PickUpModel_BossReward5_1():base()
         {
-            this.Name = TextDataModel.GetText("BossReward5_1Name");
-            this.Desc = TextDataModel.GetText("BossReward5_1Desc", PickUpModel_BossReward5_1.card == null ? (object)"[card]" : (object)PickUpModel_BossReward5_1.card.Name);
-            this.ArtWork = "BossReward5";
+
         }
 
         public override void OnPickUp(BattleUnitModel model)

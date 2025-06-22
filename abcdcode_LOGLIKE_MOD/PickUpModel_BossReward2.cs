@@ -31,15 +31,13 @@ namespace abcdcode_LOGLIKE_MOD
     13
         };
 
-        public PickUpModel_BossReward2()
+        public override string KeywordId => "GlobalEffect_Retrospection";
+        public override string KeywordIconId => "BossReward2_1";
+        public PickUpModel_BossReward2():base()
         {
             int index = (int)LogLikeMod.curchaptergrade;
             if (index > 5)
                 index = 5;
-            this.Name = TextDataModel.GetText("BossReward2Name");
-            this.Desc = TextDataModel.GetText("BossReward2Desc", (object)PickUpModel_BossReward2.CardRewardTable[index], (object)PickUpModel_BossReward2.EquipRewardTable[index]);
-            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-            this.ArtWork = "BossReward2_1";
             switch (LogLikeMod.curchaptergrade)
             {
                 case ChapterGrade.Grade1:

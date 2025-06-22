@@ -17,12 +17,12 @@ namespace abcdcode_LOGLIKE_MOD
         public int[] EquipValue = new int[6] { 1, 1, 2, 2, 3, 3 };
         public int[] MoneyValue = new int[6]
         {
-            5,
-            8,
-            11,
-            14,
+            12,
             17,
-            20
+            22,
+            27,
+            32,
+            37
         };
 
         public override void SwapFrame(int id)
