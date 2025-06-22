@@ -57,12 +57,52 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_ShivThrow : DiceCardSelfAbilityBase
     {
+        public class ScrollAbility_RMR_Shiv : ScrollAbilityBase
+        {
+            public override void OnScrollDown(BattleUnitModel unit, BattleDiceCardModel self)
+            {
+                base.OnScrollDown(unit, self);
+                if (self.GetCost() > 0)
+                {
+                    var card = self.XmlData;
+                    if (self._originalXmlData == null)
+                        self.CopySelf();
+                    self.AddCost(-1);
+                    List<DiceBehaviour> dicelist = card.DiceBehaviourList;
+                    dicelist[0].Min -= 2;
+                    dicelist[0].Dice -= 2;
+                    card.DiceBehaviourList = dicelist;
+                }
+            }
+
+            public override void OnScrollUp(BattleUnitModel unit, BattleDiceCardModel self)
+            {
+                base.OnScrollUp(unit, self);
+                if (self.GetCost() < 5 && self.GetCost() + 1 <= unit.PlayPoint - unit.cardSlotDetail.ReservedPlayPoint)
+                {
+                    var card = self.XmlData;
+                    if (self._originalXmlData == null)
+                        self.CopySelf();
+                    self.AddCost(1);
+                    List<DiceBehaviour> dicelist = card.DiceBehaviourList;
+                    dicelist[0].Min += 2;
+                    dicelist[0].Dice += 2;
+                    card.DiceBehaviourList = dicelist;
+                }
+            }
+        }
+
+        public override void OnAddToHand(BattleUnitModel owner)
+        {
+            base.OnAddToHand(owner);
+            owner.AddScrollAbility<ScrollAbility_RMR_Shiv>(card.card);
+        }
+        
         public override void OnUseInstance(BattleUnitModel unit, BattleDiceCardModel self, BattleUnitModel targetUnit)
         {
             base.OnUseInstance(unit, self, targetUnit);
             self.exhaust = true;
-            BattleDiceCardModel cardItem = BattleDiceCardModel.CreatePlayingCard(ItemXmlDataList.instance.GetCardItem(new LorId(RMRCore.packageId, -100)));
-            BattleDiceBehavior battleDiceBehavior = cardItem.CreateDiceCardBehaviorList()[0];
+            BattleDiceBehavior battleDiceBehavior = self.CreateDiceCardBehaviorList()[0];
             var list = unit.allyCardDetail.GetHand();
             list.RemoveAll(x => x.GetID() == self.GetID());
             list.SortByCost();

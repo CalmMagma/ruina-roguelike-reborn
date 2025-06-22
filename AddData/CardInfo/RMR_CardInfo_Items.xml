@@ -6,11 +6,11 @@
     <Name>Shiv</Name>
     <Artwork>Shiv.png</Artwork>
     <Rarity>Common</Rarity>
-    <Spec Range="Instance" Cost="1" />
+    <Spec Range="Instance" Cost="0" />
     <Script>RMR_ShivThrow</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sword_Z" Script="" Desc="" />
+      <Behaviour Min="1" Dice="3" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sword_Z" Script="" Desc="" />
     </BehaviourList>
     <Chapter>1</Chapter>
     <Priority>0</Priority>
