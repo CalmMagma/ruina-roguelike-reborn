@@ -165,6 +165,12 @@ namespace RogueLike_Mod_Reborn
             onCrit = false;
         }
 
+        public override void OnRoundEndTheLast()
+        {
+            base.OnRoundEndTheLast();
+            this.Destroy();
+        }
+
         public class CritVfx : MonoBehaviour
         {
             SpriteRenderer renderer;

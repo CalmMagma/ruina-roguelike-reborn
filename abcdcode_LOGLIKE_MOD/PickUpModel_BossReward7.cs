@@ -34,6 +34,7 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_BossReward7.LimitedEditionEffect());
         }
 
+        [HideFromItemCatalog]
         public class LimitedEditionEffect : GlobalLogueEffectBase
         {
             public static Rarity ItemRarity = Rarity.Unique;

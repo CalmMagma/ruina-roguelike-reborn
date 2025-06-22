@@ -323,5 +323,6 @@ namespace abcdcode_LOGLIKE_MOD
             alarm.Open();
             UIControlManager.Instance.SelectSelectableForcely(alarm.YesButton, false);
         }
+    
     }
 }

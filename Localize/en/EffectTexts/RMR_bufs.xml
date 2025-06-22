@@ -4,12 +4,12 @@
 
     <BattleEffectText ID="RMR_CriticalStrike">
 	  <Name>Critical Strike</Name>
-	  <Desc>Attacks have {0}% chance to deal +50% damage and stagger damage.</Desc>
+	  <Desc>Attacks this Scene have {0}% chance to deal +50% damage and stagger damage.</Desc>
 	</BattleEffectText>
 	
     <BattleEffectText ID="RMR_CriticalStrike_Keyword">
 	  <Name>Critical Strike X</Name>
-	  <Desc>Attacks have X% chance to deal +50% damage and stagger damage.</Desc>
+	  <Desc>Attacks this Scene have X% chance to deal +50% damage and stagger damage.</Desc>
 	</BattleEffectText>
 	
 	<BattleEffectText ID="RMR_Shield">

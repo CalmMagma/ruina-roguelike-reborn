@@ -2371,7 +2371,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.LogOpenButton = ModdingUtils.CreateLogSelectable(__instance.transform, "LogLikeModIcon", new Vector2(1f, 1f), new Vector2(-70f, 350f), new Vector2(100f, 100f));
                 LogLikeMod.LogOpenButton.gameObject.AddComponent<FrameDummy>();
                 Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
-                buttonClickedEvent.AddListener((UnityAction)(() =>
+                buttonClickedEvent.AddListener(() =>
                 {
                     SingletonBehavior<UIMainOverlayManager>.Instance.Close();
                     List<string> ExceptModNames;
@@ -2428,7 +2428,7 @@ namespace abcdcode_LOGLIKE_MOD
                             __instance.ConfirmSendInvitation();
                         }
                     }
-                }));
+                });
                 LogLikeMod.LogOpenButton.onClick = buttonClickedEvent;
                 LogLikeMod.LogOpenButton.SelectEvent = new UnityEventBasedata();
                 LogLikeMod.LogOpenButton.SelectEvent.AddListener((BaseEventData e) =>
@@ -2449,7 +2449,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.LogContinueButton = ModdingUtils.CreateLogSelectable(__instance.transform, "LogLikeModIcon_Continue", new Vector2(1f, 1f), new Vector2(-70f, 250f), new Vector2(100f, 100f));
                 LogLikeMod.LogContinueButton.gameObject.AddComponent<FrameDummy>();
                 Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
-                buttonClickedEvent.AddListener((() =>
+                buttonClickedEvent.AddListener(() =>
                 {
                     List<string> ExceptModNames;
                     SingletonBehavior<UIMainOverlayManager>.Instance.Close();
@@ -2474,7 +2474,7 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         __instance.ConfirmSendInvitation();
                     }
-                }));
+                });
                 LogLikeMod.LogContinueButton.onClick = buttonClickedEvent;
                 LogLikeMod.LogContinueButton.SelectEvent = new UnityEventBasedata();
                 LogLikeMod.LogContinueButton.SelectEvent.AddListener((BaseEventData e) =>

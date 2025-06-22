@@ -76,6 +76,7 @@
   <text id="ui_RMR_StartNewRunDesc">Start a new Roguelike run. If you have an on-going run, it will be overriden.</text>
   <text id="ui_RMR_ContinueRun">Continue Run</text>
   <text id="ui_RMR_ContinueRunDesc">Continue a previous Roguelike run.</text>
+  <text id="ui_RMR_ConfirmStartNewRun">Are you sure you wish to start a new run? The saved one will be overriden.</text>
 
 
 </localize>
