@@ -58,6 +58,9 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.booklist.Add(bookModel);
         }
 
+        /// <summary>
+        /// Adds a passive reward immediately.
+        /// </summary>
         public static void AddPassiveReward(RewardInfo info)
         {
             LogLikeMod.rewards_InStage.Add(info);
@@ -66,6 +69,9 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<ShopManager>.Instance.curshop.HideShop();
         }
 
+        /// <summary>
+        /// Adds a passive reward immediately by the reward's LorId.
+        /// </summary>
         public static void AddPassiveReward(LorId id)
         {
             RewardInfo rewardInfo = new RewardInfo()
@@ -80,10 +86,18 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<ShopManager>.Instance.curshop.HideShop();
         }
 
+        /// <summary>
+        /// Edits the name of the item upon creating it in a shop.<br></br>
+        /// Can be edited directly (ref keyword).
+        /// </summary>
         public virtual void EditName(ref string name)
         {
         }
 
+        /// <summary>
+        /// Edits the description of the item upon creating it in a shop.<br></br>
+        /// Can be edited directly (ref keyword).
+        /// </summary>
         public virtual void EditDesc(ref string desc)
         {
             if (this.Keywords.Length == 0)
@@ -97,17 +111,33 @@ namespace abcdcode_LOGLIKE_MOD
             
         }
 
+        /// <summary>
+        /// Whether the item is consumable or permanent.
+        /// </summary>
         public virtual ShopRewardType GetShopType()
         {
             return Singleton<RewardPassivesList>.Instance.GetPassiveInfo(this.id).shoptype;
         }
 
+        /// <summary>
+        /// Whether the item is a key page reward or not.
+        /// </summary>
         public virtual bool IsEquipReward() => false;
 
+        /// <summary>
+        /// Whether the item can show up in a shop or not.
+        /// </summary>
         public virtual bool IsCanAddShop() => true;
 
+        /// <summary>
+        /// Runs upon being bought in a shop.
+        /// </summary>
         public virtual void OnPickUpShop(ShopGoods good) { }
 
+        /// <summary>
+        /// Executes upon being picked up or added via ShopPickUpModel.AddPassiveReward().<br></br>
+        /// Is <b>NOT</b> ran upon being bought in a shop.
+        /// </summary>
         public override void OnPickUp() => base.OnPickUp();
     }
 }

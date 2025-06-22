@@ -240,7 +240,7 @@ namespace abcdcode_LOGLIKE_MOD
                 textUpDownButton1.targetGraphic = image2;
                 textUpDownButton1.Init(new MysteryBase.TextUpDownButton.DownEvent(textUpDown.ScrollUp));
                 this.FrameObj.Add("TextUpDown_Up", textUpDownButton1.gameObject);
-                Image image3 = ModdingUtils.CreateImage(curFrame.transform, "MysteryArrow", new Vector2(1f, 1f), new Vector2(75f, -200f - y), new Vector2(40f, 40f));
+                Image image3 = ModdingUtils.CreateImage(curFrame.transform, "MysteryArrow", new Vector2(1f, 1f), new Vector2(75f, -150f - y), new Vector2(40f, 40f));
                 MysteryBase.TextUpDownButton textUpDownButton2 = image3.gameObject.AddComponent<MysteryBase.TextUpDownButton>();
                 textUpDownButton2.targetGraphic = image3;
                 textUpDownButton2.Init(new MysteryBase.TextUpDownButton.DownEvent(textUpDown.ScrollDown));

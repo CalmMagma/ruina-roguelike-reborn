@@ -287,5 +287,41 @@ namespace abcdcode_LOGLIKE_MOD
             return new LorId(data.GetString("workshopId"), id);
         }
 
+        public static void SetChoiceAlarmText(this UIAlarmPopup alarm, string text = "", ConfirmEvent confirmFunc = null)
+        {
+            if (alarm.IsOpened())
+            {
+                alarm.Close();
+            }
+            if (alarm.ob_blue.activeSelf)
+            {
+                alarm.ob_blue.gameObject.SetActive(false);
+            }
+            if (!alarm.ob_normal.activeSelf)
+            {
+                alarm.ob_normal.gameObject.SetActive(true);
+            }
+            if (alarm.ob_Reward.activeSelf)
+            {
+                alarm.ob_Reward.SetActive(false);
+            }
+            alarm.currentAnimState = UIAlarmPopup.UIAlarmAnimState.Normal;
+            alarm.currentmode = AnimatorUpdateMode.UnscaledTime;
+            foreach (GameObject gameObject in alarm.ButtonRoots)
+            {
+                gameObject.gameObject.SetActive(false);
+            }
+            if (alarm.ob_BlackBg.activeSelf)
+            {
+                alarm.ob_BlackBg.SetActive(false);
+            }
+            alarm.currentAlarmType = UIAlarmType.Default;
+            UIAlarmButtonType index = UIAlarmButtonType.YesNo;
+            alarm.txt_alarm.text = text;
+            alarm._confirmEvent = confirmFunc;
+            alarm.ButtonRoots[(int)index].gameObject.SetActive(true);
+            alarm.Open();
+            UIControlManager.Instance.SelectSelectableForcely(alarm.YesButton, false);
+        }
     }
 }

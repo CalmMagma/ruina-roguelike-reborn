@@ -19,7 +19,7 @@ namespace abcdcode_LOGLIKE_MOD
         public override void OnClickChoice(int choiceid)
         {
             if (this.curFrame.FrameID == 1)
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new MysteryModel_Mystery_Ch2_1.MeatPieQuest());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new MysteryModel_Mystery_Ch2_1.MeatPieQuest());
             if (this.curFrame.FrameID == 2)
                 MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1200011), StageType.Normal);
             base.OnClickChoice(choiceid);

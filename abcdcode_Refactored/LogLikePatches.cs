@@ -2373,27 +2373,60 @@ namespace abcdcode_LOGLIKE_MOD
                 Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
                 buttonClickedEvent.AddListener((UnityAction)(() =>
                 {
+                    SingletonBehavior<UIMainOverlayManager>.Instance.Close();
                     List<string> ExceptModNames;
-                    if (LogLikeMod.CheckExceptionModExist(out ExceptModNames))
+                    if (LoguePlayDataSaver.CheckPlayerData()) { 
+                        UIAlarmPopup.instance.SetChoiceAlarmText(
+                        TextDataModel.GetText("ui_RMR_ConfirmStartNewRun"),
+                        (bool yes) => {
+                            if (yes)
+                            {
+                                if (LogLikeMod.CheckExceptionModExist(out ExceptModNames))
+                                {
+                                    string text = TextDataModel.GetText("ui_ExceptionWithLog") + Environment.NewLine;
+                                    foreach (string str in ExceptModNames)
+                                        text = $"{text}-{str}{Environment.NewLine}";
+                                    UIAlarmPopup.instance.SetAlarmText(text);
+                                }
+                                else
+                                {
+                                    bool flag = true;
+                                    __instance.SetCustomInvToggle(true);
+                                    foreach (UIInvitationBookSlot invitationbookSlot in __instance.invitationbookSlots)
+                                    {
+                                        if (flag)
+                                            invitationbookSlot.ApplySlotid(new LorId(LogLikeMod.ModId, -853), true);
+                                        else
+                                            invitationbookSlot.SetEmptySlot();
+                                        flag = false;
+                                    }
+                                    __instance.ConfirmSendInvitation();
+                                }
+                            } 
+                        });
+                    } else
                     {
-                        string text = TextDataModel.GetText("ui_ExceptionWithLog") + Environment.NewLine;
-                        foreach (string str in ExceptModNames)
-                            text = $"{text}-{str}{Environment.NewLine}";
-                        UIAlarmPopup.instance.SetAlarmText(text);
-                    }
-                    else
-                    {
-                        bool flag = true;
-                        __instance.SetCustomInvToggle(true);
-                        foreach (UIInvitationBookSlot invitationbookSlot in __instance.invitationbookSlots)
+                        if (LogLikeMod.CheckExceptionModExist(out ExceptModNames))
                         {
-                            if (flag)
-                                invitationbookSlot.ApplySlotid(new LorId(LogLikeMod.ModId, -853), true);
-                            else
-                                invitationbookSlot.SetEmptySlot();
-                            flag = false;
+                            string text = TextDataModel.GetText("ui_ExceptionWithLog") + Environment.NewLine;
+                            foreach (string str in ExceptModNames)
+                                text = $"{text}-{str}{Environment.NewLine}";
+                            UIAlarmPopup.instance.SetAlarmText(text);
                         }
-                        __instance.ConfirmSendInvitation();
+                        else
+                        {
+                            bool flag = true;
+                            __instance.SetCustomInvToggle(true);
+                            foreach (UIInvitationBookSlot invitationbookSlot in __instance.invitationbookSlots)
+                            {
+                                if (flag)
+                                    invitationbookSlot.ApplySlotid(new LorId(LogLikeMod.ModId, -853), true);
+                                else
+                                    invitationbookSlot.SetEmptySlot();
+                                flag = false;
+                            }
+                            __instance.ConfirmSendInvitation();
+                        }
                     }
                 }));
                 LogLikeMod.LogOpenButton.onClick = buttonClickedEvent;
@@ -2419,6 +2452,7 @@ namespace abcdcode_LOGLIKE_MOD
                 buttonClickedEvent.AddListener((() =>
                 {
                     List<string> ExceptModNames;
+                    SingletonBehavior<UIMainOverlayManager>.Instance.Close();
                     if (LogLikeMod.CheckExceptionModExist(out ExceptModNames))
                     {
                         string text = TextDataModel.GetText("ui_ExceptionWithLog") + Environment.NewLine;
