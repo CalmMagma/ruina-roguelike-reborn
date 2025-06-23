@@ -13,12 +13,11 @@ namespace abcdcode_LOGLIKE_MOD
     [HideFromItemCatalog]
     public class PickUpModel_BossReward8 : PickUpModelBase
     {
-        public PickUpModel_BossReward8()
+        public override string KeywordId => "GlobalEffect_BlastFurnace";
+        public override string KeywordIconId => "BossReward8";
+        public PickUpModel_BossReward8():base()
         {
-            this.Name = TextDataModel.GetText("BossReward8Name");
-            this.Desc = TextDataModel.GetText("BossReward8Desc");
-            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-            this.ArtWork = "BossReward8";
+
         }
 
         public override bool IsCanPickUp(UnitDataModel target)
@@ -34,14 +33,10 @@ namespace abcdcode_LOGLIKE_MOD
 
         public class DragonLightRoadEffect : GlobalLogueEffectBase
         {
+            public override string KeywordId => "GlobalEffect_BlastFurnace";
+            public override string KeywordIconId => "BossReward8";
+
             public static Rarity ItemRarity = Rarity.Unique;
-
-            public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward8"];
-
-            public override string GetEffectName() => TextDataModel.GetText("BossReward8Name");
-
-            public override string GetEffectDesc() => TextDataModel.GetText("BossReward8Desc");
-
             public override float CraftCostMultiple(CraftEffect effect) => 0.8f;
         }
     }

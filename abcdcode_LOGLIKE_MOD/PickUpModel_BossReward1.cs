@@ -13,12 +13,12 @@ namespace abcdcode_LOGLIKE_MOD
     [HideFromItemCatalog]
     public class PickUpModel_BossReward1 : PickUpModelBase
     {
-        public PickUpModel_BossReward1()
+        public override string KeywordId => "GlobalEffect_Bookbinder";
+        public override string KeywordIconId => "BossReward1";
+
+        public PickUpModel_BossReward1():base()
         {
-            this.Name = TextDataModel.GetText("BossReward1Name");
-            this.Desc = TextDataModel.GetText("BossReward1Desc");
-            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-            this.ArtWork = "BossReward1";
+
         }
 
         public override void OnPickUp()
@@ -30,6 +30,15 @@ namespace abcdcode_LOGLIKE_MOD
 
         public class BossReward1Effect : GlobalLogueEffectBase
         {
+
+            public override string KeywordId => "GlobalEffect_Bookbinder_Effect";
+            public override string KeywordIconId => "BossReward1";
+
+            public override int GetStack()
+            {
+                return this.stack * 2;
+            }
+
             public int stack;
 
             public static Rarity ItemRarity = Rarity.Unique;

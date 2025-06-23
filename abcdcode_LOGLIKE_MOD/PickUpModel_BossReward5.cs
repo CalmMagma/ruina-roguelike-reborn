@@ -13,12 +13,11 @@ namespace abcdcode_LOGLIKE_MOD
     [HideFromItemCatalog]
     public class PickUpModel_BossReward5 : PickUpModelBase
     {
-        public PickUpModel_BossReward5()
+        public override string KeywordId => "GlobalEffect_CupOfGreed";
+        public override string KeywordIconId => "BossReward5";
+        public PickUpModel_BossReward5():base()
         {
-            this.Name = TextDataModel.GetText("BossReward5Name");
-            this.Desc = TextDataModel.GetText("BossReward5Desc");
-            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-            this.ArtWork = "BossReward5";
+
         }
 
         public override bool IsCanPickUp(UnitDataModel target)
@@ -36,15 +35,12 @@ namespace abcdcode_LOGLIKE_MOD
 
         public class WildCardEffect : GlobalLogueEffectBase
         {
+            public override string KeywordId => "GlobalEffect_CupOfGreed_Effect";
+            public override string KeywordIconId => "BossReward5";
+
             public bool CanUse;
 
             public static Rarity ItemRarity = Rarity.Rare;
-
-            public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward5"];
-
-            public override string GetEffectName() => TextDataModel.GetText("BossReward5Name");
-
-            public override string GetEffectDesc() => TextDataModel.GetText("BossReward5Desc");
 
             public override void OnStartBattle()
             {
