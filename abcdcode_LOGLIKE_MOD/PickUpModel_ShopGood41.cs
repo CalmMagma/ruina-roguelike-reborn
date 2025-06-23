@@ -26,11 +26,13 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override void OnPickUpShop(ShopGoods good)
         {
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood41.Shop41Effect());
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_ShopGood41.Shop41Effect());
         }
 
         public class Shop41Effect : GlobalLogueEffectBase
         {
+            public static Rarity ItemRarity = Rarity.Uncommon;
+
             public override Sprite GetSprite() => LogLikeMod.ArtWorks["ShopPassive41"];
 
             public override string GetEffectName()

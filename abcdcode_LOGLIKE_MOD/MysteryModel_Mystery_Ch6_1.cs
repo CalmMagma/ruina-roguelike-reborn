@@ -21,7 +21,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (choiceid == 0)
                 {
-                    foreach (DiceCardItemModel diceCardItemModel in LogueBookModels.GetCardList(true, true).FindAll((Predicate<DiceCardItemModel>)(x => x.ClassInfo.CheckCanUpgrade() && x.ClassInfo.Chapter < 6)))
+                    foreach (DiceCardItemModel diceCardItemModel in LogueBookModels.GetCardList(true, true).FindAll(x => x.ClassInfo.CheckCanUpgrade() && x.ClassInfo.Chapter < 6))
                     {
                         int num = diceCardItemModel.num;
                         LorId id = diceCardItemModel.ClassInfo.id;
@@ -34,7 +34,7 @@ namespace abcdcode_LOGLIKE_MOD
                             }
                         }
                     }
-                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new MysteryModel_Mystery_Ch6_1.Mystery6_1Effect1());
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new MysteryModel_Mystery_Ch6_1.Mystery6_1Effect1());
                 }
                 if (choiceid == 1)
                 {
@@ -47,7 +47,7 @@ namespace abcdcode_LOGLIKE_MOD
                     LogLikeMod.rewards.Add(Singleton<DropBookXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 6004)));
                 }
                 if (choiceid == 2)
-                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new MysteryModel_Mystery_Ch6_1.Mystery6_1Effect2());
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new MysteryModel_Mystery_Ch6_1.Mystery6_1Effect2());
             }
             base.OnClickChoice(choiceid);
         }

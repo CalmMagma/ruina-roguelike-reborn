@@ -1046,7 +1046,7 @@ namespace abcdcode_LOGLIKE_MOD
                 return orig(self, cardId);
             if (!((List<DiceCardXmlInfo>)typeof(DeckModel).GetField("_deck", AccessTools.all).GetValue((object)self)).Remove(ItemXmlDataList.instance.GetCardItem(cardId)))
                 return false;
-            LogueBookModels.AddCard(cardId);
+            LogueBookModels.AddCard(cardId, 1, false);
             return true;
         }
 

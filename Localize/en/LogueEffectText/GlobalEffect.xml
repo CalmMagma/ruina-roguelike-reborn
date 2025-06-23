@@ -145,7 +145,7 @@ Can be used once per battle.</Desc>
 
     <LogueEffectInfo Id="RMR_HarvestScythe">
     <Name>Harvester's Scythe</Name> 
-    <Desc>At the start of the Act, give 5 Critical Strike to all allies. Whenever any character crits, they restore 5 HP.</Desc> 
+    <Desc>At the start of each Scene, give 5 Critical Strike to all allies. Whenever any character crits, they restore 5 HP.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“It takes a brave man to look death in the eye and claim they don't need help.”&lt;/color&gt;</FlavorText>
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 

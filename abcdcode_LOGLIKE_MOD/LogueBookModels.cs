@@ -134,7 +134,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     LorId cardId = ExtensionUtils.LogLoadFromSaveData(data8);
                     model.Log($"INITIALIZING DECK FOR UNIT : {cardId.packageId}, {cardId.id.ToString()}");
-                    LogueBookModels.AddCard(cardId);
+                    LogueBookModels.AddCard(cardId, 1, false);
                     int num2 = (int)model.unitData.AddCardFromInventory(cardId);
                 }
             }
@@ -244,23 +244,23 @@ namespace abcdcode_LOGLIKE_MOD
             data1.AddData("RemainStageList", data2);
             SaveData data4 = new SaveData();
             foreach (LorId cardId in Singleton<CardDropTableXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -854001)).cardIdList)
-                LogueBookModels.AddCard(cardId, 99);
+                LogueBookModels.AddCard(cardId, 99, false);
             foreach (LorId cardId in Singleton<CardDropTableXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -854101)).cardIdList)
-                LogueBookModels.AddCard(cardId, 99);
+                LogueBookModels.AddCard(cardId, 99, false);
             if (grade > ChapterGrade.Grade2)
             {
                 foreach (LorId cardId in Singleton<CardDropTableXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -854201)).cardIdList)
-                    LogueBookModels.AddCard(cardId, 99);
+                    LogueBookModels.AddCard(cardId, 99, false);
             }
             if (grade > ChapterGrade.Grade3)
             {
                 foreach (LorId cardId in Singleton<CardDropTableXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -854301)).cardIdList)
-                    LogueBookModels.AddCard(cardId, 99);
+                    LogueBookModels.AddCard(cardId, 99, false);
             }
             if (grade > ChapterGrade.Grade4)
             {
                 foreach (LorId cardId in Singleton<CardDropTableXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, -854401)).cardIdList)
-                    LogueBookModels.AddCard(cardId, 99);
+                    LogueBookModels.AddCard(cardId, 99, false);
             }
             foreach (DiceCardItemModel diceCardItemModel in LogueBookModels.cardlist)
             {
@@ -489,7 +489,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
             }
             foreach (SaveData saveData in save.GetData("cardlist"))
-                LogueBookModels.AddCard(ExtensionUtils.LogLoadFromSaveData(saveData.GetData("id")), saveData.GetData("num").GetIntSelf());
+                LogueBookModels.AddCard(ExtensionUtils.LogLoadFromSaveData(saveData.GetData("id")), saveData.GetData("num").GetIntSelf(), false);
             foreach (SaveData data3 in save.GetData("booklist"))
                 LogueBookModels.booklist.Add(LogueBookModels.LoadFromSaveData_BookModel(data3));
             LogueBookModels.nextinstanceid = save.GetInt("nextinstanceid");
@@ -673,11 +673,12 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.booklist.Add(bookModel);
         }
 
-        public static void AddUpgradeCard(LorId cardid) => LogueBookModels.AddUpgradeCard(cardid, 0, 1);
+        public static void AddUpgradeCard(LorId cardid) => LogueBookModels.AddUpgradeCard(cardid, 0, 1, 1, true);
 
-        public static void AddCard(LorId cardId, int num = 1)
+        public static void AddCard(LorId cardId, int num = 1, bool callInvenChangeEvent = true)
         {
-            cardId = Singleton<GlobalLogueEffectManager>.Instance.InvenAddCardChange(cardId);
+            if (callInvenChangeEvent)
+                cardId = Singleton<GlobalLogueEffectManager>.Instance.InvenAddCardChange(cardId);
             if (num < 0)
                 return;
             DiceCardItemModel diceCardItemModel = LogueBookModels.cardlist.Find((Predicate<DiceCardItemModel>)(x => x.GetID() == cardId));
@@ -1374,9 +1375,9 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
-        public static void AddUpgradeCard(LorId cardid, int index = 0, int count = 1)
+        public static void AddUpgradeCard(LorId cardid, int index = 0, int count = 1, int num = 1, bool callInvenChangeEvent = true)
         {
-            LogueBookModels.AddCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardid, index, count).id);
+            LogueBookModels.AddCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardid, index, count).id, num, callInvenChangeEvent);
         }
 
         public static int GetIndexOfUnit(BattleUnitModel model)

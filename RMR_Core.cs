@@ -2880,6 +2880,27 @@ namespace RogueLike_Mod_Reborn
             }
             return sprite;
         }
+
+
+
+        /// <summary>
+        /// THIS IS A DEBUGGING PATCH MADE TO FORESEE EVIDENTLY UNINTENDED BEHAVIOR IN BOOKMODEL.CHANGEPASSIVE
+        /// </summary>
+        [HarmonyTranspiler, HarmonyPatch(typeof(BookModel), nameof(BookModel.ChangePassive))]
+        static IEnumerable<CodeInstruction> BOOKMODEL_DEBUGGING_PATCH(IEnumerable<CodeInstruction> instructions)
+        {
+            foreach (var x in instructions)
+            {
+                if (x.opcode == OpCodes.Ldstr)
+                {
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.PropertyGetter(typeof(Environment), nameof(Environment.StackTrace))).MoveLabelsFrom(x);
+                } else
+                {
+                    yield return x;
+                }
+            }
+        }
+
         #endregion
 
         #region FINALIZERS
