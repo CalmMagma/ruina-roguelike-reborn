@@ -9,49 +9,50 @@ using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class CraftEffect : GlobalLogueEffectBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public virtual bool IsNormal() => true;
 
-  public virtual string GetCraftName() => "Test";
-
-  public virtual string GetCraftDesc() => "Test";
-
-  public virtual Sprite GetCraftSprite() => (Sprite) null;
-
-  public virtual int GetCraftCost() => 0;
-
-  public virtual bool CanCraft(int costresult) => LogueBookModels.GetMoney() >= costresult;
-
-  public virtual void Crafting()
-  {
-    LogueBookModels.SubMoney((int) ((double) this.GetCraftCost() * (double) Singleton<GlobalLogueEffectManager>.Instance.CraftCostMultiple(this)));
-    UIBattleSettingPanel uiPanel = UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel;
-    UnitDataModel fieldValue = LogLikeMod.GetFieldValue<UnitDataModel>((object) uiPanel.InfoRightPanel, "unitdata");
-    uiPanel.SetLibrarianProfileData(fieldValue);
-  }
-
-  public static List<RewardPassiveInfo> CheckCreaftEquipLimit(ChapterGrade grade)
-  {
-    List<RewardPassiveInfo> chapterData = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.CommonReward, LorId.None, true);
-    foreach (RewardPassiveInfo rewardPassiveInfo in chapterData.ToArray())
+    public class CraftEffect : GlobalLogueEffectBase
     {
-      RewardPassiveInfo rinfo = rewardPassiveInfo;
-      if (LogueBookModels.booklist.FindAll((Predicate<BookModel>) (x => x.ClassInfo.id == rinfo.id)).Count >= 5)
-        chapterData.Remove(rinfo);
-    }
-    return chapterData.Count == 0 ? (List<RewardPassiveInfo>) null : chapterData;
-  }
+        public virtual bool IsNormal() => true;
 
-  public static void CraftEquipByChapter(ChapterGrade grade)
-  {
-    RewardPassiveInfo reward = RewardingModel.GetReward(CraftEffect.CheckCreaftEquipLimit(grade));
-    BookXmlInfo data = Singleton<BookXmlList>.Instance.GetData(reward.id);
-    LogueBookModels.AddBook(reward.id);
-    UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipResult", (object) data.InnerName));
-  }
-}
+        public virtual string GetCraftName() => "Test";
+
+        public virtual string GetCraftDesc() => "Test";
+
+        public virtual Sprite GetCraftSprite() => (Sprite)null;
+
+        public virtual int GetCraftCost() => 0;
+
+        public virtual bool CanCraft(int costresult) => LogueBookModels.GetMoney() >= costresult;
+
+        public virtual void Crafting()
+        {
+            LogueBookModels.SubMoney((int)((double)this.GetCraftCost() * (double)Singleton<GlobalLogueEffectManager>.Instance.CraftCostMultiple(this)));
+            UIBattleSettingPanel uiPanel = UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel;
+            UnitDataModel fieldValue = LogLikeMod.GetFieldValue<UnitDataModel>((object)uiPanel.InfoRightPanel, "unitdata");
+            uiPanel.SetLibrarianProfileData(fieldValue);
+        }
+
+        public static List<RewardPassiveInfo> CheckCreaftEquipLimit(ChapterGrade grade)
+        {
+            List<RewardPassiveInfo> chapterData = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.CommonReward, LorId.None, true);
+            foreach (RewardPassiveInfo rewardPassiveInfo in chapterData.ToArray())
+            {
+                RewardPassiveInfo rinfo = rewardPassiveInfo;
+                if (LogueBookModels.booklist.FindAll(x => x.ClassInfo.id == rinfo.id).Count >= 5)
+                    chapterData.Remove(rinfo);
+            }
+            return chapterData.Count == 0 ? (List<RewardPassiveInfo>)null : chapterData;
+        }
+
+        public static void CraftEquipByChapter(ChapterGrade grade)
+        {
+            RewardPassiveInfo reward = RewardingModel.GetReward(CraftEffect.CheckCreaftEquipLimit(grade));
+            BookXmlInfo data = Singleton<BookXmlList>.Instance.GetData(reward.id);
+            LogueBookModels.AddBook(reward.id);
+            UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipResult", (object)data.InnerName));
+        }
+    }
 }

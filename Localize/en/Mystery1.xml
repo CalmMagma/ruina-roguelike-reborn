@@ -9,7 +9,7 @@
              <text id="MysteryCh1_1Frame1Dia0">You wrote about a silly dream you have, the book closing soon after. After heading towards the exit you see that some weapons lay by the entrance.</text>
              <text id="MysteryCh1_1Frame1Choice0Desc">Walk away</text>
 
-             <text id="MysteryCh1_1Frame2Dia0">You wrote about a silly dream you have, the book closing soon after. After heading towards the exit you see that a weapon lays by the entrance.</text>
+             <text id="MysteryCh1_1Frame2Dia0">You wrote about a serious dream you had, the book closing soon after. After heading towards the exit you see that a weapon lays by the entrance.</text>
              <text id="MysteryCh1_1Frame2Choice0Desc">Walk away</text>
 
 <!--
@@ -119,8 +119,8 @@ Kibbles is nowhere to be seen and instead you've been lead to a dead end. Sewege
              <text id="MysteryCh1_5Frame2Choice0Desc">Walk away ([red]Lose x1 Gut-Harvesting[/color] Combat Page. +{0} [yellow]Ahn[/color])</text>
 
              <text id="MysteryCh1_6Title">Office Raid</text>
-	<text id="MysteryCh1_6Frame0Dia0">You're down on your luck but seen an opportunity make a quick buck: Raiding a local office that's been weakened after fighting finishing a tough request, its members looking hurt and desperate.</text>
+	<text id="MysteryCh1_6Frame0Dia0">You're down on your luck but seen an opportunity make a quick buck: Raiding a local office that's been weakened after finishing a tough request, its members looking hurt and desperate.</text>
              <text id="MysteryCh1_6Frame0Choice0Desc">Raid them!</text>
-             <text id="MysteryCh1_6Frame0Choice1Desc">Walk away -- its not worth your honor</text>
+             <text id="MysteryCh1_6Frame0Choice1Desc">Walk away -- it's not worth your honor</text>
 
 </localize>

@@ -56,7 +56,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     Debug.Log($"COCK BALLS COUNT IS: {metadata.count + count}");
                     DiceCardXmlInfo upgradeInfo = GetUpgradeCard(cardId.GetOriginalId(), metadata.index, metadata.count + count);
-                    Debug.Log($"COCK BALLS ID IS: {cardId.packageId}");
+                    Debug.Log($"COCK BALLS OLD ID IS: {cardId.packageId}\nCOCK BALLS NEW ID IS: {upgradeInfo.id.packageId}");
                     dictionary.Add(metadata.index, upgradeInfo);
                 }
                 return dictionary;

@@ -72,7 +72,7 @@ namespace abcdcode_LOGLIKE_MOD
         /// <summary>
         /// Current mystery title- used by Discord Rich Presence.
         /// </summary>
-        public static string curMysteryTitle => MysteryManager.Instance.curMystery.FrameObj["Title"].GetComponent<TextMeshProUGUI>().GetParsedText();
+        public static string curMysteryTitle => Singleton<MysteryManager>.Instance.curMystery.FrameObj["Title"].GetComponent<TextMeshProUGUI>().GetParsedText();
         public static int NormalRewardCool = 0;
         /// <summary>
         /// Determines end-of-act keypage and combat page rewards.
