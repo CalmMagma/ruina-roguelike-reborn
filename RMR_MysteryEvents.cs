@@ -27,6 +27,9 @@ namespace RogueLike_Mod_Reborn
                     case 3:
                         Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_ViciousGlasses());
                         break;
+                    case 4:
+                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_LightsGuidance());
+                        break;
                     default:
                         break;
                 }
@@ -51,6 +54,9 @@ namespace RogueLike_Mod_Reborn
                         break;
                     case 3:
                         this.ShowOverlayOverButton(new RMREffect_ViciousGlasses(), choiceid);
+                        break;
+                    case 4:
+                        this.ShowOverlayOverButton(new RMREffect_LightsGuidance(), choiceid);
                         break;
                     default:
                         break;

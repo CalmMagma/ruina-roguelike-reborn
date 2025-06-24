@@ -17,6 +17,9 @@ Which one will you choose?</Dialog>
       <Choice ID="3">
         <Desc>Choose [common]Vicious Glasses</Desc>
       </Choice>
+	  <Choice ID="4">
+        <Desc>Choose [common]Light's Guidance</Desc>
+      </Choice>
     </Frame>
     <Frame ID="1">
       <Dialog>The [mirror]sparkling mirror[/color] beckons, vibrating as it manifests your chosen artifact. It lands softly in your hands, prompting [mirror]the mirror[/color] and its surroundings to dissipate into thin air.</Dialog>

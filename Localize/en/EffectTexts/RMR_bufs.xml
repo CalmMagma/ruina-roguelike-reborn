@@ -12,6 +12,26 @@
 	  <Desc>Attacks this Scene have X% chance to deal +50% damage and stagger damage.</Desc>
 	</BattleEffectText>
 	
+	<BattleEffectText ID="RMR_BurnProtection">
+      <Name>Burn Protection</Name>
+      <Desc>Take {0} less damage from Burn this Scene.</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_BurnProtection_Keyword">
+      <Name>Burn Protection X</Name>
+      <Desc>Take X less damage from Burn this Scene.</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_BleedProtection">
+      <Name>Bleed Protection</Name>
+      <Desc>Take {0} less damage from Bleed this Scene.</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_BleedProtection_Keyword">
+      <Name>Bleed Protection X</Name>
+      <Desc>Take X less damage from Bleed this Scene.</Desc>
+    </BattleEffectText>
+	
 	<BattleEffectText ID="RMR_Shield">
       <Name>Shield</Name>
       <Desc>Prevent the next {0} damage taken for the Scene.</Desc>
@@ -30,6 +50,20 @@
     <BattleEffectText ID="RMR_StaggerShield_Keyword">
       <Name>Stagger Shield X</Name>
       <Desc>Prevent the next X Stagger damage taken for the Scene.</Desc>
+    </BattleEffectText>
+	
+	
+	
+	<BattleEffectText ID="RMR_Zeal_Keyword">
+      <Name>Zeal</Name>
+      <Desc>At the start of the Act, add a copy of this page to all other allies' deck.</Desc>
+    </BattleEffectText>
+	
+	
+	<!-- base stagger fragile is not localized so this is here to give it localization in case other mods do not do it -->
+	<BattleEffectText ID="Vulnerable_break">
+      <Name>Stagger Fragile</Name>
+      <Desc>Take {0} additional Stagger damage from attacks this Scene.</Desc>
     </BattleEffectText>
 	
 	</effectTextList>

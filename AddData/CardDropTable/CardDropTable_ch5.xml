@@ -4,7 +4,7 @@
  
 
   <DropTable ID="-854401">
-    <Card>501001</Card>
+    
     <Card>501002</Card>
     <Card>501003</Card>
     <Card>501004</Card>
@@ -23,7 +23,7 @@
     <Card>503003</Card>
     <Card>503004</Card>
     <Card>504001</Card>
-    <Card>504002</Card>
+    
     <Card>504003</Card>
     <Card>504004</Card>
     <Card>504005</Card>
@@ -35,7 +35,7 @@
     <Card>505005</Card>
     <Card>505006</Card>
     <Card>505007</Card>
-    <Card>506001</Card>
+    
     <Card>506002</Card>
     <Card>506003</Card>
     <Card>506004</Card>
@@ -58,7 +58,6 @@
 
     <Card>512001</Card>
     <Card>512002</Card>
-    <Card>512003</Card>
     <Card>512004</Card>
     <Card>512005</Card>
   

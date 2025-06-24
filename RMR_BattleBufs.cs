@@ -14,6 +14,89 @@ namespace RogueLike_Mod_Reborn
         public static KeywordBuf CritChance;
         public static KeywordBuf RMRShield;
         public static KeywordBuf RMRStaggerShield;
+        public static KeywordBuf BurnProtection;
+        public static KeywordBuf BleedProtection;
+    }
+    public class BattleUnitBuf_RMR_BurnProtection : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.BurnProtection;
+            }
+        }
+        public override string keywordId => "RMR_BurnProtection";
+        public override string keywordIconId => "RMRBuf_BurnProtection";
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+        public override float DmgFactor(int dmg, DamageType type, KeywordBuf keyword)
+        {
+            float result;
+            if (keyword == KeywordBuf.Burn)
+            {
+                float num = dmg;
+                if (num > this.stack)
+                {
+                    result = (num - this.stack) / num;
+                }
+                else
+                {
+                    result = 0f;
+                }
+            }
+            else
+            {
+                result = base.DmgFactor(dmg, type, keyword);
+            }
+            return result;
+        }
+
+        public override void OnRoundEndTheLast()
+        {
+            base.OnRoundEndTheLast();
+            this.Destroy();
+        }
+    }
+
+    public class BattleUnitBuf_RMR_BleedProtection : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.BleedProtection;
+            }
+        }
+        public override string keywordId => "RMR_BleedProtection";
+        public override string keywordIconId => "RMRBuf_BleedProtection";
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+        public override float DmgFactor(int dmg, DamageType type, KeywordBuf keyword)
+        {
+            float result;
+            if (keyword == KeywordBuf.Bleeding)
+            {
+                float num = dmg;
+                if (num > this.stack)
+                {
+                    result = (num - this.stack) / num;
+                }
+                else
+                {
+                    result = 0f;
+                }
+            }
+            else
+            {
+                result = base.DmgFactor(dmg, type, keyword);
+            }
+            return result;
+        }
+
+        public override void OnRoundEndTheLast()
+        {
+            base.OnRoundEndTheLast();
+            this.Destroy();
+        }
     }
 
     public class BattleUnitBuf_RMR_Shield : BattleUnitBuf

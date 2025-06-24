@@ -44,6 +44,13 @@
     <FlavorText>&lt;color=#CA08A9&gt;"You hear various voices crying for afar, demanding removal of these so called 'Random Crits'."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_LightGuidance">
+    <Name>Light's Guidance</Name>
+    <Desc>Each Scene, all librarians boost the Power of a random type of die by +1. (Slash, Pierce, Blunt, Defense)</Desc> 
+    <FlavorText>&lt;color=#FEFCDD&gt;"Occasionally it beckons you to 'play better', whatever that means…"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
  
   
 </LogueEffectXmlRoot>
