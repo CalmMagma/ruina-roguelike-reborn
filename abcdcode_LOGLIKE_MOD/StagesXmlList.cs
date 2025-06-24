@@ -16,7 +16,6 @@ namespace abcdcode_LOGLIKE_MOD
     {
         public List<StagesXmlInfo> infos;
         private StagesXmlInfo[] _allInfos;
-
         public void Init(List<StagesXmlInfo> info)
         {
             this.infos = info;
@@ -32,13 +31,40 @@ namespace abcdcode_LOGLIKE_MOD
         public List<LogueStageInfo> GetChapterData(ChapterGrade chapter, bool ExceptAllGrade = false)
         {
             List<LogueStageInfo> chapterData = new List<LogueStageInfo>();
-            foreach (StagesXmlInfo stagesXmlInfo in this.infos.FindAll((Predicate<StagesXmlInfo>)(x =>
+            foreach (StagesXmlInfo stagesXmlInfo in this.infos.FindAll(x =>
             {
                 if (x.chapter == chapter)
                     return true;
                 return !ExceptAllGrade && x.chapter == ChapterGrade.GradeAll;
-            })))
-                chapterData.AddRange((IEnumerable<LogueStageInfo>)stagesXmlInfo.Stages);
+            }))
+                chapterData.AddRange(stagesXmlInfo.Stages);
+            return chapterData;
+        }
+
+        public List<LogueStageInfo> GetChapterDataVanilla(ChapterGrade chapter, bool ExceptAllGrade = false)
+        {
+            return GetChapterDataSpecific(chapter, new LorId(LogLikeMod.ModId, 0), ExceptAllGrade);
+        }
+
+        /// <summary>
+        /// Returns a list containing every single reception for a given chapter for a specific campaign.
+        /// </summary>
+        /// <param name="chapter">The chapter to filter by.</param>
+        /// <param name="id">The campaign ID of the campaign.</param>
+        /// <param name="ExceptAllGrade">Whether or not to exclude encounters that can show up in any chapter.</param>
+        /// <returns></returns>
+        public List<LogueStageInfo> GetChapterDataSpecific(ChapterGrade chapter, LorId id, bool ExceptAllGrade = false)
+        {
+            List<LogueStageInfo> chapterData = new List<LogueStageInfo>();
+            foreach (StagesXmlInfo stagesXmlInfo in this.infos.FindAll(x =>
+            {
+                if (x.Id != id)
+                    return false;
+                if (x.chapter == chapter)
+                    return true;
+                return !ExceptAllGrade && x.chapter == ChapterGrade.GradeAll;
+            }))
+                chapterData.AddRange(stagesXmlInfo.Stages);
             return chapterData;
         }
 

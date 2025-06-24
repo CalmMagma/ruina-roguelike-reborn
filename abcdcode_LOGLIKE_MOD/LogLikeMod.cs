@@ -327,7 +327,7 @@ namespace abcdcode_LOGLIKE_MOD
             foreach (ModContentInfo allMod in Singleton<ModContentManager>.Instance.GetAllMods())
             {
                 if (allMod.activated && LogLikeMod.CheckExceptionModList.Contains(allMod.invInfo.workshopInfo.uniqueId))
-                    ExceptModNames.Add(allMod.invInfo.workshopInfo.title);
+                    ExceptModNames.Add(allMod.invInfo.workshopInfo.title + $" ({allMod.invInfo.workshopInfo.uniqueId})");
             }
             return ExceptModNames.Count > 0;
         }
@@ -1108,8 +1108,10 @@ namespace abcdcode_LOGLIKE_MOD
             StagesXmlRoot stagesXmlRoot;
             using (StringReader stringReader = new StringReader(str))
                 stagesXmlRoot = (StagesXmlRoot)new XmlSerializer(typeof(StagesXmlRoot)).Deserialize((TextReader)stringReader);
-            foreach (StagesXmlInfo dropValueXml in stagesXmlRoot.DropValueXmlList)
+            foreach (StagesXmlInfo dropValueXml in stagesXmlRoot.ChapterList)
             {
+                if (dropValueXml.packageId == string.Empty)
+                    dropValueXml.packageId = modid;
                 foreach (LogueStageInfo stage in dropValueXml.Stages)
                 {
                     if (stage.workshopid == string.Empty)
@@ -1126,7 +1128,7 @@ namespace abcdcode_LOGLIKE_MOD
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
                 StagesXmlRoot stagesXmlRoot = LogLikeMod.LoadStages(File.ReadAllText(file.FullName), LogLikeMod.ModId);
-                info.AddRange((IEnumerable<StagesXmlInfo>)stagesXmlRoot.DropValueXmlList);
+                info.AddRange(stagesXmlRoot.ChapterList);
             }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
@@ -1136,7 +1138,7 @@ namespace abcdcode_LOGLIKE_MOD
                     foreach (FileSystemInfo file in directoryInfo2.GetFiles())
                     {
                         StagesXmlRoot stagesXmlRoot = LogLikeMod.LoadStages(File.ReadAllText(file.FullName), logMod.invInfo.workshopInfo.uniqueId);
-                        info.AddRange((IEnumerable<StagesXmlInfo>)stagesXmlRoot.DropValueXmlList);
+                        info.AddRange(stagesXmlRoot.ChapterList);
                     }
                 }
             }
@@ -1262,7 +1264,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static void SetStagePhase(StageController __instance, StageController.StagePhase phase)
         {
-            typeof(StageController).GetMethod("set_phase", AccessTools.all).Invoke((object)__instance, new object[1]
+            typeof(StageController).GetMethod("set_phase", AccessTools.all).Invoke(__instance, new object[1]
             {
                 phase
             });
@@ -2052,7 +2054,10 @@ namespace abcdcode_LOGLIKE_MOD
                 using (StringReader stringReader = new StringReader(File.ReadAllText(LogLikeMod.path + "/AddData/FormationInfo.txt")))
                     formationXmlRoot = (FormationXmlRoot)new XmlSerializer(typeof(FormationXmlRoot)).Deserialize((TextReader)stringReader);
                 ((List<FormationXmlInfo>)typeof(FormationXmlList).GetField("_list", AccessTools.all).GetValue((object)Singleton<FormationXmlList>.Instance)).AddRange((IEnumerable<FormationXmlInfo>)formationXmlRoot.list);
-                LogLikeMod.CheckExceptionModList = new List<string>();
+                LogLikeMod.CheckExceptionModList = new List<string>()
+                {
+                    "kr.heukhyeon.sayotoeveryone"
+                };
                 LogLikeMod.PreLoader preLoader = GlobalGameManager.Instance.gameObject.AddComponent<LogLikeMod.PreLoader>();
                 preLoader.StartArtWorkPreLoad();
                 preLoader.StartAssetBundlePreload();

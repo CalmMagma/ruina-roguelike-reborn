@@ -16,7 +16,7 @@ namespace abcdcode_LOGLIKE_MOD
         public override string KeywordId => "GlobalEffect_Bookbinder";
         public override string KeywordIconId => "BossReward1";
 
-        public PickUpModel_BossReward1():base()
+        public PickUpModel_BossReward1() : base()
         {
 
         }
@@ -56,13 +56,6 @@ namespace abcdcode_LOGLIKE_MOD
                 SaveData saveData = base.GetSaveData();
                 saveData.AddData("stack", this.stack);
                 return saveData;
-            }
-
-            public override string GetEffectName() => TextDataModel.GetText("BossReward1Name");
-
-            public override string GetEffectDesc()
-            {
-                return TextDataModel.GetText("BossReward1Desc_Effect", (object)(this.stack * 2));
             }
 
             public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward1"];

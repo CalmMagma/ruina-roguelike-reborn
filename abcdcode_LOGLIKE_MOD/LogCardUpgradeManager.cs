@@ -8,6 +8,7 @@ using LOR_DiceSystem;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 
 namespace abcdcode_LOGLIKE_MOD
@@ -53,7 +54,9 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (metadata.canStack)
                 {
+                    Debug.Log($"COCK BALLS COUNT IS: {metadata.count + count}");
                     DiceCardXmlInfo upgradeInfo = GetUpgradeCard(cardId.GetOriginalId(), metadata.index, metadata.count + count);
+                    Debug.Log($"COCK BALLS ID IS: {cardId.packageId}");
                     dictionary.Add(metadata.index, upgradeInfo);
                 }
                 return dictionary;

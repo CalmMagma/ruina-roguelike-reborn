@@ -16,8 +16,8 @@ namespace abcdcode_LOGLIKE_MOD
         Grade4,
         Grade5,
         Grade6,
-        DummyGrade,
-        GradeAll,
         Grade7,
+        GradeAll,
+        DummyGrade,
     }
 }

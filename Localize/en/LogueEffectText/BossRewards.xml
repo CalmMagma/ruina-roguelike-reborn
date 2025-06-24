@@ -31,7 +31,7 @@
   </LogueEffectInfo> 
   
    <LogueEffectInfo Id="GlobalEffect_CupOfGreed">
-    <Name>Cup of Greed/Name> 
+    <Name>Cup of Greed</Name> 
     <Desc>Select a Combat Page from your current Bookshelf and add it to another Librarian's hand. Can be used once per Act</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“A must have for hoarders and spendthrifts alike.”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>

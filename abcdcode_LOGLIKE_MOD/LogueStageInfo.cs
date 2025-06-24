@@ -6,31 +6,32 @@
 
 using System.Xml.Serialization;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class LogueStageInfo
+namespace abcdcode_LOGLIKE_MOD
 {
-  [XmlAttribute("WorkShopId")]
-  public string workshopid = "";
-  [XmlAttribute("StageType")]
-  public StageType type;
-  [XmlAttribute("ID")]
-  public int stageid = int.MinValue;
-  [XmlAttribute("Script")]
-  public string script = "";
 
-  public LogueStageInfo Copy()
-  {
-    return new LogueStageInfo()
+    public class LogueStageInfo
     {
-      workshopid = this.workshopid,
-      type = this.type,
-      stageid = this.stageid,
-      script = this.script
-    };
-  }
+        [XmlAttribute("WorkShopId")]
+        public string workshopid = "";
+        [XmlAttribute("StageType")]
+        public StageType type;
+        [XmlAttribute("ID")]
+        public int stageid = int.MinValue;
+        [XmlAttribute("Script")]
+        public string script = "";
 
-  public LorId Id => new LorId(this.workshopid, this.stageid);
-}
+        public LogueStageInfo Copy()
+        {
+            return new LogueStageInfo()
+            {
+                workshopid = this.workshopid,
+                type = this.type,
+                stageid = this.stageid,
+                script = this.script
+            };
+        }
+
+        public LorId Id => new LorId(this.workshopid, this.stageid);
+    }
 }

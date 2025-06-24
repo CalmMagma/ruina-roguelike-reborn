@@ -7,15 +7,15 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
- 
-namespace abcdcode_LOGLIKE_MOD_Extension
-{ 
 
-public class CardDropTableXmlRoot
+namespace abcdcode_LOGLIKE_MOD_Extension
 {
-  [XmlElement("Version")]
-  public string version = "1.1";
-  [XmlElement("DropTable")]
-  public List<CardDropTableXmlInfo> dropTableXmlList = new List<CardDropTableXmlInfo>();
-}
+
+    public class CardDropTableXmlRoot
+    {
+        [XmlElement("Version")]
+        public string version = "1.1";
+        [XmlElement("DropTable")]
+        public List<CardDropTableXmlInfo> dropTableXmlList = new List<CardDropTableXmlInfo>();
+    }
 }

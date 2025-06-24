@@ -209,6 +209,19 @@ namespace abcdcode_LOGLIKE_MOD
             };
         }
 
+        /// <summary>
+        /// Used for quickly adding combat pages to a drop pool.
+        /// </summary>
+        /// <param name="original">The original drop pool's ID. (ID OF THE CARD LIST, NOT DROP POOL ID!)</param>
+        /// <param name="newId">The drop pool to add.</param>
+        public static void MergeDropTables(this CardDropTableXmlList instance, LorId original, LorId newId)
+        {
+            var originalTable = instance.GetData(original);
+            var newTable = instance.GetData(newId);
+            originalTable.cardIdList.AddRange(newTable.cardIdList);
+            instance._workshopDict[original.packageId].Find(x => x.id == original).cardIdList = originalTable.cardIdList;
+        }
+
         public static string GetLogArtWorkPath(this ModContentInfo info)
         {
             return Path.Combine(info.GetLogDllPath(), "ArtWork");

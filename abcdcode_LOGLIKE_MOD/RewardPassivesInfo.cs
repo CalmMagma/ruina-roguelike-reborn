@@ -7,22 +7,23 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class RewardPassivesInfo
+namespace abcdcode_LOGLIKE_MOD
 {
-  [XmlAttribute("Chapter")]
-  public ChapterGrade chapter;
-  [XmlAttribute("Type")]
-  public PassiveRewardListType rewardtype;
-  [XmlAttribute("WorkShopID")]
-  public string workshopid = "";
-  [XmlAttribute("ID")]
-  public int listid = -1;
-  [XmlElement("RewardList")]
-  public List<RewardPassiveInfo> RewardPassiveList;
 
-  public LorId Id => new LorId(this.workshopid, this.listid);
-}
+    public class RewardPassivesInfo
+    {
+        [XmlAttribute("Chapter")]
+        public ChapterGrade chapter;
+        [XmlAttribute("Type")]
+        public PassiveRewardListType rewardtype;
+        [XmlAttribute("WorkShopID")]
+        public string workshopid = "";
+        [XmlAttribute("ID")]
+        public int listid = -1;
+        [XmlElement("RewardList")]
+        public List<RewardPassiveInfo> RewardPassiveList;
+
+        public LorId Id => new LorId(this.workshopid, this.listid);
+    }
 }

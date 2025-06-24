@@ -7,12 +7,13 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class RewardPassivesRoot
+namespace abcdcode_LOGLIKE_MOD
 {
-  [XmlElement("ChapterList")]
-  public List<RewardPassivesInfo> RewardPassivesList;
-}
+
+    public class RewardPassivesRoot
+    {
+        [XmlElement("ChapterList")]
+        public List<RewardPassivesInfo> RewardPassivesList;
+    }
 }

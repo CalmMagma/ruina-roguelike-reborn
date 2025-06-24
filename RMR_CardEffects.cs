@@ -97,6 +97,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnAddToHand(owner);
             owner.AddScrollAbility<ScrollAbility_RMR_Shiv>(card.card);
+            card.card.SetCurrentCost(card.card.GetOriginCost());
             card.card.ResetToOriginalData();
         }
         

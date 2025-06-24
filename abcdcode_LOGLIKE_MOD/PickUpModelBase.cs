@@ -114,9 +114,9 @@ namespace abcdcode_LOGLIKE_MOD
         /// <param name="model">The unit to remove the passive from.</param>
         public void RemovePassive(LorId id, BattleUnitModel model)
         {
-            model.UnitData.unitData.bookItem.ClassInfo.EquipEffect.PassiveList.RemoveAll((Predicate<LorId>)(x => x == id));
+            model.UnitData.unitData.bookItem.ClassInfo.EquipEffect.PassiveList.RemoveAll(x => x == id);
             model.UnitData.unitData.bookItem.TryGainUniquePassive();
-            LogueBookModels.playersperpassives[model.UnitData.unitData].RemoveAll((Predicate<LorId>)(x => x == id));
+            LogueBookModels.playersperpassives[model.UnitData.unitData].RemoveAll(x => x == id);
         }
 
         /// <summary>

@@ -270,6 +270,8 @@ namespace abcdcode_LOGLIKE_MOD
           UIBattleSettingPanel self)
         {
             orig(self);
+            // (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel).cg_NormalFrame
+            // attach funny background to object above
             if (!LogLikeMod.CheckStage())
                 return;
             foreach (UISephirahButton uiSephirahButton in (List<UISephirahButton>)typeof(UIBattleSettingPanel).GetField("SephirahButtons", AccessTools.all).GetValue((object)self))
@@ -1405,6 +1407,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.CheckStage())
             {
+                
                 foreach (UISephirahSelectionButton sephirahSelectionButton in (List<UISephirahSelectionButton>)typeof(UILibrarianCharacterListPanel).GetField("SephirahSelectionButtons", AccessTools.all).GetValue((object)self))
                 {
                     sephirahSelectionButton.Deactivate();

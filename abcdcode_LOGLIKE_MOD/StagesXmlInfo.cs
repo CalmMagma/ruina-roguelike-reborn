@@ -7,14 +7,22 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class StagesXmlInfo
+namespace abcdcode_LOGLIKE_MOD
 {
-  [XmlAttribute("Chapter")]
-  public ChapterGrade chapter;
-  [XmlElement("StageList")]
-  public List<LogueStageInfo> Stages;
-}
+
+    public class StagesXmlInfo
+    {
+        [XmlAttribute("Chapter")]
+        public ChapterGrade chapter;
+        [XmlElement("StageList")]
+        public List<LogueStageInfo> Stages;
+        [XmlAttribute("CampaignId")]
+        public int id = 0;
+        [XmlAttribute("CampaignPackageId")]
+        public string packageId = "";
+
+        [XmlIgnore]
+        public LorId Id => new LorId(this.packageId, this.id);
+    }
 }

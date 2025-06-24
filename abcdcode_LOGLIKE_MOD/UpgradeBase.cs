@@ -58,7 +58,7 @@ namespace abcdcode_LOGLIKE_MOD
                     if (this.upgradeinfo.costdata != -100)
                     {
                         int num = this.DoesCostReductionStack() ? this.upgradeinfo.costdata * count : this.upgradeinfo.costdata;
-                        this.upxmlinfo.Spec.Cost = Math.Max(0, num);
+                        this.upxmlinfo.Spec.Cost = Math.Max(0, this.baseinfo.Spec.Cost - num);
                     }
                     foreach (KeyValuePair<int, UpgradeBase.UpgradeInfo.DiceChangeData> keyValuePair in this.upgradeinfo.diceChangeData)
                     {

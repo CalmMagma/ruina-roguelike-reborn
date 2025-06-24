@@ -68,13 +68,6 @@ namespace abcdcode_LOGLIKE_MOD
             var upgradeList = Singleton<LogCardUpgradeManager>.Instance.GetAllUpgradesCard(this.cardid, 1).Values.ToList();
             upgradeList.Sort((x, y) => UpgradeMetadata.UnpackPidUnsafe(x.id.packageId).index > UpgradeMetadata.UnpackPidUnsafe(y.id.packageId).index ? 1 : 0);
 
-            Debug.Log("FINDING UPGRADES");
-            foreach (var upgrade in upgradeList)
-            {
-                if (cardid.packageId.Contains(LogCardUpgradeManager.UpgradeKeyword)) Debug.Log("THIS IS SEARING BLOW!!!");
-                Debug.Log(upgrade.id.packageId + " --- " + upgrade.id.id);
-                Debug.Log("IF IT SHOWS UP AS True:0:number<keyword>packageId THEN WE SHOULD BE GOOD");
-            }
             curcard.transform.SetParent(image.transform);
             curcard.transform.localScale = new Vector3(1.5f, 1.5f);
             curcard.transform.localPosition = new Vector3(upgradeList.Count > 1 ? 0f : -250f, upgradeList.Count > 1 ? 270f : 0.0f);

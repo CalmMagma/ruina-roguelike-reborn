@@ -12,16 +12,16 @@ namespace abcdcode_LOGLIKE_MOD
     {
         public static int[] MoneyRewardTable = new int[6]
         {
-    30,
-    40,
-    50,
-    60,
-    70,
-    80
+            30,
+            40,
+            50,
+            60,
+            70,
+            80
         };
         public override string KeywordId => "GlobalEffect_LuckyTael";
         public override string KeywordIconId => "BossReward3";
-        public PickUpModel_BossReward3():base()
+        public PickUpModel_BossReward3() : base()
         {
             int index = (int)LogLikeMod.curchaptergrade;
             if (index > 5)

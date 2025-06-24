@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-
+using static StageClearInfoListModel;
 
 namespace abcdcode_LOGLIKE_MOD
 {
@@ -893,7 +893,6 @@ namespace abcdcode_LOGLIKE_MOD
             if (LogLikeMod.saveloading)
                 return;
             PassiveAbility_MoneyCheck.SetMoney(5);
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_ShopGood46.SupriseBox());
         }
 
         public static BookXmlInfo CopyBookXmlInfo(BookXmlInfo original)
@@ -1153,21 +1152,29 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<GlobalLogueEffectManager>.Instance.OnAddSubPlayer(unitDataModel);
         }
 
-        public static void AddingRemainStageList(
+        /// <summary>
+        /// Picks a number of encounters based on their types and the given <see cref="StageLimits"/>.
+        /// </summary>
+        /// <param name="stage">An empty list to be fed the new list of unique encounters.</param>
+        /// <param name="allstage">A list containing all the encounters to pick from.</param>
+        /// <param name="stageLimits">An object that limit how many of each type of encounter should appear in a chapter.</param>
+        public static void HandleLimitPícking(
           List<LogueStageInfo> stage,
           List<LogueStageInfo> allstage,
-          object stageinfoV)
+          StageLimits stageLimits)
         {
-            int numNormal = (int)stageinfoV.GetType().GetMethod("get_NormalV", AccessTools.all).Invoke(stageinfoV, (object[])null);
-            int numMystery = (int)stageinfoV.GetType().GetMethod("get_MysteryV", AccessTools.all).Invoke(stageinfoV, (object[])null) - 1;
-            int numShop = (int)stageinfoV.GetType().GetMethod("get_ShopV", AccessTools.all).Invoke(stageinfoV, (object[])null);
-            int numBoss = (int)stageinfoV.GetType().GetMethod("get_BossV", AccessTools.all).Invoke(stageinfoV, (object[])null);
-            int numElite = (int)stageinfoV.GetType().GetMethod("get_EliteV", AccessTools.all).Invoke(stageinfoV, (object[])null);
-            List<LogueStageInfo> mstage = Singleton<StagesXmlList>.Instance.GetChapterData((ChapterGrade)stageinfoV.GetType().GetMethod("get_ChapV", AccessTools.all).Invoke(stageinfoV, (object[])null), true).FindAll((Predicate<LogueStageInfo>)(x => x.type == StageType.Mystery));
-            ModdingUtils.SuffleList<LogueStageInfo>(mstage);
+            int numBoss = stageLimits.Boss;
+            int numNormal = stageLimits.Normal;
+            int numShop = stageLimits.Shop;
+            int numMystery = stageLimits.Mystery;
+            int numElite = stageLimits.Elite;
+            int numRest = stageLimits.Rest;
+
+            List<LogueStageInfo> mstage = StagesXmlList.Instance.GetChapterData(stageLimits.Chapter, true);
+            ModdingUtils.SuffleList(mstage);
             stage.Add(mstage[0]);
-            allstage.Remove(allstage.Find((Predicate<LogueStageInfo>)(x => x.Id == mstage[0].Id)));
-            ModdingUtils.SuffleList<LogueStageInfo>(allstage);
+            allstage.Remove(mstage[0]);
+            ModdingUtils.SuffleList(allstage);
             foreach (LogueStageInfo logueStageInfo in allstage)
             {
                 if (logueStageInfo.type == StageType.Boss && numBoss > 0)
@@ -1196,105 +1203,127 @@ namespace abcdcode_LOGLIKE_MOD
                     --numElite;
                 }
             }
-            int numRest = (int)stageinfoV.GetType().GetMethod("get_Rest", AccessTools.all).Invoke(stageinfoV, (object[])null);
             LogueStageInfo stageInfo = Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 855));
             for (int index = 0; index < numRest; ++index)
                 stage.Add(stageInfo);
         }
 
+        public static List<LogueStageInfo> VanillaGamemodeReceptionList(ChapterGrade chapter)
+        {
+            List<LogueStageInfo> choiceReceptions = new List<LogueStageInfo>();
+            List<LogueStageInfo> allReceptions = Singleton<StagesXmlList>.Instance.GetChapterDataVanilla(chapter);
+            StageLimits stageLimits = new StageLimits
+            {
+                Normal = 0,
+                Elite = 0,
+                Mystery = 0,
+                Shop = 0,
+                Boss = 0,
+                Rest = 0,
+                Chapter = ChapterGrade.DummyGrade
+            };
+            switch (chapter)
+            {
+                case ChapterGrade.Grade1:
+                    stageLimits = new StageLimits
+                    {
+                        Normal = 3,
+                        Elite = 0,
+                        Mystery = 3,
+                        Shop = 1,
+                        Boss = 1,
+                        Rest = 1,
+                        Chapter = chapter
+                    };
+                    break;
+                case ChapterGrade.Grade2:
+                    stageLimits = new StageLimits
+                    {
+                        Normal = 3,
+                        Elite = 0,
+                        Mystery = 2,
+                        Shop = 1,
+                        Boss = 1,
+                        Rest = 1,
+                        Chapter = chapter
+                    };
+                    break;
+                case ChapterGrade.Grade3:
+                    stageLimits = new StageLimits
+                    {
+                        Normal = 4,
+                        Elite = 0,
+                        Mystery = 2,
+                        Shop = 1,
+                        Boss = 1,
+                        Rest = 1,
+                        Chapter = chapter
+                    };
+                    break;
+                case ChapterGrade.Grade4:
+                    stageLimits = new StageLimits
+                    {
+                        Normal = 4,
+                        Elite = 0,
+                        Mystery = 2,
+                        Shop = 2,
+                        Boss = 1,
+                        Rest = 2,
+                        Chapter = chapter
+                    };
+                    break;
+                case ChapterGrade.Grade5:
+                    stageLimits = new StageLimits
+                    {
+                        Normal = 5,
+                        Elite = 0,
+                        Mystery = 2,
+                        Shop = 2,
+                        Boss = 1,
+                        Rest = 2,
+                        Chapter = chapter
+                    };
+                    break;
+                case ChapterGrade.Grade6:
+                    stageLimits = new StageLimits
+                    {
+                        Normal = 5,
+                        Elite = 0,
+                        Mystery = 2,
+                        Shop = 2,
+                        Boss = 1,
+                        Rest = 2,
+                        Chapter = chapter
+                    };
+                    break;
+            }
+            LogueBookModels.HandleLimitPícking(choiceReceptions, allReceptions, stageLimits);
+            if (chapter == ChapterGrade.Grade4)
+                choiceReceptions.Add(Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 80000)));
+            // WORKSHOP CONTRACT EVENT
+            return choiceReceptions;
+        }
+
         public static void AddingRemainStageList()
         {
-            LogueBookModels.RemainStageList[ChapterGrade.Grade1] = new List<LogueStageInfo>();
-            List<LogueStageInfo> chapterData1 = Singleton<StagesXmlList>.Instance.GetChapterData(ChapterGrade.Grade1);
-            var stageinfoV1 = new
+            for (int i = 0; i < 7; i++)
             {
-                NormalV = 3,
-                EliteV = 0,
-                MysteryV = 3,
-                ShopV = 1,
-                BossV = 1,
-                Rest = 1,
-                ChapV = ChapterGrade.Grade1
-            };
-            LogueBookModels.AddingRemainStageList(LogueBookModels.RemainStageList[ChapterGrade.Grade1], chapterData1, (object)stageinfoV1);
-            "".Log("Chapter 1 StageList");
-            foreach (LogueStageInfo logueStageInfo in LogueBookModels.RemainStageList[ChapterGrade.Grade1])
-                "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
-            LogueBookModels.RemainStageList[ChapterGrade.Grade2] = new List<LogueStageInfo>();
-            List<LogueStageInfo> chapterData2 = Singleton<StagesXmlList>.Instance.GetChapterData(ChapterGrade.Grade2);
-            var stageinfoV2 = new
-            {
-                NormalV = 3,
-                EliteV = 0,
-                MysteryV = 3,
-                ShopV = 1,
-                BossV = 1,
-                Rest = 1,
-                ChapV = ChapterGrade.Grade2
-            };
-            LogueBookModels.AddingRemainStageList(LogueBookModels.RemainStageList[ChapterGrade.Grade2], chapterData2, (object)stageinfoV2);
-            "".Log("Chapter 2 StageList");
-            foreach (LogueStageInfo logueStageInfo in LogueBookModels.RemainStageList[ChapterGrade.Grade2])
-                "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
-            LogueBookModels.RemainStageList[ChapterGrade.Grade3] = new List<LogueStageInfo>();
-            List<LogueStageInfo> chapterData3 = Singleton<StagesXmlList>.Instance.GetChapterData(ChapterGrade.Grade3);
-            var stageinfoV3 = new
-            {
-                NormalV = 4,
-                EliteV = 0,
-                MysteryV = 3,
-                ShopV = 2,
-                BossV = 1,
-                Rest = 2,
-                ChapV = ChapterGrade.Grade3
-            };
-            LogueBookModels.AddingRemainStageList(LogueBookModels.RemainStageList[ChapterGrade.Grade3], chapterData3, (object)stageinfoV3);
-            "".Log("Chapter 3 StageList");
-            foreach (LogueStageInfo logueStageInfo in LogueBookModels.RemainStageList[ChapterGrade.Grade3])
-                "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
-            LogueBookModels.RemainStageList[ChapterGrade.Grade4] = new List<LogueStageInfo>();
-            List<LogueStageInfo> chapterData4 = Singleton<StagesXmlList>.Instance.GetChapterData(ChapterGrade.Grade4);
-            var stageinfoV4 = new
-            {
-                NormalV = 4,
-                EliteV = 0,
-                MysteryV = 3,
-                ShopV = 2,
-                BossV = 1,
-                Rest = 2,
-                ChapV = ChapterGrade.Grade4
-            };
-            LogueBookModels.AddingRemainStageList(LogueBookModels.RemainStageList[ChapterGrade.Grade4], chapterData4, (object)stageinfoV4);
-            "".Log("Chapter 4 StageList");
-            foreach (LogueStageInfo logueStageInfo in LogueBookModels.RemainStageList[ChapterGrade.Grade4])
-                "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
-            LogueBookModels.RemainStageList[ChapterGrade.Grade5] = new List<LogueStageInfo>();
-            List<LogueStageInfo> chapterData5 = Singleton<StagesXmlList>.Instance.GetChapterData(ChapterGrade.Grade5);
-            var stageinfoV5 = new
-            {
-                NormalV = 5,
-                EliteV = 0,
-                MysteryV = 3,
-                ShopV = 2,
-                BossV = 1,
-                Rest = 2,
-                ChapV = ChapterGrade.Grade5
-            };
-            LogueBookModels.AddingRemainStageList(LogueBookModels.RemainStageList[ChapterGrade.Grade5], chapterData5, (object)stageinfoV5);
-            LogueBookModels.RemainStageList[ChapterGrade.Grade6] = new List<LogueStageInfo>();
-            List<LogueStageInfo> chapterData6 = Singleton<StagesXmlList>.Instance.GetChapterData(ChapterGrade.Grade6);
-            var stageinfoV6 = new
-            {
-                NormalV = 5,
-                EliteV = 0,
-                MysteryV = 3,
-                ShopV = 2,
-                BossV = 1,
-                Rest = 2,
-                ChapV = ChapterGrade.Grade5
-            };
-            LogueBookModels.AddingRemainStageList(LogueBookModels.RemainStageList[ChapterGrade.Grade6], chapterData6, (object)stageinfoV6);
-            LogueBookModels.RemainStageList[ChapterGrade.Grade4].Add(Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 80000)));
+                try
+                {
+                    var list = RMRCore.CurrentGamemode.InitializeChapterStageList((ChapterGrade)i);
+                    "".Log($"Chapter {(i + 1).ToString()} StageList");
+                    foreach (LogueStageInfo logueStageInfo in list)
+                        "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
+                    if (list != null && list.Count > 0)
+                    {
+                        LogueBookModels.RemainStageList[(ChapterGrade)i] = new List<LogueStageInfo>();
+                        LogueBookModels.RemainStageList[(ChapterGrade)i].AddRange(list);
+                    }
+                } catch (Exception e)
+                {
+                    Debug.Log("Error when initializing chapters: " + e);
+                }
+            }
         }
 
         public static List<EmotionCardXmlInfo> GetNextList(ChapterGrade grade, bool Stepone = false)
@@ -1469,6 +1498,17 @@ namespace abcdcode_LOGLIKE_MOD
         {
             None,
             OnlyNormal,
+        }
+
+        public struct StageLimits
+        {
+            public int Normal;
+            public int Elite;
+            public int Mystery;
+            public int Shop;
+            public int Boss;
+            public int Rest;
+            public ChapterGrade Chapter;
         }
     }
 }

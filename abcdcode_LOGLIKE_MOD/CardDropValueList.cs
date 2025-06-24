@@ -8,30 +8,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class CardDropValueList : Singleton<CardDropValueList>
+namespace abcdcode_LOGLIKE_MOD
 {
-  public List<CardDropValueXmlInfo> infos;
-  private CardDropValueXmlInfo[] _allInfos;
+    public class CardDropValueList : Singleton<CardDropValueList>
+    {
+        public List<CardDropValueXmlInfo> infos;
+        private CardDropValueXmlInfo[] _allInfos;
 
-  public void Init(List<CardDropValueXmlInfo> info)
-  {
-    this.infos = info;
-    this._allInfos = new CardDropValueXmlInfo[info.Count];
-    info.CopyTo(this._allInfos);
-  }
+        public void Init(List<CardDropValueXmlInfo> info)
+        {
+            this.infos = info;
+            this._allInfos = new CardDropValueXmlInfo[info.Count];
+            info.CopyTo(this._allInfos);
+        }
 
-  public CardDropValueXmlInfo GetData(LorId id, DropType droptype = DropType.Card)
-  {
-    return this.infos.Find((Predicate<CardDropValueXmlInfo>) (x => x.Id == id && x.droptype == DropType.Card));
-  }
+        public CardDropValueXmlInfo GetData(LorId id, DropType droptype = DropType.Card)
+        {
+            return this.infos.Find(x => x.Id == id && x.droptype == DropType.Card);
+        }
 
-  public void RestoreToDefault()
-  {
-    this.infos.Clear();
-    this.infos.AddRange((IEnumerable<CardDropValueXmlInfo>) ((IEnumerable<CardDropValueXmlInfo>) this._allInfos).ToList<CardDropValueXmlInfo>());
-  }
-}
+        public void RestoreToDefault()
+        {
+            this.infos.Clear();
+            this.infos.AddRange(this._allInfos.ToList());
+        }
+    }
 }

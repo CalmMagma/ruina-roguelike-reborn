@@ -1463,7 +1463,6 @@ namespace RogueLike_Mod_Reborn
             {
                 LogueSaveManager.Instance.RemoveData(gamemode.SaveDataString);
             }
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RogueLikeGamemodeManager());
             RMRCore.CurrentGamemode = gamemode;
             return true;
         }
@@ -1492,7 +1491,6 @@ namespace RogueLike_Mod_Reborn
             }
             else
                 LogueSaveManager.Instance.RemoveData(gamemode.SaveDataString);
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RogueLikeGamemodeManager());
             RMRCore.CurrentGamemode = gamemode;
             return true;
         }
@@ -1656,19 +1654,35 @@ namespace RogueLike_Mod_Reborn
         }
 
         /// <summary>
-        /// Runs whenever the player enters a shop.
+        /// Determines the end-of-stage reward list for common fight encounters.
         /// </summary>
-        public virtual void OnEnterShop(ShopBase shop)
+        public List<RewardPassiveInfo> GetCurChapterCommonReward(ChapterGrade grade)
         {
-            // done
+            return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.CommonReward, LorId.None);
         }
 
         /// <summary>
-        /// Runs whenever the player exits a shop.
+        /// Determines the end-of-stage reward list for elite fight encounters.
         /// </summary>
-        public virtual void OnExitShop(ShopBase shop)
+        public List<RewardPassiveInfo> GetCurChapterEliteReward(ChapterGrade grade)
         {
-            // done
+            return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.EliteReward, LorId.None);
+        }
+
+        /// <summary>
+        /// Determines the end-of-stage reward list for boss fight encounters.
+        /// </summary>
+        public List<RewardPassiveInfo> GetCurChapterBossReward(ChapterGrade grade)
+        {
+            return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.BossReward, LorId.None);
+        }
+
+        /// <summary>
+        /// Determines some aspects of the abnormality selection screen, do not override unless you know what you're doing.
+        /// </summary>
+        public List<RewardPassiveInfo> GetCurChapterCreature(ChapterGrade grade)
+        {
+            return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.Creature, LorId.None);
         }
 
         /*
@@ -1681,6 +1695,12 @@ namespace RogueLike_Mod_Reborn
             return true; //done 
         }
         */
+
+        /// <summary>
+        /// Initializes the encounter/stage list for each chapter when the run starts.<br></br>
+        /// Defaults to <see cref="LogueBookModels.VanillaGamemodeReceptionList"/>.
+        /// </summary>
+        public virtual List<LogueStageInfo> InitializeChapterStageList(ChapterGrade chapter) => LogueBookModels.VanillaGamemodeReceptionList(chapter);
 
         /// <summary>
         /// Determines from which mods RMR should take Mystery Events from.
@@ -1725,6 +1745,7 @@ namespace RogueLike_Mod_Reborn
         /// Defaults to RMR's upgraded deck.
         /// </summary>
         public virtual LorId BaseDeckReplacement => new LorId(RMRCore.packageId, -10);
+
     }
 
     public class RoguelikeGamemode_RMR_Default : RoguelikeGamemodeBase
@@ -1751,6 +1772,7 @@ namespace RogueLike_Mod_Reborn
             if (!RoguelikeGamemodeController.Instance.isContinue)
             {
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_ShopGood46.SupriseBox());
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HiddenUpgradeChanceEffect());
                 Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
             }
@@ -1788,9 +1810,9 @@ namespace RogueLike_Mod_Reborn
             if (!RoguelikeGamemodeController.Instance.isContinue)
             {
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_ShopGood46.SupriseBox());
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HiddenUpgradeChanceEffect());
                 Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
-
             }
         }
 
@@ -1805,35 +1827,6 @@ namespace RogueLike_Mod_Reborn
         public override string GetContentScopePackageId => RMRCore.packageId;
     }
 
-    public class RogueLikeGamemodeManager : GlobalLogueEffectBase
-    {
-        public RoguelikeGamemodeBase currentGamemode => RMRCore.CurrentGamemode;
-
-        public override void OnEnterShop(ShopBase shop)
-        {
-            currentGamemode.OnEnterShop(shop);
-        }
-
-        public override void OnLeaveShop(ShopBase shop)
-        {
-            currentGamemode.OnExitShop(shop);
-        }
-
-        /*
-        public override void OnAddSubPlayer(UnitDataModel model)
-        {
-            if (!currentGamemode.OnAddLibrarian(model))
-            {
-                LogueBookModels.playerModel.Remove(model);
-                LogueBookModels.playerBattleModel.RemoveAll(x => x.unitData == model);
-                LogueBookModels.playersPick.Remove(model);
-                LogueBookModels.playersperpassives.Remove(model);
-                LogueBookModels.playersstatadders.Remove(model);
-                throw new Exception("New Librarian removed (working as intended)");
-            }
-        }
-        */
-    }
 
         #endregion
 
@@ -2881,8 +2874,6 @@ namespace RogueLike_Mod_Reborn
             return sprite;
         }
 
-
-
         /// <summary>
         /// THIS IS A DEBUGGING PATCH MADE TO FORESEE EVIDENTLY UNINTENDED BEHAVIOR IN BOOKMODEL.CHANGEPASSIVE
         /// </summary>
@@ -2900,6 +2891,24 @@ namespace RogueLike_Mod_Reborn
                 }
             }
         }
+
+
+        /// <summary>
+        /// Makes singleton account for upgraded pages by checking their original IDs instead
+        /// </summary>
+        [HarmonyTranspiler, HarmonyPatch(typeof(BattleAllyCardDetail), nameof(BattleAllyCardDetail.IsHighlander))]
+        static IEnumerable<CodeInstruction> IsHighlander_UpgradePatch(IEnumerable<CodeInstruction> instructions)
+        {
+            foreach (var x in instructions)
+            {
+                if (x.opcode == OpCodes.Stloc_2)
+                {
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ExtensionUtils), nameof(ExtensionUtils.GetOriginalId)));
+                }
+                yield return x;
+            }
+        }
+
 
         #endregion
 

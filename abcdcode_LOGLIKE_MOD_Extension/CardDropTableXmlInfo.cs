@@ -7,21 +7,21 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
- 
-namespace abcdcode_LOGLIKE_MOD_Extension
-{ 
 
-public class CardDropTableXmlInfo
+namespace abcdcode_LOGLIKE_MOD_Extension
 {
-  [XmlAttribute("ID")]
-  public int _id;
-  [XmlAttribute("pid")]
-  public string pid = "";
-  [XmlElement("Card")]
-  public List<LorIdXml> _cardIdList;
-  [XmlIgnore]
-  public List<LorId> cardIdList = new List<LorId>();
-  [XmlIgnore]
-  public List<int> _validCardIdList = new List<int>();
-}
+
+    public class CardDropTableXmlInfo
+    {
+        [XmlAttribute("ID")]
+        public int _id;
+        [XmlAttribute("pid")]
+        public string pid = "";
+        [XmlElement("Card")]
+        public List<LorIdXml> _cardIdList;
+        [XmlIgnore]
+        public List<LorId> cardIdList = new List<LorId>();
+        [XmlIgnore]
+        public List<int> _validCardIdList = new List<int>();
+    }
 }

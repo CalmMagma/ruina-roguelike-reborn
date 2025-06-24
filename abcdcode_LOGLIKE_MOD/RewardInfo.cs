@@ -4,6 +4,7 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
+using RogueLike_Mod_Reborn;
 using System.Collections.Generic;
 
 
@@ -26,7 +27,7 @@ namespace abcdcode_LOGLIKE_MOD
             return new RewardInfo()
             {
                 grade = grade,
-                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.CommonReward, LorId.None)
+                rewards = RMRCore.CurrentGamemode.GetCurChapterCommonReward(grade)
             };
         }
 
@@ -35,7 +36,7 @@ namespace abcdcode_LOGLIKE_MOD
             return new RewardInfo()
             {
                 grade = grade,
-                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.EliteReward, LorId.None)
+                rewards = RMRCore.CurrentGamemode.GetCurChapterEliteReward(grade)
             };
         }
 
@@ -44,7 +45,7 @@ namespace abcdcode_LOGLIKE_MOD
             return new RewardInfo()
             {
                 grade = grade,
-                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.BossReward, LorId.None)
+                rewards = RMRCore.CurrentGamemode.GetCurChapterBossReward(grade)
             };
         }
 
@@ -53,8 +54,9 @@ namespace abcdcode_LOGLIKE_MOD
             return new RewardInfo()
             {
                 grade = grade,
-                rewards = Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.Creature, LorId.None)
+                rewards = RMRCore.CurrentGamemode.GetCurChapterCreature(grade)
             };
         }
+
     }
 }

@@ -14,47 +14,50 @@ namespace abcdcode_LOGLIKE_MOD
     {
         public static int[] EquipRewardTable = new int[6]
         {
-    1,
-    2,
-    3,
-    4,
-    5,
-    5
+            1,
+            2,
+            3,
+            4,
+            5,
+            5
         };
         public static int[] CardRewardTable = new int[6]
         {
-    3,
-    5,
-    7,
-    9,
-    11,
-    13
+            3,
+            5,
+            7,
+            9,
+            11,
+            13
         };
 
         public override string KeywordId => "GlobalEffect_Retrospection";
-        public override string KeywordIconId => "BossReward2_1";
-        public PickUpModel_BossReward2():base()
+        public override string KeywordIconId 
+        { 
+            get
+            { 
+                switch (LogLikeMod.curchaptergrade)
+                {
+                    case ChapterGrade.Grade1:
+                    case ChapterGrade.Grade2:
+                        return "BossReward2_1";
+                        
+                    case ChapterGrade.Grade3:
+                        return "BossReward2_2";
+                        
+                    case ChapterGrade.Grade4:
+                    case ChapterGrade.Grade5:
+                        return "BossReward2_" + ((double)Random.value > 0.5 ? "3" : "4");
+                        
+                    default:
+                        return "BossReward2_1";
+
+                }
+            } 
+        }
+        public PickUpModel_BossReward2() : base()
         {
-            int index = (int)LogLikeMod.curchaptergrade;
-            if (index > 5)
-                index = 5;
-            switch (LogLikeMod.curchaptergrade)
-            {
-                case ChapterGrade.Grade1:
-                case ChapterGrade.Grade2:
-                    this.ArtWork = "BossReward2_1";
-                    break;
-                case ChapterGrade.Grade3:
-                    this.ArtWork = "BossReward2_2";
-                    break;
-                case ChapterGrade.Grade4:
-                case ChapterGrade.Grade5:
-                    this.ArtWork = "BossReward2_" + ((double)Random.value > 0.5 ? "3" : "4");
-                    break;
-                default:
-                    this.ArtWork = "BossReward2_1";
-                    break;
-            }
+            
         }
 
         public override void OnPickUp()
@@ -67,11 +70,11 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 int num1 = 1;
                 float num2 = Random.value;
-                if ((double)num2 > 0.89999997615814209)
+                if ((double)num2 > 0.9)
                     num1 = 4;
-                else if ((double)num2 > 0.699999988079071)
+                else if ((double)num2 > 0.7)
                     num1 = 3;
-                else if ((double)num2 > 0.40000000596046448)
+                else if ((double)num2 > 0.4)
                     num1 = 2;
                 LogLikeMod.rewards.Add(Singleton<DropBookXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 1000 * (index1 + 1) + num1)));
             }
