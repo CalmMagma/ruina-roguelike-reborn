@@ -163,4 +163,14 @@ namespace RogueLike_Mod_Reborn
             owner.TakeDamage(3, DamageType.Card_Ability);
         }
     }
+
+    public class DiceCardAbility_RMR_breakvuln1atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "Vulnerable_break" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Vulnerable_break, 1, owner);
+        }
+    }
 }

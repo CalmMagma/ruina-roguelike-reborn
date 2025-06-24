@@ -93,11 +93,13 @@
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_GutHarvesting">
-    <Desc>[On Kill] Gain 4 Ahn</Desc>
+    <Desc>[On Kill] Gain 4 Ahn
+[After Use] The page loses this ability afterwards</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_GutHarvestingUpgrade">
-    <Desc> [On Kill] Gain Ahn depending on target’s Key page rarity (4/7/10/15)</Desc>
+    <Desc> [On Kill] Gain Ahn depending on target’s Key page rarity (4/7/10/15)
+[After Use] The page loses this ability afterwards</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_GatherIntelUpgrade">
@@ -106,6 +108,10 @@
   
   <BattleCardAbility ID="RMR_whythefuckistherenoendurance1atk">
     <Desc>[On Hit] Gain 1 Endurance next Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_breakvuln1atk">
+    <Desc>[On Hit] Inflict 1 Stagger Fragile next Scene</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_whythefuckistherenobleeding1pw">
@@ -229,7 +235,7 @@
   </BattleCardAbility>
 
   <BattleCardAbility ID="RMR_GambleUpgrade">
-    <Desc>[On Use] Discard a page with the lowest Cost; if the discarded page’s Cost is not 0, gain Critical Strike equal to the Cost</Desc>
+    <Desc>[On Use] Discard a page with the lowest Cost; if the discarded page’s Cost is not 0, gain Critical Strike equal to 2x the Cost</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_BackAttack">
@@ -241,7 +247,8 @@
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_StayClamUpgrade">
-    <Desc>Draw a page and gain 3 Stagger Shield this Scene upon discarding this page [On Use] Draw 1 page</Desc>
+    <Desc>[On Discard] Draw a page and gain 3 Stagger Shield this Scene
+[On Use] Draw 1 page</Desc>
   </BattleCardAbility>
 
   <BattleCardAbility ID="RMR_FishOnslaughtUpgrade">
@@ -342,10 +349,10 @@
     <Desc>[On Clash Win] Deal 4 damage to target</Desc>
   </BattleCardAbility>
   <BattleCardAbility ID="quick2discardLog">
-    <Desc>When discarded, gain 2 Haste</Desc>
+    <Desc>[On Discard] Gain 2 Haste next Scene</Desc>
   </BattleCardAbility>
   <BattleCardAbility ID="quickall2discardLog">
-    <Desc>When discarded, give 2 Haste to all allies next Scene</Desc>
+    <Desc>[On Discard] Give 2 Haste to all allies next Scene</Desc>
   </BattleCardAbility>
   <BattleCardAbility ID="sakuraLog">
     <Desc>[On Use] If 4+ pages are in hand, discard 4 random pages and boost the min value of all dice on this page by +4</Desc>
@@ -565,10 +572,10 @@
     <Desc>[On Hit] Give 2 Protection and 2 Stagger Protection to all allies next Scene</Desc>
   </BattleCardAbility>
   <BattleCardAbility ID="plutoCardLog">
-    <Desc>Restore 2 Light upon discarding this page</Desc>
+    <Desc>[On Discard] Restore 2 Light</Desc>
   </BattleCardAbility>
   <BattleCardAbility ID="discardAllEnergy1Log">
-    <Desc>When discarded, all allies restore 1 Light</Desc>
+    <Desc>[On Discard] All allies restore 1 Light</Desc>
   </BattleCardAbility>
   <BattleCardAbility ID="handCountpowerUpLog">
     <Desc>[On Use] Boost Power by +1 for each page in hand; Discard all pages from hand</Desc>

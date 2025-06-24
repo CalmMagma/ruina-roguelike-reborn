@@ -319,6 +319,10 @@ namespace RogueLike_Mod_Reborn
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_Shield>();
             if (AddNewKeywordBufToList("Lux_RMR_StaggerShield", ref RoguelikeBufs.RMRStaggerShield))
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_StaggerShield>();
+            if (AddNewKeywordBufToList("Lux_RMR_BurnProtection", ref RoguelikeBufs.BurnProtection))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_BurnProtection>();
+            if (AddNewKeywordBufToList("Lux_RMR_BleedProtection", ref RoguelikeBufs.BleedProtection))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_BleedProtection>();
         }
 
         #region literally do not use this ever

@@ -70,6 +70,26 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_ViciousGlasses";
     }
 
+    public class RMREffect_LightsGuidance : GlobalLogueEffectBase
+    {
+        public override void OnRoundStart(StageController stage)
+        {
+            base.OnRoundStart(stage);
+            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            List<KeywordBuf> list2 = new List<KeywordBuf> { KeywordBuf.SlashPowerUp, KeywordBuf.PenetratePowerUp, KeywordBuf.HitPowerUp, KeywordBuf.DefensePowerUp };
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].bufListDetail.AddKeywordBufByEtc(RandomUtil.SelectOne<KeywordBuf>(list2), 1);
+            }
+        }
+
+        public static Rarity ItemRarity = Rarity.Common;
+
+        public override string KeywordId => "RMR_LightGuidance";
+
+        public override string KeywordIconId => "RMR_LightGuidance";
+    }
+
     public class RMREffect_StrangeOrb : GlobalLogueEffectBase
     {
         public override void OnStartBattleAfter()
