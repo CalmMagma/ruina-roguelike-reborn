@@ -165,6 +165,51 @@ namespace abcdcode_LOGLIKE_MOD
     public class LogLikeHooks
     {
         /// <summary>
+        /// Hook to fix Crying Children's shitty map manager (it DOESN'T play music with a custom stage manager.
+        /// <br></br> shiting and pissing rn.)
+        /// </summary>
+        public void CryingChildMapManager_InitializeMap(Action<CryingChildMapManager> orig, CryingChildMapManager self)
+        {
+            if (LogLikeMod.CheckStage(true))
+            {
+                AccessTools.Method(typeof(MapManager), nameof(MapManager.InitializeMap)).GetBaseDefinition().Invoke((object)self, null);
+                self._stageManager = Singleton<StageController>.Instance.EnemyStageManager as EnemyTeamStageManager_TheCryingLog;
+                self._currentPhase = self._stageManager.currentPhase;
+
+                foreach (SpriteRenderer spriteRenderer in self._burnSpriteRenderers)
+                {
+                    spriteRenderer.enabled = false;
+                }
+                self._dlgIdList.Add("ChildCovering_nomal_1");
+                self._dlgIdList.Add("ChildCovering_nomal_2");
+                self._dlgIdList.Add("ChildCovering_nomal_3");
+                self._dlgIdList.Add("ChildCovering_nomal_4");
+                self._dlgIdList.Add("ChildCovering_nomal_5");
+                self._dlgIdList.Add("ChildCovering_nomal_6");
+                self._dlgIdList.Add("ChildCovering_nomal_7");
+                self._dlgIdList.Add("ChildCovering_nomal_8");
+                self._dlgIdList.Add("TheCryingChildren_nomal_1");
+                self._dlgIdList.Add("TheCryingChildren_nomal_2");
+                self._dlgIdList.Add("TheCryingChildren_nomal_3");
+                self._dlgIdList.Add("TheCryingChildren_nomal_4");
+                self._dlgIdList.Add("TheCryingChildren_nomal_5");
+                self._dlgIdList.Add("TheCryingChildren_nomal_6");
+                self._dlgIdList.Add("TheCryingChildren_nomal_7");
+                self._dlgIdList.Add("TheCryingChildren_nomal_8");
+                self._dlgIdList.Add("TheCryingChildren_nomal_9");
+                self._dlgIdList.Add("TheCryingChildren_nomal_10");
+                self._dlgIdList.Add("TheCryingChildren_nomal_11");
+                self._dlgIdList.Add("TheCryingChildren_nomal_12");
+                self.CreateDialog();
+                SingletonBehavior<CreatureDlgManagerUI>.Instance.Init(SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject == self);
+                self._bgChanged = false;
+            }
+            else
+                orig(self);
+        }
+
+
+        /// <summary>
         /// Hook for changing empty/partially empty decks giving out default pages.
         /// </summary>
         public List<DiceCardXmlInfo> UnitDataModel_GetDeckForBattle(Func<UnitDataModel, int, List<DiceCardXmlInfo>> orig, UnitDataModel self, int index)

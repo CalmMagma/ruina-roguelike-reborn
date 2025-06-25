@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using static StageClearInfoListModel;
 
 namespace abcdcode_LOGLIKE_MOD
 {
@@ -1161,7 +1160,7 @@ namespace abcdcode_LOGLIKE_MOD
         public static void HandleLimitPícking(
           List<LogueStageInfo> stage,
           List<LogueStageInfo> allstage,
-          StageLimits stageLimits)
+          StageLimits stageLimits, bool guaranteeChapterEvent = true)
         {
             int numBoss = stageLimits.Boss;
             int numNormal = stageLimits.Normal;
@@ -1169,11 +1168,13 @@ namespace abcdcode_LOGLIKE_MOD
             int numMystery = stageLimits.Mystery;
             int numElite = stageLimits.Elite;
             int numRest = stageLimits.Rest;
-
-            List<LogueStageInfo> mstage = StagesXmlList.Instance.GetChapterData(stageLimits.Chapter, true);
-            ModdingUtils.SuffleList(mstage);
-            stage.Add(mstage[0]);
-            allstage.Remove(mstage[0]);
+            if (guaranteeChapterEvent)
+            {
+                List<LogueStageInfo> mstage = StagesXmlList.Instance.GetChapterData(stageLimits.Chapter, true);
+                ModdingUtils.SuffleList(mstage);
+                stage.Add(mstage[0]);
+                allstage.Remove(mstage[0]);
+            }
             ModdingUtils.SuffleList(allstage);
             foreach (LogueStageInfo logueStageInfo in allstage)
             {
