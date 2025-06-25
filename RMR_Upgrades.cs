@@ -822,20 +822,6 @@ namespace RogueLike_Mod_Reborn
 
     # region Urban Plague
 
-    public class UpgradeModel_RMR_ : UpgradeBase
-    {
-        public override void Init()
-        {
-            base.Init();
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetSelfAbility("RMR_MeatJamUpgrade");
-            this.upgradeinfo.SetAbility(0, "RMR_LawOrderUpgrade");
-            this.upgradeinfo.SetDice(0, 2, 0);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 100002);
-        }
-    }
-
     public class UpgradeModel_RMR_TasteChain : UpgradeBase
     {
         public override void Init()
@@ -1207,7 +1193,7 @@ namespace RogueLike_Mod_Reborn
             this.upgradeinfo.SetCost(1);
             this.upgradeinfo.SetAbility(0, "burn1atk2times");
             this.upgradeinfo.SetAbility(2, "burn1atk2times");
-            this.baseid = new LorId(LogLikeMod.ModId, 406007);
+            this.baseid = new LorId(LogLikeMod.ModId, 403002);
         }
     }
 
