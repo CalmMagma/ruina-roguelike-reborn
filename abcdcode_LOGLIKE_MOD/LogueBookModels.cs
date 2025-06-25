@@ -1367,12 +1367,12 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static List<EmotionCardXmlInfo> GetPassiveRewards_byElite(ChapterGrade grade)
         {
-            return LogueBookModels.GetPassiveRewards(Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.EliteReward, LorId.None));
+            return LogueBookModels.GetPassiveRewards(RMRCore.CurrentGamemode.GetCurChapterEliteReward(grade));
         }
 
         public static List<EmotionCardXmlInfo> GetPassiveRewards_byBoss(ChapterGrade grade)
         {
-            return LogueBookModels.GetPassiveRewards(Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.BossReward, LorId.None));
+            return LogueBookModels.GetPassiveRewards(RMRCore.CurrentGamemode.GetCurChapterBossReward(grade));
         }
 
         public static List<EmotionCardXmlInfo> GetPassiveRewards_Inlist(List<RewardPassiveInfo> list)

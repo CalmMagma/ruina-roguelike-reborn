@@ -54,7 +54,11 @@ namespace abcdcode_LOGLIKE_MOD
                 case 6:
                     id += 5000;
                     goto default;
+                case 7:
+                    id += 6000;
+                    goto default;
                 default:
+                    if (id == 0) id += 5000;
                     switch (card.ClassInfo.Rarity)
                     {
                         case Rarity.Common:

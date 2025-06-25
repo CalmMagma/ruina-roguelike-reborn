@@ -371,6 +371,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogLikeMod.purpleexcept = false;
                 LogLikeMod.rewards_InStage = new List<RewardInfo>();
                 LogLikeMod.rewards = new List<DropBookXmlInfo>();
+                LogLikeMod.rewards_lastKill = new List<DropBookXmlInfo>();
                 LogLikeMod.rewards_passive = new List<RewardInfo>();
                 LogLikeMod.rewardsMystery = new List<LorId>();
                 //if (!LogLikeMod.Debugging)
@@ -492,8 +493,10 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.CheckStage(true))
             {
+                LogLikeMod.rewards_lastKill = new List<DropBookXmlInfo>();
                 DropBookXmlInfo data1 = Singleton<DropBookXmlList>.Instance.GetData(data.id);
                 LogLikeMod.rewards.Add(data1);
+                LogLikeMod.rewards_lastKill.Add(data1);
             }
             else
                 orig(self, data);

@@ -33,7 +33,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             List<RewardPassiveInfo> chapterData = new List<RewardPassiveInfo>();
             foreach (RewardPassivesInfo rewardPassivesInfo in this.infos.FindAll(predicate))
-                chapterData.AddRange((IEnumerable<RewardPassiveInfo>)rewardPassivesInfo.RewardPassiveList);
+                chapterData.AddRange(rewardPassivesInfo.RewardPassiveList);
             return chapterData;
         }
 

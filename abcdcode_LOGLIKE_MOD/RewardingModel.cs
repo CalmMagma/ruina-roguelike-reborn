@@ -310,6 +310,7 @@ namespace abcdcode_LOGLIKE_MOD
                 if (LogLikeMod.rewards.Count > 0)
                 {
                     Singleton<MysteryManager>.Instance.StartMystery(new LorId(LogLikeMod.ModId, -4));
+                    // start Combat Page card reward event (MysteryModel_CardReward)
                     SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
                 }
                 else if (LogLikeMod.rewards_passive.Count > 0)

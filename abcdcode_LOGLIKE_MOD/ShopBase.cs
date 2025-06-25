@@ -359,9 +359,9 @@ namespace abcdcode_LOGLIKE_MOD
             List<RewardPassiveInfo> rewardPassiveInfoList = new List<RewardPassiveInfo>();
             int count1 = this.OnceCount(num);
             int count2 = num - count1;
-            rewardPassiveInfoList.AddRange((IEnumerable<RewardPassiveInfo>)ShopBase.GetPassiveInList(chapterData1, count1, ShopRewardType.Once));
+            rewardPassiveInfoList.AddRange(ShopBase.GetPassiveInList(chapterData1, count1, ShopRewardType.Once));
             List<RewardPassiveInfo> chapterData2 = Singleton<RewardPassivesList>.Instance.GetChapterData(ChapterGrade.GradeAll, PassiveRewardListType.Shop, new LorId(LogLikeMod.ModId, 90000));
-            rewardPassiveInfoList.AddRange((IEnumerable<RewardPassiveInfo>)ShopBase.GetPassiveInList(chapterData2, count2, ShopRewardType.Eternal));
+            rewardPassiveInfoList.AddRange(ShopBase.GetPassiveInList(chapterData2, count2, ShopRewardType.Eternal));
             for (int index = 0; index < rewardPassiveInfoList.Count; ++index)
                 this.Shop_PassiveCreating(rewardPassiveInfoList[index], this.GetShopShape_Passive(num, index), index);
         }

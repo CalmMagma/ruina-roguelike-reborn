@@ -60,7 +60,7 @@ namespace abcdcode_LOGLIKE_MOD
                 datalist._cardInfoList.Add(cardinfo);
                 datalist._cardInfoTable.Add(cardinfo.id, cardinfo);
             }
-            
+
         }
 
         public static void SetLayerAll(this GameObject obj, int layer)
@@ -175,7 +175,17 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.EquipNewPage(model, info);
         }
 
-        public static string LogId(this object obj) => LogLikeMod.ModId;
+        public static void LogId(this object obj) {
+            string packageId = "";
+            try
+            {
+                packageId = RMRCore.ClassIds[obj.GetType().Assembly.FullName];
+            } catch
+            {
+                packageId = "NOT_FOUND";
+            }
+            Debug.Log(obj.GetType().Name + " -- IS OF ASSEMBLY PACK ID -- " + packageId);
+        }
 
         public static bool IsDead(this UnitDataModel model)
         {

@@ -2880,10 +2880,18 @@ namespace RogueLike_Mod_Reborn
             base.OnEndBattle();
             if (card.target.IsDead())
             {
-                // upgrade dropped book rarity
+                foreach (var book in LogLikeMod.rewards_lastKill)
+                {
+                    if (LogLikeMod.rewards.Remove(book))
+                    {
+                        DropBookXmlInfo book2 = Singleton<DropBookXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, (book.chapter * 1000) + (book.id.id - book.chapter * 1000) + (book.id.id.ToString().EndsWith("4") ? 0 : 1)));
+                        LogLikeMod.rewards.Add(book2);
+                    }
+                }
             }
         }
     }
+
 
     public class DiceCardSelfAbility_RMR_FascinatingFabric : DiceCardSelfAbilityBase
     {

@@ -75,11 +75,16 @@ namespace abcdcode_LOGLIKE_MOD
         public static string curMysteryTitle => Singleton<MysteryManager>.Instance.curMystery.FrameObj["Title"].GetComponent<TextMeshProUGUI>().GetParsedText();
         public static int NormalRewardCool = 0;
         /// <summary>
-        /// Determines end-of-act keypage and combat page rewards.
+        /// Determines the reward for any incoming CardChoice and CardList events/interrupts.<br></br>
+        /// Mainly used for end-of-stage combat page rewards.
         /// </summary>
         public static List<DropBookXmlInfo> rewards;
         /// <summary>
-        /// Determines end-of-act passive choices. (Used mostly for boss rewards)
+        /// Set to the last enemy's book drops. Useful for certain effects.
+        /// </summary>
+        public static List<DropBookXmlInfo> rewards_lastKill;
+        /// <summary>
+        /// Determines end-of-act passive choices. Mainly used for key page rewards and boss rewards.
         /// </summary>
         public static List<RewardInfo> rewards_passive;
         /// <summary>
@@ -88,8 +93,8 @@ namespace abcdcode_LOGLIKE_MOD
         /// </summary>
         public static List<RewardInfo> rewards_InStage;
         /// <summary>
-        /// Runs events at the end of the act. <b>These are given out *before* <see cref="LogLikeMod.rewards"/>.</b><br></br>
-        /// Unused in vanilla Roguelike, but still works.
+        /// Runs events at the end of the act. <b>These are given out *before* <see cref="LogLikeMod.rewards_passive"/>.</b><br></br>
+        /// Inserting an event LorId results in an event being called  Unused in vanilla Roguelike, but still works.
         /// </summary>
         public static List<LorId> rewardsMystery;
         /// <summary>
@@ -101,7 +106,7 @@ namespace abcdcode_LOGLIKE_MOD
         /// </summary>
         public static ChapterGrade curchaptergrade;
         /// <summary>
-        /// The current type of stage the playe is in.
+        /// The current type of stage the player is in.
         /// </summary>
         public static StageType curstagetype;
         /// <summary>

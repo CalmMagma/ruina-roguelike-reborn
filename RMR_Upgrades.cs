@@ -1006,7 +1006,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetSelfAbility("RMR_RelayUpgrade")
+            this.upgradeinfo.SetSelfAbility("RMR_RelayUpgrade");
             this.upgradeinfo.SetAbility(0, "vulnerable2atk");
             this.upgradeinfo.SetDice(0, 1, 1);
             this.baseid = new LorId(LogLikeMod.ModId, 411102);
@@ -1624,7 +1624,7 @@ namespace RogueLike_Mod_Reborn
         public override void Init()
         {
             base.Init();
-            this.index = 2;
+            this.index = 1;
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetAbility(0, "bleeding1atk");
             this.upgradeinfo.SetAbility(1, "bleeding1atk");
