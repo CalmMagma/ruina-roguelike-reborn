@@ -138,11 +138,6 @@
       <Passive Pid="@origin" Level="1">10001</Passive>
       <Passive>250005</Passive>
 
-      <OnlyCard>602001</OnlyCard>
-      <OnlyCard>602002</OnlyCard>
-      <OnlyCard>602003</OnlyCard>
-      <OnlyCard>602004</OnlyCard>
-      <OnlyCard>602006</OnlyCard>
     </EquipEffect>
     <RangeType>Hybrid</RangeType>
     <BookIcon>TheThumb</BookIcon>
@@ -178,11 +173,6 @@
       <Passive Pid="@origin" Level="1">250006</Passive>
       <Passive Pid="@origin" Level="1">250106</Passive>
 
-      <OnlyCard>602001</OnlyCard>
-      <OnlyCard>602002</OnlyCard>
-      <OnlyCard>602003</OnlyCard>
-      <OnlyCard>602004</OnlyCard>
-      <OnlyCard>602006</OnlyCard>
       <OnlyCard>602009</OnlyCard>
     </EquipEffect>
     <RangeType>Hybrid</RangeType>
@@ -244,11 +234,6 @@
       <Passive>250005</Passive>
       <Passive Pid="@origin" Level="1">250008</Passive>
 
-      <OnlyCard>602001</OnlyCard>
-      <OnlyCard>602002</OnlyCard>
-      <OnlyCard>602003</OnlyCard>
-      <OnlyCard>602004</OnlyCard>
-      <OnlyCard>602006</OnlyCard>
       <OnlyCard>602009</OnlyCard>
     </EquipEffect>
     <RangeType>Hybrid</RangeType>
@@ -281,11 +266,6 @@
       <Passive>250005</Passive>
       <Passive>250009</Passive>
 
-      <OnlyCard>602001</OnlyCard>
-      <OnlyCard>602002</OnlyCard>
-      <OnlyCard>602003</OnlyCard>
-      <OnlyCard>602004</OnlyCard>
-      <OnlyCard>602006</OnlyCard>
       <OnlyCard>602009</OnlyCard>
     </EquipEffect>
     <RangeType>Hybrid</RangeType>

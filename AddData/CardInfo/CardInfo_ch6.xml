@@ -220,8 +220,6 @@
 		<Name>장전</Name>
 		<Artwork>Thumb1</Artwork>
 		<Rarity>Common</Rarity>
-    <Option>OnlyPage</Option>
-    <Keyword>onlypage_thumb</Keyword>
 		<Spec Range="Near" Cost="1" />
 		<Script>AddBullet1AndDrawLogEdit</Script>
 		<ScriptDesc>[사용시] 손에 무작위 탄환을 1장 추가</ScriptDesc>
@@ -237,8 +235,6 @@
 		<Name>총검술</Name>
 		<Artwork>Thumb2</Artwork>
 		<Rarity>Uncommon</Rarity>
-    <Option>OnlyPage</Option>
-    <Keyword>onlypage_thumb</Keyword>
 		<Spec Range="Near" Cost="2" />
 		<Script>AddBullet2LogEdit</Script>
 		<ScriptDesc>[사용시] 손에 무작위 탄환을 2장 추가</ScriptDesc>
@@ -255,8 +251,6 @@
 		<Name>견제 사격</Name>
 		<Artwork>Thumb3</Artwork>
 		<Rarity>Common</Rarity>
-    <Option>OnlyPage</Option>
-    <Keyword>onlypage_thumb</Keyword>
 		<Spec Range="Far" Cost="1" />
 		<Script>discard1</Script>
 		<ScriptDesc>[사용시] 비용이 가장 낮은 책장 1장을 버린다</ScriptDesc>
@@ -273,8 +267,6 @@
 		<Name>충격탄</Name>
 		<Artwork>Thumb4</Artwork>
 		<Rarity>Uncommon</Rarity>
-    <Option>OnlyPage</Option>
-    <Keyword>onlypage_thumb</Keyword>
 		<Spec Range="Far" Cost="2" />
     <Script>discard2draw1</Script>
     <ScriptDesc>[사용시] 비용이 가장 낮은 책장 1장을 버린다</ScriptDesc>
@@ -291,8 +283,6 @@
 		<Name>기습 사격 더미</Name>
 		<Artwork>Thumb5</Artwork>
 		<Rarity>Uncommon</Rarity>
-    <Option>OnlyPage</Option>
-    <Keyword>onlypage_thumb</Keyword>
 		<Spec Range="Far" Cost="1" />
 		<Script></Script>
 		<ScriptDesc></ScriptDesc>
@@ -310,8 +300,6 @@
 		<Name>화력집중</Name>
 		<Artwork>Thumb6</Artwork>
 		<Rarity>Rare</Rarity>
-    <Option>OnlyPage</Option>
-    <Keyword>onlypage_thumb</Keyword>
 		<Spec Range="Far" Cost="3" />
     <Script>discard4bullet</Script>
     <ScriptDesc>[사용시] 비용이 가장 낮은 책장 2장을 버리고 책장을 1장 뽑는다</ScriptDesc>

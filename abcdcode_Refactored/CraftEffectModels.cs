@@ -10,6 +10,68 @@ using UnityEngine;
 
 namespace abcdcode_LOGLIKE_MOD
 {
+    public class CraftExclusiveCardChapter5 : CraftEffect
+    {
+        public override bool IsNormal()
+        {
+            return false;
+        }
+
+        public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter1Icon"];
+
+        public override string GetCraftName() => TextDataModel.GetText("CraftExCardChapter5Name");
+
+        public override string GetCraftDesc() => TextDataModel.GetText("CraftExCardChapter5Desc");
+
+        public override int GetCraftCost() => 10;
+
+        public override bool CanCraft(int costresult)
+        {
+            if (CraftEffect.CanCraftExclusiveByChapter(ChapterGrade.Grade5) != null)
+                return base.CanCraft(costresult);
+            UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipCant"));
+            return false;
+        }
+
+        public override void Crafting()
+        {
+            base.Crafting();
+            CraftEffect.CraftExclusiveCardByChapter(ChapterGrade.Grade5);
+        }
+    }
+
+    public class CraftExclusiveCardChapter6 : CraftEffect
+    {
+        public override bool IsNormal()
+        {
+            return false;
+        }
+
+        public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter1Icon"];
+
+        public override string GetCraftName() => TextDataModel.GetText("CraftExCardChapter6Name");
+
+        public override string GetCraftDesc() => TextDataModel.GetText("CraftExCardChapter6Desc");
+
+        public override int GetCraftCost() => 15;
+
+        public override bool CanCraft(int costresult)
+        {
+            if (CraftEffect.CanCraftExclusiveByChapter(ChapterGrade.Grade6) != null)
+                return base.CanCraft(costresult);
+            UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipCant"));
+            return false;
+        }
+
+        public override void Crafting()
+        {
+            base.Crafting();
+            CraftEffect.CraftExclusiveCardByChapter(ChapterGrade.Grade6);
+        }
+    }
+
+
+
     public class CraftEquipChapter1 : CraftEffect
     {
         public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter1Icon"];

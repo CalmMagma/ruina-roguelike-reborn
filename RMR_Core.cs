@@ -1660,7 +1660,7 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Determines the end-of-stage reward list for common fight encounters.
         /// </summary>
-        public List<RewardPassiveInfo> GetCurChapterCommonReward(ChapterGrade grade)
+        public virtual List<RewardPassiveInfo> GetCurChapterCommonReward(ChapterGrade grade)
         {
             return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.CommonReward, LorId.None);
         }
@@ -1668,7 +1668,7 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Determines the end-of-stage reward list for elite fight encounters.
         /// </summary>
-        public List<RewardPassiveInfo> GetCurChapterEliteReward(ChapterGrade grade)
+        public virtual List<RewardPassiveInfo> GetCurChapterEliteReward(ChapterGrade grade)
         {
             return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.EliteReward, LorId.None);
         }
@@ -1676,7 +1676,7 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Determines the end-of-stage reward list for boss fight encounters.
         /// </summary>
-        public List<RewardPassiveInfo> GetCurChapterBossReward(ChapterGrade grade)
+        public virtual List<RewardPassiveInfo> GetCurChapterBossReward(ChapterGrade grade)
         {
             return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.BossReward, LorId.None);
         }
@@ -1684,7 +1684,7 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Determines some aspects of the abnormality selection screen, do not override unless you know what you're doing.
         /// </summary>
-        public List<RewardPassiveInfo> GetCurChapterCreature(ChapterGrade grade)
+        public virtual List<RewardPassiveInfo> GetCurChapterCreature(ChapterGrade grade)
         {
             return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.Creature, LorId.None);
         }

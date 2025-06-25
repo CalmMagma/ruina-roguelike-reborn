@@ -1329,13 +1329,13 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static List<EmotionCardXmlInfo> GetNextList(ChapterGrade grade, bool Stepone = false)
         {
-            List<LogueStageInfo> collection = new List<LogueStageInfo>((IEnumerable<LogueStageInfo>)LogueBookModels.RemainStageList[grade]);
+            List<LogueStageInfo> collection = new List<LogueStageInfo>(LogueBookModels.RemainStageList[grade]);
             if (collection.Count == 0)
                 return new List<EmotionCardXmlInfo>();
             List<EmotionCardXmlInfo> nextList = new List<EmotionCardXmlInfo>();
-            List<LogueStageInfo> logueStageInfoList = new List<LogueStageInfo>((IEnumerable<LogueStageInfo>)collection);
-            if (logueStageInfoList.FindAll((Predicate<LogueStageInfo>)(x => x.type == StageType.Normal)).Count > 1 || logueStageInfoList.Count > 5)
-                logueStageInfoList.Remove(logueStageInfoList.Find((Predicate<LogueStageInfo>)(x => x.type == StageType.Boss)));
+            List<LogueStageInfo> logueStageInfoList = new List<LogueStageInfo>(collection);
+            if (logueStageInfoList.FindAll(x => x.type == StageType.Normal).Count > 1 || logueStageInfoList.Count > 5)
+                logueStageInfoList.Remove(logueStageInfoList.Find(x => x.type == StageType.Boss));
             for (int index = 0; index < 3; ++index)
             {
                 LogueStageInfo info = logueStageInfoList[UnityEngine.Random.Range(0, logueStageInfoList.Count)];
@@ -1351,7 +1351,7 @@ namespace abcdcode_LOGLIKE_MOD
         public static List<EmotionCardXmlInfo> GetPassiveRewards(List<RewardPassiveInfo> list)
         {
             List<RewardPassiveInfo> rewardPassiveInfoList = new List<RewardPassiveInfo>();
-            List<RewardPassiveInfo> rewards = new List<RewardPassiveInfo>((IEnumerable<RewardPassiveInfo>)list);
+            List<RewardPassiveInfo> rewards = new List<RewardPassiveInfo>(list);
             List<EmotionCardXmlInfo> passiveRewards = new List<EmotionCardXmlInfo>();
             do
             {
@@ -1364,16 +1364,6 @@ namespace abcdcode_LOGLIKE_MOD
             for (int index = 0; index < rewardPassiveInfoList.Count; ++index)
                 passiveRewards.Add(LogLikeMod.GetRegisteredPickUpXml(rewardPassiveInfoList[index]));
             return passiveRewards;
-        }
-
-        public static List<EmotionCardXmlInfo> GetPassiveRewards_byElite(ChapterGrade grade)
-        {
-            return LogueBookModels.GetPassiveRewards(RMRCore.CurrentGamemode.GetCurChapterEliteReward(grade));
-        }
-
-        public static List<EmotionCardXmlInfo> GetPassiveRewards_byBoss(ChapterGrade grade)
-        {
-            return LogueBookModels.GetPassiveRewards(RMRCore.CurrentGamemode.GetCurChapterBossReward(grade));
         }
 
         public static List<EmotionCardXmlInfo> GetPassiveRewards_Inlist(List<RewardPassiveInfo> list)

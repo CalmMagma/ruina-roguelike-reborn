@@ -4,8 +4,11 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
+using LOR_DiceSystem;
+using RogueLike_Mod_Reborn;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UI;
 using UnityEngine;
 
@@ -53,6 +56,43 @@ namespace abcdcode_LOGLIKE_MOD
             BookXmlInfo data = Singleton<BookXmlList>.Instance.GetData(reward.id);
             LogueBookModels.AddBook(reward.id);
             UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipResult", (object)data.InnerName));
+        }
+
+        public static List<DiceCardXmlInfo> CanCraftExclusiveByChapter(ChapterGrade grade)
+        {
+            List<DiceCardXmlInfo> cardList = new List<DiceCardXmlInfo>();
+            Dictionary<LorId, int> keypageCount = new Dictionary<LorId, int>();
+            foreach (var keypage in LogueBookModels.booklist.FindAll(x => x.ClassInfo.Chapter == (int)grade + 1))
+            {
+                if (keypage.GetOnlyCards().Any())
+                {
+                    foreach (var card in keypage.GetOnlyCards())
+                    {
+                        if (keypageCount.TryGetValue(card.id, out int num))
+                            keypageCount[card.id.GetOriginalId()] = num + 1;
+                        else 
+                            keypageCount[card.id.GetOriginalId()] = 1;
+                        cardList.Add(card);
+                    }
+                }
+            }
+            List<DiceCardXmlInfo> cardList2 = new List<DiceCardXmlInfo>();
+            cardList2.AddRange(cardList);
+            foreach (var card in cardList2)
+            {
+                if (LogueBookModels.cardlist.Count(x => x.GetID().GetOriginalId() == card.id.GetOriginalId()) >= keypageCount[card.id] * card.Limit)
+                    cardList.RemoveAll(x => x.id == card.id);
+            }
+            return cardList.Any() ? cardList : null;
+        }
+
+        public static bool CraftExclusiveCardByChapter(ChapterGrade grade)
+        {
+            List<DiceCardXmlInfo> cards = CraftEffect.CanCraftExclusiveByChapter(grade);
+            DiceCardXmlInfo card = cards.SelectOneRandom();
+            LogueBookModels.AddCard(card.id);
+            UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipResult", card.Name));
+            return true;
         }
     }
 }

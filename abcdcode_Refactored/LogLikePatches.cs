@@ -1308,8 +1308,8 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
                 LoguePlayDataSaver.LoadChDebugData(ChapterGrade.Grade2);
                 RMRCore.CurrentGamemode.AfterInitializeGamemode();
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter1());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter2());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
                 LoguePlayDataSaver.RemovePlayerData();
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -3854))
@@ -1321,9 +1321,9 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
                 LoguePlayDataSaver.LoadChDebugData(ChapterGrade.Grade3);
                 RMRCore.CurrentGamemode.AfterInitializeGamemode();
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter1());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter2());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter3());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
                 LoguePlayDataSaver.RemovePlayerData();
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -4854))
@@ -1335,10 +1335,10 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
                 LoguePlayDataSaver.LoadChDebugData(ChapterGrade.Grade4);
                 RMRCore.CurrentGamemode.AfterInitializeGamemode();
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter1());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter2());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter3());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter4());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter4());
                 LoguePlayDataSaver.RemovePlayerData();
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -5854))
@@ -1350,11 +1350,12 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
                 LoguePlayDataSaver.LoadChDebugData(ChapterGrade.Grade5);
                 RMRCore.CurrentGamemode.AfterInitializeGamemode();
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter1());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter2());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter3());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter4());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter5());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter4());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter5());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter5());
                 LoguePlayDataSaver.RemovePlayerData();
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -6854))
@@ -1366,12 +1367,14 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
                 LoguePlayDataSaver.LoadChDebugData(ChapterGrade.Grade6);
                 RMRCore.CurrentGamemode.AfterInitializeGamemode();
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter1());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter2());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter3());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter4());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter5());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter6());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter4());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter5());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter5());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter6());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter6());
                 LoguePlayDataSaver.RemovePlayerData();
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -7854))
@@ -1383,13 +1386,15 @@ namespace abcdcode_LOGLIKE_MOD
                 orig(self);
                 LoguePlayDataSaver.LoadChDebugData(ChapterGrade.Grade7);
                 RMRCore.CurrentGamemode.AfterInitializeGamemode();
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter1());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter2());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter3());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter4());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter5());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter6());
-                Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter7());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter4());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter5());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter6());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter5());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter6());
+                Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter7());
                 LoguePlayDataSaver.RemovePlayerData();
             }
 

@@ -228,22 +228,24 @@ namespace abcdcode_LOGLIKE_MOD
                     switch (LogLikeMod.curchaptergrade)
                     {
                         case ChapterGrade.Grade2:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter2());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
                             break;
                         case ChapterGrade.Grade3:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter3());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
                             break;
                         case ChapterGrade.Grade4:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter4());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter4());
                             break;
                         case ChapterGrade.Grade5:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter5());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter5());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter5());
                             break;
                         case ChapterGrade.Grade6:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter6());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter6());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter6());
                             break;
                         case ChapterGrade.Grade7:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new CraftEquipChapter7());
+                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter7());
                             break;
                     }
                 }

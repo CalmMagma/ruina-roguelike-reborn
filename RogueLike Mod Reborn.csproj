@@ -176,7 +176,7 @@
     <Compile Include="abcdcode_LOGLIKE_MOD\CircusDawn2Buf.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\CraftEffect.cs" />
     <Compile Include="abcdcode_Refactored\AbnormalityPickUpModels.cs" />
-    <Compile Include="abcdcode_Refactored\CraftEquipChapterModels.cs" />
+    <Compile Include="abcdcode_Refactored\CraftEffectModels.cs" />
     <Compile Include="abcdcode_Refactored\Upgrades.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\CreaturePickUpModel.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\DebugEffect_Damage.cs" />
