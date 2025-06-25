@@ -173,4 +173,26 @@ namespace RogueLike_Mod_Reborn
             target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Vulnerable_break, 1, owner);
         }
     }
+
+    public class DiceCardAbility_RMR_critchance2pw : DiceCardAbilityBase
+    {
+         public override string[] Keywords => new string[1] { "RMR_CriticalStrike_Keyword" };
+
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            owner.bufListDetail.AddKeywordBufByCard(RoguelikeBufs.CritChance, 2, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_bleed1twiceatk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "Bleeding_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, 1, owner);
+            target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, 1, owner);
+        }
+    }
 }
