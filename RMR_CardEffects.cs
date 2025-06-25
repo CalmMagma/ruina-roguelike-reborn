@@ -482,7 +482,24 @@ namespace RogueLike_Mod_Reborn
         public override void OnUseCard()
         {
             base.OnUseCard();
-            owner.bufListDetail.AddBuf(new DiceCardSelfAbility_burnPlus.BattleUnitBuf_burnPlus());
+            owner.bufListDetail.AddBuf(new BattleUnitBuf_burnPlus());
+        }
+
+        public class BattleUnitBuf_burnPlus : BattleUnitBuf
+        {
+            public override int OnGiveKeywordBufByCard(BattleUnitBuf cardBuf, int stack, BattleUnitModel target)
+            {
+                if (cardBuf.bufType == KeywordBuf.Burn)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+
+            public override void OnRoundEnd()
+            {
+                Destroy();
+            }
         }
     }
 
@@ -1178,6 +1195,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_LowNight : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Strength_Keyword" };
         public override void OnDiscard(BattleUnitModel unit, BattleDiceCardModel self)
         {
             base.OnDiscard(unit, self);
@@ -1191,6 +1209,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_LowNightUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Strength_Keyword", "RMR_Shield_Keyword" };
         public override void OnDiscard(BattleUnitModel unit, BattleDiceCardModel self)
         {
             base.OnDiscard(unit, self);
@@ -1208,6 +1227,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_RulesBackstreets : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1223,6 +1243,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_bleed2draw1atk : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword", "DrawCard_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -1233,6 +1254,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_HandleRequest : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Burn_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1287,6 +1309,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_PrescriptOrder : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "DrawCard_Keyword" };
         bool trigger;
         public override void OnEnterCardPhase(BattleUnitModel unit, BattleDiceCardModel self)
         {
@@ -1312,6 +1335,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_PrescriptOrderUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "DrawCard_Keyword", "RMR_StaggerShield_Keyword" };
         bool trigger;
         public override void OnEnterCardPhase(BattleUnitModel unit, BattleDiceCardModel self)
         {
@@ -1341,6 +1365,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_TargetSpotted : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1350,6 +1375,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_binding3crit : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Binding_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -1380,6 +1406,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_YoureSoft : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword", "RMR_BleedProtection_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1421,6 +1448,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_Relay : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "DrawCard_Keyword" };
         public override void OnDiscard(BattleUnitModel unit, BattleDiceCardModel self)
         {
             base.OnDiscard(unit, self);
@@ -1430,6 +1458,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_RelayUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "DrawCard_Keyword" };
         public override void OnDiscard(BattleUnitModel unit, BattleDiceCardModel self)
         {
             base.OnDiscard(unit, self);
@@ -1445,14 +1474,20 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_DarkCloudUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
-
+            owner.bufListDetail.AddBuf(new guggugubleeeeedd());
         }
 
         public class guggugubleeeeedd : BattleUnitBuf
         {
+            public override void OnRoundEnd()
+            {
+                base.OnRoundEnd();
+                this.Destroy();
+            }
             public override void BeforeRollDice(BattleDiceBehavior behavior)
             {
                 base.BeforeRollDice(behavior);
@@ -1467,6 +1502,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_bleeding1atk2lessbreakdmg : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -1506,8 +1542,9 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_ReturnFire : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_ReturnFireUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1517,6 +1554,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_1weakcrit : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Weak_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -1529,6 +1567,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_2weakcrit : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Weak_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -1551,6 +1590,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_FlankAttack : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1593,6 +1633,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_FlankAttackUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override bool IsUniteCard => true;
         public override void OnUseCard()
         {
@@ -1614,6 +1655,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_RedNotes : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Strength_Keyword", "Endurance_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1629,6 +1671,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_RedNotesUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Strength_Keyword", "Endurance_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1647,6 +1690,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_WillBeTasty : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Recover_Keyword"};
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1659,6 +1703,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_IHATECQC : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Protection_Keyword", "BreakProtection_Keyword", "RMR_CriticalStrike_Keyword" };
         public override void OnLoseParrying()
         {
             base.OnLoseParrying();
@@ -1670,6 +1715,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_IHATECQCUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Protection_Keyword", "BreakProtection_Keyword", "RMR_CriticalStrike_Keyword" };
         public override void OnLoseParrying()
         {
             base.OnLoseParrying();
@@ -1681,6 +1727,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_TakeTheShot : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "DrawCard_Keyword", "Energy_Keyword" };
         public override void OnSucceedAttack()
         {
             base.OnSucceedAttack();
@@ -1694,6 +1741,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_TakeTheShotUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "DrawCard_Keyword", "Energy_Keyword", "RMR_CriticalStrike_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1748,6 +1796,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_YoureHindranceUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Disarm_Keyword" };
         public override void OnSucceedAttack()
         {
             base.OnSucceedAttack();
@@ -1757,6 +1806,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_CumulusWall : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_Shield_Keyword", "RMR_StaggerShield_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1767,6 +1817,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_CumulusWallUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_Shield_Keyword", "RMR_StaggerShield_Keyword", "Bleeding_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1787,6 +1838,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_ShrineToMusic : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Weak_Keyword", "Disarm_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1801,6 +1853,7 @@ namespace RogueLike_Mod_Reborn
     }
     public class DiceCardSelfAbility_RMR_ShrineToMusicUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Weak_Keyword", "Disarm_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -1831,6 +1884,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_dmgupquickness1ally2atk : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Quickness_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -1844,6 +1898,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_SpearedSweep : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Disarm_Keyword" };
         public override void OnStartParrying()
         {
             base.OnStartParrying();
@@ -1859,6 +1914,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_SpearedSweepUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Disarm_Keyword" };
         public override void OnSucceedAttack()
         {
             base.OnSucceedAttack();
@@ -1923,6 +1979,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_FullStopToLife : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1937,6 +1994,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_FullStopToLifeUpgrade1 : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1951,6 +2009,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_FullStopToLifeUpgrade2 : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1961,6 +2020,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_ElectricShock : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Paralysis_Keyword" };
         public override void OnEndBattle()
         {
             base.OnEndBattle();
@@ -1976,6 +2036,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_ElectricShockUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Paralysis_Keyword" };
         public override void OnEndBattle()
         {
             base.OnEndBattle();
@@ -1991,6 +2052,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_HeresMyChance : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override bool IsUniteCard => true;
         public override void OnUseCard()
         {
@@ -2027,6 +2089,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_Detonate : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Burn_Keyword" };
         public override void BeforeGiveDamage()
         {
             base.BeforeGiveDamage();
@@ -2044,6 +2107,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_SkyCut : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void BeforeGiveDamage()
         {
             base.BeforeGiveDamage();
@@ -2085,6 +2149,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_HeadtoHead : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -2131,6 +2196,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_HeadtoHeadUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override bool IsUniteCard => true;
         public override void OnStartBattle()
         {
@@ -2172,6 +2238,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_StructuralAnalysis : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Paralysis_Keyword" };
         public override void OnUseCard()
         {
             if (card.target == null)
@@ -2322,6 +2389,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_NotAnotherStep : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnStartParrying()
         {
             base.OnStartParrying();
@@ -2334,6 +2402,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_NotAnotherStepUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnStartParrying()
         {
             base.OnStartParrying();
@@ -2346,6 +2415,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_SharpenedBlade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -2382,6 +2452,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_SharpenedBladeUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -2418,6 +2489,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_SilentMist : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Protection_Keyword", "Bleeding_Keyword", "BreakProtection_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -2431,6 +2503,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_ButterflySlash : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Burn_Keyword" };
         public override void BeforeGiveDamage(BattleDiceBehavior behavior)
         {
             base.BeforeGiveDamage(behavior);
@@ -2539,6 +2612,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_BeyondShadow : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_CriticalStrike_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -2554,6 +2628,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_2bleedcrit : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -2566,6 +2641,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_3bleedcrit : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -2578,6 +2654,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_ScatteringSlash : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_Shield_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -2587,6 +2664,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_ScatteringSlashUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "RMR_Shield_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -2596,6 +2674,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_UnforgettableMelody : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Strength_Keyword", "DrawCard_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -2611,6 +2690,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_UnforgettableMelodyUpgrade : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Strength_Keyword", "DrawCard_Keyword" };
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -2706,6 +2786,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_HeavyPeaks : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Strength_Keyword", "Endurance_Keyword" };
         public override void OnEndBattle()
         {
             base.OnEndBattle();
@@ -2732,6 +2813,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_Tailoring : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "DrawCard_Keyword" };
         public class BattleDiceCardBuf_costDownCard : BattleDiceCardBuf
         {
             public override void OnRoundEnd()
@@ -2805,7 +2887,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_FascinatingFabric : DiceCardSelfAbilityBase
     {
-
+        public override string[] Keywords => new string[] { "Protection_Keyword", "BreakProtection_Keyword" };
         public override bool BeforeAddToHand(BattleUnitModel unit, BattleDiceCardModel self)
         {
             if (unit.allyCardDetail.GetAllDeck().FindAll((BattleDiceCardModel x) => x.GetID() == self.GetID()).Count >= 3)
@@ -2824,7 +2906,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_FascinatingFabricUpgrade : DiceCardSelfAbilityBase
     {
-
+        public override string[] Keywords => new string[] { "Protection_Keyword", "BreakProtection_Keyword" };
         public override bool BeforeAddToHand(BattleUnitModel unit, BattleDiceCardModel self)
         {
             if (unit.allyCardDetail.GetAllDeck().FindAll((BattleDiceCardModel x) => x.GetID() == self.GetID()).Count >= 3)
@@ -2843,6 +2925,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_CrackOfDawnDie : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Burn_Keyword" };
         public override void BeforeGiveDamage()
         {
             base.BeforeGiveDamage();
@@ -2860,6 +2943,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_CrackOfDawnDieUpgrade : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Burn_Keyword" };
         public override void BeforeGiveDamage()
         {
             base.BeforeGiveDamage();
@@ -2877,6 +2961,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_NowDie : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -3031,6 +3116,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_InkOverDie : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword", "DrawCard_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -3048,6 +3134,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardAbility_RMR_InkOverDieUpgrade : DiceCardAbilityBase
     {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword", "DrawCard_Keyword" };
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
@@ -3065,6 +3152,7 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_energy2draw1 : DiceCardSelfAbilityBase
     {
+        public override string[] Keywords => new string[] { "Energy_Keyword", "DrawCard_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -3123,6 +3211,15 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    public class DiceCardSelfAbility_RMR_bleed1atkcard : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
+        public override void OnSucceedAttack()
+        {
+            base.OnSucceedAttack();
+            card.target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, 1, owner);
+        }
+    }
 
     #endregion
 }
