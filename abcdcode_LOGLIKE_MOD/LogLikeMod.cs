@@ -66,7 +66,7 @@ namespace abcdcode_LOGLIKE_MOD
         /// </summary>
         public static int curChStageStep;
         /// <summary>
-        /// Number of total Acts available to the player this chapter.
+        /// Number of total Acts still available to the player this chapter.
         /// </summary>
         public static int curChRemainCount => LogueBookModels.RemainStageList[LogLikeMod.curchaptergrade].Count;
         /// <summary>
