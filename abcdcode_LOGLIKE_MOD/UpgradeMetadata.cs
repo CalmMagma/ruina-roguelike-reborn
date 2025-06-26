@@ -16,6 +16,7 @@ namespace abcdcode_LOGLIKE_MOD
         public int index;
         public int count = 1;
         public string actualPid = LogLikeMod.ModId;
+        public string unparsedPid = "";
 
         public static UpgradeMetadata UnpackPidUnsafe(string packageId)
         {
@@ -28,6 +29,7 @@ namespace abcdcode_LOGLIKE_MOD
             metadata = new UpgradeMetadata();
             if (!packageId.Contains(LogCardUpgradeManager.UpgradeKeyword))
                 return false;
+            metadata.unparsedPid = packageId;
             string[] strArray1 = packageId.Split(new string[1]
             {
                 LogCardUpgradeManager.UpgradeKeyword

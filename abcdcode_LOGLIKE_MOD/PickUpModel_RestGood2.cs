@@ -63,10 +63,7 @@ namespace abcdcode_LOGLIKE_MOD
           LorId cardid)
         {
             LogueBookModels.DeleteCard(cardid);
-            if (UpgradeMetadata.UnpackPid(cardid.packageId, out UpgradeMetadata outdatedData))
-                LogueBookModels.AddCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardid.GetOriginalId(), mystery2.metadata.index, mystery2.metadata.count).id);
-            else
-                LogueBookModels.AddUpgradeCard(cardid, mystery2.metadata.index, mystery2.metadata.count);
+            LogueBookModels.AddCard(new LorId(mystery2.metadata.unparsedPid, cardid.id));
             UISoundManager.instance.PlayEffectSound(UISoundType.Card_Apply);
             Singleton<MysteryManager>.Instance.EndMystery(mystery);
             Singleton<MysteryManager>.Instance.EndMystery(mystery2);

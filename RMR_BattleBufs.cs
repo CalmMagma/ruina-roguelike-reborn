@@ -269,11 +269,11 @@ namespace RogueLike_Mod_Reborn
             public void Update()
             {
                 this.timer += Time.deltaTime;
-                base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer / 8f);
+                base.gameObject.transform.localPosition = new Vector3(base.gameObject.transform.localPosition.x, base.gameObject.transform.localPosition.y + timer / 9f);
                 Color color = renderer.color;
-                color.r = 0f + timer / 3f;
-                color.g = 1f - timer / 3f;
-                color.a = 1f - timer / 2f;
+                color.r = Math.Min(1f, 0f + timer / 1.5f);
+                color.g = Math.Max(0f, 1f - timer / 1.5f);
+                color.a = Math.Max(0f, 1f - timer / 1.75f);
                 renderer.color = color;
                 if (this.timer >= this.deathtimer)
                 {

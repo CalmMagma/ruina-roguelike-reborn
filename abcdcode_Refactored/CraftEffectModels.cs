@@ -17,7 +17,7 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
-        public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter1Icon"];
+        public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter5Icon_ExCard"];
 
         public override string GetCraftName() => TextDataModel.GetText("CraftExCardChapter5Name");
 
@@ -47,7 +47,7 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
-        public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter1Icon"];
+        public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter6Icon_ExCard"];
 
         public override string GetCraftName() => TextDataModel.GetText("CraftExCardChapter6Name");
 
@@ -70,7 +70,35 @@ namespace abcdcode_LOGLIKE_MOD
         }
     }
 
+    public class CraftExclusiveCardChapter7 : CraftEffect
+    {
+        public override bool IsNormal()
+        {
+            return false;
+        }
 
+        public override Sprite GetCraftSprite() => LogLikeMod.ArtWorks["Chapter7Icon_ExCard"];
+
+        public override string GetCraftName() => TextDataModel.GetText("CraftExCardChapter7Name");
+
+        public override string GetCraftDesc() => TextDataModel.GetText("CraftExCardChapter7Desc");
+
+        public override int GetCraftCost() => 20;
+
+        public override bool CanCraft(int costresult)
+        {
+            if (CraftEffect.CanCraftExclusiveByChapter(ChapterGrade.Grade7) != null)
+                return base.CanCraft(costresult);
+            UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipCant"));
+            return false;
+        }
+
+        public override void Crafting()
+        {
+            base.Crafting();
+            CraftEffect.CraftExclusiveCardByChapter(ChapterGrade.Grade7);
+        }
+    }
 
     public class CraftEquipChapter1 : CraftEffect
     {

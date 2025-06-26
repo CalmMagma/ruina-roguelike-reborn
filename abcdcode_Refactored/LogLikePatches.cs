@@ -1496,6 +1496,9 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
+        /// <summary>
+        /// Important prefix patch to correctly get upgraded cards from the inventory/card dictionary.
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(ItemXmlDataList), nameof(ItemXmlDataList.GetCardItem), new Type[2] { typeof(LorId), typeof(bool) })]
         public static bool ItemXmlDataList_GetCardItem(
           ItemXmlDataList __instance,
@@ -1508,6 +1511,9 @@ namespace abcdcode_LOGLIKE_MOD
             return true;
         }
 
+        /// <summary>
+        /// Ancient prefix which just made abcdcode's TextDataModel actually import stuff and override vanilla if necessary.
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(TextDataModel), nameof(TextDataModel.GetText))]
         public static bool TextDataModel_GetText(string id, ref string __result, params object[] args)
         {
@@ -1516,12 +1522,6 @@ namespace abcdcode_LOGLIKE_MOD
                 return true;
             __result = text;
             return false;
-        }
-
-        [HarmonyPrefix, HarmonyPatch(typeof(StageController), nameof(StageController.CheckStoryAfterBattle))]
-        public static bool StageController_CheckStoryAfterBattle(StageController __instance)
-        {
-            return !LogLikeMod.CheckStage() || LogLikeMod.curChStageStep != 0 || true;
         }
 
         [HarmonyPrefix, HarmonyPatch(typeof(StageController), nameof(StageController.RoundStartPhase_System))]

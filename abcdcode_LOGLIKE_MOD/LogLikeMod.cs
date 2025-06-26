@@ -221,33 +221,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 if (LogLikeMod.curstagetype == StageType.Boss)
                 {
-                    LogLikeMod.AddPlayer = true;
-                    LogLikeMod.RecoverPlayers = true;
-                    LogLikeMod.curChStageStep = 0;
-                    ++LogLikeMod.curchaptergrade;
-                    switch (LogLikeMod.curchaptergrade)
-                    {
-                        case ChapterGrade.Grade2:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
-                            break;
-                        case ChapterGrade.Grade3:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
-                            break;
-                        case ChapterGrade.Grade4:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter4());
-                            break;
-                        case ChapterGrade.Grade5:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter5());
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter5());
-                            break;
-                        case ChapterGrade.Grade6:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter6());
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter6());
-                            break;
-                        case ChapterGrade.Grade7:
-                            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter7());
-                            break;
-                    }
+                    RMRCore.CurrentGamemode.OnClearBossWave();
                 }
                 else
                     ++LogLikeMod.curChStageStep;
@@ -1070,15 +1044,14 @@ namespace abcdcode_LOGLIKE_MOD
         {
             RewardPassivesRoot rewardPassivesRoot;
             using (StringReader stringReader = new StringReader(str))
-                rewardPassivesRoot = (RewardPassivesRoot)new XmlSerializer(typeof(RewardPassivesRoot)).Deserialize((TextReader)stringReader);
+                rewardPassivesRoot = (RewardPassivesRoot)new XmlSerializer(typeof(RewardPassivesRoot)).Deserialize(stringReader);
             foreach (RewardPassivesInfo rewardPassives in rewardPassivesRoot.RewardPassivesList)
             {
                 if (rewardPassives.workshopid == string.Empty)
                     rewardPassives.workshopid = modid;
                 foreach (RewardPassiveInfo rewardPassive in rewardPassives.RewardPassiveList)
                 {
-                    if (rewardPassive.workshopID == string.Empty)
-                        rewardPassive.workshopID = modid;
+                    rewardPassive.workshopID = rewardPassives.workshopid;
                     if (rewardPassive.iconartwork == string.Empty)
                         rewardPassive.iconartwork = rewardPassive.artwork;
                 }

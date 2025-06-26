@@ -971,6 +971,14 @@ namespace abcdcode_LOGLIKE_MOD
         {
             UnitDataModel unitData = model.unitData;
             float num = model.hp / (float)model.MaxHp;
+            double hpReductionMod = model.hp;
+            foreach (PassiveAbilityBase passive in unitData.bookItem.CreatePassiveList())
+            {
+                hpReductionMod = (double)passive.GetStartHp((float)(int)model.hp);
+            }
+            if (hpReductionMod == model.hp) hpReductionMod = 1f;
+            else hpReductionMod = model.hp / hpReductionMod;
+
             num.Log("cur hp percent : " + num.ToString());
             BookXmlInfo classInfo = unitData.bookItem.ClassInfo;
             classInfo._bookIcon = page._bookIcon;
@@ -1000,7 +1008,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 startHp = (double)passive.GetStartHp((float)(int)model.hp);
             }
-            model.hp = (float)startHp;
+            model.hp = (float)(startHp * hpReductionMod);
             if ((double)model.hp <= 0.0 && !model.isDead)
                 model.hp = 1f;
             List<DiceCardXmlInfo> fieldValue = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>((object)unitData.bookItem, "_onlyCards");

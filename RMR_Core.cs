@@ -50,6 +50,11 @@ namespace RogueLike_Mod_Reborn
             }
         }
         public static bool provideAdditionalLogging = false;
+        /// <summary>
+        /// A dictionary which links Assembly.FullName's to packageIds.<br></br>
+        /// Should be filled with any assemblies passed up within Roguedlls.<br></br>
+        /// Allows for assigning packageId to classes via RMRCorre.ClassIds[this.GetType().Assembly.FullName].
+        /// </summary>
         public static Dictionary<string, string> ClassIds = new Dictionary<string, string>();
         public static RoguelikeGamemodeBase CurrentGamemode;
         public const string packageId = "abcdcodecalmmagma.LogueLikeReborn";
@@ -1426,6 +1431,7 @@ namespace RogueLike_Mod_Reborn
     {
         public void AddGamemodesToList()
         {
+            gamemodeList = new List<RoguelikeGamemodeBase>();
             Assembly[] assemblies = LogLikeMod.GetAssemList().Distinct().ToArray();
             for (int b = 0; b < assemblies.Length; b++)
             {
@@ -1437,11 +1443,12 @@ namespace RogueLike_Mod_Reborn
                         if (effects[i] != null)
                             gamemodeList.Add(Activator.CreateInstance(effects[i].AsType()) as RoguelikeGamemodeBase);
                     }
-                    gamemodeList.Add(new RoguelikeGamemode_RMR_Modded());
                 }
                 catch
                 { }
             }
+            gamemodeList.Add(new RoguelikeGamemode_RMR_Modded());
+            gamemodeList.Add(new RoguelikeGamemode_RMR_Default());
         }
 
         // Handles save file creation, deletion and initialization
@@ -1600,6 +1607,7 @@ namespace RogueLike_Mod_Reborn
                     break;
             }
         }
+
         /// <summary>
         /// This determines the name of the savefile containing gamemode-specific data.
         /// </summary>
@@ -1689,17 +1697,6 @@ namespace RogueLike_Mod_Reborn
             return Singleton<RewardPassivesList>.Instance.GetChapterData(grade, PassiveRewardListType.Creature, LorId.None);
         }
 
-        /*
-        /// <summary>
-        /// Runs whenever a new Librarian is added to the floor.<br></br>
-        /// <b>Returning <see langword="false"/> prevents the Librarian from being added.</b>
-        /// </summary>
-        public virtual bool OnAddLibrarian(UnitDataModel model)
-        {
-            return true; //done 
-        }
-        */
-
         /// <summary>
         /// Initializes the encounter/stage list for each chapter when the run starts.<br></br>
         /// Defaults to <see cref="LogueBookModels.VanillaGamemodeReceptionList"/>.
@@ -1731,10 +1728,53 @@ namespace RogueLike_Mod_Reborn
         }
 
         /// <summary>
-        /// The packageId to be used if any <see cref="ContentScope"/> methods are set to <see cref="ContentScope.ONLY_PACKAGEID"/>.<br></br>
-        /// Defaults to <b><see cref="RMRCore.packageId"/></b>.
+        /// Runs whenever the player beats a boss.<br></br>
+        /// The base method does the following:<br></br>
+        /// - Increment current chapter<br></br>
+        /// - Add a new librarian<br></br>
+        /// - Revives and heals all librarians<br></br>
+        /// - Resets the current stage counter<br></br>
+        /// - Gives the current (already incremented) chapter's CraftEffect.<br></br>
+        /// - Displays the current (already incremented) chapter's splash screen.
         /// </summary>
-        public virtual string GetContentScopePackageId => RMRCore.packageId;
+        public virtual void OnClearBossWave()
+        {
+            ++LogLikeMod.curchaptergrade;
+            LogLikeMod.AddPlayer = true;
+            LogLikeMod.RecoverPlayers = true;
+            LogLikeMod.curChStageStep = 0;
+            switch (LogLikeMod.curchaptergrade)
+            {
+                case ChapterGrade.Grade2:
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter2());
+                    break;
+                case ChapterGrade.Grade3:
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter3());
+                    break;
+                case ChapterGrade.Grade4:
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter4());
+                    break;
+                case ChapterGrade.Grade5:
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter5());
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter5());
+                    break;
+                case ChapterGrade.Grade6:
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter6());
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter6());
+                    break;
+                case ChapterGrade.Grade7:
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter7());
+                    Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter7());
+                    break;
+            }
+            Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, (int)LogLikeMod.curchaptergrade + 1), null, true);
+        }
+
+        /// <summary>
+        /// The packageId to be used if any <see cref="ContentScope"/> methods are set to <see cref="ContentScope.ONLY_PACKAGEID"/>.<br></br>
+        /// Defaults to <b>this type's</b> packageId. For further reference, see <see cref="RMRCore.ClassIds"/>.
+        /// </summary>
+        public virtual string GetContentScopePackageId => RMRCore.ClassIds[this.GetType().Assembly.FullName];
 
         /// <summary>
         /// Determines whether to override the base deck or not.<br></br>
@@ -1746,7 +1786,7 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// If <see cref="ReplaceBaseDeck"/> is set to <see langword="true"/>, <br></br>
         /// this points to the <see cref="LorId"/> of the deck you are replacing the base deck with. <br></br>
-        /// Defaults to RMR's upgraded deck.
+        /// Defaults to RMR's upgraded deck (RMRCore.packageId, -10).
         /// </summary>
         public virtual LorId BaseDeckReplacement => new LorId(RMRCore.packageId, -10);
 
@@ -1793,21 +1833,6 @@ namespace RogueLike_Mod_Reborn
     public class RoguelikeGamemode_RMR_Modded : RoguelikeGamemodeBase
     {
         public override LorId StageStart => new LorId(LogLikeMod.ModId, -853);
-
-        public override ContentScope GetRewardsScope()
-        {
-            return ContentScope.ALL;
-        }
-
-        public override ContentScope GetMysteryScope()
-        {
-            return ContentScope.ALL;
-        }
-
-        public override ContentScope GetStagesScope()
-        {
-            return ContentScope.ALL;
-        }
 
         public override void AfterInitializeGamemode()
         {
