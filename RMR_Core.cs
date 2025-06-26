@@ -714,6 +714,75 @@ namespace RogueLike_Mod_Reborn
                 return math.clamp(origin + adder, Math.Min(origin, 1), Math.Max(origin, 999));
             }
         }
+
+        public static BattleDiceBehavior creatediefromtheaether(int min, int max, BehaviourDetail detail, BehaviourType type, MotionDetail mdetail = MotionDetail.N, string script = "", string actionscript = "", string effectres = "", DiceStatBonus bonus = null)
+        {
+            BattleDiceBehavior battleDiceBehavior = new BattleDiceBehavior
+            {
+                behaviourInCard = new DiceBehaviour
+                {
+                    Min = min,
+                    Dice = max,
+                    ActionScript = actionscript,
+                    Desc = "",
+                    Detail = detail,
+                    EffectRes = effectres,
+                    MotionDetail = mdetail,
+                    MotionDetailDefault = MotionDetail.N,
+                    Script = script,
+                    Type = type
+                }
+            };
+            if (bonus != null)
+            {
+                battleDiceBehavior.ApplyDiceStatBonus(bonus);
+            }
+
+            if (script != string.Empty)
+            {
+                DiceCardAbilityBase diceCardAbilityBase = Singleton<AssemblyManager>.Instance.CreateInstance_DiceCardAbility(script);
+                if (diceCardAbilityBase != null)
+                {
+                    battleDiceBehavior.AddAbility(diceCardAbilityBase);
+                }
+            }
+
+            return battleDiceBehavior;
+        }
+
+        public static void BetterCopyAbilityAndStat(BattleDiceBehavior origin, BattleDiceBehavior receiver, bool copyDesc = true)
+        {
+            foreach (DiceCardAbilityBase diceCardAbilityBase in origin.abilityList)
+            {
+                try
+                {
+                    string script = Singleton<AssemblyManager>.Instance._diceCardAbilityDict._dict.FirstOrDefault(x => x.Value == diceCardAbilityBase.GetType()).Key;
+                    DiceCardAbilityBase diceCardAbilityBase2 = Singleton<AssemblyManager>.Instance.CreateInstance_DiceCardAbility(script);
+                    receiver.AddAbility(diceCardAbilityBase2);
+                }
+                catch { }
+
+            }
+            if (copyDesc)
+            {
+                try
+                {
+                    receiver.behaviourInCard.Desc = origin.behaviourInCard.Desc;
+                }
+                catch { }
+            }
+
+            try
+            {
+                receiver._statBonus = origin._statBonus.Copy();
+            }
+            catch { }
+            try
+            {
+                receiver._firstStatBonus = origin._firstStatBonus.Copy();
+            }
+            catch { }
+        }
     }
 
     [Serializable]
