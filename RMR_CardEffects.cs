@@ -2527,10 +2527,47 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_IndiscriminateShots : DiceCardSelfAbilityBase
     {
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            foreach (BattleDiceBehavior die in card.GetDiceBehaviorList())
+            {
+                PlayCopy(die);
+            }
+            this.card.DestroyDice(DiceMatch.AllDice, DiceUITiming.Start);
+            this.card.DestroyPlayingCard();
+        }
+
         public override void OnStartBattleAfterCreateBehaviour()
         {
             base.OnStartBattleAfterCreateBehaviour();
+            this.card.DestroyDice(DiceMatch.AllDice, DiceUITiming.Start);
+        }
 
+        private void PlayCopy(BattleDiceBehavior die)
+        {
+            BattleUnitModel randomtarget = RandomUtil.SelectOne<BattleUnitModel>(BattleObjectManager.instance.GetAliveList_opponent(owner.faction).FindAll((BattleUnitModel x) => x.IsTargetable(owner)));
+            int targetslot = UnityEngine.Random.Range(0, randomtarget.speedDiceResult.Count - 1);
+            BattleDiceCardModel battleDiceCardModel = BattleDiceCardModel.CreatePlayingCard(ItemXmlDataList.instance.GetCardItem(card.card.GetID(), false));
+            BattlePlayingCardDataInUnitModel battlePlayingCardDataInUnitModel = new BattlePlayingCardDataInUnitModel();
+            battlePlayingCardDataInUnitModel.owner = owner;
+            battlePlayingCardDataInUnitModel.card = battleDiceCardModel;
+            battlePlayingCardDataInUnitModel.target = randomtarget;
+            battlePlayingCardDataInUnitModel.earlyTarget = randomtarget;
+            battlePlayingCardDataInUnitModel.earlyTargetOrder = targetslot;
+
+            battlePlayingCardDataInUnitModel.targetSlotOrder = targetslot;
+            battlePlayingCardDataInUnitModel.speedDiceResultValue = owner.GetSpeed(0);
+            battlePlayingCardDataInUnitModel.slotOrder = 0;
+
+            battlePlayingCardDataInUnitModel.ResetCardQueueWithoutStandby();
+            battlePlayingCardDataInUnitModel.cardBehaviorQueue.Clear();
+            BattleDiceBehavior diceBehavior = RMRUtilityExtensions.creatediefromtheaether(die.behaviourInCard.Min, die.behaviourInCard.Dice, die.behaviourInCard.Detail, die.behaviourInCard.Type, die.behaviourInCard.MotionDetail, "", die.behaviourInCard.ActionScript, die.behaviourInCard.EffectRes, null);
+            RMRUtilityExtensions.BetterCopyAbilityAndStat(die, diceBehavior);
+            battlePlayingCardDataInUnitModel.AddDice(diceBehavior);
+
+            StageController.Instance.GetAllCards().Insert(die.Index, battlePlayingCardDataInUnitModel);
+            //   StageController.Instance.AddAllCardListInBattle(battlePlayingCardDataInUnitModel, this.card.target);
         }
     }
 
