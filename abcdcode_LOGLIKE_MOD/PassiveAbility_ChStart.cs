@@ -7,7 +7,6 @@ using RogueLike_Mod_Reborn;
 
 namespace abcdcode_LOGLIKE_MOD
 {
-
     public class PassiveAbility_ChStart : PassiveAbilityBase
     {
         public override void OnWaveStart()

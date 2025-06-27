@@ -1478,7 +1478,7 @@ namespace abcdcode_LOGLIKE_MOD
     {
         #region PREFIXES 
         /// <summary>
-        /// 
+        /// Prefix patch to hijack the abnormality page get card id method to support the reward dictionary.
         /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(EmotionEgoXmlInfo), "CardId", MethodType.Getter)]
         public static bool EmotionEgoXmlInfo_get_CardId(EmotionEgoXmlInfo __instance, ref LorId __result)
@@ -1557,7 +1557,9 @@ namespace abcdcode_LOGLIKE_MOD
         }
         */
 
-
+        /// <summary>
+        /// Currently unused (?) patch to add support for modded story icons (strictly for Roguelike).
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(UISpriteDataManager), nameof(UISpriteDataManager.GetStoryIcon))]
         public static bool UISpriteDataManager_GetStoryIcon(
           string story,
@@ -1577,6 +1579,9 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
+        /// <summary>
+        /// Patch to hijack the BattleSetting screen to add the inventory, abnormality and crafting tabs.
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(UIBattleSettingEditPanel), nameof(UIBattleSettingEditPanel.SetBUttonState))]
         public static bool UIBattleSettingEditPanel_SetBUttonState(
           UIBattleSettingEditPanel __instance,
@@ -1664,12 +1669,19 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
+        /// <summary>
+        /// Prevents the reception from ending immediately upon clicking the back button. (I THINK)
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(UIBattleSettingPanel), nameof(UIBattleSettingPanel.OnClickBackButton))]
         public static bool UIBattleSettingPanel_OnClickBackButton()
         {
             return !LogLikeMod.CheckStage() || !UIPassiveSuccessionPopup.Instance.isActiveAndEnabled;
         }
 
+        /// <summary>
+        /// Patch for moving the positioning of enemy profiles
+        /// </summary>
+        /*
         [HarmonyPrefix, HarmonyPatch(typeof(BattleUnitInfoManagerUI), nameof(BattleUnitInfoManagerUI.Initialize))]
         public static bool BattleUnitInfoManagerUI_Initialize(BattleUnitInfoManagerUI __instance)
         {
@@ -1695,12 +1707,17 @@ namespace abcdcode_LOGLIKE_MOD
             }
             return true;
         }
+        */
 
+        /// <summary>
+        /// Patch for hijacking UI popups to show in the BattleSetting screen. (unsure)
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(UIPopupWindowManager), nameof(UIPopupWindowManager.Update))]
         public static bool UIPopupWindowManager_Update()
         {
             return !LogLikeMod.CheckStage() || UI.UIController.Instance.CurrentUIPhase != UIPhase.BattleSetting;
         }
+
 
         [HarmonyPrefix, HarmonyPatch(typeof(UIPassiveSuccessionSlot), nameof(UIPassiveSuccessionSlot.SetDataModel))]
         public static bool UIPassiveSuccessionSlot_SetDataModel(

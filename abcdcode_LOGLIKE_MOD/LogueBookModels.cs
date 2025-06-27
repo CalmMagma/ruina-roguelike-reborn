@@ -1128,10 +1128,20 @@ namespace abcdcode_LOGLIKE_MOD
             unitDataModel.bookItem.ClassInfo.EquipEffect.PassiveList.Clear();
             try
             {
-                var floormodel = StageController.Instance.GetStageModel().GetFrontAvailableFloor();
-                UnitDataModel nugget = floormodel == null ? LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[LogueBookModels.playerModel.Count] : floormodel._floorModel.GetUnitDataList()[LogueBookModels.playerModel.Count];
-                unitDataModel.SetCustomName(nugget.name);
-                unitDataModel.customizeData.Copy(nugget.customizeData);
+                var date = System.DateTime.Now;
+                if (date.DayOfYear == 91 && date.Year % 4 > 0 || date.DayOfYear == 92 && date.Year % 4 == 0)
+                {
+                    SaveData beta14 = SaveManager.Instance.LoadData(LogLikeMod.path + "/DevNuggets/Beta14");
+                    unitDataModel.customizeData.LoadFromSaveData(beta14);
+                    unitDataModel.SetCustomName("Beta14");
+                }
+                else
+                {
+                    var floormodel = StageController.Instance.GetStageModel().GetFrontAvailableFloor();
+                    UnitDataModel nugget = floormodel == null ? LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[LogueBookModels.playerModel.Count] : floormodel._floorModel.GetUnitDataList()[LogueBookModels.playerModel.Count];
+                    unitDataModel.SetCustomName(nugget.name);
+                    unitDataModel.customizeData.Copy(nugget.customizeData);
+                }
             } catch (ArgumentOutOfRangeException e)
             {
                 "".Log($"Player nugget {LogueBookModels.playerModel.Count} at currently selected floor does not exist: {e}");

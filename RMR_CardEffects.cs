@@ -2921,8 +2921,9 @@ namespace RogueLike_Mod_Reborn
                 {
                     if (LogLikeMod.rewards.Remove(book))
                     {
-                        DropBookXmlInfo book2 = Singleton<DropBookXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, (book.chapter * 1000) + (book.id.id - book.chapter * 1000) + (book.id.id.ToString().EndsWith("4") ? 0 : 1)));
-                        LogLikeMod.rewards.Add(book2);
+                        ChapterGrade chapter = (ChapterGrade)(book.chapter - 1);
+                        Rarity rarity = book.id.packageId == RMRCore.packageId ? (Rarity)(int.Parse(book.id.id.ToString().Last().ToString()) - 1) : Rarity.Unique;
+                        LogLikeMod.rewards.Add(RMRCore.CurrentGamemode.GetCommonEnemyDropBook(chapter, rarity));
                     }
                 }
             }

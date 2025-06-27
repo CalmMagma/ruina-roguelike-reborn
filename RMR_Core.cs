@@ -1799,11 +1799,11 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Runs whenever the player beats a boss.<br></br>
         /// The base method does the following:<br></br>
-        /// - Increment current chapter<br></br>
-        /// - Add a new librarian<br></br>
-        /// - Revives and heals all librarians<br></br>
-        /// - Resets the current stage counter<br></br>
-        /// - Gives the current (already incremented) chapter's CraftEffect.<br></br>
+        /// - Increment current chapter;<br></br>
+        /// - Add a new librarian;<br></br>
+        /// - Revives and heals all librarians;<br></br>
+        /// - Resets the current stage counter;<br></br>
+        /// - Gives the current (already incremented) chapter's CraftEffect;<br></br>
         /// - Displays the current (already incremented) chapter's splash screen.
         /// </summary>
         public virtual void OnClearBossWave()
@@ -1837,6 +1837,15 @@ namespace RogueLike_Mod_Reborn
                     break;
             }
             Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, (int)LogLikeMod.curchaptergrade + 1), null, true);
+        }
+
+        /// <summary>
+        /// This does NOT automatically control book drops- it is to be used strictly as a shorthand for getting the right book drops.<br></br>
+        ///  Defaults to returning RMR's books. You are expected to put the right book drops on the correct unit XMLs.
+        /// </summary>
+        public virtual DropBookXmlInfo GetCommonEnemyDropBook(ChapterGrade chapter, Rarity rarity)
+        {
+            return Singleton<DropBookXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, ((int)chapter + 1) * 1000 + (int)rarity + 1));
         }
 
         /// <summary>

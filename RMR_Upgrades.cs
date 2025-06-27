@@ -204,6 +204,32 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+
+    public class UpgradeModel_RMR_Wallop : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_breakvuln1atk");
+            this.upgradeinfo.SetDice(0, 2, 0);
+            this.upgradeinfo.SetDice(1, 1, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 100003);
+        }
+    }
+
+    public class UpgradeModel_RMR_Thrust : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 2, 0);
+            this.upgradeinfo.SetDice(1, 2, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 100002);
+        }
+    }
+
     #endregion
 
     #region Urban Myth
@@ -792,33 +818,6 @@ namespace RogueLike_Mod_Reborn
     }
 
     #endregion
-
-    public class UpgradeModel_RMR_Wallop : UpgradeBase
-    {
-        public override void Init()
-        {
-            base.Init();
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetAbility(0, "RMR_breakvuln1atk");
-            this.upgradeinfo.SetDice(0, 2, 0);
-            this.upgradeinfo.SetDice(1, 1, 2);
-            this.baseid = new LorId(LogLikeMod.ModId, 100003);
-        }
-    }
-
-    public class UpgradeModel_RMR_Thrust : UpgradeBase
-    {
-        public override void Init()
-        {
-            base.Init();
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 0);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 100002);
-        }
-    }
-
-    
 
     # region Urban Plague
 
@@ -1772,4 +1771,5 @@ namespace RogueLike_Mod_Reborn
     }
 
     #endregion
+
 }

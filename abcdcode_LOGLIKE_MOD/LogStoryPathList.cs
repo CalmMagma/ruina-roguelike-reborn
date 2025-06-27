@@ -34,12 +34,6 @@ namespace abcdcode_LOGLIKE_MOD
             return this.list.Find(x => x.Id == id);
         }
 
-        public static void DefaultStoryEnd()
-        {
-            GameSceneManager.Instance.ActivateUIController();
-            SingletonBehavior<UIBgScreenChangeAnim>.Instance.StartBg(UIScreenChangeType.EnterBattleSetting);
-        }
-
         public void LoadStoryFile(LorId id, StoryRoot.OnEndStoryFunc endFunc = null, bool OpenStory = true)
         {
             LogStoryPathInfo pathInfo = this.GetPathInfo(id);
@@ -60,16 +54,35 @@ namespace abcdcode_LOGLIKE_MOD
                 return;
             if (endFunc == null)
                 endFunc = new StoryRoot.OnEndStoryFunc(LogStoryPathList.DefaultStoryEnd);
-            this.ActivateStoryScene();
-            StoryRoot.Instance.OpenStory(endFunc, true);
+            this.ActivateStoryScene(endFunc);
         }
 
-        public void ActivateStoryScene()
+        public void ActivateStoryScene(StoryRoot.OnEndStoryFunc func)
         {
-            GameSceneManager.Instance.uIController.gameObject.SetActive(false);
-            GameSceneManager.Instance.storyRoot.gameObject.SetActive(true);
-            SingletonBehavior<UIPopupWindowManager>.Instance.AllClose();
-            UISoundManager.instance.SetGameStateBGM(GameCurrentState.Story);
+            if (UI.UIController.Instance.CurrentUIPhase == UIPhase.BattleSetting) // regular cutscene
+            {
+                GameSceneManager.Instance.uIController.gameObject.SetActive(false);
+                GameSceneManager.Instance.storyRoot.gameObject.SetActive(true);
+                SingletonBehavior<UIPopupWindowManager>.Instance.AllClose();
+                UISoundManager.instance.SetGameStateBGM(GameCurrentState.Story);
+                StoryRoot.Instance.OpenStory(func, true);
+            }
+            else // battle cutscene
+            {
+                SingletonBehavior<BattleSoundManager>.Instance.EndBgm();
+                SingletonBehavior<BattleManagerUI>.Instance.ui_battleStory.OpenStory(() => func.Invoke(), false, true);
+            }
+        }
+
+        public static void DefaultStoryEnd()
+        {
+            if (SingletonBehavior<BattleManagerUI>.Instance.ui_battleStory.isActiveAndEnabled) // return BGM in battle
+                SingletonBehavior<BattleSoundManager>.Instance.StartBgm();
+            else // if not in battle, re-activate menu UIs
+                GameSceneManager.Instance.ActivateUIController();
+            // either way, do a cool little transition that'd be cool
+            SingletonBehavior<UIBgScreenChangeAnim>.Instance.StartBg(UIScreenChangeType.EnterBattleSetting);
+            
         }
 
         public static bool LoadStoryFile(string storyPath, string effectPath, string modPath)
