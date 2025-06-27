@@ -29,7 +29,6 @@ namespace abcdcode_LOGLIKE_MOD
             metadata = new UpgradeMetadata();
             if (!packageId.Contains(LogCardUpgradeManager.UpgradeKeyword))
                 return false;
-            metadata.unparsedPid = packageId;
             string[] strArray1 = packageId.Split(new string[1]
             {
                 LogCardUpgradeManager.UpgradeKeyword
@@ -39,9 +38,10 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 canStack = bool.Parse(strArray2[0]),
                 index = int.Parse(strArray2[1]),
-                count = int.Parse(strArray2[2])
+                count = int.Parse(strArray2[2]),
+                actualPid = strArray1[1],
+                unparsedPid = packageId
             };
-            metadata.actualPid = strArray1[1];
             return true;
         }
     }

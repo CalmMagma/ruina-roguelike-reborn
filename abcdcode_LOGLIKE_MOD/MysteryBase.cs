@@ -224,7 +224,7 @@ namespace abcdcode_LOGLIKE_MOD
         public virtual void CreateDia(int choicevalue, GameObject curFrame)
         {
             float y = 350f;
-            Image image1 = ModdingUtils.CreateImage(curFrame.transform, "MaskSpace", new Vector2(1f, 1f), new Vector2(-440f, (float)(-300.0 - ((double)y - 200.0) / 2.0)), new Vector2(960f, y));
+            Image image1 = ModdingUtils.CreateImage(curFrame.transform, "MaskSpace", new Vector2(1f, 1f), new Vector2(-440f, -360f), new Vector2(960f, y));
             image1.gameObject.AddComponent<Mask>().showMaskGraphic = false;
             this.FrameObj.Add("Mask", image1.gameObject);
             TextMeshProUGUI textTmp = ModdingUtils.CreateText_TMP(image1.transform, new Vector2(0.0f, 0.0f), 30, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.TopLeft, LogLikeMod.DefFontColor, LogLikeMod.DefFont_TMP);
