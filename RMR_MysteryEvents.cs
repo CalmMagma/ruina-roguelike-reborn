@@ -91,24 +91,8 @@ namespace RogueLike_Mod_Reborn
                                 MysteryBase.AddStageList(stageInfo, ChapterGrade.Grade5);
                             }
                             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Prescript());
-                            this.SwapFrame(1);
-                            break;
-                        case 1:
-                            this.SwapFrame(2);
-                            break;
-                        default:
                             break;
                     }
-                    break;
-                case 1:
-                    switch (choiceid)
-                    {
-                        default:
-                            break;
-                    }
-                    break;
-
-                default:
                     break;
             }
             base.OnClickChoice(choiceid);
@@ -129,8 +113,12 @@ namespace RogueLike_Mod_Reborn
             }
             base.OnEnterChoice(choiceid);
         }
-        
-            
+
+        public override void OnExitChoice(int choiceid)
+        {
+            base.OnExitChoice(choiceid);
+            this.CloseOverlayOverButton();
+        }
     }
 
     public class PassiveAbility_RMR_FraudIndexEvent : PassiveAbilityBase
@@ -138,7 +126,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnWaveStart()
         {
             base.OnWaveStart();
-            Singleton<MysteryManager>.Instance.StartMystery(Singleton<MysteryXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 10003)));
+            Singleton<MysteryManager>.Instance.StartMystery(new LorId(LogLikeMod.ModId, 10003));
         }
     }
 
@@ -147,7 +135,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnWaveStart()
         {
             base.OnWaveStart();
-            Singleton<MysteryManager>.Instance.StartMystery(Singleton<MysteryXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 110003)));
+            Singleton<MysteryManager>.Instance.StartMystery(new LorId(LogLikeMod.ModId, 110003));
         }
     }
 
@@ -161,18 +149,13 @@ namespace RogueLike_Mod_Reborn
                     switch (choiceid)
                     {
                         case 0:
-                            this.SwapFrame(1);
-                            LosePrescript();
-                            // somehow give the proselytes the passive 500014 (PassiveAbility_RMR_PrescriptPassive) equal to how many prescripts were lost
-                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 2500031), abcdcode_LOGLIKE_MOD.StageType.Elite);
+                            DisablePrescript();
+                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 2500031), abcdcode_LOGLIKE_MOD.StageType.Custom);
                             break;
                         case 1:
-                            this.SwapFrame(2);
-                            // make copley gain the strength abno page, not sure how to do this here
-                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 2500032), abcdcode_LOGLIKE_MOD.StageType.Elite);
+                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 2500032), abcdcode_LOGLIKE_MOD.StageType.Custom);
                             break;
                         case 2:
-                            this.SwapFrame(3);
                             LosePrescript();
                             foreach (BattleUnitModel battleUnitModel in BattleObjectManager.instance.GetList(Faction.Player))
                             {
@@ -189,19 +172,24 @@ namespace RogueLike_Mod_Reborn
             base.OnClickChoice(choiceid);
         }
 
-        private void LosePrescript()
+        public static void DisablePrescript()
         {
-            List<GlobalLogueEffectBase> list = Singleton<GlobalLogueEffectManager>.Instance.GetEffectList();
+            (Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is RMREffect_Prescript) as RMREffect_Prescript).disable = true;
+        }
+
+        public static int LosePrescript()
+        {
+            int count = 0;
+            List<GlobalLogueEffectBase> list = Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().FindAll(x => x is RMREffect_Prescript);
             if (list.Count > 0)
             {
                 foreach (GlobalLogueEffectBase item in list)
                 {
-                    if (item is RMREffect_Prescript)
-                    {
-                        Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect(item);
-                    }
+                    count++;
+                    Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect(item);
                 }
             }
+            return count;
         }
     }
 

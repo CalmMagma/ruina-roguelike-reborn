@@ -3,7 +3,7 @@
 
 	<PassiveDesc ID="500011">
 		<Name>Injured</Name>
-		<Desc>Not subject to One-Side attack. When all my dice are consumed, the forced Clash ends. The battle ends after act 3</Desc>
+		<Desc>Starts the battle with 50% less HP.</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="500012">

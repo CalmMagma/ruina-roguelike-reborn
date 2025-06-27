@@ -12,7 +12,7 @@
         <Desc>Raise your middle finger at the man.</Desc>
       </Choice>
       <Choice ID="2">
-        <Desc>Make a break for it.</Desc>
+        <Desc>Make a break for it. [red]All Librarians lose 20% HP.</Desc>
       </Choice>
     </Frame>
 
@@ -24,9 +24,9 @@
 
 The man takes out a similar piece of paper from his pocket and hands it over to you. Your eyes scroll over the scribbles written in ink.
 
-'To Copley's squad, when you encounter a group of more than three people coming from an opposite direction, ask them to hand over their Prescripts. Then, regardless of their answer, dispose of them."
+[i]'To Copley's squad, when you encounter a group of more than three people coming from an opposite direction, ask them to hand over their Prescripts. Then, regardless of their answer, dispose of them.'[/i]
 
-*"I am John Singleton Copley." The man answers your unspoken question calmly as the Proselytes behind him draw their blades. "Farewell."</Dialog>
+"I am John Singleton Copley." The man answers your unspoken question calmly as the Proselytes behind him draw their blades. "Farewell."</Dialog>
       <Choice ID="0">
         <Desc>No choice but to engage!</Desc>
       </Choice>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
 using LOR_DiceSystem;
+using UnityEngine;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -371,6 +372,8 @@ namespace RogueLike_Mod_Reborn
 
     public class RMREffect_Prescript : OnceEffect
     {
+        public bool disable = false;
+
         public override void Use()
         {
 
@@ -380,15 +383,19 @@ namespace RogueLike_Mod_Reborn
         {
             
         }
+
         public override void OnStartBattleAfter()
         {
             base.OnStartBattleAfter();
-            for (int i = 0; i < this.stack; i++)
+            if (!disable)
             {
-                List<BattleUnitModel> list = BattleObjectManager.instance.GetAliveList(Faction.Player).FindAll((BattleUnitModel x) => x.bufListDetail.GetActivatedBufList().Find((BattleUnitBuf y) => y is BattleUnitBuf_RMRPrescriptbuf) == null);
-                if (list.Count > 0)
+                for (int i = 0; i < this.stack; i++)
                 {
-                    RandomUtil.SelectOne<BattleUnitModel>(list).bufListDetail.AddBuf(new BattleUnitBuf_RMRPrescriptbuf());
+                    List<BattleUnitModel> list = BattleObjectManager.instance.GetAliveList(Faction.Player).FindAll((BattleUnitModel x) => x.bufListDetail.GetActivatedBufList().Find((BattleUnitBuf y) => y is BattleUnitBuf_RMRPrescriptbuf) == null);
+                    if (list.Count > 0)
+                    {
+                        RandomUtil.SelectOne<BattleUnitModel>(list).bufListDetail.AddBuf(new BattleUnitBuf_RMRPrescriptbuf());
+                    }
                 }
             }
         }
@@ -443,6 +450,11 @@ namespace RogueLike_Mod_Reborn
             }
         }
         public static Rarity ItemRarity = Rarity.Special;
+
+        public override Sprite GetSprite()
+        {
+            return disable ? null : base.GetSprite();
+        }
 
         public override string KeywordId => "RMR_Prescript";
 

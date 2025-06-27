@@ -6,6 +6,7 @@ using LOR_BattleUnit_UI;
 using LOR_DiceSystem;
 using LOR_XML;
 using UnityEngine;
+using static RogueLike_Mod_Reborn.RMREffect_Prescript;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -68,7 +69,16 @@ namespace RogueLike_Mod_Reborn
 		{
 			pattern1 = false;
 			_usedCardType = new List<int>();
-		}
+			int stack = MysteryModel_RMR_CopleyIndex2.LosePrescript();
+            for (int i = 0; i < stack; i++)
+            {
+                List<BattleUnitModel> list = BattleObjectManager.instance.GetAliveList(Faction.Enemy).FindAll((BattleUnitModel x) => x.bufListDetail.GetActivatedBufList().Find((BattleUnitBuf y) => y is BattleUnitBuf_RMRPrescriptbuf) == null);
+                if (list.Count > 0)
+                {
+                    RandomUtil.SelectOne<BattleUnitModel>(list).bufListDetail.AddBuf(new BattleUnitBuf_RMRPrescriptbuf());
+                }
+            }
+        }
 
 		public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
 		{
@@ -208,6 +218,7 @@ namespace RogueLike_Mod_Reborn
 			pattern1 = false;
 			_usedCardType = new List<int>();
 			amputate = false;
+			owner.emotionDetail.ApplyEmotionCard(EmotionCardXmlList.Instance.GetData(1, SephirahType.None));
 		}
 
 		public override void OnUseCard(BattlePlayingCardDataInUnitModel curCard)
