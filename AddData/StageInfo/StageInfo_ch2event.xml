@@ -49,6 +49,17 @@
       <Unit>28471002</Unit>
     </Wave>
   </Stage>
+  
+
+<!-- fraud index event -->
+  <Stage id="120003">
+
+    <Wave>
+      <AvailableUnit>5</AvailableUnit>
+      <Formation>2</Formation>
+      <Unit>28471003</Unit>
+    </Wave>
+  </Stage>
 
 
 </StageXmlRoot>

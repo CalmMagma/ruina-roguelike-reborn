@@ -191,6 +191,14 @@ Immobilization</Desc>
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
+  <LogueEffectInfo Id="RMR_Prescript">
+    <Name>Prescript</Name> 
+    <Desc>At the start of the Act, designate a random librarian. That librarian deals +10% damage and Stagger damage every time they use a Combat Page against a target consecutively. (Max. 30%)
+If they use a Combat Page against a different target, they deal -50% damage and Stagger damage for that engagement.</Desc> 
+    <FlavorText>&lt;color=#4FACFF&gt;“A small, innocent-looking piece of paper. The words, 'Focus intently on the person in front of you' is written on it.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
   <!-- 
     <LogueEffectInfo Id="GlobalEffect_">
     <Name>Dshka</Name> 

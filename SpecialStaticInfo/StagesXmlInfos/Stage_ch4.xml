@@ -20,6 +20,7 @@
     <StageList ID="140001" StageType="Mystery" />  
     <StageList ID="140002" StageType="Mystery" />  
     <StageList ID="140003" StageType="Mystery" />  
+	<StageList ID="120003" StageType="Mystery" />
 
     <StageList ID="111001" StageType="Shop" /> 
     <StageList ID="111001" StageType="Shop" /> 

@@ -33,5 +33,140 @@
 
     <RandomFace>true</RandomFace>
   </Book>
+  
+<Book ID="28494003">
+    <Name>An Index Proselyte’s Page</Name>
+    <TextId>-1</TextId>
+    <Category>TheIndex</Category>
+    <EquipEffect>
+      <HP>96</HP>
+      <Break>54</Break>
+      <SpeedMin>2</SpeedMin>
+      <Speed>6</Speed>
+      <SResist>Normal</SResist>
+      <PResist>Normal</PResist>
+      <HResist>Normal</HResist>
+      <SBResist>Normal</SBResist>
+      <PBResist>Normal</PBResist>
+      <HBResist>Endure</HBResist>
+
+      <Passive Pid="@origin" Level="1">240018</Passive>
+      <Passive Pid="@origin" Level="1">240118</Passive>
+      <Passive Pid="@origin" Level="1">240003</Passive>
+      
+
+    </EquipEffect>
+    <BookIcon>TheIndex</BookIcon>
+    <Chapter>6</Chapter>
+    <Rarity>Uncommon</Rarity>
+    <CharacterSkin>IndexUnit</CharacterSkin>
+    <SpeedDiceNum>1</SpeedDiceNum>
+
+    <RandomFace>true</RandomFace>
+  </Book>
+
+<Book ID="28494004">
+    <Name>Copley’s Page</Name>
+    <TextId>-1</TextId>
+    <Category>TheIndex</Category>
+    <EquipEffect>
+      <HP>96</HP>
+      <Break>54</Break>
+      <SpeedMin>2</SpeedMin>
+      <Speed>6</Speed>
+      <SResist>Normal</SResist>
+      <PResist>Normal</PResist>
+      <HResist>Normal</HResist>
+      <SBResist>Normal</SBResist>
+      <PBResist>Normal</PBResist>
+      <HBResist>Endure</HBResist>
+	  
+	  <Passive Pid="@origin" Level="1">10001</Passive>
+	  <Passive>500013</Passive>
+      <Passive Pid="@origin" Level="1">250115</Passive>
+	  <Passive>500012</Passive>
+      <Passive Pid="@origin" Level="1">240018</Passive>
+      
+	  <MaxPlayPoint>4</MaxPlayPoint>
+      <StartPlayPoint>4</StartPlayPoint>
+    </EquipEffect>
+    <BookIcon>TheIndex</BookIcon>
+    <Chapter>6</Chapter>
+    <Rarity>Uncommon</Rarity>
+    <CharacterSkin>Esther</CharacterSkin>
+    <SpeedDiceNum>1</SpeedDiceNum>
+
+    <RandomFace>false</RandomFace>
+  </Book>
+  
+<!-- injured proselyte-->
+  
+<Book ID="28494005">
+    <Name>An Index Proselyte’s Page</Name>
+    <TextId>-1</TextId>
+    <Category>TheIndex</Category>
+    <EquipEffect>
+      <HP>99</HP>
+      <Break>62</Break>
+      <SpeedMin>2</SpeedMin>
+      <Speed>6</Speed>
+      <SResist>Normal</SResist>
+      <PResist>Normal</PResist>
+      <HResist>Normal</HResist>
+      <SBResist>Normal</SBResist>
+      <PBResist>Normal</PBResist>
+      <HBResist>Endure</HBResist>
+
+      <Passive Pid="@origin" Level="1">10001</Passive>
+      <Passive Pid="@origin" Level="1">240018</Passive>
+      <Passive Pid="@origin" Level="1">240118</Passive>
+      <Passive Pid="@origin" Level="1">240003</Passive>
+	  <Passive>500011</Passive>
+      
+
+    </EquipEffect>
+    <BookIcon>TheIndex</BookIcon>
+    <Chapter>6</Chapter>
+    <Rarity>Uncommon</Rarity>
+    <CharacterSkin>IndexUnit</CharacterSkin>
+    <SpeedDiceNum>1</SpeedDiceNum>
+
+    <RandomFace>true</RandomFace>
+  </Book>
+  
+  <!-- "enraged" copley -->
+  <Book ID="28494006">
+    <Name>Copley’s Page</Name>
+    <TextId>-1</TextId>
+    <Category>TheIndex</Category>
+    <EquipEffect>
+      <HP>96</HP>
+      <Break>54</Break>
+      <SpeedMin>2</SpeedMin>
+      <Speed>6</Speed>
+      <SResist>Normal</SResist>
+      <PResist>Normal</PResist>
+      <HResist>Normal</HResist>
+      <SBResist>Normal</SBResist>
+      <PBResist>Normal</PBResist>
+      <HBResist>Endure</HBResist>
+	  
+	  <Passive Pid="@origin" Level="1">10001</Passive>
+	  <Passive>500015</Passive>
+      <Passive Pid="@origin" Level="1">250115</Passive>
+	  <Passive>500012</Passive>
+      <Passive Pid="@origin" Level="1">240018</Passive>
+      
+	  <MaxPlayPoint>4</MaxPlayPoint>
+      <StartPlayPoint>4</StartPlayPoint>
+    </EquipEffect>
+    <BookIcon>TheIndex</BookIcon>
+    <Chapter>6</Chapter>
+    <Rarity>Uncommon</Rarity>
+    <CharacterSkin>Esther</CharacterSkin>
+    <SpeedDiceNum>1</SpeedDiceNum>
+
+    <RandomFace>false</RandomFace>
+  </Book>
 
 </BookXmlRoot>

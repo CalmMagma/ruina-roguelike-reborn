@@ -52,7 +52,11 @@
       <Desc>Prevent the next X Stagger damage taken for the Scene.</Desc>
     </BattleEffectText>
 	
-	
+	<BattleEffectText ID="RMR_Prescriptbuf">
+      <Name>Prescript: 'Focus intently on the person in front of you'</Name>
+      <Desc>Deal +10% damage and Stagger damage every time this character uses a Combat Page against a target consecutively. (Max. 30%)
+If this character uses a Combat Page against a different target, they deal -50% damage and Stagger damage for that engagement.</Desc>
+    </BattleEffectText>
 	
 	<BattleEffectText ID="RMR_Zeal_Keyword">
       <Name>Zeal</Name>

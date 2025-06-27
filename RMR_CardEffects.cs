@@ -3268,4 +3268,116 @@ namespace RogueLike_Mod_Reborn
     }
 
     #endregion
+
+
+
+    #region Enemy effects
+
+    public class DiceCardSelfAbility_RMR_PrescriptLoophole : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "IndexReleaseCard3_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.allyCardDetail.AddNewCard(new LorId(LogLikeMod.ModId, 605010));
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_Skewer : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "OnlyOne_Keyword","Vulnerable_Keyword", "Vulnerable_break" };
+
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            if (owner.allyCardDetail.IsHighlander())
+            {
+                card.target.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.Vulnerable, 1, owner);
+                card.target.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.Vulnerable_break, 1, owner);
+            }
+        }
+    }
+
+    public class DiceCardAbility_RMR_SkewerDie : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[] { "OnlyOne_Keyword" };
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            if (owner.allyCardDetail.IsHighlander())
+            {
+                base.card?.target?.currentDiceAction?.DestroyDice(DiceMatch.NextDice);
+            }
+        }
+    }
+
+    public class DiceCardSelfAbility_RMR_Amputation : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "RMR_onlypage_copley" };
+        public override bool OnChooseCard(BattleUnitModel owner)
+        {
+            if (owner.bufListDetail.GetActivatedBuf(KeywordBuf.IndexRelease) == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+    }
+
+    public class DiceCardAbility_RMR_Amputationfirstdie : DiceCardAbilityBase
+    {
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            base.card?.target?.currentDiceAction?.DestroyDice(DiceMatch.AllDice);
+        }
+
+        public override void OnLoseParrying()
+        {
+            base.OnLoseParrying();
+            base.card.DestroyDice(DiceMatch.AllDice);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Amputationdie : DiceCardAbilityBase
+    {
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            if (owner.faction == Faction.Player)
+            {
+                target.TakeDamage(target.MaxHp / 10, DamageType.Card_Ability, owner);
+                target.bufListDetail.AddBuf(new amputationbuf(target.MaxHp / 10));
+            }
+            else
+            {
+                target.TakeDamage(target.MaxHp / 10, DamageType.Card_Ability, owner);
+                int maxhpreduction = target.MaxHp / 10;
+                LogueBookModels.AddPlayerStat(target.UnitData, new LogStatAdder()
+                {
+                    maxhp =  -maxhpreduction
+                });
+            }
+        }
+
+        public class amputationbuf : BattleUnitBuf
+        {
+            int maxhploss;
+            public amputationbuf(int maxhploss)
+            {
+                this.maxhploss = maxhploss;
+            }
+            public override StatBonus GetStatBonus()
+            {
+                return new StatBonus
+                {
+                    hpAdder = -maxhploss
+                };
+            }
+        }
+    }
+
+    #endregion
 }

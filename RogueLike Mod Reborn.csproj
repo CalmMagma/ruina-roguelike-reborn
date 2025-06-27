@@ -663,6 +663,7 @@
     <Compile Include="abcdcode_LOGLIKE_MOD_Extension\CardDropTableXmlInfo.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD_Extension\CardDropTableXmlRoot.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD_Extension\TextDataModel.cs" />
+    <Compile Include="RMR_Passives.cs" />
     <Compile Include="CommonModApi\HookAttribute.cs" />
     <Compile Include="CommonModApi\HookGenerationError.cs" />
     <Compile Include="CommonModApi\HookGenerationResults.cs" />

@@ -73,5 +73,28 @@
 		<Rarity>Common</Rarity>
 	</Book>
 
+<!-- copley event -->
+<Book ID="28474003">
+		<Name>???</Name>
+		<EquipEffect>
+			<EmotionLevel>1</EmotionLevel>
+			<HP>100</HP>
+			<Break>100</Break>
+			<SpeedMin>1</SpeedMin>
+			<Speed>1</Speed>
+			<SResist>Normal</SResist>
+			<PResist>Normal</PResist>
+			<HResist>Normal</HResist>
+			<SBResist>Normal</SBResist>
+			<PBResist>Normal</PBResist>
+			<HBResist>Normal</HBResist>
+			<StartPlayPoint>0</StartPlayPoint>
+			<MaxPlayPoint>2</MaxPlayPoint>
+			<Passive Level="1">28474003</Passive>
+		</EquipEffect>
+		<BookIcon>None</BookIcon>
+		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
+		<Rarity>Common</Rarity>
+	</Book>
 
 </BookXmlRoot>

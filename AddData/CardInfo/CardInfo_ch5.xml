@@ -970,4 +970,53 @@
     <Priority>1</Priority>
   </Card>
   
+  <Card ID="595001">
+    <Name>Prescript Loophole</Name>
+    <Artwork>PrescriptLoophole</Artwork>
+    <Rarity>Unique</Rarity>
+	<Option>ExhaustOnUse</Option>
+    <Spec Range="Near" Cost="1"/>
+    <Script>RMR_PrescriptLoophole</Script>
+    <ScriptDesc />
+    <BehaviourList>
+      <Behaviour Min="4" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="IndexUnit_G" Script="" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="IndexUnit_J" Script="vulnerable1atk" Desc="" />
+    </BehaviourList>
+    <Chapter>5</Chapter>
+    <Priority>0</Priority>
+    <PriorityScript>slashPower</PriorityScript>
+  </Card>
+  
+  <Card ID="595002">
+    <Name>Skewer</Name>
+    <Artwork>Skewer</Artwork>
+    <Rarity>Rare</Rarity>
+    <Spec Range="Near" Cost="2"/>
+    <Script>RMR_Skewer</Script>
+    <ScriptDesc />
+    <BehaviourList>
+      <Behaviour Min="7" Dice="14" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="IndexUnit_Z" Script="RMR_SkewerDie" Desc="" />
+    </BehaviourList>
+    <Chapter>5</Chapter>
+    <Priority>0</Priority>
+    <PriorityScript>penetratePower</PriorityScript>
+  </Card>
+  
+  <Card ID="595003">
+    <Name>Amputation</Name>
+    <Artwork>Amputation</Artwork>
+    <Rarity>Unique</Rarity>
+    <Spec Range="Near" Cost="4"/>
+	<Option>OnlyPage</Option>
+    <Script>RMR_Amputation</Script>
+    <ScriptDesc />
+    <BehaviourList>
+      <Behaviour Min="14" Dice="20" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="IndexUnit_Z" Script="RMR_Amputationfirstdie" Desc="" />
+      <Behaviour Min="6" Dice="10" Type="Atk" Detail="Slash" Motion="J" EffectRes="IndexUnit_J" Script="RMR_Amputationdie" Desc="" />
+    </BehaviourList>
+    <Chapter>5</Chapter>
+    <Priority>10</Priority>
+    <PriorityScript></PriorityScript>
+  </Card>
+
 </DiceCardXmlRoot>
