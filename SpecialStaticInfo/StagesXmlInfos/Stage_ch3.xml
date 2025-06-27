@@ -16,6 +16,7 @@
 
     <StageList ID="130001" StageType="Mystery" />  
     <StageList ID="130003" StageType="Mystery" />  
+	<StageList ID="120003" StageType="Mystery" />
     <!-- <StageList ID="130004" StageType="Mystery" /> -->
   </ChapterList>
 

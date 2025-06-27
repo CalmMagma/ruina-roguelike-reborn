@@ -42,6 +42,20 @@
     <Name>???</Name>
     <Desc>???</Desc>
   </Passive>
+  
+  <Passive ID="28471003">
+    <Negative>false</Negative>
+    <IsHide>false</IsHide>
+    <Rarity>Unique</Rarity>
+    <Lock>false</Lock>
+    <CanGivePassive>true</CanGivePassive>
+    <CanReceivePassive>false</CanReceivePassive>
+    <InnerType>-1</InnerType>
+    <Cost>1</Cost>
+    <Script>RMR_FraudIndexEvent</Script>
+    <Name>???</Name>
+    <Desc>???</Desc>
+  </Passive>
 
 
 </PassiveXmlRoot>

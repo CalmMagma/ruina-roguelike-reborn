@@ -53,6 +53,45 @@
       <Unit>28494002</Unit>
     </Wave>
   </Stage>
+  
+  
+  <!-- copley event -->
+  <Stage id="150003">
+
+    <Wave>
+      <AvailableUnit>5</AvailableUnit>
+      <Formation>1</Formation>
+      <Unit>28474003</Unit>
+    </Wave>
+  </Stage>
+  
+<!-- index copley first choice -->
+  <Stage id="1500031">
+
+    <Wave>
+      <AvailableUnit>5</AvailableUnit>
+      <Formation>21</Formation>
+      <Unit>28494004</Unit>
+      <Unit>28494003</Unit>
+      <Unit>28494003</Unit>
+      <Unit>28494003</Unit>
+      <Unit>28494005</Unit>
+    </Wave>
+  </Stage>
+
+<!-- index copley second choice -->
+  <Stage id="1500032">
+
+    <Wave>
+      <AvailableUnit>5</AvailableUnit>
+      <Formation>21</Formation>
+      <Unit>28494006</Unit>
+      <Unit>28494003</Unit>
+      <Unit>28494003</Unit>
+      <Unit>28494003</Unit>
+      <Unit>28494005</Unit>
+    </Wave>
+  </Stage>
 
 </StageXmlRoot>
 

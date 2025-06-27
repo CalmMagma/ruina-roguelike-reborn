@@ -43,6 +43,20 @@
     <DropTable Level="0">
     </DropTable>
   </Enemy>
+  
+  <Enemy ID="28474003">
+    <!--copley event -->
+    <Name>???</Name>
+    <MinHeight>150</MinHeight>
+    <MaxHeight>200</MaxHeight>
+    <BookId>28474003</BookId>
+    <Gender>Creature</Gender>
+
+    <Exp>0</Exp>
+
+    <DropTable Level="0">
+    </DropTable>
+  </Enemy>
 
 
 </EnemyUnitClassRoot>

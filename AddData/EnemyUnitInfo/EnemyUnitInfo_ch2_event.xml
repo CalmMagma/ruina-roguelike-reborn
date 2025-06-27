@@ -45,4 +45,18 @@
   </Enemy>
 
 
+  <Enemy ID="28471003">
+    <!--fraud index event enemy-->
+    <Name>???</Name>
+    <MinHeight>150</MinHeight>
+    <MaxHeight>200</MaxHeight>
+    <BookId>28471003</BookId>
+    <Gender>Creature</Gender>
+
+    <Exp>0</Exp>
+
+    <DropTable Level="0">
+    </DropTable>
+  </Enemy>
+
 </EnemyUnitClassRoot>

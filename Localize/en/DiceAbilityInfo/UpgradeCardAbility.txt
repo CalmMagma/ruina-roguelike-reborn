@@ -760,6 +760,31 @@ At the start of each Scene, gain 1 Strength for the rest of the Act</Desc>
     <Desc>[On Use] Deal 9 damage to self; all dice on this page gain +3 Power</Desc>
   </BattleCardAbility>
   
+  <BattleCardAbility ID="RMR_PrescriptLoophole">
+    <Desc>[On Use] Add 'Unlock-Ⅲ' to hand</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Skewer">
+    <Desc>[On Use] If Singleton, inflict 1 Fragile and Stagger Fragile to target this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_SkewerDie">
+    <Desc>[On Clash Win] If Singleton, destroy opponent's next die</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Amputation">
+    <Desc>Only usable in the 'Blade Unlocked' state</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Amputationfirstdie">
+    <Desc>[On Clash Win] Destroy all of opponent's dice
+[On Clash Lose] Destroy all dice on this page</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Amputationdie">
+    <Desc>[On Hit] Deal damage equal to 10% of target's Max HP; target loses 10% Max HP permanently</Desc>
+  </BattleCardAbility>
+  
 
   <BattleCardAbility ID="protection2friendLog">
     <Desc>[On Use] Give 2 Protection to all allies next Scene</Desc>
