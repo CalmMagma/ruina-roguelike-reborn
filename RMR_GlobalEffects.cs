@@ -368,6 +368,87 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordIconId => "RMR_Crowbar";
     }
 
+
+    public class RMREffect_Prescript : OnceEffect
+    {
+        public override void Use()
+        {
+
+        }
+
+        public override void OnClick()
+        {
+            
+        }
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            for (int i = 0; i < this.stack; i++)
+            {
+                List<BattleUnitModel> list = BattleObjectManager.instance.GetAliveList(Faction.Player).FindAll((BattleUnitModel x) => x.bufListDetail.GetActivatedBufList().Find((BattleUnitBuf y) => y is BattleUnitBuf_RMRPrescriptbuf) == null);
+                if (list.Count > 0)
+                {
+                    RandomUtil.SelectOne<BattleUnitModel>(list).bufListDetail.AddBuf(new BattleUnitBuf_RMRPrescriptbuf());
+                }
+            }
+        }
+
+        public class BattleUnitBuf_RMRPrescriptbuf : BattleUnitBuf
+        {
+            public override string keywordId => "RMR_Prescriptbuf";
+            public override string keywordIconId => "RMR_Prescriptbuf";
+
+            BattleUnitModel target;
+            int count;
+
+            public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
+            {
+                base.OnUseCard(card);
+                if (target != null)
+                {
+                    if (target != card.target)
+                    {
+                        count = 0;
+                        card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+                        {
+                            dmgRate = -50,
+                            breakRate = -50
+                        });
+                    }
+                    else if (target == card.target)
+                    {
+                        count++;
+                        DmgIncrease(card);
+                    }
+                }
+                else
+                {
+                    count++;
+                    target = card.target;
+                    DmgIncrease(card);
+                }
+            }
+
+            private void DmgIncrease(BattlePlayingCardDataInUnitModel card)
+            {
+                if (count > 3)
+                {
+                    count = 3;
+                }
+                card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
+                {
+                    dmgRate = 10 * count,
+                    breakRate = 10 * count
+                });
+            }
+        }
+        public static Rarity ItemRarity = Rarity.Special;
+
+        public override string KeywordId => "RMR_Prescript";
+
+        public override string KeywordIconId => "RMR_Prescript";
+    }
+
     /// <summary>
     /// Hidden effect that is added on gamemode initialization<br></br>
     /// Basekit 20% chance to find upgraded cards
