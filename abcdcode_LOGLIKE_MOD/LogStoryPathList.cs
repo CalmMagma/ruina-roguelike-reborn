@@ -67,7 +67,7 @@ namespace abcdcode_LOGLIKE_MOD
                 UISoundManager.instance.SetGameStateBGM(GameCurrentState.Story);
                 StoryRoot.Instance.OpenStory(func, true);
             }
-            else // battle cutscene
+            else if (Singleton<BattleSceneRoot>.Instance._battleStarted) // battle cutscene
             {
                 SingletonBehavior<BattleSoundManager>.Instance.EndBgm();
                 SingletonBehavior<BattleManagerUI>.Instance.ui_battleStory.OpenStory(() => func.Invoke(), false, true);

@@ -3,23 +3,23 @@
 
  
   <LogueEffectInfo Id="GlobalEffect_Bookbinder">
-    <Name>Boookbinder</Name> 
+    <Name>Bookbinder</Name> 
     <Desc>All Librarians have +2 max. Passive Attribution cap.</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“Download more passives”&lt;/color&gt;</FlavorText> 
+    <FlavorText>&lt;color=#CACACA&gt;“Download more passives!”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>bookhunter or smth idk dude</CatalogDesc>
   </LogueEffectInfo> 
   
    <LogueEffectInfo Id="GlobalEffect_Bookbinder_Effect">
-    <Name>Boookbinder</Name> 
+    <Name>Bookbinder</Name> 
     <Desc>+{0} max. Passive Attribution cap.</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“Download more passives”&lt;/color&gt;</FlavorText> 
+    <FlavorText>&lt;color=#CACACA&gt;“Download more passives!”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
    <LogueEffectInfo Id="GlobalEffect_Retrospection">
     <Name>Reminiscence</Name> 
-    <Desc>Gain {0} Objet D'Art Key Pages and Combat Pages of the current chapter.</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“I 'member”&lt;/color&gt;</FlavorText> 
+    <Desc>Gain {0} Objet D'Art Key Pages and {1} Combat Pages of the current chapter.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“I 'member...”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   

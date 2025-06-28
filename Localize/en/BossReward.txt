@@ -8,7 +8,7 @@
              <text id="BossReward2Name">Reminiscence</text>
              <text id="BossReward2Desc">Gain {0} Objet D'Art Key Pages and Combat Pages of the current chapter.</text>
              <text id="BossReward3Name">Wealth and Fame</text>
-             <text id="BossReward3Desc">Gain {0} Ahn. Add 1 Shop to next chapter's reception pool</text>
+             <text id="BossReward3Desc">Gain {0} Ahn. Add 1 Shop to next chapter's reception pool.</text>
              <text id="BossReward4Name">Skaenite Ritual</text>
              <text id="BossReward4Desc">Doubles a Librarian's max. HP and Stagger Resist. The next instance were a Librarian is added is not triggered</text>
              <text id="BossReward5Name">Cup of Greed</text>

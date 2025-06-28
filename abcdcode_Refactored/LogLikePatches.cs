@@ -2836,7 +2836,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             catch (Exception ex)
             {
-                Debug.Log((object)("Failed to load thumbnail: " + (object)ex));
+                Debug.Log("Failed to load thumbnail: " + ex);
                 __result = UnityEngine.Resources.Load<Sprite>("Sprites/Books/Thumb/1");
             }
         }

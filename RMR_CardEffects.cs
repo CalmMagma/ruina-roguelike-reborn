@@ -37,6 +37,7 @@ namespace RogueLike_Mod_Reborn
                         pow++;
                 }
             }
+            --pow;
             card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus { power = pow });
         }
 
@@ -3346,34 +3347,29 @@ namespace RogueLike_Mod_Reborn
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
-            if (owner.faction == Faction.Player)
+            if (owner.faction == Faction.Enemy)
             {
                 target.TakeDamage(target.MaxHp / 10, DamageType.Card_Ability, owner);
-                target.bufListDetail.AddBuf(new amputationbuf(target.MaxHp / 10));
+                target.bufListDetail.AddBuf(new amputationbuf());
             }
             else
             {
                 target.TakeDamage(target.MaxHp / 10, DamageType.Card_Ability, owner);
-                int maxhpreduction = target.MaxHp / 10;
                 LogueBookModels.AddPlayerStat(target.UnitData, new LogStatAdder()
                 {
-                    maxhp =  -maxhpreduction
+                    maxhppercent = -10
                 });
             }
         }
 
         public class amputationbuf : BattleUnitBuf
         {
-            int maxhploss;
-            public amputationbuf(int maxhploss)
-            {
-                this.maxhploss = maxhploss;
-            }
+
             public override StatBonus GetStatBonus()
             {
                 return new StatBonus
                 {
-                    hpAdder = -maxhploss
+                    hpRate = -10
                 };
             }
         }

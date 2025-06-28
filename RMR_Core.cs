@@ -66,7 +66,7 @@ namespace RogueLike_Mod_Reborn
             RMRCore.RMRMapHandler = CustomMapHandler.GetCMU(packageId);
 
             MakeDirectoriesAndLoadConfig();
-
+            provideAdditionalLogging = true;
             Harmony.CreateAndPatchAll(typeof(RMR_Patches), packageId);
 
             RegisterAllKeyword();
@@ -1523,10 +1523,9 @@ namespace RogueLike_Mod_Reborn
         // Handles save file creation, deletion and initialization
         public bool LoadGamemodeByStageRecipe(LorId stageRecipe, bool isContinue)
         {
-            this.isContinue = false;
+            this.isContinue = isContinue;
             if (isContinue)
             {
-                this.isContinue = true;
                 return LoadGamemodeByName(Singleton<LogueSaveManager>.Instance.LoadData("Lastest").GetString("CurrentGamemode"), true);
             }
             var gamemode = gamemodeList.Find(x => stageRecipe == x.StageStart);

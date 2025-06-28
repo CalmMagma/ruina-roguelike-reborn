@@ -178,7 +178,7 @@ namespace RogueLike_Mod_Reborn
     public class BattleUnitBuf_RMR_CritChance : BattleUnitBuf
     {
         bool initResources;
-        private AudioClip critSfx;
+        AudioClip critSfx;
         public override string keywordId => "RMR_CriticalStrike";
         public override string keywordIconId => "RMRBuf_CriticalStrike";
         public bool onCrit;

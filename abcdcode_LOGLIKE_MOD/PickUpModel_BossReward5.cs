@@ -22,13 +22,13 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override bool IsCanPickUp(UnitDataModel target)
         {
-            return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_BossReward5.WildCardEffect)) == null;
+            return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_BossReward5.WildCardEffect) == null;
         }
 
         public override void OnPickUp()
         {
             base.OnPickUp();
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_BossReward5.WildCardEffect());
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_BossReward5.WildCardEffect());
         }
 
         public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
@@ -55,6 +55,12 @@ namespace abcdcode_LOGLIKE_MOD
                     return;
                 MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(), new MysteryModel_CardChoice.ChoiceResult(this.ChooseCard), MysteryModel_CardChoice.ChoiceDescType.ChooseDesc);
                 this.CanUse = false;
+            }
+
+            public override string GetEffectDesc()
+            {
+                LogueEffectXmlInfo info = LogueEffectXmlList.Instance.GetEffectInfo(this.KeywordId, LogLikeMod.ModId, PickUpModel_BossReward5_1.card.Name);
+                return info.Desc;
             }
 
             public void ChooseCard(MysteryModel_CardChoice mystery, DiceCardItemModel model)

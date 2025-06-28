@@ -58,8 +58,6 @@ namespace abcdcode_LOGLIKE_MOD
                 return saveData;
             }
 
-            public override Sprite GetSprite() => LogLikeMod.ArtWorks["BossReward1"];
-
             public override void AddedNew()
             {
                 ++this.stack;

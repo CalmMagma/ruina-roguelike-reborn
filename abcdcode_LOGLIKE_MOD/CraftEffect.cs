@@ -83,7 +83,7 @@ namespace abcdcode_LOGLIKE_MOD
                 if (LogueBookModels.cardlist.Count(x => x.GetID().GetOriginalId() == card.id.GetOriginalId()) >= keypageCount[card.id] * card.Limit)
                     cardList.RemoveAll(x => x.id == card.id);
             }
-            return cardList.Any() ? cardList : null;
+            return cardList.Count > 0 ? cardList : null;
         }
 
         public static bool CraftExclusiveCardByChapter(ChapterGrade grade)

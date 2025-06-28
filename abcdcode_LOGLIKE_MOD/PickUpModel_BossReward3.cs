@@ -23,11 +23,10 @@ namespace abcdcode_LOGLIKE_MOD
         public override string KeywordIconId => "BossReward3";
         public PickUpModel_BossReward3() : base()
         {
-            
             int index = (int)LogLikeMod.curchaptergrade;
             if (index > 5)
                 index = 5;
-            var effectText = LogueEffectXmlList.Instance.GetEffectInfo(this.KeywordId, LogLikeMod.ModId, index);
+            var effectText = LogueEffectXmlList.Instance.GetEffectInfo(this.KeywordId, LogLikeMod.ModId, MoneyRewardTable[index]);
             this.Desc = effectText.Desc;
         }
 
