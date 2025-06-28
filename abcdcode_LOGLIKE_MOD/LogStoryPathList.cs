@@ -21,6 +21,7 @@ namespace abcdcode_LOGLIKE_MOD
     public class LogStoryPathList : Singleton<LogStoryPathList>
     {
         public List<LogStoryPathInfo> list;
+        bool nullFunc;
 
         public LogStoryPathList() => this.list = new List<LogStoryPathInfo>();
 
@@ -36,6 +37,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public void LoadStoryFile(LorId id, StoryRoot.OnEndStoryFunc endFunc = null, bool OpenStory = true)
         {
+            nullFunc = false;
             LogStoryPathInfo pathInfo = this.GetPathInfo(id);
             if (pathInfo == null)
                 return;
@@ -53,7 +55,7 @@ namespace abcdcode_LOGLIKE_MOD
             if (!OpenStory)
                 return;
             if (endFunc == null)
-                endFunc = new StoryRoot.OnEndStoryFunc(LogStoryPathList.DefaultStoryEnd);
+                nullFunc = true;
             this.ActivateStoryScene(endFunc);
         }
 
@@ -65,12 +67,13 @@ namespace abcdcode_LOGLIKE_MOD
                 GameSceneManager.Instance.storyRoot.gameObject.SetActive(true);
                 SingletonBehavior<UIPopupWindowManager>.Instance.AllClose();
                 UISoundManager.instance.SetGameStateBGM(GameCurrentState.Story);
-                StoryRoot.Instance.OpenStory(func, true);
+                StoryRoot.Instance.OpenStory(nullFunc ? DefaultStoryEnd : func, true);
             }
             else if (Singleton<BattleSceneRoot>.Instance._battleStarted) // battle cutscene
             {
                 SingletonBehavior<BattleSoundManager>.Instance.EndBgm();
-                SingletonBehavior<BattleManagerUI>.Instance.ui_battleStory.OpenStory(() => func.Invoke(), false, true);
+                // ADD EVENT FUNC HERE LATER I CAN'T BE ARSED
+                SingletonBehavior<BattleManagerUI>.Instance.ui_battleStory.OpenStory(LogStoryPathList.DefaultStoryEnd, false, true);
             }
         }
 

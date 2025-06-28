@@ -183,7 +183,7 @@ namespace abcdcode_LOGLIKE_MOD
         public static void LoadFromSaveData(SaveData data)
         {
             LogLikeMod.curstagetype = (StageType)data.GetData("curstagetype").GetIntSelf();
-            LogLikeMod.curchaptergrade = data.GetData("curchaptergrade").GetIntSelf() == 6 ? ChapterGrade.Grade7 : (ChapterGrade)data.GetData("curchaptergrade").GetIntSelf();
+            LogLikeMod.curchaptergrade = (ChapterGrade)data.GetData("curchaptergrade").GetIntSelf();
             LogLikeMod.curChStageStep = data.GetInt("curChStageStep");
             LogLikeMod.curstageid = ExtensionUtils.LogLoadFromSaveData(data.GetData("curstage"));
             LogLikeMod.SetNextStage(LogLikeMod.curstageid, LogLikeMod.curstagetype, NextStageSetType.BySave);
