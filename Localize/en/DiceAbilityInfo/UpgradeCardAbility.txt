@@ -310,7 +310,7 @@
   
   <BattleCardAbility ID="RMR_LowNightUpgrade">
     <Desc>[On Discard] If user’s HP is above 50%, take 4 damage and gain 1 Strength this Scene
-Otherwise if user’s hp is below 50%, gain 4 Shield this Scene</Desc>
+Otherwise if user’s HP is below 50%, gain 4 Shield this Scene</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_RulesBackstreets">
