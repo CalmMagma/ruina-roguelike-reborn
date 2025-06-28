@@ -415,6 +415,7 @@ namespace RogueLike_Mod_Reborn
                 {
                     if (target != card.target)
                     {
+                        target = card.target;
                         count = 0;
                         card.ApplyDiceStatBonus(DiceMatch.AllDice, new DiceStatBonus
                         {

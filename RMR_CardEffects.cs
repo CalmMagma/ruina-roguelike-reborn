@@ -1983,7 +1983,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnUseCard()
         {
             base.OnUseCard();
-            List<BattleUnitModel> goobers = BattleObjectManager.instance.GetAliveList_opponent(owner.faction).FindAll((BattleUnitModel x) => x != owner);
+            List<BattleUnitModel> goobers = BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner);
             if (goobers.Count > 0)
             {
                 RandomUtil.SelectOne<BattleUnitModel>(goobers).bufListDetail.AddKeywordBufByCard(RoguelikeBufs.CritChance, 4, owner);
@@ -1998,7 +1998,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnUseCard()
         {
             base.OnUseCard();
-            List<BattleUnitModel> goobers = BattleObjectManager.instance.GetAliveList_opponent(owner.faction).FindAll((BattleUnitModel x) => x != owner);
+            List<BattleUnitModel> goobers = BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner);
             if (goobers.Count > 0)
             {
                 RandomUtil.SelectOne<BattleUnitModel>(goobers).bufListDetail.AddKeywordBufByCard(RoguelikeBufs.CritChance, 8, owner);
@@ -3144,7 +3144,7 @@ namespace RogueLike_Mod_Reborn
             {
                 if (origin == AtkResist.Vulnerable || origin == AtkResist.Weak)
                 {
-                    return AtkResist.Normal;
+                    return AtkResist.Endure;
                 }
                 return base.GetResistBP(origin, detail);
             }
@@ -3152,7 +3152,7 @@ namespace RogueLike_Mod_Reborn
             {
                 if (origin == AtkResist.Vulnerable || origin == AtkResist.Weak)
                 {
-                    return AtkResist.Normal;
+                    return AtkResist.Endure;
                 }
                 return base.GetResistHP(origin, detail);
             }

@@ -863,7 +863,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetAbility(0, "RMR_PreparedMindLulu");
+            this.upgradeinfo.SetSelfAbility("RMR_PreparedMindLulu");
             this.upgradeinfo.SetDice(0, 0, 2);
             this.upgradeinfo.SetDice(1, 1, 1);
             this.baseid = new LorId(LogLikeMod.ModId, 403006);
@@ -1330,7 +1330,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 1);
+            this.upgradeinfo.SetDice(0, 2, 2);
             this.upgradeinfo.SetDice(1, 2, 0);
             this.baseid = new LorId(LogLikeMod.ModId, 411104);
         }
@@ -1491,11 +1491,39 @@ namespace RogueLike_Mod_Reborn
         {
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetAbility(0, "RMR_IndiscriminateShotsDie1Upgrade");
+        /*    this.upgradeinfo.SetAbility(0, "RMR_IndiscriminateShotsDie1Upgrade");
             this.upgradeinfo.SetAbility(1, "RMR_IndiscriminateShotsDie1Upgrade");
             this.upgradeinfo.SetDice(0, 0, -2);
-            this.upgradeinfo.SetDice(1, 0, -2);
-            this.upgradeinfo.AddDice(4, 6, BehaviourDetail.Penetrate, "RMR_IndiscriminateShotsDie1Upgrade", MotionDetail.F, BehaviourType.Atk, "", "");
+            this.upgradeinfo.SetDice(1, 0, -2); */
+            // this.upgradeinfo.AddDice(4, 6, BehaviourDetail.Penetrate, "RMR_IndiscriminateShotsDie1Upgrade", MotionDetail.F, BehaviourType.Atk, "", "");
+
+            this.upxmlinfo.DiceBehaviourList.Clear();
+            DiceBehaviour die = new DiceBehaviour
+            {
+
+                Min = 4,
+                Dice = 6,
+                Detail = BehaviourDetail.Penetrate,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.F,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "RMR_IndiscriminateShotsDie1Upgrade"
+            };
+            DiceBehaviour die2 = new DiceBehaviour
+            {
+
+                Min = 3,
+                Dice = 6,
+                Detail = BehaviourDetail.Hit,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.F,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "RMR_IndiscriminateShotsDie2"
+            };
+            this.upxmlinfo.DiceBehaviourList.Add(die);
+            this.upxmlinfo.DiceBehaviourList.Add(die);
+            this.upxmlinfo.DiceBehaviourList.Add(die);
+            this.upxmlinfo.DiceBehaviourList.Add(die2);
             this.baseid = new LorId(LogLikeMod.ModId, 402003);
         }
     }
