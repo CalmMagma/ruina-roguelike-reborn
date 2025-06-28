@@ -90,6 +90,7 @@ namespace RogueLike_Mod_Reborn
                                 stageInfo.stageid = 150003;
                                 MysteryBase.AddStageList(stageInfo, ChapterGrade.Grade5);
                             }
+                            LogueBookModels.AddMoney(20);
                             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Prescript());
                             break;
                     }
