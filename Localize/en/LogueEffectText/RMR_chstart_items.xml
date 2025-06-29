@@ -24,8 +24,9 @@
   </LogueEffectInfo> 
 
   <LogueEffectInfo Id="RMR_StrangeOrb">
-    <Name>Strange Orb</Name>
-    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered and is able to inflict 1 Paralysis to all enemies, make 2 random allies restore 1 Light, make 2 random allies draw 1 page or give all allies 1 Damage Up. The Orb will choose one of these actions at random each Scene while alive.</Desc> 
+    <Name>Unstable Orb</Name>
+    <Desc>At the start of the Act, summon an Orb. The Orb has 20 HP, cannot be Staggered or targeted. The Orb's resistances are 'Fatal'. The Orb grows stronger each Chapter.
+- Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.</Desc> 
     <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>	Not many minds remember the days before the Grand War - something so horrible and so extensive, something so feared and so forgotten - only embers remain of the "Old World", roaming its ruins for a long-lost purpose. One such case is seen with an amalgam - a union that can only be described as an anomaly.
 
@@ -51,6 +52,62 @@
     <FlavorText>&lt;color=#FEFCDD&gt;"Occasionally it beckons you to 'play better', whatever that means…"&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
- 
+	
+	
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade2">
+    <Name>Unstable Orb</Name>
+    <Desc>At the start of the Act, summon an Orb. The Orb has 20 HP, cannot be Staggered or targeted. The Orb's resistances are 'Weak'. The Orb grows stronger each Chapter.
+- Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
+- Each Scene, all allies gain 3 Shield.
+- Every other Scene, all allies recover 3 Stagger Resist.</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo>
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade3">
+    <Name>Unstable Orb</Name>
+    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered or targeted. The Orb's resistances are 'Normal'. The Orb grows stronger each Chapter.
+- Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
+- Each Scene, all allies gain 3 Shield.
+- Every other Scene, all allies recover 3 Stagger Resist.
+- On the 3rd Scene, all allies restore 1 Light.</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade4">
+    <Name>Unstable Orb</Name>
+    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb grows stronger each Chapter.
+- Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
+- Each Scene, all allies gain 3 Shield and either 1 Damage Up, Bleed Protection or 3 Burn Protection.
+- Every other Scene, all allies recover 3 Stagger Resist.
+- On the 3rd Scene, all allies restore 1 Light.</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade5">
+    <Name>Unstable Orb</Name>
+    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb grows stronger each Chapter.
+- Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
+- Each Scene, all allies gain 3 Shield and either 1 Damage Up, Bleed Protection or 3 Burn Protection.
+- Every other Scene, all allies recover 3 Stagger Resist.
+- On the 3rd Scene, all allies restore 1 Light.
+- On the 4th Scene, all allies draw 1 page. Starting with the 4th Scene, a random other ally draws 1 page each Scene.</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade6">
+    <Name>Strange Orb</Name>
+    <Desc>At the start of the Act, summon an Orb. The Orb has 40 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb has stabilized.
+- Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
+- Each Scene, all allies gain 3 Shield and either 1 Damage Up, Bleed Protection or 3 Burn Protection; reduce the Cost of a random page whose Cost is above 0, in a random other ally's hand by 1 until used.
+- Every other Scene, all allies recover 3 Stagger Resist.
+- On the 3rd Scene, all allies restore 1 Light.
+- On the 4th Scene, all allies draw 1 page. Starting with the 4th Scene, a random other ally draws 1 page each Scene.</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"Unstable as it might be, it seems to stick by your side unconditionally."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
   
 </LogueEffectXmlRoot>

@@ -118,8 +118,33 @@ namespace RogueLike_Mod_Reborn
                 List<DiceBehaviour> dicelist = list[0].XmlData.DiceBehaviourList;
                 dicelist.Add(battleDiceBehavior.behaviourInCard);
                 list[0].XmlData.DiceBehaviourList = dicelist;
+                unit.bufListDetail.AddBufWithoutDuplication(new killshivsagaga());
             }
         }
+
+        public class killshivsagaga : BattleUnitBuf
+        {
+            public override void OnEndBattle(BattlePlayingCardDataInUnitModel curCard)
+            {
+                base.OnEndBattle(curCard);
+                if (curCard.card._originalXmlData == null)
+                    curCard.card.CopySelf();
+                List<DiceBehaviour> dicelist = curCard.card.XmlData.DiceBehaviourList;
+                foreach (DiceBehaviour die in dicelist)
+                {
+                    if (die.Script == "RMR_Shivhidden")
+                    {
+                        dicelist.Remove(die);
+                    }
+                }
+                curCard.card.XmlData.DiceBehaviourList = dicelist;
+            }
+        }
+    }
+
+    public class DiceCardAbility_RMR_Shivhidden : DiceCardAbilityBase
+    {
+        
     }
     public class DiceCardSelfAbility_RMR_Remote : DiceCardSelfAbilityBase
     {
@@ -1310,20 +1335,21 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_PrescriptOrder : DiceCardSelfAbilityBase
     {
-        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "DrawCard_Keyword" };
-        bool trigger;
-        public override void OnEnterCardPhase(BattleUnitModel unit, BattleDiceCardModel self)
-        {
-            base.OnEnterCardPhase(unit, self);
-            if (!trigger)
+        public override string[] Keywords => new string[] { "DrawCard_Keyword" };
+        /*    bool trigger;
+         *    "RMR_Zeal_Keyword",
+            public override void OnEnterCardPhase(BattleUnitModel unit, BattleDiceCardModel self)
             {
-                trigger = true;
-                foreach (BattleUnitModel amog in BattleObjectManager.instance.GetAliveList(unit.faction).FindAll((BattleUnitModel x) => x != unit))
+                base.OnEnterCardPhase(unit, self);
+                if (!trigger)
                 {
-                    amog.allyCardDetail.AddNewCardToDeck(self.GetID());
+                    trigger = true;
+                    foreach (BattleUnitModel amog in BattleObjectManager.instance.GetAliveList(unit.faction).FindAll((BattleUnitModel x) => x != unit))
+                    {
+                        amog.allyCardDetail.AddNewCardToDeck(self.GetID());
+                    }
                 }
-            }
-        }
+            } */
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1336,20 +1362,21 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_PrescriptOrderUpgrade : DiceCardSelfAbilityBase
     {
-        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "DrawCard_Keyword", "RMR_StaggerShield_Keyword" };
-        bool trigger;
-        public override void OnEnterCardPhase(BattleUnitModel unit, BattleDiceCardModel self)
-        {
-            base.OnEnterCardPhase(unit, self);
-            if (!trigger)
+        public override string[] Keywords => new string[] {  "DrawCard_Keyword", "RMR_StaggerShield_Keyword" };
+        /*    bool trigger;
+         *    "RMR_Zeal_Keyword",
+            public override void OnEnterCardPhase(BattleUnitModel unit, BattleDiceCardModel self)
             {
-                trigger = true;
-                foreach (BattleUnitModel amog in BattleObjectManager.instance.GetAliveList(unit.faction).FindAll((BattleUnitModel x) => x != unit))
+                base.OnEnterCardPhase(unit, self);
+                if (!trigger)
                 {
-                    amog.allyCardDetail.AddNewCardToDeck(self.GetID());
+                    trigger = true;
+                    foreach (BattleUnitModel amog in BattleObjectManager.instance.GetAliveList(unit.faction).FindAll((BattleUnitModel x) => x != unit))
+                    {
+                        amog.allyCardDetail.AddNewCardToDeck(self.GetID());
+                    }
                 }
-            }
-        }
+            } */
         public override void OnUseCard()
         {
             base.OnUseCard();

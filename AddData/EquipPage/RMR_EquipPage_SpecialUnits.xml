@@ -5,7 +5,7 @@
 	<Name>Strange Orb</Name>
 	<EquipEffect>
 		<EmotionLevel>0</EmotionLevel>
-		<HP>30</HP>
+		<HP>20</HP>
 		<Break>1</Break>
 		<SpeedMin>1</SpeedMin>
 		<Speed>1</Speed>
