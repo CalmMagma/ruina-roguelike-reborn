@@ -101,50 +101,114 @@ namespace RogueLike_Mod_Reborn
 
         public static Rarity ItemRarity = Rarity.Common;
 
-        public override string KeywordId => "RMR_StrangeOrb";
+        public override string KeywordId
+        {
+            get
+            {
+                if (LogLikeMod.itemCatalogActive)
+                {
+                    return "RMR_StrangeOrb";
+                }
+                switch (LogLikeMod.curchaptergrade)
+                {
+                    case ChapterGrade.Grade1:
+                        return "RMR_StrangeOrb";
+                    case ChapterGrade.Grade2:
+                        return "RMR_StrangeOrbGrade2";
+                    case ChapterGrade.Grade3:
+                        return "RMR_StrangeOrbGrade3";
+                    case ChapterGrade.Grade4:
+                        return "RMR_StrangeOrbGrade4";
+                    case ChapterGrade.Grade5:
+                        return "RMR_StrangeOrbGrade5";
+                    case ChapterGrade.Grade6:
+                        return "RMR_StrangeOrbGrade6";
+                    default:
+                       return "RMR_StrangeOrb";
+                }
+            }
+        }
 
         public override string KeywordIconId => "RMR_StrangeOrb";
         public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
         {
+            public override bool isTargetable => false;
+            public class orbhpbuf : BattleUnitBuf
+            {
+                public override StatBonus GetStatBonus()
+                {
+                    return new StatBonus
+                    {
+                        hpAdder = 10
+                    };
+                }
+            }
+            public override void Init(BattleUnitModel self)
+            {
+                base.Init(self);
+                if (LogLikeMod.curchaptergrade >= ChapterGrade.Grade3)
+                {
+                    self.bufListDetail.AddBuf(new orbhpbuf());
+                }
+                if (LogLikeMod.curchaptergrade >= ChapterGrade.Grade6)
+                {
+                    self.bufListDetail.AddBuf(new orbhpbuf());
+                }
+            }
             public override void OnRoundStart()
             {
                 base.OnRoundStart();
-                var list = BattleObjectManager.instance.GetAliveList(owner.faction).Shuffle();
-                switch (UnityEngine.Random.Range(0, 4))
+                var alivelist = BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => !x.IsDead() && x != owner);
+                if (alivelist.Count > 0)
                 {
-                    case 0:
-                        foreach (var enemy in BattleObjectManager.instance.GetAliveList_opponent(owner.faction))
-                            enemy?.bufListDetail?.AddKeywordBufThisRoundByEtc(KeywordBuf.Paralysis, 1, owner);
-                        break;
-                    case 1:
-                        var unit = list[UnityEngine.Random.Range(0, list.Count)];
-                        if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
-                        else break;
-                        list.Remove(unit);
-                        if (list.Any())
-                        {
-                            unit = list[UnityEngine.Random.Range(0, list.Count)];
-                            if (unit != null) unit.cardSlotDetail.RecoverPlayPoint(1);
-                        }
-                        break;
-                    case 2:
-                        var unit2 = list[UnityEngine.Random.Range(0, list.Count)];
-                        if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
-                        else break;
-                        list.Remove(unit2);
-                        if (list.Any())
-                        {
-                            unit2 = list[UnityEngine.Random.Range(0, list.Count)];
-                            if (unit2 != null) unit2.allyCardDetail.DrawCards(1);
-                        }
-                        break;
-                    case 3:
-                        foreach (var ally in BattleObjectManager.instance.GetAliveList(owner.faction))
-                            ally?.bufListDetail?.AddKeywordBufThisRoundByEtc(KeywordBuf.DmgUp, 1, owner);
-                        break;
-                    default:
-                        break;
+                    var list = BattleObjectManager.instance.GetAliveList(owner.faction).Shuffle();
+                    switch (LogLikeMod.curchaptergrade)
+                    {
+                        case ChapterGrade.Grade1:
+                            Effects(1, list);
+                            break;
+                        case ChapterGrade.Grade2:
+                            Effects(1, list);
+                            Effects(2, list);
+                            break;
+                        case ChapterGrade.Grade3:
+                            Effects(1, list);
+                            Effects(2, list);
+                            Effects(3, list);
+                            break;
+                        case ChapterGrade.Grade4:
+                            Effects(1, list);
+                            Effects(2, list);
+                            Effects(3, list);
+                            Effects(4, list);
+                            break;
+                        case ChapterGrade.Grade5:
+                            Effects(1, list);
+                            Effects(2, list);
+                            Effects(3, list);
+                            Effects(4, list);
+                            Effects(5, list);
+                            break;
+                        case ChapterGrade.Grade6:
+                            Effects(1, list);
+                            Effects(2, list);
+                            Effects(3, list);
+                            Effects(4, list);
+                            Effects(5, list);
+                            Effects(6, list);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                else
+                {
+                    owner.Die();
+                }
+                
+                
+                
+                
             }
 
             public override bool IsImmuneBreakDmg(DamageType type)
@@ -156,8 +220,114 @@ namespace RogueLike_Mod_Reborn
             {
                 return (AtkResist)Math.Min((int)LogLikeMod.curchaptergrade + 1, 4);
             }
-        }
 
+            private void Effects(int effect, List<BattleUnitModel> list)
+            {
+                switch (effect)
+                {
+                    case 1:
+                        owner.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -104), true);
+                        break;
+
+                    case 2:
+                        foreach (BattleUnitModel guy in list)
+                        {
+                            guy.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.RMRShield, 3);
+                        }
+                        if (Singleton<StageController>.Instance.RoundTurn % 2 == 0)
+                        {
+                            foreach (BattleUnitModel guy in list)
+                            {
+                                guy.breakDetail.RecoverBreak(3);
+                            }
+                        }
+                        break;
+
+                    case 3:
+                        if (Singleton<StageController>.Instance.RoundTurn == 3)
+                        {
+                            foreach (BattleUnitModel guy in list)
+                            {
+                                guy.cardSlotDetail.RecoverPlayPoint(1);
+                            }
+                        }
+                        break;
+
+                    case 4:
+                        int random = RandomUtil.Range(1, 3);
+                        switch (random)
+                        {
+                            case 1:
+                                foreach (BattleUnitModel guy in list)
+                                {
+                                    guy.bufListDetail.AddKeywordBufThisRoundByEtc(KeywordBuf.DmgUp, 1);
+                                }
+                                break;
+
+                            case 2:
+                                foreach (BattleUnitModel guy in list)
+                                {
+                                    guy.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.BleedProtection, 1);
+                                }
+                                break;
+
+                            case 3:
+                                foreach (BattleUnitModel guy in list)
+                                {
+                                    guy.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.BurnProtection, 3);
+                                }
+                                break;
+                        }
+                        break;
+
+                    case 5:
+                        if (Singleton<StageController>.Instance.RoundTurn == 4)
+                        {
+                            foreach (BattleUnitModel guy in list)
+                            {
+                                guy.allyCardDetail.DrawCards(1);
+                            }
+                        }
+                        if (Singleton<StageController>.Instance.RoundTurn >= 4)
+                        {
+                            RandomUtil.SelectOne<BattleUnitModel>(list.FindAll((BattleUnitModel x) => x != owner)).allyCardDetail.DrawCards(1);
+                        }
+                        break;
+
+                    case 6:
+                        var handlist = new List<BattleDiceCardModel>();
+                        foreach (BattleDiceCardModel card in RandomUtil.SelectOne<BattleUnitModel>(list.FindAll((BattleUnitModel x) => x != owner)).allyCardDetail.GetHand())
+                        {
+                            if (card.GetCost() > 0)
+                            {
+                                handlist.Add(card);
+                            }
+                        }
+                        if (handlist.Count > 0)
+                        {
+                            RandomUtil.SelectOne<BattleDiceCardModel>(handlist).AddBuf(new cardcostreductionorb());
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            public class cardcostreductionorb : BattleDiceCardBuf
+            {
+                public override int GetCost(int oldCost)
+                {
+                    return oldCost - 1;
+                }
+
+                public override void OnUseCard(BattleUnitModel owner)
+                {
+                    base.OnUseCard(owner);
+                    this.Destroy();
+                }
+            }
+        }
 
     }
     #endregion

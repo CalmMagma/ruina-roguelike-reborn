@@ -16,6 +16,51 @@ namespace RogueLike_Mod_Reborn
         public static KeywordBuf RMRStaggerShield;
         public static KeywordBuf BurnProtection;
         public static KeywordBuf BleedProtection;
+        public static KeywordBuf ClashPower;
+    }
+
+    public class BattleUnitBuf_RMR_ClashPower : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.ClashPower;
+            }
+        }
+        public override string keywordId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "RMRBuf_ClashPower";
+                }
+                else if (this.stack < 0)
+                {
+                    return "RMRBuf_ClashPowerDown";
+                }
+                return "RMRBuf_ClashPower";
+            }
+        }
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            behavior.ApplyDiceStatBonus(new DiceStatBonus
+            {
+                power = stack,
+                dmg = -stack,
+                breakDmg = -stack,
+                guardBreakAdder = -stack
+            });
+        }
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.Destroy();
+        }
+        public override string keywordIconId => "RMRBuf_ClashPower";
     }
     public class BattleUnitBuf_RMR_BurnProtection : BattleUnitBuf
     {
