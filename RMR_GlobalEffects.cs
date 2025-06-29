@@ -133,28 +133,7 @@ namespace RogueLike_Mod_Reborn
         public class PassiveAbility_RMR_StrangeOrbPassive : PassiveAbilityBase
         {
             public override bool isTargetable => false;
-            public class orbhpbuf : BattleUnitBuf
-            {
-                public override StatBonus GetStatBonus()
-                {
-                    return new StatBonus
-                    {
-                        hpAdder = 10
-                    };
-                }
-            }
-            public override void Init(BattleUnitModel self)
-            {
-                base.Init(self);
-                if (LogLikeMod.curchaptergrade >= ChapterGrade.Grade3)
-                {
-                    self.bufListDetail.AddBuf(new orbhpbuf());
-                }
-                if (LogLikeMod.curchaptergrade >= ChapterGrade.Grade6)
-                {
-                    self.bufListDetail.AddBuf(new orbhpbuf());
-                }
-            }
+
             public override void OnRoundStart()
             {
                 base.OnRoundStart();

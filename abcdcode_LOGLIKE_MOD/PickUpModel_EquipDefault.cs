@@ -32,7 +32,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override bool IsCanPickUp(UnitDataModel target)
         {
-            List<BookModel> all = LogueBookModels.booklist.FindAll((Predicate<BookModel>)(x => x.ClassInfo.id == this.id));
+            List<BookModel> all = LogueBookModels.booklist.FindAll(x => x.ClassInfo.id == this.id);
             if (all.Count == 0)
                 return true;
             Rarity rarity = all[0].Rarity;

@@ -1967,7 +1967,7 @@ namespace abcdcode_LOGLIKE_MOD
                 */
 
                 // do monomod hooks
-                HookHelper.CreateHook(typeof(CryingChildMapManager), nameof(CryingChildMapManager.InitializeMap), LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.CryingChildMapManager_InitializeMap));
+                HookHelper.CreateHook(typeof(BattleSceneRoot), nameof(BattleSceneRoot.InitInvitationMap), LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.CryingChildMapManager_InitInvitationMap));
                 HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ChoiceEmotionCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_RoundEndPhase_ChoiceEmotionCard));
                 // UNUSED // HookHelper.CreateHook(typeof(StageController), "InitStageByInvitation", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_InitStageByInvitation));
                 // UNUSED // HookHelper.CreateHook(typeof(StageController), "RoundEndPhase_ReturnUnit", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.RoundEndPhase_ReturnUnit));

@@ -3,9 +3,9 @@
 
 	<PassiveDesc ID="-100">
 		<Name>Strange Orb</Name>
-		<Desc>At the start of each Scene, randomly chooses to inflict 1 Paralysis to all enemies, make 2 random allies restore 1 Light, make 2 random allies draw 1 page or give all allies 1 Damage Up.
-
-Resistances change depending on the current chapter, starting at Fatal in Canard and capping at Endured in Urban Plague.</Desc>
+		<Desc>Resistances change depending on the current chapter, starting at Fatal in Canard and capping at Endured in Urban Plague.
+		
+Gains additional effects depending on the current chapter.</Desc>
 	</PassiveDesc>
   
 </PassiveDescRoot>

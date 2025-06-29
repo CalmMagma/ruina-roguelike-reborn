@@ -5,6 +5,7 @@
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
 using LOR_DiceSystem;
+using RogueLike_Mod_Reborn;
 using System;
 using System.Collections.Generic;
 using UI;

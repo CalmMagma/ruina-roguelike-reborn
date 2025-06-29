@@ -64,15 +64,15 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static string GetAblilityText(BookXmlInfo bookinfo)
         {
-            string str = $"{$"{$"{$"{$"{$"{$"{string.Empty}{TextDataModel.GetText("ui_ability_hp")}:{bookinfo.EquipEffect.Hp.ToString()}{Environment.NewLine}"}{TextDataModel.GetText("ui_ability_break")}:{bookinfo.EquipEffect.Break.ToString()}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Light")}:{bookinfo.EquipEffect.StartPlayPoint.ToString()}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_SpeedArea")}:{bookinfo.EquipEffect.SpeedMin.ToString()}~{bookinfo.EquipEffect.Speed.ToString()}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Slash")}:{RewardingModel.GetResistText(bookinfo.EquipEffect.SResist)}/{RewardingModel.GetResistText(bookinfo.EquipEffect.SBResist)}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Penetrate")}:{RewardingModel.GetResistText(bookinfo.EquipEffect.PResist)}/{RewardingModel.GetResistText(bookinfo.EquipEffect.PBResist)}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Hit")}:{RewardingModel.GetResistText(bookinfo.EquipEffect.HResist)}/{RewardingModel.GetResistText(bookinfo.EquipEffect.HBResist)}{Environment.NewLine}";
+            string str = $"{$"{$"{$"{$"{$"{$"{string.Empty}{TextDataModel.GetText("ui_ability_hp")}: {bookinfo.EquipEffect.Hp.ToString()}{Environment.NewLine}"}{TextDataModel.GetText("ui_ability_break")}: {bookinfo.EquipEffect.Break.ToString()}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Light")}: {bookinfo.EquipEffect.StartPlayPoint.ToString()}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_SpeedArea")}: {bookinfo.EquipEffect.SpeedMin.ToString()}~{bookinfo.EquipEffect.Speed.ToString()}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Slash")}: {RewardingModel.GetResistText(bookinfo.EquipEffect.SResist)}/{RewardingModel.GetResistText(bookinfo.EquipEffect.SBResist)}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Penetrate")}: {RewardingModel.GetResistText(bookinfo.EquipEffect.PResist)}/{RewardingModel.GetResistText(bookinfo.EquipEffect.PBResist)}{Environment.NewLine}"}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Hit")}: {RewardingModel.GetResistText(bookinfo.EquipEffect.HResist)}/{RewardingModel.GetResistText(bookinfo.EquipEffect.HBResist)}{Environment.NewLine}";
             string empty = string.Empty;
             for (int index = 0; index < bookinfo.EquipEffect.PassiveList.Count; ++index)
             {
                 empty += Singleton<PassiveDescXmlList>.Instance.GetName(bookinfo.EquipEffect.PassiveList[index]);
                 if (index < bookinfo.EquipEffect.PassiveList.Count - 1)
-                    empty += ",";
+                    empty += ", ";
             }
-            return $"{str}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Passive")} : {empty}";
+            return $"{str}{abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("Equip_Passive")}: {empty}";
         }
 
         public static string GetRaritytext(Rarity rarity)
@@ -97,7 +97,7 @@ namespace abcdcode_LOGLIKE_MOD
             BookXmlInfo data = Singleton<BookXmlList>.Instance.GetData(info.id);
             AbnormalityCard abnormalityCard = Singleton<AbnormalityCardDescXmlList>.Instance.GetAbnormalityCard(LogLikeMod.GetRegisteredPickUpXml(info).Name);
             abnormalityCard.cardName = data.InnerName;
-            abnormalityCard.flavorText = $"{RewardingModel.GetChapterText(data.Chapter)} {RewardingModel.GetRaritytext(data.Rarity)}";
+            abnormalityCard.flavorText = $"{RewardingModel.GetChapterText(data.Chapter)}, {RewardingModel.GetRaritytext(data.Rarity)}";
             abnormalityCard.abilityDesc = RewardingModel.GetAblilityText(data);
         }
 

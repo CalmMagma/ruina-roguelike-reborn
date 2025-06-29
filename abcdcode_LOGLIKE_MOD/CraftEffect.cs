@@ -86,13 +86,12 @@ namespace abcdcode_LOGLIKE_MOD
             return cardList.Count > 0 ? cardList : null;
         }
 
-        public static bool CraftExclusiveCardByChapter(ChapterGrade grade)
+        public static void CraftExclusiveCardByChapter(ChapterGrade grade)
         {
             List<DiceCardXmlInfo> cards = CraftEffect.CanCraftExclusiveByChapter(grade);
             DiceCardXmlInfo card = cards.SelectOneRandom();
             LogueBookModels.AddCard(card.id);
             UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipResult", card.Name));
-            return true;
         }
     }
 }

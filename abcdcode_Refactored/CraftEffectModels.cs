@@ -67,6 +67,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             base.Crafting();
             CraftEffect.CraftExclusiveCardByChapter(ChapterGrade.Grade6);
+            (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel)._editPanel.BattleCardPanel.SetData();
         }
     }
 
@@ -97,6 +98,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             base.Crafting();
             CraftEffect.CraftExclusiveCardByChapter(ChapterGrade.Grade7);
+            (UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel)._editPanel.BattleCardPanel.SetData();
         }
     }
 

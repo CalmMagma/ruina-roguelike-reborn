@@ -83,7 +83,6 @@ namespace abcdcode_LOGLIKE_MOD
                 GameSceneManager.Instance.ActivateUIController();
             // either way, do a cool little transition that'd be cool
             SingletonBehavior<UIBgScreenChangeAnim>.Instance.StartBg(UIScreenChangeType.EnterBattleSetting);
-            
         }
 
         public static bool LoadStoryFile(string storyPath, string effectPath, string modPath)

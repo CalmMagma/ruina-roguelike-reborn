@@ -165,47 +165,17 @@ namespace abcdcode_LOGLIKE_MOD
     public class LogLikeHooks
     {
         /// <summary>
-        /// Hook to fix Crying Children's shitty map manager (it DOESN'T play music with a custom stage manager.
-        /// <br></br> shiting and pissing rn.)
+        /// Hook for hijacing Crrying Children's map manager.
         /// </summary>
-        public void CryingChildMapManager_InitializeMap(Action<CryingChildMapManager> orig, CryingChildMapManager self)
+        public void CryingChildMapManager_InitInvitationMap(Action<BattleSceneRoot, MapManager> orig, BattleSceneRoot self, MapManager m)
         {
-            if (LogLikeMod.CheckStage(true))
+            if (LogLikeMod.CheckStage(true) && m is CryingChildMapManager)
             {
-                AccessTools.Method(typeof(MapManager), nameof(MapManager.InitializeMap)).GetBaseDefinition().Invoke((object)self, null);
-                self._stageManager = Singleton<StageController>.Instance.EnemyStageManager as EnemyTeamStageManager_TheCryingLog;
-                self._currentPhase = self._stageManager.currentPhase;
-
-                foreach (SpriteRenderer spriteRenderer in self._burnSpriteRenderers)
-                {
-                    spriteRenderer.enabled = false;
-                }
-                self._dlgIdList.Add("ChildCovering_nomal_1");
-                self._dlgIdList.Add("ChildCovering_nomal_2");
-                self._dlgIdList.Add("ChildCovering_nomal_3");
-                self._dlgIdList.Add("ChildCovering_nomal_4");
-                self._dlgIdList.Add("ChildCovering_nomal_5");
-                self._dlgIdList.Add("ChildCovering_nomal_6");
-                self._dlgIdList.Add("ChildCovering_nomal_7");
-                self._dlgIdList.Add("ChildCovering_nomal_8");
-                self._dlgIdList.Add("TheCryingChildren_nomal_1");
-                self._dlgIdList.Add("TheCryingChildren_nomal_2");
-                self._dlgIdList.Add("TheCryingChildren_nomal_3");
-                self._dlgIdList.Add("TheCryingChildren_nomal_4");
-                self._dlgIdList.Add("TheCryingChildren_nomal_5");
-                self._dlgIdList.Add("TheCryingChildren_nomal_6");
-                self._dlgIdList.Add("TheCryingChildren_nomal_7");
-                self._dlgIdList.Add("TheCryingChildren_nomal_8");
-                self._dlgIdList.Add("TheCryingChildren_nomal_9");
-                self._dlgIdList.Add("TheCryingChildren_nomal_10");
-                self._dlgIdList.Add("TheCryingChildren_nomal_11");
-                self._dlgIdList.Add("TheCryingChildren_nomal_12");
-                self.CreateDialog();
-                SingletonBehavior<CreatureDlgManagerUI>.Instance.Init(SingletonBehavior<BattleSceneRoot>.Instance.currentMapObject == self);
-                self._bgChanged = false;
+                var newmap = m.gameObject.AddComponent<CryingChildrenLogKys>();
+                UnityEngine.Object.Destroy(m);
+                m = newmap;
             }
-            else
-                orig(self);
+            orig(self, m);
         }
 
 
@@ -299,7 +269,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             var stage = Singleton<StageController>.Instance.GetStageModel();
             if (self.id.packageId == LogLikeMod.ModId // check for roguelike 
-                && ((stage == null || stage.ClassInfo.id == RMRCore.CurrentGamemode.StageStart) && self.id.id == -854) // check for wave start + main player
+                && ((stage == null || !RoguelikeGamemodeController.Instance.isContinue) && self.id.id == -854) // check for wave start + main player
                 || (LogLikeMod.AddPlayer && self.id.id >= -858 && self.id.id <= -855)) // if not above, then check if player is just being added
             {
                 return RMRCore.CurrentGamemode.BaseDeckReplacement;

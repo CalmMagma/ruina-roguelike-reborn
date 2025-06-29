@@ -9,6 +9,7 @@ using GameSave;
 
 namespace RogueLike_Mod_Reborn
 {
+    #region -- SHOP PICK UPS --
     [HideFromItemCatalog]
     public class PickUpModel_RMR_BigBrothersChains : ShopPickUpModel
     {
@@ -168,4 +169,22 @@ namespace RogueLike_Mod_Reborn
             }
         }
     }
+
+#endregion
+
+    #region -- STAGE PICK UPS --
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_CopleyConsequences : PickUpModelBase
+    {
+        public override void LoadFromSaveData(LogueStageInfo stage) => stage.type = abcdcode_LOGLIKE_MOD.StageType.Mystery;
+
+        public PickUpModel_RMR_CopleyConsequences()
+        {
+            this.Name = TextDataModel.GetText("Stage_Mystery");
+            this.Desc = TextDataModel.GetText("Stage_Mystery_Desc");
+            this.FlaverText = "";
+            this.ArtWork = "Stage_Mystery";
+        }
+    }
+    #endregion
 }

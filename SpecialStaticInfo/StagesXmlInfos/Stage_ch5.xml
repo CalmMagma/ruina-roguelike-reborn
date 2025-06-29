@@ -23,16 +23,20 @@
     <StageList ID="50019" StageType="Boss" /> 
 
     <StageList ID="150001" StageType="Mystery" />  
-    <StageList ID="150002" StageType="Mystery" />  
+    <StageList ID="150002" StageType="Mystery" /> 
 
     <StageList ID="111001" StageType="Shop" /> 
     <StageList ID="111001" StageType="Shop" /> 
     <StageList ID="111001" StageType="Shop" /> 
   </ChapterList>
 
-
   <ChapterList Chapter="GradeAll" >
-    <StageList ID="250002" StageType="Custom" Script="Ch5_2EventResult" />
+    <StageList ID="150003" StageType="Custom" Script="RMR_CopleyConsequences" /> <!-- Copley event, only added if player took a prescript -->
+	<!-- <StageList ID="2500031" StageType="Custom" /> Copley fight, normal -->
+	<!-- <StageList ID="2500032" StageType="Custom" /> Copley fight, enraged -->
+    <StageList ID="250002" StageType="Custom" Script="Ch5_2EventResult" /> <!-- Thumb Event, only added if player took Thumb box -->
+	<!-- <StageList ID="2500021" StageType="Custom" /> Thumb fight proper -->
+	<!-- ANY ENCOUNTER THAT IS NOT ADDED TO STAGE LIST AND IS INSTEAD SENT TO BY SETNEXTSTAGE OR SETNEXTSTAGECUSTOM DOES NOT NEED TO BE HERE -->
   </ChapterList>
 
 </StagesXmlRoot>

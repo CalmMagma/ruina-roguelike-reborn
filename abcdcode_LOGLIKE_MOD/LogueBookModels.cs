@@ -8,6 +8,7 @@ using GameSave;
 using HarmonyLib;
 using LOR_DiceSystem;
 using LOR_XML;
+using Mono.Cecil.Cil;
 using RogueLike_Mod_Reborn;
 using System;
 using System.Collections.Generic;
@@ -464,24 +465,27 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.RemainStageList = new Dictionary<ChapterGrade, List<LogueStageInfo>>();
             SaveData data1 = save.GetData("RemainStageList");
             foreach (ChapterGrade key in new List<ChapterGrade>()
-                {
-                      ChapterGrade.Grade1,
-                      ChapterGrade.Grade2,
-                      ChapterGrade.Grade3,
-                      ChapterGrade.Grade4,
-                      ChapterGrade.Grade5,
-                      ChapterGrade.Grade6,
-                      ChapterGrade.Grade7
-                    })
-                {
+            {
+                ChapterGrade.Grade1,
+                ChapterGrade.Grade2,
+                ChapterGrade.Grade3,
+                ChapterGrade.Grade4,
+                ChapterGrade.Grade5,
+                ChapterGrade.Grade6,
+                ChapterGrade.Grade7
+            })
+            {
                 if (data1.GetData(key.ToString()) != null)
                 {
                     List<LogueStageInfo> logueStageInfoList = new List<LogueStageInfo>();
                     foreach (SaveData data2 in data1.GetData(key.ToString()))
                     {
                         LogueStageInfo stageInfo = Singleton<StagesXmlList>.Instance.GetStageInfo(ExtensionUtils.LogLoadFromSaveData(data2));
-                        if (stageInfo.script != string.Empty)
-                            LogLikeMod.FindPickUp(stageInfo.script).LoadFromSaveData(stageInfo);
+                        if (stageInfo != null)
+                        {
+                            if (stageInfo.script != string.Empty)
+                                LogLikeMod.FindPickUp(stageInfo.script).LoadFromSaveData(stageInfo);
+                        }
                         logueStageInfoList.Add(stageInfo);
                     }
                     LogueBookModels.RemainStageList.Add(key, logueStageInfoList);

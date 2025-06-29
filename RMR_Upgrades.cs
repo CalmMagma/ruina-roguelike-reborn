@@ -1491,12 +1491,12 @@ namespace RogueLike_Mod_Reborn
         {
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-        /*    this.upgradeinfo.SetAbility(0, "RMR_IndiscriminateShotsDie1Upgrade");
-            this.upgradeinfo.SetAbility(1, "RMR_IndiscriminateShotsDie1Upgrade");
-            this.upgradeinfo.SetDice(0, 0, -2);
-            this.upgradeinfo.SetDice(1, 0, -2); */
-            // this.upgradeinfo.AddDice(4, 6, BehaviourDetail.Penetrate, "RMR_IndiscriminateShotsDie1Upgrade", MotionDetail.F, BehaviourType.Atk, "", "");
+            this.baseid = new LorId(LogLikeMod.ModId, 402003);
+        }
 
+        public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
+        {
+            this.upxmlinfo = base.GetUpgradeInfo(index, count);
             this.upxmlinfo.DiceBehaviourList.Clear();
             DiceBehaviour die = new DiceBehaviour
             {
@@ -1524,7 +1524,7 @@ namespace RogueLike_Mod_Reborn
             this.upxmlinfo.DiceBehaviourList.Add(die);
             this.upxmlinfo.DiceBehaviourList.Add(die);
             this.upxmlinfo.DiceBehaviourList.Add(die2);
-            this.baseid = new LorId(LogLikeMod.ModId, 402003);
+            return this.upxmlinfo;
         }
     }
 
