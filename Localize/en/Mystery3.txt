@@ -29,7 +29,7 @@ You will now avoid any Association-related battles during the Urban Legend Chapt
 "The normal ways from which one can get stronger in the City are viable, sure, though they all lack a key component: quick results. What if you need to get faster in a day? An hour? Well, I got just the solution!" Six-Six gestures towards a tattered surgical chair, questionably clean tools neately organized in a tray at its side.
 
 "Just a small experimental surgery will make you [green]P-O-W-E-R-F-U-L[/color]! Ain't that nice? For just 20 [yellow]Ahn[/color] I can get ya that fix! Whaddya say, chum?" Six-Six stares expectantly.</text>
-             <text id="MysteryCh3_3Frame0Choice0Desc">Do the sugery ([red]Pay 20 [yellow]Ahn[/color].[/color] [green]Chosen Librarian: +5~10 Max HP and Stagger Resist[/color], [red]-1~1 Speed Range[/color])</text>
+             <text id="MysteryCh3_3Frame0Choice0Desc">Do the surgery ([red]Pay 20 [yellow]Ahn[/color].[/color] [green]Chosen Librarian: +5~10 Max HP and Stagger Resist[/color], [red]-1~1 Speed Range[/color])</text>
              <text id="MysteryCh3_3Frame0Choice1Desc">Walk away</text>
              <text id="MysteryCh3_3RewardName">Bone-Strengthening Surgery</text>
              <text id="MysteryCh3_3RewardDesc">Chosen Librarian: +5~10 Max HP and Stagger Resist, -1~1 Speed Range</text>

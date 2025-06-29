@@ -1835,7 +1835,7 @@ namespace RogueLike_Mod_Reborn
                     Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftExclusiveCardChapter7());
                     break;
             }
-            Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, (int)LogLikeMod.curchaptergrade + 1), null, true);
+            LogStoryPathList.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, (int)LogLikeMod.curchaptergrade + 1), null, true);
         }
 
         /// <summary>
@@ -1895,7 +1895,7 @@ namespace RogueLike_Mod_Reborn
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_ShopGood46.SupriseBox());
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HiddenUpgradeChanceEffect());
-                Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
+                LogStoryPathList.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
             }
         }
 
@@ -1918,7 +1918,7 @@ namespace RogueLike_Mod_Reborn
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new CraftEquipChapter1());
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_ShopGood46.SupriseBox());
                 Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_HiddenUpgradeChanceEffect());
-                Singleton<LogStoryPathList>.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
+                LogStoryPathList.Instance.LoadStoryFile(new LorId(LogLikeMod.ModId, 1), null, true);
             }
         }
 

@@ -7,7 +7,6 @@
              <text id="MysteryCh6_1Frame0Choice2Desc">Hope for the Future ([green]Upgrade every Combat Page obtained after this event[/color])</text>
              <text id="MysteryCh6_1Frame1Dia0">[mirror]The Sparkling Mirror[/color] summons the chosen rewards in front of you, their essence otherworldly and familiar in a way, though it vanishes before you can scrutinize it better.</text>
              <text id="MysteryCh6_1Frame1Choice0Desc">Walk away... </text>
-</localize>
 
              <text id="MysteryCh6_2Title">Lets Go Gambling!</text>
              <text id="MysteryCh6_2Frame0Dia0">You find yourself summoned inside a gigantic J Corp cansino, already in front a table starting a game of Craps. A rapsy masculine voice coming from the dealer breaks you from your trance. 

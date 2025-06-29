@@ -4,20 +4,21 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public enum StageType
+namespace abcdcode_LOGLIKE_MOD
 {
-  Normal,
-  Reward,
-  Elite,
-  Boss,
-  Mystery,
-  Creature,
-  Shop,
-  Start,
-  Rest,
-  Custom,
-}
+
+    public enum StageType
+    {
+        Normal,
+        Reward,
+        Elite,
+        Boss,
+        Mystery,
+        Creature,
+        Shop,
+        Start,
+        Rest,
+        Custom,
+    }
 }

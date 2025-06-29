@@ -21,7 +21,6 @@ namespace abcdcode_LOGLIKE_MOD
     public class LogStoryPathList : Singleton<LogStoryPathList>
     {
         public List<LogStoryPathInfo> list;
-        bool nullFunc;
 
         public LogStoryPathList() => this.list = new List<LogStoryPathInfo>();
 
@@ -37,11 +36,10 @@ namespace abcdcode_LOGLIKE_MOD
 
         public void LoadStoryFile(LorId id, StoryRoot.OnEndStoryFunc endFunc = null, bool OpenStory = true)
         {
-            nullFunc = false;
             LogStoryPathInfo pathInfo = this.GetPathInfo(id);
             if (pathInfo == null)
                 return;
-            string modPath = Singleton<ModContentManager>.Instance.GetModPath(pathInfo.pid);
+            string modPath = ModContentManager.Instance.GetModPath(pathInfo.pid);
             string storyPath = $"{modPath}/Assemblies/dlls/StoryInfo/Localize/{TextDataModel.CurrentLanguage}/{pathInfo.localizepath}";
             string effectPath = $"{modPath}/Assemblies/dlls/StoryInfo/EffectInfo/{pathInfo.effectpath}";
             if (pathInfo.pid != LogLikeMod.ModId)
@@ -55,25 +53,25 @@ namespace abcdcode_LOGLIKE_MOD
             if (!OpenStory)
                 return;
             if (endFunc == null)
-                nullFunc = true;
+                endFunc = DefaultStoryEnd;
             this.ActivateStoryScene(endFunc);
         }
 
         public void ActivateStoryScene(StoryRoot.OnEndStoryFunc func)
         {
-            if (UI.UIController.Instance.CurrentUIPhase == UIPhase.BattleSetting) // regular cutscene
+            var phase = UI.UIController.Instance.CurrentUIPhase;
+            if (phase == UIPhase.BattleSetting || phase == UIPhase.Invitation || phase == UIPhase.Story) // regular cutscene
             {
                 GameSceneManager.Instance.uIController.gameObject.SetActive(false);
                 GameSceneManager.Instance.storyRoot.gameObject.SetActive(true);
                 SingletonBehavior<UIPopupWindowManager>.Instance.AllClose();
                 UISoundManager.instance.SetGameStateBGM(GameCurrentState.Story);
-                StoryRoot.Instance.OpenStory(nullFunc ? DefaultStoryEnd : func, true);
+                StoryRoot.Instance.OpenStory(func, true);
             }
-            else if (Singleton<BattleSceneRoot>.Instance._battleStarted) // battle cutscene
+            else if (SingletonBehavior<BattleSceneRoot>.Instance._battleStarted) // battle cutscene
             {
                 SingletonBehavior<BattleSoundManager>.Instance.EndBgm();
-                // ADD EVENT FUNC HERE LATER I CAN'T BE ARSED
-                SingletonBehavior<BattleManagerUI>.Instance.ui_battleStory.OpenStory(LogStoryPathList.DefaultStoryEnd, false, true);
+                SingletonBehavior<BattleManagerUI>.Instance.ui_battleStory.OpenStory(() => func(), false, true);
             }
         }
 

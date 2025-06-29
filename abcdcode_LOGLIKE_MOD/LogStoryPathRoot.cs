@@ -7,12 +7,13 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class LogStoryPathRoot
+namespace abcdcode_LOGLIKE_MOD
 {
-  [XmlElement("StoryPathList")]
-  public List<LogStoryPathInfo> list;
-}
+
+    public class LogStoryPathRoot
+    {
+        [XmlElement("StoryPathList")]
+        public List<LogStoryPathInfo> list;
+    }
 }

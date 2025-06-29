@@ -1196,7 +1196,7 @@ namespace abcdcode_LOGLIKE_MOD
                     }
                 }
             }
-            Singleton<LogStoryPathList>.Instance.AddStoryPathInfo(infolist);
+            LogStoryPathList.Instance.AddStoryPathInfo(infolist);
         }
 
         public static EmotionEgoXmlInfo AddEmotionEgoForReward(DiceCardXmlInfo info)
@@ -1536,7 +1536,7 @@ namespace abcdcode_LOGLIKE_MOD
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
                 List<DiceCardXmlInfo> collection = LogLikeMod.LoadCardInfo(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<DiceCardXmlInfo>)collection);
+                list1.AddRange(collection);
             }
             ItemXmlDataList.instance.AddCardInfoByMod(LogLikeMod.ModId, list1);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -1547,7 +1547,7 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo2.FullName))
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
-                        list2.AddRange((IEnumerable<DiceCardXmlInfo>)LogLikeMod.LoadCardInfo(file.FullName, uniqueId));
+                        list2.AddRange(LogLikeMod.LoadCardInfo(file.FullName, uniqueId));
                     ItemXmlDataList.instance.AddCardInfoByMod(uniqueId, list2);
                 }
             }

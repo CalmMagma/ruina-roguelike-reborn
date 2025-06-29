@@ -872,8 +872,9 @@ namespace abcdcode_LOGLIKE_MOD
             else
             {
                 player.SetCustomName(abcdcode_LOGLIKE_MOD_Extension.TextDataModel.GetText("LogueLike_PlayerName"));
-                player.customizeData.Copy(LibraryModel.Instance.GetFloor(SephirahType.Keter).GetUnitDataList()[0].customizeData);
-                player.customizeData.specialCustomID = new LorId(10);
+                var unit = LibraryModel.Instance.GetFloor(UI.UIController.Instance.CurrentSephirah).GetUnitDataList()[0].customizeData;
+                player.customizeData.Copy(unit);
+                player.customizeData.specialCustomID = unit.specialCustomID;
             }
             player.customizeData.SetCustomData(true);
             player.bookItem.TryGainUniquePassive();
@@ -1000,8 +1001,8 @@ namespace abcdcode_LOGLIKE_MOD
             if (LogueBookModels.playersstatadders[model.unitData].Count > 0)
                 LogueBookModels.ApplyPlayerStat(model, LogueBookModels.playersstatadders[model.unitData]);
             model.unitData.bookItem.SetOriginalCharacterName();
-            typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue((object)model.unitData.bookItem, (object)classInfo.CharacterSkin[0]);
-            typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue((object)model.unitData.bookItem, (object)classInfo.CharacterSkin[0]);
+            typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue(model.unitData.bookItem, classInfo.CharacterSkin[0]);
+            typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue(model.unitData.bookItem, classInfo.CharacterSkin[0]);
             model.hp = (float)Mathf.RoundToInt(num * (float)model.MaxHp);
             double startHp = model.hp;
             foreach (PassiveAbilityBase passive in model.unitData.bookItem.CreatePassiveList())
