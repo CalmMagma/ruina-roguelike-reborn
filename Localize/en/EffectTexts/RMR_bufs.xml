@@ -52,6 +52,21 @@
       <Desc>Prevent the next X Stagger damage taken for the Scene.</Desc>
     </BattleEffectText>
 	
+	<BattleEffectText ID="RMR_ClashPower">
+      <Name>Clash Power</Name>
+      <Desc>All dice gain {0} Power and deal {0} less damage, Stagger damage, and deflect Stagger damage in a clash for the Scene</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_ClashPowerDown">
+      <Name>Clash Power</Name>
+      <Desc>All dice lose {0} Power and deal +{0} damage, Stagger damage, and deflect Stagger damage in a clash for the Scene</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_ClashPower_Keyword">
+      <Name>Clash Power X</Name>
+      <Desc>All dice gain X Power and deal X less damage, Stagger damage, and deflect Stagger damage in a clash for the Scene</Desc>
+    </BattleEffectText>
+	
 	<BattleEffectText ID="RMR_Prescriptbuf">
       <Name>Prescript: 'Focus intently on the person in front of you'</Name>
       <Desc>Deal +10% damage and Stagger damage every time this character uses a Combat Page against a target consecutively. (Max. 30%)

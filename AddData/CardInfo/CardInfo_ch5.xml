@@ -972,7 +972,7 @@
   
   <Card ID="595001">
     <Name>Prescript Loophole</Name>
-    <Artwork>PrescriptLoophole</Artwork>
+    <Artwork>PrescriptLoophole.png</Artwork>
     <Rarity>Unique</Rarity>
 	<Option>ExhaustOnUse</Option>
     <Spec Range="Near" Cost="1"/>
@@ -989,7 +989,7 @@
   
   <Card ID="595002">
     <Name>Skewer</Name>
-    <Artwork>Skewer</Artwork>
+    <Artwork>Skewer.png</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2"/>
     <Script>RMR_Skewer</Script>
@@ -1004,7 +1004,7 @@
   
   <Card ID="595003">
     <Name>Amputation</Name>
-    <Artwork>Amputation</Artwork>
+    <Artwork>Amputation.png</Artwork>
     <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="4"/>
 	<Option>OnlyPage</Option>

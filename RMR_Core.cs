@@ -328,6 +328,8 @@ namespace RogueLike_Mod_Reborn
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_BurnProtection>();
             if (AddNewKeywordBufToList("Lux_RMR_BleedProtection", ref RoguelikeBufs.BleedProtection))
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_BleedProtection>();
+            if (AddNewKeywordBufToList("Lux_RMR_ClashPower", ref RoguelikeBufs.ClashPower))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_ClashPower>();
         }
 
         #region literally do not use this ever
