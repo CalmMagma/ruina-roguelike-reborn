@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<PassiveDesc ID="-100">
+		<Name>奇怪球体</Name>
+		<Desc>每一幕从以下效果中随机执行1种效果： 
+对所有敌方角色施加1层“麻痹”
+使2名随机友方角色抽取1张书页
+使所有友方角色获得1层“伤害强化”
+自身抗性根据当前章节而变化与提升(传闻级-“致命”将逐级提升至都市恶疾级-“耐性”停止提升)</Desc>
+	</PassiveDesc>
+  
+</PassiveDescRoot>
+  
+

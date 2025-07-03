@@ -21,13 +21,16 @@ namespace abcdcode_LOGLIKE_MOD
         };
         public override string KeywordId => "GlobalEffect_LuckyTael";
         public override string KeywordIconId => "BossReward3";
-        public PickUpModel_BossReward3() : base()
+        public PickUpModel_BossReward3()
         {
             int index = (int)LogLikeMod.curchaptergrade;
             if (index > 5)
                 index = 5;
             var effectText = LogueEffectXmlList.Instance.GetEffectInfo(this.KeywordId, LogLikeMod.ModId, MoneyRewardTable[index]);
             this.Desc = effectText.Desc;
+            this.Name = effectText.Name;
+            this.FlaverText = effectText.FlavorText;
+            this.ArtWork = this.KeywordIconId;
         }
 
         public override void OnPickUp()

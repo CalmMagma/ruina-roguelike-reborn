@@ -74,18 +74,33 @@ namespace RogueLike_Mod_Reborn
         {
             base.Awake();
             CryingChildMapManager mapManager = SingletonBehavior<BattleSceneRoot>.Instance.transform.Find("InvitationMap_CryingChild").GetComponent<MapManager>() as CryingChildMapManager;
+
+            this.isActivated = mapManager.isActivated;
+            this.isEnabled = mapManager.isEnabled;
+            this.mapSize = mapManager.mapSize;
+            this.sephirahType = mapManager.sephirahType;
+            this.borderFrame = mapManager.borderFrame;
+            this.backgroundRoot = mapManager.backgroundRoot;
+            this.sephirahColor = mapManager.sephirahColor;
+            this.scratchPrefabs = mapManager.scratchPrefabs;
+            this.wallCratersPrefabs = mapManager.wallCratersPrefabs;
+            this._roots = mapManager._roots;
+            this._obstacleRoot = mapManager._obstacleRoot;
+            this.mapBgm = mapManager.mapBgm;
+            this._obstacles = mapManager._obstacles;
+
             this._burnPhaseSound = Instantiate<AudioClip>(mapManager._burnPhaseSound, this.transform.parent);
             this._angelParticles = new List<GameObject>();
             foreach (var particle in mapManager._angelParticles)
-              this._angelParticles.Add(Instantiate<GameObject>(particle, this.transform.parent));
-            this._sparkParticle = Instantiate(mapManager._sparkParticle, this.transform.parent);
-            this._ashParticle = Instantiate(mapManager._ashParticle, this.transform.parent);
+                this._angelParticles.Add(Instantiate<GameObject>(particle, particle.transform.parent));
+            this._sparkParticle = Instantiate(mapManager._sparkParticle, mapManager._sparkParticle.transform.parent);
+            this._ashParticle = Instantiate(mapManager._ashParticle, mapManager._ashParticle.transform.parent);
             this._areaLaserSound = Instantiate<AudioClip>(mapManager._areaLaserSound, this.transform.parent);
             this._ashPhaseSound = Instantiate<AudioClip>(mapManager._ashPhaseSound, this.transform.parent);
-            this._mapChangeFilter = Instantiate(mapManager._mapChangeFilter, this.transform.parent);
+            this._mapChangeFilter = Instantiate(mapManager._mapChangeFilter, mapManager._mapChangeFilter.transform.parent);
             this._burnSpriteRenderers = new List<SpriteRenderer>();
             foreach (var render in mapManager._burnSpriteRenderers)
-                this._burnSpriteRenderers.Add(Instantiate(render, this.transform.parent));
+                this._burnSpriteRenderers.Add(Instantiate(render, render.transform.parent));
             this._dlgColor = mapManager._dlgColor;
             this._makeOneSound = Instantiate<AudioClip>(mapManager._makeOneSound, this.transform.parent);
             this._seperateSound = Instantiate<AudioClip>(mapManager._seperateSound, this.transform.parent);

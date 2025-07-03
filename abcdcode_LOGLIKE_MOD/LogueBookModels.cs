@@ -439,7 +439,7 @@ namespace abcdcode_LOGLIKE_MOD
             foreach (KeyValuePair<string, SaveData> keyValuePair in save.GetData("playersstatadders").GetDictionarySelf())
             {
                 KeyValuePair<string, SaveData> dic = keyValuePair;
-                UnitDataModel key = LogueBookModels.playerModel.Find((Predicate<UnitDataModel>)(x => x.bookItem.BookId.id.ToString() == dic.Key));
+                UnitDataModel key = LogueBookModels.playerModel.Find(x => x.bookItem.BookId.id.ToString() == dic.Key);
                 foreach (SaveData saveData in dic.Value)
                 {
                     LogStatAdder statAdderBySave = LogStatAdder.CreateStatAdderBySave(saveData);
@@ -483,7 +483,7 @@ namespace abcdcode_LOGLIKE_MOD
                         LogueStageInfo stageInfo = Singleton<StagesXmlList>.Instance.GetStageInfo(ExtensionUtils.LogLoadFromSaveData(data2));
                         if (stageInfo != null)
                         {
-                            if (stageInfo.script != string.Empty)
+                            if (!string.IsNullOrEmpty(stageInfo.script))
                                 LogLikeMod.FindPickUp(stageInfo.script).LoadFromSaveData(stageInfo);
                         }
                         logueStageInfoList.Add(stageInfo);
@@ -1069,7 +1069,7 @@ namespace abcdcode_LOGLIKE_MOD
             model.unitData.bookItem.SetSpeedDiceMax(speedMax);
 
             int speedMin = model.unitData.bookItem.SpeedMin + StatAdderManager.GetSpeedMin(adder);
-            model.unitData.bookItem.ClassInfo.EquipEffect.Speed = speedMin;
+            model.unitData.bookItem.ClassInfo.EquipEffect.SpeedMin = speedMin;
             model.unitData.bookItem.SetSpeedDiceMin(speedMin);
 
             int startPlayPoint = model.unitData.bookItem.GetStartPlayPoint() + StatAdderManager.GetStartPlayPoint(adder);
@@ -1101,7 +1101,7 @@ namespace abcdcode_LOGLIKE_MOD
         public static void AddPlayerStat(UnitDataModel model, LogStatAdder adder)
         {
             LogueBookModels.playersstatadders[model].Add(adder);
-            BookModel bookModel = LogueBookModels.booklist.Find((Predicate<BookModel>)(x => x.owner == model));
+            BookModel bookModel = LogueBookModels.booklist.Find(x => x.owner == model);
             if (bookModel != null)
             {
                 LogueBookModels.EquipNewPage(model, bookModel.ClassInfo, true);

@@ -10,7 +10,6 @@ using UnityEngine;
 
 namespace abcdcode_LOGLIKE_MOD
 {
-    [HideFromItemCatalog]
     public class PickUpModel_BossReward5 : PickUpModelBase
     {
         public override string KeywordId => "GlobalEffect_CupOfGreed";
@@ -33,6 +32,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
 
+        [HideFromItemCatalog]
         public class WildCardEffect : GlobalLogueEffectBase
         {
             public override string KeywordId => "GlobalEffect_CupOfGreed_Effect";

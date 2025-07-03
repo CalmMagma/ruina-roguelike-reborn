@@ -83,7 +83,7 @@ namespace RogueLike_Mod_Reborn
                     switch (choiceid)
                     {
                         case 0:
-                            if (!LogueBookModels.RemainStageList[ChapterGrade.Grade5].Exists((LogueStageInfo x) => x.Id == (new LorId(LogLikeMod.ModId, 150003))))
+                            if (!LogueBookModels.RemainStageList[ChapterGrade.Grade5].Exists((LogueStageInfo x) => x.Id == new LorId(LogLikeMod.ModId, 150003)))
                             {
                                 LogueStageInfo stageInfo = Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.ModId, 150003));
                                 stageInfo.type = abcdcode_LOGLIKE_MOD.StageType.Mystery;
@@ -151,10 +151,10 @@ namespace RogueLike_Mod_Reborn
                     {
                         case 0:
                             DisablePrescript();
-                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 2500031), abcdcode_LOGLIKE_MOD.StageType.Elite);
+                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1500031), abcdcode_LOGLIKE_MOD.StageType.Normal);
                             break;
                         case 1:
-                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 2500032), abcdcode_LOGLIKE_MOD.StageType.Elite);
+                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1500032), abcdcode_LOGLIKE_MOD.StageType.Normal);
                             break;
                         case 2:
                             LosePrescript();

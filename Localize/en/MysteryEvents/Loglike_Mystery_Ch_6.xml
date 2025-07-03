@@ -25,7 +25,7 @@ How about you? Can you get anything out of this crazy board?</Dialog>
 You throw the die, you shout the number. Then...
 It stopped at the exact number!</Dialog>
       <Choice ID="0">
-        <Desc>Get double of the Ahn you bet.</Desc>
+        <Desc>Get 50% of the Ahn you bet.</Desc>
       </Choice>
     </Frame>
 

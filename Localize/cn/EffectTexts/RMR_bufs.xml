@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<BattleEffectTextRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<effectTextList>
+
+    <BattleEffectText ID="RMR_CriticalStrike">
+	  <Name>暴击</Name>
+	  <Desc>这一幕内自身的攻击有{0}%的概率使造成的伤害与混乱伤害+50%</Desc>
+	</BattleEffectText>
+	
+    <BattleEffectText ID="RMR_CriticalStrike_Keyword">
+	  <Name>暴击 X</Name>
+	  <Desc>这一幕内自身的攻击有X%的概率使造成的伤害与混乱伤害+50%</Desc>
+	</BattleEffectText>
+	
+	<BattleEffectText ID="RMR_Shield">
+      <Name>护盾</Name>
+      <Desc>这一幕内使自身下一次受到的伤害-{0}</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_Shield_Keyword">
+      <Name>护盾 X</Name>
+      <Desc>这一幕内使自身下一次受到的伤害-X</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_StaggerShield">
+      <Name>混乱护盾</Name>
+      <Desc>这一幕内使自身下一次受到的混乱伤害-{0}</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_StaggerShield_Keyword">
+      <Name>混乱护盾 X</Name>
+      <Desc>这一幕内使自身下一次受到的混乱伤害-X</Desc>
+    </BattleEffectText>
+	
+	</effectTextList>
+</BattleEffectTextRoot>

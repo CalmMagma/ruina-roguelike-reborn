@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace abcdcode_LOGLIKE_MOD
 {
-    [HideFromItemCatalog]
+    
     public class PickUpModel_BossReward1 : PickUpModelBase
     {
         public override string KeywordId => "GlobalEffect_Bookbinder";
@@ -24,10 +24,10 @@ namespace abcdcode_LOGLIKE_MOD
         public override void OnPickUp()
         {
             base.OnPickUp();
-            Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_BossReward1.BossReward1Effect());
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new PickUpModel_BossReward1.BossReward1Effect());
         }
 
-
+        [HideFromItemCatalog]
         public class BossReward1Effect : GlobalLogueEffectBase
         {
 
