@@ -684,7 +684,7 @@ namespace abcdcode_LOGLIKE_MOD
                 cardId = Singleton<GlobalLogueEffectManager>.Instance.InvenAddCardChange(cardId);
             if (num < 0)
                 return;
-            DiceCardItemModel diceCardItemModel = LogueBookModels.cardlist.Find((Predicate<DiceCardItemModel>)(x => x.GetID() == cardId));
+            DiceCardItemModel diceCardItemModel = LogueBookModels.cardlist.Find(x => x.GetID() == cardId);
             if (diceCardItemModel != null)
             {
                 diceCardItemModel.num += num;

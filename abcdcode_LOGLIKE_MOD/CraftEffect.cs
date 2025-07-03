@@ -62,19 +62,17 @@ namespace abcdcode_LOGLIKE_MOD
         {
             List<DiceCardXmlInfo> cardList = new List<DiceCardXmlInfo>();
             Dictionary<LorId, int> keypageCount = new Dictionary<LorId, int>();
-            foreach (var keypage in LogueBookModels.booklist.FindAll(x => x.ClassInfo.Chapter == (int)grade + 1))
+            foreach (var keypage in LogueBookModels.booklist.FindAll(x => x.ClassInfo.Chapter == (((int)grade) + 1)))
             {
-                if (keypage.GetOnlyCards().Any())
+                foreach (var card in keypage.GetOnlyCards())
                 {
-                    foreach (var card in keypage.GetOnlyCards())
-                    {
-                        if (keypageCount.TryGetValue(card.id, out int num))
-                            keypageCount[card.id.GetOriginalId()] = num + 1;
-                        else 
-                            keypageCount[card.id.GetOriginalId()] = 1;
-                        cardList.Add(card);
-                    }
+                    if (keypageCount.TryGetValue(card.id, out int num))
+                        ++keypageCount[card.id.GetOriginalId()];
+                    else
+                        keypageCount[card.id.GetOriginalId()] = 1;
+                    cardList.Add(card);
                 }
+                
             }
             List<DiceCardXmlInfo> cardList2 = new List<DiceCardXmlInfo>();
             cardList2.AddRange(cardList);
