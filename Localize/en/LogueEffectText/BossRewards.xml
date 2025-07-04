@@ -51,11 +51,17 @@
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
  
-  
    <LogueEffectInfo Id="GlobalEffect_BlastFurnace">
     <Name>Blast Furnace</Name> 
     <Desc>Crafting is now 25% cheaper.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“You're unsure of how such bulky equipment helps you in this situation, but it does.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+    <LogueEffectInfo Id="GlobalEffect_SkaeniteRitual">
+    <Name>Skaenite Ritual</Name> 
+    <Desc>Selected Librarian gains +100% Max. HP and Stagger Resist, +1 Max. Light Capacity and +1 Speed Die. You do not gain an additional Librarian this chapter.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“This hatred, this bile, this anger - these shall be the tools for thy rebellion.”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
  
