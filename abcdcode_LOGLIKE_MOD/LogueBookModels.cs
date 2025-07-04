@@ -1380,9 +1380,12 @@ namespace abcdcode_LOGLIKE_MOD
             do
             {
                 RewardPassiveInfo reward = RewardingModel.GetReward(rewards);
-                if (LogueBookModels.CheckIsCanAdd(reward))
-                    rewardPassiveInfoList.Add(reward);
-                rewards.Remove(reward);
+                if (reward != null)
+                {
+                    if (LogueBookModels.CheckIsCanAdd(reward))
+                        rewardPassiveInfoList.Add(reward);
+                    rewards.Remove(reward);
+                }
             }
             while (rewards.Count != 0 && rewardPassiveInfoList.Count != 3);
             for (int index = 0; index < rewardPassiveInfoList.Count; ++index)

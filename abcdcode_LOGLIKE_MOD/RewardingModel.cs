@@ -352,6 +352,8 @@ namespace abcdcode_LOGLIKE_MOD
             }
             if (Singleton<MysteryManager>.Instance.curMystery == null)
                 SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(true);
+            if (RewardingModel.rewardFlag == RewardFlag.EmtoionChoose)
+                return false;
             RewardingModel.StartPickReward();
             return false;
         }
