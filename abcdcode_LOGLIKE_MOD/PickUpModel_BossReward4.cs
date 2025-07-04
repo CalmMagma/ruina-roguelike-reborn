@@ -10,12 +10,12 @@ namespace abcdcode_LOGLIKE_MOD
     [HideFromItemCatalog]
     public class PickUpModel_BossReward4 : PickUpModelBase
     {
-        public PickUpModel_BossReward4()
+        public override string KeywordId => "GlobalEffect_SkaeniteRitual";
+        public override string KeywordIconId => "BossReward4";
+
+        public PickUpModel_BossReward4() : base()
         {
-            this.Name = TextDataModel.GetText("BossReward4Name");
-            this.Desc = TextDataModel.GetText("BossReward4Desc");
-            this.FlaverText = TextDataModel.GetText("BossRewardFlaverText");
-            this.ArtWork = "BossReward4";
+
         }
 
         public override void OnPickUp()
@@ -37,6 +37,9 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 this.maxbreakpercent = 100;
                 this.maxhppercent = 100;
+                this.speeddicenum = 1;
+                this.maxplaypoint = 1;
+                this.startplaypoint = 1;
             }
         }
     }
