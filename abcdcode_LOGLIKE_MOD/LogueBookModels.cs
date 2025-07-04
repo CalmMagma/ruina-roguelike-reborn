@@ -1374,7 +1374,8 @@ namespace abcdcode_LOGLIKE_MOD
         public static List<EmotionCardXmlInfo> GetPassiveRewards(List<RewardPassiveInfo> list)
         {
             List<RewardPassiveInfo> rewardPassiveInfoList = new List<RewardPassiveInfo>();
-            List<RewardPassiveInfo> rewards = new List<RewardPassiveInfo>(list);
+            List<RewardPassiveInfo> rewards = new List<RewardPassiveInfo>();
+            if (list != null) rewards.AddRange(list);
             List<EmotionCardXmlInfo> passiveRewards = new List<EmotionCardXmlInfo>();
             do
             {

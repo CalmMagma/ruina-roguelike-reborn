@@ -3,7 +3,7 @@
   <Version>1.1</Version>
 <Card ID="2000001">
     <Name>고기</Name>
-    <Artwork>피에르퀘스트고기</Artwork>
+    <Artwork>피에르퀘스트고기.png</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Instance" Cost="0" />
     <Script>Ch2EventMeatDesc</Script>
@@ -15,7 +15,7 @@
 
 <Card ID="2000002">
     <Name>보존식</Name>
-    <Artwork>피에르퀘스트고기</Artwork>
+    <Artwork>피에르퀘스트고기.png</Artwork>
     <Rarity>Uncommon</Rarity>
     <Option>ExhaustOnUse</Option>
     <Spec Range="Instance" Cost="1" />

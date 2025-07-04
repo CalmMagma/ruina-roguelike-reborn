@@ -18,7 +18,7 @@
 
   <Card ID="8582008">
     <Name>발화</Name>
-    <Artwork>StigmaBurn</Artwork>
+    <Artwork>StigmaBurn.png</Artwork>
     <Rarity>Uncommon</Rarity>
     <Option>ExhaustOnUse</Option>
     <Spec Range="Instance" Cost="0" />

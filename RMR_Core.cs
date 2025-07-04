@@ -85,6 +85,7 @@ namespace RogueLike_Mod_Reborn
             LogueEffectXmlList.Instance.Init(TextDataModel.CurrentLanguage);
             LoadSatelliteBattleTexts(TextDataModel.CurrentLanguage);
             LoadSatelliteBattleDialog(TextDataModel.CurrentLanguage);
+            LoadVanillaCardArt();
             RogueMysteryXmlList.Instance.Init(TextDataModel.CurrentLanguage);
             SceneManager.sceneLoaded += FindGamemodes;
             CurrentGamemode = new RoguelikeGamemode_RMR_Default();
@@ -260,6 +261,44 @@ namespace RogueLike_Mod_Reborn
                 {
                     new BinaryFormatter().Serialize(fileStream, data.GetSerializedData());
                 }
+            }
+        }
+
+        public static void LoadVanillaCardArt()
+        {
+            List<ArtworkCustomizeData> list = Singleton<CustomizingCardArtworkLoader>.Instance.GetWorkshopArtworkData("LoR.StartUp.LocalizationManager");
+            if (list == null) // check for Localization Manager vanilla page loading
+            {
+                Singleton<AssetBundleManagerRemake>.Instance.LoadCardAssetBundle();
+                Sprite[] array = Singleton<AssetBundleManagerRemake>.Instance._cardAssetBundle.LoadAllAssets<Sprite>();
+                list = Singleton<CustomizingCardArtworkLoader>.Instance.GetWorkshopArtworkData(RMRCore.packageId);
+                foreach (Sprite sprite in array)
+                {
+                    list.Add(new ArtworkCustomizeData
+                    {
+                        name = sprite.name,
+                        _sprite = sprite
+                    });
+                }
+                Singleton<CustomizingCardArtworkLoader>.Instance.AddArtworkData(RMRCore.packageId, list);
+            }
+            else
+            {
+                var listLog = Singleton<CustomizingCardArtworkLoader>.Instance.GetWorkshopArtworkData(RMRCore.packageId);
+                listLog.AddRange(list);
+                Singleton<CustomizingCardArtworkLoader>.Instance.AddArtworkData(RMRCore.packageId, listLog);
+            }
+            foreach (ModContentInfo modContentInfo in LogLikeMod.GetLogMods())
+            {
+                string uniqueId = modContentInfo.invInfo.workshopInfo.uniqueId;
+                List<ArtworkCustomizeData> list2 = Singleton<CustomizingCardArtworkLoader>.Instance.GetWorkshopArtworkData(uniqueId);
+                if (list2 == null)
+                {
+                    list2 = new List<ArtworkCustomizeData>();
+                    
+                }
+                list2.AddRange(list);
+                Singleton<CustomizingCardArtworkLoader>.Instance.AddArtworkData(uniqueId, list2);
             }
         }
 
@@ -2435,15 +2474,15 @@ namespace RogueLike_Mod_Reborn
         {
             try
             {
-                if (RMRCore.ClassIds[item.GetType().Assembly.FullName] != RMRCore.packageId)
+                if (RMRCore.ClassIds[item.GetType().Assembly.FullName] == RMRCore.packageId)
                 {
-                    return LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[item.GetType().Assembly.FullName], item.ArtWork)];
-                }
+                    return LogLikeMod.ArtWorks[item.ArtWork]; 
+                } 
                 else if (string.IsNullOrEmpty(item.ArtWork) && item.id != null)
                 {
                     return RewardPassivesList.Instance.GetPassiveInfo(item.id).Artwork;
                 }
-                else return LogLikeMod.ArtWorks[item.ArtWork];
+                else return LogLikeMod.ModdedArtWorks[(RMRCore.ClassIds[item.GetType().Assembly.FullName], item.ArtWork)];
             }
             catch 
             { 

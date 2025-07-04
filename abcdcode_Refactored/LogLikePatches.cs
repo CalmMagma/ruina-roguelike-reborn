@@ -1960,12 +1960,6 @@ namespace abcdcode_LOGLIKE_MOD
             return false;
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(LocalizedTextLoader), nameof(LocalizedTextLoader.LoadOthers))]
-        public static void LocalizedTextLoader_LoadOthers(string language)
-        {
-            LogLikeMod.LoadTextData(language);
-        }
-
         [HarmonyPrefix, HarmonyPatch(typeof(BattleEmotionRewardInfoUI), nameof(BattleEmotionRewardInfoUI.SetData))]
         public static bool BattleEmotionRewardInfoUI_SetData(BattleEmotionRewardInfoUI __instance)
         {
@@ -2085,6 +2079,18 @@ namespace abcdcode_LOGLIKE_MOD
         {
             __state = detail;
             return true;
+        }
+
+        // Patch to make upgraded combat pages consult their original PackageIds for combat page art
+        [HarmonyPrefix, HarmonyPatch(typeof(CustomizingCardArtworkLoader), nameof(CustomizingCardArtworkLoader.GetSpecificArtworkSprite))]
+        public static void CustomizingCardArtworkLoader_GetSpecificArtworkSprite(
+          ref string id,
+          string name)
+        {
+            if (!LogLikeMod.CheckStage())
+                return;
+            if (id.Contains(LogCardUpgradeManager.UpgradeKeyword))
+                id = UpgradeMetadata.UnpackPidUnsafe(id).actualPid;
         }
 
         #endregion
@@ -2395,15 +2401,10 @@ namespace abcdcode_LOGLIKE_MOD
             __result = PassiveAbility_MoneyCheck.GetMoney().ToString();
         }
 
-        [HarmonyPostfix, HarmonyPatch(typeof(CustomizingCardArtworkLoader), nameof(CustomizingCardArtworkLoader.GetSpecificArtworkSprite))]
-        public static void CustomizingCardArtworkLoader_GetSpecificArtworkSprite(
-          ref Sprite __result,
-          string id,
-          string name)
+        [HarmonyPostfix, HarmonyPatch(typeof(LocalizedTextLoader), nameof(LocalizedTextLoader.LoadOthers))]
+        public static void LocalizedTextLoader_LoadOthers(string language)
         {
-            if (!LogLikeMod.CheckStage() || !LogLikeMod.ArtWorks.ContainsKey(name))
-                return;
-            __result = LogLikeMod.ArtWorks[name];
+            LogLikeMod.LoadTextData(language);
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(UIInvitationRightMainPanel), nameof(UIInvitationRightMainPanel.OpenInit))]
@@ -2545,6 +2546,7 @@ namespace abcdcode_LOGLIKE_MOD
                 return;
             LogLikeMod.GetFieldValue<Image>((object)__instance, "_artwork").sprite = LogLikeMod.ArtWorks[__instance.Card.Artwork];
         }
+
 
         /// <summary>
         /// Patch responsible for equipping Key Pages(??)

@@ -31,7 +31,7 @@
 
   <Card ID="706108">
     <Name>로직 아틀리에</Name>
-    <Artwork>LogicSpecial</Artwork>
+    <Artwork>LogicSpecial.png</Artwork>
     <Rarity>Unique</Rarity>
     <Spec Range="Far" Cost="2" />
     <Script></Script>
