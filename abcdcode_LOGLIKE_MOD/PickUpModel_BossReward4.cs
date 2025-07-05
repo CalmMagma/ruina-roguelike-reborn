@@ -21,14 +21,37 @@ namespace abcdcode_LOGLIKE_MOD
         public override void OnPickUp()
         {
             base.OnPickUp();
-            LogLikeMod.AddPlayer = false;
+            GlobalLogueEffectManager.Instance.AddEffects(new RMRHidden_PlayerRemover());
         }
 
         public override void OnPickUp(BattleUnitModel model)
         {
             base.OnPickUp(model);
             LogueBookModels.AddPlayerStat(model.UnitData, (LogStatAdder)new PickUpModel_BossReward4.BossStatAdder());
-            LogLikeMod.AddPlayer = false;
+        }
+
+        public class RMRHidden_PlayerRemover : GlobalLogueEffectBase
+        {
+            bool removed = false;
+
+            public override void AfterClearBossWave()
+            {
+                if (removed)
+                    return;
+                LogLikeMod.AddPlayer = false;
+                this.Destroy();
+                removed = true;
+            }
+
+            public override void OnStartBattleAfter()
+            {
+                base.OnStartBattleAfter();
+                foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player).FindAll(x => LogueBookModels.playersstatadders[x.UnitData.unitData].Find(y => y is BossStatAdder) != null))
+                {
+                    unit.allyCardDetail.DrawCards(1);
+                }
+            }
+
         }
 
         public class BossStatAdder : LogStatAdder

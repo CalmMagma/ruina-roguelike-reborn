@@ -222,6 +222,7 @@ namespace abcdcode_LOGLIKE_MOD
                 if (LogLikeMod.curstagetype == StageType.Boss)
                 {
                     RMRCore.CurrentGamemode.OnClearBossWave();
+                    GlobalLogueEffectManager.Instance.AfterClearBossWave();
                 }
                 else
                     ++LogLikeMod.curChStageStep;

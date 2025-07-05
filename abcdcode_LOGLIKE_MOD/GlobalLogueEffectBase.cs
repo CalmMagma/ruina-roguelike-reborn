@@ -463,5 +463,13 @@ namespace abcdcode_LOGLIKE_MOD
         public virtual void OnCrit(BattleUnitModel critter, BattleUnitModel target)
         {
         }
+
+        /// <summary>
+        /// [RMR] Runs immediately after <see cref="RMRCore.CurrentGamemode.OnClearBossWave"/>.
+        /// </summary>
+        public virtual void AfterClearBossWave()
+        {
+
+        }
     }
 }

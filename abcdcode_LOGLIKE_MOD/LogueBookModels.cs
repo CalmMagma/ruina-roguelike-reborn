@@ -988,7 +988,7 @@ namespace abcdcode_LOGLIKE_MOD
             BookXmlInfo classInfo = unitData.bookItem.ClassInfo;
             classInfo._bookIcon = page._bookIcon;
             classInfo.Chapter = page.Chapter;
-            classInfo.CharacterSkin = new List<string>((IEnumerable<string>)page.CharacterSkin);
+            classInfo.CharacterSkin = new List<string>(page.CharacterSkin);
             classInfo.skinType = page.skinType;
             classInfo.EquipEffect = LogueBookModels.CopyEquipEffect(page.EquipEffect);
             classInfo.EquipEffect.PassiveList = new List<LorId>((IEnumerable<LorId>)classInfo.EquipEffect.PassiveList);
@@ -1002,6 +1002,7 @@ namespace abcdcode_LOGLIKE_MOD
             model.unitData.bookItem.SetOriginalSpeed();
             model.unitData.bookItem.SetOriginalResists();
             model.unitData.bookItem.SetOriginalPlayPoint();
+            model.unitData.bookItem.SetOriginalSpeedNum();
             if (LogueBookModels.playersstatadders[model.unitData].Count > 0)
                 LogueBookModels.ApplyPlayerStat(model, LogueBookModels.playersstatadders[model.unitData]);
             model.unitData.bookItem.SetOriginalCharacterName();
@@ -1077,7 +1078,9 @@ namespace abcdcode_LOGLIKE_MOD
             model.unitData.bookItem.SetStartPlayPoint(startPlayPoint);
 
             int maxPlayPoint = model.unitData.bookItem.ClassInfo.EquipEffect.MaxPlayPoint + StatAdderManager.GetMaxPlayPoint(adder);
-            model.unitData.bookItem.SetStartPlayPoint(maxPlayPoint);
+            model.unitData.bookItem.ClassInfo.EquipEffect.MaxPlayPoint = maxPlayPoint;
+            model.unitData.bookItem.SetMaxPlayPoint(maxPlayPoint);
+
 
             foreach (LogStatAdder logStatAdder in adder)
                 model.unitData.bookItem.ClassInfo.RangeType = logStatAdder.GetRangeType(model.unitData.bookItem.ClassInfo.RangeType);
@@ -1510,6 +1513,7 @@ namespace abcdcode_LOGLIKE_MOD
                     speedmin += logStatAdder.speedmin;
                 return speedmin;
             }
+
         }
 
         public enum StageFlag

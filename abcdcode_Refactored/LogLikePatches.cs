@@ -664,7 +664,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     Button button = ModdingUtils.CreateButton(self.selectablePanel.transform.parent, "AbCardSelection_Skip", new Vector2(1f, 1f), new Vector2(650f, 385f));
                     Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
-                    buttonClickedEvent.AddListener((UnityAction)(() =>
+                    buttonClickedEvent.AddListener(() =>
                     {
                         if (RewardingModel.rewardFlag == RewardingModel.RewardFlag.CardReward)
                         {
@@ -678,10 +678,10 @@ namespace abcdcode_LOGLIKE_MOD
                             LogLikeMod.rewards_passive.RemoveAt(0);
                         self.StartCoroutine((IEnumerator)typeof(LevelUpUI).GetMethod("DisableRoutine", AccessTools.all).Invoke((object)self, (object[])null));
                         self.StartCoroutine((IEnumerator)typeof(LevelUpUI).GetMethod("TranslateRoutine", AccessTools.all).Invoke((object)self, new object[1]
-            {
-            (object) true
+                    {
+                    (object) true
                       }));
-                    }));
+                    });
                     button.onClick = buttonClickedEvent;
                     LogLikeMod.skipPanel = button;
                     LogLikeMod.skipPanelText = ModdingUtils.CreateText_TMP(button.transform, new Vector2(-10f, 0.0f), (int)textMeshProUgui2.fontSize, new Vector2(0.0f, 0.0f), new Vector2(1f, 1f), new Vector2(0.0f, 0.0f), TextAlignmentOptions.Midline, textMeshProUgui2.color, textMeshProUgui2.font);

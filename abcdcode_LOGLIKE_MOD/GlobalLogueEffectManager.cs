@@ -502,6 +502,12 @@ namespace abcdcode_LOGLIKE_MOD
                 effect.OnCrit(critter, target);
         }
 
+        public void AfterClearBossWave()
+        {
+            foreach (GlobalLogueEffectBase effect in this.effects)
+                effect.AfterClearBossWave();
+        }
+
         public class LogueEffectOnOff : MonoBehaviour
         {
             public float curRotValue;

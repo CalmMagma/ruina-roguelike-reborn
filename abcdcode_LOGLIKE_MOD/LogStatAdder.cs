@@ -38,7 +38,7 @@ namespace abcdcode_LOGLIKE_MOD
             saveData.AddData("speeddicenum", speeddicenum);
             saveData.AddData("speedmin", speedmin);
             saveData.AddData("speedmax", speedmax);
-           
+
             saveData.AddData("TypeName", new SaveData(this.GetType().Name));
             return saveData;
         }

@@ -305,23 +305,23 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else
             {
-                if (LogLikeMod.rewards.Count == 0 && LogLikeMod.rewards_passive.Count == 0 && LogLikeMod.nextlist.Count == 0)
+                if (LogLikeMod.rewards.FindAll(x => x != null).Count == 0 && LogLikeMod.rewards_passive.FindAll(x => x != null).Count == 0 && LogLikeMod.nextlist.Count == 0)
                     return;
-                if (LogLikeMod.rewards.Count > 0)
+                if (LogLikeMod.rewards.FindAll(x => x != null).Count > 0)
                 {
                     Singleton<MysteryManager>.Instance.StartMystery(new LorId(LogLikeMod.ModId, -4));
                     // start Combat Page card reward event (MysteryModel_CardReward)
                     SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
                 }
-                else if (LogLikeMod.rewards_passive.Count > 0)
+                else if (LogLikeMod.rewards_passive.FindAll(x => x != null).Count > 0)
                 {
-                    List<EmotionCardXmlInfo> passiveRewardsInlist = LogueBookModels.GetPassiveRewards_Inlist(LogLikeMod.rewards_passive[0].rewards);
+                    List<EmotionCardXmlInfo> passiveRewardsInlist = LogueBookModels.GetPassiveRewards_Inlist(LogLikeMod.rewards_passive.FindAll(x => x !=null)[0].rewards);
                     RewardingModel.rewardFlag = RewardingModel.RewardFlag.PassiveReward;
                     SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.Init(1, passiveRewardsInlist);
                 }
                 else
                 {
-                    if (LogLikeMod.nextlist.Count <= 0)
+                    if (LogLikeMod.nextlist.FindAll(x => x != null).Count <= 0)
                         return;
                     List<EmotionCardXmlInfo> nextlist = LogLikeMod.nextlist;
                     RewardingModel.rewardFlag = RewardingModel.RewardFlag.NextStageChoose;
@@ -343,7 +343,7 @@ namespace abcdcode_LOGLIKE_MOD
             Singleton<GlobalLogueEffectManager>.Instance.RewardClearStageInterrupt();
             if (Singleton<MysteryManager>.Instance.curMystery != null || SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.IsEnabled)
                 return false;
-            if (LogLikeMod.rewards.Count == 0 && LogLikeMod.rewards_passive.Count == 0 && LogLikeMod.nextlist.Count == 0)
+            if (LogLikeMod.rewards.FindAll(x => x != null).Count == 0 && LogLikeMod.rewards_passive.FindAll(x => x != null).Count == 0 && LogLikeMod.nextlist.FindAll(x => x != null).Count == 0)
                 return true;
             if (BattleObjectManager.instance.GetAliveListWithAvailable(Faction.Player).Count == 0)
             {
@@ -352,6 +352,39 @@ namespace abcdcode_LOGLIKE_MOD
             }
             if (Singleton<MysteryManager>.Instance.curMystery == null)
                 SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(true);
+            Debug.Log("REWARDS");
+            foreach(var reward in LogLikeMod.rewards)
+            {
+                if (reward == null)
+                    Debug.Log("NULL REWARD!!");
+                else
+                    Debug.Log(reward.id.packageId + " --- " + reward.id.id.ToString());
+            }
+            Debug.Log("REWARDS PASSIVE");
+            for (int i = 0; i < LogLikeMod.rewards_passive.Count; i++)
+            {
+                if (LogLikeMod.rewards_passive[i] == null)
+                    Debug.Log("NULL REWARD LIST!!");
+                else
+                {
+                    Debug.Log($"REWARDS PASSIVE LIST {i}");
+                    foreach (var reward in LogLikeMod.rewards_passive[i].rewards)
+                    {
+                        if (reward == null)
+                            Debug.Log("NULL REWARD!!");
+                        else
+                            Debug.Log(reward.id.packageId + " --- " + reward.id.id.ToString());
+                    }
+                }
+            }
+            Debug.Log("NEXTLIST");
+            foreach (var reward in LogLikeMod.nextlist)
+            {
+                if (reward == null)
+                    Debug.Log("NULL REWARD!!");
+                else
+                    Debug.Log(reward.Script[0] + " --- " + reward.id.ToString());
+            }
             RewardingModel.StartPickReward();
             return false;
         }
