@@ -112,6 +112,11 @@ namespace RogueLike_Mod_Reborn
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_BleedingSpleen());
         }
 
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
+        }
+
         public override string KeywordIconId => "RMR_BleedingSpleen";
 
         public override string KeywordId => "RMR_BleedingSpleen";
@@ -130,6 +135,11 @@ namespace RogueLike_Mod_Reborn
         public override void OnPickUpShop(ShopGoods good)
         {
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_CorrodedChains());
+        }
+
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
         }
 
         public override string KeywordIconId => "RMR_CorrodedChains";

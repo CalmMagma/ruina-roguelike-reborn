@@ -58,6 +58,11 @@ namespace abcdcode_LOGLIKE_MOD
                 return saveData;
             }
 
+            public override bool CanDupliacte()
+            {
+                return true;
+            }
+
             public override void AddedNew()
             {
                 ++this.stack;

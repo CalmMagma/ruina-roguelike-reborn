@@ -59,7 +59,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public override string GetEffectDesc()
             {
-                LogueEffectXmlInfo info = LogueEffectXmlList.Instance.GetEffectInfo(this.KeywordId, LogLikeMod.ModId, PickUpModel_BossReward5_1.card.Name);
+                LogueEffectXmlInfo info = LogueEffectXmlList.Instance.GetEffectInfo(this.KeywordId, LogLikeMod.ModId, PickUpModel_BossReward5_1.card == null ? "X" : PickUpModel_BossReward5_1.card.Name);
                 return info.Desc;
             }
 
@@ -67,7 +67,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 PickUpModel_BossReward5_1.card = model.ClassInfo;
                 ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 1000051));
-                Singleton<MysteryManager>.Instance.EndMystery((MysteryBase)mystery);
+                Singleton<MysteryManager>.Instance.EndMystery(mystery);
             }
         }
     }

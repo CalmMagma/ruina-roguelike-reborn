@@ -22,6 +22,11 @@ namespace abcdcode_LOGLIKE_MOD
             this.id = new LorId(LogLikeMod.ModId, 90041);
         }
 
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
+        }
+
         public override void OnPickUp(BattleUnitModel model) => base.OnPickUp(model);
 
         public override void OnPickUpShop(ShopGoods good)

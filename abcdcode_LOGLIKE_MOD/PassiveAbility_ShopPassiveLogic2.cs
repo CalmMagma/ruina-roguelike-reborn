@@ -42,8 +42,8 @@ namespace abcdcode_LOGLIKE_MOD
             public override void AfterAction()
             {
                 base.AfterAction();
-                BattleUnitModel target = this.owner.currentDiceAction.target;
-                if (target == null)
+                BattleUnitModel target = this.owner?.currentDiceAction?.target;
+                if (target == null || target?.currentDiceAction == null)
                     return;
                 Queue<BattleDiceBehavior> battleDiceBehaviorQueue = new Queue<BattleDiceBehavior>(target.currentDiceAction.cardBehaviorQueue);
                 List<BattleDiceBehavior> behaviourList = new List<BattleDiceBehavior>();

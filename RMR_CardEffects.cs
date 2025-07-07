@@ -132,13 +132,7 @@ namespace RogueLike_Mod_Reborn
                 else
                 {
                     List<DiceBehaviour> dicelist = curCard.card.XmlData.DiceBehaviourList;
-                    foreach (DiceBehaviour die in dicelist)
-                    {
-                        if (die.Script == "RMR_Shivhidden")
-                        {
-                            dicelist.Remove(die);
-                        }
-                    }
+                    dicelist.RemoveAll(x => x.Script == "RMR_Shivhidden");
                     curCard.card.XmlData.DiceBehaviourList = dicelist;
                     if (curCard.card._originalXmlData == null)
                         curCard.card.CopySelf();

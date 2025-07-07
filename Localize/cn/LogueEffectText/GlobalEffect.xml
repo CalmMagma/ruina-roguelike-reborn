@@ -159,8 +159,9 @@
 
   <LogueEffectInfo Id="RMR_BleedingSpleen">
     <Name>脾出血</Name> 
-    <Desc>All allies now inflict 2 Bleed upon a successful critical strike. Enemies with at least 10 Bleed explode on death, dealing (Bleed/2) damage to all other enemies.</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“A strange artifical organ which seems to contain immense anti-coagulant properties.”&lt;/color&gt;</FlavorText>
+    <Desc>所有友方角色暴击命中目标时下一幕对目标施加2层“流血”
+拥有不少于10层“流血”的敌方角色死亡时将对所有其他敌方角色造成其“流血”层数一半的伤害</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“一种奇怪的人造器官，似乎含有巨量的抗凝剂。”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
   
