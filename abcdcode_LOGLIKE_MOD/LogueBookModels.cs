@@ -6,6 +6,7 @@
 
 using GameSave;
 using HarmonyLib;
+using HyperCard;
 using LOR_DiceSystem;
 using LOR_XML;
 using Mono.Cecil.Cil;
@@ -844,8 +845,8 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.EmotionSelectDic[3] = 0;
             LogLikeMod.AddPlayer = false;
             LogLikeMod.RecoverPlayers = false;
-            LogLikeMod.CreateShopEquipPages();
             LogLikeMod.LoadTextData(TextDataModel.CurrentLanguage);
+            LogLikeMod.CreateShopEquipPages();
             Singleton<LogCardUpgradeManager>.Instance.ReLoadCurAllUpgradeCard();
             LogueBookModels.nextinstanceid = 0;
             LogLikeMod.ResetUIs();
@@ -991,7 +992,7 @@ namespace abcdcode_LOGLIKE_MOD
             classInfo.CharacterSkin = new List<string>(page.CharacterSkin);
             classInfo.skinType = page.skinType;
             classInfo.EquipEffect = LogueBookModels.CopyEquipEffect(page.EquipEffect);
-            classInfo.EquipEffect.PassiveList = new List<LorId>((IEnumerable<LorId>)classInfo.EquipEffect.PassiveList);
+            classInfo.EquipEffect.PassiveList = new List<LorId>(classInfo.EquipEffect.PassiveList);
             for (int index = 0; index < LogueBookModels.playersperpassives[unitData].Count; ++index)
                 classInfo.EquipEffect.PassiveList.Insert(index, LogueBookModels.playersperpassives[unitData][index]);
             if (!keepSuc)
@@ -1362,14 +1363,25 @@ namespace abcdcode_LOGLIKE_MOD
             List<LogueStageInfo> logueStageInfoList = new List<LogueStageInfo>(collection);
             if (logueStageInfoList.FindAll(x => x.type == StageType.Normal).Count > 1 || logueStageInfoList.Count > 5)
                 logueStageInfoList.Remove(logueStageInfoList.Find(x => x.type == StageType.Boss));
-            for (int index = 0; index < 3; ++index)
+            for (int index = 0; index < 3; )
             {
                 LogueStageInfo info = logueStageInfoList[UnityEngine.Random.Range(0, logueStageInfoList.Count)];
-                nextList.Add(LogLikeMod.GetRegisteredPickUpXml(info));
-                LogueBookModels.CreateStageDesc(info);
+                var thing = LogLikeMod.GetRegisteredPickUpXml(info);
                 logueStageInfoList.Remove(info);
-                if (logueStageInfoList.Count == 0)
-                    break;
+                var thing2 = Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Stage(thing), thing.id));
+                var pid = LogLikeMod.GetPickUpXmlWorkShopId_Stage(thing);
+                if (thing != null && thing2 != null)
+                {
+                    nextList.Add(thing);
+                    LogueBookModels.CreateStageDesc(info);
+                    if (logueStageInfoList.Count == 0)
+                        break;
+                    index++;
+                } else
+                {
+                    Debug.Log("NULL STAGE!!! WATCH THE FUCK OUT!!: " + info.Id.packageId + " --- " + info.Id.id.ToString());
+                    Debug.Log(pid == null ? "PID IS NULL" : "PID IS: " + pid);
+                }
             }
             return nextList;
         }

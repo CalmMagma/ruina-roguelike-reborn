@@ -12,6 +12,26 @@
 	  <Desc>这一幕内自身的攻击有X%的概率使造成的伤害与混乱伤害+50%</Desc>
 	</BattleEffectText>
 	
+	<BattleEffectText ID="RMR_BurnProtection">
+      <Name>烧伤守护</Name>
+      <Desc>这一幕中受到的“烧伤”伤害-{0}</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_BurnProtection_Keyword">
+      <Name>烧伤守护 X</Name>
+      <Desc>这一幕中受到的“烧伤”伤害-X</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_BleedProtection">
+      <Name>流血守护</Name>
+      <Desc>这一幕中受到的“流血”伤害-{0}</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_BleedProtection_Keyword">
+      <Name>流血守护 X</Name>
+      <Desc>这一幕中受到的“流血”伤害-{0}</Desc>
+    </BattleEffectText>
+	
 	<BattleEffectText ID="RMR_Shield">
       <Name>护盾</Name>
       <Desc>这一幕内使自身下一次受到的伤害-{0}</Desc>
@@ -30,6 +50,39 @@
     <BattleEffectText ID="RMR_StaggerShield_Keyword">
       <Name>混乱护盾 X</Name>
       <Desc>这一幕内使自身下一次受到的混乱伤害-X</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_ClashPower">
+      <Name>拼点威力提升</Name>
+      <Desc>这一幕内所有骰子拼点时威力+{0}但造成的伤害、混乱伤害与反震伤害-{0}</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_ClashPowerDown">
+      <Name>拼点威力下降</Name>
+      <Desc>这一幕内所有骰子拼点时威力-{0}但造成的伤害、混乱伤害与反震伤害+{0}</Desc>
+    </BattleEffectText>
+
+    <BattleEffectText ID="RMR_ClashPower_Keyword">
+      <Name>拼点威力 X</Name>
+      <Desc>这一幕内所有骰子拼点时威力+X但造成的伤害、混乱伤害与反震伤害-X</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_Prescriptbuf">
+      <Name>指令：“专注于你面前之人”</Name>
+      <Desc>自身连续对1名目标使用战斗书页时造成的伤害与混乱伤害+10%(至多30%)
+若对其他目标使用战斗书页则该次行动中造成的伤害与混乱伤害-50%</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_Zeal_Keyword">
+      <Name>狂热</Name>
+      <Desc>开启舞台时复制本书页并将其置入所有其他友方角色的卡组中</Desc>
+    </BattleEffectText>
+	
+	
+	<!-- base stagger fragile is not localized so this is here to give it localization in case other mods do not do it -->
+	<BattleEffectText ID="Vulnerable_break">
+      <Name>混乱易损</Name>
+      <Desc>这一幕中被击中时所受混乱伤害+{0}</Desc>
     </BattleEffectText>
 	
 	</effectTextList>

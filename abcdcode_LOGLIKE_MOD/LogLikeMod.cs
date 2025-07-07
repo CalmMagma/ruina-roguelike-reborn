@@ -70,7 +70,7 @@ namespace abcdcode_LOGLIKE_MOD
         /// </summary>
         public static int curChRemainCount => LogueBookModels.RemainStageList[LogLikeMod.curchaptergrade].Count;
         /// <summary>
-        /// Current mystery title- used by Discord Rich Presence.
+        /// The currently running mystery's title- used by Discord Rich Presence.
         /// </summary>
         public static string curMysteryTitle => Singleton<MysteryManager>.Instance.curMystery.FrameObj["Title"].GetComponent<TextMeshProUGUI>().GetParsedText();
         public static int NormalRewardCool = 0;
@@ -274,7 +274,6 @@ namespace abcdcode_LOGLIKE_MOD
         /// <summary>
         /// Shorthand for setting private fields.
         /// </summary>
-        /// <typeparam name="T">The type of the field you wish you get.</typeparam>
         /// <param name="obj">The object that has the field.</param>
         /// <param name="name">The name of the field.</param>
         /// <param name="value">The value to override the field with.</param>
@@ -406,22 +405,22 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static string GetPickUpXmlWorkShopId_Stage(EmotionCardXmlInfo info)
         {
-            return LogLikeMod.PickUpXml_Dummy_Stage == null ? (string)null : LogLikeMod.PickUpXml_Dummy_Stage.ToList<KeyValuePair<string, List<EmotionCardXmlInfo>>>().Find((Predicate<KeyValuePair<string, List<EmotionCardXmlInfo>>>)(x => x.Value.Find((Predicate<EmotionCardXmlInfo>)(y => y == info)) != null)).Key;
+            return LogLikeMod.PickUpXml_Dummy_Stage == null ? null : LogLikeMod.PickUpXml_Dummy_Stage.ToList().Find(x => x.Value.Find(y => y == info) != null).Key;
         }
 
         public static string GetPickUpXmlWorkShopId_Passive(EmotionCardXmlInfo info)
         {
-            return LogLikeMod.PickUpXml_Dummy_Passive == null ? (string)null : LogLikeMod.PickUpXml_Dummy_Passive.ToList<KeyValuePair<string, List<EmotionCardXmlInfo>>>().Find((Predicate<KeyValuePair<string, List<EmotionCardXmlInfo>>>)(x => x.Value.Find((Predicate<EmotionCardXmlInfo>)(y => y == info)) != null)).Key;
+            return LogLikeMod.PickUpXml_Dummy_Passive == null ? null : LogLikeMod.PickUpXml_Dummy_Passive.ToList().Find(x => x.Value.Find(y => y == info) != null).Key;
         }
 
         public static EmotionCardXmlInfo GetRegisteredPickUpXml(LogueStageInfo info)
         {
-            return LogLikeMod.PickUpXml_Dummy_Stage == null ? (EmotionCardXmlInfo)null : LogLikeMod.PickUpXml_Dummy_Stage[info.workshopid].Find((Predicate<EmotionCardXmlInfo>)(x => x.id == info.stageid));
+            return LogLikeMod.PickUpXml_Dummy_Stage == null ? null : LogLikeMod.PickUpXml_Dummy_Stage[info.workshopid].Find(x => x.id == info.stageid);
         }
 
         public static EmotionCardXmlInfo GetRegisteredPickUpXml(RewardPassiveInfo info)
         {
-            return LogLikeMod.PickUpXml_Dummy_Passive == null ? (EmotionCardXmlInfo)null : LogLikeMod.PickUpXml_Dummy_Passive[info.workshopID].Find((Predicate<EmotionCardXmlInfo>)(x => x.id == info.passiveid));
+            return LogLikeMod.PickUpXml_Dummy_Passive == null ? null : LogLikeMod.PickUpXml_Dummy_Passive[info.workshopID].Find(x => x.id == info.passiveid);
         }
 
         public static void RegisterPickUpXml(LogueStageInfo info)
@@ -1697,15 +1696,18 @@ namespace abcdcode_LOGLIKE_MOD
             return pickUp is ShopPickUpModel && (pickUp as ShopPickUpModel).IsEquipReward();
         }
 
+        /// <summary>
+        /// Method that creates all the passive key pages automatically
+        /// </summary>
         public static void CreateShopEquipPages()
         {
             if (LogLikeMod.CreatedShopEquipPages)
                 return;
-            List<RewardPassivesInfo> all = Singleton<RewardPassivesList>.Instance.infos.FindAll((Predicate<RewardPassivesInfo>)(x => x.rewardtype == PassiveRewardListType.Shop));
+            List<RewardPassivesInfo> all = Singleton<RewardPassivesList>.Instance.infos.FindAll(x => x.rewardtype == PassiveRewardListType.Shop);
             List<RewardPassiveInfo> rewardPassiveInfoList = new List<RewardPassiveInfo>();
             Dictionary<string, List<BookXmlInfo>> dictionary = new Dictionary<string, List<BookXmlInfo>>();
             foreach (RewardPassivesInfo rewardPassivesInfo in all)
-                rewardPassiveInfoList.AddRange((IEnumerable<RewardPassiveInfo>)rewardPassivesInfo.RewardPassiveList.FindAll((Predicate<RewardPassiveInfo>)(x => LogLikeMod.CheckIsEquipReward(x))));
+                rewardPassiveInfoList.AddRange(rewardPassivesInfo.RewardPassiveList.FindAll(x => LogLikeMod.CheckIsEquipReward(x)));
             string path = LogLikeMod.path + "/AddData/EquipPage/EquipPage_ShopDefault.xml";
             foreach (RewardPassiveInfo rewardPassiveInfo in rewardPassiveInfoList)
             {
@@ -1722,6 +1724,7 @@ namespace abcdcode_LOGLIKE_MOD
                 bookXmlInfo._id = rewardPassiveInfo.passiveid;
                 bookXmlInfo.skinType = "CUSTOM";
                 bookXmlInfo.CharacterSkin[0] = bookXmlInfo._bookIcon;
+                bookXmlInfo.InnerName = pickUp.Name;
                 if (!dictionary.ContainsKey(rewardPassiveInfo.workshopID))
                     dictionary.Add(rewardPassiveInfo.workshopID, new List<BookXmlInfo>());
                 dictionary[rewardPassiveInfo.workshopID].Add(bookXmlInfo);
@@ -1729,10 +1732,10 @@ namespace abcdcode_LOGLIKE_MOD
             foreach (KeyValuePair<string, List<BookXmlInfo>> keyValuePair in dictionary)
             {
                 Singleton<BookXmlList>.Instance.AddEquipPageByMod(keyValuePair.Key, keyValuePair.Value);
-                Dictionary<string, List<BookXmlInfo>> fieldValue = LogLikeMod.GetFieldValue<Dictionary<string, List<BookXmlInfo>>>((object)Singleton<BookXmlList>.Instance, "_workshopBookDict");
+                Dictionary<string, List<BookXmlInfo>> fieldValue = LogLikeMod.GetFieldValue<Dictionary<string, List<BookXmlInfo>>>(Singleton<BookXmlList>.Instance, "_workshopBookDict");
                 if (!fieldValue.ContainsKey(keyValuePair.Key))
                     fieldValue.Add(keyValuePair.Key, new List<BookXmlInfo>());
-                fieldValue[keyValuePair.Key].AddRange((IEnumerable<BookXmlInfo>)keyValuePair.Value);
+                fieldValue[keyValuePair.Key].AddRange(keyValuePair.Value);
             }
             LogLikeMod.CreatedShopEquipPages = true;
         }

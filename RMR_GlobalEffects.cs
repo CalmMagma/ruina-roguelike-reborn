@@ -316,23 +316,30 @@ namespace RogueLike_Mod_Reborn
         public static Rarity ItemRarity = Rarity.Uncommon;
         public override string KeywordId => "RMR_CorrodedChains";
         public override string KeywordIconId => "RMR_CorrodedChains";
-
-        /*
-        public override void OnSuccessAttack(BattleDiceBehavior behavior)
+        public override void OnStartBattleAfter()
         {
-            base.OnSuccessAttack(behavior);
-            int bleedStacks = this._owner.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding);
-            if (bleedStacks > 0)
+            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            for (int i = 0; i < list.Count; i++)
             {
-                bleedStacks /= 2;
-                BattleUnitModel target = behavior.card.target;
-                if (target != null)
-                {
-                    target.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Bleeding, bleedStacks, _owner);
-                }
+                list[i].bufListDetail.AddBuf(new RMR_EffectBuf_CorrodedChains());   
             }
         }
-        */
+        public class RMR_EffectBuf_CorrodedChains : BattleUnitBuf 
+        {
+            public override void OnSuccessAttack(BattleDiceBehavior behavior)
+            {
+                base.OnSuccessAttack(behavior);
+                int bleedStacks = this._owner.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding);
+                if (bleedStacks > 0)
+                {
+                    bleedStacks /= 2;
+                    BattleUnitModel target = behavior.card.target;
+                    target?.bufListDetail?.AddKeywordBufByEtc(KeywordBuf.Bleeding, bleedStacks, _owner);
+                }
+            }
+
+        }
+        
     }
 
     public class RMREffect_BleedingSpleen : GlobalLogueEffectBase
@@ -352,7 +359,8 @@ namespace RogueLike_Mod_Reborn
         public override void OnCrit(BattleUnitModel critter, BattleUnitModel target)
         {
             base.OnCrit(critter, target);
-            target?.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Bleeding, 2, critter);
+            if (critter.faction == Faction.Player)
+            target?.bufListDetail?.AddKeywordBufByEtc(KeywordBuf.Bleeding, 2, critter);
         }
         public override void OnKillUnit(BattleUnitModel killer, BattleUnitModel target)
         {
@@ -370,6 +378,7 @@ namespace RogueLike_Mod_Reborn
             }
         }
     }
+
     public class RMREffect_HarvesterScythe : GlobalLogueEffectBase
     {
         public static Rarity ItemRarity = Rarity.Uncommon;

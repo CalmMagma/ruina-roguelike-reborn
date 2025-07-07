@@ -12,10 +12,13 @@
         <Desc>选择[common]猎人斗篷</Desc>
       </Choice>
       <Choice ID="2">
-        <Desc>选择[common]奇怪球体</Desc>
+        <Desc>选择[common]不稳定的球体</Desc>
       </Choice>
       <Choice ID="3">
         <Desc>选择[common]狂暴目镜</Desc>
+      </Choice>
+	  <Choice ID="4">
+        <Desc>选择[common]指引之光</Desc>
       </Choice>
     </Frame>
     <Frame ID="1">

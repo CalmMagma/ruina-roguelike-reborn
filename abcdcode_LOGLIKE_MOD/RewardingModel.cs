@@ -296,6 +296,12 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static void StartPickReward()
         {
+            var list = new List<RewardInfo>(LogLikeMod.rewards_passive); // NULL SAFETY CHECKING
+            foreach (var passive in list)
+            {
+                if (passive.rewards == null)
+                    LogLikeMod.rewards_passive.Remove(passive);
+            }
             if (LogLikeMod.rewardsMystery.Count > 0)
             {
                 LorId mysteryid = LogLikeMod.rewardsMystery[0];
@@ -305,15 +311,15 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else
             {
-                if (LogLikeMod.rewards.FindAll(x => x != null).Count == 0 && LogLikeMod.rewards_passive.FindAll(x => x != null).Count == 0 && LogLikeMod.nextlist.Count == 0)
+                if (LogLikeMod.rewards.Count == 0 && LogLikeMod.rewards_passive.Count == 0 && LogLikeMod.nextlist.Count == 0)
                     return;
-                if (LogLikeMod.rewards.FindAll(x => x != null).Count > 0)
+                if (LogLikeMod.rewards.Count > 0)
                 {
                     Singleton<MysteryManager>.Instance.StartMystery(new LorId(LogLikeMod.ModId, -4));
                     // start Combat Page card reward event (MysteryModel_CardReward)
                     SingletonBehavior<BattleManagerUI>.Instance.ui_levelup.SetRootCanvas(false);
                 }
-                else if (LogLikeMod.rewards_passive.FindAll(x => x != null).Count > 0)
+                else if (LogLikeMod.rewards_passive.Count > 0)
                 {
                     List<EmotionCardXmlInfo> passiveRewardsInlist = LogueBookModels.GetPassiveRewards_Inlist(LogLikeMod.rewards_passive.FindAll(x => x !=null)[0].rewards);
                     RewardingModel.rewardFlag = RewardingModel.RewardFlag.PassiveReward;
@@ -321,7 +327,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 else
                 {
-                    if (LogLikeMod.nextlist.FindAll(x => x != null).Count <= 0)
+                    if (LogLikeMod.nextlist.Count <= 0)
                         return;
                     List<EmotionCardXmlInfo> nextlist = LogLikeMod.nextlist;
                     RewardingModel.rewardFlag = RewardingModel.RewardFlag.NextStageChoose;
@@ -363,7 +369,7 @@ namespace abcdcode_LOGLIKE_MOD
             Debug.Log("REWARDS PASSIVE");
             for (int i = 0; i < LogLikeMod.rewards_passive.Count; i++)
             {
-                if (LogLikeMod.rewards_passive[i] == null)
+                if (LogLikeMod.rewards_passive[i].rewards == null)
                     Debug.Log("NULL REWARD LIST!!");
                 else
                 {
@@ -371,7 +377,7 @@ namespace abcdcode_LOGLIKE_MOD
                     foreach (var reward in LogLikeMod.rewards_passive[i].rewards)
                     {
                         if (reward == null)
-                            Debug.Log("NULL REWARD!!");
+                            Debug.Log("NULL REWARD LIST!!");
                         else
                             Debug.Log(reward.id.packageId + " --- " + reward.id.id.ToString());
                     }
@@ -383,7 +389,7 @@ namespace abcdcode_LOGLIKE_MOD
                 if (reward == null)
                     Debug.Log("NULL REWARD!!");
                 else
-                    Debug.Log(reward.Script[0] + " --- " + reward.id.ToString());
+                    Debug.Log(reward.Name + " --- " + reward.id.ToString());
             }
             RewardingModel.StartPickReward();
             return false;

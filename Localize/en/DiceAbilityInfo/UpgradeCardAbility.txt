@@ -333,14 +333,12 @@ Otherwise if user’s HP is below 50%, gain 4 Shield this Scene</Desc>
     <Desc>[On Clash Lose] Boost min value of all dice on this page by +2</Desc>
   </BattleCardAbility>
   
-  <BattleCardAbility ID="RMR_PrescriptOrder">
-    <Desc>[Zeal]
-[On Use] If Singleton, draw 1 page</Desc>
+  <BattleCardAbility ID="RMR_PrescriptOrder"> <!-- RE-ADD ZEAL LATER -->
+    <Desc>[On Use] If Singleton, draw 1 page</Desc>
   </BattleCardAbility>
   
-  <BattleCardAbility ID="RMR_PrescriptOrderUpgrade">
-    <Desc>[Zeal]
-[On Use] If Singleton, draw 1 page
+  <BattleCardAbility ID="RMR_PrescriptOrderUpgrade"> <!-- RE-ADD ZEAL LATER -->
+    <Desc>[On Use] If Singleton, draw 1 page
 Otherwise gain Stagger Shield this Scene equal to pages in hand</Desc>
   </BattleCardAbility>
   

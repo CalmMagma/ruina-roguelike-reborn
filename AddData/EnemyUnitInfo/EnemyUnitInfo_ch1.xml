@@ -5,7 +5,7 @@
   <Enemy ID="1">
     <!--레니-->
     <Name>레니</Name>
-    <NameID>1</NameID>
+    <NameID>11</NameID>
     <MinHeight>165</MinHeight><!-- 165 -->
     <MaxHeight>165</MaxHeight>
     
@@ -21,7 +21,7 @@
   <Enemy ID="2">
     <!--망치-->
     <Name>망치</Name>
-    <NameID>2</NameID>
+    <NameID>12</NameID>
     <MinHeight>180</MinHeight>
     <MaxHeight>180</MaxHeight>
 
@@ -37,7 +37,7 @@
   <Enemy ID="3">
     <!--피트-->
     <Name>피트</Name>
-    <NameID>3</NameID>
+    <NameID>13</NameID>
     <MinHeight>175</MinHeight>
     <MaxHeight>175</MaxHeight>
 

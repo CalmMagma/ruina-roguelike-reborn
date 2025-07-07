@@ -25,6 +25,12 @@ Become Immobilized this Scene.
 Gain 3 Strength next Scene.
 Add a copy of 'Pinpoint Breakthrough' to hand</Desc>
   </BattleCardAbility>
+  <BattleCardAbility ID="fireIlsumLogEdit">
+    <Desc>[On Use] If 'Burning Flash' is in hand, discard it and draw a page, then add the Offensive dice on the discarded page to this</Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="costdownLogEdit">
+    <Desc>This page's Cost is lowered by the number of other 'Rapid Gashes' in hand</Desc>
+  </BattleCardAbility>
 
 </BattleCardAbilityDescRoot>
 

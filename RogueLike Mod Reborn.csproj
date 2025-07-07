@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <DocumentationFile>bin\Release\RogueLike Mod Reborn.xml</DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -40,7 +43,7 @@
     </Reference>
     <Reference Include="10EnumExtender">
       <HintPath>dependencies\10EnumExtender.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>dependencies\Assembly-CSharp.dll</HintPath>
@@ -52,7 +55,7 @@
     </Reference>
     <Reference Include="CustomMapUtility">
       <HintPath>dependencies\CustomMapUtility.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="ErrorLogCleaner">
@@ -61,39 +64,40 @@
     </Reference>
     <Reference Include="KeywordUtil">
       <HintPath>dependencies\KeywordUtil.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>dependencies\Mono.Cecil.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
       <HintPath>dependencies\Mono.Cecil.Mdb.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
       <HintPath>dependencies\Mono.Cecil.Pdb.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
       <HintPath>dependencies\Mono.Cecil.Rocks.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
       <HintPath>dependencies\MonoMod.RuntimeDetour.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.Utils">
       <HintPath>dependencies\MonoMod.Utils.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NAudio">
       <HintPath>dependencies\NAudio.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Spine3.4.02, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dependencies\Spine3.4.02.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -686,9 +690,13 @@
     <Compile Include="RMR_Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(TargetDir)\$(TargetFileName)" "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls"
+    <PostBuildEvent>xcopy /Y /E /Q "$(TargetDir)\*.xml" "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls"
+xcopy /Y /E /Q "$(TargetDir)\*.dll" "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls"
 xcopy /Y /E /Q "$(SolutionDir)\AddData\*.*" "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls\AddData" 
 xcopy /Y /E /Q "$(SolutionDir)\Localize\*.*" "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls\Localize" 
 xcopy /Y /E /Q "$(SolutionDir)\SpecialStaticInfo\*.*" "C:\Users\Usuário\Desktop\Projects\LoR Modding\Mod Projects\! RogueLike Mod REBORN\Assemblies\dlls\SpecialStaticInfo" 

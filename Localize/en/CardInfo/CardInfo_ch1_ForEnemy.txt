@@ -13,5 +13,8 @@
     <BattleCardDesc ID="-104004">
       <LocalizedName>Rampage</LocalizedName>
     </BattleCardDesc>
+	<BattleCardDesc ID="-104006">
+      <LocalizedName>Mutilate</LocalizedName>
+    </BattleCardDesc>
   </cardDescList>
 </BattleCardDescRoot>

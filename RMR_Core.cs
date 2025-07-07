@@ -1767,7 +1767,7 @@ namespace RogueLike_Mod_Reborn
 
         /// <summary>
         /// Runs at the start of the Act of the first encounter.<br></br>
-        /// Feel free to insert your initial event call here via <see cref="Singleton&lt;MysteryManager&gt;.Instance.StartMystery(LorId mysteryId)"/>.
+        /// Feel free to insert your initial event call here via <see cref="MysteryManager.StartMystery(LorId)"/>.
         /// </summary>
         public virtual void OnWaveStartInitialEvent()
         {
@@ -1897,7 +1897,7 @@ namespace RogueLike_Mod_Reborn
         /// <summary>
         /// Determines whether to override the base deck or not.<br></br>
         /// (Evade, Charge and Cover, Focused Strikes, etc.)<br></br>
-        /// Defaults to <see cref="false"/>. The replacement deck is set by <see cref="BaseDeckReplacement"/>.
+        /// Defaults to <see langword="false"/>. The replacement deck is set by <see cref="BaseDeckReplacement"/>.
         /// </summary>
         public virtual bool ReplaceBaseDeck => false;
 

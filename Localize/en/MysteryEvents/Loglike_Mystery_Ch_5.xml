@@ -12,7 +12,7 @@
         <Desc>Raise your middle finger at the man.</Desc>
       </Choice>
       <Choice ID="2">
-        <Desc>Make a break for it. [red]All Librarians lose 20% HP.</Desc>
+        <Desc>Make a break for it. [red](All Librarians lose 20% HP.)</Desc>
       </Choice>
     </Frame>
 

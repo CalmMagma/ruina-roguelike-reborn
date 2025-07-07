@@ -2,7 +2,7 @@
 <CharactersNameRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 <!-- 1챕터 -->
-<Name ID="11">Mang-chi</Name>
+	<Name ID="11">Mang-chi</Name>
 	<Name ID="12">Lenny</Name>
 	<Name ID="13">Pete</Name>
 	<Name ID="14">Consta</Name>

@@ -98,6 +98,47 @@ namespace RogueLike_Mod_Reborn
 
     }
 
+
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_BleedingSpleen : ShopPickUpModel
+    {
+        public PickUpModel_RMR_BleedingSpleen() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90051);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90051));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_BleedingSpleen());
+        }
+
+        public override string KeywordIconId => "RMR_BleedingSpleen";
+
+        public override string KeywordId => "RMR_BleedingSpleen";
+
+    }
+
+
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_CorrodedChains : ShopPickUpModel
+    {
+        public PickUpModel_RMR_CorrodedChains() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90052);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90052));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_CorrodedChains());
+        }
+
+        public override string KeywordIconId => "RMR_CorrodedChains";
+
+        public override string KeywordId => "RMR_CorrodedChains";
+
+    }
+
+
     public class PickUpModel_RMR_Polyhedra : ShopPickUpModel
     {
         public PickUpModel_RMR_Polyhedra() : base()

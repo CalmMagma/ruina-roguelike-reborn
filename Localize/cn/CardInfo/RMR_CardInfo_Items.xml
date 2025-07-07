@@ -13,5 +13,8 @@
     <BattleCardDesc ID="-103">
       <LocalizedName>遥控器</LocalizedName>
     </BattleCardDesc>
+    <BattleCardDesc ID="-104">
+      <LocalizedName>过去的哀嚎</LocalizedName>
+    </BattleCardDesc>
   </cardDescList>
 </BattleCardDescRoot>

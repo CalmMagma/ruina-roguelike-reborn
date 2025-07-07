@@ -6,7 +6,7 @@
     <RewardList ID="100001" PassiveType="Nolimit" Rarity="Unique" TargetType="All" Script="BossReward1" ArtWork="BossReward1"/>
     <RewardList ID="100002" PassiveType="Nolimit" Rarity="Unique" TargetType="All" Script="BossReward2" ArtWork="BossReward2"/>
     <RewardList ID="100003" PassiveType="Nolimit" Rarity="Unique" TargetType="All" Script="BossReward3" ArtWork="BossReward3"/>
-    <RewardList ID="100004" PassiveType="Nolimit" Rarity="Unique" TargetType="SelectOne" Script="BossReward4" ArtWork="BossReward4"/>
+    <!-- <RewardList ID="100004" PassiveType="Nolimit" Rarity="Unique" TargetType="SelectOne" Script="BossReward4" ArtWork="BossReward4"/> -->
     <RewardList ID="100005" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward5" ArtWork="BossReward5"/>
     <RewardList ID="100006" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward6" ArtWork="BossReward6"/>
     <!-- <RewardList ID="100007" PassiveType="Custom" Rarity="Unique" TargetType="All" Script="BossReward7" ArtWork="BossReward7"/> NOW BASEKIT --> 

@@ -820,8 +820,14 @@ namespace abcdcode_LOGLIKE_MOD
           EmotionCardXmlInfo card,
           BattleUnitModel target = null)
         {
-            if (RewardingModel.rewardFlag == RewardingModel.RewardFlag.NextStageChoose && Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Stage(card), card.id)) != null)
-                LogLikeMod.SetNextStage(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Stage(card), card.id), Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Stage(card), card.id)).type);
+            var stage = Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Stage(card), card.id));
+            if (RewardingModel.rewardFlag == RewardingModel.RewardFlag.NextStageChoose && stage != null)
+            {
+                LogLikeMod.SetNextStage(stage.Id, stage.type);
+            } else if (RewardingModel.rewardFlag == RewardingModel.RewardFlag.NextStageChoose && stage == null)
+            {
+                Debug.Log("NULL STAGE ERROR!!: " + card.Name + " --- " + card.id + " --- Generated PID: " + LogLikeMod.GetPickUpXmlWorkShopId_Stage(card) ?? "NULL");
+            }
             else if (Singleton<RewardPassivesList>.Instance.GetPassiveInfo(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Passive(card), card.id)) != null)
             {
                 PickUpModelBase pickUp = LogLikeMod.FindPickUp(card.Script[0]);

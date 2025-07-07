@@ -25,6 +25,12 @@
 这一幕中使自身陷入[眩晕]并无法行动
 下一幕中使自身获得3层[强壮]</Desc>
   </BattleCardAbility>
-
+  <BattleCardAbility ID="fireIlsumLogEdit">
+    <Desc>[使用时]若手中存在[火光瞬闪]则丢弃1张[火光瞬闪]并抽取1张书页
+将丢弃书页中的骰子置入本书页末尾<Desc>
+  </BattleCardAbility>
+  <BattleCardAbility ID="costdownLogEdit">
+    <Desc>手中每有1张其他[连续切割]便使本书页费用-1</Desc>
+  </BattleCardAbility>
 </BattleCardAbilityDescRoot>
 

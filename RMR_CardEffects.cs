@@ -925,7 +925,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnUseCard();
             var x = owner.allyCardDetail.DiscardACardLowest();
-            if (x.GetCost() != 0)
+            if (x != null && x.GetCost() > 0)
             {
                 owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.CritChance, x.GetCost()*2, owner);
             }
@@ -3303,8 +3303,63 @@ namespace RogueLike_Mod_Reborn
     #endregion
 
 
+    #region Fixes and Edits
 
-    #region Enemy effects
+    public class DiceCardSelfAbility_fireIlsumLogEdit : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "DrawCard_Keyword" };
+
+        public override void OnUseCard()
+        {
+            List<BattleDiceCardModel> list = base.owner.allyCardDetail.GetHand().FindAll(x => x.GetID().GetOriginalId() == card.card.GetID().GetOriginalId());
+            if (list.Count <= 0)
+            {
+                return;
+            }
+            BattleDiceCardModel battleDiceCardModel = RandomUtil.SelectOne(list);
+            foreach (BattleDiceBehavior item in battleDiceCardModel.CreateDiceCardBehaviorList())
+            {
+                if (item.Type == BehaviourType.Atk)
+                {
+                    card.AddDice(item);
+                }
+            }
+            base.owner.allyCardDetail.DiscardACardByAbility(battleDiceCardModel);
+            base.owner.allyCardDetail.DrawCards(1);
+        }
+    }
+
+
+    public class DiceCardSelfAbility_costdownLogEdit : DiceCardSelfAbilityBase
+    {
+        public class BattleDiceCardBuf_costDownCard : BattleDiceCardBuf
+        {
+            private int _count;
+
+            public override DiceCardBufType bufType => DiceCardBufType.CostDownR;
+
+            public BattleDiceCardBuf_costDownCard(int count)
+            {
+                _count = count;
+            }
+
+            public override int GetCost(int oldCost)
+            {
+                return oldCost - _count;
+            }
+        }
+
+        public override void OnEnterCardPhase(BattleUnitModel unit, BattleDiceCardModel self)
+        {
+            List<BattleDiceCardModel> list = unit.allyCardDetail.GetHand().FindAll((BattleDiceCardModel x) => x != self && x.GetID().GetOriginalId() == card.card.GetID().GetOriginalId());
+            self.AddBufWithoutDuplication(new BattleDiceCardBuf_costDownCard(list.Count));
+        }
+    }
+
+    #endregion
+
+
+    #region Enemy Effects
 
     public class DiceCardSelfAbility_RMR_PrescriptLoophole : DiceCardSelfAbilityBase
     {

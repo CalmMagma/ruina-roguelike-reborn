@@ -421,7 +421,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         /// <summary>
         /// Returns the first instance of a GlobalLogueEffectBase in inventory.<br></br>
-        /// If it does not exist, returns <see cref="null"/>.
+        /// If it does not exist, returns <see langword="null"/>.
         /// </summary>
         public T GetEffect<T>() where T : GlobalLogueEffectBase
         {

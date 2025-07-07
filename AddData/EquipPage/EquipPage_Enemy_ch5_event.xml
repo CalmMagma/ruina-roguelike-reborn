@@ -21,8 +21,9 @@
 			<Passive Level="1">28474001</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+		<Rarity>Special</Rarity>
+        <CharacterSkinType>Custom</CharacterSkinType>
 	</Book>
 
 <!-- 이벤트 2 -->
@@ -45,8 +46,9 @@
 			<Passive Level="1">28474002</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+		<Rarity>Special</Rarity>
+        <CharacterSkinType>Custom</CharacterSkinType>
 	</Book>
 
 <!-- 이벤트 2_1 -->
@@ -69,8 +71,9 @@
 			<Passive Level="1">28484002</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+		<Rarity>Special</Rarity>
+        <CharacterSkinType>Custom</CharacterSkinType>
 	</Book>
 
 <!-- copley event -->
@@ -93,8 +96,9 @@
 			<Passive Level="1">28474003</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+		<Rarity>Special</Rarity>
+        <CharacterSkinType>Custom</CharacterSkinType>
 	</Book>
 
 </BookXmlRoot>

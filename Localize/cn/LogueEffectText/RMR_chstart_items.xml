@@ -26,10 +26,10 @@
   <LogueEffectInfo Id="RMR_StrangeOrb">
     <Name>奇怪球体</Name>
     <Desc>开启舞台时召唤1个球体。球体拥有30点体力，无法陷入混乱，其存活时每一幕从以下效果中随机执行1种效果：
-对所有敌方角色施加1层“麻痹”
-使2名随机友方角色抽取1张书页
-使所有友方角色获得1层“伤害强化”</Desc> 
-    <FlavorText>&lt;color=#08CAA9&gt;"虽然它可能不稳定，但它似乎无条件地站在你身边。"&lt;/color&gt;</FlavorText> 
+- 对所有敌方角色施加1层“麻痹”
+- 使2名随机友方角色抽取1张书页
+- 使所有友方角色获得1层“伤害强化”</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"尽管它可能不稳定，但它似乎无条件地站在你身边。"&lt;/color&gt;</FlavorText> 
     <CatalogDesc>  没有多少人记得大战之前的日子——一件如此可怕、如此广泛的事情，一件如此可怕、如此被遗忘的事情——只剩下“旧世界”的余烬，在它的废墟上游荡，为了一个长期失去的目的。一个这样的例子就是汞合金——一种只能被描述为异常的结合。
 
   在旧世界被粉碎成许多深不可测的碎片之后，他们仍然在那里：先是分裂，但在结束一切理性的光之后不久就结合在了一起。他们疑惑着，徘徊着，发现自己置身于熟悉而陌生的旧家、学校和道路的废墟中。大火还是烧到了最后，从此以后，生活只会是一片废墟。
@@ -46,7 +46,71 @@
     <Desc>每一幕开始时使所有友方角色获得10层“暴击”。</Desc> 
     <FlavorText>&lt;color=#CA08A9&gt;"你会听到各种声音在远处呼喊，要求移除这些所谓的‘随机暴击’。"&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[暂无]</CatalogDesc>
+  </LogueEffectInfo>  
+  
+  <LogueEffectInfo Id="RMR_LightGuidance">
+    <Name>指引之光</Name>
+    <Desc>每一幕使所有司书1种随机属性的骰子威力+1。(斩击/突刺/打击/防御型骰子)</Desc> 
+    <FlavorText>&lt;color=#FEFCDD&gt;"偶尔它会使你“打得更好”，无论那究竟是什么意思……"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
- 
+	
+	
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade2">
+    <Name>不稳定的球体</Name>
+    <Desc>开启舞台时召唤1个球体。球体拥有20点体力，无法陷入混乱与被选中，初始抗性为“脆弱”，球体随章节进度会变的更强。
+- 每一幕球体将获得1张“过去的哀嚎”战斗书页
+- 每一幕使所有友方角色获得3层“护盾”
+- 每隔一幕使所有友方角色恢复3点混乱抗性</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"尽管它可能不稳定，但它似乎无条件地站在你身边。"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo>
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade3">
+    <Name>不稳定的球体</Name>
+    <Desc>开启舞台时召唤1个球体。球体拥有30点体力，无法陷入混乱与被选中，初始抗性为“一般”，球体随章节进度会变的更强。
+- 每一幕球体将获得1张“过去的哀嚎”战斗书页
+- 每一幕使所有友方角色获得3层“护盾”
+- 每隔一幕使所有友方角色恢复3点混乱抗性
+- 第三幕中使所有司书恢复1点光芒</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"尽管它可能不稳定，但它似乎无条件地站在你身边。"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade4">
+    <Name>不稳定的球体</Name>
+    <Desc>开启舞台时召唤1个球体。球体拥有30点体力，无法陷入混乱与被选中，初始抗性为“耐性”，球体随章节进度会变的更强。
+- 每一幕球体将获得1张“过去的哀嚎”战斗书页
+- 每一幕使所有友方角色获得3层“护盾”/1层“伤害强化”与“流血守护”/3层“烧伤守护”
+- 每隔一幕使所有友方角色恢复3点混乱抗性
+- 第三幕中使所有司书恢复1点光芒</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"尽管它可能不稳定，但它似乎无条件地站在你身边。"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade5">
+    <Name>不稳定的球体</Name>
+    <Desc>开启舞台时召唤1个球体。球体拥有30点体力，无法陷入混乱与被选中，初始抗性为“耐性”，球体随章节进度会变的更强。
+- 每一幕球体将获得1张“过去的哀嚎”战斗书页
+- 每一幕使所有友方角色获得3层“护盾”/1层“伤害强化”与“流血守护”/3层“烧伤守护”
+- 每隔一幕使所有友方角色恢复3点混乱抗性
+- 第三幕中使所有司书恢复1点光芒
+- 第四幕中使所有司书抽取1张书页且自此幕开始每一幕使1名随机其他友方角色抽取1张书页</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"尽管它可能不稳定，但它似乎无条件地站在你身边。"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StrangeOrbGrade6">
+    <Name>奇怪球体</Name>
+    <Desc>开启舞台时召唤1个球体。球体拥有30点体力，无法陷入混乱与被选中，初始抗性为“耐性”，球体已变的稳定。
+- 每一幕球体将获得1张“过去的哀嚎”战斗书页
+- 每一幕使所有友方角色获得3层“护盾”/1层“伤害强化”与“流血守护”/3层“烧伤守护” 
+- 每一幕使1名其他友方角色手中随机1张费用高于0的书页的费用-1(使用后复原)
+- 每隔一幕使所有友方角色恢复3点混乱抗性
+- 第三幕中使所有司书恢复1点光芒
+- 第四幕中使所有司书抽取1张书页且自此幕开始每一幕使1名随机其他友方角色抽取1张书页</Desc> 
+    <FlavorText>&lt;color=#08CAA9&gt;"尽管它可能不稳定，但它似乎无条件地站在你身边。"&lt;/color&gt;</FlavorText> 
+    <CatalogDesc></CatalogDesc>
+  </LogueEffectInfo> 
   
 </LogueEffectXmlRoot>

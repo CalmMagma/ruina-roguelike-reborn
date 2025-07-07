@@ -23,7 +23,7 @@
 		<BookIcon>None</BookIcon>
 		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
 		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
+    <RandomFace>false</RandomFace>
 	</Book>
 
 <!-- All 이벤트 2 -->
@@ -48,7 +48,7 @@
 		<BookIcon>None</BookIcon>
 		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
 		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
+    <RandomFace>false</RandomFace>
 	</Book>
 
 <Book ID="28370003">
@@ -72,7 +72,7 @@
 		<BookIcon>None</BookIcon>
 		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
 		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
+    <RandomFace>false</RandomFace>
 	</Book>
 
 <Book ID="28370004">
@@ -96,7 +96,7 @@
 		<BookIcon>None</BookIcon>
 		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
 		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
+    <RandomFace>false</RandomFace>
 	</Book>
 
 </BookXmlRoot>

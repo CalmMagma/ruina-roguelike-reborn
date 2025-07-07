@@ -6,7 +6,7 @@
 
 你呢？你能从这疯狂的赌场里获得什么吗？</Dialog>
       <Choice ID="0">
-        <Desc>赌上你当前一半的眼-有50%/50%的概率使其[green]翻倍 [red]全部失去</Desc>
+        <Desc>赌上你当前一半的眼-有50%/50%的概率使其[green]大赚 [red]全部失去</Desc>
       </Choice>
       <Choice ID="1">
         <Desc>赌上你的装备-有50%/50%的概率[green]复制当前所有的核心书页 [red]全部失去</Desc>
@@ -25,7 +25,7 @@
 你掷出骰子，喊出号码。然后……
 它精准的停在你的数字上！</Dialog>
       <Choice ID="0">
-        <Desc>获得2倍赌资的眼</Desc>
+        <Desc>获得赌资150%的眼</Desc> <!-- change this from gain double Ahn to gain +50% Ahn -->
       </Choice>
     </Frame>
 

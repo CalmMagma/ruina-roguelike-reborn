@@ -159,8 +159,8 @@
 
   <LogueEffectInfo Id="RMR_BleedingSpleen">
     <Name>脾出血</Name> 
-    <Desc>暴击时对目标施加2层“流血”。“流血”层数不少于10层的敌方角色死亡时将爆炸，对其他所有敌方角色造成(‘流血’层数/2)点伤害。</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“WIP”&lt;/color&gt;</FlavorText>
+    <Desc>All allies now inflict 2 Bleed upon a successful critical strike. Enemies with at least 10 Bleed explode on death, dealing (Bleed/2) damage to all other enemies.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“A strange artifical organ which seems to contain immense anti-coagulant properties.”&lt;/color&gt;</FlavorText>
     <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
   
@@ -192,6 +192,15 @@
     <FlavorText>&lt;color=#CACACA&gt;“Rua！”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_Prescript">
+    <Name>指令</Name> 
+    <Desc>每一幕开始时指定1名司书
+该司书连续对1名目标使用战斗书页时造成的伤害与混乱伤害+10%(至多30%)
+若对其他目标使用战斗书页则该次行动中使其造成的伤害与混乱伤害-50%</Desc> 
+    <FlavorText>&lt;color=#4FACFF&gt;“一张看起来很小巧的小纸条。上面写着‘专注于你面前的人。‘”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[暂无]</CatalogDesc>
+  </LogueEffectInfo>  
   
   <!-- 
     <LogueEffectInfo Id="GlobalEffect_">

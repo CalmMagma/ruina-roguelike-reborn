@@ -294,7 +294,7 @@
     <Artwork>Liu1_7</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>fireIlsum</Script>
+    <Script>fireIlsumLogEdit</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="6" Dice="10" Type="Atk" Detail="Slash" Motion="H" EffectRes="Liu1_H" Script="burn1atk" ActionScript="" Desc="" />
@@ -741,7 +741,7 @@
     <Artwork>Rcorp12</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="5" />
-    <Script>costdown</Script>
+    <Script>costdownLogEdit</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="4" Dice="10" Type="Atk" Detail="Slash" Motion="H" EffectRes="RCorp_H" Script="" ActionScript="" Desc="" />

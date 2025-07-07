@@ -57,7 +57,7 @@ namespace abcdcode_LOGLIKE_MOD
                     Debug.Log($"COCK BALLS COUNT IS: {metadata.count + count}");
                     DiceCardXmlInfo upgradeInfo = GetUpgradeCard(cardId.GetOriginalId(), metadata.index, metadata.count + count);
                     Debug.Log($"COCK BALLS OLD ID IS: {cardId.packageId}\nCOCK BALLS NEW ID IS: {upgradeInfo.id.packageId}");
-                    dictionary.Add(metadata.index, upgradeInfo);
+                    dictionary[metadata.index] = upgradeInfo;
                 }
                 return dictionary;
             }
@@ -67,7 +67,7 @@ namespace abcdcode_LOGLIKE_MOD
                 foreach (KeyValuePair<int, UpgradeBase> pair in upgrades)
                 {
                     DiceCardXmlInfo upgradeInfo = pair.Value.GetUpgradeInfo(pair.Key, count);
-                    dictionary.Add(pair.Key, upgradeInfo);
+                    dictionary[pair.Key] = upgradeInfo;
                 }
             }
 
@@ -97,15 +97,13 @@ namespace abcdcode_LOGLIKE_MOD
                             this.UpgradeInfoDic[instance.baseid][instance.index] = instance;
                         }
 
-                        if (!instance.CanRepeatUpgrade())
-                        {
-                            instance.Log("Created Custom UpgradeInfo");
-                            this.UpgradeInfoCache.Remove(type);
-                        }
+                        instance.Log("Created Custom UpgradeInfo");
+                        this.UpgradeInfoCache.Remove(type);
+                        
                         if (instance.baseid == cardId)
                         {
                             DiceCardXmlInfo upgradeInfo = instance.GetUpgradeInfo(instance.index, count);
-                            dictionary.Add(instance.index, upgradeInfo);
+                            dictionary[instance.index] = upgradeInfo;
                         }
                     }
                 }
@@ -154,7 +152,9 @@ namespace abcdcode_LOGLIKE_MOD
                             instance.baseinfo = ItemXmlDataList.instance.GetCardItem(instance.baseid, true);
                             if (instance.baseinfo == null)
                                 this.Log($"Error! baseinfo NULL cardid : {cardid.packageId} _ {cardid.id.ToString()} _ {instance.index}");
-                            if (!this.UpgradeInfoDic.TryGetValue(instance.baseid, out Dictionary<int, UpgradeBase> _))
+                            if (this.UpgradeInfoDic.TryGetValue(instance.baseid, out Dictionary<int, UpgradeBase> _))
+                                this.UpgradeInfoDic[instance.baseid][instance.index] = instance;
+                            else
                                 this.UpgradeInfoDic.Add(instance.baseid, new Dictionary<int, UpgradeBase>()
                                 {
                                     {
@@ -162,10 +162,7 @@ namespace abcdcode_LOGLIKE_MOD
                                         instance
                                     }
                                 });
-                            else
-                                this.UpgradeInfoDic[instance.baseid][instance.index] = instance;
-                            if (!instance.CanRepeatUpgrade())
-                                this.UpgradeInfoCache.Remove(type);
+                            this.UpgradeInfoCache.Remove(type);
                             if (instance.baseid == cardid && instance.index == index)
                             {
                                 return instance;

@@ -13,5 +13,8 @@
     <BattleCardDesc ID="-103">
       <LocalizedName>The Remote</LocalizedName>
     </BattleCardDesc>
+	<BattleCardDesc ID="-104">
+      <LocalizedName>Wails of the Past</LocalizedName>
+    </BattleCardDesc>
   </cardDescList>
 </BattleCardDescRoot>

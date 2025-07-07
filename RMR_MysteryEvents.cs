@@ -151,10 +151,10 @@ namespace RogueLike_Mod_Reborn
                     {
                         case 0:
                             DisablePrescript();
-                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1500031), abcdcode_LOGLIKE_MOD.StageType.Custom);
+                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1500031), abcdcode_LOGLIKE_MOD.StageType.Normal);
                             break;
                         case 1:
-                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1500032), abcdcode_LOGLIKE_MOD.StageType.Custom);
+                            MysteryBase.SetNextStageCustom(new LorId(LogLikeMod.ModId, 1500032), abcdcode_LOGLIKE_MOD.StageType.Normal);
                             break;
                         case 2:
                             LosePrescript();

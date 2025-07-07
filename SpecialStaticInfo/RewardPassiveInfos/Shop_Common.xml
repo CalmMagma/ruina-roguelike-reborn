@@ -52,6 +52,8 @@
 	<RewardList ID="90048" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_Crowbar" ArtWork="RMR_Crowbar"/>
 	<RewardList ID="90049" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_HarvestScythe" ArtWork="RMR_HarvestScythe"/>
 	<RewardList ID="90050" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_Remote" ArtWork="RMR_Remote"/>
+	<RewardList ID="90051" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_BleedingSpleen" ArtWork="RMR_BleedingSpleen"/>
+	<RewardList ID="90052" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_CorrodedChains" ArtWork="RMR_CorrodedChains"/>
 	<RewardList ID="90069" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Rarity="Unique" Script="RMR_Polyhedra" ArtWork="RMR_Polyhedra"/>
 	
   </ChapterList> 

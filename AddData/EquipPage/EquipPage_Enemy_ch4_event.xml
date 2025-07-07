@@ -21,9 +21,10 @@
 			<Passive Level="1">28473001</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+		<Rarity>Special</Rarity>
+        <CharacterSkinType>Custom</CharacterSkinType>
+    <RandomFace>false</RandomFace>
 	</Book>
 
 <!-- 이벤트 3 -->
@@ -46,9 +47,10 @@
 			<Passive Level="1">28473002</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+		<Rarity>Special</Rarity>
+        <CharacterSkinType>Custom</CharacterSkinType>
+    <RandomFace>false</RandomFace>
 	</Book>
 
 <!-- 이벤트 3 -->
@@ -71,9 +73,9 @@
 			<Passive Level="1">28473003</Passive>
 		</EquipEffect>
 		<BookIcon>None</BookIcon>
-		<CharacterSkin>Creature_SilentGirl_BlackHand</CharacterSkin>
-		<Rarity>Common</Rarity>
-    <RandomFace>true</RandomFace>
+		<CharacterSkin>TheSparklingMirror</CharacterSkin>
+		<Rarity>Special</Rarity>
+        <CharacterSkinType>Custom</CharacterSkinType>
 	</Book>
 
 
