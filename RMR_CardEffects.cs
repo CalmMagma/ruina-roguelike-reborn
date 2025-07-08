@@ -127,16 +127,9 @@ namespace RogueLike_Mod_Reborn
             public override void OnEndBattle(BattlePlayingCardDataInUnitModel curCard)
             {
                 base.OnEndBattle(curCard);
-                if (curCard.card._originalXmlData != null)
-                    curCard.card.ResetToOriginalData();
-                else
-                {
-                    List<DiceBehaviour> dicelist = curCard.card.XmlData.DiceBehaviourList;
-                    dicelist.RemoveAll(x => x.Script == "RMR_Shivhidden");
-                    curCard.card.XmlData.DiceBehaviourList = dicelist;
-                    if (curCard.card._originalXmlData == null)
-                        curCard.card.CopySelf();
-                }
+                List<DiceBehaviour> dicelist = curCard.card.XmlData.DiceBehaviourList;
+                dicelist.RemoveAll(x => x.Script == "RMR_Shivhidden");
+                curCard.card.XmlData.DiceBehaviourList = dicelist;
             }
         }
     }

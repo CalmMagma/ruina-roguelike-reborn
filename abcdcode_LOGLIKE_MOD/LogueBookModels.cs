@@ -1027,11 +1027,6 @@ namespace abcdcode_LOGLIKE_MOD
                     "".Log("Error : No Limit Card Data");
                 else
                     fieldValue.Add(cardItem);
-                DiceCardXmlInfo upgradeCard = Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(new LorId(page.workshopID, id));
-                if (upgradeCard == null)
-                    "".Log("Error : No Limit Card Data");
-                else
-                    fieldValue.Add(upgradeCard);
             }
             foreach (DiceCardXmlInfo diceCardXmlInfo in model.unitData.bookItem.GetCardListFromCurrentDeck())
             {

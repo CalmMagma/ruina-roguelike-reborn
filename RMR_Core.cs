@@ -2833,6 +2833,25 @@ namespace RogueLike_Mod_Reborn
             }
             return result;
         }
+
+        /// <summary>
+        /// Simple patch that makes exclusive combat pages work within Roguelike and not shit pant
+        /// </summary>
+        [HarmonyPostfix, HarmonyPatch(typeof(BookModel), nameof(BookModel.SetXmlInfo))]
+        public static void BookModel_SetXmlInfo_Post(BookModel __instance, BookXmlInfo ____classInfo, ref List<DiceCardXmlInfo> ____onlyCards)
+        {
+            var mod = LogLikeMod.GetLogMods().Find(x => x.invInfo.workshopInfo.uniqueId == __instance.BookId.packageId);
+            if (__instance.BookId.packageId == LogLikeMod.ModId || mod != null)
+            {
+                ____onlyCards.RemoveAll(x => x.id.IsBasic());
+                foreach (int id in ____classInfo.EquipEffect.OnlyCard)
+                {
+                    DiceCardXmlInfo cardItem = ItemXmlDataList.instance.GetCardItem(new LorId(__instance.BookId.packageId, id), false);
+                    ____onlyCards.Add(cardItem);
+                }
+            } 
+        }
+
         #endregion
 
         #region TRANSPILERS
@@ -3055,6 +3074,8 @@ namespace RogueLike_Mod_Reborn
                 yield return x;
             }
         }
+
+
 
 
         #endregion

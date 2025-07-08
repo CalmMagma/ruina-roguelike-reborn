@@ -16,5 +16,9 @@
       <LocalizedName>粗制护盾</LocalizedName>
     </BattleCardDesc>
 
+    <BattleCardDesc ID="706108">
+      <LocalizedName>工作室逻辑</LocalizedName>
+    </BattleCardDesc>
+
   </cardDescList>
 </BattleCardDescRoot>

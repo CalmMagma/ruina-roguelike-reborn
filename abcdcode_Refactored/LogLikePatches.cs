@@ -1207,7 +1207,7 @@ namespace abcdcode_LOGLIKE_MOD
                     List<DiceCardXmlInfo> onlyCards = bookItem.GetOnlyCards();
                     if (_cardModel.ClassInfo.optionList.Contains(CardOption.OnlyPage))
                     {
-                        if (!onlyCards.Exists((Predicate<DiceCardXmlInfo>)(y => y.id.GetOriginalId() == _cardModel.GetID().GetOriginalId())))
+                        if (!onlyCards.Exists(y => y.id.GetOriginalId() == _cardModel.GetID().GetOriginalId()))
                             field.SetValue((object)self, (object)UIINVENCARD_STATE.OnlyPage);
                     }
                     else if (bookItem.ClassInfo.RangeType == EquipRangeType.Melee && _cardModel.GetSpec().Ranged == CardRange.Far)
