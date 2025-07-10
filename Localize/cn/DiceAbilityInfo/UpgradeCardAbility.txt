@@ -748,11 +748,11 @@
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_InkOverDie">
-    <Desc>[​​命中时]If target has 4+ Bleed, draw pages equal to (target’s Bleed / 4) (Max. 2)</Desc>
+    <Desc>[命中时]若目标拥有不少于4层[流血]则抽取等同于目标[流血]层数1/4的书页(至多2张)</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_InkOverDieUpgrade">
-    <Desc>[​On Hit] If target has 3+ Bleed, draw pages equal to (target’s Bleed / 3) (Max. 3)</Desc>
+    <Desc>[命中时]若目标拥有不少于3层[流血]则抽取等同于目标[流血]层数1/3的书页(至多3张)</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_energy2draw1">

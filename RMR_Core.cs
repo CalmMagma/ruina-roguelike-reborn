@@ -3076,8 +3076,6 @@ namespace RogueLike_Mod_Reborn
         }
 
 
-
-
         #endregion
 
         #region FINALIZERS

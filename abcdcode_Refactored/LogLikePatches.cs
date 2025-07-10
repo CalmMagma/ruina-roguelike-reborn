@@ -32,7 +32,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 elapsed += TimeManager.GetUIDeltaTime() * 2f;
                 self.cardSelectionGroup.alpha = 1f - elapsed;
-                yield return (object)null;
+                yield return null;
             }
             self.SetRootCanvas(false);
             for (int i = 0; i < self.candidates.Length; ++i)
@@ -43,8 +43,8 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static IEnumerator TranslateRoutine(bool hide, LevelUpUI self)
         {
-            float translateDelay = (float)typeof(LevelUpUI).GetField("translateDelay", AccessTools.all).GetValue((object)self);
-            float translateSpeed = (float)typeof(LevelUpUI).GetField("translateSpeed", AccessTools.all).GetValue((object)self);
+            float translateDelay = (float)typeof(LevelUpUI).GetField("translateDelay", AccessTools.all).GetValue(self);
+            float translateSpeed = (float)typeof(LevelUpUI).GetField("translateSpeed", AccessTools.all).GetValue(self);
             float elapsed = 0.0f;
             Vector2 v = new Vector2(-2027f, -213f);
             Vector2 vector2 = new Vector2(751f, 79f);
@@ -55,14 +55,14 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else
                 self.showTranslator.anchoredPosition = v;
-            yield return (object)YieldCache.WaitForSeconds(translateDelay);
+            yield return YieldCache.WaitForSeconds(translateDelay);
             if (hide)
             {
                 while ((double)elapsed < 1.0)
                 {
                     elapsed += Time.deltaTime * translateSpeed;
                     self.showTranslator.anchoredPosition = Vector2.Lerp(Vector2.zero, v, elapsed * elapsed);
-                    yield return (object)YieldCache.waitFrame;
+                    yield return YieldCache.waitFrame;
                 }
             }
             else
@@ -71,7 +71,7 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     elapsed += Time.deltaTime * translateSpeed;
                     self.showTranslator.anchoredPosition = Vector2.Lerp(v, Vector2.zero, elapsed);
-                    yield return (object)YieldCache.waitFrame;
+                    yield return YieldCache.waitFrame;
                 }
                 self.cardSelectionGroup.interactable = true;
             }
@@ -115,24 +115,24 @@ namespace abcdcode_LOGLIKE_MOD
             FieldInfo field14 = slot.GetType().GetField("defeatColor", AccessTools.all);
             FieldInfo field15 = slot.GetType().GetField("anim", AccessTools.all);
             FieldInfo field16 = slot.GetType().GetField("cg", AccessTools.all);
-            field1.SetValue((object)slot, (object)list);
+            field1.SetValue(slot, list);
             RectTransform transform = slot.transform as RectTransform;
-            field2.SetValue((object)slot, (object)transform);
-            field3.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Image>());
-            field4.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>());
-            field5.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(3).gameObject.GetComponent<Image>());
-            field6.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(2).gameObject.GetComponent<Image>());
-            field7.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(3).gameObject.GetComponent<_2dxFX_HSV>());
-            field8.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(2).gameObject.GetComponent<_2dxFX_HSV>());
-            field9.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(1).gameObject.GetComponent<_2dxFX_HSV>());
-            field10.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<_2dxFX_HSV>());
-            field11.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>());
-            field12.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshProMaterialSetter>());
-            field13.SetValue((object)slot, (object)slot.gameObject.transform.GetChild(0).gameObject.GetComponent<Image>());
+            field2.SetValue(slot, transform);
+            field3.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Image>());
+            field4.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>());
+            field5.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(3).gameObject.GetComponent<Image>());
+            field6.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(2).gameObject.GetComponent<Image>());
+            field7.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(3).gameObject.GetComponent<_2dxFX_HSV>());
+            field8.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(2).gameObject.GetComponent<_2dxFX_HSV>());
+            field9.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(1).gameObject.GetComponent<_2dxFX_HSV>());
+            field10.SetValue(slot, slot.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<_2dxFX_HSV>());
+            field11.SetValue(slot, slot.gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>());
+            field12.SetValue(slot, slot.gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshProMaterialSetter>());
+            field13.SetValue(slot, slot.gameObject.transform.GetChild(0).gameObject.GetComponent<Image>());
             Color color = new Color(0.454902f, 0.1098039f, 0.0f, 1f);
-            field14.SetValue((object)slot, (object)color);
-            field15.SetValue((object)slot, (object)slot.gameObject.GetComponent<Animator>());
-            field16.SetValue((object)slot, (object)slot.gameObject.GetComponent<CanvasGroup>());
+            field14.SetValue(slot, color);
+            field15.SetValue(slot, slot.gameObject.GetComponent<Animator>());
+            field16.SetValue(slot, slot.gameObject.GetComponent<CanvasGroup>());
             slot.transform.localPosition = (Vector3)new Vector2(120f, 0.0f);
             slot.gameObject.SetActive(false);
         }
@@ -213,7 +213,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return orig(self, cardID);
-            Dictionary<string, AbnormalityCard> dictionary = (Dictionary<string, AbnormalityCard>)typeof(AbnormalityCardDescXmlList).GetField("_dictionary", AccessTools.all).GetValue((object)self);
+            Dictionary<string, AbnormalityCard> dictionary = (Dictionary<string, AbnormalityCard>)typeof(AbnormalityCardDescXmlList).GetField("_dictionary", AccessTools.all).GetValue(self);
             AbnormalityCard abnormalityCard;
             if (dictionary.ContainsKey(cardID))
             {
@@ -289,7 +289,7 @@ namespace abcdcode_LOGLIKE_MOD
             // attach funny background to object above
             if (!LogLikeMod.CheckStage())
                 return;
-            foreach (UISephirahButton uiSephirahButton in (List<UISephirahButton>)typeof(UIBattleSettingPanel).GetField("SephirahButtons", AccessTools.all).GetValue((object)self))
+            foreach (UISephirahButton uiSephirahButton in (List<UISephirahButton>)typeof(UIBattleSettingPanel).GetField("SephirahButtons", AccessTools.all).GetValue(self))
                 uiSephirahButton.SetButtonState(UISephirahButton.ButtonState.Close);
         }
 
@@ -314,19 +314,19 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage(true))
                 return orig(self, coinType, count);
             self.SetMaxEmotionLevel(Math.Min((int)(LogLikeMod.curchaptergrade + 1), 5));
-            BattleUnitModel battleUnitModel = (BattleUnitModel)typeof(BattleUnitEmotionDetail).GetField("_self", AccessTools.all).GetValue((object)self);
+            BattleUnitModel battleUnitModel = (BattleUnitModel)typeof(BattleUnitEmotionDetail).GetField("_self", AccessTools.all).GetValue(self);
             if (battleUnitModel.faction == Faction.Player && battleUnitModel.UnitData.unitData.gender == Gender.Creature)
                 return 0;
             MethodInfo method = typeof(BattleUnitEmotionDetail).GetMethod("GetEmotionCoinAdder", AccessTools.all);
-            count += (int)method.Invoke((object)self, new object[1]
+            count += (int)method.Invoke(self, new object[1]
             {
-      (object) count
+       count
             });
             if (battleUnitModel.faction == Faction.Player)
                 battleUnitModel.personalEgoDetail.AddEgoCoolTime(count);
             if (self.EmotionLevel >= self.MaximumEmotionLevel)
                 return 0;
-            List<EmotionCoin> emotionCoinList = (List<EmotionCoin>)typeof(BattleUnitEmotionDetail).GetField("_emotionCoins", AccessTools.all).GetValue((object)self);
+            List<EmotionCoin> emotionCoinList = (List<EmotionCoin>)typeof(BattleUnitEmotionDetail).GetField("_emotionCoins", AccessTools.all).GetValue(self);
             for (int index = 0; index < count; ++index)
             {
                 if (emotionCoinList.Count < self.MaximumCoinNumber)
@@ -334,7 +334,7 @@ namespace abcdcode_LOGLIKE_MOD
                     //if (!self.OnGetEmotionCoin(coinType))
                     //  ;
                     EmotionCoin uninitializedObject = (EmotionCoin)FormatterServices.GetUninitializedObject(typeof(EmotionCoin));
-                    typeof(EmotionCoin).GetField("_coinType", AccessTools.all).SetValue((object)uninitializedObject, (object)coinType);
+                    typeof(EmotionCoin).GetField("_coinType", AccessTools.all).SetValue(uninitializedObject, coinType);
                     emotionCoinList.Add(uninitializedObject);
                     self.totalEmotionCoins.Add(uninitializedObject);
                 }
@@ -445,7 +445,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.CheckStage(true))
             {
-                BattleTeamModel battleTeamModel = (BattleTeamModel)typeof(StageController).GetField("_librarianTeam", AccessTools.all).GetValue((object)self);
+                BattleTeamModel battleTeamModel = (BattleTeamModel)typeof(StageController).GetField("_librarianTeam", AccessTools.all).GetValue(self);
                 int num = 0;
                 foreach (UnitBattleDataModel unitBattleData in LogueBookModels.playerBattleModel)
                 {
@@ -541,10 +541,10 @@ namespace abcdcode_LOGLIKE_MOD
                 FieldInfo _needUnitSelection = typeof(LevelUpUI).GetField("_needUnitSelection", AccessTools.all);
                 FieldInfo _selectedCard = typeof(LevelUpUI).GetField("_selectedCard", AccessTools.all);
                 self.cardSelectionGroup.interactable = false;
-                yield return (object)YieldCache.WaitForSeconds(0.1f);
-                if ((bool)_needUnitSelection.GetValue((object)self))
+                yield return YieldCache.WaitForSeconds(0.1f);
+                if ((bool)_needUnitSelection.GetValue(self))
                 {
-                    EmotionCardXmlInfo einfo = _selectedCard.GetValue((object)self) as EmotionCardXmlInfo;
+                    EmotionCardXmlInfo einfo = _selectedCard.GetValue(self) as EmotionCardXmlInfo;
                     LorId id = new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Passive(einfo), einfo.id);
                     List<BattleUnitModel> aliveList = BattleObjectManager.instance.GetList(Faction.Player);
                     RewardPassiveInfo pinfo = Singleton<RewardPassivesList>.Instance.GetPassiveInfo(id);
@@ -571,8 +571,8 @@ namespace abcdcode_LOGLIKE_MOD
                 label_11:
                     if (aliveList.Count > 0)
                     {
-                        if (_selectedCard.GetValue((object)self) != null)
-                            self.selectedEmotionCard.Init((EmotionCardXmlInfo)_selectedCard.GetValue((object)self), true);
+                        if (_selectedCard.GetValue(self) != null)
+                            self.selectedEmotionCard.Init((EmotionCardXmlInfo)_selectedCard.GetValue(self), true);
                         if (Singleton<StageController>.Instance.AllyFormationDirection == Direction.LEFT)
                         {
                             self.selectedEmotionCard.transform.localPosition = new Vector3(410f, -510f);
@@ -613,7 +613,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
             }
             else
-                yield return (object)orig(self);
+                yield return orig(self);
         }
 
         /// <summary>
@@ -629,9 +629,9 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (LogLikeMod.CheckStage(true))
                 {
-                    TextMeshProUGUI textMeshProUgui1 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_PositiveValueText", AccessTools.all).GetValue((object)self);
-                    TextMeshProUGUI textMeshProUgui2 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_NegativeValueText", AccessTools.all).GetValue((object)self);
-                    RectTransform rectTransform = (RectTransform)typeof(LevelUpUI).GetField("rect_BarContent", AccessTools.all).GetValue((object)self);
+                    TextMeshProUGUI textMeshProUgui1 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_PositiveValueText", AccessTools.all).GetValue(self);
+                    TextMeshProUGUI textMeshProUgui2 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_NegativeValueText", AccessTools.all).GetValue(self);
+                    RectTransform rectTransform = (RectTransform)typeof(LevelUpUI).GetField("rect_BarContent", AccessTools.all).GetValue(self);
                     textMeshProUgui1.text = "0";
                     textMeshProUgui2.text = "0";
                     rectTransform.anchoredPosition = Vector2.zero;
@@ -658,8 +658,8 @@ namespace abcdcode_LOGLIKE_MOD
             orig(self, selectedCount, isEgo);
             if (LogLikeMod.CheckStage(true))
             {
-                TextMeshProUGUI textMeshProUgui1 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_SelectDesc", AccessTools.all).GetValue((object)self);
-                TextMeshProUGUI textMeshProUgui2 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_BtnSelectDesc", AccessTools.all).GetValue((object)self);
+                TextMeshProUGUI textMeshProUgui1 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_SelectDesc", AccessTools.all).GetValue(self);
+                TextMeshProUGUI textMeshProUgui2 = (TextMeshProUGUI)typeof(LevelUpUI).GetField("txt_BtnSelectDesc", AccessTools.all).GetValue(self);
                 if (LogLikeMod.skipPanel == null)
                 {
                     Button button = ModdingUtils.CreateButton(self.selectablePanel.transform.parent, "AbCardSelection_Skip", new Vector2(1f, 1f), new Vector2(650f, 385f));
@@ -676,10 +676,10 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         if (RewardingModel.rewardFlag == RewardingModel.RewardFlag.PassiveReward)
                             LogLikeMod.rewards_passive.RemoveAt(0);
-                        self.StartCoroutine((IEnumerator)typeof(LevelUpUI).GetMethod("DisableRoutine", AccessTools.all).Invoke((object)self, (object[])null));
-                        self.StartCoroutine((IEnumerator)typeof(LevelUpUI).GetMethod("TranslateRoutine", AccessTools.all).Invoke((object)self, new object[1]
+                        self.StartCoroutine((IEnumerator)typeof(LevelUpUI).GetMethod("DisableRoutine", AccessTools.all).Invoke(self, (object[])null));
+                        self.StartCoroutine((IEnumerator)typeof(LevelUpUI).GetMethod("TranslateRoutine", AccessTools.all).Invoke(self, new object[1]
                     {
-                    (object) true
+                     true
                       }));
                     });
                     button.onClick = buttonClickedEvent;
@@ -856,7 +856,7 @@ namespace abcdcode_LOGLIKE_MOD
                             LogueBookModels.playersPick[target.UnitData.unitData].Add(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Passive(card), card.id));
                     }
                     pickUp.OnPickUp();
-                    Singleton<LogueSaveManager>.Instance.AddToObtainCount((object)pickUp);
+                    Singleton<LogueSaveManager>.Instance.AddToObtainCount(pickUp);
                 }
                 switch (RewardingModel.rewardFlag)
                 {
@@ -889,7 +889,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (LogLikeMod.InvenBtn == null)
                 {
-                    Button fieldValue = LogLikeMod.GetFieldValue<Button>((object)self, "button_BattleCard");
+                    Button fieldValue = LogLikeMod.GetFieldValue<Button>(self, "button_BattleCard");
                     LogLikeMod.InvenBtn = UnityEngine.Object.Instantiate<Button>(fieldValue, fieldValue.transform.parent);
                     LogLikeMod.InvenBtn.transform.localPosition = fieldValue.transform.localPosition + new Vector3(200f, 0.0f);
                     Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
@@ -903,7 +903,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 if (LogLikeMod.CreatureBtn == null)
                 {
-                    Button fieldValue = LogLikeMod.GetFieldValue<Button>((object)self, "button_BattleCard");
+                    Button fieldValue = LogLikeMod.GetFieldValue<Button>(self, "button_BattleCard");
                     LogLikeMod.CreatureBtn = UnityEngine.Object.Instantiate<Button>(fieldValue, fieldValue.transform.parent);
                     LogLikeMod.CreatureBtn.transform.localPosition = fieldValue.transform.localPosition + new Vector3(400f, 0.0f);
                     Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
@@ -917,7 +917,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 if (LogLikeMod.CraftBtn == null)
                 {
-                    Button fieldValue = LogLikeMod.GetFieldValue<Button>((object)self, "button_BattleCard");
+                    Button fieldValue = LogLikeMod.GetFieldValue<Button>(self, "button_BattleCard");
                     LogLikeMod.CraftBtn = UnityEngine.Object.Instantiate<Button>(fieldValue, fieldValue.transform.parent);
                     LogLikeMod.CraftBtn.transform.localPosition = fieldValue.transform.localPosition + new Vector3(600f, 0.0f);
                     Button.ButtonClickedEvent buttonClickedEvent = new Button.ButtonClickedEvent();
@@ -935,7 +935,7 @@ namespace abcdcode_LOGLIKE_MOD
                 Singleton<GlobalLogueInventoryPanel>.Instance.SetActive(false);
                 Singleton<LogCreatureTabPanel>.Instance.SetActive(false);
                 Singleton<LogCraftPanel>.Instance.SetActive(false);
-                Image image = (Image)typeof(UIBattleSettingEditPanel).GetField("img_BlockBackGroundBg", AccessTools.all).GetValue((object)self);
+                Image image = (Image)typeof(UIBattleSettingEditPanel).GetField("img_BlockBackGroundBg", AccessTools.all).GetValue(self);
                 self.SetBUttonState(state);
                 image.raycastTarget = true;
                 self.SetActivePanel(true);
@@ -960,7 +960,7 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage())
                 return;
             Color uiColor = UIColorManager.Manager.GetUIColor(UIColor.Default);
-            typeof(UIBattleSettingLibrarianInfoPanel).GetField("isBattlePageLock", AccessTools.all).SetValue((object)self, (object)false);
+            typeof(UIBattleSettingLibrarianInfoPanel).GetField("isBattlePageLock", AccessTools.all).SetValue(self, false);
             self.SetBattlePageSlotColor(uiColor);
         }
 
@@ -975,7 +975,7 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage())
                 return;
             Color uiColor = UIColorManager.Manager.GetUIColor(UIColor.Default);
-            typeof(UIBattleSettingLibrarianInfoPanel).GetField("isEquipPageLock", AccessTools.all).SetValue((object)self, (object)false);
+            typeof(UIBattleSettingLibrarianInfoPanel).GetField("isEquipPageLock", AccessTools.all).SetValue(self, false);
             self.SetEquipPageSlotColor(uiColor);
         }
 
@@ -1000,22 +1000,22 @@ namespace abcdcode_LOGLIKE_MOD
             orig(self, egoxmlinfo);
             if (!LogLikeMod.CheckStage(true))
                 return;
-            foreach (GameObject gameObject in (GameObject[])typeof(BattleDiceCardUI).GetField("ob_NormalFrames", AccessTools.all).GetValue((object)self))
+            foreach (GameObject gameObject in (GameObject[])typeof(BattleDiceCardUI).GetField("ob_NormalFrames", AccessTools.all).GetValue(self))
                 gameObject.SetActive(true);
-            foreach (GameObject gameObject in (GameObject[])typeof(BattleDiceCardUI).GetField("ob_EgoFrames", AccessTools.all).GetValue((object)self))
+            foreach (GameObject gameObject in (GameObject[])typeof(BattleDiceCardUI).GetField("ob_EgoFrames", AccessTools.all).GetValue(self))
                 gameObject.SetActive(false);
             DiceCardXmlInfo cardItem = ItemXmlDataList.instance.GetCardItem(egoxmlinfo.CardId);
             FieldInfo field1 = typeof(BattleDiceCardUI).GetField("colorFrame", AccessTools.all);
             FieldInfo field2 = typeof(BattleDiceCardUI).GetField("colorLineardodge", AccessTools.all);
-            field1.SetValue((object)self, (object)UIColorManager.Manager.GetCardRarityColor(cardItem.Rarity));
-            field2.SetValue((object)self, (object)UIColorManager.Manager.GetCardRarityLinearColor(cardItem.Rarity));
-            typeof(BattleDiceCardUI).GetMethod("SetRangeIconHsv", AccessTools.all).Invoke((object)self, new object[1]
+            field1.SetValue(self, UIColorManager.Manager.GetCardRarityColor(cardItem.Rarity));
+            field2.SetValue(self, UIColorManager.Manager.GetCardRarityLinearColor(cardItem.Rarity));
+            typeof(BattleDiceCardUI).GetMethod("SetRangeIconHsv", AccessTools.all).Invoke(self, new object[1]
             {
-      (object) UIColorManager.Manager.CardRangeHsvValue[(int) cardItem.Rarity]
+       UIColorManager.Manager.CardRangeHsvValue[(int) cardItem.Rarity]
             });
-            typeof(BattleDiceCardUI).GetMethod("SetFrameColor", AccessTools.all).Invoke((object)self, new object[1]
+            typeof(BattleDiceCardUI).GetMethod("SetFrameColor", AccessTools.all).Invoke(self, new object[1]
             {
-      field1.GetValue((object) self)
+      field1.GetValue( self)
             });
             self.SetLinearDodgeColor(true);
         }
@@ -1032,28 +1032,28 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.CheckStage(true))
             {
-                GameObject gameObject = (GameObject)typeof(BattleUnitCardsInHandUI).GetField("_rootObj", AccessTools.all).GetValue((object)self);
-                Toggle toggle = (Toggle)typeof(BattleUnitCardsInHandUI).GetField("toggle_ShowEgo", AccessTools.all).GetValue((object)self);
+                GameObject gameObject = (GameObject)typeof(BattleUnitCardsInHandUI).GetField("_rootObj", AccessTools.all).GetValue(self);
+                Toggle toggle = (Toggle)typeof(BattleUnitCardsInHandUI).GetField("toggle_ShowEgo", AccessTools.all).GetValue(self);
                 FieldInfo field1 = typeof(BattleUnitCardsInHandUI).GetField("isOverOnEgoToggle", AccessTools.all);
                 FieldInfo field2 = typeof(BattleUnitCardsInHandUI).GetField("_selectedUnit", AccessTools.all);
                 FieldInfo field3 = typeof(BattleUnitCardsInHandUI).GetField("_hOveredUnit", AccessTools.all);
                 FieldInfo field4 = typeof(BattleUnitCardsInHandUI).GetField("_handState", AccessTools.all);
                 gameObject.SetActive(true);
-                field1.SetValue((object)self, (object)false);
+                field1.SetValue(self, false);
                 if (isClicked)
-                    field2.SetValue((object)self, (object)unitModel);
+                    field2.SetValue(self, unitModel);
                 else
-                    field3.SetValue((object)self, (object)unitModel);
+                    field3.SetValue(self, unitModel);
                 BattleUnitCardsInHandUI.EgoToggleState egoToggleState = BattleUnitCardsInHandUI.EgoToggleState.Hide;
                 if (unitModel.personalEgoDetail.ExistsCard())
                     egoToggleState = toggle.isOn ? BattleUnitCardsInHandUI.EgoToggleState.On : BattleUnitCardsInHandUI.EgoToggleState.Off;
                 else
-                    field4.SetValue((object)self, (object)BattleUnitCardsInHandUI.HandState.BattleCard);
+                    field4.SetValue(self, BattleUnitCardsInHandUI.HandState.BattleCard);
                 if (!PlatformManager.Instance.AchievementUnlocked(AchievementEnum.ONCE_COPY) && unitModel.allyCardDetail.Exsist6CardsInHand_andCopy())
                     PlatformManager.Instance.UnlockAchievement(AchievementEnum.ONCE_COPY);
-                typeof(BattleUnitCardsInHandUI).GetMethod("SetEgoToggleState", AccessTools.all).Invoke((object)self, new object[1]
+                typeof(BattleUnitCardsInHandUI).GetMethod("SetEgoToggleState", AccessTools.all).Invoke(self, new object[1]
                 {
-        (object) egoToggleState
+         egoToggleState
                 });
             }
             else
@@ -1070,7 +1070,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return orig(self, cardId);
-            if (!((List<DiceCardXmlInfo>)typeof(DeckModel).GetField("_deck", AccessTools.all).GetValue((object)self)).Remove(ItemXmlDataList.instance.GetCardItem(cardId)))
+            if (!((List<DiceCardXmlInfo>)typeof(DeckModel).GetField("_deck", AccessTools.all).GetValue(self)).Remove(ItemXmlDataList.instance.GetCardItem(cardId)))
                 return false;
             LogueBookModels.AddCard(cardId, 1, false);
             return true;
@@ -1087,7 +1087,7 @@ namespace abcdcode_LOGLIKE_MOD
             CardEquipState cardEquipState;
             if (LogLikeMod.CheckStage())
             {
-                List<DiceCardXmlInfo> diceCardXmlInfoList = (List<DiceCardXmlInfo>)typeof(DeckModel).GetField("_deck", AccessTools.all).GetValue((object)self);
+                List<DiceCardXmlInfo> diceCardXmlInfoList = (List<DiceCardXmlInfo>)typeof(DeckModel).GetField("_deck", AccessTools.all).GetValue(self);
                 if (diceCardXmlInfoList.Count >= 9)
                 {
                     cardEquipState = CardEquipState.FullOfDeck;
@@ -1099,7 +1099,7 @@ namespace abcdcode_LOGLIKE_MOD
                     CardEquipState state;
                     if (diceCardSelfAbility != null && diceCardSelfAbility is LogDiceCardSelfAbility && !(diceCardSelfAbility as LogDiceCardSelfAbility).CanAddDeck(self, out state))
                         return state;
-                    if (diceCardXmlInfoList.FindAll((Predicate<DiceCardXmlInfo>)(x => x.id.GetOriginalId() == card.id.GetOriginalId())).Count >= card.Limit)
+                    if (diceCardXmlInfoList.FindAll(x => x.id.GetOriginalId() == card.id.GetOriginalId()).Count >= card.Limit)
                         cardEquipState = CardEquipState.OverCardLimit;
                     else if (!LogueBookModels.RemoveCard(card.id))
                     {
@@ -1143,6 +1143,50 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage())
                 return orig(self, cardId);
             return ItemXmlDataList.instance.GetCardItem(cardId) == null ? CardEquipState.ERROR : self.bookItem.AddCardFromInventoryToCurrentDeck(cardId);
+        }
+
+        /// <summary>
+        /// Hook for equipping a combat page into an unit.
+        /// </summary>
+        public CardEquipState BookModel_AddCardFromInventory(
+            Func<BookModel, LorId, CardEquipState> orig, 
+            BookModel self, 
+            LorId cardId)
+        {
+            if (!LogLikeMod.CheckStage())
+                return orig(self, cardId);
+            if (self.IsFixedDeck())
+            {
+                return CardEquipState.ERROR;
+            }
+            if (self.IsLockByBluePrimary())
+            {
+                return CardEquipState.ERROR;
+            }
+            DiceCardXmlInfo cardXmlInfo = ItemXmlDataList.instance.GetCardItem(cardId, false);
+            if (cardXmlInfo == null)
+            {
+                return CardEquipState.ERROR;
+            }
+            if (cardXmlInfo.optionList.Contains(CardOption.OnlyPage))
+            {
+                if (!self._onlyCards.Exists((DiceCardXmlInfo x) => x.id.GetOriginalId() == cardXmlInfo.id.GetOriginalId()))
+                {
+                    return CardEquipState.OnlyPageLimit;
+                }
+            }
+            else if (self.ClassInfo.RangeType == EquipRangeType.Melee)
+            {
+                if (cardXmlInfo.Spec.Ranged == CardRange.Far)
+                {
+                    return CardEquipState.FarTypeLimit;
+                }
+            }
+            else if (self.ClassInfo.RangeType == EquipRangeType.Range && cardXmlInfo.Spec.Ranged == CardRange.Near)
+            {
+                return CardEquipState.NearTypeLimit;
+            }
+            return self._deck.AddCardFromInventory(cardId);
         }
 
         /// <summary>
@@ -1191,15 +1235,15 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.CheckStage())
             {
-                TextMeshProUGUI textMeshProUgui = (TextMeshProUGUI)typeof(UIInvenCardSlot).GetField("txt_deckLimit", AccessTools.all).GetValue((object)self);
-                GameObject gameObject = (GameObject)typeof(UIInvenCardSlot).GetField("deckLimitRoot", AccessTools.all).GetValue((object)self);
-                DiceCardItemModel _cardModel = (DiceCardItemModel)typeof(UIOriginCardSlot).GetField("_cardModel", AccessTools.all).GetValue((object)self);
+                TextMeshProUGUI textMeshProUgui = (TextMeshProUGUI)typeof(UIInvenCardSlot).GetField("txt_deckLimit", AccessTools.all).GetValue(self);
+                GameObject gameObject = (GameObject)typeof(UIInvenCardSlot).GetField("deckLimitRoot", AccessTools.all).GetValue(self);
+                DiceCardItemModel _cardModel = (DiceCardItemModel)typeof(UIOriginCardSlot).GetField("_cardModel", AccessTools.all).GetValue(self);
                 FieldInfo field = typeof(UIInvenCardSlot).GetField("slotState", AccessTools.all);
-                field.SetValue((object)self, (object)UIINVENCARD_STATE.None);
+                field.SetValue(self, UIINVENCARD_STATE.None);
                 if (_cardModel.num <= 0)
-                    field.SetValue((object)self, (object)UIINVENCARD_STATE.NumberZero);
+                    field.SetValue(self, UIINVENCARD_STATE.NumberZero);
                 if (UI.UIController.Instance.CurrentUnit.GetDeckAll().FindAll((Predicate<DiceCardXmlInfo>)(x => x.id.GetOriginalId() == _cardModel.GetID().GetOriginalId())).Count >= _cardModel.GetLimit())
-                    field.SetValue((object)self, (object)UIINVENCARD_STATE.LimitedDeck);
+                    field.SetValue(self, UIINVENCARD_STATE.LimitedDeck);
                 UnitDataModel currentUnit = UI.UIController.Instance.CurrentUnit;
                 if (currentUnit != null)
                 {
@@ -1208,16 +1252,16 @@ namespace abcdcode_LOGLIKE_MOD
                     if (_cardModel.ClassInfo.optionList.Contains(CardOption.OnlyPage))
                     {
                         if (!onlyCards.Exists(y => y.id.GetOriginalId() == _cardModel.GetID().GetOriginalId()))
-                            field.SetValue((object)self, (object)UIINVENCARD_STATE.OnlyPage);
+                            field.SetValue(self, UIINVENCARD_STATE.OnlyPage);
                     }
                     else if (bookItem.ClassInfo.RangeType == EquipRangeType.Melee && _cardModel.GetSpec().Ranged == CardRange.Far)
-                        field.SetValue((object)self, (object)UIINVENCARD_STATE.RangeCard);
+                        field.SetValue(self, UIINVENCARD_STATE.RangeCard);
                     else if (bookItem.ClassInfo.RangeType == EquipRangeType.Range && _cardModel.GetSpec().Ranged == CardRange.Near)
-                        field.SetValue((object)self, (object)UIINVENCARD_STATE.MeleeCard);
+                        field.SetValue(self, UIINVENCARD_STATE.MeleeCard);
                 }
-                gameObject.gameObject.SetActive((UIINVENCARD_STATE)field.GetValue((object)self) > UIINVENCARD_STATE.None);
-                self.SetGrayScale((UIINVENCARD_STATE)field.GetValue((object)self) > UIINVENCARD_STATE.None);
-                switch ((UIINVENCARD_STATE)field.GetValue((object)self))
+                gameObject.gameObject.SetActive((UIINVENCARD_STATE)field.GetValue(self) > UIINVENCARD_STATE.None);
+                self.SetGrayScale((UIINVENCARD_STATE)field.GetValue(self) > UIINVENCARD_STATE.None);
+                switch ((UIINVENCARD_STATE)field.GetValue(self))
                 {
                     case UIINVENCARD_STATE.LimitedDeck:
                         textMeshProUgui.text = TextDataModel.GetText("ui_card_equipstate_overcardlimit");
@@ -1413,13 +1457,13 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (LogLikeMod.CheckStage())
             {
-                UICharacterList uiCharacterList = (UICharacterList)typeof(UILibrarianCharacterListPanel).GetField("CharacterList", AccessTools.all).GetValue((object)self);
+                UICharacterList uiCharacterList = (UICharacterList)typeof(UILibrarianCharacterListPanel).GetField("CharacterList", AccessTools.all).GetValue(self);
                 List<UnitBattleDataModel> playerBattleModel = LogueBookModels.playerBattleModel;
                 self.SetCharacterRenderer(playerBattleModel, false);
                 uiCharacterList.InitUnitListFromBattleData(playerBattleModel);
-                typeof(UILibrarianCharacterListPanel).GetMethod("UpdateFrameToSephirah", AccessTools.all).Invoke((object)self, new object[1]
+                typeof(UILibrarianCharacterListPanel).GetMethod("UpdateFrameToSephirah", AccessTools.all).Invoke(self, new object[1]
                 {
-                    (object) SephirahType.None
+                     SephirahType.None
                 });
             }
             else
@@ -1437,7 +1481,7 @@ namespace abcdcode_LOGLIKE_MOD
             if (LogLikeMod.CheckStage())
             {
                 
-                foreach (UISephirahSelectionButton sephirahSelectionButton in (List<UISephirahSelectionButton>)typeof(UILibrarianCharacterListPanel).GetField("SephirahSelectionButtons", AccessTools.all).GetValue((object)self))
+                foreach (UISephirahSelectionButton sephirahSelectionButton in (List<UISephirahSelectionButton>)typeof(UILibrarianCharacterListPanel).GetField("SephirahSelectionButtons", AccessTools.all).GetValue(self))
                 {
                     sephirahSelectionButton.Deactivate();
                     sephirahSelectionButton.SetLock();
@@ -1503,7 +1547,7 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPrefix, HarmonyPatch(typeof(StageController), nameof(StageController.RoundStartPhase_System))]
         public static bool StageController_RoundStartPhase_System(StageController __instance)
         {
-            if (!LogLikeMod.GetFieldValue<bool>((object)__instance, "_bCalledRoundStart_system") && LogLikeMod.CheckStage())
+            if (!LogLikeMod.GetFieldValue<bool>(__instance, "_bCalledRoundStart_system") && LogLikeMod.CheckStage())
                 Singleton<GlobalLogueEffectManager>.Instance.OnRoundStart(__instance);
             return true;
         }
@@ -1568,13 +1612,13 @@ namespace abcdcode_LOGLIKE_MOD
                 Singleton<GlobalLogueInventoryPanel>.Instance.SetActive(false);
                 return true;
             }
-            Button fieldValue1 = LogLikeMod.GetFieldValue<Button>((object)__instance, "button_EquipPage");
-            Button fieldValue2 = LogLikeMod.GetFieldValue<Button>((object)__instance, "button_BattleCard");
-            Image fieldValue3 = LogLikeMod.GetFieldValue<Image>((object)__instance, "img_equippageFrame");
-            Image fieldValue4 = LogLikeMod.GetFieldValue<Image>((object)__instance, "img_battlecardFrame");
-            UISettingEquipPageInvenPanel fieldValue5 = LogLikeMod.GetFieldValue<UISettingEquipPageInvenPanel>((object)__instance, "_equipPagePanel");
-            UISettingCardInvenPanel fieldValue6 = LogLikeMod.GetFieldValue<UISettingCardInvenPanel>((object)__instance, "_battleCardPanel");
-            RectTransform fieldValue7 = LogLikeMod.GetFieldValue<RectTransform>((object)__instance, "rect_LeftBg");
+            Button fieldValue1 = LogLikeMod.GetFieldValue<Button>(__instance, "button_EquipPage");
+            Button fieldValue2 = LogLikeMod.GetFieldValue<Button>(__instance, "button_BattleCard");
+            Image fieldValue3 = LogLikeMod.GetFieldValue<Image>(__instance, "img_equippageFrame");
+            Image fieldValue4 = LogLikeMod.GetFieldValue<Image>(__instance, "img_battlecardFrame");
+            UISettingEquipPageInvenPanel fieldValue5 = LogLikeMod.GetFieldValue<UISettingEquipPageInvenPanel>(__instance, "_equipPagePanel");
+            UISettingCardInvenPanel fieldValue6 = LogLikeMod.GetFieldValue<UISettingCardInvenPanel>(__instance, "_battleCardPanel");
+            RectTransform fieldValue7 = LogLikeMod.GetFieldValue<RectTransform>(__instance, "rect_LeftBg");
             switch (state)
             {
                 case (UIBattleSettingEditTap)2:
@@ -1728,7 +1772,7 @@ namespace abcdcode_LOGLIKE_MOD
             UnitBattleDataModel battledata = LogueBookModels.playerBattleModel.Find((Predicate<UnitBattleDataModel>)(x => x.unitData == data));
             if (battledata != null)
             {
-                UICharacterSlot uiCharacterSlot = LogLikeMod.GetFieldValue<UICharacterList>((object)__instance, "CharacterList").slotList.Find((Predicate<UICharacterSlot>)(x => x.unitBattleData == battledata));
+                UICharacterSlot uiCharacterSlot = LogLikeMod.GetFieldValue<UICharacterList>(__instance, "CharacterList").slotList.Find((Predicate<UICharacterSlot>)(x => x.unitBattleData == battledata));
                 if (uiCharacterSlot != null && uiCharacterSlot.unitBattleData != null)
                 {
                     uiCharacterSlot.ReloadHpBattleSettingSlot();
@@ -1763,8 +1807,8 @@ namespace abcdcode_LOGLIKE_MOD
             if (num != 0)
             {
                 __instance.bookItem.ClassInfo.CharacterSkin[0] = "KetherLibrarian";
-                typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue((object)__instance.bookItem, (object)__instance.bookItem.ClassInfo.CharacterSkin[0]);
-                typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue((object)__instance.bookItem, (object)__instance.bookItem.ClassInfo.CharacterSkin[0]);
+                typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue(__instance.bookItem, __instance.bookItem.ClassInfo.CharacterSkin[0]);
+                typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue(__instance.bookItem, __instance.bookItem.ClassInfo.CharacterSkin[0]);
             }
             LogueBookModels.RemoveEquip(__instance);
             __result = true;
@@ -1799,9 +1843,9 @@ namespace abcdcode_LOGLIKE_MOD
           BattleUnitModel unit,
           BattleDiceCardModel appliedCard)
         {
-            List<BattleDiceCardModel> fieldValue1 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInUse", (object)__instance);
-            List<BattleDiceCardModel> fieldValue2 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInReserved", (object)__instance);
-            List<BattleDiceCardModel> fieldValue3 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInHand", (object)__instance);
+            List<BattleDiceCardModel> fieldValue1 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInUse", __instance);
+            List<BattleDiceCardModel> fieldValue2 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInReserved", __instance);
+            List<BattleDiceCardModel> fieldValue3 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInHand", __instance);
             PassiveAbility_ShopPassiveMook9 shopPassiveMook9 = PassiveAbility_ShopPassiveMook9.HasPassive(unit);
             if (shopPassiveMook9 == null || !shopPassiveMook9.cards.ContainsKey(appliedCard))
                 return true;
@@ -1821,10 +1865,10 @@ namespace abcdcode_LOGLIKE_MOD
           BattlePersonalEgoCardDetail __instance,
           BattleDiceCardModel appliedCard)
         {
-            BattleUnitModel fieldValue1 = ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance);
-            List<BattleDiceCardModel> fieldValue2 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInUse", (object)__instance);
-            List<BattleDiceCardModel> fieldValue3 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInReserved", (object)__instance);
-            List<BattleDiceCardModel> fieldValue4 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInHand", (object)__instance);
+            BattleUnitModel fieldValue1 = ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance);
+            List<BattleDiceCardModel> fieldValue2 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInUse", __instance);
+            List<BattleDiceCardModel> fieldValue3 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInReserved", __instance);
+            List<BattleDiceCardModel> fieldValue4 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInHand", __instance);
             PassiveAbility_ShopPassiveMook9 shopPassiveMook9 = PassiveAbility_ShopPassiveMook9.HasPassive(fieldValue1);
             if (shopPassiveMook9 == null || !shopPassiveMook9.cards.ContainsKey(appliedCard))
                 return true;
@@ -1844,10 +1888,10 @@ namespace abcdcode_LOGLIKE_MOD
           BattleAllyCardDetail __instance,
           BattleDiceCardModel appliedCard)
         {
-            BattleUnitModel fieldValue1 = ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance);
-            List<BattleDiceCardModel> fieldValue2 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInUse", (object)__instance);
-            List<BattleDiceCardModel> fieldValue3 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInReserved", (object)__instance);
-            List<BattleDiceCardModel> fieldValue4 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInHand", (object)__instance);
+            BattleUnitModel fieldValue1 = ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance);
+            List<BattleDiceCardModel> fieldValue2 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInUse", __instance);
+            List<BattleDiceCardModel> fieldValue3 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInReserved", __instance);
+            List<BattleDiceCardModel> fieldValue4 = ModdingUtils.GetFieldValue<List<BattleDiceCardModel>>("_cardInHand", __instance);
             PassiveAbility_ShopPassiveMook9 shopPassiveMook9 = PassiveAbility_ShopPassiveMook9.HasPassive(fieldValue1);
             if (shopPassiveMook9 == null || !shopPassiveMook9.cards.ContainsKey(appliedCard))
                 return true;
@@ -1868,7 +1912,7 @@ namespace abcdcode_LOGLIKE_MOD
           BattleDiceCardModel card,
           ref bool __result)
         {
-            PassiveAbility_ShopPassiveMook9 shopPassiveMook9 = PassiveAbility_ShopPassiveMook9.HasPassive(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance));
+            PassiveAbility_ShopPassiveMook9 shopPassiveMook9 = PassiveAbility_ShopPassiveMook9.HasPassive(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance));
             if (shopPassiveMook9 == null)
                 return true;
             int cost = card.GetCost();
@@ -1890,7 +1934,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return true;
-            BattleUnitModel fieldValue = ModdingUtils.GetFieldValue<BattleUnitModel>("_owner", (object)__instance);
+            BattleUnitModel fieldValue = ModdingUtils.GetFieldValue<BattleUnitModel>("_owner", __instance);
             if (fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) != null)
             {
                 PassiveAbility_ShopPassiveStigma5 shopPassiveStigma5 = fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) as PassiveAbility_ShopPassiveStigma5;
@@ -1905,7 +1949,7 @@ namespace abcdcode_LOGLIKE_MOD
                 if (v < 0)
                     v = 0;
                 fieldValue.TakeDamage(v, DamageType.Buf, keyword: __instance.bufType);
-                __instance.GetType().GetMethod("PrintEffect", AccessTools.all).Invoke((object)__instance, (object[])null);
+                __instance.GetType().GetMethod("PrintEffect", AccessTools.all).Invoke(__instance, (object[])null);
                 if (fieldValue.bufListDetail.GetActivatedBuf(KeywordBuf.BurnBreak) != null)
                     fieldValue.TakeBreakDamage(v / 2, DamageType.Buf, keyword: __instance.bufType);
                 if (fieldValue.faction == Faction.Enemy && fieldValue.IsDead())
@@ -1969,7 +2013,7 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPrefix, HarmonyPatch(typeof(BattleEmotionRewardInfoUI), nameof(BattleEmotionRewardInfoUI.SetData))]
         public static bool BattleEmotionRewardInfoUI_SetData(BattleEmotionRewardInfoUI __instance)
         {
-            List<BattleEmotionRewardSlotUI> fieldValue = LogLikeMod.GetFieldValue<List<BattleEmotionRewardSlotUI>>((object)__instance, "slots");
+            List<BattleEmotionRewardSlotUI> fieldValue = LogLikeMod.GetFieldValue<List<BattleEmotionRewardSlotUI>>(__instance, "slots");
             if (fieldValue.Count < 10)
             {
                 while (fieldValue.Count < 10)
@@ -2069,7 +2113,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 int index1 = Singleton<StageController>.Instance.CurrentWave - 1;
                 if (index1 < 0 || __instance.waveSlots.Count <= index1)
-                    Debug.LogError((object)"Index Error");
+                    Debug.LogError("Index Error");
                 else
                     __instance.waveSlots[index1].SetHighlighted();
             }
@@ -2108,7 +2152,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return;
-            BattleUnitModel fieldValue = ModdingUtils.GetFieldValue<BattleUnitModel>("_owner", (object)__instance);
+            BattleUnitModel fieldValue = ModdingUtils.GetFieldValue<BattleUnitModel>("_owner", __instance);
             if (!(__instance is BattleUnitBuf_burn) || fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) == null)
                 return;
             (fieldValue.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveStigma5) as PassiveAbility_ShopPassiveStigma5).Recovering();
@@ -2150,7 +2194,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (bufType != KeywordBuf.Bleeding || actor.passiveDetail.PassiveList.Find(x => x is PassiveAbility_ShopPassiveUnion2) == null)
                 return;
-            ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance).TakeDamage(stack);
+            ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance).TakeDamage(stack);
         }
 
         /// <summary>
@@ -2164,7 +2208,7 @@ namespace abcdcode_LOGLIKE_MOD
           DamageType type = DamageType.ETC,
           KeywordBuf keyword = KeywordBuf.None)
         {
-            __result = Singleton<GlobalLogueEffectManager>.Instance.DmgFactor(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", (object)__instance), dmg, type, keyword);
+            __result = Singleton<GlobalLogueEffectManager>.Instance.DmgFactor(ModdingUtils.GetFieldValue<BattleUnitModel>("_self", __instance), dmg, type, keyword);
         }
 
         /// <summary>
@@ -2219,7 +2263,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return;
-            Image image = (Image)typeof(UIOriginCardSlot).GetField("img_Artwork", AccessTools.all).GetValue((object)__instance);
+            Image image = (Image)typeof(UIOriginCardSlot).GetField("img_Artwork", AccessTools.all).GetValue(__instance);
             bool flag = cardmodel.GetID().packageId == LogLikeMod.ModId;
             if (LogLikeMod.ArtWorks.ContainsKey(cardmodel.GetArtworkSrc()) & flag)
             {
@@ -2550,7 +2594,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return;
-            LogLikeMod.GetFieldValue<Image>((object)__instance, "_artwork").sprite = LogLikeMod.ArtWorks[__instance.Card.Artwork];
+            LogLikeMod.GetFieldValue<Image>(__instance, "_artwork").sprite = LogLikeMod.ArtWorks[__instance.Card.Artwork];
         }
 
 

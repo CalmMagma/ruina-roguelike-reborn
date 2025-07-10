@@ -1998,6 +1998,7 @@ namespace abcdcode_LOGLIKE_MOD
                 HookHelper.CreateHook(typeof(UIInvenCardSlot), "SetSlotState", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardSlot_SetSlotState));
                 HookHelper.CreateHook(typeof(UIInvenCardSlot), "OnClickCardEquipInfoButton", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardSlot_OnClickCardEquipInfoButton));
                 HookHelper.CreateHook(typeof(UnitDataModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UnitDataModel_AddCardFromInventory));
+                HookHelper.CreateHook(typeof(BookModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookModel_AddCardFromInventory));
                 HookHelper.CreateHook(typeof(UIInvenCardListScroll), "SetData", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardListScroll_SetData));
                 HookHelper.CreateHook(typeof(DeckModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DeckModel_AddCardFromInventory));
                 HookHelper.CreateHook(typeof(DeckModel), "MoveCardToInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DeckModel_MoveCardToInventory));
