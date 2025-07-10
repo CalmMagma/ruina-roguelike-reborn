@@ -1133,7 +1133,8 @@ namespace abcdcode_LOGLIKE_MOD
         }
 
         /// <summary>
-        /// Hook for equipping a combat page into an unit.
+        /// Hook for equipping a combat page into an unit-<br></br>
+        /// SPECIFICALLY, defers control of AddCardFromInventory to BookModel.
         /// </summary>
         public CardEquipState UnitDataModel_AddCardFromInventory(
           Func<UnitDataModel, LorId, CardEquipState> orig,
@@ -1142,7 +1143,9 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!LogLikeMod.CheckStage())
                 return orig(self, cardId);
-            return ItemXmlDataList.instance.GetCardItem(cardId) == null ? CardEquipState.ERROR : self.bookItem.AddCardFromInventoryToCurrentDeck(cardId);
+            return ItemXmlDataList.instance.GetCardItem(cardId) == null ? 
+                CardEquipState.ERROR : 
+                self.bookItem.AddCardFromInventoryToCurrentDeck(cardId);
         }
 
         /// <summary>
