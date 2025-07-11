@@ -287,7 +287,7 @@ namespace abcdcode_LOGLIKE_MOD
             get
             {
                 if (LogLikeMod._DefFont_TMP == null)
-                    LogLikeMod._DefFont_TMP = LogLikeMod.GetFieldValue<TMP_FontAsset>((object)SingletonBehavior<LocalizedFontSetter>.Instance, "font_NotoSans");
+                    LogLikeMod._DefFont_TMP = LogLikeMod.GetFieldValue<TMP_FontAsset>(SingletonBehavior<LocalizedFontSetter>.Instance, "font_NotoSans");
                 return LogLikeMod._DefFont_TMP;
             }
             set => LogLikeMod._DefFont_TMP = value;
@@ -711,6 +711,7 @@ namespace abcdcode_LOGLIKE_MOD
             Dictionary<string, BattleCardAbilityDesc> fieldValue = LogLikeMod.GetFieldValue<Dictionary<string, BattleCardAbilityDesc>>((object)Singleton<BattleCardAbilityDescXmlList>.Instance, "_dictionary");
             using (StringReader stringReader = new StringReader(File.ReadAllText(path)))
             {
+                
                 BattleCardAbilityDescRoot cardAbilityDescRoot = (BattleCardAbilityDescRoot)new XmlSerializer(typeof(BattleCardAbilityDescRoot)).Deserialize((TextReader)stringReader);
                 for (int index = 0; index < cardAbilityDescRoot.cardDescList.Count; ++index)
                 {
@@ -758,6 +759,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             using (StringReader stringReader = new StringReader(File.ReadAllText(path)))
             {
+                
                 CharactersNameRoot charactersNameRoot = (CharactersNameRoot)new XmlSerializer(typeof(CharactersNameRoot)).Deserialize((TextReader)stringReader);
                 List<EnemyUnitClassInfo> all1 = LogLikeMod.GetFieldValue<List<EnemyUnitClassInfo>>((object)Singleton<EnemyUnitClassInfoList>.Instance, "_list").FindAll((Predicate<EnemyUnitClassInfo>)(x => x.workshopID == modid));
                 foreach (CharacterName name in charactersNameRoot.nameList)
@@ -777,6 +779,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             using (StringReader stringReader = new StringReader(File.ReadAllText(path)))
             {
+                
                 BookDescRoot bookDescRoot = (BookDescRoot)new XmlSerializer(typeof(BookDescRoot)).Deserialize((TextReader)stringReader);
                 List<BookXmlInfo> list = Singleton<BookXmlList>.Instance.GetList();
                 foreach (BookDesc bookDesc in bookDescRoot.bookDescList)
@@ -797,6 +800,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             using (StringReader stringReader = new StringReader(File.ReadAllText(path)))
             {
+                
                 Dictionary<LorId, BattleCardDesc> dictionary = (Dictionary<LorId, BattleCardDesc>)typeof(BattleCardDescXmlList).GetField("_dictionary", AccessTools.all).GetValue((object)Singleton<BattleCardDescXmlList>.Instance);
                 foreach (BattleCardDesc cardDesc in ((BattleCardDescRoot)new XmlSerializer(typeof(BattleCardDescRoot)).Deserialize((TextReader)stringReader)).cardDescList)
                 {
@@ -813,6 +817,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             using (StringReader stringReader = new StringReader(File.ReadAllText(path)))
             {
+                
                 Dictionary<LorId, PassiveDesc> dictionary = (Dictionary<LorId, PassiveDesc>)typeof(PassiveDescXmlList).GetField("_dictionary", AccessTools.all).GetValue((object)Singleton<PassiveDescXmlList>.Instance);
                 foreach (PassiveDesc desc1 in ((PassiveDescRoot)new XmlSerializer(typeof(PassiveDescRoot)).Deserialize((TextReader)stringReader)).descList)
                 {
@@ -862,6 +867,7 @@ namespace abcdcode_LOGLIKE_MOD
             abcdcode_LOGLIKE_MOD_Extension.TextDataModel._currentLanguage = language;
             Dictionary<string, string> textDic = abcdcode_LOGLIKE_MOD_Extension.TextDataModel.textDic;
             DirectoryInfo directoryInfo1 = !Directory.Exists(LogLikeMod.path + str) ? new DirectoryInfo(LogLikeMod.path + "/Localize/en") : new DirectoryInfo(LogLikeMod.path + str);
+            
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
                 LogLikeMod.LoadLocalizeFile(file.FullName, ref textDic);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -875,19 +881,38 @@ namespace abcdcode_LOGLIKE_MOD
                 }
             }
             foreach (FileSystemInfo file in new DirectoryInfo(directoryInfo1.FullName + "/PassiveInfo").GetFiles())
-                LogLikeMod.LoadPassiveDesc(file.FullName, LogLikeMod.ModId);
+                try
+                {
+                    LogLikeMod.LoadPassiveDesc(file.FullName, LogLikeMod.ModId);
+                } catch (Exception e)
+                {
+                    Debug.Log("Failed to load PassiveInfo file at " + file.FullName + ":\n" + e);
+                }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
                 DirectoryInfo directoryInfo3 = new DirectoryInfo($"{logMod.GetLogDllPath()}{str}/PassiveInfo");
                 string uniqueId = logMod.invInfo.workshopInfo.uniqueId;
                 if (Directory.Exists(directoryInfo3.FullName))
                 {
+
                     foreach (FileSystemInfo file in directoryInfo3.GetFiles())
-                        LogLikeMod.LoadPassiveDesc(file.FullName, uniqueId);
+                        try { 
+                            LogLikeMod.LoadPassiveDesc(file.FullName, uniqueId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load PassiveInfo file at " + file.FullName + ":\n" + e);
+                        }
                 }
             }
             foreach (FileSystemInfo file in new DirectoryInfo(directoryInfo1.FullName + "/CardInfo").GetFiles())
+                try { 
                 LogLikeMod.LoadCardDesc(file.FullName, LogLikeMod.ModId);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load CardInfo file at " + file.FullName + ":\n" + e);
+                }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
                 DirectoryInfo directoryInfo4 = new DirectoryInfo($"{logMod.GetLogDllPath()}{str}/CardInfo");
@@ -895,11 +920,23 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo4.FullName))
                 {
                     foreach (FileSystemInfo file in directoryInfo4.GetFiles())
+                        try { 
                         LogLikeMod.LoadCardDesc(file.FullName, uniqueId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load CardInfo file at " + file.FullName + ":\n" + e);
+                        }
                 }
             }
             foreach (FileSystemInfo file in new DirectoryInfo(directoryInfo1.FullName + "/BookInfo").GetFiles())
+                try { 
                 LogLikeMod.LoadBookDesc(file.FullName, LogLikeMod.ModId);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load BookInfo file at " + file.FullName + ":\n" + e);
+                }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
                 DirectoryInfo directoryInfo5 = new DirectoryInfo($"{logMod.GetLogDllPath()}{str}/BookInfo");
@@ -907,11 +944,24 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo5.FullName))
                 {
                     foreach (FileSystemInfo file in directoryInfo5.GetFiles())
-                        LogLikeMod.LoadBookDesc(file.FullName, uniqueId);
+                        try
+                        {
+                            LogLikeMod.LoadBookDesc(file.FullName, uniqueId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load BookInfo file at " + file.FullName + ":\n" + e);
+                        }
                 }
             }
             foreach (FileSystemInfo file in new DirectoryInfo(directoryInfo1.FullName + "/EnemyNameInfo").GetFiles())
-                LogLikeMod.LoadEnemyUnitName(file.FullName, LogLikeMod.ModId);
+                try { 
+                    LogLikeMod.LoadEnemyUnitName(file.FullName, LogLikeMod.ModId);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load EnemyUnitName file at " + file.FullName + ":\n" + e);
+                }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
                 DirectoryInfo directoryInfo6 = new DirectoryInfo($"{logMod.GetLogDllPath()}{str}/EnemyNameInfo");
@@ -919,11 +969,23 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo6.FullName))
                 {
                     foreach (FileSystemInfo file in directoryInfo6.GetFiles())
-                        LogLikeMod.LoadEnemyUnitName(file.FullName, uniqueId);
+                        try { 
+                            LogLikeMod.LoadEnemyUnitName(file.FullName, uniqueId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load EnemyUnitName file at " + file.FullName + ":\n" + e);
+                        }
                 }
             }
             foreach (FileSystemInfo file in new DirectoryInfo(directoryInfo1.FullName + "/DropBookInfo").GetFiles())
-                LogLikeMod.LoadDropBookName(file.FullName, LogLikeMod.ModId);
+                try { 
+                    LogLikeMod.LoadDropBookName(file.FullName, LogLikeMod.ModId);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load DropBookName file at " + file.FullName + ":\n" + e);
+                }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
                 DirectoryInfo directoryInfo7 = new DirectoryInfo($"{logMod.GetLogDllPath()}{str}/DropBookInfo");
@@ -931,11 +993,23 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo7.FullName))
                 {
                     foreach (FileSystemInfo file in directoryInfo7.GetFiles())
-                        LogLikeMod.LoadDropBookName(file.FullName, uniqueId);
+                        try { 
+                            LogLikeMod.LoadDropBookName(file.FullName, uniqueId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load DropBookName file at " + file.FullName + ":\n" + e);
+                        }
                 }
             }
             foreach (FileSystemInfo file in new DirectoryInfo(directoryInfo1.FullName + "/DiceAbilityInfo").GetFiles())
-                LogLikeMod.LoadDiceAbilityDesc(file.FullName, LogLikeMod.ModId);
+                try {
+                    LogLikeMod.LoadDiceAbilityDesc(file.FullName, LogLikeMod.ModId);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load DiceAbilityDesc file at " + file.FullName + ":\n" + e);
+                }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
                 DirectoryInfo directoryInfo8 = new DirectoryInfo($"{logMod.GetLogDllPath()}{str}/DiceAbilityInfo");
@@ -943,7 +1017,13 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo8.FullName))
                 {
                     foreach (FileSystemInfo file in directoryInfo8.GetFiles())
-                        LogLikeMod.LoadDiceAbilityDesc(file.FullName, uniqueId);
+                        try { 
+                            LogLikeMod.LoadDiceAbilityDesc(file.FullName, uniqueId);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load DiceAbilityDesc file at " + file.FullName + ":\n" + e);
+                        }
                 }
             }
             try
@@ -1998,7 +2078,7 @@ namespace abcdcode_LOGLIKE_MOD
                 HookHelper.CreateHook(typeof(UIInvenCardSlot), "SetSlotState", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardSlot_SetSlotState));
                 HookHelper.CreateHook(typeof(UIInvenCardSlot), "OnClickCardEquipInfoButton", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardSlot_OnClickCardEquipInfoButton));
                 HookHelper.CreateHook(typeof(UnitDataModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UnitDataModel_AddCardFromInventory));
-                HookHelper.CreateHook(typeof(BookModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookModel_AddCardFromInventory));
+                HookHelper.CreateHook(typeof(BookModel), "AddCardFromInventoryToCurrentDeck", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookModel_AddCardFromInventory));
                 HookHelper.CreateHook(typeof(UIInvenCardListScroll), "SetData", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.UIInvenCardListScroll_SetData));
                 HookHelper.CreateHook(typeof(DeckModel), "AddCardFromInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DeckModel_AddCardFromInventory));
                 HookHelper.CreateHook(typeof(DeckModel), "MoveCardToInventory", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.DeckModel_MoveCardToInventory));
@@ -2050,8 +2130,6 @@ namespace abcdcode_LOGLIKE_MOD
                 preLoader.StartUpgradeInfoPreload();
                 preLoader.StartCreatureTabPreload();
                 preLoader.StartSoundPreload();
-                foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
-                    LogLikeMod.ModLoader.OnInitializeMod(logMod.GetAssemPath(), logMod.invInfo.workshopInfo.uniqueId);
             }
             catch (Exception ex)
             {

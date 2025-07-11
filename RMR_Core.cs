@@ -89,6 +89,8 @@ namespace RogueLike_Mod_Reborn
             RogueMysteryXmlList.Instance.Init(TextDataModel.CurrentLanguage);
             SceneManager.sceneLoaded += FindGamemodes;
             CurrentGamemode = new RoguelikeGamemode_RMR_Default();
+            foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
+                LogLikeMod.ModLoader.OnInitializeMod(logMod.GetAssemPath(), logMod.invInfo.workshopInfo.uniqueId);
         }
 
         // This essentially guarantees that the gamemodes are only collected far after all mods are loaded

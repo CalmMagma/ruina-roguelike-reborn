@@ -43,7 +43,7 @@ namespace abcdcode_LOGLIKE_MOD
                     }
                     catch (Exception ex)
                     {
-                        Debug.Log((object)$"Error while trying to load XML file {file.Name}: {(object)ex}");
+                        Debug.Log($"Error while trying to load XML file {file.Name}: {ex}");
                     }
                 }
             }
@@ -68,7 +68,7 @@ namespace abcdcode_LOGLIKE_MOD
                         }
                         catch (Exception ex)
                         {
-                            Debug.Log((object)$"Error while trying to load XML file {file.Name}: {(object)ex}");
+                            Debug.Log($"Error while trying to load XML file {file.Name}: {ex}");
                         }
                     }
                 }
