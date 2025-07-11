@@ -1910,8 +1910,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<BookXmlInfo> list1 = new List<BookXmlInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
-                List<BookXmlInfo> collection = LogLikeMod.LoadEquipPage(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<BookXmlInfo>)collection);
+                try {
+                    List<BookXmlInfo> collection = LogLikeMod.LoadEquipPage(file.FullName, LogLikeMod.ModId);
+                    list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load equip pages from " + file.FullName + ":\n" + e);
+                }
             }
             Singleton<BookXmlList>.Instance.AddEquipPageByMod(LogLikeMod.ModId, list1);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -1923,8 +1929,13 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
                     {
-                        File.ReadAllText(file.FullName);
-                        list2.AddRange((IEnumerable<BookXmlInfo>)LogLikeMod.LoadEquipPage(file.FullName, uniqueId));
+                        try {
+                            list2.AddRange(LogLikeMod.LoadEquipPage(file.FullName, uniqueId));
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load equip pages from " + file.FullName + ":\n" + e);
+                        }
                     }
                     Singleton<BookXmlList>.Instance.AddEquipPageByMod(uniqueId, list2);
                 }
