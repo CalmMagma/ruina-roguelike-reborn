@@ -1400,8 +1400,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<PassiveXmlInfo> list1 = new List<PassiveXmlInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
-                List<PassiveXmlInfo> collection = LogLikeMod.LoadPassive(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<PassiveXmlInfo>)collection);
+                try { 
+                    List<PassiveXmlInfo> collection = LogLikeMod.LoadPassive(file.FullName, LogLikeMod.ModId);
+                    list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load passives from " + file.FullName + ":\n" + e);
+                }
             }
             Singleton<PassiveXmlList>.Instance.AddPassivesByMod(list1);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -1412,7 +1418,13 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo2.FullName))
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
-                        list2.AddRange((IEnumerable<PassiveXmlInfo>)LogLikeMod.LoadPassive(file.FullName, uniqueId));
+                        try
+                        {
+                            list2.AddRange(LogLikeMod.LoadPassive(file.FullName, uniqueId));
+                        } catch (Exception e)
+                        {
+                            Debug.Log("Failed to load passives from " + file.FullName + ":\n" + e);
+                        }
                     Singleton<PassiveXmlList>.Instance.AddPassivesByMod(list2);
                 }
             }
@@ -1445,8 +1457,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<DeckXmlInfo> list1 = new List<DeckXmlInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
-                List<DeckXmlInfo> collection = LogLikeMod.LoadDeck(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<DeckXmlInfo>)collection);
+                try {
+                    List<DeckXmlInfo> collection = LogLikeMod.LoadDeck(file.FullName, LogLikeMod.ModId);
+                    list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load decks from " + file.FullName + ":\n" + e);
+                }
             }
             Singleton<DeckXmlList>.Instance.AddDeckByMod(list1);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -1457,7 +1475,14 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo2.FullName))
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
-                        list2.AddRange((IEnumerable<DeckXmlInfo>)LogLikeMod.LoadDeck(file.FullName, uniqueId));
+                        try
+                        {
+                            list2.AddRange(LogLikeMod.LoadDeck(file.FullName, uniqueId));
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load decks from " + file.FullName + ":\n" + e);
+                        }
                     Singleton<DeckXmlList>.Instance.AddDeckByMod(list2);
                 }
             }
@@ -1494,8 +1519,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<DropBookXmlInfo> list1 = new List<DropBookXmlInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
+                try {
                 List<DropBookXmlInfo> collection = LogLikeMod.LoadDropBook(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<DropBookXmlInfo>)collection);
+                list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load dropbooks from " + file.FullName + ":\n" + e);
+                }
             }
             Singleton<DropBookXmlList>.Instance.SetDropTableByMod(list1);
             Singleton<DropBookXmlList>.Instance.AddBookByMod(LogLikeMod.ModId, list1);
@@ -1508,8 +1539,14 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
                     {
-                        File.ReadAllText(file.FullName);
-                        list2.AddRange((IEnumerable<DropBookXmlInfo>)LogLikeMod.LoadDropBook(file.FullName, uniqueId));
+                        try {
+                            File.ReadAllText(file.FullName);
+                            list2.AddRange(LogLikeMod.LoadDropBook(file.FullName, uniqueId));
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load dropbooks from " + file.FullName + ":\n" + e);
+                        }
                     }
                     Singleton<DropBookXmlList>.Instance.SetDropTableByMod(list2);
                     Singleton<DropBookXmlList>.Instance.AddBookByMod(uniqueId, list2);
@@ -1550,8 +1587,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<CardDropTableXmlInfo> list1 = new List<CardDropTableXmlInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
+                try {
                 List<CardDropTableXmlInfo> collection = LogLikeMod.LoadCardDropTable(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<CardDropTableXmlInfo>)collection);
+                list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load card drop tables from " + file.FullName + ":\n" + e);
+                }
             }
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
             {
@@ -1562,19 +1605,25 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     foreach (FileSystemInfo file in directoryInfo2.GetFiles())
                     {
-                        List<CardDropTableXmlInfo> collection = LogLikeMod.LoadCardDropTable(file.FullName, uniqueId);
-                        foreach (CardDropTableXmlInfo dropTableXmlInfo1 in new List<CardDropTableXmlInfo>((IEnumerable<CardDropTableXmlInfo>)collection))
-                        {
-                            CardDropTableXmlInfo tempinfo = dropTableXmlInfo1;
-                            CardDropTableXmlInfo dropTableXmlInfo2 = list1.Find((Predicate<CardDropTableXmlInfo>)(x => x.id == tempinfo.id));
-                            if (dropTableXmlInfo2 != null)
+                        try {
+                            List<CardDropTableXmlInfo> collection = LogLikeMod.LoadCardDropTable(file.FullName, uniqueId);
+                            foreach (CardDropTableXmlInfo dropTableXmlInfo1 in new List<CardDropTableXmlInfo>((IEnumerable<CardDropTableXmlInfo>)collection))
                             {
-                                dropTableXmlInfo2.cardIdList.AddRange((IEnumerable<LorId>)tempinfo.cardIdList);
-                                dropTableXmlInfo2._cardIdList.AddRange((IEnumerable<LorIdXml>)tempinfo._cardIdList);
-                                collection.Remove(tempinfo);
+                                CardDropTableXmlInfo tempinfo = dropTableXmlInfo1;
+                                CardDropTableXmlInfo dropTableXmlInfo2 = list1.Find((Predicate<CardDropTableXmlInfo>)(x => x.id == tempinfo.id));
+                                if (dropTableXmlInfo2 != null)
+                                {
+                                    dropTableXmlInfo2.cardIdList.AddRange(tempinfo.cardIdList);
+                                    dropTableXmlInfo2._cardIdList.AddRange(tempinfo._cardIdList);
+                                    collection.Remove(tempinfo);
+                                }
                             }
+                            list2.AddRange(collection);
                         }
-                        list2.AddRange((IEnumerable<CardDropTableXmlInfo>)collection);
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load card drop tables from " + file.FullName + ":\n" + e);
+                        }
                     }
                     Singleton<CardDropTableXmlList>.Instance.AddCardDropTableByMod(uniqueId, list2);
                 }
@@ -1615,8 +1664,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<DiceCardXmlInfo> list1 = new List<DiceCardXmlInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
-                List<DiceCardXmlInfo> collection = LogLikeMod.LoadCardInfo(file.FullName, LogLikeMod.ModId);
-                list1.AddRange(collection);
+                try {
+                    List<DiceCardXmlInfo> collection = LogLikeMod.LoadCardInfo(file.FullName, LogLikeMod.ModId);
+                    list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load card infos from " + file.FullName + ":\n" + e);
+                }
             }
             ItemXmlDataList.instance.AddCardInfoByMod(LogLikeMod.ModId, list1);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -1627,7 +1682,14 @@ namespace abcdcode_LOGLIKE_MOD
                 if (Directory.Exists(directoryInfo2.FullName))
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
-                        list2.AddRange(LogLikeMod.LoadCardInfo(file.FullName, uniqueId));
+                        try
+                        {
+                            list2.AddRange(LogLikeMod.LoadCardInfo(file.FullName, uniqueId));
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load card infos from " + file.FullName + ":\n" + e);
+                        }
                     ItemXmlDataList.instance.AddCardInfoByMod(uniqueId, list2);
                 }
             }
@@ -1663,8 +1725,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<StageClassInfo> list1 = new List<StageClassInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
-                List<StageClassInfo> collection = LogLikeMod.LoadStage(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<StageClassInfo>)collection);
+                try {
+                    List<StageClassInfo> collection = LogLikeMod.LoadStage(file.FullName, LogLikeMod.ModId);
+                    list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load stage info from " + file.FullName + ":\n" + e);
+                }
             }
             Singleton<StageClassInfoList>.Instance.AddStageByMod(LogLikeMod.ModId, list1);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -1676,8 +1744,13 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
                     {
-                        File.ReadAllText(file.FullName);
-                        list2.AddRange((IEnumerable<StageClassInfo>)LogLikeMod.LoadStage(file.FullName, uniqueId));
+                        try {
+                            list2.AddRange(LogLikeMod.LoadStage(file.FullName, uniqueId));
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load stage info from " + file.FullName + ":\n" + e);
+                        }
                     }
                     Singleton<StageClassInfoList>.Instance.AddStageByMod(uniqueId, list2);
                 }
@@ -1722,8 +1795,14 @@ namespace abcdcode_LOGLIKE_MOD
             List<EnemyUnitClassInfo> list1 = new List<EnemyUnitClassInfo>();
             foreach (FileSystemInfo file in directoryInfo1.GetFiles())
             {
-                List<EnemyUnitClassInfo> collection = LogLikeMod.LoadEnemyUnit(file.FullName, LogLikeMod.ModId);
-                list1.AddRange((IEnumerable<EnemyUnitClassInfo>)collection);
+                try {
+                    List<EnemyUnitClassInfo> collection = LogLikeMod.LoadEnemyUnit(file.FullName, LogLikeMod.ModId);
+                    list1.AddRange(collection);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log("Failed to load enemy units infos from " + file.FullName + ":\n" + e);
+                }
             }
             Singleton<EnemyUnitClassInfoList>.Instance.AddEnemyUnitByMod(LogLikeMod.ModId, list1);
             foreach (ModContentInfo logMod in LogLikeMod.GetLogMods())
@@ -1735,8 +1814,13 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     foreach (System.IO.FileInfo file in directoryInfo2.GetFiles())
                     {
-                        File.ReadAllText(file.FullName);
-                        list2.AddRange((IEnumerable<EnemyUnitClassInfo>)LogLikeMod.LoadEnemyUnit(file.FullName, uniqueId));
+                        try {
+                            list2.AddRange(LogLikeMod.LoadEnemyUnit(file.FullName, uniqueId));
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.Log("Failed to load enemy unit infos from " + file.FullName + ":\n" + e);
+                        }
                     }
                     Singleton<EnemyUnitClassInfoList>.Instance.AddEnemyUnitByMod(uniqueId, list2);
                 }
