@@ -159,7 +159,7 @@ Can be used once per battle.</Desc>
 
   <LogueEffectInfo Id="RMR_BleedingSpleen">
     <Name>Bleeding Spleen</Name> 
-    <Desc>All allies now inflict 2 Bleed upon a successful critical strike. Enemies with at least 10 Bleed explode on death, dealing (Bleed/2) damage to all other enemies.</Desc> 
+    <Desc>At the start of each Scene, give 5 Critical Strike to all allies. All allies now inflict 2 Bleed upon a successful critical strike. Enemies with at least 10 Bleed explode on death, dealing (Bleed/2) damage to all other enemies.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“A strange artifical organ which seems to contain immense anti-coagulant properties.”&lt;/color&gt;</FlavorText>
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 

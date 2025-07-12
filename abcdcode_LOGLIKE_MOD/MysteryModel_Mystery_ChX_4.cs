@@ -9,45 +9,46 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class MysteryModel_Mystery_ChX_4 : MysteryBase
+namespace abcdcode_LOGLIKE_MOD
 {
-  public int index;
-  public List<LorId> droplist;
 
-  public override void SwapFrame(int id)
-  {
-    base.SwapFrame(id);
-    if (PassiveAbility_MoneyCheck.GetMoney() >= 10 || id != 0)
-      return;
-    this.FrameObj["choice_btn0"].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["disabledButton"];
-    this.FrameObj["Desc0"].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText("Mystery_RequireCondition") + this.FrameObj["Desc0"].GetComponent<TextMeshProUGUI>().text;
-  }
-
-  public override void OnClickChoice(int choiceid)
-  {
-    if (choiceid == 0 && PassiveAbility_MoneyCheck.GetMoney() >= 10)
+    public class MysteryModel_Mystery_ChX_4 : MysteryBase
     {
-      LogueBookModels.SubMoney(10);
-      List<RewardPassiveInfo> all = Singleton<RewardPassivesList>.Instance.GetChapterData(ChapterGrade.GradeAll, PassiveRewardListType.Shop, new LorId(-1)).FindAll((Predicate<RewardPassiveInfo>) (x => x.shoptype == ShopRewardType.Once));
-      ModdingUtils.SuffleList<RewardPassiveInfo>(all);
-      MysteryModel_ShopItemReward.PopupShopReward(new List<RewardPassiveInfo>()
+        public int index;
+        public List<LorId> droplist;
+
+        public override void SwapFrame(int id)
+        {
+            base.SwapFrame(id);
+            if (PassiveAbility_MoneyCheck.GetMoney() >= 10 || id != 0)
+                return;
+            this.FrameObj["choice_btn0"].GetComponent<Image>().sprite = LogLikeMod.ArtWorks["disabledButton"];
+            this.FrameObj["Desc0"].GetComponent<TextMeshProUGUI>().text = TextDataModel.GetText("Mystery_RequireCondition") + this.FrameObj["Desc0"].GetComponent<TextMeshProUGUI>().text;
+        }
+
+        public override void OnClickChoice(int choiceid)
+        {
+            if (choiceid == 0 && PassiveAbility_MoneyCheck.GetMoney() >= 10)
+            {
+                LogueBookModels.SubMoney(10);
+                List<RewardPassiveInfo> all = Singleton<RewardPassivesList>.Instance.GetChapterData(ChapterGrade.GradeAll, PassiveRewardListType.Shop, new LorId(-1)).FindAll((Predicate<RewardPassiveInfo>)(x => x.shoptype == ShopRewardType.Once));
+                ModdingUtils.SuffleList<RewardPassiveInfo>(all);
+                MysteryModel_ShopItemReward.PopupShopReward(new List<RewardPassiveInfo>()
       {
         all[0]
       }, new MysteryModel_ShopItemReward.ChoiceResult(this.Checking));
-      this.droplist.Add(all[0].id);
-    }
-    base.OnClickChoice(choiceid);
-  }
+                this.droplist.Add(all[0].id);
+            }
+            base.OnClickChoice(choiceid);
+        }
 
-  public void Checking(
-    MysteryModel_ShopItemReward mystery,
-    MysteryModel_ShopItemReward.RewardGood good)
-  {
-    LoguePlayDataSaver.SavePlayData_Menu();
-    Singleton<MysteryManager>.Instance.EndMystery((MysteryBase) mystery);
-  }
-}
+        public void Checking(
+          MysteryModel_ShopItemReward mystery,
+          MysteryModel_ShopItemReward.RewardGood good)
+        {
+            LoguePlayDataSaver.SavePlayData_Menu();
+            Singleton<MysteryManager>.Instance.EndMystery((MysteryBase)mystery);
+        }
+    }
 }

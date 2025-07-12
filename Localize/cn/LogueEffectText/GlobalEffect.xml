@@ -160,7 +160,7 @@
   <LogueEffectInfo Id="RMR_BleedingSpleen">
     <Name>脾出血</Name> 
     <Desc>所有友方角色暴击命中目标时下一幕对目标施加2层“流血”
-拥有不少于10层“流血”的敌方角色死亡时将对所有其他敌方角色造成其“流血”层数一半的伤害</Desc> 
+拥有不少于10层“流血”的敌方角色死亡时将对所有其他敌方角色造成其“流血”层数一半的伤害。任何角色触发“暴击”效果时恢复5点体力。</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“一种奇怪的人造器官，似乎含有巨量的抗凝剂。”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 

@@ -1285,7 +1285,7 @@
   <!-- 하나후다 -->
   <Card ID="411101">
     <Name>밤일낮장</Name>
-    <Artwork>Jeong1</Artwork>
+    <Artwork>jeong1</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0" />
     <Script>RMR_LowNight</Script>
@@ -1298,7 +1298,7 @@
   </Card>
   <Card ID="411102">
     <Name>중계</Name>
-    <Artwork>Jeong2</Artwork>
+    <Artwork>jeong2</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
     <Script>RMR_Relay</Script>
@@ -1312,7 +1312,7 @@
   </Card>
   <Card ID="411103">
     <Name>판 엎기</Name>
-    <Artwork>Jeong1</Artwork>
+    <Artwork>jeong1</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
     <Script>quickall1discard</Script>
@@ -1326,7 +1326,7 @@
   </Card>
   <Card ID="411104">
     <Name>손패 섞기</Name>
-    <Artwork>Jeong2</Artwork>
+    <Artwork>jeong2</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="2" />
     <Script>discardlowest1draw</Script>
@@ -1340,7 +1340,7 @@
   </Card>
   <Card ID="411105">
     <Name>앵화</Name>
-    <Artwork>Jeong3</Artwork>
+    <Artwork>jeong3</Artwork>
     <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3" />
     <Script>RMR_Sakura</Script>

@@ -371,6 +371,12 @@ namespace abcdcode_LOGLIKE_MOD
             tmpro.text = string.Format(tmpro.text, parameters);
         }
 
+        public void ReformatDialog(params object[] parameters)
+        {
+            var tmpro = this.FrameObj["Dia"].GetComponent<TextMeshProUGUI>();
+            tmpro.text = string.Format(tmpro.text, parameters);
+        }
+
         public void ShowOverlayOverButton(BattleUnitBuf buf, int button)
         {
             SingletonBehavior<UIBattleOverlayManager>.Instance.EnableBufOverlay(buf.bufActivatedName, buf.bufActivatedText, buf.GetBufIcon(), this.FrameObj["choice_btn" + button.ToString()]);

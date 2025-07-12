@@ -7,9 +7,9 @@
 			 
              <text id="MysteryCh4_1Frame0Choice1Desc">Sell it to a local syndicate ([green]+25[/color] [yellow]Ahn[/color])</text>
 <!--
-			 <text id="MysteryCh4_1Frame0Choice0Desc">Repair the equipment and keep it ([red]-1 Mend Weapon[/color], [green]+2[/color] [unique]Unique[/color] [green]Urban Plague Pages[/color])</text>
+	     <text id="MysteryCh4_1Frame0Choice2Desc">Repair the equipment and keep it ([red]-1 Mend Weapon[/color], [green]+2[/color] [unique]Unique[/color] [green]Urban Plague Pages[/color])</text>
 			 
-			 <text id="MysteryCh4_1Frame0Choice2Desc">Repair the equipment and sell it ([red]-1 Mend Weapon[/color], [green]+50[/color] [yellow]Ahn[/color])</text>
+	     <text id="MysteryCh4_1Frame0Choice3Desc">Repair the equipment and sell it ([red]-1 Mend Weapon[/color], [green]+50[/color] [yellow]Ahn[/color])</text>
 -->
              <text id="MysteryCh4_1Frame1Dia0">You manage to put some of the broken equipment to use, selling it to a local syndicate for a higher price than usual.</text>
 			 

@@ -2,7 +2,7 @@
 <RogueMysteryXmlRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Mystery ID="-100">
     <Frame ID="0">
-      <Dialog>You find yourself facing a [mirror]sparkling mirror[/color] - it gives you a choice between four mystical artifacts to aid you in your journey.
+      <Dialog>You find yourself facing a [mirror]sparkling mirror[/color] - it gives you a choice between several mystical artifacts to aid you in your journey.
 
 Which one will you choose?</Dialog>
       <Choice ID="0">
