@@ -951,7 +951,7 @@ namespace abcdcode_LOGLIKE_MOD
                 return false;
             if (cardXmlInfo.optionList.Contains(CardOption.OnlyPage))
             {
-                if (!model.GetOnlyCards().Exists((Predicate<DiceCardXmlInfo>)(x => x.id == cardXmlInfo.id)))
+                if (!model.GetOnlyCards().Exists(x => x.id.GetOriginalId() == cardXmlInfo.id.GetOriginalId()))
                     return false;
             }
             else if (model.ClassInfo.RangeType == EquipRangeType.Melee)
@@ -1179,6 +1179,7 @@ namespace abcdcode_LOGLIKE_MOD
         /// <param name="stage">An empty list to be fed the new list of unique encounters.</param>
         /// <param name="allstage">A list containing all the encounters to pick from.</param>
         /// <param name="stageLimits">An object that limit how many of each type of encounter should appear in a chapter.</param>
+        /// <param name="guaranteeChapterEvent">As to whether or not guarantee at least one event from that chapter.</param>
         public static void HandleLimitPícking(
           List<LogueStageInfo> stage,
           List<LogueStageInfo> allstage,

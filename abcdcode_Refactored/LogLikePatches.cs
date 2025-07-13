@@ -1173,7 +1173,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             if (cardXmlInfo.optionList.Contains(CardOption.OnlyPage))
             {
-                if (!self._onlyCards.Exists((DiceCardXmlInfo x) => x.id.GetOriginalId() == cardXmlInfo.id.GetOriginalId()))
+                if (!self.GetOnlyCards().Exists((DiceCardXmlInfo x) => x.id.GetOriginalId() == cardXmlInfo.id.GetOriginalId()))
                 {
                     return CardEquipState.OnlyPageLimit;
                 }
@@ -1232,6 +1232,61 @@ namespace abcdcode_LOGLIKE_MOD
         }
 
         /// <summary>
+        /// Hook to make exclusive combat pages show up properly in roguelike
+        /// </summary>
+        public void UIInvenCardScrollList_ApplyFilterAll(Action<UIInvenCardListScroll> orig, UIInvenCardListScroll self)
+        {
+            if (!LogLikeMod.CheckStage())
+                return;
+            self._currentCardListForFilter.Clear();
+            List<DiceCardItemModel> cardsByDetailFilterUI = self.GetCardsByDetailFilterUI(self.GetCardBySearchFilterUI(self.GetCardsByCostFilterUI(self.GetCardsByGradeFilterUI(self._originCardList))));
+            cardsByDetailFilterUI.Sort(new Comparison<DiceCardItemModel>(SortUtil.CardItemCompByCost));
+            float y;
+            if (self._unitdata != null)
+            {
+                Predicate<DiceCardItemModel> cond1 = (DiceCardItemModel x) => true;
+                Predicate<DiceCardItemModel> cond2 = (DiceCardItemModel x) => true;
+                switch (self._unitdata.bookItem.ClassInfo.RangeType)
+                {
+                    case EquipRangeType.Melee:
+                        cond1 = ((DiceCardItemModel x) => x.GetSpec().Ranged == CardRange.Near);
+                        break;
+                    case EquipRangeType.Range:
+                        cond1 = ((DiceCardItemModel x) => x.GetSpec().Ranged == CardRange.Far);
+                        break;
+                    case EquipRangeType.Hybrid:
+                        cond1 = (DiceCardItemModel x) => true;
+                        break;
+                }
+                List<DiceCardXmlInfo> onlyCards = self._unitdata.bookItem.GetOnlyCards();
+                cond2 = (DiceCardItemModel x) => onlyCards.Exists((DiceCardXmlInfo z) => z.id.GetOriginalId() == x.GetID().GetOriginalId());
+                foreach (DiceCardItemModel item in cardsByDetailFilterUI.FindAll((DiceCardItemModel x) => x.ClassInfo.optionList.Contains(CardOption.OnlyPage) && !cond2(x)))
+                {
+                    cardsByDetailFilterUI.Remove(item);
+                }
+                self._currentCardListForFilter.AddRange(cardsByDetailFilterUI.FindAll(delegate (DiceCardItemModel x)
+                {
+                    if (!x.ClassInfo.optionList.Contains(CardOption.OnlyPage))
+                    {
+                        return cond1(x);
+                    }
+                    return cond2(x);
+                }));
+                self._currentCardListForFilter.AddRange(cardsByDetailFilterUI.FindAll((DiceCardItemModel x) => !(x.ClassInfo.optionList.Contains(CardOption.OnlyPage) ? cond2(x) : cond1(x))));
+            }
+            else
+            {
+                self._currentCardListForFilter.AddRange(cardsByDetailFilterUI);
+            }
+            float x2 = (float)self.column * self.slotWidth;
+            y = (float)(self.GetMaxRow() + self.row - 1) * self.slotHeight;
+            self.scrollBar.SetScrollRectSize(x2, y);
+            self.scrollBar.SetWindowPosition(0f, 0f);
+            self.selectablePanel.ChildSelectable = self.slotList[0].selectable;
+            self.SetCardsData(self.GetCurrentPageList());
+        }
+
+        /// <summary>
         /// Hook to manipulate card slot states to refer to the roguelike inventory.
         /// </summary>
         public void UIInvenCardSlot_SetSlotState(Action<UIInvenCardSlot> orig, UIInvenCardSlot self)
@@ -1245,7 +1300,7 @@ namespace abcdcode_LOGLIKE_MOD
                 field.SetValue(self, UIINVENCARD_STATE.None);
                 if (_cardModel.num <= 0)
                     field.SetValue(self, UIINVENCARD_STATE.NumberZero);
-                if (UI.UIController.Instance.CurrentUnit.GetDeckAll().FindAll((Predicate<DiceCardXmlInfo>)(x => x.id.GetOriginalId() == _cardModel.GetID().GetOriginalId())).Count >= _cardModel.GetLimit())
+                if (UI.UIController.Instance.CurrentUnit.GetDeckAll().FindAll(x => x.id.GetOriginalId() == _cardModel.GetID().GetOriginalId()).Count >= _cardModel.GetLimit())
                     field.SetValue(self, UIINVENCARD_STATE.LimitedDeck);
                 UnitDataModel currentUnit = UI.UIController.Instance.CurrentUnit;
                 if (currentUnit != null)
@@ -1701,10 +1756,10 @@ namespace abcdcode_LOGLIKE_MOD
             return !LogLikeMod.CheckStage() || !UIPassiveSuccessionPopup.Instance.isActiveAndEnabled;
         }
 
-        /// <summary>
-        /// Patch for moving the positioning of enemy profiles
-        /// </summary>
         /*
+        /// <summary>
+        /// Patch for moving the positioning of enemy profiles.
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(typeof(BattleUnitInfoManagerUI), nameof(BattleUnitInfoManagerUI.Initialize))]
         public static bool BattleUnitInfoManagerUI_Initialize(BattleUnitInfoManagerUI __instance)
         {
