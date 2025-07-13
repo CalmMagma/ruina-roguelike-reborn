@@ -6,31 +6,32 @@
 
 using HarmonyLib;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PuppetBuf : BattleUnitBuf
+namespace abcdcode_LOGLIKE_MOD
 {
-  public BattleUnitModel owner;
 
-  public override string keywordId => "LogueLikeMod_PuppetBuf";
+    public class PuppetBuf : BattleUnitBuf
+    {
+        public BattleUnitModel owner;
 
-  public override void Init(BattleUnitModel owner)
-  {
-    base.Init(owner);
-    typeof (BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue((object) this, (object) LogLikeMod.ArtWorks["buff_Puppet"]);
-    typeof (BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue((object) this, (object) true);
-    this.owner = owner;
-    owner.view.speedDiceSetterUI.SetSpeedDicesBeforeRoll(owner.Book.GetSpeedDiceRule(owner).speedDiceList, owner.faction);
-    owner.view.speedDiceSetterUI.DeselectAll();
-  }
+        public override string keywordId => "LogueLikeMod_PuppetBuf";
 
-  public override int SpeedDiceBreakedAdder() => 100;
+        public override void Init(BattleUnitModel owner)
+        {
+            base.Init(owner);
+            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue(this, LogLikeMod.ArtWorks["buff_Puppet"]);
+            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue(this, true);
+            this.owner = owner;
+            owner.view.speedDiceSetterUI.SetSpeedDicesBeforeRoll(owner.Book.GetSpeedDiceRule(owner).speedDiceList, owner.faction);
+            owner.view.speedDiceSetterUI.DeselectAll();
+        }
 
-  public override void OnRoundEnd()
-  {
-    base.OnRoundEnd();
-    this.Destroy();
-  }
-}
+        public override int SpeedDiceBreakedAdder() => 100;
+
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.Destroy();
+        }
+    }
 }

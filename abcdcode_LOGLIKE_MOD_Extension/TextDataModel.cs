@@ -37,7 +37,7 @@ namespace abcdcode_LOGLIKE_MOD_Extension
         TextDataModel._isLoaded = false;
         if (!TextDataModel._supported.Contains<string>(currentLanguage))
         {
-          Debug.LogError((object) "not supported Language");
+          Debug.LogError( "not supported Language");
           currentLanguage = "en";
         }
         if (!TextDataModel._isLoaded)

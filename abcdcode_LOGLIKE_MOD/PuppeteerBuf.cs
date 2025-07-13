@@ -6,44 +6,45 @@
 
 using HarmonyLib;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class PuppeteerBuf : BattleUnitBuf
+namespace abcdcode_LOGLIKE_MOD
 {
-  public BattleUnitModel owner;
 
-  public override string keywordId => "LogueLikeMod_PuppeteerBuf";
-
-  public override void Init(BattleUnitModel owner)
-  {
-    base.Init(owner);
-    typeof (BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue((object) this, (object) LogLikeMod.ArtWorks["buff_Puppeteer"]);
-    typeof (BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue((object) this, (object) true);
-    this.owner = owner;
-  }
-
-  public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
-  {
-    base.OnUseCard(card);
-    if (PickUpModel_ShopGood25.Shop25Effect.curpuppet == null)
-      return;
-    BattleUnitModel owner = PickUpModel_ShopGood25.Shop25Effect.curpuppet.owner;
-    BattleDiceCardModel playingCard = BattleDiceCardModel.CreatePlayingCard(card.card.XmlData);
-    playingCard.costSpended = true;
-    Singleton<StageController>.Instance.AddAllCardListInBattle(new BattlePlayingCardDataInUnitModel()
+    public class PuppeteerBuf : BattleUnitBuf
     {
-      owner = owner,
-      card = playingCard,
-      target = card.target,
-      speedDiceResultValue = 99
-    }, card.target);
-  }
+        public BattleUnitModel owner;
 
-  public override void OnRoundEnd()
-  {
-    base.OnRoundEnd();
-    this.Destroy();
-  }
-}
+        public override string keywordId => "LogueLikeMod_PuppeteerBuf";
+
+        public override void Init(BattleUnitModel owner)
+        {
+            base.Init(owner);
+            typeof(BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue(this, LogLikeMod.ArtWorks["buff_Puppeteer"]);
+            typeof(BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue(this, true);
+            this.owner = owner;
+        }
+
+        public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
+        {
+            base.OnUseCard(card);
+            if (PickUpModel_ShopGood25.Shop25Effect.curpuppet == null || !_owner.cardSlotDetail.cardQueue.Contains(card))
+                return;
+            BattleUnitModel owner = PickUpModel_ShopGood25.Shop25Effect.curpuppet.owner;
+            BattleDiceCardModel playingCard = BattleDiceCardModel.CreatePlayingCard(card.card.XmlData);
+            playingCard.costSpended = true;
+            Singleton<StageController>.Instance.AddAllCardListInBattle(new BattlePlayingCardDataInUnitModel()
+            {
+                owner = owner,
+                card = playingCard,
+                target = card.target,
+                speedDiceResultValue = 99
+            }, card.target);
+        }
+
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.Destroy();
+        }
+    }
 }

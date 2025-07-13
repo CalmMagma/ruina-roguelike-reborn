@@ -24,7 +24,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public void StartMystery(MysteryXmlInfo info)
         {
-            if ((Object)LogLikeMod.DefFont == (Object)null)
+            if (LogLikeMod.DefFont == null)
             {
                 LogLikeMod.DefFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
                 LogLikeMod.DefFontColor = UIColorManager.Manager.GetUIColor(UIColor.Default);

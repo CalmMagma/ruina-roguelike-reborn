@@ -188,9 +188,9 @@ namespace abcdcode_LOGLIKE_MOD
               RectTransform rectTransform,
               UIToolTipPanelType panelType = UIToolTipPanelType.Normal)
             {
-                __instance.GetType().GetMethod("Open", AccessTools.all).Invoke((object)__instance, (object[])null);
-                TextMeshProUGUI fieldValue1 = LogLikeMod.GetFieldValue<TextMeshProUGUI>((object)__instance, "tooltipName");
-                TextMeshProUGUI fieldValue2 = LogLikeMod.GetFieldValue<TextMeshProUGUI>((object)__instance, "tooltipDesc");
+                __instance.GetType().GetMethod("Open", AccessTools.all).Invoke(__instance, (object[])null);
+                TextMeshProUGUI fieldValue1 = LogLikeMod.GetFieldValue<TextMeshProUGUI>(__instance, "tooltipName");
+                TextMeshProUGUI fieldValue2 = LogLikeMod.GetFieldValue<TextMeshProUGUI>(__instance, "tooltipDesc");
                 fieldValue1.text = name;
                 fieldValue1.rectTransform.sizeDelta = new Vector2(fieldValue1.rectTransform.sizeDelta.x, 20f);
                 Camera camera = (Camera)null;
@@ -202,21 +202,21 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 string str = content;
                 fieldValue2.text = str;
-                TextMeshProMaterialSetter fieldValue3 = LogLikeMod.GetFieldValue<TextMeshProMaterialSetter>((object)__instance, "setter_tooltipname");
+                TextMeshProMaterialSetter fieldValue3 = LogLikeMod.GetFieldValue<TextMeshProMaterialSetter>(__instance, "setter_tooltipname");
                 fieldValue3.underlayColor = UIColorManager.Manager.GetUIColor(UIColor.Default);
                 fieldValue1.color = UIColorManager.Manager.GetUIColor(UIColor.Default);
                 fieldValue3.enabled = false;
                 fieldValue3.enabled = true;
                 fieldValue1.enabled = false;
                 fieldValue1.enabled = true;
-                __instance.GetType().GetMethod("SetTooltipOverlayBoxSize", AccessTools.all).Invoke((object)__instance, new object[1]
+                __instance.GetType().GetMethod("SetTooltipOverlayBoxSize", AccessTools.all).Invoke(__instance, new object[1]
                 {
-        (object) panelType
+         panelType
                 });
-                __instance.GetType().GetMethod("SetTooltipOverlayBoxPosition", AccessTools.all).Invoke((object)__instance, new object[2]
+                __instance.GetType().GetMethod("SetTooltipOverlayBoxPosition", AccessTools.all).Invoke(__instance, new object[2]
                 {
-        (object) camera,
-        (object) rectTransform
+         camera,
+         rectTransform
                 });
             }
         }

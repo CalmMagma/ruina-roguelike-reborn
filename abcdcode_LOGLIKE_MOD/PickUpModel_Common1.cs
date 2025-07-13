@@ -77,7 +77,7 @@ namespace abcdcode_LOGLIKE_MOD
             while (dic.Count != 0);
             goto label_3;
         label_1:
-            typeof(BookEquipEffect).GetField(str, AccessTools.all).SetValue((object)model.UnitData.unitData.bookItem.equipeffect, (object)(dic[str] + 1));
+            typeof(BookEquipEffect).GetField(str, AccessTools.all).SetValue(model.UnitData.unitData.bookItem.equipeffect, (dic[str] + 1));
             return;
         label_3:;
         }

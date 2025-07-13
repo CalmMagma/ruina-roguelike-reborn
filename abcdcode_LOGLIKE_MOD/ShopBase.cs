@@ -432,7 +432,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 catch (Exception ex)
                 {
-                    Debug.Log((object)$"Shop Create error1 : Card{Environment.NewLine}{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    Debug.Log($"Shop Create error1 : Card{Environment.NewLine}{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
                 try
                 {
@@ -440,7 +440,7 @@ namespace abcdcode_LOGLIKE_MOD
                 }
                 catch (Exception ex)
                 {
-                    Debug.Log((object)$"Shop Create error2 : Passive{Environment.NewLine}{ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    Debug.Log($"Shop Create error2 : Passive{Environment.NewLine}{ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 }
             }
             this.MoneyChecking();

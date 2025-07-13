@@ -159,7 +159,7 @@ public class PassiveAbility_230016Log : PassiveAbilityBase
     {
       elapsedTime += Time.deltaTime;
       r.Intensity = Mathf.PingPong(Time.time, 0.05f);
-      yield return (object) new WaitForEndOfFrame();
+      yield return  new WaitForEndOfFrame();
     }
     BattleCamManager instance = SingletonBehavior<BattleCamManager>.Instance;
     if ( instance !=  null)

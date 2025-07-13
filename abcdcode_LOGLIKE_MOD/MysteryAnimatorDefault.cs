@@ -47,12 +47,12 @@ namespace abcdcode_LOGLIKE_MOD
 
         public void ChangeAlpha(GameObject obj, float alpha)
         {
-            if ((Object)obj.GetComponent<Image>() != (Object)null)
+            if (obj.GetComponent<Image>() != null)
             {
                 Color color = obj.GetComponent<Image>().color;
                 obj.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);
             }
-            if (!((Object)obj.GetComponent<TextMeshProUGUI>() != (Object)null))
+            if (!(obj.GetComponent<TextMeshProUGUI>() != null))
                 return;
             Color color1 = obj.GetComponent<TextMeshProUGUI>().color;
             obj.GetComponent<TextMeshProUGUI>().color = new Color(color1.r, color1.g, color1.b, alpha);

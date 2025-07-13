@@ -137,11 +137,11 @@ namespace abcdcode_LOGLIKE_MOD
 
         public static void SetData(this SaveData save, string key, SaveData data)
         {
-            SaveDataType fieldValue1 = LogLikeMod.GetFieldValue<SaveDataType>((object)save, "_type");
-            Dictionary<string, SaveData> fieldValue2 = LogLikeMod.GetFieldValue<Dictionary<string, SaveData>>((object)save, "_dic");
+            SaveDataType fieldValue1 = LogLikeMod.GetFieldValue<SaveDataType>(save, "_type");
+            Dictionary<string, SaveData> fieldValue2 = LogLikeMod.GetFieldValue<Dictionary<string, SaveData>>(save, "_dic");
             if (fieldValue1 != SaveDataType.None && fieldValue1 != SaveDataType.Dictionary)
-                Debug.LogError((object)"SaveData cannot have multiple type");
-            LogLikeMod.SetFieldValue((object)save, "_type", (object)SaveDataType.Dictionary);
+                Debug.LogError("SaveData cannot have multiple type");
+            LogLikeMod.SetFieldValue(save, "_type", SaveDataType.Dictionary);
             fieldValue2[key] = data;
         }
 
@@ -257,18 +257,18 @@ namespace abcdcode_LOGLIKE_MOD
             if (RMRCore.provideAdditionalLogging)
             {
                 if (obj != null)
-                    Debug.Log((object)$"Log : {obj.GetType().Name} {str}");
+                    Debug.Log($"Log : {obj.GetType().Name} {str}");
                 else
-                    Debug.Log((object)("Log : " + str));
+                    Debug.Log(("Log : " + str));
             }
         }
 
         public static void LogError(this object obj, Exception e)
         {
             if (obj != null)
-                Debug.Log((object)$"Log : {obj.GetType().Name}{e.Message}{Environment.NewLine}{e.StackTrace}");
+                Debug.Log($"Log : {obj.GetType().Name}{e.Message}{Environment.NewLine}{e.StackTrace}");
             else
-                Debug.Log((object)$"Log : {e.Message}{Environment.NewLine}{e.StackTrace}");
+                Debug.Log($"Log : {e.Message}{Environment.NewLine}{e.StackTrace}");
         }
 
         public static Predicate<DiceMatch> NotFirstAttackDice()

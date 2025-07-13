@@ -34,9 +34,9 @@ public class PassiveAbility_ShopPassive5 : PassiveAbilityBase
       spriteRenderer.enabled = true;
       this.effect.SetActive(true);
     }
-    else if ((Object) this.effect != (Object) null)
+    else if ( this.effect !=  null)
     {
-      Object.Destroy((Object) this.effect);
+      Object.Destroy( this.effect);
       this.effect = (GameObject) null;
     }
   }

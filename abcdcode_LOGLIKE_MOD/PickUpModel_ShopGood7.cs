@@ -74,7 +74,7 @@ namespace abcdcode_LOGLIKE_MOD
                         newinfo.cardIdList.AddRange((IEnumerable<LorId>)Singleton<CardDropTableXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, id)).cardIdList);
                 }
                 this.Log("CardChange5");
-                List<CardDropTableXmlInfo> dropTableXmlInfoList = (List<CardDropTableXmlInfo>)typeof(CardDropTableXmlList).GetField("_list", AccessTools.all).GetValue((object)Singleton<CardDropTableXmlList>.Instance);
+                List<CardDropTableXmlInfo> dropTableXmlInfoList = (List<CardDropTableXmlInfo>)typeof(CardDropTableXmlList).GetField("_list", AccessTools.all).GetValue(Singleton<CardDropTableXmlList>.Instance);
                 dropTableXmlInfoList.RemoveAll((Predicate<CardDropTableXmlInfo>)(x => x.id == newinfo.id));
                 dropTableXmlInfoList.Add(newinfo);
                 dropValueXmlInfo.DropTableId = newinfo._id;

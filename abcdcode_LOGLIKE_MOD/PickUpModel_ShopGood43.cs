@@ -45,7 +45,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public override string GetEffectDesc()
             {
-                return TextDataModel.GetText("BossReward1Desc_Effect", (object)this.stack);
+                return TextDataModel.GetText("BossReward1Desc_Effect", this.stack);
             }
 
             public override void LoadFromSaveData(SaveData save)

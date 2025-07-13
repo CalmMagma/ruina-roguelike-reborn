@@ -38,7 +38,7 @@ public static class ReflectionHelper
   public static Func<TTarget, TField> CreatePrivateFieldGetter<TTarget, TField>(string fieldName)
   {
     FieldInfo field = typeof (TTarget).GetField(fieldName, AccessTools.all);
-    return !(field == (FieldInfo) null) ? (Func<TTarget, TField>) (t => (TField) field.GetValue((object) t)) : throw new ArgumentException($"Private instance field {fieldName} was not found on {typeof (TTarget)}");
+    return !(field == (FieldInfo) null) ? (Func<TTarget, TField>) (t => (TField) field.GetValue( t)) : throw new ArgumentException($"Private instance field {fieldName} was not found on {typeof (TTarget)}");
   }
 
   public static Delegate CreateInstanceDelegate(object source, string name)

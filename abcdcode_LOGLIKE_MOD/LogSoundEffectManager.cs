@@ -36,13 +36,13 @@ public class LogSoundEffectManager : Singleton<LogSoundEffectManager>
       file = (FileInfo) null;
     }
     fileInfoArray = (FileInfo[]) null;
-    yield return (object) new WaitForEndOfFrame();
+    yield return  new WaitForEndOfFrame();
     List<string> list = new List<string>((IEnumerable<string>) this.PreList);
     foreach (string pa in list)
     {
       string name = Path.GetFileNameWithoutExtension(pa);
       this.LoadClipInPreList(name);
-      yield return (object) new WaitForEndOfFrame();
+      yield return  new WaitForEndOfFrame();
       name = (string) null;
     }
   }

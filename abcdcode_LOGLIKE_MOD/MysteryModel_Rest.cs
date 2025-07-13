@@ -164,7 +164,7 @@ public class MysteryModel_Rest : MysteryBase
     {
       if (key.Contains("RestGoods"))
       {
-        Object.Destroy((Object) this.FrameObj[key]);
+        Object.Destroy( this.FrameObj[key]);
         this.FrameObj.Remove(key);
       }
     }

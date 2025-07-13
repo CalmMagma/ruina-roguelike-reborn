@@ -20,7 +20,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.ArtWork = "ShopPassive40";
             this.Name = TextDataModel.GetText("ShopGood40_1Name");
             if (PickUpModel_ShopGood40Effect.curcard != null)
-                this.Desc = TextDataModel.GetText("ShopGood40_1Desc", (object)PickUpModel_ShopGood40Effect.curcard.Name);
+                this.Desc = TextDataModel.GetText("ShopGood40_1Desc", PickUpModel_ShopGood40Effect.curcard.Name);
             else
                 this.Desc = TextDataModel.GetText("ShopGood40_1Desc");
             this.id = new LorId(LogLikeMod.ModId, 900401);

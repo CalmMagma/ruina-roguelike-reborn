@@ -34,7 +34,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             LogueBookModels.SubMoney((int)((double)this.GetCraftCost() * (double)Singleton<GlobalLogueEffectManager>.Instance.CraftCostMultiple(this)));
             UIBattleSettingPanel uiPanel = UI.UIController.Instance.GetUIPanel(UIPanelType.BattleSetting) as UIBattleSettingPanel;
-            UnitDataModel fieldValue = LogLikeMod.GetFieldValue<UnitDataModel>((object)uiPanel.InfoRightPanel, "unitdata");
+            UnitDataModel fieldValue = LogLikeMod.GetFieldValue<UnitDataModel>(uiPanel.InfoRightPanel, "unitdata");
             uiPanel.SetLibrarianProfileData(fieldValue);
         }
 
@@ -55,7 +55,7 @@ namespace abcdcode_LOGLIKE_MOD
             RewardPassiveInfo reward = RewardingModel.GetReward(CraftEffect.CheckCreaftEquipLimit(grade));
             BookXmlInfo data = Singleton<BookXmlList>.Instance.GetData(reward.id);
             LogueBookModels.AddBook(reward.id);
-            UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipResult", (object)data.InnerName));
+            UIAlarmPopup.instance.SetAlarmText(TextDataModel.GetText("CraftEquipResult", data.InnerName));
         }
 
         public static List<DiceCardXmlInfo> CanCraftExclusiveByChapter(ChapterGrade grade)

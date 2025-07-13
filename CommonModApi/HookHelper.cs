@@ -66,9 +66,9 @@ public static class HookHelper
     {
       HookGenerationError second = new HookGenerationError(hookMethod, "Could not find type");
       System.Type targetType = hookAtt.TargetType;
-      if ((object) targetType == null)
+      if ( targetType == null)
         targetType = hookAtt.TargetType;
-      second.TargetTypeDescriptor = (object) targetType;
+      second.TargetTypeDescriptor =  targetType;
       second.TargetMethod = hookAtt.TargetMethod;
       return Tuple.Create<Hook, HookGenerationError>((Hook) null, second);
     }
@@ -76,9 +76,9 @@ public static class HookHelper
     {
       HookGenerationError second = new HookGenerationError(hookMethod, "Target method was not specified");
       System.Type targetType = hookAtt.TargetType;
-      if ((object) targetType == null)
+      if ( targetType == null)
         targetType = hookAtt.TargetType;
-      second.TargetTypeDescriptor = (object) targetType;
+      second.TargetTypeDescriptor =  targetType;
       second.TargetMethod = hookAtt.TargetMethod;
       return Tuple.Create<Hook, HookGenerationError>((Hook) null, second);
     }
@@ -86,7 +86,7 @@ public static class HookHelper
     if (method == (MethodInfo) null)
       return Tuple.Create<Hook, HookGenerationError>((Hook) null, new HookGenerationError(hookMethod, "Target method could not be found")
       {
-        TargetTypeDescriptor = (object) type,
+        TargetTypeDescriptor =  type,
         TargetMethod = hookAtt.TargetMethod
       });
     Tuple<Hook, HookGenerationError> hook;
@@ -99,7 +99,7 @@ public static class HookHelper
       hook = Tuple.Create<Hook, HookGenerationError>((Hook) null, new HookGenerationError(hookMethod, $"Exception, {ex.GetType()}:{ex.Message}")
       {
         TargetMethod = method.ToString(),
-        TargetTypeDescriptor = (object) type
+        TargetTypeDescriptor =  type
       });
     }
     return hook;

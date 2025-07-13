@@ -126,7 +126,7 @@ public class PassiveAbility_150038Log : PassiveAbilityBase
   {
     this.owner.view.ChangeSkin("XiaoEgo");
     Object original1 = Resources.Load(this._TRANSFORM_PARTICLE_PATH);
-    if (original1 != (Object) null)
+    if (original1 !=  null)
     {
       GameObject gameObject = Object.Instantiate(original1) as GameObject;
       gameObject.transform.parent = this.owner.view.charAppearance.atkEffectRoot;
@@ -135,17 +135,17 @@ public class PassiveAbility_150038Log : PassiveAbilityBase
       gameObject.transform.localScale = Vector3.one;
     }
     Object original2 = Resources.Load("Prefabs/Battle/SpecialEffect/XiaoEgoAura");
-    if (!(original2 != (Object) null))
+    if (!(original2 !=  null))
       return;
     GameObject gameObject1 = Object.Instantiate(original2) as GameObject;
-    if ((Object) gameObject1 != (Object) null)
+    if ( gameObject1 !=  null)
     {
       gameObject1.transform.parent = this.owner.view.charAppearance.transform;
       gameObject1.transform.localPosition = Vector3.zero;
       gameObject1.transform.localRotation = Quaternion.identity;
       gameObject1.transform.localScale = Vector3.one;
       XiaoFeatherAura component = gameObject1.GetComponent<XiaoFeatherAura>();
-      if ((Object) component != (Object) null)
+      if ( component !=  null)
         component.Init(this.owner.view);
       this._aura = gameObject1;
     }

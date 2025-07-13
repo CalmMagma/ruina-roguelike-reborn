@@ -40,7 +40,7 @@ namespace abcdcode_LOGLIKE_MOD
                 this.behavior.card = cardDataInUnitModel;
                 cardDataInUnitModel.cardBehaviorQueue.Enqueue(this.behavior);
                 this.behavior.abilityList.Remove((DiceCardAbilityBase)this);
-                ((List<BattlePlayingCardDataInUnitModel>)typeof(StageController).GetField("_allCardList", AccessTools.all).GetValue((object)Singleton<StageController>.Instance)).Add(cardDataInUnitModel);
+                ((List<BattlePlayingCardDataInUnitModel>)typeof(StageController).GetField("_allCardList", AccessTools.all).GetValue(Singleton<StageController>.Instance)).Add(cardDataInUnitModel);
             }
         }
     }

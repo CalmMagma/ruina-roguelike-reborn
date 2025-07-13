@@ -39,7 +39,7 @@
   
    <LogueEffectInfo Id="GlobalEffect_CupOfGreed_Effect">
     <Name>贪婪之杯</Name> 
-    <Desc>将1张{0}置入所选司书手中。</Desc> 
+    <Desc>从当前书库中选择1张战斗书页将其置入另一名司书手中。每舞台限用1次。</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“有屯屯鼠必有挥金人。”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[​暂无]</CatalogDesc>
   </LogueEffectInfo> 

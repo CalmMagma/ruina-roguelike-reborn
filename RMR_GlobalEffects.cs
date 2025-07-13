@@ -365,15 +365,15 @@ namespace RogueLike_Mod_Reborn
         public override void OnKillUnit(BattleUnitModel killer, BattleUnitModel target)
         {
             base.OnKillUnit(killer, target);
-            int BleedToTransfer = target.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding);
+            int BleedToTransfer = target.bufListDetail.GetKewordBufAllStack(KeywordBuf.Bleeding);
             if (BleedToTransfer < 10) return;
             BleedToTransfer /= 2;
-            List<BattleUnitModel> EnemyList = target.Team.GetList();
-            for (int i = 0; i < EnemyList.Count; i++)
+            List<BattleUnitModel> EnemyList = BattleObjectManager.instance.GetAliveList(target.faction);
+            foreach (var unit in EnemyList)
             {
-                if (EnemyList[i] != target)
+                if (unit != target)
                 {
-                    EnemyList[i].TakeDamage(BleedToTransfer, DamageType.ETC, killer);
+                    unit?.TakeDamage(BleedToTransfer, DamageType.ETC, killer);
                 }
             }
         }

@@ -68,7 +68,7 @@
     </BattleEffectText>
 	
 	<BattleEffectText ID="RMR_Prescriptbuf">
-      <Name>指令：“专注于你面前之人”</Name>
+      <Name>指令</Name>
       <Desc>自身连续对1名目标使用战斗书页时造成的伤害与混乱伤害+10%(至多30%)
 若对其他目标使用战斗书页则该次行动中造成的伤害与混乱伤害-50%</Desc>
     </BattleEffectText>

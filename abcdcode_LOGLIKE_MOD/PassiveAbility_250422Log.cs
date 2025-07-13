@@ -154,7 +154,7 @@ public class PassiveAbility_250422Log : PassiveAbilityBase
       SingletonBehavior<BattleSoundManager>.Instance.ChangeEnemyTheme(0);
     }
     else
-      Debug.LogError((object) "Bgm Not found : red mist");
+      Debug.LogError( "Bgm Not found : red mist");
   }
 
   public class BattleUnitBuf_RedMistEgo : BattleUnitBuf
