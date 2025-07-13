@@ -56,9 +56,9 @@
   
   <Card ID="-104">
     <Name>Wails of the Past</Name>
-    <Artwork>Creature_Bigbird2.png</Artwork>
+    <Artwork>Creature_Bigbird.png</Artwork>
     <Rarity>Uncommon</Rarity>
-	<Option>ExhaustOnUse</Option>
+    <Option>ExhaustOnUse</Option>
     <Spec Range="Near" Cost="0" />
     <Script>RMR_Diversion</Script>
     <ScriptDesc />

@@ -23,7 +23,7 @@ public class PickUpModel_Way1_1 : PickUpModelBase
     StageWaveInfo wave = data.waveList[Random.Range(0, data.waveList.Count - 1)];
     StageWaveModel stageWaveModel = new StageWaveModel();
     stageWaveModel.Init(stageModel, wave);
-    ((List<StageWaveModel>) typeof (StageModel).GetField("_waveList", AccessTools.all).GetValue((object) stageModel)).Add(stageWaveModel);
+    ((List<StageWaveModel>) typeof (StageModel).GetField("_waveList", AccessTools.all).GetValue( stageModel)).Add(stageWaveModel);
   }
 }
 }

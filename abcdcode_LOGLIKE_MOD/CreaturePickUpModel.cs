@@ -63,7 +63,7 @@ namespace abcdcode_LOGLIKE_MOD
             StatBonus statBonus2 = new StatBonus();
             foreach (BattleEmotionCardModel passive in emotionDetail.PassiveList)
                 statBonus2.AddStatBonus(passive.GetStatBonus());
-            LogLikeMod.SetFieldValue((object)emotionDetail, "_statBonus", (object)statBonus2);
+            LogLikeMod.SetFieldValue(emotionDetail, "_statBonus", statBonus2);
             try
             {
                 SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.GetProfileUI(targetunit);
@@ -74,7 +74,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (ex is NullReferenceException)
                     return;
-                Debug.LogError((object)ex);
+                Debug.LogError(ex);
             }
         }
 
@@ -92,27 +92,27 @@ namespace abcdcode_LOGLIKE_MOD
                 }
             }
             UIGetAbnormalityPanel instance = UIGetAbnormalityPanel.instance;
-            FieldInfo field1 = ModdingUtils.GetField("currentFloor", (object)instance);
-            GameObject fieldValue1 = ModdingUtils.GetFieldValue<GameObject>("ob_blackbgForKeterCompleterOpen", (object)instance);
-            FieldInfo field2 = ModdingUtils.GetField("currentSettinfCardCount", (object)instance);
-            FieldInfo field3 = ModdingUtils.GetField("sep", (object)instance);
-            FieldInfo field4 = ModdingUtils.GetField("isbinahhokmacompletecheck", (object)instance);
-            Image fieldValue2 = ModdingUtils.GetFieldValue<Image>("img_floorIcon", (object)instance);
-            TextMeshProUGUI fieldValue3 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_floorname", (object)instance);
-            TextMeshProUGUI fieldValue4 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_level", (object)instance);
-            GameObject fieldValue5 = ModdingUtils.GetFieldValue<GameObject>("controllerGuide", (object)instance);
-            GameObject fieldValue6 = ModdingUtils.GetFieldValue<GameObject>("AbnormalitiesRoot", (object)instance);
-            GameObject fieldValue7 = ModdingUtils.GetFieldValue<GameObject>("EgoCardsRoot", (object)instance);
-            TextMeshProUGUI fieldValue8 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_getabcardtxt", (object)instance);
-            TextMeshProUGUI fieldValue9 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_getegocardtxt", (object)instance);
-            List<UIEmotionPassiveCardInven> fieldValue10 = ModdingUtils.GetFieldValue<List<UIEmotionPassiveCardInven>>("AbnormalityList", (object)instance);
-            Animator fieldValue11 = ModdingUtils.GetFieldValue<Animator>("anim", (object)instance);
-            field1.SetValue((object)instance, (object)null);
+            FieldInfo field1 = ModdingUtils.GetField("currentFloor", instance);
+            GameObject fieldValue1 = ModdingUtils.GetFieldValue<GameObject>("ob_blackbgForKeterCompleterOpen", instance);
+            FieldInfo field2 = ModdingUtils.GetField("currentSettinfCardCount", instance);
+            FieldInfo field3 = ModdingUtils.GetField("sep", instance);
+            FieldInfo field4 = ModdingUtils.GetField("isbinahhokmacompletecheck", instance);
+            Image fieldValue2 = ModdingUtils.GetFieldValue<Image>("img_floorIcon", instance);
+            TextMeshProUGUI fieldValue3 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_floorname", instance);
+            TextMeshProUGUI fieldValue4 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_level", instance);
+            GameObject fieldValue5 = ModdingUtils.GetFieldValue<GameObject>("controllerGuide", instance);
+            GameObject fieldValue6 = ModdingUtils.GetFieldValue<GameObject>("AbnormalitiesRoot", instance);
+            GameObject fieldValue7 = ModdingUtils.GetFieldValue<GameObject>("EgoCardsRoot", instance);
+            TextMeshProUGUI fieldValue8 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_getabcardtxt", instance);
+            TextMeshProUGUI fieldValue9 = ModdingUtils.GetFieldValue<TextMeshProUGUI>("txt_getegocardtxt", instance);
+            List<UIEmotionPassiveCardInven> fieldValue10 = ModdingUtils.GetFieldValue<List<UIEmotionPassiveCardInven>>("AbnormalityList", instance);
+            Animator fieldValue11 = ModdingUtils.GetFieldValue<Animator>("anim", instance);
+            field1.SetValue(instance, null);
             fieldValue1.SetActive(false);
-            field2.SetValue((object)instance, (object)cards.Count);
+            field2.SetValue(instance, cards.Count);
             instance.Open();
-            field3.SetValue((object)instance, (object)SephirahType.None);
-            field4.SetValue((object)instance, (object)false);
+            field3.SetValue(instance, SephirahType.None);
+            field4.SetValue(instance, false);
             fieldValue2.sprite = UISpriteDataManager.instance.GetStoryIcon("Chapter1").icon;
             fieldValue3.text = name;
             switch (level)
@@ -157,7 +157,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             foreach (UIEmotionPassiveCardInven passiveCardInven in fieldValue10)
                 passiveCardInven.SetActiveDetail(false);
-            instance.GetType().GetMethod("SetDefault", AccessTools.all).Invoke((object)instance, (object[])null);
+            instance.GetType().GetMethod("SetDefault", AccessTools.all).Invoke(instance, (object[])null);
             fieldValue11.SetTrigger("Reveal");
         }
 

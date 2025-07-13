@@ -288,7 +288,7 @@ public class PassiveAbility_150051Log : PassiveAbilityBase
         this.owner.view.ChangeHeight((int) ((double) height * 1.5));
         break;
       default:
-        Util.DebugEditorLog((object) ("Not fount skin : " + skinName));
+        Util.DebugEditorLog( ("Not fount skin : " + skinName));
         break;
     }
   }

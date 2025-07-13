@@ -78,12 +78,12 @@ namespace abcdcode_LOGLIKE_MOD
         public LogueEffectXmlInfo GetEffectInfo(string id, string packageId, params object[] args)
         {
             if (!this.effectDict.ContainsKey(packageId) || !this.effectDict[packageId].ContainsKey(id))
-                return (LogueEffectXmlInfo)null;
+                return null;
             LogueEffectXmlInfo effectInfo = this.effectDict[packageId][id];
-            if (LogLikeMod.itemCatalogActive || args == null || args.Length == 0)
-                effectInfo.Desc = effectInfo.Desc.Replace("{0}", "X");
-            else if (args != null && args.Length != 0)
+            if (args != null && args.Length != 0)
                 effectInfo.Desc = string.Format(effectInfo.Desc, args);
+            else if (LogLikeMod.itemCatalogActive || args == null || args.Length == 0)
+                effectInfo.Desc = effectInfo.Desc.Replace("{0}", "X");
             return effectInfo;
         }
     }

@@ -1232,12 +1232,15 @@ namespace abcdcode_LOGLIKE_MOD
         }
 
         /// <summary>
-        /// Hook to make exclusive combat pages show up properly in roguelike
+        /// Hook to make exclusive combat pages show up properly in roguelike's card inventory
         /// </summary>
         public void UIInvenCardScrollList_ApplyFilterAll(Action<UIInvenCardListScroll> orig, UIInvenCardListScroll self)
         {
             if (!LogLikeMod.CheckStage())
+            {
+                orig(self);
                 return;
+            }
             self._currentCardListForFilter.Clear();
             List<DiceCardItemModel> cardsByDetailFilterUI = self.GetCardsByDetailFilterUI(self.GetCardBySearchFilterUI(self.GetCardsByCostFilterUI(self.GetCardsByGradeFilterUI(self._originCardList))));
             cardsByDetailFilterUI.Sort(new Comparison<DiceCardItemModel>(SortUtil.CardItemCompByCost));

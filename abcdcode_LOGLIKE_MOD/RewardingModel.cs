@@ -181,7 +181,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (info == null)
             {
-                Debug.Log((object)"info is null");
+                Debug.Log("info is null");
                 return (DiceCardXmlInfo)null;
             }
             CardDropTableXmlInfo data = Singleton<CardDropTableXmlList>.Instance.GetData(new LorId(info.workshopID, info.DropTableId));

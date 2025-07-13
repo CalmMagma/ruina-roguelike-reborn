@@ -28,8 +28,8 @@ public class PassiveAbility_230028Log : PassiveAbilityBase
   {
     this._speedDiceAdder = 0;
     this._patternCount = 0;
-    if ((Object) this._protectionEffect != (Object) null)
-      Object.Destroy((Object) this._protectionEffect);
+    if ( this._protectionEffect !=  null)
+      Object.Destroy( this._protectionEffect);
     this._protectionEffect = (GameObject) null;
   }
 
@@ -61,10 +61,10 @@ public class PassiveAbility_230028Log : PassiveAbilityBase
         this.owner.bufListDetail.AddBuf((BattleUnitBuf) new PassiveAbility_230028.PhilipBuf4(3 - this._patternCount));
         Singleton<StageController>.Instance.GetStageModel().SetCurrentMapInfo(0);
         this.owner.view.ChangeSkin("PhilipEgoProtection");
-        if ((Object) this._protectionEffect == (Object) null)
+        if ( this._protectionEffect ==  null)
         {
           Object original = Resources.Load("Prefabs/Battle/BufEffect/PhilipProtectionEffect");
-          if (original != (Object) null)
+          if (original !=  null)
             this._protectionEffect = Object.Instantiate(original, this.owner.view.atkEffectRoot) as GameObject;
         }
         this.owner.allyCardDetail.ExhaustAllCards();
@@ -79,9 +79,9 @@ public class PassiveAbility_230028Log : PassiveAbilityBase
         this.owner.bufListDetail.AddBuf((BattleUnitBuf) new PassiveAbility_230028.PhilipBuf4(3 - this._patternCount));
         Singleton<StageController>.Instance.GetStageModel().SetCurrentMapInfo(1);
         this.owner.view.ChangeSkin("PhilipEgo");
-        if ((Object) this._protectionEffect != (Object) null)
+        if ( this._protectionEffect !=  null)
         {
-          Object.Destroy((Object) this._protectionEffect);
+          Object.Destroy( this._protectionEffect);
           this._protectionEffect = (GameObject) null;
         }
         this.owner.allyCardDetail.ExhaustAllCards();
@@ -96,9 +96,9 @@ public class PassiveAbility_230028Log : PassiveAbilityBase
         Singleton<StageController>.Instance.GetStageModel().SetCurrentMapInfo(2);
         this.owner.view.ChangeSkin("PhilipEgoFury");
         SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Battle/Philip_MapChange_Strong");
-        if ((Object) this._protectionEffect != (Object) null)
+        if ( this._protectionEffect !=  null)
         {
-          Object.Destroy((Object) this._protectionEffect);
+          Object.Destroy( this._protectionEffect);
           this._protectionEffect = (GameObject) null;
         }
         this._speedDiceAdder = 2;

@@ -94,7 +94,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             model.unitData.bookItem.instanceId = data.GetInt("instanceid");
             SaveData data3 = data.GetData("SucPassiveList");
-            List<PassiveModel> fieldValue1 = LogLikeMod.GetFieldValue<List<PassiveModel>>((object)model.unitData.bookItem, "_activatedAllPassives");
+            List<PassiveModel> fieldValue1 = LogLikeMod.GetFieldValue<List<PassiveModel>>(model.unitData.bookItem, "_activatedAllPassives");
             foreach (SaveData data4 in data3)
             {
                 PassiveModel __instance = new PassiveModel(model.unitData.bookItem.instanceId);
@@ -114,10 +114,10 @@ namespace abcdcode_LOGLIKE_MOD
             model.unitData.bookItem.SetOriginalResists();
             model.unitData.bookItem.SetOriginalPlayPoint();
             model.unitData.bookItem.SetOriginalCharacterName();
-            typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue((object)model.unitData.bookItem, (object)classInfo.CharacterSkin[0]);
-            typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue((object)model.unitData.bookItem, (object)classInfo.CharacterSkin[0]);
+            typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue(model.unitData.bookItem, classInfo.CharacterSkin[0]);
+            typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue(model.unitData.bookItem, classInfo.CharacterSkin[0]);
             SaveData data5 = data.GetData("_onlyCard");
-            List<DiceCardXmlInfo> fieldValue2 = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>((object)model.unitData.bookItem, "_onlyCards");
+            List<DiceCardXmlInfo> fieldValue2 = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>(model.unitData.bookItem, "_onlyCards");
             if (data5.GetListCount() > 0)
             {
                 foreach (SaveData data6 in data5)
@@ -211,7 +211,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             data1.AddData("SucPassiveList", data7);
             SaveData data8 = new SaveData();
-            List<DiceCardXmlInfo> fieldValue = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>((object)model.unitData.bookItem, "_onlyCards");
+            List<DiceCardXmlInfo> fieldValue = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>(model.unitData.bookItem, "_onlyCards");
             if (fieldValue.Count > 0)
             {
                 foreach (DiceCardXmlInfo diceCardXmlInfo in fieldValue)
@@ -708,14 +708,14 @@ namespace abcdcode_LOGLIKE_MOD
             DiceCardItemModel diceCardItemModel = LogueBookModels.cardlist.Find((Predicate<DiceCardItemModel>)(x => x.GetID() == cardId));
             if (num <= 0)
             {
-                Debug.LogError((object)"num must not be zero");
+                Debug.LogError("num must not be zero");
             }
             else
             {
                 DiceCardXmlInfo cardItem = ItemXmlDataList.instance.GetCardItem(cardId);
                 if (diceCardItemModel == null)
                 {
-                    Debug.LogError((object)"There's no Card");
+                    Debug.LogError("There's no Card");
                 }
                 else
                 {
@@ -756,7 +756,7 @@ namespace abcdcode_LOGLIKE_MOD
             DiceCardItemModel diceCardItemModel = LogueBookModels.cardlist.Find((Predicate<DiceCardItemModel>)(x => x.GetID() == cardId));
             if (num <= 0)
             {
-                Debug.LogError((object)"num must not be zero");
+                Debug.LogError("num must not be zero");
                 return false;
             }
             DiceCardXmlInfo cardItem = ItemXmlDataList.instance.GetCardItem(cardId);
@@ -764,12 +764,12 @@ namespace abcdcode_LOGLIKE_MOD
                 return true;
             if (diceCardItemModel == null)
             {
-                Debug.LogError((object)"not enough card");
+                Debug.LogError("not enough card");
                 return false;
             }
             if (diceCardItemModel.num < num)
             {
-                Debug.LogError((object)"not enough card");
+                Debug.LogError("not enough card");
                 return false;
             }
             diceCardItemModel.num -= num;
@@ -817,8 +817,8 @@ namespace abcdcode_LOGLIKE_MOD
             player.bookItem.SetOriginalResists();
             player.bookItem.SetOriginalPlayPoint();
             player.bookItem.SetOriginalCharacterName();
-            typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue((object)player.bookItem, (object)player.bookItem.ClassInfo.CharacterSkin[0]);
-            typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue((object)player.bookItem, (object)player.bookItem.ClassInfo.CharacterSkin[0]);
+            typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue(player.bookItem, player.bookItem.ClassInfo.CharacterSkin[0]);
+            typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue(player.bookItem, player.bookItem.ClassInfo.CharacterSkin[0]);
         }
 
         public static int GetMoney() => PassiveAbility_MoneyCheck.GetMoney();
@@ -1018,7 +1018,7 @@ namespace abcdcode_LOGLIKE_MOD
             model.hp = (float)(startHp * hpReductionMod);
             if ((double)model.hp <= 0.0 && !model.isDead)
                 model.hp = 1f;
-            List<DiceCardXmlInfo> fieldValue = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>((object)unitData.bookItem, "_onlyCards");
+            List<DiceCardXmlInfo> fieldValue = LogLikeMod.GetFieldValue<List<DiceCardXmlInfo>>(unitData.bookItem, "_onlyCards");
             fieldValue.Clear();
             foreach (int id in page.EquipEffect.OnlyCard)
             {
@@ -1112,8 +1112,8 @@ namespace abcdcode_LOGLIKE_MOD
                 {
                     model.bookItem.ClassInfo.CharacterSkin = new List<string>();
                     model.bookItem.ClassInfo.CharacterSkin.Add("KetherLibrarian");
-                    typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue((object)model.bookItem, (object)model.bookItem.ClassInfo.CharacterSkin[0]);
-                    typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue((object)model.bookItem, (object)model.bookItem.ClassInfo.CharacterSkin[0]);
+                    typeof(BookModel).GetField("_selectedOriginalSkin", AccessTools.all).SetValue(model.bookItem, model.bookItem.ClassInfo.CharacterSkin[0]);
+                    typeof(BookModel).GetField("_characterSkin", AccessTools.all).SetValue(model.bookItem, model.bookItem.ClassInfo.CharacterSkin[0]);
                 }
             }
         }

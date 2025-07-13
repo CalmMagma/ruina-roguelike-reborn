@@ -32,10 +32,10 @@ public class OrdealTextManager : Singleton<OrdealTextManager>
     string audioclip,
     OrdealTextManager.OrdealEnd endfunc = null)
   {
-    if ((Object) this.root == (Object) null)
+    if ( this.root ==  null)
       this.ObjectInit();
     AudioClip audioClip = Singleton<LogSoundEffectManager>.Instance.GetAudioClip(audioclip);
-    if ((Object) audioClip != (Object) null)
+    if ( audioClip !=  null)
       SingletonBehavior<SoundEffectManager>.Instance.PlayClip(audioClip, volume: 3f);
     else
       this.Log($"Error : {audioclip} is NULL");
@@ -106,12 +106,12 @@ public class OrdealTextManager : Singleton<OrdealTextManager>
 
     public void ChangeAlpha(GameObject obj, float alpha)
     {
-      if ((Object) obj.GetComponent<Image>() != (Object) null)
+      if ( obj.GetComponent<Image>() !=  null)
       {
         Color color = obj.GetComponent<Image>().color;
         obj.GetComponent<Image>().color = new Color(color.r, color.g, color.b, alpha);
       }
-      if (!((Object) obj.GetComponent<TextMeshProUGUI>() != (Object) null))
+      if (!( obj.GetComponent<TextMeshProUGUI>() !=  null))
         return;
       Color color1 = obj.GetComponent<TextMeshProUGUI>().color;
       obj.GetComponent<TextMeshProUGUI>().color = new Color(color1.r, color1.g, color1.b, alpha);

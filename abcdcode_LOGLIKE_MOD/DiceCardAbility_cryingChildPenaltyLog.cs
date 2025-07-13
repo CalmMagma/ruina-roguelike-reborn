@@ -20,28 +20,28 @@ namespace abcdcode_LOGLIKE_MOD
             this.owner.battleCardResultLog?.SetAfterActionEvent((BattleCardBehaviourResult.BehaviourEvent)(() =>
             {
                 BattleCamManager instance1 = SingletonBehavior<BattleCamManager>.Instance;
-                CameraFilterPack_TV_BrokenGlass r1 = ((Object)instance1 != (Object)null ? instance1.EffectCam.gameObject.AddComponent<CameraFilterPack_TV_BrokenGlass>() : (CameraFilterPack_TV_BrokenGlass)null) ?? (CameraFilterPack_TV_BrokenGlass)null;
-                if ((Object)r1 != (Object)null)
+                CameraFilterPack_TV_BrokenGlass r1 = (instance1 != null ? instance1.EffectCam.gameObject.AddComponent<CameraFilterPack_TV_BrokenGlass>() : (CameraFilterPack_TV_BrokenGlass)null) ?? (CameraFilterPack_TV_BrokenGlass)null;
+                if (r1 != null)
                 {
                     r1.Broken_High = 20f;
                     r1.Broken_Big = 2f;
                     r1.StartCoroutine(this.BrokenGlassRoutine(r1));
                     BattleCamManager instance2 = SingletonBehavior<BattleCamManager>.Instance;
-                    AutoScriptDestruct autoScriptDestruct = ((Object)instance2 != (Object)null ? instance2.EffectCam.gameObject.AddComponent<AutoScriptDestruct>() : (AutoScriptDestruct)null) ?? (AutoScriptDestruct)null;
-                    if ((Object)autoScriptDestruct != (Object)null)
+                    AutoScriptDestruct autoScriptDestruct = (instance2 != null ? instance2.EffectCam.gameObject.AddComponent<AutoScriptDestruct>() : (AutoScriptDestruct)null) ?? (AutoScriptDestruct)null;
+                    if (autoScriptDestruct != null)
                     {
                         autoScriptDestruct.targetScript = (MonoBehaviour)r1;
                         autoScriptDestruct.time = 2f;
                     }
                 }
                 BattleCamManager instance3 = SingletonBehavior<BattleCamManager>.Instance;
-                CameraFilterPack_FX_EarthQuake r2 = ((Object)instance3 != (Object)null ? instance3.EffectCam.gameObject.AddComponent<CameraFilterPack_FX_EarthQuake>() : (CameraFilterPack_FX_EarthQuake)null) ?? (CameraFilterPack_FX_EarthQuake)null;
-                if (!((Object)r2 != (Object)null))
+                CameraFilterPack_FX_EarthQuake r2 = (instance3 != null ? instance3.EffectCam.gameObject.AddComponent<CameraFilterPack_FX_EarthQuake>() : (CameraFilterPack_FX_EarthQuake)null) ?? (CameraFilterPack_FX_EarthQuake)null;
+                if (!(r2 != null))
                     return;
                 r2.StartCoroutine(this.EarthQuakeRoutine(r2));
                 BattleCamManager instance4 = SingletonBehavior<BattleCamManager>.Instance;
-                AutoScriptDestruct autoScriptDestruct1 = ((Object)instance4 != (Object)null ? instance4.EffectCam.gameObject.AddComponent<AutoScriptDestruct>() : (AutoScriptDestruct)null) ?? (AutoScriptDestruct)null;
-                if ((Object)autoScriptDestruct1 != (Object)null)
+                AutoScriptDestruct autoScriptDestruct1 = (instance4 != null ? instance4.EffectCam.gameObject.AddComponent<AutoScriptDestruct>() : (AutoScriptDestruct)null) ?? (AutoScriptDestruct)null;
+                if (autoScriptDestruct1 != null)
                 {
                     autoScriptDestruct1.targetScript = (MonoBehaviour)r2;
                     autoScriptDestruct1.time = 0.5f;
@@ -58,7 +58,7 @@ namespace abcdcode_LOGLIKE_MOD
                 r.Speed = (float)(30.0 * (1.0 - (double)e));
                 r.X = (float)(0.019999999552965164 * (1.0 - (double)e));
                 r.Y = (float)(0.019999999552965164 * (1.0 - (double)e));
-                yield return (object)null;
+                yield return null;
             }
         }
 
@@ -75,7 +75,7 @@ namespace abcdcode_LOGLIKE_MOD
                     r.Broken_High = (float)(20.0 * (1.0 - ((double)e - 1.0)));
                     r.Broken_Big = (float)(2.0 * (1.0 - ((double)e - 1.0)));
                 }
-                yield return (object)null;
+                yield return null;
             }
         }
     }

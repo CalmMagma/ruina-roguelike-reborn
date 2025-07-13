@@ -16,8 +16,8 @@ public class CircusDawn2Buf : BattleUnitBuf
   public override void Init(BattleUnitModel owner)
   {
     base.Init(owner);
-    typeof (BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue((object) this, (object) LogLikeMod.ArtWorks["buff_CricusDawn2"]);
-    typeof (BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue((object) this, (object) true);
+    typeof (BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue( this,  LogLikeMod.ArtWorks["buff_CricusDawn2"]);
+    typeof (BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue( this,  true);
   }
 
   public override void BeforeRollDice(BattleDiceBehavior behavior)

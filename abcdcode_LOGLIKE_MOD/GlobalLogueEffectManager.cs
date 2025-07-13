@@ -402,7 +402,7 @@ namespace abcdcode_LOGLIKE_MOD
                 else
                     this.effects.Add(effect);
                 if (!this.isLoadingSave)
-                    Singleton<LogueSaveManager>.Instance.AddToObtainCount((object)effect);
+                    Singleton<LogueSaveManager>.Instance.AddToObtainCount(effect);
                 this.UpdateSprites();
             }
         }  

@@ -20,8 +20,8 @@ public class CircusDawn1Buf : BattleUnitBuf
   public override void Init(BattleUnitModel owner)
   {
     base.Init(owner);
-    typeof (BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue((object) this, (object) LogLikeMod.ArtWorks["buff_CricusDawn1"]);
-    typeof (BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue((object) this, (object) true);
+    typeof (BattleUnitBuf).GetField("_bufIcon", AccessTools.all).SetValue( this,  LogLikeMod.ArtWorks["buff_CricusDawn1"]);
+    typeof (BattleUnitBuf).GetField("_iconInit", AccessTools.all).SetValue( this,  true);
     this.checkbuf = new CircusDawn1_1Buf();
     this.checkbuf.stack = -1;
     this.checkbuf.Init(this.targetunit);

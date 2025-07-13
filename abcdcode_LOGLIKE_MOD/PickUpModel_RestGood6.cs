@@ -16,7 +16,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             this.basepassive = Singleton<PassiveXmlList>.Instance.GetData(new LorId(LogLikeMod.ModId, 800006));
             this.Name = Singleton<PassiveDescXmlList>.Instance.GetName(this.basepassive.id);
-            this.Desc = TextDataModel.GetText("RestGood6_Desc", (object)PickUpModel_RestGood6.count);
+            this.Desc = TextDataModel.GetText("RestGood6_Desc", PickUpModel_RestGood6.count);
             this.id = new LorId(LogLikeMod.ModId, 800006);
             this.type = RestPickUp.RestPickUpType.Sub;
         }
@@ -24,7 +24,7 @@ namespace abcdcode_LOGLIKE_MOD
         public override void Init()
         {
             PickUpModel_RestGood6.count = 2;
-            this.Desc = TextDataModel.GetText("RestGood6_Desc", (object)PickUpModel_RestGood6.count);
+            this.Desc = TextDataModel.GetText("RestGood6_Desc", PickUpModel_RestGood6.count);
         }
 
         public override bool CheckCondition() => LogueBookModels.GetCardList(true, true).Count > 0;
@@ -89,7 +89,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             MysteryModel_CardChoice.PopupCardChoice(LogueBookModels.GetCardList(true, true), new MysteryModel_CardChoice.ChoiceResult(this.ExChangeCard), MysteryModel_CardChoice.ChoiceDescType.TransformDesc);
             --PickUpModel_RestGood6.count;
-            this.Desc = TextDataModel.GetText("RestGood6_Desc", (object)PickUpModel_RestGood6.count);
+            this.Desc = TextDataModel.GetText("RestGood6_Desc", PickUpModel_RestGood6.count);
         }
     }
 }

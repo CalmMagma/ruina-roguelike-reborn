@@ -51,7 +51,7 @@ namespace abcdcode_LOGLIKE_MOD
 
             public override string GetEffectDesc()
             {
-                return TextDataModel.GetText("MeatPieQuest_Desc", (object)this.stack);
+                return TextDataModel.GetText("MeatPieQuest_Desc", this.stack);
             }
 
             public override void OnSkipCardRewardChoose(List<DiceCardXmlInfo> cardlist)

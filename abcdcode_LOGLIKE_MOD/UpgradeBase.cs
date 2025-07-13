@@ -36,7 +36,7 @@ namespace abcdcode_LOGLIKE_MOD
         public virtual DiceCardXmlInfo GetUpgradeInfo(int index, int count)
         {
             DiceCardXmlInfo upxmlinfo;
-            if (this.upxmlinfo == null)
+            if (this.upxmlinfo == null || this.upxmlinfo.workshopID.StartsWith("True"))
             {
                 this.upxmlinfo = this.CreateUpBase(index, count);
                 if (this.upgradeinfo == null)

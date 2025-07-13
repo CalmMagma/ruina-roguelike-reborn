@@ -169,7 +169,7 @@ namespace abcdcode_LOGLIKE_MOD
                     return;
                 this.image.color = UIColorManager.Manager.GetUIColor(UIColor.Highlighted);
                 FieldInfo field = this.effect.GetType().GetField("ItemRarity", BindingFlags.Static | BindingFlags.Public);
-                Rarity rare = !(field != (FieldInfo)null) ? Rarity.Special : (Rarity)field.GetValue((object)null);
+                Rarity rare = !(field != (FieldInfo)null) ? Rarity.Special : (Rarity)field.GetValue(null);
                 SingletonBehavior<UIMainOverlayManager>.Instance.SetTooltip(this.effect.GetEffectName(), $"{this.effect.GetEffectDesc()}\n<color=#{ColorUtility.ToHtmlStringRGB(UIColorManager.Manager.GetEquipRarityColor(rare))}>{rare.ToString()}</color>", this.transform as RectTransform, rare, UIToolTipPanelType.OnlyContent);
                 this.update = true;
             }

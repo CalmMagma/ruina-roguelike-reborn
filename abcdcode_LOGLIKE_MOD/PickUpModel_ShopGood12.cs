@@ -37,7 +37,7 @@ namespace abcdcode_LOGLIKE_MOD
                     SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfile(model, model.faction, model.hp, model.breakDetail.breakGauge, model.bufListDetail.GetBufUIDataList());
                 }
             }
-            Singleton<LogueSaveManager>.Instance.AddToObtainCount((object)this, -1);
+            Singleton<LogueSaveManager>.Instance.AddToObtainCount(this, -1);
         }
 
         public override void OnPickUpShop(ShopGoods good)

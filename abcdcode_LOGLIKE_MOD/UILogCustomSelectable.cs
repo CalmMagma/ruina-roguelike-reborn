@@ -32,7 +32,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (!this.IsActive() || !this.IsInteractable())
                 return;
-            UISystemProfilerApi.AddMarker("Button.onClick", (Object)this);
+            UISystemProfilerApi.AddMarker("Button.onClick", this);
             this.m_OnClick.Invoke();
         }
 
@@ -59,7 +59,7 @@ namespace abcdcode_LOGLIKE_MOD
             while ((double)elapsedTime < (double)fadeTime)
             {
                 elapsedTime += Time.unscaledDeltaTime;
-                yield return (object)null;
+                yield return null;
             }
             this.DoStateTransition(this.currentSelectionState, false);
         }
