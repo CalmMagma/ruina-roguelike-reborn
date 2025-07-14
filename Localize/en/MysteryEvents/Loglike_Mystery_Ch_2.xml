@@ -6,7 +6,7 @@
 
 "Hello there! We are running a special service today! For the low, low price of taking this Prescript, we will offer you 20 [yellow]Ahn[/color]! Good deal, no?"</Dialog>
       <Choice ID="0">
-        <Desc>Accept the Prescript. [green]Gain 20 [yellow]Ahn[/color].</Desc>
+        <Desc>Accept the Prescript. ([green]Gain 20 [yellow]Ahn[/color])</Desc>
       </Choice>
       <Choice ID="1">
         <Desc>Politely refuse.</Desc>

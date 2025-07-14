@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
              <text id="MysteryCh5_1Title">Last-Minute Performance</text>
-             <text id="MysteryCh5_1Frame0Dia0"> You pass by what seems like a circus tent, its symbol striped red and white clown, though the silence has you curious enough to investigate. As you go further inside its revealed that, while the performance is ready to begi, there are no actors to excute the play -- save for a bizarre-looking clown, who greets you with a cheery smile. The remains of various pikes and spears litter the circus.
+             <text id="MysteryCh5_1Frame0Dia0"> You pass by what seems like a circus tent, its symbol a striped red and white clown, though the silence has you curious enough to investigate. As you go further inside its revealed that, while the performance is ready to begin, there are no actors to execute the play -- save for a bizarre-looking clown, who greets you with a cheery smile. The remains of various pikes and spears litter the circus.
 			 
 "Ah! [mirror]Shard[/color]! How nice it is to see you here~~" His tower body moves to extreme, expressive poses. "Ohh my poor poor self is in a terrible situation! My actors have all... had an acccident, yes!? And as such a need new ones for the show! Ohhh, [mirror]Shard[/color], wont you help me? The performance is so soon..."
 			 

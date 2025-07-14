@@ -13,7 +13,7 @@ You explain that you're upset about the delay in your food, quickly joined by ot
 
              <text id="MysteryCh2_1Frame1Dia0">"Alright! I'll be waiting for ya~" Pierre let out a big smile.</text>
              <text id="MysteryCh2_1Frame1Dia1">
-You can now obtain the 'Meat' Combat Page by skipping page rewards after a fight. Bringing you bring 5 'Meat' Combat Pages to Pierre will allow you to complete the quest.</text>
+You can now obtain the 'Meat' Combat Page by skipping page rewards after a fight. Skipping 5 Combat Page rewards will allow you to complete the quest.</text>
              <text id="MysteryCh2_1Frame1Choice0Desc">Walk away a wee bit hungry</text>
 
              <text id="MysteryCh2_1Frame2Dia0">Pierre grinned eerily as she drew her knife and Jack his cleaver. Other customers also seemed to have brought their own utensils...</text>
