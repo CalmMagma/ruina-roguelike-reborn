@@ -1337,7 +1337,16 @@ namespace abcdcode_LOGLIKE_MOD
                     var list = RMRCore.CurrentGamemode.InitializeChapterStageList((ChapterGrade)i);
                     "".Log($"Chapter {(i + 1).ToString()} StageList");
                     foreach (LogueStageInfo logueStageInfo in list)
-                        "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
+                    {
+                        if (StageClassInfoList.Instance.GetData(logueStageInfo.Id) is var stage && (stage == null || stage.waveList == null))
+                        {
+                            list.Remove(logueStageInfo);
+                            "".Log($"!WARNING! -- INVALID STAGE REMOVED FROM STAGE LIST ON INITIALIZE");
+                            "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
+                        }
+                        else
+                            "".Log($"{logueStageInfo.Id.packageId} _ {logueStageInfo.Id.id.ToString()}");
+                    }
                     if (list != null && list.Count > 0)
                     {
                         LogueBookModels.RemainStageList[(ChapterGrade)i] = new List<LogueStageInfo>();
@@ -1362,11 +1371,10 @@ namespace abcdcode_LOGLIKE_MOD
             for (int index = 0; index < 3; )
             {
                 LogueStageInfo info = logueStageInfoList[UnityEngine.Random.Range(0, logueStageInfoList.Count)];
-                var thing = LogLikeMod.GetRegisteredPickUpXml(info);
+                EmotionCardXmlInfo thing = LogLikeMod.GetRegisteredPickUpXml(info);
                 logueStageInfoList.Remove(info);
-                var thing2 = Singleton<StagesXmlList>.Instance.GetStageInfo(new LorId(LogLikeMod.GetPickUpXmlWorkShopId_Stage(thing), thing.id));
-                var pid = LogLikeMod.GetPickUpXmlWorkShopId_Stage(thing);
-                if (thing != null && thing2 != null)
+                string pid = LogLikeMod.GetPickUpXmlWorkShopId_Stage(thing);
+                if (thing != null)
                 {
                     nextList.Add(thing);
                     LogueBookModels.CreateStageDesc(info);

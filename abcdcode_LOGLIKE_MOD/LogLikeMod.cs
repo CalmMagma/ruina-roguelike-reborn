@@ -2158,7 +2158,8 @@ namespace abcdcode_LOGLIKE_MOD
                 HookHelper.CreateHook(typeof(StageController), "OnEnemyDropBookForAdded", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_OnEnemyDropBookForAdded));
                 HookHelper.CreateHook(typeof(StageController), "EndBattlePhase", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_EndBattlePhase));
                 HookHelper.CreateHook(typeof(StageController), "EndBattle", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageController_EndBattle));
-                
+
+                HookHelper.CreateHook(typeof(BookModel), "ChangePassive", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.BookModel_ChangePassive));
                 HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickPassiveCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageLibraryFloorModel_OnPickPassiveCard));
                 HookHelper.CreateHook(typeof(StageLibraryFloorModel), "OnPickEgoCard", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.StageLibraryFloorModel_OnPickEgoCard));
                 HookHelper.CreateHook(typeof(LevelUpUI), "InitBase", LogLikeMod.logLikeHooks, nameof(LogLikeMod.logLikeHooks.LevelUpUI_InitBase));

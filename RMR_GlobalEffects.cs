@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
+using HarmonyLib;
 using LOR_DiceSystem;
+using UI;
 using UnityEngine;
 
 namespace RogueLike_Mod_Reborn
@@ -56,7 +58,7 @@ namespace RogueLike_Mod_Reborn
     {
         public override void OnRoundStart(StageController stage)
         {
-            base.OnRoundStart(stage);   
+            base.OnRoundStart(stage);
             var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
             for (int i = 0; i < list.Count; i++)
             {
@@ -124,7 +126,7 @@ namespace RogueLike_Mod_Reborn
                     case ChapterGrade.Grade6:
                         return "RMR_StrangeOrbGrade6";
                     default:
-                       return "RMR_StrangeOrb";
+                        return "RMR_StrangeOrb";
                 }
             }
         }
@@ -184,10 +186,10 @@ namespace RogueLike_Mod_Reborn
                 {
                     owner.Die();
                 }
-                
-                
-                
-                
+
+
+
+
             }
 
             public override bool IsImmuneBreakDmg(DamageType type)
@@ -321,10 +323,10 @@ namespace RogueLike_Mod_Reborn
             var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
             for (int i = 0; i < list.Count; i++)
             {
-                list[i].bufListDetail.AddBuf(new RMR_EffectBuf_CorrodedChains());   
+                list[i].bufListDetail.AddBuf(new RMR_EffectBuf_CorrodedChains());
             }
         }
-        public class RMR_EffectBuf_CorrodedChains : BattleUnitBuf 
+        public class RMR_EffectBuf_CorrodedChains : BattleUnitBuf
         {
             public override void OnSuccessAttack(BattleDiceBehavior behavior)
             {
@@ -339,7 +341,7 @@ namespace RogueLike_Mod_Reborn
             }
 
         }
-        
+
     }
 
     public class RMREffect_BleedingSpleen : GlobalLogueEffectBase
@@ -360,7 +362,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnCrit(critter, target);
             if (critter.faction == Faction.Player)
-            target?.bufListDetail?.AddKeywordBufByEtc(KeywordBuf.Bleeding, 2, critter);
+                target?.bufListDetail?.AddKeywordBufByEtc(KeywordBuf.Bleeding, 2, critter);
         }
         public override void OnKillUnit(BattleUnitModel killer, BattleUnitModel target)
         {
@@ -539,7 +541,7 @@ namespace RogueLike_Mod_Reborn
 
         public override void OnClick()
         {
-            
+
         }
 
         public override void OnStartBattleAfter()
@@ -661,6 +663,39 @@ namespace RogueLike_Mod_Reborn
                 }
             }
             cardlist = list;
+        }
+    }
+
+    /// <summary>
+    /// Hidden effect that is added on base gamemode initialization to allow for effects like Zeal.
+    /// </summary>
+    [HideFromItemCatalog]
+    public class RMREffect_ExtendedFunctionalityEffect : GlobalLogueEffectBase
+    {
+        /// <summary>
+        /// Adds a "OnWaveStart" override for DiceCardSelfAbilityBase. Usage:<br></br>
+        /// <code>
+        /// public void OnWaveStart_Roguelike(BattleDiceCardModel self, BattleUnitModel owner)
+        /// {
+        /// 
+        /// }
+        /// </code>
+        /// </summary>
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList())
+            {
+                foreach (var page in unit.allyCardDetail.GetDeck())
+                {
+                    var script = page._script;
+                    if (script != null)
+                    {
+                        var method = AccessTools.Method(script.GetType(), "OnWaveStart_Roguelike", new Type[] { typeof(BattleDiceCardModel), typeof(BattleUnitModel) });
+                        method?.Invoke(script, new object[] { page, page.owner });
+                    }
+                }
+            }
         }
     }
 }
