@@ -21,9 +21,11 @@
     <StageList ID="140002" StageType="Mystery" />  
     <StageList ID="140003" StageType="Mystery" />  
 	<StageList ID="120003" StageType="Mystery" />
+	<StageList ID="400041" StageType="Mystery" />
 
     <StageList ID="111001" StageType="Shop" /> 
     <StageList ID="111001" StageType="Shop" /> 
+	
   </ChapterList>
 
   <ChapterList Chapter="Grade4">
