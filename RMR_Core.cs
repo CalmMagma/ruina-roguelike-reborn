@@ -28,6 +28,7 @@ using EnumExtenderV2;
 using KeywordUtil;
 using Unity.Mathematics;
 using BattleCardEnhancedView;
+using JetBrains.Annotations;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -758,7 +759,10 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public static BattleDiceBehavior creatediefromtheaether(int min, int max, BehaviourDetail detail, BehaviourType type, MotionDetail mdetail = MotionDetail.N, string script = "", string actionscript = "", string effectres = "", DiceStatBonus bonus = null)
+        /// <summary>
+        /// Methods for quickly making BattleDiceBehaviors.
+        /// </summary>
+        public static BattleDiceBehavior CreateBattleDiceBehavior(int min, int max, BehaviourDetail detail, BehaviourType type, MotionDetail mdetail = MotionDetail.N, string script = "", string actionscript = "", string effectres = "", DiceStatBonus bonus = null)
         {
             BattleDiceBehavior battleDiceBehavior = new BattleDiceBehavior
             {
@@ -792,8 +796,32 @@ namespace RogueLike_Mod_Reborn
 
             return battleDiceBehavior;
         }
+        /// <summary>
+        /// Methods for quickly converting a DiceBehaviour into a BattleDiceBehavior.
+        /// </summary>
+        public static BattleDiceBehavior CreateBattleDiceBehavior(DiceBehaviour die, DiceStatBonus bonus = null)
+        {
+            BattleDiceBehavior battleDiceBehavior = new BattleDiceBehavior
+            {
+                behaviourInCard = die.Copy()
+            };
+            
+            if (!string.IsNullOrEmpty(die.Script))
+            {
+                DiceCardAbilityBase diceCardAbilityBase = Singleton<AssemblyManager>.Instance.CreateInstance_DiceCardAbility(die.Script);
+                if (diceCardAbilityBase != null)
+                {
+                    battleDiceBehavior.AddAbility(diceCardAbilityBase);
+                }
+            }
 
-        public static void BetterCopyAbilityAndStat(BattleDiceBehavior origin, BattleDiceBehavior receiver, bool copyDesc = true)
+            return battleDiceBehavior;
+        }
+
+        /// <summary>
+        /// Essentially just a safer and more reliable CopyAbilityAndStat method from vanilla.
+        /// </summary>
+        public static void BetterCopyAbilityAndStat(this BattleDiceBehavior origin, BattleDiceBehavior receiver, bool copyDesc = true)
         {
             foreach (DiceCardAbilityBase diceCardAbilityBase in origin.abilityList)
             {
@@ -804,7 +832,6 @@ namespace RogueLike_Mod_Reborn
                     receiver.AddAbility(diceCardAbilityBase2);
                 }
                 catch { }
-
             }
             if (copyDesc)
             {
@@ -814,7 +841,6 @@ namespace RogueLike_Mod_Reborn
                 }
                 catch { }
             }
-
             try
             {
                 receiver._statBonus = origin._statBonus.Copy();
@@ -1749,7 +1775,7 @@ namespace RogueLike_Mod_Reborn
 
         /// <summary>
         /// Runs when initializing a roguelike reception, BEFORE creating the player.<br></br>
-        /// Hooked up to <see cref="LogLikeMod.UIInvitationRightMainPanel_ConfirmSendInvitation"/>.<br></br>
+        /// Hooked up to <see cref="LogLikeHooks.UIInvitationRightMainPanel_ConfirmSendInvitation"/>.<br></br>
         /// Runs immediately <b>before</b> StageClassInfo.mapInfo.clear().
         /// </summary>
         public virtual void BeforeInitializeGamemode()
@@ -1759,7 +1785,7 @@ namespace RogueLike_Mod_Reborn
 
         /// <summary>
         /// Runs when initializing a roguelike reception, AFTER creating the player.<br></br>
-        /// Hooked up to <see cref="LogLikeMod.UIInvitationRightMainPanel_ConfirmSendInvitation"/>.<br></br>
+        /// Hooked up to <see cref="LogLikeHooks.UIInvitationRightMainPanel_ConfirmSendInvitation"/>.<br></br>
         /// Runs immediately <b>prior</b> to all return calls.
         /// </summary>
         public virtual void AfterInitializeGamemode()
@@ -1975,7 +2001,6 @@ namespace RogueLike_Mod_Reborn
         public override LorId BaseDeckReplacement => new LorId(RMRCore.packageId, -10);
         public override string GetContentScopePackageId => RMRCore.packageId;
     }
-
 
         #endregion
 
@@ -2760,7 +2785,47 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    
+    /// <summary>
+    /// Used for the combat page adding VFX.
+    /// </summary>
+    public class SelfDestructBezierCurve : MonoBehaviour
+    {
+        public Transform target;
+        public Vector3 
+            point1 = new Vector3(290f, 430f), 
+            point2 = new Vector3(820f, -40f), 
+            point3 = new Vector3(860f, -540f);
+        // SCREEN POINTS THAT MAKE A NICE CURVE TOWARDS TOP-RIGHT CORNER
+        // 1250, 970 -> 290, 430, 0
+        // 1780, 500 -> 820, -40, 0
+        // 1820, 0 -> 860, -540, 0
+
+        private void Start()
+        {
+            StartCoroutine(COR_BezierCurves());
+        }
+
+        IEnumerator COR_BezierCurves(float duration = 1.0f)
+        {
+            float time = 0f;
+
+            while (true)
+            {
+                if (time > duration) // self destruct after duration
+                {
+                    Destroy(this.gameObject);
+                }
+                float timeSquared = (float)((double)time * (double)time); // use doubles for extra accuracy
+                Vector3 p4 = Vector3.Lerp(point1, point2, timeSquared);
+                Vector3 p5 = Vector3.Lerp(point2, point3, timeSquared);
+                this.gameObject.transform.position = Vector3.Lerp(p4, p5, timeSquared);
+                
+                time += Time.deltaTime / duration;
+
+                yield return null;
+            }
+        }
+    }
 
     #endregion
 
@@ -3043,25 +3108,6 @@ namespace RogueLike_Mod_Reborn
         }
 
         /// <summary>
-        /// THIS IS A DEBUGGING PATCH MADE TO FORESEE EVIDENTLY UNINTENDED BEHAVIOR IN BOOKMODEL.CHANGEPASSIVE
-        /// </summary>
-        [HarmonyTranspiler, HarmonyPatch(typeof(BookModel), nameof(BookModel.ChangePassive))]
-        static IEnumerable<CodeInstruction> BOOKMODEL_DEBUGGING_PATCH(IEnumerable<CodeInstruction> instructions)
-        {
-            foreach (var x in instructions)
-            {
-                if (x.opcode == OpCodes.Ldstr)
-                {
-                    yield return new CodeInstruction(OpCodes.Call, AccessTools.PropertyGetter(typeof(Environment), nameof(Environment.StackTrace))).MoveLabelsFrom(x);
-                } else
-                {
-                    yield return x;
-                }
-            }
-        }
-
-
-        /// <summary>
         /// Makes singleton account for upgraded pages by checking their original IDs instead
         /// </summary>
         [HarmonyTranspiler, HarmonyPatch(typeof(BattleAllyCardDetail), nameof(BattleAllyCardDetail.IsHighlander))]
@@ -3076,7 +3122,6 @@ namespace RogueLike_Mod_Reborn
                 yield return x;
             }
         }
-
 
         #endregion
 

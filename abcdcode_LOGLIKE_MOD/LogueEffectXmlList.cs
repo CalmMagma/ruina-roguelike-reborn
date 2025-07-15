@@ -82,7 +82,7 @@ namespace abcdcode_LOGLIKE_MOD
             LogueEffectXmlInfo effectInfo = this.effectDict[packageId][id];
             if (args != null && args.Length != 0)
                 effectInfo.Desc = string.Format(effectInfo.Desc, args);
-            else if (LogLikeMod.itemCatalogActive || args == null || args.Length == 0)
+            else
                 effectInfo.Desc = effectInfo.Desc.Replace("{0}", "X");
             return effectInfo;
         }

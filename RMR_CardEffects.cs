@@ -2582,12 +2582,12 @@ namespace RogueLike_Mod_Reborn
 
             battlePlayingCardDataInUnitModel.ResetCardQueueWithoutStandby();
             battlePlayingCardDataInUnitModel.cardBehaviorQueue.Clear();
-            BattleDiceBehavior diceBehavior = RMRUtilityExtensions.creatediefromtheaether(die.behaviourInCard.Min, die.behaviourInCard.Dice, die.behaviourInCard.Detail, die.behaviourInCard.Type, die.behaviourInCard.MotionDetail, "", die.behaviourInCard.ActionScript, die.behaviourInCard.EffectRes, null);
-            RMRUtilityExtensions.BetterCopyAbilityAndStat(die, diceBehavior);
+            BattleDiceBehavior diceBehavior = RMRUtilityExtensions.CreateBattleDiceBehavior(die.behaviourInCard, null);
+            die.BetterCopyAbilityAndStat(diceBehavior);
             battlePlayingCardDataInUnitModel.AddDice(diceBehavior);
 
             StageController.Instance.GetAllCards().Insert(die.Index, battlePlayingCardDataInUnitModel);
-            //   StageController.Instance.AddAllCardListInBattle(battlePlayingCardDataInUnitModel, this.card.target);
+            // StageController.Instance.AddAllCardListInBattle(battlePlayingCardDataInUnitModel, this.card.target);
         }
     }
 

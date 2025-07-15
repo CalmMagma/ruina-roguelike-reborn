@@ -178,6 +178,18 @@ namespace abcdcode_LOGLIKE_MOD
             orig(self, m);
         }
 
+        /// <summary>
+        /// Hook for fixing an annoying passive attribution bug where the game fails to find a passive.
+        /// </summary>
+        public void BookModel_ChangePassive(Action<BookModel, PassiveModel, PassiveModel> orig, BookModel self, PassiveModel currentBookPassive, PassiveModel changeBookPassive)
+        {
+            if (!LogLikeMod.CheckStage())
+            {
+                orig(self, currentBookPassive, changeBookPassive);
+                return;
+            }
+            currentBookPassive.SuccessionPassiveForReserved(changeBookPassive);
+        }
 
         /// <summary>
         /// Hook for changing empty/partially empty decks giving out default pages.
@@ -1500,6 +1512,7 @@ namespace abcdcode_LOGLIKE_MOD
                 LogueBookModels.CreatePlayerBattle();
                 LoguePlayDataSaver.RemovePlayerData();
                 RMRCore.CurrentGamemode.AfterInitializeGamemode();
+                GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_ExtendedFunctionalityEffect());
                 this.Log("NEW RUN! " + RMRCore.CurrentGamemode.SaveDataString);
             }
             else
