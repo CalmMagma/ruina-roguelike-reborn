@@ -34,4 +34,19 @@
     </DropTable>
   </Enemy>
 
+  <Enemy ID="28483003">
+    <!--리우 2과 잡-->
+    <NameID>118</NameID>
+    <MinHeight>160</MinHeight>
+    <MaxHeight>180</MaxHeight>
+
+    <BookId>150001</BookId>
+
+    <Exp>8</Exp>
+    <DropTable Level="0">
+      <DropItem Prob="1">4001</DropItem>
+      <DropItem Prob="0.8">4003</DropItem>
+    </DropTable>
+  </Enemy>
+
 </EnemyUnitClassRoot>

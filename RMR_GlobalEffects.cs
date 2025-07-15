@@ -8,6 +8,7 @@ using HarmonyLib;
 using LOR_DiceSystem;
 using UI;
 using UnityEngine;
+using static RogueLike_Mod_Reborn.RMREffect_IronMountain;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -626,6 +627,54 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordId => "RMR_Prescript";
 
         public override string KeywordIconId => "RMR_Prescript";
+    }
+
+    public class RMREffect_IronMountain : GlobalLogueEffectBase
+    {
+        public static Rarity ItemRarity = Rarity.Uncommon;
+        public override string KeywordId => "RMR_IronMountain";
+
+        public override string KeywordIconId => "RMR_IronMountain";
+
+        public class InflictMPregOnClashWin : BattleUnitBuf
+        {
+            public override void OnWinParrying(BattleDiceBehavior behavior)
+            {
+                base.OnWinParrying(behavior);
+                behavior.card.target?.bufListDetail?.AddKeywordBufByEtc(KeywordBuf.Burn, 1, _owner);
+                // question marks are null checking!!
+            }
+        }
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.bufListDetail.AddBuf(new InflictMPregOnClashWin());
+               
+        }
+    }
+
+    public class RMREffect_DragonFist : GlobalLogueEffectBase
+    {
+        public override string KeywordId => "RMR_DragonFist";
+        public override string KeywordIconId => "RMR_DragonFist";
+
+        public static Rarity ItemRarity = Rarity.Uncommon;
+
+        public class InflictMPregOnHit : BattleUnitBuf
+        {
+            public override void OnSuccessAttack(BattleDiceBehavior behavior)
+            {
+                base.OnSuccessAttack(behavior);
+                behavior.card.target?.bufListDetail?.AddKeywordBufByEtc(KeywordBuf.Burn, 1, _owner);
+                // question marks are null checking!!
+            }
+        }
+
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.bufListDetail.AddBuf(new InflictMPregOnHit());
+        }
     }
 
     /// <summary>

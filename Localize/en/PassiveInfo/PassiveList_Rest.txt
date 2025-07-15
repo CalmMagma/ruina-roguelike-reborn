@@ -2,35 +2,35 @@
 <PassiveDescRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<PassiveDesc ID="800001">
-    <Name>Restoration</Name>
-    <Desc>Recovers 40% of one Librarian's HP</Desc>
+    <Name>Rest</Name>
+    <Desc>Recovers 40% of the selected Librarian's HP</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="800002">
-    <Name>Training</Name>
+    <Name>Upgrade</Name>
     <Desc>Select and upgrade a Combat Page</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="800003">
     <Name>Moisture Proof Treatment</Name>
-    <Desc>Increases one Librarian's every damage resistance by 1 level for this Chapter.(Up to "Ineffective")</Desc>
+    <Desc>Increases the selected Librarian's every damage resistances by 1 for this Chapter.(Up to "Ineffective")</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="800004">
-    <Name>Conversion</Name>
-    <Desc>Get 15 Ahn</Desc>
+    <Name>Scavenge</Name>
+    <Desc>Gain 15 Ahn</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="800005">
-    <Name>Full Restoration</Name>
-    <Desc>Recovers 100% of one Librarian's HP</Desc>
+    <Name>Long Rest</Name>
+    <Desc>Recovers 100% of the selected Librarian's HP</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="800006">
     <Name>Page Conversion</Name>
-    <Desc>Select 1 Combat Page and remove it. Get 1 Combat Page reward from the previous chapter of the removed Combat Page.
-Depending on the grade of the Combat Page you have removed, you will receive a higher grade Combat Page reward. When you remove the Combat Page of the Canard Chapter, you will receive the lowest grade of the Canard Chapter Combat Page reward.
-Can be used regardless of other actions
+    <Desc>Select 1 Combat Page and convert it to another Page from the previous Chapter. 
+The higher the grade of the converted page, the more/better quality rewards it gives.
+Counts as a free action.
 Remaining : {0}</Desc>
 	</PassiveDesc>
 

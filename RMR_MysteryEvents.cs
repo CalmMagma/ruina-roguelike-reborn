@@ -194,5 +194,64 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    public class MysteryModel_RMR_LiuTraining : MysteryBase
+    {
+        public override void SwapFrame(int id)
+        {
+            base.SwapFrame(id);
+            if (LogueBookModels.GetMoney() < 30)
+                this.DisableButton(1);
+            if (LogueBookModels.GetMoney() < 20)
+            this.DisableButton(0);
+        }
+        public override void OnClickChoice(int choiceid)
+        {
+            base.OnClickChoice(choiceid);
+            if (this.curFrame.FrameID == 0)
 
+            {
+                switch (choiceid)
+                {
+                    case 0:
+                        LogueBookModels.SubMoney(20);
+                        GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_IronMountain());
+                        break;
+                    case 1:
+                        LogueBookModels.SubMoney(30);
+                        GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_DragonFist());
+                        break;
+                }
+            
+            }
+            else if (this.curFrame.FrameID == 3)
+            {
+                GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_IronMountain());
+                GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_DragonFist());
+                MysteryBase.SetNextStageCustom(new LorId(RMRCore.packageId, 1400041));
+            }
+
+        }
+        public override void OnEnterChoice(int choiceid)
+        {
+            base.OnEnterChoice(choiceid);
+            if (this.curFrame.FrameID == 0)
+            {
+                switch (choiceid) { 
+                    case 0:
+                        this.ShowOverlayOverButton(new RMREffect_IronMountain(), choiceid);
+                        break;
+                    case 1:
+                        this.ShowOverlayOverButton(new RMREffect_DragonFist(), choiceid);
+                        break;
+                }
+            }
+        }
+
+        public override void OnExitChoice(int choiceid)
+        {
+            base.OnExitChoice(choiceid);
+            this.CloseOverlayOverButton();
+        }
+
+    }
 }

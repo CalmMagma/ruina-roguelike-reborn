@@ -65,6 +65,26 @@
       <Unit>28483001</Unit>
     </Wave>
   </Stage>
+ 
+ <Stage id="400041">
+   <Wave>
+      <AvailableUnit>5</AvailableUnit>
+      <Formation>1</Formation>
+      <Unit>-999</Unit>
+      <ManagerScript>AutoStartMysteryStage</ManagerScript>
+    </Wave>
+</Stage>
+ 
+    <Stage id="1400041">
 
+    <Wave>
+      <AvailableUnit>5</AvailableUnit>
+      <Formation>3</Formation>
+      <Unit>28483003</Unit>
+      <Unit>28483003</Unit>
+      <Unit>28483003</Unit>
+    </Wave>
+  </Stage>
+  
 </StageXmlRoot>
 
