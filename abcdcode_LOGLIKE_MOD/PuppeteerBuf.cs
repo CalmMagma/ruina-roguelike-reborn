@@ -30,15 +30,15 @@ namespace abcdcode_LOGLIKE_MOD
             if (PickUpModel_ShopGood25.Shop25Effect.curpuppet == null || !_owner.cardSlotDetail.cardQueue.Contains(card))
                 return;
             BattleUnitModel owner = PickUpModel_ShopGood25.Shop25Effect.curpuppet.owner;
-            BattleDiceCardModel playingCard = BattleDiceCardModel.CreatePlayingCard(card.card.XmlData);
+            BattleDiceCardModel playingCard = BattleDiceCardModel.CreatePlayingCard(ItemXmlDataList.instance.GetCardItem(card.card.GetID()));
             playingCard.costSpended = true;
-            Singleton<StageController>.Instance.AddAllCardListInBattle(new BattlePlayingCardDataInUnitModel()
+            Singleton<StageController>.Instance._allCardList.Insert(0, new BattlePlayingCardDataInUnitModel
             {
                 owner = owner,
                 card = playingCard,
                 target = card.target,
                 speedDiceResultValue = 99
-            }, card.target);
+            });
         }
 
         public override void OnRoundEnd()

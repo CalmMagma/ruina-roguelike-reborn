@@ -441,7 +441,7 @@ namespace RogueLike_Mod_Reborn
         /// </summary>
         public static void ExplodeOnDeath(BattleUnitView view)
         {
-            if (view.model.UnitData.floorBattleData.param3 != 113413411)
+            if (view.model.history.data1 != 113413411) // magic number yes i know but this should just prevent the method from running twice
             {
                 SoundEffectPlayer soundEffectPlayer = SingletonBehavior<SoundEffectManager>.Instance.PlayClip("Creature/MatchGirl_Explosion");
                 if (soundEffectPlayer != null)
@@ -451,7 +451,7 @@ namespace RogueLike_Mod_Reborn
                 var effect = SingletonBehavior<DiceEffectManager>.Instance.CreateCreatureEffect("1/MatchGirl_Footfall", 1f, view, null, 2f);
                 effect.transform.localScale *= 3.5f;
                 effect.AttachEffectLayer();
-                view.model.UnitData.floorBattleData.param3 = 113413411;
+                view.model.history.data1 = 113413411;
                 view.StartDeadEffect(false);
                 view.model._deadSceneBlock = true;
             }
@@ -1974,6 +1974,27 @@ namespace RogueLike_Mod_Reborn
         }
 
         public override string GetContentScopePackageId => RMRCore.packageId;
+    }
+
+    public class RoguelikeGamemode_RMR_Modded_DebugCh2 : RoguelikeGamemode_RMR_Modded
+    {
+        public override LorId StageStart => new LorId(LogLikeMod.ModId, -2854);
+    }
+    public class RoguelikeGamemode_RMR_Modded_DebugCh3 : RoguelikeGamemode_RMR_Modded
+    {
+        public override LorId StageStart => new LorId(LogLikeMod.ModId, -3854);
+    }
+    public class RoguelikeGamemode_RMR_Modded_DebugCh4 : RoguelikeGamemode_RMR_Modded
+    {
+        public override LorId StageStart => new LorId(LogLikeMod.ModId, -4854);
+    }
+    public class RoguelikeGamemode_RMR_Modded_DebugCh5 : RoguelikeGamemode_RMR_Modded
+    {
+        public override LorId StageStart => new LorId(LogLikeMod.ModId, -5854);
+    }
+    public class RoguelikeGamemode_RMR_Modded_DebugCh6 : RoguelikeGamemode_RMR_Modded
+    {
+        public override LorId StageStart => new LorId(LogLikeMod.ModId, -6854);
     }
 
     public class RoguelikeGamemode_RMR_Modded : RoguelikeGamemodeBase

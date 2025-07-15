@@ -114,8 +114,9 @@ namespace abcdcode_LOGLIKE_MOD
 
         /// <summary>
         /// Runs whenever a combat page is added to the inventory.
-        /// <param name="effect">The ID of the combat page.</param>
         /// </summary>
+        /// <param name="baseid">The ID of the combat page.</param>
+
         public virtual LorId InvenAddCardChange(LorId baseid) => baseid;
 
         /// <summary>

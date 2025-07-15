@@ -22,9 +22,22 @@ namespace abcdcode_LOGLIKE_MOD
 
     public class MysteryBase
     {
+        /// <summary>
+        /// Utilized to determine metadata for picking abnormality pages.
+        /// </summary>
         public static MysteryBase.MysteryAbnormalInfo curinfo;
+        /// <summary>
+        /// The animator object for MysteryBase fade-ins/outs.
+        /// </summary>
         public AnimUpdater animator;
+        /// <summary>
+        /// A dictionary containing UI elements created for the event interface.<br></br>
+        /// When making custom UI elements, please add them to this list.
+        /// </summary>
         public Dictionary<string, GameObject> FrameObj;
+        /// <summary>
+        /// The event's respective XML info.
+        /// </summary>
         public MysteryXmlInfo xmlinfo;
         public MysteryFrameInfo curFrame;
         public RogueMysteryXmlInfo loc;
@@ -251,7 +264,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public void OnClickChoiceCheckAlpha(GameObject btn, int i)
         {
-            if ((double)btn.GetComponent<Image>().color.a < 0.75)
+            if ((double)btn.GetComponent<Image>().color.a < 0.75 || btn.GetComponent<Image>().sprite == LogLikeMod.ArtWorks["disabledButton"])
                 return;
             this.OnClickChoice(i);
         }

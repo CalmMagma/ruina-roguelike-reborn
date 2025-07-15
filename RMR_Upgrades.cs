@@ -704,10 +704,19 @@ namespace RogueLike_Mod_Reborn
         public override void Init()
         {
             base.Init();
-            // uhh idk if upgradebase persists between upgrades so Idk if I can make it increment max increase by 1
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 3);
             this.baseid = new LorId(LogLikeMod.ModId, 303005);
+        }
+        public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
+        {
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            int num = 0;
+            if (count > 1)
+                for (int i = count; i > 0; --i) // if count = 5; becomes 5 + 4 + 3 + 2 ...
+                    num += i;
+            else num = 1;
+            this.upgradeinfo.SetDice(0, 2, num);
+            return base.GetUpgradeInfo(index, count);
         }
     }
 

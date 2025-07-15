@@ -1394,7 +1394,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -2854))
             {
-                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -854), false);
+                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -2854), false);
                 RMRCore.CurrentGamemode.FilterContent();
                 RMRCore.CurrentGamemode.BeforeInitializeGamemode();
                 bookRecipe.mapInfo.Clear();
@@ -1407,7 +1407,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -3854))
             {
-                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -854), false);
+                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -3854), false);
                 RMRCore.CurrentGamemode.FilterContent();
                 RMRCore.CurrentGamemode.BeforeInitializeGamemode();
                 bookRecipe.mapInfo.Clear();
@@ -1421,7 +1421,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -4854))
             {
-                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -854), false);
+                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -4854), false);
                 RMRCore.CurrentGamemode.FilterContent();
                 RMRCore.CurrentGamemode.BeforeInitializeGamemode();
                 bookRecipe.mapInfo.Clear();
@@ -1436,7 +1436,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -5854))
             {
-                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -854), false);
+                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -5854), false);
                 RMRCore.CurrentGamemode.FilterContent();
                 RMRCore.CurrentGamemode.BeforeInitializeGamemode();
                 bookRecipe.mapInfo.Clear();
@@ -1453,7 +1453,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -6854))
             {
-                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -854), false);
+                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -6854), false);
                 RMRCore.CurrentGamemode.FilterContent();
                 RMRCore.CurrentGamemode.BeforeInitializeGamemode();
                 bookRecipe.mapInfo.Clear();
@@ -1472,7 +1472,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             else if (bookRecipe.id == new LorId(LogLikeMod.ModId, -7854))
             {
-                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -854), false);
+                RoguelikeGamemodeController.Instance.LoadGamemodeByStageRecipe(new LorId(RMRCore.packageId, -7854), false);
                 RMRCore.CurrentGamemode.FilterContent();
                 RMRCore.CurrentGamemode.BeforeInitializeGamemode();
                 bookRecipe.mapInfo.Clear();

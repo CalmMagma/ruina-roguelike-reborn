@@ -202,6 +202,12 @@ namespace RogueLike_Mod_Reborn
                 return (AtkResist)Math.Min((int)LogLikeMod.curchaptergrade + 1, 4);
             }
 
+            public override void OnDie()
+            {
+                owner.view.deadEvent = RMRUtilityExtensions.ExplodeOnDeath;
+                base.OnDie();
+            }
+
             private void Effects(int effect, List<BattleUnitModel> list)
             {
                 switch (effect)
