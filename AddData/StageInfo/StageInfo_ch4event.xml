@@ -66,7 +66,7 @@
     </Wave>
   </Stage>
  
- <Stage id="400041">
+ <Stage id="400041"> <!-- DOES NOT MATCH MYSTERY ID (30004) -->
    <Wave>
       <AvailableUnit>5</AvailableUnit>
       <Formation>1</Formation>

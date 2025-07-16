@@ -181,7 +181,7 @@ namespace RogueLike_Mod_Reborn
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_Hidden_Polyhedra() { unitIndex = LogueBookModels.GetIndexOfUnit(model) });
         }
 
-        public override string KeywordIconId => "RMR_Polyhedra";
+        public override string KeywordIconId => "RMRPickUp_Polyhedra";
 
         public override string KeywordId => "RMRPickUp_Polyhedra";
 
