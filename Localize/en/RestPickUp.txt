@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <localize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-             <text id="RestGood6_Desc">Select 1 Combat Page and remove it. Get 1 Combat Page reward from the previous chapter of the removed Combat Page.
-Depending on the grade of the Combat Page you have removed, you will receive a higher grade Combat Page reward. When you remove the Combat Page of the Canard Chapter, you will receive the lowest grade of the Canard Chapter Combat Page reward.
-Can be used regardless of other actions
+             <text id="RestGood6_Desc">Select 1 Combat Page and convert it into a page of the previous Chapter. The higher the rarity of the page consumed, the more/better rewards are given.
+This counts as a free action.
 Remaining : {0}</text>
 </localize>

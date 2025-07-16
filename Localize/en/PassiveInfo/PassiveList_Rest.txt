@@ -3,7 +3,7 @@
 
 	<PassiveDesc ID="800001">
     <Name>Rest</Name>
-    <Desc>Recovers 40% of the selected Librarian's HP</Desc>
+    <Desc>Recovers 40% of the selected Librarian's Max. HP</Desc>
 	</PassiveDesc>
 
 	<PassiveDesc ID="800002">
