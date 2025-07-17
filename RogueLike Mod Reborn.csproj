@@ -689,6 +689,7 @@
     <Compile Include="RMR_MysteryEvents.cs" />
     <Compile Include="RMR_Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SnapshotCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

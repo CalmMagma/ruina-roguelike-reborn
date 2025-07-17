@@ -466,7 +466,7 @@ namespace abcdcode_LOGLIKE_MOD
         }
 
         /// <summary>
-        /// [RMR] Runs immediately after <see cref="RMRCore.CurrentGamemode.OnClearBossWave"/>.
+        /// [RMR] Runs immediately after <see cref="RoguelikeGamemodeBase.OnClearBossWave"/>.
         /// </summary>
         public virtual void AfterClearBossWave()
         {

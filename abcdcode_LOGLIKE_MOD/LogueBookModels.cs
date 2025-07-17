@@ -6,16 +6,15 @@
 
 using GameSave;
 using HarmonyLib;
-using HyperCard;
 using LOR_DiceSystem;
 using LOR_XML;
-using Mono.Cecil.Cil;
 using RogueLike_Mod_Reborn;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace abcdcode_LOGLIKE_MOD
 {

@@ -6,6 +6,7 @@
 
 using GameSave;
 using LOR_DiceSystem;
+using RogueLike_Mod_Reborn;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -124,6 +125,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             base.Purchase();
             LogueBookModels.AddCard(this.CardSlot._cardModel.GetID());
+            CardAddVfx.RunCardVfx(this.CardSlot);
             --this.count;
             this.CardSlot.txt_cardNumbers.text = this.count.ToString();
             if (this.count <= 0)

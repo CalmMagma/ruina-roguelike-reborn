@@ -54,7 +54,8 @@ namespace abcdcode_LOGLIKE_MOD
         {
             MysteryModel_UpgradeCheckPopup.PopupUpgradeCheck(
                 model.GetID(), 
-                my => this.UpgradedCard(mystery, my, model.GetID()));
+                my => this.UpgradedCard(mystery, my, model.GetID())
+            );
         }
 
         public void UpgradedCard(

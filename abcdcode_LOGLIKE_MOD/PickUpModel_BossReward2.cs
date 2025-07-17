@@ -55,14 +55,17 @@ namespace abcdcode_LOGLIKE_MOD
                 }
             } 
         }
-        public PickUpModel_BossReward2() : base()
+        public PickUpModel_BossReward2() 
         {
             int index1 = (int)LogLikeMod.curchaptergrade;
             if (index1 > 5)
                 index1 = 5;
             LogueEffectXmlInfo info = LogueEffectXmlList.Instance.GetEffectInfo(this.KeywordId, LogLikeMod.ModId, EquipRewardTable[index1], CardRewardTable[index1]);
             this.Desc = info.Desc;
-        }
+            this.Name = info.Name;
+            this.FlaverText = info.FlavorText;
+            this.ArtWork = this.KeywordIconId;
+        } // please work God I beg you
 
         public override void OnPickUp()
         {

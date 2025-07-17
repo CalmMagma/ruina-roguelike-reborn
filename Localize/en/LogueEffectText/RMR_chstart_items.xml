@@ -66,7 +66,7 @@
   
   <LogueEffectInfo Id="RMR_StrangeOrbGrade3">
     <Name>Unstable Orb</Name>
-    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered or targeted. The Orb's resistances are 'Normal'. The Orb grows stronger each Chapter.
+    <Desc>At the start of the Act, summon an Orb. The Orb has 20 HP, cannot be Staggered or targeted. The Orb's resistances are 'Normal'. The Orb grows stronger each Chapter.
 - Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
 - Each Scene, all allies gain 3 Shield.
 - Every other Scene, all allies recover 3 Stagger Resist.
@@ -77,7 +77,7 @@
   
   <LogueEffectInfo Id="RMR_StrangeOrbGrade4">
     <Name>Unstable Orb</Name>
-    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb grows stronger each Chapter.
+    <Desc>At the start of the Act, summon an Orb. The Orb has 20 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb grows stronger each Chapter.
 - Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
 - Each Scene, all allies gain 3 Shield and either 1 Damage Up, Bleed Protection or 3 Burn Protection.
 - Every other Scene, all allies recover 3 Stagger Resist.
@@ -88,7 +88,7 @@
   
   <LogueEffectInfo Id="RMR_StrangeOrbGrade5">
     <Name>Unstable Orb</Name>
-    <Desc>At the start of the Act, summon an Orb. The Orb has 30 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb grows stronger each Chapter.
+    <Desc>At the start of the Act, summon an Orb. The Orb has 20 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb grows stronger each Chapter.
 - Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
 - Each Scene, all allies gain 3 Shield and either 1 Damage Up, Bleed Protection or 3 Burn Protection.
 - Every other Scene, all allies recover 3 Stagger Resist.
@@ -100,7 +100,7 @@
   
   <LogueEffectInfo Id="RMR_StrangeOrbGrade6">
     <Name>Strange Orb</Name>
-    <Desc>At the start of the Act, summon an Orb. The Orb has 40 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb has stabilized.
+    <Desc>At the start of the Act, summon an Orb. The Orb has 20 HP, cannot be Staggered or targeted. The Orb's resistances are 'Endured'. The Orb has stabilized.
 - Each Scene, the Orb adds a 'Wails of the Past' Combat Page to its hand.
 - Each Scene, all allies gain 3 Shield and either 1 Damage Up, Bleed Protection or 3 Burn Protection; reduce the Cost of a random page whose Cost is above 0, in a random other ally's hand by 1 until used.
 - Every other Scene, all allies recover 3 Stagger Resist.

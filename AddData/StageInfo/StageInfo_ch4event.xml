@@ -56,7 +56,6 @@
 <!--이벤트4_3_1 : 급습-->
 
   <Stage id="1400031">
-
     <Wave>
       <AvailableUnit>5</AvailableUnit>
       <Formation>3</Formation>
@@ -66,17 +65,16 @@
     </Wave>
   </Stage>
  
- <Stage id="400041"> <!-- DOES NOT MATCH MYSTERY ID (30004) -->
-   <Wave>
+  <Stage id="400041"> 
+    <Wave>
       <AvailableUnit>5</AvailableUnit>
       <Formation>1</Formation>
       <Unit>-999</Unit>
       <ManagerScript>AutoStartMysteryStage</ManagerScript>
     </Wave>
-</Stage>
+  </Stage>
  
-    <Stage id="1400041">
-
+  <Stage id="1400041">
     <Wave>
       <AvailableUnit>5</AvailableUnit>
       <Formation>3</Formation>
