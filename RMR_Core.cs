@@ -2822,6 +2822,7 @@ namespace RogueLike_Mod_Reborn
 
         void Awake()
         {
+            target = this.gameObject.transform;
             StartCoroutine(COR_BezierCurves());
         }
 
@@ -2851,7 +2852,7 @@ namespace RogueLike_Mod_Reborn
 
                 time += Time.deltaTime / duration;
 
-                yield return null;
+                yield return new WaitForEndOfFrame();
             }
         }
     }
@@ -2875,10 +2876,10 @@ namespace RogueLike_Mod_Reborn
             Camera.gameObject.SetActive(true);
             var texture2D = Camera.TakeObjectSnapshot(card.gameObject, (int)card.Pivot.sizeDelta.x, (int)card.Pivot.sizeDelta.y);
             Camera.gameObject.SetActive(false);
-            var vfx = LogAssetBundleManager.Instance.GetAsset("calmmagma_card", "calmmagma_card");
+            var vfx = LogAssetBundleManager.Instance.GetAsset("CalmMagma", "calmmagma_card");
             vfx.transform.parent = card.transform.parent;
             vfx.transform.localPosition = card.transform.localPosition;
-            vfx.GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0.0f, 0.0f, (float)texture2D.width, (float)texture2D.height), new Vector2(0.0f, 0.0f), 100f, 0U, SpriteMeshType.FullRect);
+            vfx.GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture2D, new Rect(0.0f, 0.0f, (float)texture2D.width, (float)texture2D.height), new Vector2(0.0f, 0.0f), 100f, 0U, SpriteMeshType.FullRect);
             // vfx.gameObject.layer = LayerMask.NameToLayer("UI");
             vfx.AddComponent<SelfDestructBezierCurve>();
             vfx.SetActive(true);
