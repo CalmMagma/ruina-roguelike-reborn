@@ -3,7 +3,7 @@
   <Card ID="300001">
     <Name>견제</Name>
     <Artwork>ch3_1</Artwork>
-    <Rarity>Common</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="0" />
     <Script>RMR_Diversion</Script>
     <ScriptDesc />
@@ -177,7 +177,7 @@
   <Card ID="301008">
     <Name>제압</Name>
     <Artwork>Zwei10</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
     <Script />
     <ScriptDesc />
@@ -275,7 +275,7 @@
   <Card ID="302004">
     <Name>과감한 판단</Name>
     <Artwork>Molar7</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="3" />
     <Script>discardall</Script>
     <ScriptDesc>[사용시] 모든 책장을 버림</ScriptDesc>

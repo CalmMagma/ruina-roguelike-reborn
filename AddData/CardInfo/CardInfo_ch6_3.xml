@@ -1115,7 +1115,7 @@
     <Artwork>work1</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script>smokeSelf3</Script>
+    <Script>RMR_Gain3Smoke</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="6" Type="Atk" Detail="Hit" Motion="H" EffectRes="workshop_H" Script="" ActionScript="" Desc="" />
@@ -1130,11 +1130,11 @@
     <Artwork>work2</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>smokeSelf3</Script>
+    <Script>RMR_Gain3Smoke</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="4" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="workshop_G" Script="" ActionScript="" Desc="" />
-      <Behaviour Min="5" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="workshop_H" Script="light1smoke3atk" ActionScript="" Desc="" />
+      <Behaviour Min="5" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="workshop_H" Script="RMR_SmokeBlowDie" ActionScript="" Desc="" />
     </BehaviourList>
     <Chapter>6</Chapter>
     <Priority>0</Priority>
@@ -1147,11 +1147,11 @@
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
     <!--사용시 연기가 9이상이라면, 이책장의 모든 주사위 위력 +2-->
-    <Script>powerup2byselfsmoke9</Script>
+    <Script>RMR_SmokeSmash</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="4" Dice="8" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" ActionScript="" Desc="" />
-      <Behaviour Min="6" Dice="9" Type="Atk" Detail="Slash" Motion="J" EffectRes="workshop_J" Script="smoke2atk" ActionScript="" Desc="" />
+      <Behaviour Min="6" Dice="9" Type="Atk" Detail="Slash" Motion="J" EffectRes="workshop_J" Script="RMR_Smoke2Atk" ActionScript="" Desc="" />
     </BehaviourList>
     <Chapter>6</Chapter>
     <Priority>0</Priority>
@@ -1162,12 +1162,12 @@
     <Artwork>work3</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>smokeSelf2</Script>
+    <Script>RMR_Gain2Smoke</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="workshop_G" Script="" ActionScript="" Desc="" />
-      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="workshop_H" Script="smoke3atk" ActionScript="" Desc="" />
-      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="workshop_Z" Script="smoke2selfsmoke1atk" ActionScript="" Desc="" />
+      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="workshop_H" Script="RMR_Smoke3Atk" ActionScript="" Desc="" />
+      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="workshop_Z" Script="RMR_SmokePrickDie" ActionScript="" Desc="" />
     </BehaviourList>
     <Chapter>6</Chapter>
     <Priority>0</Priority>
@@ -1195,10 +1195,10 @@
     <Option>OnlyPage</Option>
     <Keyword>onlypage_cor</Keyword>
     <Spec Range="Near" Cost="4" />
-    <Script>smokeSelf8</Script>
+    <Script>RMR_ExhaleSmoke</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="7" Dice="12" Type="Atk" Detail="Hit" Motion="H" EffectRes="workshop_H" Script="smoke3atkparalysis3atkbytagetsmoke5" ActionScript="" Desc="" />
+      <Behaviour Min="7" Dice="12" Type="Atk" Detail="Hit" Motion="H" EffectRes="workshop_H" Script="RMR_ExhaleSmokeDie" ActionScript="" Desc="" />
       <Behaviour Min="4" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="workshop_G" Script="" ActionScript="" Desc="" />
       <Behaviour Min="7" Dice="11" Type="Atk" Detail="Slash" Motion="S1" EffectRes="FX_Mon_Cor_S" Script="" ActionScript="" Desc="" />
     </BehaviourList>

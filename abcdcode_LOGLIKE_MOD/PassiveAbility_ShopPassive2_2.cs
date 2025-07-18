@@ -66,7 +66,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 base.OnRoundStartAfter();
                 if (parent.curbuf != null)
-                    LuckyBuf.GiveLuckyThisRound(this._owner, 2);
+                    _owner.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.RMRLuck, 2, _owner);
             }
         }
     }

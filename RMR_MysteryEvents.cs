@@ -30,6 +30,9 @@ namespace RogueLike_Mod_Reborn
                     case 4:
                         Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_LightsGuidance());
                         break;
+                    case 5:
+                        Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_RoadlessCamelot());
+                        break;
                     default:
                         break;
                 }
@@ -57,6 +60,9 @@ namespace RogueLike_Mod_Reborn
                         break;
                     case 4:
                         this.ShowOverlayOverButton(new RMREffect_LightsGuidance(), choiceid);
+                        break;
+                    case 5:
+                        this.ShowOverlayOverButton(new RMREffect_RoadlessCamelot(), choiceid);
                         break;
                     default:
                         break;

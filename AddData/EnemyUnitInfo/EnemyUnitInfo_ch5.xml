@@ -377,6 +377,24 @@
     <Exp>7</Exp>
   </Enemy>
   
+  <Enemy ID="40027">
+    <!-- 검지 수행자-->
+    <NameID>105</NameID>
+    <MinHeight>165</MinHeight>
+    <MaxHeight>185</MaxHeight>
+
+    <BookId>140027</BookId>
+
+        <DropTable Level="0">
+      <DropItem Prob="1">5002</DropItem>
+      <DropItem Prob="1">5003</DropItem>
+    </DropTable>
+
+    <AiScript>theIndex</AiScript>
+    
+    <Exp>8</Exp>
+  </Enemy>
+  
 
 
 

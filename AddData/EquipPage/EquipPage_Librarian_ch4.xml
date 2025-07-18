@@ -38,13 +38,14 @@
       <SBResist>Normal</SBResist>
       <PBResist>Vulnerable</PBResist>
       <HBResist>Normal</HBResist>
+	  <Passive Pid="@origin" Level="1">10001</Passive>
       <Passive Pid="@origin" Level="10">230004</Passive>
     </EquipEffect>
     <RangeType>Hybrid</RangeType>
     <BookIcon>FullStopOffice</BookIcon>
     <Chapter>4</Chapter>
     <Episode>30002</Episode>
-    <Rarity>Rare</Rarity>
+    <Rarity>Unique</Rarity>
     <CharacterSkin>Liwei</CharacterSkin>
   </Book>
 
@@ -144,6 +145,7 @@
       <SBResist>Normal</SBResist>
       <PBResist>Endure</PBResist>
       <HBResist>Normal</HBResist>
+	  <Passive>1000000000</Passive>
       <Passive Pid="@origin" Level="10">230008</Passive>
       <Passive Pid="@origin" Level="15">230207</Passive>
     </EquipEffect>
@@ -168,6 +170,7 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Normal</HBResist>
+	  <Passive>1000000000</Passive>
       <Passive Pid="@origin" Level="10">230010</Passive>
     </EquipEffect>
     <BookIcon>GazeOffice</BookIcon>
@@ -273,6 +276,7 @@
       <HBResist>Normal</HBResist>
 
       <PassiveCost>10</PassiveCost>
+	  <Passive>1000000000</Passive>
       <Passive Pid="@origin" Level="10">230019</Passive>
       <Passive Pid="@origin" Level="10">231001</Passive>
     </EquipEffect>
@@ -299,6 +303,7 @@
       <HBResist>Normal</HBResist>
 
       <PassiveCost>10</PassiveCost>
+	  <Passive>1000000000</Passive>
       <Passive Pid="@origin" Level="10">230020</Passive>
       <Passive Pid="@origin" Level="10">231001</Passive>
     </EquipEffect>
@@ -469,6 +474,8 @@
       <HBResist>Endure</HBResist>
 
       <PassiveCost>10</PassiveCost>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="10">230124</Passive>
       <Passive Pid="@origin" Level="10">230025</Passive>
@@ -496,6 +503,8 @@
       <HBResist>Endure</HBResist>
 
       <PassiveCost>10</PassiveCost>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="10">230124</Passive>
       <Passive Pid="@origin" Level="10">230026</Passive>

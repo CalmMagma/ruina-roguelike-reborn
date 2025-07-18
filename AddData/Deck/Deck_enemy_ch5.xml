@@ -189,6 +189,10 @@
 
   <!-- 검지 수행자 -->
   <Deck ID="140018">
+    <Card>505004</Card>
+  </Deck>
+  
+  <Deck ID="140027">
     <Card>505001</Card>
     <Card>505002</Card>
     <Card>505003</Card>

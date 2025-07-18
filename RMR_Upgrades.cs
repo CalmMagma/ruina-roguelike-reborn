@@ -1809,4 +1809,919 @@ namespace RogueLike_Mod_Reborn
 
     #endregion
 
+    #region Urban Nightmare
+
+    public class UpgradeModel_RMR_DrawSword : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 512001);
+        }
+    }
+
+    public class UpgradeModel_RMR_Engagement : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_EngagementUpgrade");
+            this.upgradeinfo.SetDice(0, 2, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 511001);
+        }
+    }
+
+    public class UpgradeModel_RMR_EnGarde : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_EnGardeUpgrade");
+            this.upgradeinfo.SetCost(1);
+            this.baseid = new LorId(LogLikeMod.ModId, 511005);
+        }
+    }
+
+    public class UpgradeModel_RMR_OvercomeCrisis : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_OvercomeCrisisUpgrade");
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 501007);
+        }
+    }
+
+    public class UpgradeModel_RMR_EnergyCycle : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.upgradeinfo.SetSelfAbility("warpCharge4");
+            this.baseid = new LorId(LogLikeMod.ModId, 506007);
+        }
+    }
+
+    public class UpgradeModel_RMR_SmokingPipe : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_SmokingPipeUpgrade");
+            this.upgradeinfo.SetDice(1, 2, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 507006);
+        }
+    }
+
+    public class UpgradeModel_RMR_PuppetBlockade : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 502007);
+        }
+    }
+
+    public class UpgradeModel_RMR_Juggling : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 2, 3);
+            this.baseid = new LorId(LogLikeMod.ModId, 503003);
+        }
+    }
+
+    public class UpgradeModel_RMR_Faith : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_FaithDie");
+            this.upgradeinfo.SetAbility(0, "RMR_FaithDie");
+            this.baseid = new LorId(LogLikeMod.ModId, 505005);
+        }
+    }
+
+
+
+    public class UpgradeModel_RMR_Leap : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_LeapUpgrade");
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 506006);
+        }
+    }
+
+    public class UpgradeModel_RMR_Riposte : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_AdaptDice_RiposteUpgrade");
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 511002);
+        }
+    }
+
+    public class UpgradeModel_RMR_DesperateStruggle : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_HitAndRunBlockonEvade");
+            this.upgradeinfo.SetAbility(0, "RMR_HitAndRunBlockonEvade");
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 501006);
+        }
+    }
+
+    public class UpgradeModel_RMR_ExtractFuel : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 504005);
+        }
+    }
+
+    public class UpgradeModel_RMR_NightBackstreets : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 2);
+            this.upgradeinfo.SetDice(1, 1, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 504006);
+        }
+    }
+
+    public class UpgradeModel_RMR_HiddenBlade : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_HiddenBladeUpgrade");
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 507005);
+        }
+    }
+
+    public class UpgradeModel_RMR_FlyingSword : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_HastePower2");
+            this.upgradeinfo.SetAbility(1, "RMR_HastePower2");
+            this.upgradeinfo.SetSelfAbility("RMR_FlyingSwordUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 501004);
+        }
+    }
+
+    public class UpgradeModel_RMR_Gigigig : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 2);
+            this.upgradeinfo.SetDice(1, 1, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 502005);
+        }
+    }
+
+    public class UpgradeModel_RMR_InhaleSmoke : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_InhaleSmokeUpgrade");
+            this.upgradeinfo.SetDice(1, 2, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 507003);
+        }
+    }
+
+    public class UpgradeModel_RMR_CircusKnives : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(1, "bleeding1atk");
+            this.upgradeinfo.SetDice(0, 2, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 503002);
+        }
+    }
+
+    public class UpgradeModel_RMR_WildCard : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 2, 2);
+            this.upgradeinfo.SetDice(1, 0, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 503004);
+        }
+    }
+
+    public class UpgradeModel_RMR_Acupuncture : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(1, "RMR_critchance12pw");
+            this.upgradeinfo.SetDice(0, 0, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 512002);
+        }
+    }
+
+    public class UpgradeModel_RMR_ProselyteBlade : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_ProselyteBladeUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 505007);
+        }
+    }
+
+    public class UpgradeModel_RMR_Rewind : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(2, "recoverHp3atk");
+            this.upgradeinfo.SetSelfAbility("warpCharge5");
+            this.upgradeinfo.SetDice(0, 0, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.upgradeinfo.SetDice(2, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 506005);
+        }
+    }
+
+    public class UpgradeModel_RMR_SenseQuarry : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "jaeheon_guard_pw2");
+            this.upgradeinfo.SetAbility(1, "paralysis1pw");
+            this.upgradeinfo.SetDice(0, 0, 1);
+            this.upgradeinfo.SetDice(1, 0, 1);
+            this.upgradeinfo.SetDice(2, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 505006);
+        }
+    }
+
+    public class UpgradeModel_RMR_Fleche : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 2, 2);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 511003);
+        }
+    }
+
+    public class UpgradeModel_RMR_FierceCharge : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_FierceChargeUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 508011);
+        }
+    }
+
+    public class UpgradeModel_RMR_ExtremeEdge : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "disarm3atk");
+            this.upgradeinfo.SetDice(0, 1, 3);
+            this.baseid = new LorId(LogLikeMod.ModId, 501002);
+        }
+    }
+
+    public class UpgradeModel_RMR_YieldFlesh : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_YieldMyFleshUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 512003);
+        }
+    }
+
+    public class UpgradeModel_RMR_PrescriptPoints : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_ToWherePrescriptUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 505001);
+        }
+    }
+
+    public class UpgradeModel_RMR_DimensionalRift1 : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upxmlinfo.DiceBehaviourList.Clear();
+            DiceBehaviour die = new DiceBehaviour
+            {
+
+                Min = 4,
+                Dice = 8,
+                Detail = BehaviourDetail.Slash,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.H,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_H"
+            };
+            DiceBehaviour die2 = new DiceBehaviour
+            {
+
+                Min = 4,
+                Dice = 8,
+                Detail = BehaviourDetail.Slash,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.J,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_J"
+            };
+
+            DiceBehaviour die3 = new DiceBehaviour
+            {
+
+                Min = 5,
+                Dice = 8,
+                Detail = BehaviourDetail.Guard,
+                Type = BehaviourType.Def,
+                MotionDetail = MotionDetail.G,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_G"
+            };
+
+
+            this.upxmlinfo.DiceBehaviourList.Add(die3);
+            this.upxmlinfo.DiceBehaviourList.Add(die);
+            this.upxmlinfo.DiceBehaviourList.Add(die2);
+            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+        }
+    }
+
+    public class UpgradeModel_RMR_DimensionalRift2 : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.index = 1;
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upxmlinfo.DiceBehaviourList.Clear();
+            DiceBehaviour die = new DiceBehaviour
+            {
+
+                Min = 4,
+                Dice = 8,
+                Detail = BehaviourDetail.Slash,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.H,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_H"
+            };
+            DiceBehaviour die2 = new DiceBehaviour
+            {
+
+                Min = 4,
+                Dice = 8,
+                Detail = BehaviourDetail.Slash,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.J,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_J"
+            };
+
+            DiceBehaviour die3 = new DiceBehaviour
+            {
+
+                Min = 5,
+                Dice = 8,
+                Detail = BehaviourDetail.Guard,
+                Type = BehaviourType.Def,
+                MotionDetail = MotionDetail.G,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_G"
+            };
+
+
+            
+            this.upxmlinfo.DiceBehaviourList.Add(die);
+            this.upxmlinfo.DiceBehaviourList.Add(die3);
+            this.upxmlinfo.DiceBehaviourList.Add(die2);
+            
+            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+        }
+    }
+
+    public class UpgradeModel_RMR_DimensionalRift3 : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.index = 2;
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upxmlinfo.DiceBehaviourList.Clear();
+            DiceBehaviour die = new DiceBehaviour
+            {
+
+                Min = 4,
+                Dice = 8,
+                Detail = BehaviourDetail.Slash,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.H,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_H"
+            };
+            DiceBehaviour die2 = new DiceBehaviour
+            {
+
+                Min = 4,
+                Dice = 8,
+                Detail = BehaviourDetail.Slash,
+                Type = BehaviourType.Atk,
+                MotionDetail = MotionDetail.J,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_J"
+            };
+
+            DiceBehaviour die3 = new DiceBehaviour
+            {
+
+                Min = 5,
+                Dice = 8,
+                Detail = BehaviourDetail.Guard,
+                Type = BehaviourType.Def,
+                MotionDetail = MotionDetail.G,
+                MotionDetailDefault = MotionDetail.N,
+                Script = "",
+                EffectRes = "WarpCrew_G"
+            };
+
+
+            
+            this.upxmlinfo.DiceBehaviourList.Add(die);
+            this.upxmlinfo.DiceBehaviourList.Add(die2);
+            this.upxmlinfo.DiceBehaviourList.Add(die3);
+            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+        }
+    }
+
+    public class UpgradeModel_RMR_Execute : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_ExecuteUpgrade");
+            this.upgradeinfo.SetAbility(1, "RMR_ExecuteUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 505003);
+        }
+    }
+
+    public class UpgradeModel_RMR_FleshFillet : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "bleeding2atk");
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.upgradeinfo.SetDice(1, 3, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 507002);
+        }
+    }
+
+    public class UpgradeModel_RMR_Slay : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 2, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 512005);
+        }
+    }
+
+    public class UpgradeModel_RMR_sweeperpage : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_sweeperpageUpgrade");
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 504001);
+        }
+    }
+
+    public class UpgradeModel_RMR_RipSpace : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_draw3pw");
+            this.upgradeinfo.SetAbility(1, "RMR_RipSpaceDieUpgrade");
+            this.upgradeinfo.SetSelfAbility("RMR_RipSpaceUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 506001);
+        }
+    }
+
+    public class UpgradeModel_RMR_EndlessBattle : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.upgradeinfo.SetDice(2, 1, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 501005);
+        }
+    }
+
+    public class UpgradeModel_RMR_Manikin : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.upgradeinfo.SetDice(2, 2, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 502002);
+        }
+    }
+
+    public class UpgradeModel_RMR_Creak : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 1, 1);
+            this.upgradeinfo.SetDice(2, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 502006);
+        }
+    }
+
+    public class UpgradeModel_RMR_LetShowBegin : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.upgradeinfo.SetDice(2, 1, 0);
+            this.upgradeinfo.AddDice(1, 5, BehaviourDetail.Hit, "", MotionDetail.H, BehaviourType.Standby, "", "");
+            this.baseid = new LorId(LogLikeMod.ModId, 503011);
+        }
+    }
+
+    public class UpgradeModel_RMR_TraceFumes : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_Smoke2Atk");
+            this.upgradeinfo.SetAbility(1, "RMR_Smoke3Atk");
+            this.upgradeinfo.SetDice(2, 2, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 507004);
+        }
+    }
+
+    public class UpgradeModel_RMR_SweepBackstreets : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(2, "recoverBreak5atk");
+            this.upgradeinfo.SetDice(0, 2, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.upgradeinfo.SetDice(2, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 504003);
+        }
+    }
+
+    public class UpgradeModel_RMR_UndertakePrescript : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetCost(1);
+            this.baseid = new LorId(LogLikeMod.ModId, 505002);
+        }
+    }
+
+    public class UpgradeModel_RMR_FlashingStrike : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_FlashingStrikeUpgrade");
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.upgradeinfo.SetDice(1, 2, 0);
+            this.upgradeinfo.SetDice(2, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 501003);
+        }
+    }
+
+    public class UpgradeModel_RMR_ForFamily : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_ForTheFamilyUpgrade");
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.upgradeinfo.SetDice(1, 2, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 504004);
+        }
+    }
+
+    public class UpgradeModel_RMR_TrashDisposal : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("sweeperOnlyLog");
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.upgradeinfo.SetDice(2, 1, 0);
+            this.upgradeinfo.SetDice(3, 0, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 504002);
+        }
+    }
+
+    public class UpgradeModel_RMR_BoundaryOfDeath : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 501001);
+        }
+    }
+
+    public class UpgradeModel_RMR_BlazingStrike : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_BlazingStrikeDieUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 508010);
+        }
+    }
+
+    public class UpgradeModel_RMR_ClaimBones : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetCost(1);
+            this.upgradeinfo.SetDice(0, 1, 7);
+            this.baseid = new LorId(LogLikeMod.ModId, 512006);
+        }
+    }
+
+    public class UpgradeModel_RMR_DeepDrag : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(0, "RMR_Smoke9Atk");
+            this.upgradeinfo.SetDice(0, 3, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 507001);
+        }
+    }
+
+    public class UpgradeModel_RMR_ForcefulGesture : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(1, "RMR_ForcefulGestureUpgrade");
+            this.upgradeinfo.SetDice(1, 3, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 502004);
+        }
+    }
+
+    public class UpgradeModel_RMR_Ripple : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 1, 1);
+            this.upgradeinfo.SetDice(1, 2, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 506003);
+        }
+    }
+
+    public class UpgradeModel_RMR_Overthrow : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_OverthrowUpgrade");
+            this.baseid = new LorId(LogLikeMod.ModId, 512004);
+        }
+    }
+
+    public class UpgradeModel_RMR_WillofthePrescript : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 2, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.upgradeinfo.SetDice(2, 0, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 505004);
+        }
+    }
+
+    public class UpgradeModel_RMR_Moulinet : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 2, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.upgradeinfo.SetDice(2, 2, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 511004);
+        }
+    }
+
+    public class UpgradeModel_RMR_SharpNails : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(3, 1, 1);
+            this.upgradeinfo.SetDice(4, 1, 1);
+            this.upgradeinfo.AddDice(4, 8, BehaviourDetail.Hit, "", MotionDetail.H, BehaviourType.Standby, "Ema_J", "");
+            this.baseid = new LorId(LogLikeMod.ModId, 503001);
+        }
+    }
+
+    public class UpgradeModel_RMR_Overcharge1 : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_OverchargeUpgrade1");
+            this.upgradeinfo.SetDice(3, 2, 2);
+            this.baseid = new LorId(LogLikeMod.ModId, 506004);
+        }
+    }
+
+    public class UpgradeModel_RMR_Overcharge2 : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.index = 1;
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_OverchargeUpgrade2");
+            this.upgradeinfo.SetDice(0, 0, 3);
+            this.upgradeinfo.SetDice(1, 1, 2);
+            this.upgradeinfo.SetDice(2, 1, 1);
+            this.upgradeinfo.SetDice(3, 1, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 506004);
+        }
+    }
+
+    public class UpgradeModel_RMR_LossOfSenses : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_LossOfSensesUpgrade");
+            this.upgradeinfo.SetDice(2, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 507007);
+        }
+    }
+
+    public class UpgradeModel_RMR_AutoMovement : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetAbility(1, "paralysis1atk");
+            this.upgradeinfo.SetAbility(2, "binding2atk");
+            this.upgradeinfo.SetDice(0, 1, 0);
+            this.upgradeinfo.SetDice(1, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 502001);
+        }
+    }
+
+    public class UpgradeModel_RMR_RepressedFlesh : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetSelfAbility("RMR_RepressedFleshUpgrade");
+            this.upgradeinfo.SetDice(1, 2, 0);
+            this.upgradeinfo.SetDice(2, 2, 0);
+            this.upgradeinfo.SetDice(3, 1, 0);
+            this.baseid = new LorId(LogLikeMod.ModId, 502003);
+        }
+    }
+
+    #endregion
+
+    #region Star of the City
+
+
+
+    #endregion
+
 }
