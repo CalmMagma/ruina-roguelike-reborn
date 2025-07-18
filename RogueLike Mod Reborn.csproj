@@ -325,7 +325,6 @@
     <Compile Include="abcdcode_LOGLIKE_MOD\LoguePlayDataSaver.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\LogueSaveManager.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\LogueStageInfo.cs" />
-    <Compile Include="abcdcode_LOGLIKE_MOD\LuckyBuf.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\MaxDonwMinUpBuf.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\MaxUpMinDownBuf.cs" />
     <Compile Include="abcdcode_LOGLIKE_MOD\MemberShipShop.cs" />

@@ -6,7 +6,7 @@
     <Rarity>Unique</Rarity>
     <Option>OnlyPage</Option>
     <Spec Range="Near" Cost="4" />
-    <Script/>
+    <Script>RMR_BoundaryOfDeath</Script>
     <ScriptDesc/>
     <BehaviourList>
       <Behaviour Min="1" Dice="4" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="Shi_H" Script="yujin" ActionScript="borderof4" Desc="최대값이 나오면 위력 +45" />
@@ -20,10 +20,10 @@
     <Artwork>Shi2</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script />
+    <Script>RMR_ExtremeEdge</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="6" Dice="12" Type="Atk" Detail="Slash" Motion="J" EffectRes="Shi_J" Script="disarm1atk" Desc="[적중] 무장해제 1 부여" />
+      <Behaviour Min="6" Dice="12" Type="Atk" Detail="Slash" Motion="J" EffectRes="Shi_J" Script="disarm2atk" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -33,7 +33,7 @@
     <Artwork>Shi3</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>powerUp2speed6</Script>
+    <Script>RMR_FlashingStrike</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="H" EffectRes="Tenma_H" Script="" Desc="" />
@@ -48,11 +48,11 @@
     <Artwork>Shi4</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>quickness2</Script>
-    <ScriptDesc>[사용시] 다음 막에 신속 2를 얻음</ScriptDesc>
+    <Script>RMR_FlyingSword</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Tenma_J" Script="" Desc="" />
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="Z" EffectRes="Shi_Z" Script="" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Tenma_J" Script="RMR_HastePower1" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="Z" EffectRes="Shi_Z" Script="RMR_HastePower1" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -60,14 +60,14 @@
   <Card ID="501005">
     <Name>끝 없는 전투</Name>
     <Artwork>Shi5</Artwork>
-    <Rarity>Common</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>powerUp1Hp</Script>
-    <ScriptDesc>[사용시] 체력이 25% 이하면 이 책장의 모든 주사위 위력 +1</ScriptDesc>
+    <Script>RMR_EndlessBattle</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="4" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Shi_G" Script="" Desc="" />
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Hit" Motion="H" EffectRes="Shi_H" Script="" Desc="" />
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="Shi_J" Script="" Desc="" />
+      <Behaviour Min="5" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Shi_G" Script="" Desc="" />
+      <Behaviour Min="4" Dice="6" Type="Atk" Detail="Hit" Motion="H" EffectRes="Shi_H" Script="" Desc="" />
+      <Behaviour Min="4" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Shi_J" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -75,10 +75,10 @@
   <Card ID="501006">
     <Name>필사적인 사투</Name>
     <Artwork>Shi6</Artwork>
-    <Rarity>Common</Rarity>
+    <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>clashPowerUp</Script>
-    <ScriptDesc>[합 시작시] 자신에게 피해 5. 이 책장의 모든 주사위 위력 +2</ScriptDesc>
+    <Script>RMR_DesperateStruggle</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="5" Type="Atk" Detail="Slash" Motion="H" EffectRes="Shi_H" Script="" Desc="" />
       <Behaviour Min="2" Dice="5" Type="Atk" Detail="Slash" Motion="J" EffectRes="Shi_J" Script="" Desc="" />
@@ -91,8 +91,8 @@
     <Artwork>Shi7</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script>drawCard</Script>
-    <ScriptDesc>[사용시] 책장을 1장 뽑음</ScriptDesc>
+    <Script>RMR_OvercomeCrisis</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="7" Type="Atk" Detail="Slash" Motion="Z" EffectRes="Shi_Z" Script="energy1atkAndHp" Desc="[적중] 체력이 25% 이하면 빛 1 회복" />
     </BehaviourList>
@@ -120,10 +120,10 @@
     <Artwork>Puppet1</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="3"/>
-    <Script>quickness2</Script>
-    <ScriptDesc>[사용시] 다음 막에 신속 2를 얻음</ScriptDesc>
+    <Script>RMR_AutomatedMovement</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="2" Dice="9" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="powerUpNext2pw" Desc="" />
+      <Behaviour Min="5" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="powerUpNext2pw" Desc="" />
       <Behaviour Min="3" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="Puppet1_H" Script="" Desc="" />
       <Behaviour Min="4" Dice="7" Type="Atk" Detail="Hit" Motion="J" EffectRes="Puppet1_J" Script="" Desc="" />
       <Behaviour Min="3" Dice="8" Type="Standby" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
@@ -151,11 +151,11 @@
     <Artwork>Puppet3</Artwork>
     <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3"/>
-    <Script>drawCard</Script>
-    <ScriptDesc>[사용시] 책장을 1장 뽑음</ScriptDesc>
+    <Script>RMR_RepressedFlesh</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="4" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Shi_G" Script="" Desc="" />
-      <Behaviour Min="4" Dice="9" Type="Atk" Detail="Hit" Motion="H" EffectRes="Puppet1_H" Script="powerDown3targetDfn" Desc="대상의 현재 수비 주사위 위력 -3" />
+      <Behaviour Min="4" Dice="9" Type="Atk" Detail="Hit" Motion="H" EffectRes="Puppet1_H" Script="RMR_CoolerRepressed" Desc="" />
       <Behaviour Min="4" Dice="9" Type="Atk" Detail="Hit" Motion="Z" EffectRes="Puppet1_Z" Script="break3atk" Desc="[적중] 대상에게 흐트러짐 피해 3" />
       <Behaviour Min="3" Dice="7" Type="Standby" Detail="Hit" Motion="J" EffectRes="Puppet1_J" Script="" Desc="" />
     </BehaviourList>
@@ -171,7 +171,7 @@
     <ScriptDesc>[사용시] 책장을 1장 뽑음</ScriptDesc>
     <BehaviourList>
       <Behaviour Min="4" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="Shi_G" Script="" Desc="" />
-      <Behaviour Min="5" Dice="16" Type="Atk" Detail="Hit" Motion="J" EffectRes="Puppet1_J" Script="weakDisarmBinding1atk" Desc="[적중] 다음 막에 허약 1, 무장해제 1, 속박 1 부여" />
+      <Behaviour Min="5" Dice="16" Type="Atk" Detail="Hit" Motion="J" EffectRes="Puppet1_J" Script="RMR_ForcefulGesture" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>1</Priority>
@@ -179,10 +179,10 @@
   <Card ID="502005">
     <Name>기기긱</Name>
     <Artwork>Puppet5</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1"/>
-    <Script>energy2</Script>
-    <ScriptDesc>[사용시] 빛 2 회복</ScriptDesc>
+    <Script>RMR_Gigigi</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="Shi_G" Script="" Desc="" />
       <Behaviour Min="3" Dice="6" Type="Atk" Detail="Hit" Motion="H" EffectRes="Puppet1_Z" Script="" Desc="" />
@@ -208,7 +208,7 @@
   <Card ID="502007">
     <Name>인형 방패</Name>
     <Artwork>Puppet7</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0"/>
     <Script>energy1</Script>
     <ScriptDesc>[사용시] 빛 1 회복</ScriptDesc>
@@ -224,7 +224,7 @@
   <Card ID="503001">
     <Name>예리한 손톱</Name>
     <Artwork>Circus1</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3"/>
     <Script />
     <ScriptDesc />
@@ -233,6 +233,7 @@
       <Behaviour Min="5" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="Ema_H" Script="" Desc="" />
       <Behaviour Min="4" Dice="9" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="Ema_H" Script="recoverBreak5atk" Desc="[적중] 흐트러짐 저항 5 회복" />
       <Behaviour Min="3" Dice="7" Type="Standby" Detail="Slash" Motion="H" EffectRes="Ema_H" Script="" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Standby" Detail="Penetrate" Motion="Z" EffectRes="Ema_Z" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>1</Priority>
@@ -245,8 +246,8 @@
     <Script />
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Hit" Motion="Z" EffectRes="Ema_Z" Script="bleeding2atk" Desc="" />
-      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Ema_J" Script="" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Standby" Detail="Hit" Motion="Z" EffectRes="Ema_Z" Script="bleeding1atk" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Standby" Detail="Slash" Motion="J" EffectRes="Ema_J" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -257,8 +258,8 @@
     <Rarity>Uncommon</Rarity>
     <Option>ExhaustOnUse</Option>
     <Spec Range="Far" Cost="1"/>
-    <Script></Script>
-    <ScriptDesc>이 책장은 사용 후에 소멸됨</ScriptDesc>
+    <Script>RMR_Juggling</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="6" Dice="11" Type="Atk" Detail="Hit" Motion="F" EffectRes="" Script="paralysis1atk" Desc="" />
     </BehaviourList>
@@ -270,12 +271,12 @@
     <Artwork>Circus4</Artwork>
     <Rarity>Uncommon</Rarity>
     <Option>ExhaustOnUse</Option>
-    <Spec Range="Far" Cost="2"/>
+    <Spec Range="Far" Cost="1"/>
     <Script></Script>
-    <ScriptDesc>이 책장은 사용 후에 소멸됨</ScriptDesc>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Penetrate" Motion="S" EffectRes="" Script="recoverHp2atk" Desc="" />
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Hit" Motion="S" EffectRes="" Script="" Desc="" />
+      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Penetrate" Motion="S" EffectRes="" Script="RMR_WildCard" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Hit" Motion="S" EffectRes="" Script="RMR_allydraw1atk" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -341,32 +342,18 @@
     <Chapter>5</Chapter>
     <Priority>0</Priority>
   </Card>
-
-  <Card ID="503009">
-    <Name>저글링</Name>
-    <Artwork>Circus3</Artwork>
-    <Rarity>Uncommon</Rarity>
-    <Option>ExhaustOnUse</Option>
-    <Spec Range="Far" Cost="1"/>
-    <Script></Script>
-    <ScriptDesc>이 책장은 사용 후에 소멸됨</ScriptDesc>
+  
+  <Card ID="503011">
+    <Name>공연 시작</Name>
+    <Artwork>Circus8</Artwork>
+    <Rarity>Rare</Rarity>
+    <Spec Range="Near" Cost="2"/>
+    <Script>RMR_LetShowBegin</Script>
+    <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="6" Dice="11" Type="Atk" Detail="Hit" Motion="F" EffectRes="" Script="paralysis1atk" Desc="" />
-    </BehaviourList>
-    <Chapter>5</Chapter>
-    <Priority>1</Priority>
-  </Card>
-  <Card ID="503010">
-    <Name>와일드 카드</Name>
-    <Artwork>Circus4</Artwork>
-    <Rarity>Uncommon</Rarity>
-    <Option>ExhaustOnUse</Option>
-    <Spec Range="Far" Cost="1"/>
-    <Script></Script>
-    <ScriptDesc>이 책장은 사용 후에 소멸됨</ScriptDesc>
-    <BehaviourList>
-      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Penetrate" Motion="S" EffectRes="" Script="recoverHp2atk" Desc="" />
-      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Hit" Motion="S" EffectRes="" Script="" Desc="" />
+      <Behaviour Min="4" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="RMR_Add2PowerAllpw" Desc="" />
+      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="Ema_J" Script="" Desc="" />
+      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="Z" EffectRes="Ema_Z" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -378,11 +365,11 @@
     <Rarity>Unique</Rarity>
     <Option>ExhaustOnUse</Option>
     <Spec Range="Near" Cost="2"/>
-    <Script>sweeperUnique</Script>
-    <ScriptDesc>[사용시] 3막 동안 '끈질김' 효과를 얻음. 이 책장은 사용 후 소멸.</ScriptDesc>
+    <Script>RMR_sweeperpage</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sweeper_Z" Script="" Desc="" />
-      <Behaviour Min="3" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Sweeper_G" Script="" Desc="" />
+      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sweeper_Z" Script="RMR_shield5atk" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Sweeper_G" Script="RMR_shield5pw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>2</Priority>
@@ -400,7 +387,7 @@
       <Behaviour Min="2" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Sweeper_G" Script="" Desc="" />
       <Behaviour Min="3" Dice="8" Type="Atk" Detail="Hit" Motion="J" EffectRes="Sweeper_J" Script="" Desc="" />
       <Behaviour Min="2" Dice="4" Type="Def" Detail="Guard" Motion="G" EffectRes="Sweeper_G" Script="" Desc="" />
-      <Behaviour Min="2" Dice="3" Type="Atk" Detail="Penetrate" Motion="J" EffectRes="Sweeper_S" Script="sweeperOnlyDice" ActionScript="sweeperOnly" Desc="" />
+      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Penetrate" Motion="J" EffectRes="Sweeper_S" Script="RMR_TrashDisposalDie" ActionScript="sweeperOnly" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>1</Priority>
@@ -416,7 +403,7 @@
     <BehaviourList>
       <Behaviour Min="4" Dice="7" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="Sweeper_H" Script="paralysis2atk" Desc="" />
       <Behaviour Min="2" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="Sweeper_G" Script="" Desc="" />
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sweeper_J" Script="recoverHp3atk" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sweeper_J" Script="recoverBreak3atk" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -427,8 +414,8 @@
     <Artwork>Sweepers4</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2"/>
-    <Script>ally2protection1thisRound</Script>
-    <ScriptDesc>[전투 시작] 무작위 아군 2명에게 보호 1 부여</ScriptDesc>
+    <Script>RMR_ForTheFamily</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="4" Dice="7" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sweeper_Z" Script="bleeding2atk" Desc="" />
       <Behaviour Min="3" Dice="7" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
@@ -445,8 +432,8 @@
     <Script>energy2</Script>
     <ScriptDesc>[사용시] 빛 2 회복</ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Penetrate" Motion="J" EffectRes="Sweeper_J" Script="recoverHp2atk" Desc="" />
-      <Behaviour Min="2" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="Sweeper_G" Script="" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Penetrate" Motion="J" EffectRes="Sweeper_J" Script="recoverHp1atk" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Def" Detail="Guard" Motion="G" EffectRes="Sweeper_G" Script="RMR_recover1pl" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -460,7 +447,7 @@
     <ScriptDesc>[전투 시작] 이번 막 동안 모든 주사위의 위력 -2</ScriptDesc>
     <BehaviourList>
       <Behaviour Min="6" Dice="9" Type="Atk" Detail="Hit" Motion="H" EffectRes="Sweeper_H" Script="recoverHp3atk" Desc="" />
-      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sweeper_Z" Script="recoverHp2atk" Desc="" />
+      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sweeper_Z" Script="recoverHp3atk" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -469,13 +456,13 @@
   <Card ID="505001">
     <Name>지령이 향하는 곳</Name>
     <Artwork>TheIndex1</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="2"/>
-    <Script>powerUp1highlander</Script>
-    <ScriptDesc>[사용시] 중복된 책장을 보유하고 있지 않다면, 이 책장의 모든 주사위 위력 +1</ScriptDesc>
+    <Script>RMR_ToWherePrescript</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <!--<Behaviour Min="4" Dice="7" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="IndexUnit_H" Script="destroyNextHighlander" Desc="중복된 책장을 보유하고 있지 않다면, 대상의 다음 주사위 파괴" />-->
-      <Behaviour Min="4" Dice="7" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="IndexUnit_H" Script="vulnerable1atk" Desc="[적중] 취약 1 부여" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="IndexUnit_H" Script="RMR_PrescriptDie" Desc="" />
       <Behaviour Min="3" Dice="7" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="IndexUnit_Z" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -485,14 +472,14 @@
   <Card ID="505002">
     <Name>지령 수행</Name>
     <Artwork>TheIndex2</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2"/>
-    <Script>powerUp1highlander</Script>
-    <ScriptDesc>[사용시] 중복된 책장을 보유하고 있지 않다면, 이 책장의 모든 주사위 위력 +1</ScriptDesc>
+    <Script>RMR_UndertakePrescript</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Hit" Motion="H" EffectRes="IndexUnit_H" Script="" Desc="" />
-      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="IndexUnit_J" Script="" Desc="" />
-      <Behaviour Min="1" Dice="4" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="IndexUnit_Z" Script="" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Hit" Motion="H" EffectRes="IndexUnit_H" Script="paralysis1atk" Desc="" />
+      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Hit" Motion="J" EffectRes="IndexUnit_J" Script="binding1atk" Desc="" />
+      <Behaviour Min="1" Dice="4" Type="Atk" Detail="Hit" Motion="H" EffectRes="IndexUnit_H" Script="disarm1atk" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -503,11 +490,11 @@
     <Artwork>TheIndex3</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2"/>
-    <Script></Script>
+    <Script>RMR_Zeal</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="3" Dice="5" Type="Atk" Detail="Slash" Motion="H" EffectRes="IndexUnit_H" Script="powerUpDice4highlander" ActionScript="index_execute" Desc="중복된 책장을 보유하고 있지 않다면 위력 +4" />
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="IndexUnit_J" Script="" Desc="" />
+      <Behaviour Min="4" Dice="6" Type="Atk" Detail="Slash" Motion="H" EffectRes="IndexUnit_H" Script="RMR_Execute" ActionScript="index_execute" Desc="" />
+      <Behaviour Min="4" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="IndexUnit_J" Script="RMR_Execute" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -516,10 +503,10 @@
   <Card ID="505004">
     <Name>지령의 뜻</Name>
     <Artwork>TheIndex4</Artwork>
-    <Rarity>Common</Rarity>
+    <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3"/>
-    <Script>drawCard3highlander</Script>
-    <ScriptDesc>[사용시] 중복된 책장을 보유하고 있지 않다면 책장을 3장 뽑음</ScriptDesc>
+    <Script>RMR_WillOfThePrescript</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="8" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
       <Behaviour Min="4" Dice="8" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="IndexUnit_Z" Script="" Desc="" />
@@ -532,10 +519,10 @@
   <Card ID="505005">
     <Name>믿음</Name>
     <Artwork>TheIndex5</Artwork>
-    <Rarity>Common</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="1"/>
-    <Script>energy1</Script>
-    <ScriptDesc>[사용시] 빛 1 회복</ScriptDesc>
+    <Script>RMR_Faith</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="8" Type="Atk" Detail="Penetrate" Motion="J" EffectRes="IndexUnit_J" Script="" Desc="" />
       <Behaviour Min="2" Dice="6" Type="Atk" Detail="Slash" Motion="Z" EffectRes="IndexUnit_Z" Script="" Desc="" />
@@ -549,8 +536,8 @@
     <Artwork>TheIndex6</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="1"/>
-    <Script>powerUp2fullCard</Script>
-    <ScriptDesc>[사용시] 내 손에 책장이 7장 이상이라면, 이 책장의 모든 주사위 위력 +2</ScriptDesc>
+    <Script>RMR_SenseQuarry</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="IndexUnit_G" Script="" Desc="" />
       <Behaviour Min="2" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="IndexUnit_G" Script="" Desc="" />
@@ -558,17 +545,17 @@
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
-    <PriorityScript>fullHand</PriorityScript>
+    <PriorityScript></PriorityScript>
   </Card>
   <Card ID="505007">
     <Name>수행자의 검</Name>
     <Artwork>TheIndex7</Artwork>
-    <Rarity>Uncommon</Rarity>
-    <Spec Range="Near" Cost="1"/>
-    <Script>powerDown3thisRound</Script>
-    <ScriptDesc>[전투 시작] 이번 막 동안 모든 주사위의 위력 -3</ScriptDesc>
+    <Rarity>Rare</Rarity>
+    <Spec Range="Near" Cost="2"/>
+    <Script>RMR_ProselyteBlade</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="7" Dice="11" Type="Atk" Detail="Hit" Motion="H" EffectRes="IndexUnit_H" Script="" Desc="" />
+      <Behaviour Min="7" Dice="11" Type="Atk" Detail="Hit" Motion="H" EffectRes="IndexUnit_H" Script="RMR_SingletonPower2" Desc="" />
       <Behaviour Min="7" Dice="10" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="IndexUnit_Z" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -582,11 +569,11 @@
     <Rarity>Unique</Rarity>
     <Option>OnlyPage</Option>
     <Spec Range="Near" Cost="2"/>
-    <Script>warpSkill</Script>
-    <ScriptDesc>[전용 전투 책장], [사용시] (충전x9.9)%의 확률로 성공, 충전 모두 소모.</ScriptDesc>
+    <Script>RMR_RipSpace</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="WarpCrew_H" Script="drawCard2pw" Desc="" />
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="S1" EffectRes="WarpCrew_S1" Script="warpSkillDice" ActionScript="warpSkill" Desc="" />
+      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="WarpCrew_H" Script="RMR_draw3pw" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="S1" EffectRes="WarpCrew_S1" Script="RMR_RipSpaceDie" ActionScript="warpSkill" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -612,10 +599,10 @@
     <Artwork>Warp3</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="3"/>
-    <Script>power3costCharge</Script>
-    <ScriptDesc>[사용시] 충전 3을 소모하여 이 책장의 모든 주사위 위력 +3</ScriptDesc>
+    <Script>RMR_Ripple</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="2" Dice="5" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="powerUpNext2pl" Desc="" />
+      <Behaviour Min="2" Dice="5" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="RMR_RippleDie" Desc="" />
       <Behaviour Min="5" Dice="17" Type="Atk" Detail="Hit" Motion="Z" EffectRes="WarpCrew_Z" Script="binding2atk" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -625,14 +612,14 @@
   <Card ID="506004">
     <Name>과충전</Name>
     <Artwork>Warp4</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="3"/>
-    <Script>warpOvercharge</Script>
-    <ScriptDesc>[사용시] 충전 10을 얻고 다음 막에 행동불가 상태가 됨</ScriptDesc>
+    <Script>RMR_Overcharge</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="5" Dice="13" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="WarpCrew_Z" Script="" Desc="" />
-      <Behaviour Min="4" Dice="12" Type="Atk" Detail="Slash" Motion="J" EffectRes="WarpCrew_J" Script="" Desc="" />
-      <Behaviour Min="5" Dice="11" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="WarpCrew_Z" Script="" Desc="" />
+      <Behaviour Min="7" Dice="10" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="WarpCrew_Z" Script="" Desc="" />
+      <Behaviour Min="6" Dice="10" Type="Atk" Detail="Slash" Motion="J" EffectRes="WarpCrew_J" Script="" Desc="" />
+      <Behaviour Min="6" Dice="10" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="WarpCrew_Z" Script="" Desc="" />
       <Behaviour Min="2" Dice="6" Type="Standby" Detail="Guard" Motion="G" EffectRes="WarpCrew_G" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -648,7 +635,7 @@
     <BehaviourList>
       <Behaviour Min="2" Dice="9" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
       <Behaviour Min="2" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="WarpCrew_G" Script="" Desc="" />
-      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="WarpCrew_Z" Script="recoverHp3atk" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="WarpCrew_Z" Script="recoverHp2atk" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -658,7 +645,7 @@
     <Artwork>Warp6</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1"/>
-    <Script>drawCardWarp</Script>
+    <Script>RMR_Leap</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="H" EffectRes="WarpCrew_H" Script="" Desc="" />
@@ -691,7 +678,7 @@
     <Script>smokeOnly1</Script>
     <ScriptDesc>[사용시] 책장을 1장 뽑음</ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="6" Dice="19" Type="Atk" Detail="Hit" Motion="S2" MotionDefault="H" EffectRes="" Script="smoke7atk" Desc="[적중] 다음 막에 연기 7 부여" />
+      <Behaviour Min="6" Dice="19" Type="Atk" Detail="Hit" Motion="S2" MotionDefault="H" EffectRes="" Script="RMR_Smoke7Atk" Desc="[적중] 다음 막에 연기 7 부여" />
       <Behaviour Min="1" Dice="9" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -702,11 +689,11 @@
     <Artwork>Smile2</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2"/>
-    <Script>powerUp2smoke</Script>
-    <ScriptDesc>[사용시] 연기 2를 소모하여 이 책장의 모든 주사위 위력+2</ScriptDesc>
+    <Script>RMR_FleshFillet</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="4" Dice="8" Type="Atk" Detail="Slash" Motion="Z" EffectRes="SmilingFaces_Atk_Z" Script="bleeding1atk" Desc="" />
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="H" EffectRes="SmilingFaces_Atk_H" Script="bleedingXsmoke" Desc="[적중] 대상에게 있는 (연기 x 0.5) 만큼 다음 막에 출혈 부여" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="H" EffectRes="SmilingFaces_Atk_H" Script="RMR_FleshFilletDie" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -715,14 +702,14 @@
   <Card ID="507003">
     <Name>연기 흡입</Name>
     <Artwork>Smile3</Artwork>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Common</Rarity>
     <Category>Smoke1</Category>
     <Spec Range="Near" Cost="1"/>
-    <Script>smokeSelf3</Script>
-    <ScriptDesc>[사용시] 다음 막에 연기 3을 얻음</ScriptDesc>
+    <Script>RMR_InhaleSmoke</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="2" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="SmilingFaces_G" Script="" Desc="" />
-      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Hit" Motion="S1" MotionDefault="H" EffectRes="" Script="smokeSelf4atk" Desc="[적중] 다음 막에 연기 4를 얻음" />
+      <Behaviour Min="2" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="SmilingFaces_G" Script="RMR_nodeflectdamage" Desc="" />
+      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Hit" Motion="S1" MotionDefault="H" EffectRes="" Script="RMR_GainSmoke4Atk" Desc="[적중] 다음 막에 연기 4를 얻음" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -732,11 +719,11 @@
     <Artwork>Smile4</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="2"/>
-    <Script></Script>
+    <Script>RMR_TraceFumes</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="SmilingFaces_Smoke_H" Script="smoke1atk" Desc="[적중] 다음 막에 연기 1 부여" />
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Hit" Motion="J" EffectRes="SmilingFaces_Smoke_J" Script="smoke2atk" Desc="[적중] 다음 막에 연기 2 부여" />
+      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="SmilingFaces_Smoke_H" Script="RMR_Smoke1Atk" Desc="[적중] 다음 막에 연기 1 부여" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Hit" Motion="J" EffectRes="SmilingFaces_Smoke_J" Script="RMR_Smoke2Atk" Desc="[적중] 다음 막에 연기 2 부여" />
       <Behaviour Min="3" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -745,10 +732,10 @@
   <Card ID="507005">
     <Name>숨은 칼날</Name>
     <Artwork>Smile5</Artwork>
-    <Rarity>Common</Rarity>
+    <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="1"/>
-    <Script>powerUp2smoke</Script>
-    <ScriptDesc>[사용시] 연기 2를 소모하여 이 책장의 모든 주사위 위력+2</ScriptDesc>
+    <Script>RMR_HiddenBlade</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="9" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
       <Behaviour Min="4" Dice="8" Type="Atk" Detail="Slash" Motion="Z" EffectRes="SmilingFaces_Atk_Z" Script="bleeding2atk" Desc="" />
@@ -762,11 +749,11 @@
     <Artwork>Smile6</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0"/>
-    <Script>energySmoke</Script>
-    <ScriptDesc>[사용시] 다음 막에 연기 2를 얻음. 빛 1 회복</ScriptDesc>
+    <Script>RMR_SmokingPipe</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="SmilingFaces_G" Script="" Desc="" />
-      <Behaviour Min="1" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
+      <Behaviour Min="1" Dice="7" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -780,8 +767,8 @@
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="5" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="SmilingFaces_G" Script="" Desc="" />
-      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Hit" Motion="J" EffectRes="SmilingFaces_Atk_J" Script="debufsSmoke" Desc="[적중] 대상에게 연기가 7 이상 있다면 마비 2와 허약 1 부여" />
-      <Behaviour Min="4" Dice="9" Type="Atk" Detail="Slash" Motion="H" EffectRes="SmilingFaces_Atk_H" Script="drawSmoke" Desc="[적중] 대상에게 연기가 3 이상 있다면 책장을 2장 뽑음" />
+      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Hit" Motion="J" EffectRes="SmilingFaces_Atk_J" Script="RMR_LossOfSensesDie" Desc="" />
+      <Behaviour Min="4" Dice="9" Type="Atk" Detail="Slash" Motion="H" EffectRes="SmilingFaces_Atk_H" Script="RMR_LoSDraw2" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -801,6 +788,37 @@
     <Chapter>5</Chapter>
     <Priority>0</Priority>
   </Card>
+  
+  
+  <Card ID="508010">
+    <Name>타오르는 일격</Name>
+    <Artwork>Wedge7</Artwork>
+    <Rarity>Unique</Rarity>
+    <Option>OnlyPage</Option>
+    <Spec Range="Near" Cost="4" />
+    <Script>RMR_BlazingStrike</Script>
+    <ScriptDesc/>
+    <BehaviourList>
+      <Behaviour Min="30" Dice="40" Type="Atk" Detail="Hit" Motion="Z" EffectRes="PhilipEgo_Special" Script="RMR_BlazingStrikeDie" ActionScript="" Desc="" />
+    </BehaviourList>
+    <Chapter>5</Chapter>
+    <Priority>2</Priority>
+    <SortPriority>1</SortPriority>
+  </Card>
+  
+  <Card ID="508011">
+    <Name>맹렬한 돌진</Name>
+    <Artwork>Wedge9</Artwork>
+    <Rarity>Rare</Rarity>
+    <Spec Range="Near" Cost="2" />
+    <Script>RMR_FierceCharge</Script>
+    <ScriptDesc />
+    <BehaviourList>
+      <Behaviour Min="7" Dice="12" Type="Atk" Detail="Slash" Motion="Z" EffectRes="PhilipEgo_Z" Script="RMR_FierceChargeDie" Desc="" />
+    </BehaviourList>
+    <Chapter>5</Chapter>
+    <Priority>0</Priority>
+  </Card>
 
 
 
@@ -810,10 +828,9 @@
     <Artwork>Seven_Engagement</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="0" />
-    <Script>Seven_Engagement</Script>
-    <ScriptDesc>Engard</ScriptDesc>
+    <Script>RMR_Engagement</Script>
     <BehaviourList>
-      <Behaviour Min="1" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="" Desc="" />
+      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="RMR_2protpwnow" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -822,13 +839,13 @@
   <Card ID="511002">
     <Name>리포스트</Name>
     <Artwork>Seven_Riposte</Artwork>
-    <Rarity>Common</Rarity>
+    <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script />
+    <Script>RMR_AdaptPage</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="SevenAssociation_G" Script="powerUpNext1pw" Desc="" />
-      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="SevenAssociation_G" Script="RMR_AdaptDice_Riposte" Desc="" />
+      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="RMR_break5pw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -843,6 +860,7 @@
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="5" Dice="13" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="SevenAssociation_Z" Script="Seven_Fleche" Desc="" />
+      <Behaviour Min="2" Dice="6" Type="Standby" Detail="Penetrate" Motion="Z" EffectRes="SevenAssociation_Z" Script="RMR_FlecheCounter" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -853,12 +871,12 @@
     <Artwork>Seven_Moulinet</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="3" />
-    <Script />
+    <Script>RMR_Moulinet</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="increaseMaxLast2pw" Desc="" />
-      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Hit" Motion="H" EffectRes="SevenAssociation_H" Script="increaseMaxLast2pw" Desc="" />
-      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="vulnerable2pw" Desc="" />
+      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="increaseMaxLast2pw" Desc="" />
+      <Behaviour Min="4" Dice="8" Type="Atk" Detail="Hit" Motion="H" EffectRes="SevenAssociation_H" Script="increaseMaxLast2pw" Desc="" />
+      <Behaviour Min="2" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="RMR_1vulnbreakvulnpw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -870,10 +888,10 @@
     <Rarity>Common</Rarity>
     <Option>ExhaustOnUse</Option>
     <Spec Range="Near" Cost="2" />
-    <Script>Seven_EnGarde</Script>
+    <Script>RMR_EnGarde</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="6" Dice="10" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="" Desc="" />
+      <Behaviour Min="6" Dice="10" Type="Atk" Detail="Slash" Motion="J" EffectRes="SevenAssociation_J" Script="binding2pw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -888,7 +906,7 @@
     <Script>energy1</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="RMR_critchance5pw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -899,11 +917,11 @@
     <Artwork>sword2</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>slashUp1thisRound</Script>
+    <Script>RMR_Acupuncture</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="3" Dice="7" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sword_Z" Script="upgradeNext2atk" Desc="" />
-      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="energy1pw" Desc="" />
+      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="RMR_critchance5pw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -919,7 +937,7 @@
     <Script></Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="5" Dice="10" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="Sword_getbonecuttingcardpl" Desc="" />
+      <Behaviour Min="5" Dice="10" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="RMR_YieldMyFlesh" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -930,10 +948,10 @@
     <Artwork>sword4</Artwork>
     <Rarity>Unique</Rarity>
     <Spec Range="Near" Cost="3" />
-    <Script>slashUp3thisRound</Script>
+    <Script>RMR_Overthrow</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="RMR_OverthrowDie" Desc="" />
       <Behaviour Min="2" Dice="8" Type="Def" Detail="Guard" Motion="G" EffectRes="Sword_G" Script="" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -945,11 +963,11 @@
     <Artwork>sword5</Artwork>
     <Rarity>Rare</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script></Script>
+    <Script>RMR_Slay</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="strength1pw" Desc="" />
-      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="energy1atk" Desc="" />
+      <Behaviour Min="3" Dice="8" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="drawCard1pw" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="energy1pw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>0</Priority>
@@ -960,7 +978,7 @@
     <Artwork>sword6</Artwork>
     <Rarity>Unique</Rarity>
     <Option>ExhaustOnUse</Option>
-    <Spec Range="Near" Cost="5" />
+    <Spec Range="Near" Cost="3" />
     <Script>limit1_goldan</Script>
     <ScriptDesc />
     <BehaviourList>

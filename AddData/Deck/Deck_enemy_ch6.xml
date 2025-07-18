@@ -214,8 +214,6 @@
     <Card>605008</Card>
   </Deck>
   <Deck ID="151001">
-    <Card>505001</Card>
-    <Card>505003</Card>
     <Card>505004</Card>
     <Card>605006</Card>
     <Card>605007</Card>
@@ -224,6 +222,7 @@
     <Card>505001</Card>
     <Card>505003</Card>
     <Card>505004</Card>
+    <Card>505005</Card>
     <Card>605006</Card>
     <Card>605007</Card>
   </Deck>

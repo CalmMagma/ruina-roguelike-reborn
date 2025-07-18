@@ -103,7 +103,7 @@
     <LogueEffectInfo Id="GlobalEffect_BloodShed">
     <Name>血流成河</Name> 
     <Desc>这一幕内场上所有角色造成的伤害与混乱伤害x2。
-每场战斗可使用1次。</Desc> 
+每场战斗可使用1次。</Desc>  <!-- All characters deal +50% more damage and Stagger damage this Scene. Can be used once per battle. -->
     <FlavorText>&lt;color=#CACACA&gt;“镜子里的男人点了点头……”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
@@ -170,7 +170,8 @@
     <Desc>获得1张佚亡装备书页。
 [装备时]将开启舞台时手中的书页交给指定司书
 移除目标所有光芒并卸下其装备的所有非0费的书页
-使用后本道具将移除</Desc>
+使用后本道具将移除</Desc> <!-- Adds a Single-Use, [On Play] page at the start of Normal and Elite encounter Acts to the Patron Librarian's hand that removes all of the target's Light and unslots any non-0 Cost pages. 
+This item is removed upon using the page. -->
     <FlavorText>&lt;color=#CACACA&gt;“你有一种感觉，似乎有什么人把他们的线路弄乱了……”&lt;/color&gt;</FlavorText>
     <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 

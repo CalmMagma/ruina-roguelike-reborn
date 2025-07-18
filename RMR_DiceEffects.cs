@@ -185,6 +185,28 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    public class DiceCardAbility_RMR_critchance5pw : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_CriticalStrike_Keyword" };
+
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            owner.bufListDetail.AddKeywordBufByCard(RoguelikeBufs.CritChance, 5, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_critchance12pw : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_CriticalStrike_Keyword" };
+
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            owner.bufListDetail.AddKeywordBufByCard(RoguelikeBufs.CritChance, 12, owner);
+        }
+    }
+
     public class DiceCardAbility_RMR_bleed1twiceatk : DiceCardAbilityBase
     {
         public override string[] Keywords => new string[1] { "Bleeding_Keyword" };
@@ -193,6 +215,189 @@ namespace RogueLike_Mod_Reborn
             base.OnSucceedAttack(target);
             target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, 1, owner);
             target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, 1, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_2protpwnow : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "Protection_Keyword" };
+
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.Protection, 2, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_break5pw : DiceCardAbilityBase
+    {
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            card?.target?.breakDetail.TakeBreakDamage(5, DamageType.Card_Ability);
+        }
+    }
+
+    public class DiceCardAbility_RMR_GainSmoke4Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack()
+        {
+            base.OnSucceedAttack();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 4, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke1Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 1, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke2Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 2, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke3Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 3, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke4Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 4, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke5Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 5, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke6Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 6, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke7Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 7, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke8Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 8, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_Smoke9Atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Smoke_Keyword" };
+        public override void OnSucceedAttack(BattleUnitModel target)
+        {
+            base.OnSucceedAttack(target);
+            target.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRSmoke, 9, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_shield5atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Shield_Keyword" };
+
+        public override void OnSucceedAttack()
+        {
+            base.OnSucceedAttack();
+            owner.bufListDetail.AddKeywordBufByCard(RoguelikeBufs.RMRShield, 5, owner);
+        }
+    }
+    public class DiceCardAbility_RMR_shield5pw : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "RMR_Shield_Keyword" };
+
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            owner.bufListDetail.AddKeywordBufByCard(RoguelikeBufs.RMRShield, 5, owner);
+        }
+    }
+
+
+    public class DiceCardAbility_RMR_draw3pw : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[1] { "DrawCard_Keyword" };
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            owner.allyCardDetail.DrawCards(3);
+        }
+    }
+
+    public class DiceCardAbility_RMR_1vulnbreakvulnpw : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[2] { "Vulnerabke_Keyword", "Vulnerable_break" };
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            card.target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Vulnerable, 1, owner);
+            card.target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Vulnerable_break, 1, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_recover1pl : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Recover_Keyword" };
+        public override void OnLoseParrying()
+        {
+            base.OnLoseParrying();
+            owner.RecoverHP(1);
+        }
+    }
+
+    public class DiceCardAbility_RMR_recover5atk : DiceCardAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Recover_Keyword" };
+        public override void OnSucceedAttack()
+        {
+            base.OnSucceedAttack();
+            owner.RecoverHP(5);
         }
     }
 }

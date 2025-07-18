@@ -108,6 +108,8 @@
       <SBResist>Vulnerable</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240004</Passive>
       <Passive Pid="@origin" Level="1">240006</Passive>
@@ -163,6 +165,8 @@
       <HBResist>Normal</HBResist>
 
       <StartPlayPoint>0</StartPlayPoint>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240006</Passive>
     </EquipEffect>
@@ -187,6 +191,8 @@
       <HBResist>Normal</HBResist>
 
       <StartPlayPoint>1</StartPlayPoint>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240006</Passive>
     </EquipEffect>
@@ -369,6 +375,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Vulnerable</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240015</Passive>
 
@@ -394,6 +402,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Vulnerable</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
       
       <Passive Pid="@origin" Level="1">240016</Passive>
 
@@ -419,6 +429,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Vulnerable</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240015</Passive>
 
@@ -445,6 +457,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Endure</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240018</Passive>
       <Passive Pid="@origin" Level="1">240118</Passive>
@@ -502,6 +516,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240020</Passive>
       <Passive Pid="@origin" Level="1">240022</Passive>
@@ -528,6 +544,8 @@
       <SBResist>Endure</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240021</Passive>
       <Passive Pid="@origin" Level="1">240022</Passive>
@@ -554,6 +572,8 @@
       <SBResist>Endure</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240022</Passive>
 
@@ -672,6 +692,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240026</Passive>
 
@@ -682,6 +704,37 @@
     <BookIcon>SmilingFaces</BookIcon>
     <CharacterSkin>SmilingFacesUnit</CharacterSkin>
     <Rarity>Common</Rarity>
+  </Book>
+  
+  <Book ID="140027">
+    <Name>검지 수행자</Name>
+    <TextId>240018</TextId>
+    <EquipEffect>
+      <EmotionLevel>2</EmotionLevel>
+      <HP>74</HP>
+      <Break>34</Break>
+      <SpeedMin>2</SpeedMin>
+      <Speed>6</Speed>
+      <SResist>Normal</SResist>
+      <PResist>Normal</PResist>
+      <HResist>Normal</HResist>
+      <SBResist>Normal</SBResist>
+      <PBResist>Normal</PBResist>
+      <HBResist>Endure</HBResist>
+	  
+	  <Passive>1000000000</Passive>
+
+      <Passive Pid="@origin" Level="1">240018</Passive>
+      <Passive Pid="@origin" Level="1">240118</Passive>
+
+      <Passive Pid="@origin" Level="1">2004</Passive>
+      <Passive Pid="@origin" Level="1">2005</Passive>
+      <Passive Pid="@origin" Level="1">2006</Passive>
+    </EquipEffect>
+    <BookIcon>TheIndex</BookIcon>
+    <CharacterSkin>IndexUnit</CharacterSkin>
+    <Rarity>Uncommon</Rarity>
+    <RandomFace>true</RandomFace>
   </Book>
   
   
@@ -701,6 +754,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">241301</Passive>
     </EquipEffect>
@@ -724,6 +779,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Vulnerable</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
       
       <Passive Pid="@origin" Level="1">241002</Passive>
       <Passive Pid="@origin" Level="1">241202</Passive>
@@ -772,6 +829,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Vulnerable</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">243001</Passive>
     </EquipEffect>
@@ -824,6 +883,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Vulnerable</PBResist>
       <HBResist>Normal</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin">231001</Passive>
       <Passive Pid="@origin">220003</Passive>

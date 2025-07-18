@@ -108,7 +108,9 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Endure</HBResist>
-
+	  
+	  
+	  <Passive Pid="@origin">10001</Passive>
       <Passive Pid="@origin">240018</Passive>
       <Passive Pid="@origin">240118</Passive>
       <Passive Pid="@origin">240003</Passive>
@@ -137,10 +139,10 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Endure</HBResist>
-
+	  
+	  <Passive Pid="@origin">10001</Passive>
       <Passive Pid="@origin">240018</Passive>
       <Passive Pid="@origin">240118</Passive>
-      <Passive Pid="@origin">10001</Passive>
       <Passive Pid="@origin">240003</Passive>
     </EquipEffect>
     <BookIcon>TheIndex</BookIcon>

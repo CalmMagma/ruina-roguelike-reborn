@@ -3,7 +3,7 @@
 
   <LogueEffectInfo Id="RMR_IronHeart">
     <Name>心之钢</Name> 
-    <Desc>开启舞台时使指定司书恢复6点体力。</Desc> 
+    <Desc>开启舞台时使指定司书恢复6点体力。</Desc> <!-- The Patron Librarian recovers 6 HP and gains 1 Max HP at the start of each Combat Encounter. (Normal, Elite, Boss) -->
     <FlavorText>&lt;color=#CA0812&gt;"虽然质地坚硬，但仍然很贴心。这是最后一批了。"&lt;/color&gt;</FlavorText> 
     <CatalogDesc>    器官总是不满足：吸收新的思想、营养或欲望，然后在不再需要时丢弃。这样的行为有一个持续的循环，尽管大多数是出于必要，但一个人不会这样做——相反，它会记住一切。不管多小。
 

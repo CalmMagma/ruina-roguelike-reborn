@@ -10,6 +10,67 @@ using static RogueLike_Mod_Reborn.RMREffect_Prescript;
 
 namespace RogueLike_Mod_Reborn
 {
+	public class RMRPassiveBase : PassiveAbilityBase
+    {
+		public virtual void OnSpendSmoke(int amount)
+        {
+        }
+
+		public virtual bool SmokeBoostsOutgoingDamage()
+        {
+			return true;
+        }
+
+		public virtual bool SmokeBoostsIncomingDamage()
+		{
+			return true;
+		}
+
+		public virtual void OnSpendSmokeByCombatPage(int amount)
+        {
+        }
+    }
+
+	public class PassiveAbility_RMR_Posthaste : PassiveAbilityBase
+    {
+        public override int SpeedDiceNumAdder()
+        {
+			if (owner.emotionDetail.EmotionLevel >= 2)
+            {
+				return 1;
+            }
+            return base.SpeedDiceNumAdder();
+        }
+    }
+
+	public class PassiveAbility_RMR_LoneSpeed : PassiveAbilityBase
+    {
+		bool speed;
+        public override void OnWaveStart()
+        {
+            base.OnWaveStart();
+			speed = false;
+			foreach (BattleUnitModel ally in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
+            {
+				foreach (PassiveAbilityBase passive in ally.passiveDetail.PassiveList)
+                {
+					if (passive.InnerTypeId == 1)
+                    {
+						speed = true;
+                    }
+                }
+            }
+        }
+
+        public override int SpeedDiceNumAdder()
+        {
+			if (!speed)
+            {
+				return 1;
+            }
+            return base.SpeedDiceNumAdder();
+        }
+    }
     public class PassiveAbility_RMR_CopleyPassive : PassiveAbilityBase
     {
         BattleUnitModel target;

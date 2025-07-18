@@ -63,12 +63,13 @@
 			<SBResist>Normal</SBResist>
 			<PBResist>Normal</PBResist>
 			<HBResist>Vulnerable</HBResist>
+			<Passive>1000000001</Passive>
 			<Passive Pid="@origin" Level="10">210003</Passive>
 		</EquipEffect>
 		<BookIcon>StreetlightOffice</BookIcon>
 		<Chapter>2</Chapter>
 		<Episode>10002</Episode>
-		<Rarity>Rare</Rarity>
+		<Rarity>Unique</Rarity>
 		<CharacterSkin>Mars</CharacterSkin>
 	</Book>
 	<Book ID="210006">

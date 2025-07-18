@@ -582,10 +582,10 @@
     <Rarity>Rare</Rarity>
     <Category>Smoke2</Category>
     <Spec Range="Near" Cost="3" />
-    <Script>smokeSelf4draw</Script>
+    <Script>RMR_Vapour</Script>
     <ScriptDesc>[사용시] 연기 4를 얻음. 카드 뽑음</ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="9" Dice="19" Type="Atk" Detail="Slash" Motion="S2" MotionDefault="H" EffectRes="" Script="smoke3atk" ActionScript="" Desc="" />
+      <Behaviour Min="9" Dice="19" Type="Atk" Detail="Slash" Motion="S2" MotionDefault="H" EffectRes="" Script="RMR_Smoke3Atk" ActionScript="" Desc="" />
     </BehaviourList>
     <Chapter>6</Chapter>
     <Priority>0</Priority>
@@ -595,7 +595,7 @@
     <Artwork>Gear2</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>smokeSelf4</Script>
+    <Script>RMR_Gain4Smoke</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="7" Dice="10" Type="Def" Detail="Guard" Motion="G" EffectRes="Gears_G" Script="" ActionScript="" Desc="" />
@@ -610,10 +610,10 @@
     <Rarity>Uncommon</Rarity>
     <Category>Smoke2</Category>
     <Spec Range="Near" Cost="2" />
-    <Script>smokeSelf2</Script>
+    <Script>RMR_Gain2Smoke</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Slash" Motion="S2" MotionDefault="H" EffectRes="Gears_H" Script="smoke2atk" ActionScript="" Desc="" />
+      <Behaviour Min="5" Dice="9" Type="Atk" Detail="Slash" Motion="S2" MotionDefault="H" EffectRes="Gears_H" Script="RMR_Smoke2Atk" ActionScript="" Desc="" />
       <Behaviour Min="3" Dice="7" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Gears_Z" Script="" ActionScript="" Desc="" />
     </BehaviourList>
     <Chapter>6</Chapter>
@@ -624,7 +624,7 @@
     <Artwork>Gear4</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>smokePowerUp</Script>
+    <Script>RMR_AssaultOrder</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="6" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" ActionScript="" Desc="" />
@@ -639,7 +639,7 @@
     <Artwork>Gear5</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>energySmoke2</Script>
+    <Script>RMR_GuidanceGears</Script>
     <ScriptDesc>[사용시] 빛 2 회복</ScriptDesc>
     <BehaviourList>
       <Behaviour Min="3" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Gears_G" Script="" ActionScript="" Desc="" />

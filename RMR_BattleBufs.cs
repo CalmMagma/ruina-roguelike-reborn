@@ -6,9 +6,30 @@ using System.Threading.Tasks;
 using abcdcode_LOGLIKE_MOD;
 using Sound;
 using UnityEngine;
+using LOR_DiceSystem;
 
 namespace RogueLike_Mod_Reborn
 {
+    public class RMRBufBase : BattleUnitBuf
+    {
+        public virtual void OnSpendSmoke(int amount)
+        {
+        }
+
+        public virtual bool SmokeBoostsOutgoingDamage()
+        {
+            return true;
+        }
+
+        public virtual bool SmokeBoostsIncomingDamage()
+        {
+            return true;
+        }
+
+        public virtual void OnSpendSmokeByCombatPage(int amount)
+        {
+        }
+    }
     public static class RoguelikeBufs
     {
         public static KeywordBuf CritChance;
@@ -17,8 +38,482 @@ namespace RogueLike_Mod_Reborn
         public static KeywordBuf BurnProtection;
         public static KeywordBuf BleedProtection;
         public static KeywordBuf ClashPower;
+        public static KeywordBuf SlashClashPower;
+        public static KeywordBuf PierceClashPower;
+        public static KeywordBuf BluntClashPower;
+        public static KeywordBuf RMRSmoke;
+        public static KeywordBuf RMRPersistence;
+        public static KeywordBuf RMRLuck;
     }
 
+    public class SweeperBuf : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.RMRPersistence;
+            }
+        }
+
+        public override string keywordId => "RMR_Persistence";
+        public override string keywordIconId => "SweepersSkill"; // unsure if the persistence icon name is this or not
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+
+        public override void OnHpZero()
+        {
+            if (base.IsDestroyed())
+            {
+                return;
+            }
+            this._owner.SetHp(30);
+            this._owner.UnitData.historyInStage.sweeperSkill++;
+            this.Destroy();
+        }
+        public override void OnRoundEnd()
+        {
+            this.stack--;
+            if (this.stack <= 0)
+            {
+             //   _owner.allyCardDetail.AddNewCardToDeck(new LorId(LogLikeMod.ModId, 504001));    this can be uncommented if we want to make the page reappear in deck if the buf does not revive you, probably unnecessary but an optional buff to persistence
+                this.Destroy();
+            }
+        }
+    }
+
+    public class BattleUnitBuf_RMR_Luck : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.RMRLuck;
+            }
+        }
+
+        public override string keywordId => "RMR_Luck";
+        public override string keywordIconId => "RMRBuf_Luck";
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+    //    public override string keywordId => "LogueLikeMod_LuckyBuf";
+
+        public static void ChangeDiceResult(BattleDiceBehavior behavior, int level, ref int diceResult)
+        {
+            int diceMin = behavior.GetDiceMin();
+            int diceMax = behavior.GetDiceMax();
+            int num1 = diceResult;
+            for (int index = 0; index < level; ++index)
+            {
+                int num2 = DiceStatCalculator.MakeDiceResult(diceMin, diceMax, 0);
+                if (num2 > num1)
+                    num1 = num2;
+            }
+            diceResult = num1;
+        }
+
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.Destroy();
+        }
+
+        public override void ChangeDiceResult(BattleDiceBehavior behavior, ref int diceResult)
+        {
+            BattleUnitBuf_RMR_Luck.ChangeDiceResult(behavior, this.stack, ref diceResult);
+            this.stack--;
+            if (this.stack < 0)
+            {
+                this.Destroy();
+            }
+        }
+    }
+
+    public class BattleUnitBuf_RMR_Smoke : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.RMRSmoke;
+            }
+        }
+        public override string keywordId => "RMR_Smoke";
+        public override string keywordIconId => "Smoke"; // not sure if just "Smoke" is the bufname
+
+        public override void OnAddBuf(int addedStack)
+        {
+            if (stack > 10)
+            {
+                stack = 10;
+            }
+            if (_owner.IsImmune(bufType))
+            {
+                stack = 0;
+                Destroy();
+            }
+        }
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            if (!_owner.IsImmune(bufType) && stack >= 9)
+            {
+                behavior.ApplyDiceStatBonus(new DiceStatBonus
+                {
+                    power = 1
+                });
+            }
+        }
+
+        public override void BeforeGiveDamage(BattleDiceBehavior behavior)
+        {
+            if (_owner.IsImmune(bufType))
+            {
+                return;
+            }
+            bool boostdamage = true;
+            foreach (PassiveAbilityBase passiveAbilityBase in _owner.passiveDetail.PassiveList)
+            {
+                if (passiveAbilityBase != null && passiveAbilityBase is RMRPassiveBase && passiveAbilityBase.isActiavted)
+                {
+                    try
+                    {
+                        RMRPassiveBase basepassive = passiveAbilityBase as RMRPassiveBase;
+                        if (!basepassive.SmokeBoostsOutgoingDamage())
+                        {
+                            boostdamage = false;
+                        }
+                    }
+                    catch (Exception message)
+                    {
+                        Debug.Log(message);
+                    }
+                }
+            }
+            foreach (BattleUnitBuf battleUnitBuf in _owner.bufListDetail.GetActivatedBufList().ToArray())
+            {
+                if (battleUnitBuf != null && battleUnitBuf is RMRBufBase && !battleUnitBuf.IsDestroyed())
+                {
+                    try
+                    {
+                        RMRBufBase rmrbuffbase = battleUnitBuf as RMRBufBase;
+                        if (!rmrbuffbase.SmokeBoostsOutgoingDamage())
+                        {
+                            boostdamage = false;
+                        }
+                    }
+                    catch (Exception message2)
+                    {
+                        Debug.Log(message2);
+                    }
+                }
+            }
+            if (stack > 0 && boostdamage)
+            {
+                behavior.ApplyDiceStatBonus(new DiceStatBonus
+                {
+                    dmgRate = stack * 3
+                });
+            }
+        }
+
+        public override int GetDamageIncreaseRate()
+        {
+            if (_owner.IsImmune(bufType))
+            {
+                return base.GetDamageIncreaseRate();
+            }
+            bool boostdamage = true;
+            foreach (PassiveAbilityBase passiveAbilityBase in _owner.passiveDetail.PassiveList)
+            {
+                if (passiveAbilityBase != null && passiveAbilityBase is RMRPassiveBase && passiveAbilityBase.isActiavted)
+                {
+                    try
+                    {
+                        RMRPassiveBase basepassive = passiveAbilityBase as RMRPassiveBase;
+                        if (!basepassive.SmokeBoostsIncomingDamage())
+                        {
+                            boostdamage = false;
+                        }
+                    }
+                    catch (Exception message)
+                    {
+                        Debug.Log(message);
+                    }
+                }
+            }
+            foreach (BattleUnitBuf battleUnitBuf in _owner.bufListDetail.GetActivatedBufList().ToArray())
+            {
+                if (battleUnitBuf != null && battleUnitBuf is RMRBufBase && !battleUnitBuf.IsDestroyed())
+                {
+                    try
+                    {
+                        RMRBufBase rmrbuffbase = battleUnitBuf as RMRBufBase;
+                        if (!rmrbuffbase.SmokeBoostsIncomingDamage())
+                        {
+                            boostdamage = false;
+                        }
+                    }
+                    catch (Exception message2)
+                    {
+                        Debug.Log(message2);
+                    }
+                }
+            }
+            if (stack > 0 && boostdamage)
+            {
+                return stack * 3;
+            }
+            return base.GetDamageIncreaseRate();
+        }
+
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.stack -= this.stack / 2;
+            if (this.stack <= 0)
+            {
+                this.Destroy();
+            }
+        }
+
+        public bool Spend(int amount, bool isCard = false)
+        {
+            if (amount <= this.stack)
+            {
+                this.stack -= amount;
+                if (this.stack <= 0)
+                {
+                    this.Destroy();
+                }
+                if (isCard)
+                {
+                    foreach (PassiveAbilityBase passiveAbilityBase in _owner.passiveDetail.PassiveList)
+                    {
+                        if (passiveAbilityBase != null && passiveAbilityBase is RMRPassiveBase && passiveAbilityBase.isActiavted)
+                        {
+                            try
+                            {
+                                RMRPassiveBase basepassive = passiveAbilityBase as RMRPassiveBase;
+                                basepassive.OnSpendSmokeByCombatPage(amount);
+                            }
+                            catch (Exception message)
+                            {
+                                Debug.Log(message);
+                            }
+                        }
+                    }
+                    foreach (BattleUnitBuf battleUnitBuf in _owner.bufListDetail.GetActivatedBufList().ToArray())
+                    {
+                        if (battleUnitBuf != null && battleUnitBuf is RMRBufBase && !battleUnitBuf.IsDestroyed())
+                        {
+                            try
+                            {
+                                RMRBufBase rmrbuffbase = battleUnitBuf as RMRBufBase;
+                                rmrbuffbase.OnSpendSmokeByCombatPage(amount);
+                            }
+                            catch (Exception message2)
+                            {
+                                Debug.Log(message2);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (PassiveAbilityBase passiveAbilityBase in _owner.passiveDetail.PassiveList)
+                    {
+                        if (passiveAbilityBase != null && passiveAbilityBase is RMRPassiveBase && passiveAbilityBase.isActiavted)
+                        {
+                            try
+                            {
+                                RMRPassiveBase basepassive = passiveAbilityBase as RMRPassiveBase;
+                                basepassive.OnSpendSmoke(amount);
+                            }
+                            catch (Exception message)
+                            {
+                                Debug.Log(message);
+                            }
+                        }
+                    }
+                    foreach (BattleUnitBuf battleUnitBuf in _owner.bufListDetail.GetActivatedBufList().ToArray())
+                    {
+                        if (battleUnitBuf != null && battleUnitBuf is RMRBufBase && !battleUnitBuf.IsDestroyed())
+                        {
+                            try
+                            {
+                                RMRBufBase rmrbuffbase = battleUnitBuf as RMRBufBase;
+                                rmrbuffbase.OnSpendSmoke(amount);
+                            }
+                            catch (Exception message2)
+                            {
+                                Debug.Log(message2);
+                            }
+                        }
+                    }
+                }
+               
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public class BattleUnitBuf_RMR_BluntClashPower : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.BluntClashPower;
+            }
+        }
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+        public override string keywordId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "RMRBuf_BluntClashPower";
+                }
+                else if (this.stack < 0)
+                {
+                    return "RMRBuf_BluntClashPowerDown";
+                }
+                return "RMRBuf_BluntClashPower";
+            }
+        }
+
+        public override string keywordIconId => "RMRBuf_BluntClashPower";
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            if (behavior.Detail == BehaviourDetail.Hit)
+            {
+                if (behavior.IsParrying() && !this._owner.IsImmune(this.bufType) && !this._owner.IsNullifyPower() && !behavior.card.ignorePower)
+                {
+                    behavior.ApplyDiceStatBonus(new DiceStatBonus
+                    {
+                        power = stack,
+                        dmg = -stack,
+                        breakDmg = -stack,
+                        guardBreakAdder = -stack
+                    });
+                }
+            }
+        }
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.Destroy();
+        }
+
+    }
+
+    public class BattleUnitBuf_RMR_PierceClashPower : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.PierceClashPower;
+            }
+        }
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+        public override string keywordId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "RMRBuf_PierceClashPower";
+                }
+                else if (this.stack < 0)
+                {
+                    return "RMRBuf_PierceClashPowerDown";
+                }
+                return "RMRBuf_PierceClashPower";
+            }
+        }
+
+        public override string keywordIconId => "RMRBuf_PierceClashPower";
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            if (behavior.Detail == BehaviourDetail.Penetrate)
+            {
+                if (behavior.IsParrying() && !this._owner.IsImmune(this.bufType) && !this._owner.IsNullifyPower() && !behavior.card.ignorePower)
+                {
+                    behavior.ApplyDiceStatBonus(new DiceStatBonus
+                    {
+                        power = stack,
+                        dmg = -stack,
+                        breakDmg = -stack,
+                        guardBreakAdder = -stack
+                    });
+                }
+            }
+        }
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.Destroy();
+        }
+
+    }
+    public class BattleUnitBuf_RMR_SlashClashPower : BattleUnitBuf
+    {
+        public override KeywordBuf bufType
+        {
+            get
+            {
+                return RoguelikeBufs.SlashClashPower;
+            }
+        }
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
+        public override string keywordId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "RMRBuf_SlashClashPower";
+                }
+                else if (this.stack < 0)
+                {
+                    return "RMRBuf_SlashClashPowerDown";
+                }
+                return "RMRBuf_SlashClashPower";
+            }
+        }
+
+        public override string keywordIconId => "RMRBuf_SlashClashPower";
+
+        public override void BeforeRollDice(BattleDiceBehavior behavior)
+        {
+            base.BeforeRollDice(behavior);
+            if (behavior.Detail == BehaviourDetail.Slash)
+            {
+                if (behavior.IsParrying() && !this._owner.IsImmune(this.bufType) && !this._owner.IsNullifyPower() && !behavior.card.ignorePower)
+                {
+                    behavior.ApplyDiceStatBonus(new DiceStatBonus
+                    {
+                        power = stack,
+                        dmg = -stack,
+                        breakDmg = -stack,
+                        guardBreakAdder = -stack
+                    });
+                }
+            }
+        }
+        public override void OnRoundEnd()
+        {
+            base.OnRoundEnd();
+            this.Destroy();
+        }
+
+    }
     public class BattleUnitBuf_RMR_ClashPower : BattleUnitBuf
     {
         public override KeywordBuf bufType
@@ -28,6 +523,7 @@ namespace RogueLike_Mod_Reborn
                 return RoguelikeBufs.ClashPower;
             }
         }
+        public override BufPositiveType positiveType => BufPositiveType.Positive;
         public override string keywordId
         {
             get
@@ -44,23 +540,28 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
+        public override string keywordIconId => "RMRBuf_ClashPower";
+
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
             base.BeforeRollDice(behavior);
-            behavior.ApplyDiceStatBonus(new DiceStatBonus
+            if (behavior.IsParrying() && !this._owner.IsImmune(this.bufType) && !this._owner.IsNullifyPower() && !behavior.card.ignorePower)
             {
-                power = stack,
-                dmg = -stack,
-                breakDmg = -stack,
-                guardBreakAdder = -stack
-            });
+                behavior.ApplyDiceStatBonus(new DiceStatBonus
+                {
+                    power = stack,
+                    dmg = -stack,
+                    breakDmg = -stack,
+                    guardBreakAdder = -stack
+                });
+            }
         }
         public override void OnRoundEnd()
         {
             base.OnRoundEnd();
             this.Destroy();
         }
-        public override string keywordIconId => "RMRBuf_ClashPower";
+        
     }
     public class BattleUnitBuf_RMR_BurnProtection : BattleUnitBuf
     {

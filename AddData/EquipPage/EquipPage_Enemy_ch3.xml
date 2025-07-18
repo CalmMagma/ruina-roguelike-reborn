@@ -80,7 +80,7 @@
 			<PBResist>Normal</PBResist>
 			<HBResist>Vulnerable</HBResist>
                         <Passive>30001</Passive>
-			<Passive Pid="@origin" Level="1">10001</Passive>
+			<Passive>1000000000</Passive>
 			<Passive Pid="@origin" Level="1">220004</Passive>
 		</EquipEffect>
 		<BookIcon>ZweiAssociation</BookIcon>
@@ -126,7 +126,7 @@
 			<PBResist>Endure</PBResist>
 			<HBResist>Normal</HBResist>
 			<Passive>30001</Passive>
-			<Passive Pid="@origin" Level="1">10001</Passive>
+			<Passive>1000000000</Passive>
 			<Passive Pid="@origin" Level="1">220006</Passive>
 
 		</EquipEffect>

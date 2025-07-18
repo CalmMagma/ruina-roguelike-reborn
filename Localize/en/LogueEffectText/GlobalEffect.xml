@@ -102,7 +102,7 @@ Copy. Erasing that direction.”&lt;/color&gt;</FlavorText>
   
     <LogueEffectInfo Id="GlobalEffect_BloodShed">
     <Name>Bloodshed</Name> 
-    <Desc>All characters deal double damage and stagger damage this Scene.
+    <Desc>All characters deal +50% more damage and Stagger damage this Scene.
 Can be used once per battle.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“The man in the mirror nods his head...”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
@@ -166,7 +166,7 @@ Can be used once per battle.</Desc>
   
     <LogueEffectInfo Id="RMR_Remote">
     <Name>The Remote</Name> 
-    <Desc>Adds a Single-Use, [On Play] page at the start of the Act to the Patron Librarian's hand that removes all of the target's Light and unslots any non-0 Cost pages. 
+    <Desc>Adds a Single-Use, [On Play] page at the start of Normal and Elite encounter Acts to the Patron Librarian's hand that removes all of the target's Light and unslots any non-0 Cost pages. 
 This item is removed upon using the page.</Desc>
     <FlavorText>&lt;color=#CACACA&gt;“You have a feeling someone messed up their wiring somewhere...”&lt;/color&gt;</FlavorText>
     <CatalogDesc>[No entry for now.]</CatalogDesc>
@@ -202,6 +202,38 @@ Immobilization</Desc>
     <Name>Dragon Fist Manual</Name> 
     <Desc>All librarians inflict 1 Burn on a sucessful attack.</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“An ancient technique from the now defunct Xuanhuo Association.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_WelltunedWeapons">
+    <Name>Well-tuned Weapons</Name> 
+    <Desc>[Global]
+All current non-upgraded Hardcover pages become upgraded.
+Every 9th Hardcover page a librarian uses, they restore 2 Light and gain 1 Max Light Capacity till end of the Act.</Desc> 
+    <FlavorText>&lt;color=#4091CF&gt;"Perfection in simplicity."&lt;/color&gt; - Laku</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_GamblerEye">
+    <Name>Gambler's Eye Augment</Name> 
+    <Desc>[Global]
+Every 7th Objet d'art page a librarian uses, they activate all effects of this item at once.
+When a librarian uses an Objet d'art page, they have a 7% chance to activate any number of the following effects:
+-Gain 2 Luck this Scene
+-Gain 5 Critical Strike this Scene
+-Gain 2 Haste next Scene
+-Gain 10 Stagger Shield this Scene
+-Restore 1 Light
+-Draw 1 page</Desc> 
+    <FlavorText>&lt;color=#F7DA5D&gt;"Money brings in tools, and tools bring superiority."&lt;/color&gt; - Viiru</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_OrdinaryClothes">
+    <Name>Not-So Ordinary Clothes</Name> 
+    <Desc>[Global]
+All librarians while Staggered have their resistances set to 'Weak' instead of 'Fatal'.</Desc> 
+    <FlavorText>&lt;color=#44269C&gt;"Produced by a peculiar tailor whose name has been forgotten in the many trades of such wares."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   

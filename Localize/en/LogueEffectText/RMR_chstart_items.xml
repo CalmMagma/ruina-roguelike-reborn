@@ -3,7 +3,7 @@
 
   <LogueEffectInfo Id="RMR_IronHeart">
     <Name>Heart of Iron</Name> 
-    <Desc>The Patron Librarian restores 6 HP at the start of each Act.</Desc> 
+    <Desc>The Patron Librarian recovers 6 HP and gains 1 Max HP at the start of each Combat Encounter. (Normal, Elite, Boss)</Desc> 
     <FlavorText>&lt;color=#CA0812&gt;"Tough, but still caring. One of the last of its kind."&lt;/color&gt;</FlavorText> 
     <CatalogDesc>    Organs are always wanting: absorbing new ideas, nutrients or desires onto themselves, then discarding when the necessity has ceased. There is a constant loop to such actions, and although most do out of necessity, one doesn't - rather, it remembers everything. No matter how small.
 
@@ -51,6 +51,18 @@
     <Desc>Each Scene, all librarians boost the Power of a random type of die by +1. (Slash, Pierce, Blunt, Defense)</Desc> 
     <FlavorText>&lt;color=#FEFCDD&gt;"Occasionally it beckons you to 'play better', whatever that means…"&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_RoadlessCamelot">
+    <Name>Roadless Camelot</Name>
+    <Desc>At the start of each Scene, a random librarian gains 'Roadless Camelot' for the Scene.
+(Roadless Camelot - Each time this character uses a Combat Page, all other allies temporarily upgrade a random Combat Page in their hand for the rest of the Act.)</Desc> 
+    <FlavorText>&lt;color=#03EAF2&gt;"The crystallization of an utopia without any entrance. Like the reflection of a moon on water, its beauty is matched only by its fragility."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Almost everyone has an ideal they chase after. An utopia, where their dreams are realized and their wishes are fulfilled. From simple wants such as warm food and shelter, to grand ambitions looking up at the top of the chain. It is simply a constant value of hope against the ruthless cycle of gears that make up the machine called the City.
+
+Yet, sometimes that side may truly be unreachable. Without any clear roads that lead towards that dream, all that is left... is nothing more than a mirage of what could have been, and what could never be.
+
+After all, that is what a dream is.</CatalogDesc>
   </LogueEffectInfo> 
 	
 	

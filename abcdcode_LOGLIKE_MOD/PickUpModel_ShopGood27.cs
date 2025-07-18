@@ -57,8 +57,8 @@ namespace abcdcode_LOGLIKE_MOD
                     return;
                 behavior.ApplyDiceStatBonus(new DiceStatBonus()
                 {
-                    dmgRate = 100,
-                    breakRate = 100
+                    dmgRate = 50,
+                    breakRate = 50
                 });
             }
 
