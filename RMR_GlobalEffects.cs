@@ -17,10 +17,17 @@ namespace RogueLike_Mod_Reborn
     {
         public override void OnStartBattleAfter()
         {
-            BattleUnitModel model = BattleObjectManager.instance.GetPatron();
-            if (model == null)
-                return;
-            model.RecoverHP(6);
+            if (LogLikeMod.curstagetype == abcdcode_LOGLIKE_MOD.StageType.Normal || LogLikeMod.curstagetype == abcdcode_LOGLIKE_MOD.StageType.Elite || LogLikeMod.curstagetype == abcdcode_LOGLIKE_MOD.StageType.Boss)
+            {
+                BattleUnitModel model = BattleObjectManager.instance.GetPatron();
+                if (model == null)
+                    return;
+                if (LogueBookModels.playerBattleModel.Contains<UnitBattleDataModel>(model.UnitData))
+                {
+                    LogueBookModels.AddPlayerStat(LogueBookModels.playerBattleModel.Find((UnitBattleDataModel x) => x == model.UnitData), new LogStatAdder { maxhp = 1 });
+                }
+                model.RecoverHP(6);
+            }
         }
 
         public static Rarity ItemRarity = Rarity.Common;
@@ -92,6 +99,49 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordId => "RMR_LightGuidance";
 
         public override string KeywordIconId => "RMR_LightGuidance";
+    }
+
+    public class RMREffect_RoadlessCamelot : GlobalLogueEffectBase
+    {
+        public override void OnRoundStart(StageController stage)
+        {
+            base.OnRoundStart(stage);
+            var list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+            RandomUtil.SelectOne<BattleUnitModel>(list).bufListDetail.AddBuf(new CamelotBuf());
+        }
+
+        public class CamelotBuf : BattleUnitBuf
+        {
+            public override string keywordId => "RMR_RoadlessCamelotBuf";
+            public override string keywordIconId => "RMR_RoadlessCamelot";
+            public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
+            {
+                base.OnUseCard(card);
+                foreach (BattleUnitModel guy in BattleObjectManager.instance.GetAliveList(_owner.faction).FindAll((BattleUnitModel x) => x != _owner))
+                {
+                    List<BattleDiceCardModel> list = guy.allyCardDetail.GetHand().FindAll((BattleDiceCardModel x) => x._xmlData.CheckCanUpgrade());
+                    if (list.Count > 0)
+                    {
+                        BattleDiceCardModel cardy = RandomUtil.SelectOne<BattleDiceCardModel>(list);
+                        cardy.exhaust = true;
+                        guy.allyCardDetail.AddNewCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardy.GetID()).id);
+                 //       Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard()
+                    }
+                }
+            }
+
+            public override void OnRoundEnd()
+            {
+                base.OnRoundEnd();
+                this.Destroy();
+            }
+        }
+
+        public static Rarity ItemRarity = Rarity.Common;
+
+        public override string KeywordId => "RMR_RoadlessCamelot";
+
+        public override string KeywordIconId => "RMR_RoadlessCamelot";
     }
 
     public class RMREffect_StrangeOrb : GlobalLogueEffectBase
@@ -417,10 +467,13 @@ namespace RogueLike_Mod_Reborn
         public override void OnStartBattleAfter()
         {
             base.OnStartBattleAfter();
-            BattleUnitModel model = BattleObjectManager.instance.GetPatron();
-            if (model != null)
+            if (LogLikeMod.curstagetype == abcdcode_LOGLIKE_MOD.StageType.Normal || LogLikeMod.curstagetype == abcdcode_LOGLIKE_MOD.StageType.Elite)
             {
-                model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -103));
+                BattleUnitModel model = BattleObjectManager.instance.GetPatron();
+                if (model != null)
+                {
+                    model.allyCardDetail.AddNewCard(new LorId(RMRCore.packageId, -103));
+                }
             }
         }
     }
@@ -534,6 +587,234 @@ namespace RogueLike_Mod_Reborn
         public override string KeywordId => "RMR_Crowbar";
 
         public override string KeywordIconId => "RMR_Crowbar";
+    }
+
+
+    /*
+    public class RMREffect_ScrapScavenge : GlobalLogueEffectBase
+    {
+        public static Rarity ItemRarity = Rarity.Rare;
+        public override string KeywordId => "RMR_ScrapScavenge";
+
+        public override string KeywordIconId => "RMR_ScrapScavenge";
+
+
+       
+        // not sure if there is a method for this as of the moment
+
+    } */
+
+    public class RMREffect_WelltunedWeapons : GlobalLogueEffectBase
+    {
+        public static Rarity ItemRarity = Rarity.Uncommon;
+        public override string KeywordId => "RMR_WelltunedWeapons";
+
+        public override string KeywordIconId => "RMR_WelltunedWeapons";
+
+        public override void AddedNew()
+        {
+            base.AddedNew();
+            stack = 0;
+            foreach (DiceCardItemModel card in LogueBookModels.cardlist)
+            {
+                if (card.GetRarity() == Rarity.Uncommon)
+                {
+                    if (card._xmlData.CheckCanUpgrade())
+                    {
+                        Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(card.GetID());
+                    }
+                }
+            }
+        }
+
+        int stack;
+
+        public override int GetStack()
+        {
+            return stack;
+        }
+
+        public class imtuningmyweaponslikeatuner : BattleUnitBuf
+        {
+            public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
+            {
+                base.OnUseCard(card);
+                if (card.card.GetRarity() == Rarity.Uncommon)
+                {
+                    stack++;
+                    RMREffect_WelltunedWeapons weapons = Singleton<GlobalLogueEffectManager>.Instance.GetEffect<RMREffect_WelltunedWeapons>();
+                    if (weapons != null)
+                    {
+                        weapons.stack++;
+                    }
+                    if (weapons.stack >= 9)
+                    {
+                        weapons.stack = 0;
+                        _owner.cardSlotDetail.RecoverPlayPoint(2);
+                    }
+                }
+            }
+
+            public class infinitelightyessirsirsir : BattleUnitBuf
+            {
+                public override void Init(BattleUnitModel owner)
+                {
+                    base.Init(owner);
+                    owner.view.costUI.AddMaxLight(1);
+                }
+                public override int MaxPlayPointAdder()
+                {
+                    return 1;
+                }
+            }
+        }
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.bufListDetail.AddBuf(new imtuningmyweaponslikeatuner());
+
+        }
+    }
+
+    public class RMREffect_GamblerEye : GlobalLogueEffectBase
+    {
+        public static Rarity ItemRarity = Rarity.Unique;
+        public override string KeywordId => "RMR_GamblerEye";
+
+        public override string KeywordIconId => "RMR_GamblerEye";
+
+        public override void AddedNew()
+        {
+            base.AddedNew();
+            stack = 0;
+        }
+
+        int stack;
+
+        public override int GetStack()
+        {
+            return stack;
+        }
+
+        public class letsgogambling : BattleUnitBuf
+        {
+            public override void OnUseCard(BattlePlayingCardDataInUnitModel card)
+            {
+                base.OnUseCard(card);
+                if (card.card.GetRarity() == Rarity.Unique)
+                {
+                    stack++;
+                    RMREffect_GamblerEye gambler = Singleton<GlobalLogueEffectManager>.Instance.GetEffect<RMREffect_GamblerEye>();
+                    if (gambler != null)
+                    {
+                        gambler.stack++;
+                    }
+                    if (gambler.stack >= 7)
+                    {
+                        for (int i = 1; i < 7; i++)
+                        {
+                            Effect(i);
+                        }
+                        // maybe play a sound here if you feel like it
+                        gambler.stack = 0;
+                    }
+                    else
+                    {
+                        for (int i = 1; i < 7; i++)
+                        {
+                            if (RandomUtil.valueForProb <= 0.07f)
+                            {
+                               Effect(i);
+                            }
+   
+                        }
+                    }
+                }
+            }
+
+            private void Effect(int effect)
+            {
+                switch (effect)
+                {
+                    case 1:
+                        _owner.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.RMRLuck, 2, _owner);
+                        break;
+                    case 2:
+                        _owner.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.CritChance, 5, _owner);
+                        break;
+                    case 3:
+                        _owner.bufListDetail.AddKeywordBufByEtc(KeywordBuf.Quickness, 2, _owner);
+                        break;
+                    case 4:
+                        _owner.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.RMRStaggerShield, 10, _owner);
+                        break;
+                    case 5:
+                        _owner.cardSlotDetail.RecoverPlayPoint(1);
+                        break;
+                    case 6:
+                        _owner.allyCardDetail.DrawCards(1);
+                        break;
+                    default:
+
+                        break;
+                }
+            }
+        }
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.bufListDetail.AddBuf(new letsgogambling());
+
+        }
+    }
+
+    public class RMREffect_OrdinaryClothes : GlobalLogueEffectBase
+    {
+
+
+        //hidden passive because pm are terrible people
+        public override void OnStartBattleAfter()
+        {
+            base.OnStartBattleAfter();
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player))
+            {
+                unit.passiveDetail.AddPassive(new PassiveAbility_RMR_clotheshiddenpassive());
+            }
+        }
+
+        public class PassiveAbility_RMR_clotheshiddenpassive : PassiveAbilityBase
+        {
+            public override bool DontChangeResistByBreak()
+            {
+                return true;
+            }
+
+            public override void OnBreakState()
+            {
+                owner?.bufListDetail.AddBufWithoutDuplication(new BattleUnitBuf_luxCouragebuf());
+            }
+
+            public class BattleUnitBuf_luxCouragebuf : BattleUnitBuf
+            {
+                public override AtkResist GetResistHP(AtkResist origin, BehaviourDetail detail)
+                {
+                    return AtkResist.Weak;
+                }
+                public override void OnRoundStart()
+                {
+                    if (!_owner.IsBreakLifeZero())
+                    {
+                        this.Destroy();
+                    }
+                }
+            }
+        }
+
+        public static Rarity ItemRarity = Rarity.Uncommon;
+
+        public override string KeywordId => "RMR_OrdinaryClothes";
+
+        public override string KeywordIconId => "RMR_OrdinaryClothes";
     }
 
 

@@ -55,7 +55,7 @@ namespace abcdcode_LOGLIKE_MOD
                 var unit = BattleObjectManager.instance.GetAliveList(Faction.Player).SelectOneRandom();
                 if (unit != null)
                 {
-                    LuckyBuf.GiveLuckyThisRound(unit, 1);
+                    unit.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.RMRLuck, 1, unit);
                     SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfileAll();
                 }
             }

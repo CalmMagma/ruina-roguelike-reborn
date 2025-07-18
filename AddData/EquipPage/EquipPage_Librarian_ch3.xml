@@ -81,7 +81,7 @@
 			<SBResist>Endure</SBResist>
 			<PBResist>Normal</PBResist>
 			<HBResist>Vulnerable</HBResist>
-			<Passive Pid="@origin" Level="1">10001</Passive>
+			<Passive>1000000000</Passive>
 			<Passive Pid="@origin" Level="10">220004</Passive>
 		</EquipEffect>
 		<BookIcon>ZweiAssociation</BookIcon>
@@ -128,7 +128,7 @@
 			<SBResist>Normal</SBResist>
 			<PBResist>Endure</PBResist>
 			<HBResist>Normal</HBResist>
-			<Passive Pid="@origin" Level="1">10001</Passive>
+			<Passive>1000000000</Passive>
 			<Passive Pid="@origin" Level="10">220006</Passive>
 		</EquipEffect>
 		<BookIcon>MolarOffice</BookIcon>
@@ -179,7 +179,7 @@
 
       <PassiveCost>10</PassiveCost>
 
-			<Passive Pid="@origin" Level="1">10001</Passive>
+			<Passive>1000000000</Passive>
 			<Passive Pid="@origin" Level="10">220008</Passive>
 		</EquipEffect>
 		<BookIcon>TheStrayDogs</BookIcon>

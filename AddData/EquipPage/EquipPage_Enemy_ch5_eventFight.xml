@@ -49,6 +49,8 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Endure</HBResist>
+	  
+	  <Passive>1000000000</Passive>
 
       <Passive Pid="@origin" Level="1">240018</Passive>
       <Passive Pid="@origin" Level="1">240118</Passive>
@@ -70,12 +72,12 @@
     <TextId>-1</TextId>
     <Category>TheIndex</Category>
     <EquipEffect>
-      <HP>154</HP>
-      <Break>86</Break>
-      <SpeedMin>2</SpeedMin>
+      <HP>195</HP>
+      <Break>135</Break>
+      <SpeedMin>4</SpeedMin>
       <Speed>6</Speed>
       <SResist>Normal</SResist>
-      <PResist>Normal</PResist>
+      <PResist>Endure</PResist>
       <HResist>Normal</HResist>
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
@@ -92,7 +94,7 @@
     </EquipEffect>
     <BookIcon>TheIndex</BookIcon>
     <Chapter>6</Chapter>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Unique</Rarity>
     <CharacterSkin>Esther</CharacterSkin>
     <SpeedDiceNum>1</SpeedDiceNum>
 
@@ -116,6 +118,7 @@
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
       <HBResist>Endure</HBResist>
+	  
 
       <Passive Pid="@origin" Level="1">10001</Passive>
       <Passive Pid="@origin" Level="1">240018</Passive>
@@ -140,12 +143,12 @@
     <TextId>-1</TextId>
     <Category>TheIndex</Category>
     <EquipEffect>
-      <HP>154</HP>
-      <Break>86</Break>
-      <SpeedMin>2</SpeedMin>
+      <HP>195</HP>
+      <Break>135</Break>
+      <SpeedMin>4</SpeedMin>
       <Speed>6</Speed>
       <SResist>Normal</SResist>
-      <PResist>Normal</PResist>
+      <PResist>Endure</PResist>
       <HResist>Normal</HResist>
       <SBResist>Normal</SBResist>
       <PBResist>Normal</PBResist>
@@ -162,7 +165,7 @@
     </EquipEffect>
     <BookIcon>TheIndex</BookIcon>
     <Chapter>6</Chapter>
-    <Rarity>Uncommon</Rarity>
+    <Rarity>Unique</Rarity>
     <CharacterSkin>Esther</CharacterSkin>
     <SpeedDiceNum>1</SpeedDiceNum>
 

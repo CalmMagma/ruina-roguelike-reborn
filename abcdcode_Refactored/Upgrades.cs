@@ -368,67 +368,6 @@ namespace abcdcode_LOGLIKE_MOD
 
 
 
-    public class UpgradeModel_Circus1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetDice(2, 2, 0);
-            this.upgradeinfo.SetDice(2, 0, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 503001);
-        }
-    }
-
-
-    public class UpgradeModel_Circus2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 503002);
-        }
-    }
-
-
-    public class UpgradeModel_Circus3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 3);
-            this.baseid = new LorId(LogLikeMod.ModId, 503003);
-        }
-
-        public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
-        {
-            this.upxmlinfo = base.GetUpgradeInfo(index, count);
-            this.upxmlinfo.optionList.Remove(CardOption.ExhaustOnUse);
-            return this.upxmlinfo;
-        }
-    }
-
-
-    public class UpgradeModel_Circus4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 503004);
-        }
-
-        public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
-        {
-            this.upxmlinfo = base.GetUpgradeInfo(index, count);
-            this.upxmlinfo.optionList.Remove(CardOption.ExhaustOnUse);
-            return this.upxmlinfo;
-        }
-    }
 
     public class UpgradeModel_Gear1 : UpgradeBase
     {
@@ -436,7 +375,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 2, 2);
-            this.upgradeinfo.SetAbility(0, "smoke4atk");
+            this.upgradeinfo.SetAbility(0, "RMR_Smoke4Atk");
             this.baseid = new LorId(LogLikeMod.ModId, 604001);
         }
     }
@@ -449,7 +388,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 2, 0);
             this.upgradeinfo.SetDice(1, 0, 2);
-            this.upgradeinfo.SetSelfAbility("smokeSelf5Log");
+            this.upgradeinfo.SetSelfAbility("RMR_Gain5Smoke");
             this.baseid = new LorId(LogLikeMod.ModId, 604002);
         }
     }
@@ -462,8 +401,8 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 1, 1);
             this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetSelfAbility("smokeSelf3");
-            this.upgradeinfo.SetAbility(0, "smoke3atk");
+            this.upgradeinfo.SetSelfAbility("RMR_Gain3Smoke");
+            this.upgradeinfo.SetAbility(0, "RMR_Smoke3Atk");
             this.baseid = new LorId(LogLikeMod.ModId, 604003);
         }
     }
@@ -477,7 +416,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo.SetDice(0, 0, 2);
             this.upgradeinfo.SetDice(1, 1, 0);
             this.upgradeinfo.SetDice(2, 1, 0);
-            this.upgradeinfo.SetSelfAbility("smokePowerUpLog");
+            this.upgradeinfo.SetSelfAbility("RMR_AssaultOrderUpgrade");
             this.baseid = new LorId(LogLikeMod.ModId, 604004);
         }
     }
@@ -490,7 +429,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 1, 1);
             this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetSelfAbility("energy2Smoke3Log");
+            this.upgradeinfo.SetSelfAbility("RMR_GuidanceGearsUpgrade");
             this.baseid = new LorId(LogLikeMod.ModId, 604005);
         }
     }
@@ -1051,95 +990,7 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Puppet1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 0, 1);
-            this.upgradeinfo.SetDice(3, 0, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 502001);
-        }
-    }
-
-
-    public class UpgradeModel_Puppet2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 0, 1);
-            this.upgradeinfo.SetDice(2, 2, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 502002);
-        }
-    }
-
-
-    public class UpgradeModel_Puppet3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.upgradeinfo.SetDice(2, 1, 0);
-            this.upgradeinfo.SetDice(3, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 502003);
-        }
-    }
-
-
-    public class UpgradeModel_Puppet4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 0);
-            this.upgradeinfo.SetDice(1, 1, 3);
-            this.baseid = new LorId(LogLikeMod.ModId, 502004);
-        }
-    }
-
-
-    public class UpgradeModel_Puppet5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 502005);
-        }
-    }
-
-
-    public class UpgradeModel_Puppet6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 502006);
-        }
-    }
-
-
-    public class UpgradeModel_Puppet7 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 502007);
-        }
-    }
-
+    
 
     public class UpgradeModel_Purple1 : UpgradeBase
     {
@@ -1668,152 +1519,6 @@ namespace abcdcode_LOGLIKE_MOD
 
 
 
-    public class UpgradeModel_Seven_Engagement : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 2);
-            this.upgradeinfo.SetSelfAbility("Seven_EngagementLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 511001);
-        }
-    }
-
-
-    public class UpgradeModel_Seven_EnGarde : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetCost(1);
-            this.upgradeinfo.SetSelfAbility("Seven_EnGardeLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 511005);
-        }
-    }
-
-
-    public class UpgradeModel_Seven_Fleche : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 2);
-            this.upgradeinfo.SetAbility(0, "Seven_FlecheLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 511003);
-        }
-    }
-
-
-    public class UpgradeModel_Seven_Moulinet : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetDice(2, 2, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 511004);
-        }
-    }
-
-
-    public class UpgradeModel_Seven_Riposte : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetAbility(0, "powerUpNext2pw");
-            this.baseid = new LorId(LogLikeMod.ModId, 511002);
-        }
-    }
-
-
-    public class UpgradeModel_Shi1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.baseid = new LorId(LogLikeMod.ModId, 501001);
-        }
-    }
-
-
-    public class UpgradeModel_Shi2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 3);
-            this.upgradeinfo.SetAbility(0, "disarm2atk");
-            this.baseid = new LorId(LogLikeMod.ModId, 501002);
-        }
-    }
-
-
-    public class UpgradeModel_Shi3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.upgradeinfo.SetSelfAbility("powerUp2speed5Log");
-            this.baseid = new LorId(LogLikeMod.ModId, 501003);
-        }
-    }
-
-
-    public class UpgradeModel_Shi4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 501004);
-        }
-    }
-
-
-    public class UpgradeModel_Shi5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 501005);
-        }
-    }
-
-
-    public class UpgradeModel_Shi6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 501006);
-        }
-    }
-
-
-    public class UpgradeModel_Shi7 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetAbility(0, "energy2atkAndHpLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 501007);
-        }
-    }
 
 
     public class UpgradeModel_Shyao1 : UpgradeBase
@@ -1941,96 +1646,7 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Smile1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 3, 0);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.upgradeinfo.SetAbility(0, "smoke9atkLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 507001);
-        }
-    }
-
-
-    public class UpgradeModel_Smile2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetAbility(1, "bleedingXsmokeLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 507002);
-        }
-    }
-
-
-    public class UpgradeModel_Smile3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 2);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetSelfAbility("smokeSelf4");
-            this.baseid = new LorId(LogLikeMod.ModId, 507003);
-        }
-    }
-
-
-    public class UpgradeModel_Smile4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.upgradeinfo.SetAbility(0, "smoke2atk");
-            this.baseid = new LorId(LogLikeMod.ModId, 507004);
-        }
-    }
-
-
-    public class UpgradeModel_Smile5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 0, 2);
-            this.baseid = new LorId(LogLikeMod.ModId, 507005);
-        }
-    }
-
-
-    public class UpgradeModel_Smile6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 0, 2);
-            this.upgradeinfo.SetSelfAbility("energySmokeLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 507006);
-        }
-    }
-
-
-    public class UpgradeModel_Smile7 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetDice(2, 2, 0);
-            this.upgradeinfo.SetAbility(1, "debufsSmokeLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 507007);
-        }
-    }
+    
 
 
     public class UpgradeModel_StigmaBurn : UpgradeBase
@@ -2138,240 +1754,10 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Sweepers1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 504001);
-        }
-    }
+   
 
 
-    public class UpgradeModel_Sweepers2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetDice(2, 1, 0);
-            this.upgradeinfo.SetDice(3, 1, 1);
-            this.upgradeinfo.SetSelfAbility("sweeperOnlyLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 504002);
-        }
-    }
-
-
-    public class UpgradeModel_Sweepers3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 1);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 504003);
-        }
-    }
-
-
-    public class UpgradeModel_Sweepers4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 2, 0);
-            this.upgradeinfo.SetDice(2, 1, 1);
-            this.upgradeinfo.SetSelfAbility("ally3protection1thisRoundLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 504004);
-        }
-    }
-
-
-    public class UpgradeModel_Sweepers5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 504005);
-        }
-    }
-
-
-    public class UpgradeModel_Sweepers6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 504006);
-        }
-    }
-
-
-    public class UpgradeModel_sword1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 2);
-            this.baseid = new LorId(LogLikeMod.ModId, 512001);
-        }
-    }
-
-
-    public class UpgradeModel_sword2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.ChangeDiceType(0, BehaviourDetail.Slash);
-            this.baseid = new LorId(LogLikeMod.ModId, 512002);
-        }
-    }
-
-
-    public class UpgradeModel_sword3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetAbility(0, "Sword_getbonecuttingcardplLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 512003);
-        }
-    }
-
-
-    public class UpgradeModel_sword4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 512004);
-        }
-    }
-
-
-    public class UpgradeModel_sword5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 0, 2);
-            this.baseid = new LorId(LogLikeMod.ModId, 512005);
-        }
-    }
-
-
-    public class UpgradeModel_sword6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 7);
-            this.upgradeinfo.SetAbility(0, "paralysis10bleeding5atkLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 512006);
-        }
-    }
-
-
-    public class UpgradeModel_TheIndex1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetAbility(0, "destroyNextHighlander");
-            this.baseid = new LorId(LogLikeMod.ModId, 505001);
-        }
-    }
-
-
-    public class UpgradeModel_TheIndex2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 505002);
-        }
-    }
-
-
-    public class UpgradeModel_TheIndex3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetAbility(0, "powerUpDice6highlanderLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 505003);
-        }
-    }
-
-
-    public class UpgradeModel_TheIndex4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 2);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetDice(2, 0, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 505004);
-        }
-    }
-
-
-    public class UpgradeModel_TheIndex5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetCost(1);
-            this.baseid = new LorId(LogLikeMod.ModId, 505005);
-        }
-    }
-
-
-    public class UpgradeModel_TheIndex6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 1);
-            this.upgradeinfo.SetDice(1, 0, 1);
-            this.upgradeinfo.SetDice(2, 1, 0);
-            this.upgradeinfo.SetSelfAbility("powerUp2fullCardLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 505006);
-        }
-    }
-
-
-    public class UpgradeModel_TheIndex7 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 505007);
-        }
-    }
-
+    
 
     public class UpgradeModel_Thumb1 : UpgradeBase
     {
@@ -2627,94 +2013,7 @@ namespace abcdcode_LOGLIKE_MOD
     }
 
 
-    public class UpgradeModel_Warp1 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetSelfAbility("warpSkillLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 506001);
-        }
-    }
-
-
-    public class UpgradeModel_Warp2 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.AddDice(2, 7, BehaviourDetail.Hit, "", MotionDetail.H, BehaviourType.Atk, "WarpCrew_H", "");
-            this.baseid = new LorId(LogLikeMod.ModId, 506002);
-        }
-    }
-
-
-    public class UpgradeModel_Warp3 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(1, 2, 1);
-            this.upgradeinfo.SetAbility(0, "powerUpNext4plLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 506003);
-        }
-    }
-
-
-    public class UpgradeModel_Warp4 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 2, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 0, 1);
-            this.upgradeinfo.SetDice(3, 1, 1);
-            this.baseid = new LorId(LogLikeMod.ModId, 506004);
-        }
-    }
-
-
-    public class UpgradeModel_Warp5 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 0, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetDice(2, 2, 0);
-            this.upgradeinfo.SetSelfAbility("warpCharge5");
-            this.upgradeinfo.SetAbility(2, "recoverHp4atk");
-            this.baseid = new LorId(LogLikeMod.ModId, 506005);
-        }
-    }
-
-
-    public class UpgradeModel_Warp6 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetSelfAbility("drawCardWarpLog");
-            this.baseid = new LorId(LogLikeMod.ModId, 506006);
-        }
-    }
-
-
-    public class UpgradeModel_Warp7 : UpgradeBase
-    {
-        public override void Init()
-        {
-            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            this.upgradeinfo.SetDice(0, 1, 1);
-            this.upgradeinfo.SetDice(1, 1, 0);
-            this.upgradeinfo.SetSelfAbility("warpCharge4");
-            this.baseid = new LorId(LogLikeMod.ModId, 506007);
-        }
-    }
-
+   
 
 
     // Feather Shield
@@ -2756,8 +2055,8 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 1, 1);
             this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetSelfAbility("powerup2byselfsmoke8Log");
-            this.upgradeinfo.SetAbility(1, "smoke3atk");
+            this.upgradeinfo.SetSelfAbility("RMR_SmokeSmashUpgrade");
+            this.upgradeinfo.SetAbility(1, "RMR_Smoke3Atk");
             this.baseid = new LorId(LogLikeMod.ModId, 615003);
         }
     }
@@ -2769,7 +2068,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 1, 1);
             this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetSelfAbility("smokeSelf4");
+            this.upgradeinfo.SetSelfAbility("RMR_Gain4Smoke");
             this.baseid = new LorId(LogLikeMod.ModId, 615001);
         }
     }
@@ -2781,7 +2080,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetDice(0, 1, 1);
             this.upgradeinfo.SetDice(1, 1, 1);
-            this.upgradeinfo.SetSelfAbility("smokeSelf4");
+            this.upgradeinfo.SetSelfAbility("RMR_Gain4Smoke");
             this.baseid = new LorId(LogLikeMod.ModId, 615002);
         }
     }
@@ -2794,8 +2093,8 @@ namespace abcdcode_LOGLIKE_MOD
             this.upgradeinfo.SetDice(0, 1, 1);
             this.upgradeinfo.SetDice(1, 1, 1);
             this.upgradeinfo.SetDice(2, 1, 1);
-            this.upgradeinfo.SetSelfAbility("smokeSelf3");
-            this.upgradeinfo.SetAbility(1, "smoke4atk");
+            this.upgradeinfo.SetSelfAbility("RMR_Gain3Smoke");
+            this.upgradeinfo.SetAbility(1, "RMR_Smoke4Atk");
             this.baseid = new LorId(LogLikeMod.ModId, 615004);
         }
     }
