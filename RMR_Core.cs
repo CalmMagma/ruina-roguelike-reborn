@@ -28,7 +28,6 @@ using EnumExtenderV2;
 using KeywordUtil;
 using Unity.Mathematics;
 using BattleCardEnhancedView;
-using JetBrains.Annotations;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -2813,38 +2812,76 @@ namespace RogueLike_Mod_Reborn
     {
         public Transform target;
         public Vector3 
-            point1 = new Vector3(290f, 430f), 
-            point2 = new Vector3(820f, -40f), 
-            point3 = new Vector3(860f, -540f);
+            point1 = new Vector3(-40f, -1340f), 
+            point2 = new Vector3(-820f, -1590f), 
+            destination = new Vector3(915f, -720f);
         // SCREEN POINTS THAT MAKE A NICE CURVE TOWARDS TOP-RIGHT CORNER
-        // 1250, 970 -> 290, 430, 0
-        // 1780, 500 -> 820, -40, 0
-        // 1820, 0 -> 860, -540, 0
+        // 920, -800 -> -40 -1340
+        // 140, 2130 -> -820 1590
+        // 1875, -180 -> 915 -720
 
-        private void Start()
+        void Awake()
         {
             StartCoroutine(COR_BezierCurves());
         }
 
-        IEnumerator COR_BezierCurves(float duration = 1.0f)
+        IEnumerator COR_BezierCurves(float duration = 1.5f)
         {
             float time = 0f;
+            Vector3 pointStart = target.position;
 
             while (true)
             {
-                if (time > duration) // self destruct after duration
+                if (time >= 1f) // self destruct after duration
                 {
                     Destroy(this.gameObject);
+                    yield break;
                 }
                 float timeSquared = (float)((double)time * (double)time); // use doubles for extra accuracy
-                Vector3 p4 = Vector3.Lerp(point1, point2, timeSquared);
-                Vector3 p5 = Vector3.Lerp(point2, point3, timeSquared);
-                this.gameObject.transform.position = Vector3.Lerp(p4, p5, timeSquared);
-                
+
+                // four-point bezier interpolation
+                Vector3 comb1 = Vector3.Lerp(pointStart, point1, timeSquared);
+                Vector3 comb2 = Vector3.Lerp(point1, point2, timeSquared);
+                Vector3 comb3 = Vector3.Lerp(point2, destination, timeSquared);
+                Vector3 combLast1 = Vector3.Lerp(comb1, comb2, timeSquared);
+                Vector3 combLast2 = Vector3.Lerp(comb2, comb3, timeSquared);
+                target.position = Vector3.Lerp(combLast1, combLast2, timeSquared);
+                double rotationAngle = Math.Tan(target.position.x) / Math.Tan(target.position.y);
+                target.rotation.eulerAngles.Set(0f, (float)rotationAngle, 0f);
+
                 time += Time.deltaTime / duration;
 
                 yield return null;
             }
+        }
+    }
+
+    public static class CardAddVfx
+    {
+        public static SnapshotCamera Camera
+        {
+            get
+            {
+                if (_camera == null)
+                {
+                    _camera = SnapshotCamera.MakeSnapshotCamera(0);
+                }
+                return _camera;
+            }
+        }
+        private static SnapshotCamera _camera;
+        public static void RunCardVfx(LogLikeMod.UILogCardSlot card)
+        {
+            Camera.gameObject.SetActive(true);
+            var texture2D = Camera.TakeObjectSnapshot(card.gameObject, (int)card.Pivot.sizeDelta.x, (int)card.Pivot.sizeDelta.y);
+            Camera.gameObject.SetActive(false);
+            var vfx = LogAssetBundleManager.Instance.GetAsset("calmmagma_card", "calmmagma_card");
+            vfx.transform.parent = card.transform.parent;
+            vfx.transform.localPosition = card.transform.localPosition;
+            vfx.GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0.0f, 0.0f, (float)texture2D.width, (float)texture2D.height), new Vector2(0.0f, 0.0f), 100f, 0U, SpriteMeshType.FullRect);
+            // vfx.gameObject.layer = LayerMask.NameToLayer("UI");
+            vfx.AddComponent<SelfDestructBezierCurve>();
+            vfx.SetActive(true);
         }
     }
 

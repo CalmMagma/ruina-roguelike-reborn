@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -200,21 +200,24 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+
     public class MysteryModel_RMR_LiuTraining : MysteryBase
     {
         public override void SwapFrame(int id)
         {
             base.SwapFrame(id);
-            if (LogueBookModels.GetMoney() < 30)
-                this.DisableButton(1);
-            if (LogueBookModels.GetMoney() < 20)
-            this.DisableButton(0);
+            if (id == 0)
+            {
+                if (LogueBookModels.GetMoney() < 30)
+                    this.DisableButton(1);
+                if (LogueBookModels.GetMoney() < 20)
+                    this.DisableButton(0);
+            }
         }
         public override void OnClickChoice(int choiceid)
         {
             base.OnClickChoice(choiceid);
             if (this.curFrame.FrameID == 0)
-
             {
                 switch (choiceid)
                 {
@@ -227,13 +230,13 @@ namespace RogueLike_Mod_Reborn
                         GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_DragonFist());
                         break;
                 }
-            
+                this.CloseOverlayOverButton();
             }
-            else if (this.curFrame.FrameID == 3)
+            else if (this.curFrame.FrameID == 3 && choiceid == 0)
             {
                 GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_IronMountain());
                 GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_DragonFist());
-                MysteryBase.SetNextStageCustom(new LorId(RMRCore.packageId, 1400041));
+                MysteryBase.SetNextStageCustom(new LorId(RMRCore.packageId, 1400041), abcdcode_LOGLIKE_MOD.StageType.Normal);
             }
 
         }

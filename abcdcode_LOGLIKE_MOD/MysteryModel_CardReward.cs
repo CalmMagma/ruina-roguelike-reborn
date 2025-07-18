@@ -6,6 +6,7 @@
 
 using GameSave;
 using LOR_DiceSystem;
+using RogueLike_Mod_Reborn;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -214,7 +215,7 @@ namespace abcdcode_LOGLIKE_MOD
                         CardSlot.transform.localPosition = (Vector3)this.GetChoiceShape(count, index);
                         CardSlot.SetData(new DiceCardItemModel(info));
                         CardSlot.selectable.SubmitEvent.RemoveAllListeners();
-                        CardSlot.selectable.SubmitEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnClickCard(info)));
+                        CardSlot.selectable.SubmitEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnClickCard(CardSlot)));
                         CardSlot.selectable.SelectEvent.RemoveAllListeners();
                         CardSlot.selectable.SelectEvent.AddListener((UnityAction<BaseEventData>)(e => this.OnPointerEnter(CardSlot)));
                         CardSlot.selectable.DeselectEvent.RemoveAllListeners();
@@ -251,11 +252,13 @@ namespace abcdcode_LOGLIKE_MOD
             LogLikeMod.UILogBattleDiceCardUI.Instance.gameObject.SetActive(false);
         }
 
-        public void OnClickCard(DiceCardXmlInfo card)
+        public void OnClickCard(LogLikeMod.UILogCardSlot CardSlot)
         {
+            DiceCardXmlInfo card = CardSlot._cardModel.ClassInfo;
             Singleton<GlobalLogueEffectManager>.Instance.OnPickCardReward(this.choicelist, card);
             LogueBookModels.AddCard(card.id);
             this.curState = MysteryModel_CardReward.State.CardList;
+            CardAddVfx.RunCardVfx(CardSlot);
             this.SwapFrame(0);
             if (this.result == null)
                 return;

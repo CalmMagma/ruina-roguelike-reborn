@@ -12,6 +12,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
 using UI;
+using RogueLike_Mod_Reborn;
 
 namespace abcdcode_LOGLIKE_MOD
 {
@@ -21,6 +22,7 @@ namespace abcdcode_LOGLIKE_MOD
         public LorId cardid;
         public MysteryModel_UpgradeCheckPopup.CheckResult okdele;
         public MysteryModel_UpgradeCheckPopup.CheckResult nodele;
+        public LogLikeMod.UILogCardSlot slot;
         public UpgradeMetadata metadata;
 
         public override void LoadFromSaveData(SaveData savedata)
@@ -64,6 +66,7 @@ namespace abcdcode_LOGLIKE_MOD
             this.FrameObj.Add("NoText", textTmp2.gameObject);
             LogLikeMod.UILogCardSlot curcard = LogLikeMod.UILogCardSlot.SlotCopyingByOrig();
             this.metadata = null;
+            this.slot = null;
 
             var upgradeList = Singleton<LogCardUpgradeManager>.Instance.GetAllUpgradesCard(this.cardid, 1).Values.ToList();
             upgradeList.Sort((x, y) => UpgradeMetadata.UnpackPidUnsafe(x.id.packageId).index > UpgradeMetadata.UnpackPidUnsafe(y.id.packageId).index ? 1 : 0);
@@ -81,7 +84,7 @@ namespace abcdcode_LOGLIKE_MOD
             curcard.selectable.DeselectEvent.RemoveAllListeners();
             curcard.selectable.DeselectEvent.AddListener(e => this.OnPointerExit(curcard));
             curcard.gameObject.SetActive(true);
-
+            
             if (upgradeList.Count == 1)
             {
                 var upgrade = upgradeList[0];
@@ -99,6 +102,7 @@ namespace abcdcode_LOGLIKE_MOD
                 resultcard.selectable.DeselectEvent.RemoveAllListeners();
                 resultcard.selectable.DeselectEvent.AddListener(e => this.OnPointerExit(resultcard));
                 resultcard.gameObject.SetActive(true);
+                this.slot = resultcard;
                 UpgradeMetadata.UnpackPid(upgrade.id.packageId, out this.metadata);
             }
             else
@@ -123,6 +127,7 @@ namespace abcdcode_LOGLIKE_MOD
                     if (i == 0)
                     {
                         UpgradeMetadata.UnpackPid(upgrade.id.packageId, out this.metadata);
+                        this.slot = resultcard;
                     }
                     else selectedImage.gameObject.SetActive(false);
                     resultcard.txt_cardNumbers.text = "";
@@ -153,6 +158,7 @@ namespace abcdcode_LOGLIKE_MOD
                 this.DefaultOk();
             else
                 this.okdele(this);
+            CardAddVfx.RunCardVfx(slot);
         }
 
         public void OnClickNo()
@@ -206,6 +212,7 @@ namespace abcdcode_LOGLIKE_MOD
             }
             UISoundManager.instance.PlayEffectSound(UISoundType.Card_Apply);
             UpgradeMetadata.UnpackPid(CardSlot._cardModel.ClassInfo.id.packageId, out this.metadata);
+            this.slot = CardSlot;
         }
 
         public void OnClickCard(DiceCardItemModel card)

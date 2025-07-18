@@ -94,7 +94,7 @@
   </LogueEffectInfo> 
 
    <LogueEffectInfo Id="RMR_Crowbar">
-    <Name>撬棍</Name> 
+    <Name>物理学圣剑</Name> 
     <Desc>对体力高于90%的目标造成的伤害与混乱伤害+50%。</Desc> 
     <FlavorText>&lt;color=#CACACA&gt;“应对不可预见的后果。”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[暂无]</CatalogDesc>
@@ -196,17 +196,17 @@ This item is removed upon using the page. -->
   </LogueEffectInfo> 
   
 <LogueEffectInfo Id="RMR_IronMountain">
-    <Name>Iron Mountain Manual</Name> 
-    <Desc>All librarians inflict 1 Burn upon winning a clash with a Defensive die.</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“Tiger drop negates ALL damage...”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>[No entry for now.]</CatalogDesc>
+    <Name>铁布衫秘籍</Name> 
+    <Desc>所有司书使用防御型骰子拼点胜利时对目标施加1层“烧伤”</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“虎蹲式可以抵挡一切伤害……”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
   
   <LogueEffectInfo Id="RMR_DragonFist">
-    <Name>Dragon Fist Manual</Name> 
-    <Desc>All librarians inflict 1 Burn on a sucessful attack.</Desc> 
-    <FlavorText>&lt;color=#CACACA&gt;“An ancient technique from the now defunct Xuanhuo Association.”&lt;/color&gt;</FlavorText> 
-    <CatalogDesc>[No entry for now.]</CatalogDesc>
+    <Name>神龙拳秘籍</Name> 
+    <Desc>所有司书攻击命中目标时对目标施加1层“烧伤”</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“源自现已解散的宣和会的古老招式。”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
   
   <LogueEffectInfo Id="RMR_Prescript">
