@@ -20,6 +20,9 @@
 	  <Choice ID="4">
         <Desc>选择[common]指引之光</Desc>
       </Choice>
+	  <Choice ID="5">
+        <Desc>Choose [common]Roadless Camelot</Desc>
+      </Choice>
     </Frame>
     <Frame ID="1">
       <Dialog>[mirror]闪光之镜[/color]轻轻振动着，召唤出了你选择的遗物。它轻轻地落在你手里，然后[mirror]镜子[/color]便逐渐隐匿与环境之中。</Dialog>

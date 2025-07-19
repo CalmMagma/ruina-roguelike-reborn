@@ -8,7 +8,6 @@ using HarmonyLib;
 using LOR_DiceSystem;
 using UI;
 using UnityEngine;
-using static RogueLike_Mod_Reborn.RMREffect_IronMountain;
 
 namespace RogueLike_Mod_Reborn
 {
@@ -122,10 +121,10 @@ namespace RogueLike_Mod_Reborn
                     List<BattleDiceCardModel> list = guy.allyCardDetail.GetHand().FindAll((BattleDiceCardModel x) => x._xmlData.CheckCanUpgrade());
                     if (list.Count > 0)
                     {
-                        BattleDiceCardModel cardy = RandomUtil.SelectOne<BattleDiceCardModel>(list);
+                        BattleDiceCardModel cardy = RandomUtil.SelectOne(list);
                         cardy.exhaust = true;
+                        cardy.owner.allyCardDetail.ExhaustCardInHand(cardy);
                         guy.allyCardDetail.AddNewCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardy.GetID()).id);
-                 //       Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard()
                     }
                 }
             }
@@ -615,15 +614,10 @@ namespace RogueLike_Mod_Reborn
         {
             base.AddedNew();
             stack = 0;
-            foreach (DiceCardItemModel card in LogueBookModels.cardlist)
+            foreach (DiceCardItemModel card in LogueBookModels.cardlist.FindAll(x => x.GetRarity() == Rarity.Uncommon && x.ClassInfo.CheckCanUpgrade()))
             {
-                if (card.GetRarity() == Rarity.Uncommon)
-                {
-                    if (card._xmlData.CheckCanUpgrade())
-                    {
-                        Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(card.GetID());
-                    }
-                }
+                LogueBookModels.AddUpgradeCard(card.GetID(), true);
+                LogueBookModels.RemoveCard(card.GetID());   
             }
         }
 
@@ -646,11 +640,12 @@ namespace RogueLike_Mod_Reborn
                     if (weapons != null)
                     {
                         weapons.stack++;
-                    }
-                    if (weapons.stack >= 9)
-                    {
-                        weapons.stack = 0;
-                        _owner.cardSlotDetail.RecoverPlayPoint(2);
+                        if (weapons.stack >= 9)
+                        {
+                            weapons.stack = 0;
+                            _owner.cardSlotDetail.RecoverPlayPoint(2);
+                        }
+                        Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
                     }
                 }
             }
@@ -671,8 +666,8 @@ namespace RogueLike_Mod_Reborn
         public override void OnStartBattleAfter()
         {
             base.OnStartBattleAfter();
-            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.bufListDetail.AddBuf(new imtuningmyweaponslikeatuner());
-
+            foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) 
+                unit.bufListDetail.AddBuf(new imtuningmyweaponslikeatuner());
         }
     }
 
@@ -724,11 +719,12 @@ namespace RogueLike_Mod_Reborn
                         {
                             if (RandomUtil.valueForProb <= 0.07f)
                             {
-                               Effect(i);
+                                Effect(i);
                             }
-   
+
                         }
                     }
+                    Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
                 }
             }
 
@@ -770,8 +766,6 @@ namespace RogueLike_Mod_Reborn
 
     public class RMREffect_OrdinaryClothes : GlobalLogueEffectBase
     {
-
-
         //hidden passive because pm are terrible people
         public override void OnStartBattleAfter()
         {
@@ -798,7 +792,7 @@ namespace RogueLike_Mod_Reborn
             {
                 public override AtkResist GetResistHP(AtkResist origin, BehaviourDetail detail)
                 {
-                    return AtkResist.Weak;
+                    return AtkResist.Vulnerable;
                 }
                 public override void OnRoundStart()
                 {
@@ -930,7 +924,7 @@ namespace RogueLike_Mod_Reborn
         {
             base.OnStartBattleAfter();
             foreach (var unit in BattleObjectManager.instance.GetAliveList(Faction.Player)) unit.bufListDetail.AddBuf(new InflictMPregOnClashWin());
-               
+
         }
     }
 
@@ -1027,7 +1021,7 @@ namespace RogueLike_Mod_Reborn
                     var script = page._script;
                     if (script != null)
                     {
-                        var method = AccessTools.Method(script.GetType(), "OnWaveStart_Roguelike", new Type[] { typeof(BattleDiceCardModel), typeof(BattleUnitModel) });
+                        var method = AccessTools.Method(script.GetType(), "OnWaveStart_RogueLike", new Type[] { typeof(BattleDiceCardModel), typeof(BattleUnitModel) });
                         method?.Invoke(script, new object[] { page, page.owner });
                     }
                 }

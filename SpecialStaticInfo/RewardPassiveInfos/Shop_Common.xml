@@ -7,7 +7,7 @@
     <RewardList ID="90003" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood3" ArtWork="ShopPassive3"/>
     <RewardList ID="90004" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood4" ArtWork="ShopPassive4"/>
     <RewardList ID="90005" PassiveType="EachOther" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood5" ArtWork="ShopPassive5"/>
-    <RewardList ID="90006" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood6" ArtWork="ShopPassive6"/>
+    <!-- <RewardList ID="90006" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood6" ArtWork="ShopPassive6"/> -->
     <RewardList ID="90007" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Script="ShopGood7" ArtWork="ShopPassive7"/>
     <RewardList ID="90008" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood8" ArtWork="ShopPassive8"/>
     <RewardList ID="90009" PassiveType="Custom" ShopType="Once" TargetType="SelectOne" Script="ShopGood9" ArtWork="ShopPassive9"/>
@@ -54,6 +54,9 @@
 	<RewardList ID="90050" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_Remote" ArtWork="RMR_Remote"/>
 	<RewardList ID="90051" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_BleedingSpleen" ArtWork="RMR_BleedingSpleen"/>
 	<RewardList ID="90052" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_CorrodedChains" ArtWork="RMR_CorrodedChains"/>
+	<RewardList ID="90053" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_WelltunedWeapons" ArtWork="RMR_WelltunedWeapons"/>
+	<RewardList ID="90054" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_GamblerEye" ArtWork="RMR_GamblerEye"/>
+	<RewardList ID="90055" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_OrdinaryClothes" ArtWork="RMR_OrdinaryClothes"/>
 	<RewardList ID="90069" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Rarity="Unique" Script="RMR_Polyhedra" ArtWork="RMR_Polyhedra"/>
 	
   </ChapterList> 

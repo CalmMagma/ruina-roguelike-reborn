@@ -5,8 +5,10 @@
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
 using LOR_DiceSystem;
+using RogueLike_Mod_Reborn;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -33,7 +35,16 @@ namespace abcdcode_LOGLIKE_MOD
             }
         }
 
-        public DiceCardXmlInfo GetUpgradeCard(LorId cardid) => this.GetUpgradeCard(cardid, 0, 1);
+        public DiceCardXmlInfo GetUpgradeCard(LorId cardid)
+        {
+            if (UpgradeMetadata.UnpackPid(cardid.packageId, out UpgradeMetadata metadata))
+            {
+                if (metadata.canStack)
+                    return this.GetUpgradeCard(cardid.GetOriginalId(), metadata.index, metadata.count + 1);
+                return ItemXmlDataList.instance.GetCardItem(cardid, false);
+            }
+            return GetAllUpgradesCard(cardid, 1).Values.ToList().SelectOneRandom();
+        }
 
         public void ReLoadCurAllUpgradeCard()
         {

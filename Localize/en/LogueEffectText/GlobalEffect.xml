@@ -207,17 +207,14 @@ Immobilization</Desc>
   
   <LogueEffectInfo Id="RMR_WelltunedWeapons">
     <Name>Well-tuned Weapons</Name> 
-    <Desc>[Global]
-All current non-upgraded Hardcover pages become upgraded.
-Every 9th Hardcover page a librarian uses, they restore 2 Light and gain 1 Max Light Capacity till end of the Act.</Desc> 
-    <FlavorText>&lt;color=#4091CF&gt;"Perfection in simplicity."&lt;/color&gt; - Laku</FlavorText> 
+    <Desc>[Global] All current non-upgraded Hardcover pages become upgraded. Every 9th Hardcover page a librarian uses, they restore 2 Light and gain 1 Max Light Capacity till end of the Act.</Desc> 
+    <FlavorText>&lt;color=#4091CF&gt;“Perfection in simplicity.”&lt;/color&gt; - Laku</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
   <LogueEffectInfo Id="RMR_GamblerEye">
     <Name>Gambler's Eye Augment</Name> 
-    <Desc>[Global]
-Every 7th Objet d'art page a librarian uses, they activate all effects of this item at once.
+    <Desc>[Global] Every 7th Objet d'art page a librarian uses, they activate all effects of this item at once.
 When a librarian uses an Objet d'art page, they have a 7% chance to activate any number of the following effects:
 -Gain 2 Luck this Scene
 -Gain 5 Critical Strike this Scene
@@ -225,15 +222,14 @@ When a librarian uses an Objet d'art page, they have a 7% chance to activate any
 -Gain 10 Stagger Shield this Scene
 -Restore 1 Light
 -Draw 1 page</Desc> 
-    <FlavorText>&lt;color=#F7DA5D&gt;"Money brings in tools, and tools bring superiority."&lt;/color&gt; - Viiru</FlavorText> 
+    <FlavorText>&lt;color=#F7DA5D&gt;“Money brings in tools, and tools bring superiority.”&lt;/color&gt; - Viiru</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
   <LogueEffectInfo Id="RMR_OrdinaryClothes">
     <Name>Not-So Ordinary Clothes</Name> 
-    <Desc>[Global]
-All librarians while Staggered have their resistances set to 'Weak' instead of 'Fatal'.</Desc> 
-    <FlavorText>&lt;color=#44269C&gt;"Produced by a peculiar tailor whose name has been forgotten in the many trades of such wares."&lt;/color&gt;</FlavorText> 
+    <Desc>[Global] All librarians while Staggered have their resistances set to 'Weak' instead of 'Fatal'.</Desc> 
+    <FlavorText>&lt;color=#44269C&gt;“Produced by a peculiar tailor whose name has been forgotten in the many trades of such wares.”&lt;/color&gt;</FlavorText> 
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   

@@ -64,22 +64,30 @@ namespace abcdcode_LOGLIKE_MOD
             Dictionary<LorId, int> keypageCount = new Dictionary<LorId, int>();
             foreach (var keypage in LogueBookModels.booklist.FindAll(x => x.ClassInfo.Chapter == (((int)grade) + 1)))
             {
-                foreach (var card in keypage.GetOnlyCards())
-                {
-                    if (keypageCount.TryGetValue(card.id, out int num))
-                        ++keypageCount[card.id.GetOriginalId()];
-                    else
-                        keypageCount[card.id.GetOriginalId()] = 1;
-                    cardList.Add(card);
-                }
-                
+                var onlyCards = keypage.GetOnlyCards();
+                if (onlyCards != null && onlyCards.Count > 0)
+                    foreach (var card in keypage.GetOnlyCards())
+                    {
+                        var id = card.id.GetOriginalId();
+                        if (keypageCount.TryGetValue(id, out _))
+                            ++keypageCount[id];
+                        else
+                            keypageCount[id] = 1;
+                        cardList.Add(card);
+                    }
             }
             List<DiceCardXmlInfo> cardList2 = new List<DiceCardXmlInfo>();
             cardList2.AddRange(cardList);
             foreach (var card in cardList2)
             {
-                if (LogueBookModels.cardlist.Count(x => x.GetID().GetOriginalId() == card.id.GetOriginalId()) >= keypageCount[card.id] * card.Limit)
+                keypageCount[card.id] *= card.Limit;
+                int obtainCount = LogueBookModels.cardlist.Count(x => x.GetID().GetOriginalId() == card.id.GetOriginalId());
+                Debug.Log("CARD ID " + card.id.packageId + " --- " + card.id.id.ToString() + " LIMIT: " + keypageCount[card.id].ToString());
+                Debug.Log("CARD OBT COUNT: " + obtainCount.ToString());
+                if (obtainCount >= keypageCount[card.id]) {
                     cardList.RemoveAll(x => x.id == card.id);
+                    Debug.Log("CARD WAS REMOVED!!");
+                }
             }
             return cardList.Count > 0 ? cardList : null;
         }

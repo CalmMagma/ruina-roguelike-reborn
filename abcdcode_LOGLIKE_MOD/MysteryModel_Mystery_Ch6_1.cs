@@ -29,7 +29,7 @@ namespace abcdcode_LOGLIKE_MOD
                         {
                             for (int index = 0; index < num; ++index)
                             {
-                                LogueBookModels.AddUpgradeCard(id);
+                                LogueBookModels.AddUpgradeCard(id, true);
                                 LogueBookModels.DeleteCard(id);
                             }
                         }

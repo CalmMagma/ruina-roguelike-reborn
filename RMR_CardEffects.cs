@@ -811,7 +811,7 @@ namespace RogueLike_Mod_Reborn
                 BattlePlayingCardDataInUnitModel fish = this.card.target.cardSlotDetail.cardAry[this.card.targetSlotOrder];
                 if (fish != null)
                 {
-                    if (fish.target != this.owner)
+                    if (fish.target != this.owner && fish.CanIRedirectPls(this.owner))
                     {
                         fish.target = this.owner;
                         fish.targetSlotOrder = this.card.slotOrder;
@@ -1062,7 +1062,7 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelFAbility_RMR_5shield : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_5shield : DiceCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "RMR_Shield_Keyword" };
         public override void OnUseCard()
@@ -3059,41 +3059,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnStartBattle()
         {
             base.OnStartBattle();
-            owner.bufListDetail.AddBuf(new refinebuf());
-        }
-
-        public class refinebuf :BattleUnitBuf
-        {
-            public override void OnRoundEnd()
-            {
-                base.OnRoundEnd();
-                this.Destroy();
-            }
-
-            public override void BeforeRollDice(BattleDiceBehavior behavior)
-            {
-                base.BeforeRollDice(behavior);
-                if (behavior.Detail == BehaviourDetail.Penetrate)
-                {
-                    behavior.ApplyDiceStatBonus(new DiceStatBonus
-                    {
-                        power = 2
-                    });
-                }
-            }
-
-            public override void BeforeGiveDamage(BattleDiceBehavior behavior)
-            {
-                base.BeforeGiveDamage(behavior);
-                if (behavior.Detail == BehaviourDetail.Penetrate)
-                {
-                    behavior.ApplyDiceStatBonus(new DiceStatBonus
-                    {
-                        dmg = -2,
-                        breakDmg = -2
-                    });
-                }
-            }
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.PierceClashPower, 2, owner);
         }
     }
 
@@ -4289,7 +4255,7 @@ namespace RogueLike_Mod_Reborn
     {
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public void OnWaveStart_Rogueike(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -5575,27 +5541,26 @@ namespace RogueLike_Mod_Reborn
             base.OnSucceedAttack(target);
             if (owner.faction == Faction.Enemy)
             {
-                target.TakeDamage(target.MaxHp / 10, DamageType.Card_Ability, owner);
+                target.TakeDamage(target.MaxHp / 4, DamageType.Card_Ability, owner);
                 target.bufListDetail.AddBuf(new amputationbuf());
             }
             else
             {
-                target.TakeDamage(target.MaxHp / 10, DamageType.Card_Ability, owner);
+                target.TakeDamage(target.MaxHp / 4, DamageType.Card_Ability, owner);
                 LogueBookModels.AddPlayerStat(target.UnitData, new LogStatAdder()
                 {
-                    maxhppercent = -10
+                    maxhppercent = -25
                 });
             }
         }
 
         public class amputationbuf : BattleUnitBuf
         {
-
             public override StatBonus GetStatBonus()
             {
                 return new StatBonus
                 {
-                    hpRate = -10
+                    hpRate = -25
                 };
             }
         }

@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
 using UnityEngine;
-
+using RogueLike_Mod_Reborn;
 
 namespace abcdcode_LOGLIKE_MOD
 {
@@ -26,7 +26,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             base.OnPickUp(model);
             int stack = (double)Random.value > 0.7 ? 2 : 1;
-            LuckyBuf.GiveLuckyThisRound(model, stack);
+            model.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.RMRLuck, stack, model);
             SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfile(model, model.faction, model.hp, model.breakDetail.breakGauge, model.bufListDetail.GetBufUIDataList());
         }
 

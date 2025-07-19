@@ -5,6 +5,7 @@
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
 using LOR_DiceSystem;
+using RogueLike_Mod_Reborn;
 using UnityEngine;
 
 
@@ -56,7 +57,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (MenualGlobalEffect.CurEffect != this || behavior.owner.faction != Faction.Player || behavior.behaviourInCard.Detail != BehaviourDetail.Penetrate)
                     return;
-                LuckyBuf.ChangeDiceResult(behavior, 1, ref diceResult);
+                BattleUnitBuf_RMR_Luck.ChangeDiceResult(behavior, 1, ref diceResult);
             }
         }
     }

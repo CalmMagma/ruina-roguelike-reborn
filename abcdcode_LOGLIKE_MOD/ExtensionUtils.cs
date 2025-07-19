@@ -16,6 +16,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using RogueLike_Mod_Reborn;
+using static UnityEngine.GraphicsBuffer;
 
 
 namespace abcdcode_LOGLIKE_MOD

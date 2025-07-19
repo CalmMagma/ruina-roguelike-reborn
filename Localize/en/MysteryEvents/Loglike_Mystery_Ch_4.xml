@@ -2,9 +2,9 @@
 <RogueMysteryXmlRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <Mystery ID="400041">
 	<Frame ID="0">
-		<Dialog>You run into a Liu Section 2 camp that blocks your path, seemingly set up not too long ago, their leader a low ranking member of the association. As you're distracted assessing the threat the camp could pose, their leader approaches, signaling his men to stand down.
+		<Dialog>You run into a Liu Section 1 camp that blocks your path, seemingly set up not too long ago, their leader a low ranking member of the association. As you're distracted assessing the threat the camp could pose, their leader approaches, signaling his men to stand down.
 			
-"We're the folk from Liu Section 2's local branch! You're [mirror]Shard[/color], correct? We've heard of you." The man brushes his slick brown hair and adjusts his gloves. "We believe that our techniques can come in handy for someone like you so we've been given the green light to teach them... at a price, of course. What do you say?"  
+"We're the folk from Liu Section 1's local branch! You're [mirror]Shard[/color], correct? We've heard of you." The man brushes his slick brown hair and adjusts his gloves. "We believe that our techniques can come in handy for someone like you so we've been given the green light to teach them... at a price, of course. What do you say?"  
 			
 The man seems confident as he examines your figure. You can spot two brightly colored manuals on a metal table not far into the camp, so if you don't have the money...</Dialog>
 		<Choice ID="0">

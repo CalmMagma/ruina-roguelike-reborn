@@ -221,7 +221,84 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-#endregion
+
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_WelltunedWeapons : ShopPickUpModel
+    {
+        public PickUpModel_RMR_WelltunedWeapons() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90053);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90053));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_WelltunedWeapons());
+        }
+
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
+        }
+        public override Rarity ItemRarity => Rarity.Uncommon;
+        public override string KeywordIconId => "RMR_WelltunedWeapons";
+
+        public override string KeywordId => "RMR_WelltunedWeapons";
+
+    }
+
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_GamblerEye : ShopPickUpModel
+    {
+        public PickUpModel_RMR_GamblerEye() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90054);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90054));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_GamblerEye());
+        }
+
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
+        }
+
+        public override Rarity ItemRarity => Rarity.Unique;
+        public override string KeywordIconId => "RMR_GamblerEye";
+
+        public override string KeywordId => "RMR_GamblerEye";
+
+    }
+
+    [HideFromItemCatalog]
+    public class PickUpModel_RMR_OrdinaryClothes : ShopPickUpModel
+    {
+        public PickUpModel_RMR_OrdinaryClothes() : base()
+        {
+            this.id = new LorId(LogLikeMod.ModId, 90055);
+            this.rewardinfo = RewardPassivesList.Instance.GetPassiveInfo(new LorId(LogLikeMod.ModId, 90055));
+        }
+        public override void OnPickUpShop(ShopGoods good)
+        {
+            Singleton<GlobalLogueEffectManager>.Instance.AddEffects(new RMREffect_OrdinaryClothes());
+        }
+
+        public override bool IsCanAddShop()
+        {
+            return !LogueBookModels.shopPick.Contains(this.id);
+        }
+
+        public override Rarity ItemRarity => Rarity.Uncommon;
+        public override string KeywordIconId => "RMR_OrdinaryClothes";
+
+        public override string KeywordId => "RMR_OrdinaryClothes";
+
+    }
+
+
+
+    #endregion
 
     #region -- STAGE PICK UPS --
     [HideFromItemCatalog]

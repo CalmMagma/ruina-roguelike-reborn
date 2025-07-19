@@ -710,13 +710,25 @@ namespace RogueLike_Mod_Reborn
         public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
         {
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
-            int num = 0;
-            if (count > 1)
+            if (count > 1) // custom scaling because fuck Lux
+            {
+                int num = 0;
                 for (int i = count; i > 0; --i) // if count = 5; becomes 5 + 4 + 3 + 2 ...
                     num += i;
-            else num = 1;
-            this.upgradeinfo.SetDice(0, 2, num);
-            return base.GetUpgradeInfo(index, count);
+                this.upxmlinfo = this.CreateUpBase(index, count);
+                this.upgradeinfo.SetDice(0, 2, 0);
+                for (int index1 = 0; index1 < count; index1++)
+                {
+                    // regular min value scaling
+                    foreach (KeyValuePair<int, int> keyValuePair in this.upgradeinfo.mindata)
+                        this.upxmlinfo.DiceBehaviourList[keyValuePair.Key].Min += keyValuePair.Value;
+                }
+                // custom max value scaling
+                this.upxmlinfo.DiceBehaviourList[0].Dice += num;
+                return this.upxmlinfo;
+            }
+            this.upgradeinfo.SetDice(0, 2, 1);
+            return base.GetUpgradeInfo(index, 1);
         }
     }
 
@@ -2176,6 +2188,12 @@ namespace RogueLike_Mod_Reborn
         {
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+        }
+
+        public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
+        {
+            this.upxmlinfo = base.GetUpgradeInfo(index, count); base.GetUpgradeInfo(index, count);
             this.upxmlinfo.DiceBehaviourList.Clear();
             DiceBehaviour die = new DiceBehaviour
             {
@@ -2219,7 +2237,7 @@ namespace RogueLike_Mod_Reborn
             this.upxmlinfo.DiceBehaviourList.Add(die3);
             this.upxmlinfo.DiceBehaviourList.Add(die);
             this.upxmlinfo.DiceBehaviourList.Add(die2);
-            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+            return this.upxmlinfo;
         }
     }
 
@@ -2230,6 +2248,12 @@ namespace RogueLike_Mod_Reborn
             base.Init();
             this.index = 1;
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            
+            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+        }
+        public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
+        {
+            this.upxmlinfo = base.GetUpgradeInfo(index, count);
             this.upxmlinfo.DiceBehaviourList.Clear();
             DiceBehaviour die = new DiceBehaviour
             {
@@ -2270,12 +2294,11 @@ namespace RogueLike_Mod_Reborn
             };
 
 
-            
+
             this.upxmlinfo.DiceBehaviourList.Add(die);
             this.upxmlinfo.DiceBehaviourList.Add(die3);
             this.upxmlinfo.DiceBehaviourList.Add(die2);
-            
-            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+            return this.upxmlinfo;
         }
     }
 
@@ -2286,6 +2309,12 @@ namespace RogueLike_Mod_Reborn
             base.Init();
             this.index = 2;
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+        }
+
+        public override DiceCardXmlInfo GetUpgradeInfo(int index, int count)
+        {
+            this.upxmlinfo = base.GetUpgradeInfo(index, count);
             this.upxmlinfo.DiceBehaviourList.Clear();
             DiceBehaviour die = new DiceBehaviour
             {
@@ -2311,7 +2340,6 @@ namespace RogueLike_Mod_Reborn
                 Script = "",
                 EffectRes = "WarpCrew_J"
             };
-
             DiceBehaviour die3 = new DiceBehaviour
             {
 
@@ -2325,12 +2353,10 @@ namespace RogueLike_Mod_Reborn
                 EffectRes = "WarpCrew_G"
             };
 
-
-            
             this.upxmlinfo.DiceBehaviourList.Add(die);
             this.upxmlinfo.DiceBehaviourList.Add(die2);
             this.upxmlinfo.DiceBehaviourList.Add(die3);
-            this.baseid = new LorId(LogLikeMod.ModId, 506002);
+            return this.upxmlinfo;
         }
     }
 

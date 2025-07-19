@@ -36,16 +36,17 @@
 
   <Enemy ID="28483003">
     <!--리우 2과 잡-->
-    <NameID>118</NameID>
-    <MinHeight>160</MinHeight>
-    <MaxHeight>180</MaxHeight>
+    <NameID>136</NameID>
+    <MinHeight>165</MinHeight>
+    <MaxHeight>185</MaxHeight>
 
-    <BookId>150001</BookId>
+    <BookId>150019</BookId>
 
-    <Exp>8</Exp>
+    <Exp>10</Exp>
     <DropTable Level="0">
-      <DropItem Prob="1">4001</DropItem>
-      <DropItem Prob="0.8">4003</DropItem>
+      <DropItem Prob="1">4002</DropItem>
+      <DropItem Prob="1.5">4003</DropItem>
+      <DropItem Prob="0.5">4004</DropItem>
     </DropTable>
   </Enemy>
 

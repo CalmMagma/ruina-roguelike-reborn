@@ -12,7 +12,7 @@
     <Cost>0</Cost>
     <Script>RMR_StrangeOrbPassive</Script> 
     <Name>Strange Orb</Name>
-    <Desc>At the start of each Scene, randomly chooses to inflict 1 Paralysis to all enemies, make 2 random allies restore 1 Light, make 2 random allies draw 1 page or give all allies 1 Damage Up.</Desc>
+    <Desc>-</Desc>
   </Passive>
 
 </PassiveXmlRoot>

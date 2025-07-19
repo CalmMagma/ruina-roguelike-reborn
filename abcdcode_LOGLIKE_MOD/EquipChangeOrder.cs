@@ -7,28 +7,29 @@
 using GameSave;
 using System;
 
- 
-namespace abcdcode_LOGLIKE_MOD {
 
-public class EquipChangeOrder : Savable
+namespace abcdcode_LOGLIKE_MOD
 {
-  public UnitBattleDataModel model;
-  public BookXmlInfo equip;
 
-  public SaveData GetSaveData()
-  {
-    SaveData saveData = new SaveData();
-    saveData.AddData("equip", this.equip.id.LogGetSaveData());
-    saveData.AddData("model", this.model.unitData.bookItem.ClassInfo.id.LogGetSaveData());
-    return saveData;
-  }
+    public class EquipChangeOrder : Savable
+    {
+        public UnitBattleDataModel model;
+        public BookXmlInfo equip;
 
-  public void LoadFromSaveData(SaveData data)
-  {
-    LorId id = ExtensionUtils.LogLoadFromSaveData(data.GetData("equip"));
-    this.equip = Singleton<BookXmlList>.Instance.GetData(id);
-    id = ExtensionUtils.LogLoadFromSaveData(data.GetData("model"));
-    this.model = LogueBookModels.playerBattleModel.Find((Predicate<UnitBattleDataModel>) (x => x.unitData.bookItem.ClassInfo.id == id));
-  }
-}
+        public SaveData GetSaveData()
+        {
+            SaveData saveData = new SaveData();
+            saveData.AddData("equip", this.equip.id.LogGetSaveData());
+            saveData.AddData("model", this.model.unitData.bookItem.ClassInfo.id.LogGetSaveData());
+            return saveData;
+        }
+
+        public void LoadFromSaveData(SaveData data)
+        {
+            LorId id = ExtensionUtils.LogLoadFromSaveData(data.GetData("equip"));
+            this.equip = Singleton<BookXmlList>.Instance.GetData(id);
+            id = ExtensionUtils.LogLoadFromSaveData(data.GetData("model"));
+            this.model = LogueBookModels.playerBattleModel.Find((Predicate<UnitBattleDataModel>)(x => x.unitData.bookItem.ClassInfo.id == id));
+        }
+    }
 }

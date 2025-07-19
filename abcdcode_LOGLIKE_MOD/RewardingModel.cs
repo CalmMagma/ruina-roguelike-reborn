@@ -410,18 +410,18 @@ namespace abcdcode_LOGLIKE_MOD
                 }
             }
             if (num3 / num2 < num1)
-                return (List<EmotionCardXmlInfo>)null;
+                return null;
             ++LogLikeMod.curemotion;
             if (LogueBookModels.EmotionCardList == null && LogueBookModels.EmotionCardList.Count == 0)
-                return (List<EmotionCardXmlInfo>)null;
+                return null;
             int level = LogLikeMod.curemotion;
-            List<RewardPassiveInfo> rewardPassiveInfoList = new List<RewardPassiveInfo>((IEnumerable<RewardPassiveInfo>)LogueBookModels.EmotionCardList);
-            rewardPassiveInfoList.RemoveAll((Predicate<RewardPassiveInfo>)(x => (LogLikeMod.FindPickUp(x.script) as CreaturePickUpModel).level != level || LogueBookModels.selectedEmotion.Contains(x)));
+            List<RewardPassiveInfo> rewardPassiveInfoList = new List<RewardPassiveInfo>(LogueBookModels.EmotionCardList);
+            rewardPassiveInfoList.RemoveAll(x => (LogLikeMod.FindPickUp(x.script) as CreaturePickUpModel).level != level || LogueBookModels.selectedEmotion.Contains(x));
             foreach (RewardPassiveInfo info in rewardPassiveInfoList)
                 infos.Add(LogLikeMod.GetRegisteredPickUpXml(info));
             while (true)
             {
-                EmotionCardXmlInfo emotionCardXmlInfo = infos.Find((Predicate<EmotionCardXmlInfo>)(x => infos.FindAll((Predicate<EmotionCardXmlInfo>)(y => x == y)).Count > 1));
+                EmotionCardXmlInfo emotionCardXmlInfo = infos.Find(x => infos.FindAll(y => x == y).Count > 1);
                 if (emotionCardXmlInfo != null)
                     infos.Remove(emotionCardXmlInfo);
                 else

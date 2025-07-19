@@ -28,8 +28,6 @@ using UnityEngine.UI;
 using BattleCardEnhancedView;
 using RogueLike_Mod_Reborn;
 using CommonModApi;
-using Workshop;
-using HarmonyLib.Tools;
 
 
 namespace abcdcode_LOGLIKE_MOD
@@ -145,7 +143,7 @@ namespace abcdcode_LOGLIKE_MOD
         /// </summary>
         public static bool AddPlayer;
         /// <summary>
-        /// Determines to whether or not add revive a player at the end of the act.
+        /// Determines to whether or not revive all players and heal them all at the end of the act.
         /// </summary>
         public static bool RecoverPlayers;
         public static Dictionary<string, System.Type> FindPickUpCache;
@@ -2331,6 +2329,7 @@ namespace abcdcode_LOGLIKE_MOD
                 while (this.AssetBundles.Count > 0)
                 {
                     AssetBundle bundle = this.AssetBundles.Pop();
+                    this.Log("LOADING BUNDLE -- " + bundle.name);
                     string[] strings = bundle.GetAllAssetNames();
                     string[] strArray = strings;
                     for (int index = 0; index < strArray.Length; ++index)
@@ -2339,10 +2338,11 @@ namespace abcdcode_LOGLIKE_MOD
                         GameObject Gobj = bundle.LoadAsset<GameObject>(name);
                         if (Gobj != null)
                         {
+                            this.Log("LOADING ASSET -- " + name + " // " + Gobj.name);
                             LogAssetBundleManager.GameObjectBundleCache cache = new LogAssetBundleManager.GameObjectBundleCache()
                             {
                                 BundleName = bundle.name,
-                                objname = name,
+                                objname = Gobj.name,
                                 obj = Gobj
                             };
                             Singleton<LogAssetBundleManager>.Instance.GObjList.Add(cache);

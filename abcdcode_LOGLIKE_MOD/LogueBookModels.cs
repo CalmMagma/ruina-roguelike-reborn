@@ -13,8 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
+using static CharacterSound;
 
 namespace abcdcode_LOGLIKE_MOD
 {
@@ -676,7 +678,8 @@ namespace abcdcode_LOGLIKE_MOD
             LogueBookModels.booklist.Add(bookModel);
         }
 
-        public static void AddUpgradeCard(LorId cardid) => LogueBookModels.AddUpgradeCard(cardid, 0, 1, 1, true);
+        public static void AddUpgradeCard(LorId cardid, bool callInvenChangeEvent = true) =>
+            LogueBookModels.AddCard(Singleton<LogCardUpgradeManager>.Instance.GetUpgradeCard(cardid).id, 1, callInvenChangeEvent);
 
         public static void AddCard(LorId cardId, int num = 1, bool callInvenChangeEvent = true)
         {
@@ -1334,8 +1337,10 @@ namespace abcdcode_LOGLIKE_MOD
                 try
                 {
                     var list = RMRCore.CurrentGamemode.InitializeChapterStageList((ChapterGrade)i);
+                    var list2 = new List<LogueStageInfo>();
+                    list2.AddRange(list);
                     "".Log($"Chapter {(i + 1).ToString()} StageList");
-                    foreach (LogueStageInfo logueStageInfo in list)
+                    foreach (LogueStageInfo logueStageInfo in list2)
                     {
                         if (StageClassInfoList.Instance.GetData(logueStageInfo.Id) is var stage && (stage == null || stage.waveList == null))
                         {

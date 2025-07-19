@@ -10,6 +10,9 @@ using LOR_DiceSystem;
 
 namespace RogueLike_Mod_Reborn
 {
+    /// <summary>
+    /// A BattleUnitBuf with some additional overrides that interact with RMR mechanics.
+    /// </summary>
     public class RMRBufBase : BattleUnitBuf
     {
         public virtual void OnSpendSmoke(int amount)
@@ -57,7 +60,7 @@ namespace RogueLike_Mod_Reborn
         }
 
         public override string keywordId => "RMR_Persistence";
-        public override string keywordIconId => "SweepersSkill"; // unsure if the persistence icon name is this or not
+        public override string keywordIconId => "RMR_ReworkPersistence"; // unsure if the persistence icon name is this or not
         public override BufPositiveType positiveType => BufPositiveType.Positive;
 
         public override void OnHpZero()
@@ -75,7 +78,9 @@ namespace RogueLike_Mod_Reborn
             this.stack--;
             if (this.stack <= 0)
             {
-             //   _owner.allyCardDetail.AddNewCardToDeck(new LorId(LogLikeMod.ModId, 504001));    this can be uncommented if we want to make the page reappear in deck if the buf does not revive you, probably unnecessary but an optional buff to persistence
+                // _owner.allyCardDetail.AddNewCardToDeck(new LorId(LogLikeMod.ModId, 504001));
+                // this can be uncommented if we want to make the page reappear in deck if the buf does not revive you,
+                // probably unnecessary but an optional buff to persistence
                 this.Destroy();
             }
         }
@@ -94,7 +99,6 @@ namespace RogueLike_Mod_Reborn
         public override string keywordId => "RMR_Luck";
         public override string keywordIconId => "RMRBuf_Luck";
         public override BufPositiveType positiveType => BufPositiveType.Positive;
-    //    public override string keywordId => "LogueLikeMod_LuckyBuf";
 
         public static void ChangeDiceResult(BattleDiceBehavior behavior, int level, ref int diceResult)
         {
@@ -137,7 +141,7 @@ namespace RogueLike_Mod_Reborn
             }
         }
         public override string keywordId => "RMR_Smoke";
-        public override string keywordIconId => "Smoke"; // not sure if just "Smoke" is the bufname
+        public override string keywordIconId => "RMR_ReworkSmoke"; // not sure if just "Smoke" is the bufname
 
         public override void OnAddBuf(int addedStack)
         {
@@ -383,7 +387,21 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public override string keywordIconId => "RMRBuf_BluntClashPower";
+        public override string keywordIconId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "BluntClashUp";
+                }
+                else if (this.stack < 0)
+                {
+                    return "BluntClashDown";
+                }
+                return "BluntClashUp";
+            }
+        }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
@@ -436,7 +454,21 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public override string keywordIconId => "RMRBuf_PierceClashPower";
+        public override string keywordIconId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "PierceClashUp";
+                }
+                else if (this.stack < 0)
+                {
+                    return "PierceClashDown";
+                }
+                return "PierceClashUp";
+            }
+        }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
@@ -488,7 +520,21 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public override string keywordIconId => "RMRBuf_SlashClashPower";
+        public override string keywordIconId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "SlashClashUp";
+                }
+                else if (this.stack < 0)
+                {
+                    return "SlashClashDown";
+                }
+                return "SlashClashUp";
+            }
+        }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {
@@ -540,7 +586,21 @@ namespace RogueLike_Mod_Reborn
             }
         }
 
-        public override string keywordIconId => "RMRBuf_ClashPower";
+        public override string keywordIconId
+        {
+            get
+            {
+                if (this.stack >= 0)
+                {
+                    return "ClashPowerUp";
+                }
+                else if (this.stack < 0)
+                {
+                    return "ClashPowerDown";
+                }
+                return "ClashPowerUp";
+            }
+        }
 
         public override void BeforeRollDice(BattleDiceBehavior behavior)
         {

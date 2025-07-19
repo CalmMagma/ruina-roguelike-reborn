@@ -22,7 +22,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override bool IsCanPickUp(UnitDataModel target)
         {
-            return LogueBookModels.playerBattleModel.Find((Predicate<UnitBattleDataModel>)(x => x.unitData == target)).isDead;
+            return LogueBookModels.playerBattleModel.Find(x => x.unitData == target).isDead;
         }
 
         public override void OnPickUp(BattleUnitModel model)
@@ -49,7 +49,7 @@ namespace abcdcode_LOGLIKE_MOD
             public override void OnClick()
             {
                 base.OnClick();
-                if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase || BattleObjectManager.instance.GetList().ToList<BattleUnitModel>().Find((Predicate<BattleUnitModel>)(x => x.faction == Faction.Player && x.UnitData.isDead)) == null)
+                if (Singleton<StageController>.Instance.Phase != StageController.StagePhase.ApplyLibrarianCardPhase || BattleObjectManager.instance.GetList().ToList().Find(x => x.faction == Faction.Player && x.UnitData.isDead) == null)
                     return;
                 ShopPickUpModel.AddPassiveReward(new LorId(LogLikeMod.ModId, 90014));
                 this.Destroy();

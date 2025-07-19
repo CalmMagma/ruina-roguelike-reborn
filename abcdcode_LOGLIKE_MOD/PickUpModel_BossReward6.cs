@@ -4,8 +4,10 @@
 // MVID: 4BD775C4-C5BF-4699-81F7-FB98B2E922E2
 // Assembly location: C:\Users\Usuário\Desktop\Projects\LoR Modding\spaghetti\RogueLike Mod Reborn\dependencies\abcdcode_LOGLIKE_MOD.dll
 
+using RogueLike_Mod_Reborn;
 using System;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 
 namespace abcdcode_LOGLIKE_MOD
@@ -22,15 +24,15 @@ namespace abcdcode_LOGLIKE_MOD
 
         public override bool IsCanPickUp(UnitDataModel target)
         {
-            return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_ShopGood23.Shop23Effect)) != null && Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_BossReward6.FourCloverEffect)) == null;
+            return Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_ShopGood23.Shop23Effect) != null && Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_BossReward6.FourCloverEffect) == null;
         }
 
         public override void OnPickUp()
         {
             base.OnPickUp();
-            if (Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_ShopGood23.Shop23Effect)) == null)
+            if (Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_ShopGood23.Shop23Effect) == null)
                 return;
-            Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect(Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find((Predicate<GlobalLogueEffectBase>)(x => x is PickUpModel_ShopGood23.Shop23Effect)));
+            Singleton<GlobalLogueEffectManager>.Instance.RemoveEffect(Singleton<GlobalLogueEffectManager>.Instance.GetEffectList().Find(x => x is PickUpModel_ShopGood23.Shop23Effect));
             Singleton<GlobalLogueEffectManager>.Instance.AddEffects((GlobalLogueEffectBase)new PickUpModel_BossReward6.FourCloverEffect());
         }
 
@@ -48,7 +50,7 @@ namespace abcdcode_LOGLIKE_MOD
                 base.OnRoundStart(stage);
                 foreach (BattleUnitModel alive in BattleObjectManager.instance.GetAliveList(Faction.Player))
                 {
-                    LuckyBuf.GiveLuckyThisRound(alive, 1);
+                    alive.bufListDetail.AddKeywordBufThisRoundByEtc(RoguelikeBufs.RMRLuck, 1);
                     SingletonBehavior<BattleManagerUI>.Instance.ui_unitListInfoSummary.UpdateCharacterProfileAll();
                 }
             }

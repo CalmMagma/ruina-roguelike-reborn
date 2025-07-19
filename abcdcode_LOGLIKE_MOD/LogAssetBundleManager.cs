@@ -66,12 +66,7 @@ namespace abcdcode_LOGLIKE_MOD
 
         public GameObject GetAsset(string name, string bundlename = "")
         {
-            LogAssetBundleManager.GameObjectBundleCache objectBundleCache = this.GObjList.Find(x =>
-            {
-                if (!(x.objname == name))
-                    return false;
-                return bundlename == "" || x.BundleName == bundlename;
-            });
+            LogAssetBundleManager.GameObjectBundleCache objectBundleCache = this.GObjList.Find(x => x.objname == name && (bundlename == "" || x.BundleName == bundlename));
             if (objectBundleCache != null)
                 return UnityEngine.Object.Instantiate<GameObject>(objectBundleCache.obj);
             foreach (AssetBundle bundle in this.bundles)
@@ -82,7 +77,7 @@ namespace abcdcode_LOGLIKE_MOD
                     this.GObjList.Add(new LogAssetBundleManager.GameObjectBundleCache()
                     {
                         BundleName = bundle.name,
-                        objname = name,
+                        objname = original.name,
                         obj = original
                     });
                     return UnityEngine.Object.Instantiate<GameObject>(original);

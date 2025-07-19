@@ -371,6 +371,18 @@ namespace RogueLike_Mod_Reborn
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_BleedProtection>();
             if (AddNewKeywordBufToList("Lux_RMR_ClashPower", ref RoguelikeBufs.ClashPower))
                 KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_ClashPower>();
+            if (AddNewKeywordBufToList("Lux_RMR_SlashClashPower", ref RoguelikeBufs.SlashClashPower))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_SlashClashPower>();
+            if (AddNewKeywordBufToList("Lux_RMR_PierceClashPower", ref RoguelikeBufs.PierceClashPower))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_PierceClashPower>();
+            if (AddNewKeywordBufToList("Lux_RMR_BluntClashPower", ref RoguelikeBufs.BluntClashPower))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_BluntClashPower>();
+            if (AddNewKeywordBufToList("Lux_RMR_ReworkPersistence", ref RoguelikeBufs.RMRPersistence))
+                KeywordUtils.RegisterKeywordBuf<SweeperBuf>();
+            if (AddNewKeywordBufToList("Lux_RMR_ReworkSmoke", ref RoguelikeBufs.RMRSmoke))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_Smoke>();
+            if (AddNewKeywordBufToList("Lux_RMR_LuckBuf", ref RoguelikeBufs.RMRLuck))
+                KeywordUtils.RegisterKeywordBuf<BattleUnitBuf_RMR_Luck>();
         }
 
         #region literally do not use this ever
@@ -617,7 +629,7 @@ namespace RogueLike_Mod_Reborn
         /// </summary>
         /// <param name="card">The card to redirect.</param>
         /// <param name="owner">The owner of the card.</param>
-        public static bool CanIRedirectPls(BattlePlayingCardDataInUnitModel card, BattleUnitModel owner)
+        public static bool CanIRedirectPls(this BattlePlayingCardDataInUnitModel card, BattleUnitModel owner)
         {
             if (card.cardAbility != null && !card.cardAbility.IsTargetChangable(owner))
             {
@@ -2810,7 +2822,10 @@ namespace RogueLike_Mod_Reborn
     /// </summary>
     public class SelfDestructBezierCurve : MonoBehaviour
     {
-        public Transform target;
+        float time = 0f;
+        float duration = 1.5f;
+        Vector3 pointStart;
+        Transform target;
         public Vector3 
             point1 = new Vector3(-40f, -1340f), 
             point2 = new Vector3(-820f, -1590f), 
@@ -2819,40 +2834,35 @@ namespace RogueLike_Mod_Reborn
         // 920, -800 -> -40 -1340
         // 140, 2130 -> -820 1590
         // 1875, -180 -> 915 -720
-
-        void Awake()
+        public void Start()
         {
             target = this.gameObject.transform;
-            StartCoroutine(COR_BezierCurves());
+            pointStart = target.position;
+            time = 0f;
+            duration = 1.5f;
         }
 
-        IEnumerator COR_BezierCurves(float duration = 1.5f)
+        public void Update()
         {
-            float time = 0f;
-            Vector3 pointStart = target.position;
+            float timeSquared = (float)((double)time * (double)time); // use doubles for extra accuracy
 
-            while (true)
+            // four-point bezier interpolation
+            Vector3 comb1 = Vector3.Lerp(pointStart, point1, timeSquared);
+            Vector3 comb2 = Vector3.Lerp(point1, point2, timeSquared);
+            Vector3 comb3 = Vector3.Lerp(point2, destination, timeSquared);
+            Vector3 combLast1 = Vector3.Lerp(comb1, comb2, timeSquared);
+            Vector3 combLast2 = Vector3.Lerp(comb2, comb3, timeSquared);
+            
+            target.localPosition = Vector3.Lerp(combLast1, combLast2, timeSquared);
+            double rotationAngle = Math.Tan(target.localPosition.x) / Math.Tan(target.localPosition.y);
+            target.rotation.eulerAngles.Set(0f, (float)rotationAngle, 0f);
+            Debug.Log("CARD POSITION: " + target.localPosition.x + ", " + target.localPosition.y);
+            Debug.Log("CARD ROTATION: " + rotationAngle);
+            time += Time.deltaTime / duration;
+            if (time >= 1f) // self destruct after duration
             {
-                if (time >= 1f) // self destruct after duration
-                {
-                    Destroy(this.gameObject);
-                    yield break;
-                }
-                float timeSquared = (float)((double)time * (double)time); // use doubles for extra accuracy
-
-                // four-point bezier interpolation
-                Vector3 comb1 = Vector3.Lerp(pointStart, point1, timeSquared);
-                Vector3 comb2 = Vector3.Lerp(point1, point2, timeSquared);
-                Vector3 comb3 = Vector3.Lerp(point2, destination, timeSquared);
-                Vector3 combLast1 = Vector3.Lerp(comb1, comb2, timeSquared);
-                Vector3 combLast2 = Vector3.Lerp(comb2, comb3, timeSquared);
-                target.position = Vector3.Lerp(combLast1, combLast2, timeSquared);
-                double rotationAngle = Math.Tan(target.position.x) / Math.Tan(target.position.y);
-                target.rotation.eulerAngles.Set(0f, (float)rotationAngle, 0f);
-
-                time += Time.deltaTime / duration;
-
-                yield return new WaitForEndOfFrame();
+                Destroy(this.gameObject);
+                return;
             }
         }
     }
@@ -2863,26 +2873,36 @@ namespace RogueLike_Mod_Reborn
         {
             get
             {
-                if (_camera == null)
+                if (_camera == null || LayerMask.NameToLayer(_camera.name) != curLayer)
                 {
-                    _camera = SnapshotCamera.MakeSnapshotCamera(0);
+                    if (_camera != null) UnityEngine.Object.Destroy(_camera.gameObject);
+                    _camera = SnapshotCamera.MakeSnapshotCamera(curLayer, LayerMask.LayerToName(curLayer));
                 }
                 return _camera;
             }
         }
+        private static int curLayer;
         private static SnapshotCamera _camera;
         public static void RunCardVfx(LogLikeMod.UILogCardSlot card)
         {
+            /*
+            curLayer = card.gameObject.layer;
             Camera.gameObject.SetActive(true);
             var texture2D = Camera.TakeObjectSnapshot(card.gameObject, (int)card.Pivot.sizeDelta.x, (int)card.Pivot.sizeDelta.y);
             Camera.gameObject.SetActive(false);
             var vfx = LogAssetBundleManager.Instance.GetAsset("CalmMagma", "calmmagma_card");
-            vfx.transform.parent = card.transform.parent;
-            vfx.transform.localPosition = card.transform.localPosition;
-            vfx.GetComponent<SpriteRenderer>().sprite = Sprite.Create(texture2D, new Rect(0.0f, 0.0f, (float)texture2D.width, (float)texture2D.height), new Vector2(0.0f, 0.0f), 100f, 0U, SpriteMeshType.FullRect);
-            // vfx.gameObject.layer = LayerMask.NameToLayer("UI");
-            vfx.AddComponent<SelfDestructBezierCurve>();
-            vfx.SetActive(true);
+            var cardImage = ModdingUtils.CreateImage(LogLikeMod.LogUIObjs[90].transform,
+                Sprite.Create(texture2D, new Rect(0.0f, 0.0f, (float)texture2D.width, (float)texture2D.height), new Vector2(0.0f, 0.0f), 100f, 0U, SpriteMeshType.FullRect),
+                new Vector2(1f, 1f),
+                card.transform.localPosition);
+            vfx.transform.parent = cardImage.transform;
+            vfx.transform.localPosition = cardImage.transform.localPosition;
+            vfx.transform.localScale = new Vector3(1f, 1f);
+            vfx.GetComponent<SpriteRenderer>().sprite = cardImage.sprite;
+            vfx.SetLayerAll(cardImage.gameObject.layer);
+            var curve = cardImage.gameObject.AddComponent<SelfDestructBezierCurve>();
+            cardImage.gameObject.SetActive(true);
+            */
         }
     }
 

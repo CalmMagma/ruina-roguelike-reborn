@@ -724,7 +724,7 @@ Otherwise gain Stagger Shield this Scene equal to pages in hand</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_Refine">
-    <Desc>[Combat Start] Boost Pierce dice Power by +2 and reduce Pierce dice damage and Stagger damage by 2 for this Scene</Desc>
+    <Desc>[Combat Start] Gain 2 Pierce Clash Power this Scene</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_Sakura">
@@ -782,7 +782,7 @@ At the start of each Scene, gain 1 Strength for the rest of the Act</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_Amputationdie">
-    <Desc>[On Hit] Deal damage equal to 10% of target's Max HP; target loses 10% Max HP permanently</Desc>
+    <Desc>[On Hit] Deal damage equal to 25% of target's Max HP; target loses 25% Max HP permanently</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_Engagement">

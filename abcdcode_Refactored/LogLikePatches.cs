@@ -459,7 +459,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 BattleTeamModel battleTeamModel = (BattleTeamModel)typeof(StageController).GetField("_librarianTeam", AccessTools.all).GetValue(self);
                 int num = 0;
-                foreach (UnitBattleDataModel unitBattleData in LogueBookModels.playerBattleModel)
+                foreach (UnitBattleDataModel unitBattleData in LogueBookModels.playerBattleModel.FindAll(x => x.IsAddedBattle))
                 {
                     StageLibraryFloorModel floor = self.GetStageModel().GetFloor(sephirah);
                     UnitDataModel unitData = unitBattleData.unitData;
@@ -1843,10 +1843,10 @@ namespace abcdcode_LOGLIKE_MOD
             if (!LogLikeMod.CheckStage())
                 return true;
             __instance.Log("Refrash Character start");
-            UnitBattleDataModel battledata = LogueBookModels.playerBattleModel.Find((Predicate<UnitBattleDataModel>)(x => x.unitData == data));
+            UnitBattleDataModel battledata = LogueBookModels.playerBattleModel.Find(x => x.unitData == data);
             if (battledata != null)
             {
-                UICharacterSlot uiCharacterSlot = LogLikeMod.GetFieldValue<UICharacterList>(__instance, "CharacterList").slotList.Find((Predicate<UICharacterSlot>)(x => x.unitBattleData == battledata));
+                UICharacterSlot uiCharacterSlot = LogLikeMod.GetFieldValue<UICharacterList>(__instance, "CharacterList").slotList.Find(x => x.unitBattleData == battledata);
                 if (uiCharacterSlot != null && uiCharacterSlot.unitBattleData != null)
                 {
                     uiCharacterSlot.ReloadHpBattleSettingSlot();
@@ -2510,9 +2510,12 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(BattleUnitModel), nameof(BattleUnitModel.OnDie))]
         public static void BattleUnitModel_OnDie(BattleUnitModel __instance)
         {
-            if (__instance.faction != Faction.Enemy || __instance.UnitData.unitData.ExpDrop <= 0)
+            if (!LogLikeMod.CheckStage(true))
                 return;
-            PassiveAbility_MoneyCheck.AddMoney(__instance.UnitData.unitData.ExpDrop);
+            if (__instance.faction == Faction.Enemy && __instance.UnitData.unitData.ExpDrop > 0)
+                PassiveAbility_MoneyCheck.AddMoney(__instance.UnitData.unitData.ExpDrop);
+            else if (__instance.faction == Faction.Player && LogueBookModels.playerBattleModel.Contains(__instance.UnitData))
+                LogueBookModels.playerBattleModel.Find(x => x == __instance.UnitData).isDead = true;
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(BookPassiveInfo), "desc", MethodType.Getter)]
@@ -2974,7 +2977,8 @@ namespace abcdcode_LOGLIKE_MOD
                     foreach (UnitBattleDataModel unitBattleDataModel in LogueBookModels.playerBattleModel)
                     {
                         unitBattleDataModel.isDead = false;
-                        unitBattleDataModel.Refreshhp();
+                        unitBattleDataModel.hp += (unitBattleDataModel.MaxHp - (int)unitBattleDataModel.hp) * 0.75f; // recover 75% of missing hp
+                        unitBattleDataModel.Init();
                         unitBattleDataModel.emotionDetail.Reset();
                     }
                 }
@@ -2988,6 +2992,28 @@ namespace abcdcode_LOGLIKE_MOD
             StageModel stageModel = __instance.GetStageModel();
             if ((stageModel.GetFrontAvailableWave() == null ? 1 : (stageModel.GetFrontAvailableFloor() == null ? 1 : 0)) != 0)
                 LoguePlayDataSaver.RemovePlayerData();
+        }
+
+        /// <summary>
+        /// A patch to be able to disable units when unchecked.
+        /// </summary>
+        [HarmonyPostfix, HarmonyPatch(typeof(UICharacterSlot), nameof(UICharacterSlot.SetNoToggleState))]
+        public static void UICharacterSlot_SetToggleStateFalse(UICharacterSlot __instance)
+        {
+            var unit = LogueBookModels.playerBattleModel.Find(x => x.unitData == __instance.unitBattleData.unitData);
+            if (unit != null)
+                unit.IsAddedBattle = false;
+        }
+
+        /// <summary>
+        /// A patch to be able to enable units when checked.
+        /// </summary>
+        [HarmonyPostfix, HarmonyPatch(typeof(UICharacterSlot), nameof(UICharacterSlot.SetYesToggleState))]
+        public static void UICharacterSlot_SetToggleStateTrue(UICharacterSlot __instance)
+        {
+            var unit = LogueBookModels.playerBattleModel.Find(x => x.unitData == __instance.unitBattleData.unitData);
+            if (unit != null)
+                unit.IsAddedBattle = true;
         }
 
         #endregion

@@ -154,11 +154,11 @@ namespace abcdcode_LOGLIKE_MOD
 
         public void OnClickOk()
         {
+            CardAddVfx.RunCardVfx(slot);
             if (this.okdele == null)
                 this.DefaultOk();
             else
                 this.okdele(this);
-            CardAddVfx.RunCardVfx(slot);
         }
 
         public void OnClickNo()
