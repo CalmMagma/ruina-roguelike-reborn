@@ -4372,6 +4372,18 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    public class DiceCardPriority_RMR_sweeper : DiceCardPriorityBase
+    {
+        public override int GetPriorityBonus(BattleUnitModel owner)
+        {
+            if (owner.bufListDetail.GetActivatedBuf(RoguelikeBufs.RMRPersistence) != null)
+            {
+                return -3;
+            }
+            return 2;
+        }
+    }
+
     public class DiceCardSelfAbility_RMR_RipSpace : DiceCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "onlypage_warp_Keyword", "WarpCharge" };

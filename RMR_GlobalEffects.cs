@@ -644,6 +644,7 @@ namespace RogueLike_Mod_Reborn
                         {
                             weapons.stack = 0;
                             _owner.cardSlotDetail.RecoverPlayPoint(2);
+                            _owner.bufListDetail.AddBuf(new infinitelightyessirsirsir());
                         }
                         Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
                     }

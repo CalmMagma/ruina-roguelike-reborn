@@ -373,7 +373,7 @@
     </BehaviourList>
     <Chapter>5</Chapter>
     <Priority>2</Priority>
-    <PriorityScript>sweeperRevival</PriorityScript>
+    <PriorityScript>RMR_sweeper</PriorityScript>
   </Card>
   <Card ID="504002">
     <Name>쓰레기 처리</Name>
@@ -442,7 +442,7 @@
     <Name>뒷골목의 밤</Name>
     <Artwork>Sweepers6</Artwork>
     <Rarity>Common</Rarity>
-    <Spec Range="Near" Cost="1"/>
+    <Spec Range="Near" Cost="0"/>
     <Script>powerDown2thisRound</Script>
     <ScriptDesc>[전투 시작] 이번 막 동안 모든 주사위의 위력 -2</ScriptDesc>
     <BehaviourList>
@@ -572,7 +572,7 @@
     <Script>RMR_RipSpace</Script>
     <ScriptDesc></ScriptDesc>
     <BehaviourList>
-      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="WarpCrew_H" Script="RMR_draw3pw" Desc="" />
+      <Behaviour Min="2" Dice="4" Type="Atk" Detail="Penetrate" Motion="H" EffectRes="WarpCrew_H" Script="drawCard2pw" Desc="" />
       <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="S1" EffectRes="WarpCrew_S1" Script="RMR_RipSpaceDie" ActionScript="warpSkill" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>
@@ -675,8 +675,8 @@
     <Rarity>Uncommon</Rarity>
     <Category>Smoke2</Category>
     <Spec Range="Near" Cost="3"/>
-    <Script>smokeOnly1</Script>
-    <ScriptDesc>[사용시] 책장을 1장 뽑음</ScriptDesc>
+    <Script>drawCard</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="6" Dice="19" Type="Atk" Detail="Hit" Motion="S2" MotionDefault="H" EffectRes="" Script="RMR_Smoke7Atk" Desc="[적중] 다음 막에 연기 7 부여" />
       <Behaviour Min="1" Dice="9" Type="Def" Detail="Evasion" Motion="E" EffectRes="" Script="" Desc="" />
@@ -920,7 +920,7 @@
     <Script>RMR_Acupuncture</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="Sword_Z" Script="upgradeNext2atk" Desc="" />
+      <Behaviour Min="3" Dice="7" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="upgradeNext2atk" Desc="" />
       <Behaviour Min="2" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Sword_J" Script="RMR_critchance5pw" Desc="" />
     </BehaviourList>
     <Chapter>5</Chapter>

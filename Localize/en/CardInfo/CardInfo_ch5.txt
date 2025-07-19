@@ -109,11 +109,8 @@
     <BattleCardDesc ID="503008">
       <LocalizedName>Let the Show Begin</LocalizedName>
     </BattleCardDesc>
-    <BattleCardDesc ID="503009">
-      <LocalizedName>Juggling</LocalizedName> <!-- Juggling -->
-    </BattleCardDesc>
-    <BattleCardDesc ID="503010">
-      <LocalizedName>Wild Card</LocalizedName>
+	<BattleCardDesc ID="503011">
+      <LocalizedName>Let the Show Begin</LocalizedName>
     </BattleCardDesc>
 
     <!-- 청소부 -->

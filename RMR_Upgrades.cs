@@ -1925,7 +1925,7 @@ namespace RogueLike_Mod_Reborn
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetAbility(0, "RMR_FaithDie");
-            this.upgradeinfo.SetAbility(0, "RMR_FaithDie");
+            this.upgradeinfo.SetAbility(1, "RMR_FaithDie");
             this.baseid = new LorId(LogLikeMod.ModId, 505005);
         }
     }
