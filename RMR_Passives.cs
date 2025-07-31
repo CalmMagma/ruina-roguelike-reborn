@@ -127,8 +127,50 @@ namespace RogueLike_Mod_Reborn
 
 		private int _onlyCardCooltime;
 
+		BattleUnitModel indextarget;
+
+        public override void OnDieOtherUnit(BattleUnitModel unit)
+        {
+            base.OnDieOtherUnit(unit);
+			if (unit == indextarget)
+            {
+				ObtainTarget();
+            }
+        }
+
+        private void ObtainTarget()
+        {
+			List<BattleUnitModel> list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+			int highesthp = 0;
+			if (list.Count > 0)
+			{
+				foreach (BattleUnitModel guy in list)
+				{
+					if (guy.hp > highesthp)
+					{
+						highesthp = (int)guy.hp;
+					}
+				}
+			}
+			List<BattleUnitModel> list2 = new List<BattleUnitModel>();
+			foreach (BattleUnitModel goober in list)
+			{
+				if (goober.hp == highesthp)
+				{
+					list2.Add(goober);
+				}
+			}
+			if (list2.Count > 0)
+			{
+				indextarget = RandomUtil.SelectOne<BattleUnitModel>(list2);
+			}
+		}
 		public override void OnWaveStart()
 		{
+			if (indextarget == null)
+            {
+				ObtainTarget();
+            }
 			pattern1 = false;
 			_usedCardType = new List<int>();
 			int stack = MysteryModel_RMR_CopleyIndex2.LosePrescript();
@@ -275,8 +317,51 @@ namespace RogueLike_Mod_Reborn
 
 		bool amputate;
 
+		BattleUnitModel indextarget;
+
+		public override void OnDieOtherUnit(BattleUnitModel unit)
+		{
+			base.OnDieOtherUnit(unit);
+			if (unit == indextarget)
+			{
+				ObtainTarget();
+			}
+		}
+
+		private void ObtainTarget()
+		{
+			List<BattleUnitModel> list = BattleObjectManager.instance.GetAliveList(Faction.Player);
+			int highesthp = 0;
+			if (list.Count > 0)
+			{
+				foreach (BattleUnitModel guy in list)
+				{
+					if (guy.hp > highesthp)
+					{
+						highesthp = (int)guy.hp;
+					}
+				}
+			}
+			List<BattleUnitModel> list2 = new List<BattleUnitModel>();
+			foreach (BattleUnitModel goober in list)
+			{
+				if (goober.hp == highesthp)
+				{
+					list2.Add(goober);
+				}
+			}
+			if (list2.Count > 0)
+			{
+				indextarget = RandomUtil.SelectOne<BattleUnitModel>(list2);
+			}
+		}
+
 		public override void OnWaveStart()
 		{
+			if (indextarget == null)
+			{
+				ObtainTarget();
+			}
 			pattern1 = false;
 			_usedCardType = new List<int>();
 			amputate = false;

@@ -711,8 +711,8 @@
     <Name>먹칠</Name>
     <Artwork>Kurokumo1</Artwork>
     <Rarity>Rare</Rarity>
-    <Spec Range="Near" Cost="4" />
-    <Script>RMR_bleed1atkcard</Script>
+    <Spec Range="Near" Cost="5" />
+    <Script>RMR_InkOver</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="6" Type="Atk" Detail="Slash" Motion="H" EffectRes="Kurokumo_H" Script="powerPerHand" Desc="손에 있는 책장 수만큼 위력 증가" />
@@ -727,11 +727,11 @@
     <Artwork>Kurokumo2</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="2" />
-    <Script>RMR_SharpenedBlade</Script>
+    <Script>RMR_SharpenedBladev2</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="3" Dice="4" Type="Atk" Detail="Slash" Motion="J" EffectRes="Kurokumo_J" Script="bleeding1atk" Desc="" />
-      <Behaviour Min="3" Dice="4" Type="Atk" Detail="Slash" Motion="H" EffectRes="Kurokumo_H" Script="bleeding1atk" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="J" EffectRes="Kurokumo_J" Script="bleeding1atk" Desc="" />
+      <Behaviour Min="3" Dice="6" Type="Atk" Detail="Slash" Motion="H" EffectRes="Kurokumo_H" Script="bleeding1atk" Desc="" />
       <Behaviour Min="4" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="Kurokumo_G" Script="" Desc="" />
     </BehaviourList>
     <Chapter>4</Chapter>
@@ -745,8 +745,8 @@
     <Script>RMR_CumulusWall</Script>
     <ScriptDesc />
     <BehaviourList>
-      <Behaviour Min="2" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Kurokumo_G" Script="" Desc="" />
-      <Behaviour Min="2" Dice="4" Type="Def" Detail="Guard" Motion="G" EffectRes="Kurokumo_G" Script="" Desc="" />
+      <Behaviour Min="4" Dice="7" Type="Def" Detail="Guard" Motion="G" EffectRes="Kurokumo_G" Script="RMR_CumulusWallDie" Desc="" />
+      <Behaviour Min="3" Dice="5" Type="Def" Detail="Guard" Motion="G" EffectRes="Kurokumo_G" Script="" Desc="" />
       <Behaviour Min="2" Dice="5" Type="Atk" Detail="Slash" Motion="H" EffectRes="Kurokumo_H" Script="bleeding1atk" Desc="[적중] 다음 막에 출혈 1 부여" />
     </BehaviourList>
     <Chapter>4</Chapter>
@@ -814,8 +814,8 @@
     <Artwork>Kurokumo8</Artwork>
     <Rarity>Uncommon</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>energy2</Script>
-    <ScriptDesc>[사용시] 빛 2 회복</ScriptDesc>
+    <Script>RMR_CleanUp</Script>
+    <ScriptDesc></ScriptDesc>
     <BehaviourList>
       <Behaviour Min="2" Dice="7" Type="Atk" Detail="Slash" Motion="H" EffectRes="Kurokumo_H" Script="bleeding1atk" Desc="[적중] 다음 막에 출혈 1 부여" />
     </BehaviourList>
@@ -1229,7 +1229,7 @@
     <Artwork>workshopfixer1</Artwork>
     <Rarity>Common</Rarity>
     <Spec Range="Near" Cost="1" />
-    <Script>penetrateup1recoverplayerpoint1</Script>
+    <Script>RMR_Mendweapon</Script>
     <ScriptDesc />
     <BehaviourList>
       <Behaviour Min="1" Dice="7" Type="Atk" Detail="Penetrate" Motion="Z" EffectRes="WorkshopFixer_Z" Script="" Desc="" />

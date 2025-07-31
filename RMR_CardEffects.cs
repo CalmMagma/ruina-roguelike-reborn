@@ -1326,17 +1326,10 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_PrescriptOrder : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_PrescriptOrder : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] { "DrawCard_Keyword", "RMR_Zeal_Keyword" };
+        public override string[] Keywords => new string[] { "DrawCard_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1347,16 +1340,10 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_PrescriptOrderUpgrade : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_PrescriptOrderUpgrade : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] {  "DrawCard_Keyword", "RMR_Zeal_Keyword", "RMR_StaggerShield_Keyword" };
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
+        public override string[] Keywords => new string[] {  "DrawCard_Keyword", "RMR_StaggerShield_Keyword" };
+
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -1812,6 +1799,21 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    public class DiceCardSelfAbility_RMR_CleanUp : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Energy_Keyword", "DrawCard_Keyword", "Bleeding_Keyword" };
+
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.cardSlotDetail.RecoverPlayPointByCard(2);
+            if (card.target.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding) >= 4)
+            {
+                owner.allyCardDetail.DrawCards(1);
+            }
+        }
+    }
+
     public class DiceCardSelfAbility_RMR_CumulusWall : DiceCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "RMR_Shield_Keyword", "RMR_StaggerShield_Keyword" };
@@ -1820,6 +1822,19 @@ namespace RogueLike_Mod_Reborn
             base.OnStartBattle();
             owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRShield, 5, owner);
             owner.bufListDetail.AddKeywordBufThisRoundByCard(RoguelikeBufs.RMRStaggerShield, 5, owner);
+        }
+    }
+
+    public class DiceCardAbility_RMR_CumulusWallDie : DiceCardAbilityBase
+    {
+        public override void OnWinParrying()
+        {
+            base.OnWinParrying();
+            if (behavior.TargetDice?.Type == BehaviourType.Atk)
+            {
+                behavior.TargetDice.isBonusAttack = true;
+                base.ActivateBonusAttackDice();
+            }
         }
     }
 
@@ -2127,7 +2142,7 @@ namespace RogueLike_Mod_Reborn
         public override void OnSucceedAttack(BattleUnitModel target)
         {
             base.OnSucceedAttack(target);
-            target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, behavior.DiceResultValue, owner);
+            target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, Mathf.Max(behavior.DiceResultValue-behavior.GetDiceMin(), 1), owner);
         }
     }
 
@@ -2421,6 +2436,47 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    public class DiceCardSelfAbility_RMR_SharpenedBladev2 : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Bleeding_Keyword" };
+        public override void OnStartBattle()
+        {
+            base.OnStartBattle();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.DmgUp, 2, owner);
+            owner.bufListDetail.AddBuf(new hehehehebleeeedILVOVEVEBLEEEED());
+        }
+
+        public class hehehehebleeeedILVOVEVEBLEEEED : BattleUnitBuf
+        {
+            public override void BeforeRollDice(BattleDiceBehavior behavior)
+            {
+                base.BeforeRollDice(behavior);
+                if (behavior.Detail == BehaviourDetail.Slash)
+                {
+                    if (!behavior.abilityList.Contains(new heheheedmgbleed()))
+                    {
+                        behavior.AddAbility(new heheheedmgbleed());
+                    }
+                }
+            }
+
+            public override void OnRoundEnd()
+            {
+                base.OnRoundEnd();
+                this.Destroy();
+            }
+
+            public class heheheedmgbleed : DiceCardAbilityBase
+            {
+                public override void OnSucceedAttack(BattleUnitModel target)
+                {
+                    base.OnSucceedAttack(target);
+                    target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, owner.bufListDetail.GetKewordBufStack(KeywordBuf.DmgUp), owner);
+                }
+            }
+        }
+    }
+
     public class DiceCardSelfAbility_RMR_SharpenedBlade : DiceCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "Bleeding_Keyword" };
@@ -2497,15 +2553,13 @@ namespace RogueLike_Mod_Reborn
 
     public class DiceCardSelfAbility_RMR_SilentMist : DiceCardSelfAbilityBase
     {
-        public override string[] Keywords => new string[] { "Protection_Keyword", "Bleeding_Keyword", "BreakProtection_Keyword" };
+        public override string[] Keywords => new string[] { "Protection_Keyword", "BreakProtection_Keyword" };
         public override void OnUseCard()
         {
             base.OnUseCard();
             owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.Protection, 3, owner);
-            if (card.target.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding) >= 4)
-            {
-                owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.BreakProtection, 2, owner);
-            }
+            owner.bufListDetail.AddKeywordBufByCard(KeywordBuf.BreakProtection, 3, owner);
+            
         }
     }
 
@@ -3054,6 +3108,20 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
+    public class DiceCardSelfAbility_RMR_Mendweapon : DiceCardSelfAbilityBase
+    {
+        public override string[] Keywords => new string[] { "Energy_Keyword" };
+        public override void OnUseCard()
+        {
+            base.OnUseCard();
+            owner.cardSlotDetail.RecoverPlayPointByCard(1);
+        }
+        public override void OnStartBattle()
+        {
+            base.OnStartBattle();
+            owner.bufListDetail.AddKeywordBufThisRoundByCard(KeywordBuf.PenetratePowerUp, 1, owner);
+        }
+    }
     public class DiceCardSelfAbility_RMR_Refine : DiceCardSelfAbilityBase
     {
         public override void OnStartBattle()
@@ -3134,6 +3202,40 @@ namespace RogueLike_Mod_Reborn
     
     }
 
+    public class DiceCardSelfAbility_RMR_InkOver : DiceCardSelfAbilityBase
+    {
+        public override void OnRoundStart_inHand(BattleUnitModel unit, BattleDiceCardModel self)
+        {
+            base.OnRoundStart_inHand(unit, self);
+            foreach (BattleUnitModel amog in BattleObjectManager.instance.GetAliveList_opponent(unit.faction))
+            {
+                if (amog.bufListDetail.GetKewordBufStack(KeywordBuf.Bleeding) >= 10)
+                {
+                    self.AddBuf(new costreduction());
+                }
+            }
+        }
+
+        public class costreduction : BattleDiceCardBuf
+        {
+            public override void OnUseCard(BattleUnitModel owner)
+            {
+                base.OnUseCard(owner);
+                this.Destroy();
+            }
+            public override int GetCost(int oldCost)
+            {
+                return oldCost - 1;
+            }
+        }
+
+
+        public override void OnSucceedAttack(BattleDiceBehavior behavior)
+        {
+            base.OnSucceedAttack(behavior);
+            behavior.card?.target.bufListDetail.AddKeywordBufByCard(KeywordBuf.Bleeding, 1, owner);
+        }
+    }
     public class DiceCardAbility_RMR_InkOverDie : DiceCardAbilityBase
     {
         public override string[] Keywords => new string[] { "Bleeding_Keyword", "DrawCard_Keyword" };
@@ -3378,17 +3480,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_Faith : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_Faith : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] { "Energy_Keyword", "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
+        public override string[] Keywords => new string[] { "Energy_Keyword", "OnlyOne_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
+
         public override void OnUseCard()
         {
             base.OnUseCard();
@@ -3887,18 +3983,8 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_ProselyteBlade : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_ProselyteBlade : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword" };
-
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
-
         public override void OnStartBattle()
         {
             base.OnStartBattle();
@@ -3987,17 +4073,9 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_SenseQuarry : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_SenseQuarry : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
-
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
+        public override string[] Keywords => new string[] { "OnlyOne_Keyword" };
 
         public override void OnUseCard()
         {
@@ -4181,17 +4259,9 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_ToWherePrescript : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_ToWherePrescript : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] {  "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
-
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
+        public override string[] Keywords => new string[] { "OnlyOne_Keyword" };
 
         public override void OnUseCard()
         {
@@ -4206,17 +4276,9 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_ToWherePrescriptUpgrade : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_ToWherePrescriptUpgrade : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "OnlyOne_Keyword", "Vulnerable_Keyword" };
-
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
+        public override string[] Keywords => new string[] { "OnlyOne_Keyword", "Vulnerable_Keyword" };
 
         public override void OnUseCard()
         {
@@ -4255,11 +4317,22 @@ namespace RogueLike_Mod_Reborn
     {
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword" };
 
-        public void OnWaveStart_Rogueike(BattleDiceCardModel self, BattleUnitModel owner)
+        public bool zealtrigger;
+
+        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
         {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
+            if (!zealtrigger)
             {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
+                zealtrigger = true;
+                foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
+                {
+                    var card = impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
+                    if (card != null)
+                    {
+                        DiceCardSelfAbility_RMR_Zeal ability = card._script as DiceCardSelfAbility_RMR_Zeal;
+                        ability.zealtrigger = true;
+                    }
+                }
             }
         }
     }
@@ -4621,17 +4694,9 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_UndertakePrescript : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_UndertakePrescript : DiceCardSelfAbility_RMR_Zeal
     {
-        public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
-
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
-        {
-            foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
-            {
-                impostor.allyCardDetail.AddNewCardToDeck(self.GetID());
-            }
-        }
+        public override string[] Keywords => new string[] { "OnlyOne_Keyword" };
 
         public override void OnUseCard()
         {

@@ -143,6 +143,15 @@ namespace RogueLike_Mod_Reborn
         public override string keywordId => "RMR_Smoke";
         public override string keywordIconId => "RMR_ReworkSmoke"; // not sure if just "Smoke" is the bufname
 
+
+        public override int paramInBufDesc
+        {
+            get
+            {
+                return this.stack * 3;
+            }
+        }
+
         public override void OnAddBuf(int addedStack)
         {
             if (stack > 10)

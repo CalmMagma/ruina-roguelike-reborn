@@ -57,7 +57,30 @@
 	<RewardList ID="90053" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_WelltunedWeapons" ArtWork="RMR_WelltunedWeapons"/>
 	<RewardList ID="90054" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_GamblerEye" ArtWork="RMR_GamblerEye"/>
 	<RewardList ID="90055" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_OrdinaryClothes" ArtWork="RMR_OrdinaryClothes"/>
+	<RewardList ID="90056" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_StasisBlaze" ArtWork="RMR_StasisBlaze"/>
+	<RewardList ID="90057" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_StasisSpark" ArtWork="RMR_StasisSpark"/>
+	<RewardList ID="90058" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_StasisLight" ArtWork="RMR_StasisLight"/>
+	<RewardList ID="90059" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_Duplicator" ArtWork="RMR_Duplicator"/>
+	<RewardList ID="90060" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_ZweiSwordstyle" ArtWork="RMR_ZweiSwordstyle"/>
+	<RewardList ID="90061" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_ZweiBlock" ArtWork="RMR_ZweiBlock"/>
+	<RewardList ID="90062" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_RuinedDummy" ArtWork="RMR_RuinedDummy"/>
+	<RewardList ID="90063" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_FlickerSwitch" ArtWork="RMR_FlickerSwitch"/>
+	<RewardList ID="90064" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_TCorpRestore" ArtWork="RMR_TCorpRestore"/>
+	<RewardList ID="90065" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_Timepiece" ArtWork="RMR_Timepiece"/>
+	<RewardList ID="90066" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_Jokercard" ArtWork="RMR_Jokercard"/>
+	<RewardList ID="90067" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_MoonstoneGyro" ArtWork="RMR_MoonstoneGyro"/>
+	<RewardList ID="90068" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_AvalonStimpack" ArtWork="RMR_AvalonStimpack"/>
 	<RewardList ID="90069" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Rarity="Unique" Script="RMR_Polyhedra" ArtWork="RMR_Polyhedra"/>
+	<RewardList ID="90070" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_MourningVeil" ArtWork="RMR_MourningVeil"/>
+	<RewardList ID="90071" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_TrainingWheels" ArtWork="RMR_TrainingWheels"/>
+	<RewardList ID="90072" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_BudgetToolkit" ArtWork="RMR_BudgetToolkit"/>
+	<RewardList ID="90073" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_Satchel" ArtWork="RMR_Satchel"/>
+	<RewardList ID="90074" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_SentinelBracers" ArtWork="RMR_SentinelBracers"/>
+	<RewardList ID="90075" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_ConceptConverter" ArtWork="RMR_ConceptConverter"/>
+	<RewardList ID="90076" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_ColorMixer" ArtWork="RMR_ColorMixer"/>
+	<RewardList ID="90077" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_WhiteCotton" ArtWork="RMR_WhiteCotton"/>
+	<RewardList ID="90078" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Rare" Script="RMR_ExposeWeakness" ArtWork="RMR_ExposeWeakness"/>
+	<RewardList ID="90079" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_FindingWeakness" ArtWork="RMR_FindingWeakness"/>
 	
   </ChapterList> 
 
