@@ -453,6 +453,15 @@ Otherwise gain Stagger Shield this Scene equal to pages in hand</Desc>
     <Desc>[On Hit] Inflict 1 Disarm next Scene</Desc>
   </BattleCardAbility>
   
+  <BattleCardAbility ID="RMR_CleanUp">
+    <Desc>[On Use] Restore 2 Light
+If target has 4+ Bleed, draw 1 page</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_CumulusWallDie">
+    <Desc>[On Clash Win] If opponent's die is Offensive, recycle both user's and opponent's die</Desc>
+  </BattleCardAbility>
+  
   <BattleCardAbility ID="RMR_CumulusWall">
     <Desc>[Combat Start] Gain 5 Shield and Stagger Shield this Scene</Desc>
   </BattleCardAbility>
@@ -531,7 +540,7 @@ Otherwise gain Stagger Shield this Scene equal to pages in hand</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_SkyCut">
-    <Desc>This die deals no Stagger damage; [On Hit] Inflict Bleed next Scene equal to roll value</Desc>
+    <Desc>This die deals no Stagger damage; [On Hit] Inflict Bleed next Scene equal to (the roll - min value) (Min. 1)</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_add5powerpl">
@@ -596,8 +605,12 @@ Otherwise gain Stagger Shield this Scene equal to pages in hand</Desc>
     <Desc>[Combat Start] When inflicting Bleed using Combat Pages this Scene, inflict 2 additional stacks; all dice the user plays deal 4 less damage and Stagger damage this Scene</Desc>
   </BattleCardAbility>
   
+  <BattleCardAbility ID="RMR_SharpenedBladev2">
+    <Desc>[Combat Start] Gain 2 Damage Up this Scene; Slash dice gain "[On Hit] Inflict Bleed next Scene equal to user's Damage Up" for this Scene</Desc>
+  </BattleCardAbility>
+  
   <BattleCardAbility ID="RMR_SilentMist">
-    <Desc>[On Use] Gain 3 Protection next Scene; if target has 4+ Bleed, gain 2 Stagger Protection next Scene</Desc>
+    <Desc>[On Use] Gain 3 Protection and Stagger Protection next Scene</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_ButterflySlash">
@@ -723,6 +736,11 @@ Otherwise gain Stagger Shield this Scene equal to pages in hand</Desc>
 [On Use] Inflict 5 Bleed to self next Scene</Desc>
   </BattleCardAbility>
   
+  <BattleCardAbility ID="RMR_Mendweapon">
+    <Desc>[Combat Start] Gain 1 Pierce Power-Up this Scene
+[On Use] Restore 1 Light</Desc>
+  </BattleCardAbility>
+  
   <BattleCardAbility ID="RMR_Refine">
     <Desc>[Combat Start] Gain 2 Pierce Clash Power this Scene</Desc>
   </BattleCardAbility>
@@ -733,6 +751,11 @@ Otherwise gain Stagger Shield this Scene equal to pages in hand</Desc>
   
   <BattleCardAbility ID="RMR_SakuraUpgrade">
     <Desc>[On Use] Discard up to 4 random pages in hand, for each page discarded, boost the min value of all dice on this page by +1; if 4 pages were discarded, if user has any ‘Fatal’ or ‘Weak’ resistances, set them to ‘Endured’ for this Scene</Desc>
+  </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_InkOver">
+    <Desc>While this is in hand, at the start of the Scene, reduce the Cost of this page by 1 until used for each enemy with 10+ Bleed
+[On Hit] Inflict 1 Bleed next Scene</Desc>
   </BattleCardAbility>
   
   <BattleCardAbility ID="RMR_InkOverDie">

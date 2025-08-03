@@ -8,5 +8,9 @@
   <BattleCardAbility ID="RMR_Remote">
     <Desc>[On Play] Remove all of the target's Light and unslot any non-0 Cost pages</Desc>
   </BattleCardAbility>
+  
+  <BattleCardAbility ID="RMR_Jokercard">
+    <Desc>[On Play] Discard all pages in hand; draw 4 pages</Desc>
+  </BattleCardAbility>
 
 </BattleCardAbilityDescRoot>
