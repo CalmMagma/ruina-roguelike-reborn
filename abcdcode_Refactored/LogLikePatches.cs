@@ -440,7 +440,9 @@ namespace abcdcode_LOGLIKE_MOD
                 Singleton<GlobalLogueEffectManager>.Instance.UpdateSprites();
             }
             else
+            {
                 LogLikeMod.ResetUIs();
+            }
             orig(self);
             if (!LogLikeMod.CheckStage())
                 return;
@@ -2950,7 +2952,10 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(StageController), nameof(StageController.ActivateStartBattleEffectPhase))]
         public static void StageController_ActivateStartBattleEffectPhase(StageController __instance)
         {
-            foreach (BattlePlayingCardDataInUnitModel card in ModdingUtils.GetFieldValue<List<BattlePlayingCardDataInUnitModel>>("_allCardList", __instance))
+            var list = ModdingUtils.GetFieldValue<List<BattlePlayingCardDataInUnitModel>>("_allCardList", __instance);
+            var list2 = new List<BattlePlayingCardDataInUnitModel>();
+            list2.AddRange(list); // prevent collection modified exception
+            foreach (BattlePlayingCardDataInUnitModel card in list2)
                 Singleton<GlobalLogueEffectManager>.Instance.OnStartBattle_AfterCardSet(card);
         }
 

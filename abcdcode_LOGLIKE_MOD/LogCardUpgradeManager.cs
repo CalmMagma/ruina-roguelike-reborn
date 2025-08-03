@@ -43,7 +43,7 @@ namespace abcdcode_LOGLIKE_MOD
                     return this.GetUpgradeCard(cardid.GetOriginalId(), metadata.index, metadata.count + 1);
                 return ItemXmlDataList.instance.GetCardItem(cardid, false);
             }
-            return GetAllUpgradesCard(cardid, 1).Values.ToList().SelectOneRandom();
+            return GetUpgradeCard(cardid, 0, 1);
         }
 
         public void ReLoadCurAllUpgradeCard()
@@ -65,9 +65,7 @@ namespace abcdcode_LOGLIKE_MOD
             {
                 if (metadata.canStack)
                 {
-                    Debug.Log($"COCK BALLS COUNT IS: {metadata.count + count}");
                     DiceCardXmlInfo upgradeInfo = GetUpgradeCard(cardId.GetOriginalId(), metadata.index, metadata.count + count);
-                    Debug.Log($"COCK BALLS OLD ID IS: {cardId.packageId}\nCOCK BALLS NEW ID IS: {upgradeInfo.id.packageId}");
                     dictionary[metadata.index] = upgradeInfo;
                 }
                 return dictionary;

@@ -10,7 +10,10 @@ using static RogueLike_Mod_Reborn.RMREffect_Prescript;
 
 namespace RogueLike_Mod_Reborn
 {
-	public class RMRPassiveBase : PassiveAbilityBase
+    /// <summary>
+    /// A PassiveAbilityBase with some additional overrides that interact with RMR mechanics.
+    /// </summary>
+    public class RMRPassiveBase : PassiveAbilityBase
     {
 		public virtual void OnSpendSmoke(int amount)
         {

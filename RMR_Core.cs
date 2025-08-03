@@ -2873,35 +2873,41 @@ namespace RogueLike_Mod_Reborn
         {
             get
             {
-                if (_camera == null || LayerMask.NameToLayer(_camera.name) != curLayer)
+                if (_camera == null)
                 {
-                    if (_camera != null) UnityEngine.Object.Destroy(_camera.gameObject);
-                    _camera = SnapshotCamera.MakeSnapshotCamera(curLayer, LayerMask.LayerToName(curLayer));
+                    _camera = SnapshotCamera.MakeSnapshotCamera(LayerMask.NameToLayer("Default"));
                 }
                 return _camera;
             }
         }
-        private static int curLayer;
         private static SnapshotCamera _camera;
         public static void RunCardVfx(LogLikeMod.UILogCardSlot card)
         {
             /*
-            curLayer = card.gameObject.layer;
+            var cardCanvas = card.cg_LeftPanel.gameObject;
+            int curLayer = cardCanvas.gameObject.layer;
             Camera.gameObject.SetActive(true);
-            var texture2D = Camera.TakeObjectSnapshot(card.gameObject, (int)card.Pivot.sizeDelta.x, (int)card.Pivot.sizeDelta.y);
+            var texture2D = Camera.TakeObjectSnapshot(cardCanvas.gameObject, (int)card.Pivot.sizeDelta.x, (int)card.Pivot.sizeDelta.y);
             Camera.gameObject.SetActive(false);
-            var vfx = LogAssetBundleManager.Instance.GetAsset("CalmMagma", "calmmagma_card");
+            var sprite = Sprite.Create(texture2D, new Rect(0.0f, 0.0f, (float)texture2D.width, (float)texture2D.height), new Vector2(0.0f, 0.0f), 100f, 0U, SpriteMeshType.FullRect);
+
+            /*
             var cardImage = ModdingUtils.CreateImage(LogLikeMod.LogUIObjs[90].transform,
-                Sprite.Create(texture2D, new Rect(0.0f, 0.0f, (float)texture2D.width, (float)texture2D.height), new Vector2(0.0f, 0.0f), 100f, 0U, SpriteMeshType.FullRect),
+                sprite,
                 new Vector2(1f, 1f),
                 card.transform.localPosition);
-            vfx.transform.parent = cardImage.transform;
-            vfx.transform.localPosition = cardImage.transform.localPosition;
-            vfx.transform.localScale = new Vector3(1f, 1f);
-            vfx.GetComponent<SpriteRenderer>().sprite = cardImage.sprite;
-            vfx.SetLayerAll(cardImage.gameObject.layer);
-            var curve = cardImage.gameObject.AddComponent<SelfDestructBezierCurve>();
-            cardImage.gameObject.SetActive(true);
+            //
+            
+            var vfx = LogAssetBundleManager.Instance.GetAsset("CalmMagma", "calmmagma_card");
+            // GetAsset instantiates the VFX, VFX is being imported properly
+            
+            vfx.transform.parent = LogLikeMod.LogUIObjs[90].transform;
+            vfx.transform.localPosition = card.transform.localPosition;
+            vfx.transform.localScale = new Vector3(1f, 1f, 1f);
+            vfx.SetLayerAll(curLayer);
+            vfx.GetComponent<SpriteRenderer>().sprite = sprite;
+            // var curve = cardImage.gameObject.AddComponent<SelfDestructBezierCurve>();
+            vfx.SetActive(true);
             */
         }
     }

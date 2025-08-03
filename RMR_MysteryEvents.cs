@@ -216,7 +216,6 @@ namespace RogueLike_Mod_Reborn
         }
         public override void OnClickChoice(int choiceid)
         {
-            base.OnClickChoice(choiceid);
             if (this.curFrame.FrameID == 0)
             {
                 switch (choiceid)
@@ -238,7 +237,7 @@ namespace RogueLike_Mod_Reborn
                 GlobalLogueEffectManager.Instance.AddEffects(new RMREffect_DragonFist());
                 MysteryBase.SetNextStageCustom(new LorId(RMRCore.packageId, 1400041), abcdcode_LOGLIKE_MOD.StageType.Normal);
             }
-
+            base.OnClickChoice(choiceid);
         }
         public override void OnEnterChoice(int choiceid)
         {

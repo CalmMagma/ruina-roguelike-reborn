@@ -10,6 +10,16 @@ using UnityEngine;
 
 namespace RogueLike_Mod_Reborn
 {
+    /// <summary>
+    /// A DiceCardSelfAbilityBase with some additional overrides that interact with RMR mechanics.
+    /// </summary>
+    public class RMRCardSelfAbilityBase : DiceCardSelfAbilityBase
+    {
+        public virtual void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
+        {
+        }
+    }
+
     public class DiceCardSelfAbility_RMR_Starter_Evade : DiceCardSelfAbilityBase
     {
         public override void OnUseCard()
@@ -1326,11 +1336,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_PrescriptOrder : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_PrescriptOrder : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "DrawCard_Keyword", "RMR_Zeal_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -1347,10 +1357,10 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_PrescriptOrderUpgrade : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_PrescriptOrderUpgrade : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] {  "DrawCard_Keyword", "RMR_Zeal_Keyword", "RMR_StaggerShield_Keyword" };
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -3378,11 +3388,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_Faith : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_Faith : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "Energy_Keyword", "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -3887,11 +3897,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_ProselyteBlade : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_ProselyteBlade : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -3987,11 +3997,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_SenseQuarry : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_SenseQuarry : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -4181,11 +4191,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_ToWherePrescript : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_ToWherePrescript : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] {  "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -4206,11 +4216,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_ToWherePrescriptUpgrade : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_ToWherePrescriptUpgrade : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "OnlyOne_Keyword", "Vulnerable_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -4251,11 +4261,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_Zeal : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_Zeal : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword" };
 
-        public void OnWaveStart_Rogueike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {
@@ -4621,11 +4631,11 @@ namespace RogueLike_Mod_Reborn
         }
     }
 
-    public class DiceCardSelfAbility_RMR_UndertakePrescript : DiceCardSelfAbilityBase
+    public class DiceCardSelfAbility_RMR_UndertakePrescript : RMRCardSelfAbilityBase
     {
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword", "OnlyOne_Keyword" };
 
-        public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
+        public override void OnWaveStart(BattleDiceCardModel self, BattleUnitModel owner)
         {
             foreach (BattleUnitModel impostor in BattleObjectManager.instance.GetAliveList(owner.faction).FindAll((BattleUnitModel x) => x != owner))
             {

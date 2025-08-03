@@ -409,7 +409,7 @@ namespace abcdcode_LOGLIKE_MOD
                     num3 += unitBattleDataModel.emotionDetail.EmotionLevel;
                 }
             }
-            if (num3 / num2 < num1)
+            if (num2 == 0 || num3 / num2 < num1)
                 return null;
             ++LogLikeMod.curemotion;
             if (LogueBookModels.EmotionCardList == null && LogueBookModels.EmotionCardList.Count == 0)

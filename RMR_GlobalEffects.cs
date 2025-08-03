@@ -1004,13 +1004,7 @@ namespace RogueLike_Mod_Reborn
     public class RMREffect_ExtendedFunctionalityEffect : GlobalLogueEffectBase
     {
         /// <summary>
-        /// Adds a "OnWaveStart" override for DiceCardSelfAbilityBase. Usage:<br></br>
-        /// <code>
-        /// public void OnWaveStart_Roguelike(BattleDiceCardModel self, BattleUnitModel owner)
-        /// {
-        /// 
-        /// }
-        /// </code>
+        /// Executes the "OnWaveStart" override for RMRCardSelfAbilityBase.
         /// </summary>
         public override void OnStartBattleAfter()
         {
@@ -1020,10 +1014,9 @@ namespace RogueLike_Mod_Reborn
                 foreach (var page in unit.allyCardDetail.GetDeck())
                 {
                     var script = page._script;
-                    if (script != null)
+                    if (script != null & script is RMRCardSelfAbilityBase)
                     {
-                        var method = AccessTools.Method(script.GetType(), "OnWaveStart_RogueLike", new Type[] { typeof(BattleDiceCardModel), typeof(BattleUnitModel) });
-                        method?.Invoke(script, new object[] { page, page.owner });
+                        (script as RMRCardSelfAbilityBase).OnWaveStart(page, unit);
                     }
                 }
             }

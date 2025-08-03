@@ -66,7 +66,7 @@ public class PassiveAbility_Mystery4_3_1 : PassiveAbilityBase
     public override void AfterAction()
     {
       base.AfterAction();
-      BattleUnitModel target = this.owner.currentDiceAction.target;
+      BattleUnitModel target = this.owner.currentDiceAction?.target;
       if (target == null)
         return;
       Queue<BattleDiceBehavior> battleDiceBehaviorQueue = new Queue<BattleDiceBehavior>((IEnumerable<BattleDiceBehavior>) target.currentDiceAction.cardBehaviorQueue);
