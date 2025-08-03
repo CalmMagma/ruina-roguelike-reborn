@@ -67,5 +67,19 @@
     <Chapter>1</Chapter>
     <Priority>0</Priority>
   </Card>
+  
+  <Card ID="-105">
+    <Name>Joker Card</Name>
+    <Artwork>jeong1</Artwork>
+    <Rarity>Unique</Rarity>
+    <Option>ExhaustOnUse</Option>
+    <Spec Range="Instance" Cost="0" />
+    <Script>RMR_Jokercard</Script>
+    <ScriptDesc />
+    <BehaviourList>
+    </BehaviourList>
+    <Chapter>1</Chapter>
+    <Priority>0</Priority>
+  </Card>
 
 </DiceCardXmlRoot>

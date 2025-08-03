@@ -233,6 +233,191 @@ When a librarian uses an Objet d'art page, they have a 7% chance to activate any
     <CatalogDesc>[No entry for now.]</CatalogDesc>
   </LogueEffectInfo> 
   
+  <LogueEffectInfo Id="RMR_StasisBlaze">
+    <Name>In-Statis Blaze</Name> 
+    <Desc>Upon pick up, choose a Combat Page and remove it from inventory. 
+Boost the min/max value of all dice on the page by +2/1.
+At the start of each Act, add this Combat Page to the hand of each Librarian.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StasisSpark">
+    <Name>In-Statis Spark</Name> 
+    <Desc>Upon pick up, choose a Combat Page and remove it from inventory.
+Whenever a Librarian uses the Combat Page, they gain 3 Protection and Stagger Protection for the Scene.
+At the start of each Act, add this Combat Page to the hand of each Librarian.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_StasisLight">
+    <Name>In-Statis Light</Name> 
+    <Desc>Upon pick up, choose a Combat Page and remove it from inventory.
+Lower the Cost of the page by 1 and whenever a Librarian uses the Combat Page, they restore 1 Light and draw 1 page.
+At the start of each Act, add this Combat Page to the hand of each Librarian.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_Duplicator">
+    <Name>Duplicator</Name> 
+    <Desc>When 2+ Librarians use the same Combat Page during the same Scene, add a copy of that Combat Page to their hands.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_ZweiSwordstyle">
+    <Name>Zwei Swordstyle</Name> 
+    <Desc>Upon winning a clash with Slash dice, gain 1 Endurance next Scene.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_ZweiBlock">
+    <Name>Zwei 'Art of Blocking' Manual</Name> 
+    <Desc>Upon winning a clash against Offensive dice with a Block die, gain 1 Strength this Scene.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_RuinedDummy">
+    <Name>Ruined Dummy</Name> 
+    <Desc>Restore 1 Light when using a Combat Page without an ability.
+Dice without abilities gain +1 Power.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Stick to the basics.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_FlickerSwitch">
+    <Name>Flicker-switch</Name> 
+    <Desc>When a Librarian exhausts a Combat Page, reduce the Cost of a random page in their hand by 2 until used.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_TCorpRestore">
+    <Name>T-Corp Restoration Protocol</Name> 
+    <Desc>The first time a Librarian accumulates 15+ damage taken during a single Act, they gain 10 Restoration. (Once per Act)
+(Restoration - In 3 Scenes, purge this and this character recovers X HP. Increase stack by half of the damage received while this character has this status.)</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_Timepiece">
+    <Name>Timepiece</Name> 
+    <Desc>At the end of the 7th Scene, all Librarians fully restore Light and draw 3 pages. Librarians who are not Emotion Level 5+ gain an Emotion Level.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Tick-tock...”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_Jokercard">
+    <Name>Joker Card</Name> 
+    <Desc>At the start of the Act, add a Single-use On-Play Combat Page to the hand of all Librarians that allows them to discard their entire hand and draw 4 pages.</Desc> 
+    <FlavorText>&lt;color=#F7DA5D&gt;“Know when to fold 'em”&lt;/color&gt; - Viiru</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_MoonstoneGyro">
+    <Name>Moonstone Gyroscope</Name> 
+    <Desc>Whenever a Librarian discards a Combat Page, they recover Stagger Resist equal to (2 + Cost of the discarded page).</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“It feels as if your sense of orientation is gone yet you remain standing.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_Duffelbag">
+    <Name>Duffel Bag</Name> 
+    <Desc>Upon pick up, gain 150 Ahn.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Whoever left this orange bag must've been in a hurry...”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_AvalonStimpack">
+    <Name>Avalon Stimpack</Name> 
+    <Desc>Whenever a Librarian is inflicted with a status ailment, they gain 1 Resilience that Scene. (Up to 3 times per Scene)
+At the start of each Scene, all Librarians remove stacks of a random status ailment up to Resilience amount and lose that amount of Resilience.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_MourningVeil">
+    <Name>Mourning Veil</Name> 
+    <Desc>When a Librarian dies, another Librarian recovers HP/Stagger Resist equal to 30% of the dead Librarian's Max HP/Stagger Resist.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_TrainingWheels">
+    <Name>Training Wheels</Name> 
+    <Desc>Each Scene, increase the Speed value of all Speed dice of Librarians with a value equal to the slowest Speed die of the Librarians by +3.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_BudgetToolkit">
+    <Name>Budget 'DIY-Workshopper' Toolkit</Name> 
+    <Desc>At the start of the Act, all Librarians temporarily upgrade 1 random Combat Page in their deck.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Especially popular with the crafty youngin'.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_Satchel">
+    <Name>Leather Satchel</Name> 
+    <Desc>At the start of the Act, all Librarians draw 1 page and gain +1 Max Hand Size Slot.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Extra pockets are always welcome in this business.”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_SentinelBracers">
+    <Name>Sentinel Bracers</Name> 
+    <Desc>At the start of combat, all Librarians playing Combat Pages without any Offensive dice or not using any pages, gain 8 Shield and Stagger Shield for that Scene.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“How the hell did these become popular as a brand image?”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_ConceptConverter">
+    <Name>Concept Converter</Name> 
+    <Desc>When skipping Book rewards, gain 5 Ahn for every Book skipped.
+When skipping choosing a card, gain 2 Ahn.</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Who in their right mind would sellout like this?”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_ColorMixer">
+    <Name>Color Mixer</Name> 
+    <Desc>At the start of the Act, each Librarian draws 1 page and reduces the Cost of the highest rarity page in hand by 1 until used if their deck contains one of each Rarity. (Paperback, Hardcover, Limited and Objet d'art)</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“Variety's the spice of life!”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_WhiteCotton">
+    <Name>White Cotton Flower</Name> 
+    <Desc>At the start of each Scene, all Librarians gain 1 Bleed Protection.
+While activated, when a character would get Staggered, they instead recover from Stagger and are inflicted with Bleed equal to (Max Stagger Resist / 6) this Scene. (Rounded Up)</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_ExposeWeakness">
+    <Name>Taking Point: Expose Weakness</Name> 
+    <Desc>At the start of every Scene, the Librarian with the highest HP gains 'En Garde' status.
+(En Garde - Upon winning 3 clashes against the same target, inflict 1 Fragile and Stagger Fragile to them next Scene)</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+  
+  <LogueEffectInfo Id="RMR_FindingWeakness">
+    <Name>Construction and You: Finding Weaknesses</Name> 
+    <Desc>All Librarians deal 2 bonus damage/Stagger damage upon winning a clash against an opponent with Strength/Endurance</Desc> 
+    <FlavorText>&lt;color=#CACACA&gt;“h”&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>[No entry for now.]</CatalogDesc>
+  </LogueEffectInfo> 
+
+  
+  
+  
+  
+  
   <LogueEffectInfo Id="RMR_Prescript">
     <Name>Prescript</Name> 
     <Desc>At the start of the Act, designate a random librarian. That librarian deals +10% damage and Stagger damage every time they use a Combat Page against a target consecutively. (Max. 30%)

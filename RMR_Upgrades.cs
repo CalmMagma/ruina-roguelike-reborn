@@ -1182,9 +1182,8 @@ namespace RogueLike_Mod_Reborn
             base.Init();
             this.upgradeinfo = new UpgradeBase.UpgradeInfo();
             this.upgradeinfo.SetSelfAbility("RMR_CumulusWallUpgrade");
-            this.upgradeinfo.SetAbility(2, "bleeding2atk");
-            this.upgradeinfo.SetDice(0, 1, 0);
-            this.upgradeinfo.SetDice(1, 1, 0);
+            this.upgradeinfo.SetAbility(2, "RMR_bleed1twiceatk");
+            this.upgradeinfo.SetDice(0, 2, 0);
             this.upgradeinfo.SetDice(2, 2, 0);
             this.baseid = new LorId(LogLikeMod.ModId, 406003);
         }
@@ -1448,7 +1447,7 @@ namespace RogueLike_Mod_Reborn
             this.baseid = new LorId(LogLikeMod.ModId, 402005);
         }
     }
-
+    /*
     public class UpgradeModel_RMR_SharpenedBlade : UpgradeBase
     {
         public override void Init()
@@ -1464,6 +1463,19 @@ namespace RogueLike_Mod_Reborn
             this.baseid = new LorId(LogLikeMod.ModId, 406002);
         }
     }
+    */
+    public class UpgradeModel_RMR_SharpenedBlade : UpgradeBase
+    {
+        public override void Init()
+        {
+            base.Init();
+            this.upgradeinfo = new UpgradeBase.UpgradeInfo();
+            this.upgradeinfo.SetDice(0, 2, 1);
+            this.upgradeinfo.SetDice(1, 2, 1);
+            this.baseid = new LorId(LogLikeMod.ModId, 406002);
+        }
+    }
+
 
     public class UpgradeModel_RMR_SilentMist : UpgradeBase
     {
