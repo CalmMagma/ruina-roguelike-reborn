@@ -149,7 +149,7 @@ If this character uses a Combat Page against a different target, they deal -50% 
     </BattleEffectText>
 	
 	<BattleEffectText ID="RMR_RoadlessCamelotBuf">
-      <Name>Prescript</Name>
+      <Name>Roadless Camelot</Name>
       <Desc>Each time this character uses a Combat Page, all other allies temporarily upgrade a random Combat Page in their hand for the rest of the Act.</Desc>
     </BattleEffectText>
 	

@@ -797,7 +797,6 @@
     <Desc>[命中时]追加等同于目标体力上限25%的伤害并使目标体力上限永久-25%</Desc>
   </BattleCardAbility>
   
-  
   <BattleCardAbility ID="RMR_Engagement">
     <Desc>[Combat Start] Gain 6 Shield and Stagger Shield this Scene
 [On Use] Add 'En Garde' to user's hand</Desc>
@@ -1327,7 +1326,6 @@ Otherwise deal 20 damage to self</Desc>
   <BattleCardAbility ID="RMR_recover5atk">
     <Desc>[On Hit] Recover 5 HP</Desc>
   </BattleCardAbility>
-  
 
   <BattleCardAbility ID="protection2friendLog">
     <Desc>[使用时]下一幕使所有友方角色获得2层[守护]</Desc>

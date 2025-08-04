@@ -55,6 +55,17 @@
     <CatalogDesc>[暂无]</CatalogDesc>
   </LogueEffectInfo> 
 	
+  <LogueEffectInfo Id="RMR_RoadlessCamelot">
+    <Name>Roadless Camelot</Name>
+    <Desc>At the start of each Scene, a random librarian gains 'Roadless Camelot' for the Scene.
+(Roadless Camelot - Each time this character uses a Combat Page, all other allies temporarily upgrade a random Combat Page in their hand for the rest of the Act.)</Desc> 
+    <FlavorText>&lt;color=#03EAF2&gt;"The crystallization of an utopia without any entrance. Like the reflection of a moon on water, its beauty is matched only by its fragility."&lt;/color&gt;</FlavorText> 
+    <CatalogDesc>Almost everyone has an ideal they chase after. An utopia, where their dreams are realized and their wishes are fulfilled. From simple wants such as warm food and shelter, to grand ambitions looking up at the top of the chain. It is simply a constant value of hope against the ruthless cycle of gears that make up the machine called the City.
+
+Yet, sometimes that side may truly be unreachable. Without any clear roads that lead towards that dream, all that is left... is nothing more than a mirage of what could have been, and what could never be.
+
+After all, that is what a dream is.</CatalogDesc>
+  </LogueEffectInfo> 
 	
   <LogueEffectInfo Id="RMR_StrangeOrbGrade2">
     <Name>不稳定的球体</Name>

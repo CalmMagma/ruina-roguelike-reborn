@@ -127,7 +127,7 @@
     <script>Mystery_Ch1_4</script>
     <Frame ID="0" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame0Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles1</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame0Choice0Desc</Desc>
         <Next>3</Next>
@@ -140,7 +140,7 @@
 
     <Frame ID="1" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame1Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles2</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame1Choice0Desc</Desc>
         <Next>-1</Next>
@@ -149,7 +149,7 @@
 
     <Frame ID="2" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame2Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles2</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame2Choice0Desc</Desc>
         <Next>-1</Next>
@@ -158,7 +158,7 @@
 
     <Frame ID="3" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame3Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles2</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame3Choice0Desc</Desc>
         <Next>4</Next>
@@ -171,7 +171,7 @@
 
     <Frame ID="4" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame4Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles2</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame4Choice0Desc</Desc>
         <Next>5</Next>
@@ -184,7 +184,7 @@
 
     <Frame ID="5" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame5Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles3</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame5Choice0Desc</Desc>
         <Next>6</Next>
@@ -197,7 +197,7 @@
 
     <Frame ID="6" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame6Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles4</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame6Choice0Desc</Desc>
         <Next>7</Next>
@@ -210,7 +210,7 @@
 
     <Frame ID="7" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame7Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles4</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame7Choice0Desc</Desc>
         <Next>8</Next>
@@ -223,7 +223,7 @@
 
     <Frame ID="8" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame8Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>Kibbles4</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame8Choice0Desc</Desc>
         <Next>-1</Next>
@@ -232,7 +232,7 @@
 
     <Frame ID="9" FrameType="DEFAULT">
       <Dialog>MysteryCh1_4Frame9Dia0</Dialog>
-      <ArtWork>Mystery_Ch1_4Frame0</ArtWork>
+      <ArtWork>KibblesFound</ArtWork>
       <Choice ID="0">
         <Desc>MysteryCh1_4Frame9Choice0Desc</Desc>
         <Next>-1</Next>

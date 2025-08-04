@@ -55,12 +55,12 @@ namespace abcdcode_LOGLIKE_MOD
             ShopBase.CardShape.Add(5, vector2Array3);
             Vector2[] vector2Array4 = new Vector2[6]
             {
-      new Vector2(550f, 425f),
-      new Vector2(330f, 425f),
-      new Vector2(110f, 425f),
-      new Vector2(-110f, 425f),
-      new Vector2(-330f, 425f),
-      new Vector2(-550f, 425f)
+              new Vector2(550f, 425f),
+              new Vector2(330f, 425f),
+              new Vector2(110f, 425f),
+              new Vector2(-110f, 425f),
+              new Vector2(-330f, 425f),
+              new Vector2(-550f, 425f)
             };
             ShopBase.CardShape.Add(6, vector2Array4);
             Vector2[] vector2Array5 = new Vector2[7]
@@ -489,7 +489,7 @@ namespace abcdcode_LOGLIKE_MOD
         {
             if (this.Goods == null || this.Goods.Count == 0)
                 return;
-            this.Goods.FindAll((Predicate<ShopGoods>)(x => x.CheckEnoughMoney()));
+            this.Goods.FindAll(x => x.CheckEnoughMoney());
             LoguePlayDataSaver.SaveShop(this);
             LoguePlayDataSaver.SavePlayData_Menu();
         }
