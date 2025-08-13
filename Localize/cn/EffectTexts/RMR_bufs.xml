@@ -168,6 +168,20 @@
       <Desc>Change the position of the die with Adapt.</Desc>
     </BattleEffectText>
 	
+	<BattleEffectText ID="RMR_Restoration">
+      <Name>Restoration</Name>
+      <Desc>In {1} Scenes, purge this and this character recovers {0} HP. Increase stack by half of the damage received while this character has this status.</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_Restoration_Keyword">
+      <Name>Restoration X</Name>
+      <Desc>In 3 Scenes, purge this and this character recovers X HP. Increase stack by half of the damage received while this character has this status.</Desc>
+    </BattleEffectText>
+	
+	<BattleEffectText ID="RMR_Engarde">
+      <Name>En Garde</Name>
+      <Desc>Upon winning {0} clashes against the same target, inflict 1 Fragile and Stagger Fragile to them next Scene.</Desc>
+    </BattleEffectText>
 	
 	<!-- base stagger fragile is not localized so this is here to give it localization in case other mods do not do it -->
 	<BattleEffectText ID="Vulnerable_break">
