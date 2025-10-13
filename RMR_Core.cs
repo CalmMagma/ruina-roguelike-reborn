@@ -1349,7 +1349,8 @@ namespace RogueLike_Mod_Reborn
             }
         }
     }
-    #endregion
+    
+	#endregion
 
     #region SCROLL ABILITY UTIL
     /// <summary>
