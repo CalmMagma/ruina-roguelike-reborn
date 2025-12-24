@@ -70,7 +70,7 @@
 	<RewardList ID="90066" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_Jokercard" ArtWork="RMR_Jokercard"/>
 	<RewardList ID="90067" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Uncommon" Script="RMR_MoonstoneGyro" ArtWork="RMR_MoonstoneGyro"/>
 	<RewardList ID="90068" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Unique" Script="RMR_AvalonStimpack" ArtWork="RMR_AvalonStimpack"/>
-	<RewardList ID="90069" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Rarity="Unique" Script="RMR_Polyhedra" ArtWork="RMR_Polyhedra"/>
+	<RewardList ID="90069" PassiveType="Custom" ShopType="Eternal" TargetType="SelectOne" Rarity="Unique" Script="RMR_Polyhedra" ArtWork="RMRPickUp_Polyhedra"/>
 	<RewardList ID="90070" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_MourningVeil" ArtWork="RMR_MourningVeil"/>
 	<RewardList ID="90071" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_TrainingWheels" ArtWork="RMR_TrainingWheels"/>
 	<RewardList ID="90072" PassiveType="Custom" ShopType="Eternal" TargetType="All" Rarity="Common" Script="RMR_BudgetToolkit" ArtWork="RMR_BudgetToolkit"/>

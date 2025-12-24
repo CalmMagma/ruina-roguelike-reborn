@@ -3005,6 +3005,8 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(UICharacterSlot), nameof(UICharacterSlot.SetNoToggleState))]
         public static void UICharacterSlot_SetToggleStateFalse(UICharacterSlot __instance)
         {
+            if (!LogLikeMod.CheckStage())
+                return;
             var unit = LogueBookModels.playerBattleModel.Find(x => x.unitData == __instance.unitBattleData.unitData);
             if (unit != null)
                 unit.IsAddedBattle = false;
@@ -3016,6 +3018,8 @@ namespace abcdcode_LOGLIKE_MOD
         [HarmonyPostfix, HarmonyPatch(typeof(UICharacterSlot), nameof(UICharacterSlot.SetYesToggleState))]
         public static void UICharacterSlot_SetToggleStateTrue(UICharacterSlot __instance)
         {
+            if (!LogLikeMod.CheckStage())
+                return;
             var unit = LogueBookModels.playerBattleModel.Find(x => x.unitData == __instance.unitBattleData.unitData);
             if (unit != null)
                 unit.IsAddedBattle = true;
