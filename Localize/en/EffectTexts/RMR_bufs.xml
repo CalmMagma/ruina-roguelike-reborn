@@ -155,7 +155,8 @@ If this character uses a Combat Page against a different target, they deal -50% 
 	
 	<BattleEffectText ID="RMR_Zeal_Keyword">
       <Name>Zeal</Name>
-      <Desc>At the start of the Act, add a copy of this page to all other allies' deck.</Desc>
+      <Desc>(Unimplemented, does nothing as of currently.)</Desc>
+	<!-- At the start of the Act, add a copy of this page to all other allies' deck. -->
     </BattleEffectText>
 	
 	<BattleEffectText ID="RMR_Adapt_Keyword">

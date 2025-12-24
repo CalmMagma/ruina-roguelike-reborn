@@ -189,7 +189,13 @@
 
   <!-- 검지 수행자 -->
   <Deck ID="140018">
-    <Card>505004</Card>
+    <Card>505001</Card>
+    <Card>505002</Card>
+    <Card>505003</Card>
+    <Card>505004</Card> <!-- COMMENT WHOLE DECK EXCEPT THIS CARD AFTER IMPLEMENTING ZEAL -->
+    <Card>505005</Card>
+    <Card>505006</Card>
+    <Card>505007</Card>
   </Deck>
   
   <Deck ID="140027">

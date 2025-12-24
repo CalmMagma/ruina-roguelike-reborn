@@ -4328,7 +4328,7 @@ namespace RogueLike_Mod_Reborn
         public override string[] Keywords => new string[] { "RMR_Zeal_Keyword" };
 
         public bool zealtrigger;
-
+        /*
         public void OnWaveStart_RogueLike(BattleDiceCardModel self, BattleUnitModel owner)
         {
             if (!zealtrigger)
@@ -4345,6 +4345,7 @@ namespace RogueLike_Mod_Reborn
                 }
             }
         }
+        */
     }
 
     public class DiceCardAbility_RMR_Execute : DiceCardAbilityBase
